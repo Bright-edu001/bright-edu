@@ -1,0 +1,152 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins";
+
+.food-attractions-page {
+  .food-attractions-description,
+  .food-attractions-text {
+    @include label-style;
+    text-align: left;
+    max-width: 71%;
+    margin: 0 auto;
+    margin-top: $spacing-xxl;
+  }
+  .food-attractions-text {
+    margin-top: $spacing-md;
+  }
+  .food-attractions-intro {
+    margin-top: 7rem;
+    h3 {
+      @include heading-large;
+      margin-bottom: $spacing-xxl;
+      color: $color-accent-gold;
+    }
+    p {
+      @include label-style;
+      margin: 0 auto;
+      text-align: left;
+      max-width: 71%;
+      margin-bottom: $spacing-xxl;
+    }
+    img {
+      margin-bottom: $spacing-xxl;
+    }
+  }
+
+  .card {
+    display: flex;
+    align-items: center;
+    margin: $spacing-xxl auto;
+    max-width: 71%;
+    overflow: hidden;
+
+    &-content {
+      padding: $spacing-lg;
+      flex: 1;
+
+      h4 {
+        @include heading-medium;
+        margin-bottom: $spacing-xxl;
+
+        & + h4 {
+          margin-top: -$spacing-xxl;
+          margin-bottom: $spacing-md;
+        }
+      }
+
+      p {
+        @include label-style;
+        margin: 0 auto;
+        text-align: left;
+        max-width: 80%;
+      }
+    }
+
+    img {
+      width: 40%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    &-right {
+      flex-direction: row;
+    }
+
+    &-left {
+      flex-direction: row-reverse;
+      margin-right: 9rem;
+    }
+  }
+  .title {
+    @include heading-medium;
+    margin-bottom: 8rem;
+    margin-top: $spacing-xxl;
+  }
+  .food-attractions-pizza,
+  .food-attractions-hotdog {
+    @include label-style;
+    max-width: 80%;
+    text-align: left;
+
+    margin: 0 auto;
+    margin-bottom: 8rem;
+  }
+
+  .food-attractions-hotdog + .food-attractions-hotdog {
+    margin-top: -7rem; // 減少連續段落之間的間距
+    margin-bottom: 6rem; // 調整底部間距
+  }
+}
+
+@media (max-width: 700px) {
+  // 1. food-attractions-intro 圖片移至 h3 上方
+  .food-attractions-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      order: -1;
+      margin-bottom: 12px;
+      width: 100%;
+      height: auto;
+      max-width: 90%;
+    }
+    h3 {
+      margin-top: 0;
+    }
+  }
+
+  // 2. InfoCard 垂直排列 img > title > content
+  .food-attractions-page .card {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+
+    img {
+      order: -1;
+      width: 100%;
+      height: auto;
+      margin-bottom: 12px;
+      max-width: 100%;
+    }
+    .card-content {
+      width: 100%;
+      padding: 0;
+      h4 {
+        margin-top: $spacing-md;
+        color: $color-accent-gold;
+      }
+      p {
+        margin-left: $spacing-lg;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .card.card-left {
+    margin-right: 7rem;
+    p {
+      margin-left: 3rem;
+    }
+  }
+}

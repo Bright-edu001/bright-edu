@@ -1,0 +1,60 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+@import "./mba-common";
+
+.mba-application-desc {
+  margin: $spacing-xl auto 32px auto;
+  p {
+    font-size: $font-size-xl;
+    line-height: 39px;
+    color: $color-brown-dark;
+    text-align: left;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+.mba-info-section {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  text-align: left;
+  margin-left: 6rem;
+  margin-bottom: $spacing-xxl;
+  .mba-info-section-title {
+    font-size: $font-size-xl;
+    line-height: 39px;
+    color: $color-brown-dark;
+    text-align: left;
+  }
+  .mba-info-list {
+    li {
+      @include heading-large;
+      color: $color-brown-dark;
+      font-size: $font-size-lg;
+      line-height: 24px;
+      margin-left: $spacing-xxl;
+      margin-top: $spacing-lg;
+    }
+  }
+}
+
+.mba-application-section {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  text-align: left;
+  margin-left: $spacing-xxl;
+  margin-bottom: $spacing-xxl;
+}
+@media screen and (max-width: 700px) {
+  .mba-info-section .mba-info-list {
+    li {
+      @include heading-large;
+      color: $color-brown-dark;
+      font-size: $font-size-lg;
+      line-height: 24px;
+      margin-left: $spacing-md;
+      margin-top: $spacing-lg;
+    }
+  }
+}

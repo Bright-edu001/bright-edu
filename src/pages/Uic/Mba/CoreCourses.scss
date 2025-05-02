@@ -1,0 +1,115 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+@import "./mba-common";
+
+.mba-courses-page {
+  .intro {
+    @include label-style;
+    margin-top: $spacing-xxl;
+    margin-bottom: 10rem;
+  }
+
+  .courses-content {
+    margin-top: $spacing-xl;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+
+    .course {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 5rem;
+      margin-bottom: $spacing-xxl;
+
+      // 左側標題區
+      .course-title {
+        min-width: 350px;
+        max-width: 450px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: right;
+        margin-right: 2rem;
+
+        h4 {
+          font-size: $font-size-xxl;
+          font-weight: 700;
+          color: $color-accent-gold;
+          margin-bottom: 0.5rem;
+          line-height: 1.2;
+        }
+        h3 {
+          font-size: $font-size-lg;
+          font-weight: 400;
+          color: $color-accent-gold;
+          margin-bottom: 0;
+          line-height: 1.2;
+        }
+      }
+
+      // 右側說明區
+      .course-desc {
+        flex: 1;
+        p {
+          font-size: $font-size-lg;
+          color: $color-brown-dark;
+          font-weight: 700;
+          line-height: 1.7;
+          margin: 0;
+          text-align: left;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  .courses-class {
+    .course {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: $spacing-md;
+      max-width: 90%; // 新增最大寬度
+      width: 100%; // 讓內容撐滿最大寬度
+      margin-left: auto; // 置中
+      margin-right: auto; // 置中
+      border-top: 1px solid $color-brown-light;
+      h3 {
+        @extend .mba-heading-large;
+        color: $color-footer;
+        text-align: left;
+        margin-top: $spacing-xxl;
+        margin-bottom: $spacing-md;
+      }
+      li {
+        @include label-style;
+        color: $color-brown-dark;
+        text-align: left;
+      }
+    }
+  }
+
+  @media (max-width: 700px) {
+    .courses-content {
+      .course {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2rem;
+
+        .course-title {
+          min-width: unset;
+          max-width: unset;
+          width: 100%;
+          margin-right: 0;
+          margin-bottom: 1.5rem;
+          text-align: left;
+          align-items: flex-start;
+        }
+        .course-desc {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

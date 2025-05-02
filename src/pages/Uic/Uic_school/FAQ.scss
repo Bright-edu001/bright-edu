@@ -1,0 +1,131 @@
+@import "../../../styles/_variables.scss";
+@import "../../../styles/_mixins.scss";
+
+.faq-page {
+  width: 100%;
+  font-family: "Arial", sans-serif;
+
+  .faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+
+    .faq-section {
+      margin-bottom: 3rem;
+
+      .section-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid $color-accent-gold;
+        color: $color-brown-dark;
+      }
+
+      .question-list {
+        .faq-item {
+          margin-bottom: 1rem;
+          border: 1px solid #e0e0e0;
+          border-radius: 5px;
+          overflow: hidden;
+
+          .question {
+            padding: 1rem;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            h3 {
+              margin: 0;
+              font-size: 1.1rem;
+              font-weight: 500;
+              color: $color-accent-gold;
+            }
+
+            .toggle-icon {
+              font-size: 1.5rem;
+              color: $color-accent-gold;
+            }
+
+            &:hover {
+              background-color: #f0f0f0;
+            }
+
+            &.expanded {
+              background-color: $color-accent-gold;
+              color: white;
+
+              .toggle-icon {
+                color: white;
+              }
+              h3 {
+                color: $color-white;
+              }
+            }
+          }
+
+          .answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            padding: 0 1rem;
+
+            p {
+              @include value-style;
+              text-align: left;
+              margin-top: $spacing-xs;
+            }
+
+            &.expanded {
+              max-height: 500px; // 調整為適合內容的高度
+              padding: 1rem;
+              background-color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 響應式設計
+@media (max-width: 768px) {
+  .faq-page {
+    .faq-banner {
+      height: 200px;
+
+      .banner-content {
+        h1 {
+          font-size: 2rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    .faq-container {
+      padding: 2rem 1rem;
+
+      .faq-section {
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .question-list {
+          .faq-item {
+            .question {
+              h3 {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

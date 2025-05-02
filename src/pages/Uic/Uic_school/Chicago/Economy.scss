@@ -1,0 +1,105 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins";
+
+.economy-page {
+  h2 {
+    @include body-large;
+    font-size: 56px;
+    line-height: 68px;
+    color: $color-brown-dark;
+    text-align: center;
+    margin-top: $spacing-xxl; // Space above the heading
+    margin-bottom: $spacing-xxl; // Space below the heading
+  }
+
+  p {
+    max-width: 90%;
+    @include label-style;
+    line-height: 36px;
+    margin: 0 auto; // Center the text
+    text-align: justify; // Justify text like in the image
+  }
+
+  // Group common styles for these sections
+  .financial-center-section,
+  .economy-section {
+    margin: 0 auto; // Center the section
+    margin-bottom: 50px;
+  }
+
+  // Specific styles for financial-center-section if any, or remove if none
+  .financial-center-section {
+    max-width: 80%; // Keep original max-width if different, or move to common if same
+  }
+
+  .cme-section {
+    margin-top: 2rem;
+
+    .cme-header-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: $spacing-xl; // Space below the header row
+    }
+
+    .cme-image-container {
+      margin-top: $spacing-xxl; // Space above the image
+      flex: 0 0 auto;
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-left: $spacing-xxl; // Space to the left of the image
+      }
+    }
+
+    .cme-title-container {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      h3 {
+        @include heading-large;
+        margin: 0;
+        line-height: 1.4;
+      }
+    }
+
+    .cme-description {
+      margin-top: 0.5rem;
+      p {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  .economy-section {
+    border-top: 1px solid $color-footer;
+    max-width: 75%; // Specific max-width for economy-section
+    // Inherits margin: 0 auto and margin-bottom: 50px from the common group
+    p {
+      @include label-style;
+      line-height: 36px;
+      color: $color-brown-dark;
+      // Inherits max-width: 90%, margin: 0 auto, text-align: justify from base p
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .economy-page {
+    .cme-section {
+      .cme-header-row {
+        flex-direction: column; // Stack items vertically on small screens
+        align-items: center; // Align to the start
+      }
+
+      .cme-image-container {
+        margin-top: $spacing-xl; // Adjust space above the image for smaller screens
+        img {
+          margin-left: 0; // Remove left margin on small screens
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@import "variables";
+
+/* 居中對齊混合器 - 用於垂直和水平居中內容 */
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 兩端對齊混合器 - 用於水平分散內容與垂直居中 */
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 容器混合器 - 設定標準內容容器樣式 */
+@mixin container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-sm;
+  overflow-x: visible; // 防止橫向滾動條出現
+}
+
+/* 懸停提升效果混合器 - 為元素添加懸停時上移動畫 */
+@mixin hover-lift {
+  transition: $transition-normal;
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* 卡片基礎樣式混合器 - 設定卡片元素的基本樣式 */
+@mixin card-base {
+  background: $color-white;
+  border-radius: 8px;
+  box-shadow: $shadow-md;
+}
+
+/* 按鈕基礎樣式 */
+@mixin button-base {
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: $transition-normal;
+  border: none;
+}
+
+/* 網格列表樣式 */
+@mixin grid-list($columns: 3) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $spacing-lg;
+  list-style: none;
+  padding: 0;
+}

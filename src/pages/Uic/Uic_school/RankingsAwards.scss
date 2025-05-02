@@ -1,0 +1,355 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.rankings-awards-container {
+  margin: 0 auto;
+  .content-section {
+    max-width: 100%;
+  }
+
+  .uic-rankings-section {
+    margin-top: 60px;
+    padding: 20px 0;
+
+    .rankings-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+
+      .rankings-logo {
+        max-width: 300px;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .rankings-title {
+        h2 {
+          @include heading-large;
+          color: $color-brown-dark;
+        }
+      }
+    }
+    .rankings-intro {
+      @include label-style;
+      font-weight: 700;
+      color: $color-brown-dark;
+      margin-bottom: $spacing-xxl;
+    }
+
+    .rankings-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+      width: 80%;
+      margin: 0 auto;
+
+      .ranking-item {
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .rank-header {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          width: 100%;
+
+          .top-label {
+            @include body-large;
+            color: #ff6633;
+            margin: 0;
+            padding: 0;
+            margin-right: 10px;
+          }
+
+          .rank-number {
+            @include label-style;
+            font-size: 48px;
+            color: #ff6633;
+            margin: 5px 0 15px;
+          }
+        }
+
+        .rank-description,
+        .rank-sub-description {
+          @include body-large;
+          font-size: $font-size-xs;
+          line-height: 17px;
+          color: $color-brown-dark;
+          margin: 5px 0 5px;
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+// 內容區塊
+.content-section {
+  margin-bottom: $spacing-xxl;
+  margin: $spacing-xxl auto;
+
+  .intro-text {
+    @include value-style;
+    margin-bottom: $spacing-lg;
+    text-align: left;
+  }
+
+  // AACSB 部分樣式
+  .aacsb-section {
+    margin: 0 auto;
+    padding: 2rem;
+
+    .aacsb-header {
+      display: flex;
+      justify-content: space-evenly;
+      margin-left: 10rem;
+      margin-bottom: 1.5rem;
+
+      .aacsb-logo {
+        margin-right: 1.5rem;
+      }
+
+      .aacsb-title {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        margin-top: $spacing-lg;
+        width: 40%;
+        h2 {
+          margin-bottom: 0.5rem;
+          color: $color-brown-dark;
+          font-weight: 900;
+        }
+        p {
+          @include label-style;
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+
+    .aacsb-description {
+      @include label-style;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: left;
+      margin-bottom: $spacing-xxl;
+    }
+
+    .standard-title,
+    .international-title {
+      color: $color-brown-dark;
+      margin: 2rem 0 1rem;
+    }
+
+    .standard-categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 1.5rem 0;
+
+      .standard-item {
+        flex: 0 0 30%;
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        &.title-item {
+          flex: 0 0 100%;
+          margin-bottom: 2rem;
+          .item-text {
+            @include paragraph-style;
+          }
+        }
+      }
+    }
+
+    .international-standards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 1.5rem $spacing-xxl;
+
+      .international-item {
+        flex: 0 0 80%;
+        margin-bottom: $spacing-lg;
+      }
+    }
+
+    .advantage-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 1.5rem $spacing-xxl;
+
+      .advantage-item {
+        flex: 0 0 45%;
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        &.title-item {
+          flex: 0 0 100%;
+          margin-bottom: 2rem;
+          .item-text {
+            @include paragraph-style;
+          }
+        }
+      }
+    }
+  }
+
+  // 多元性卓越獎部分樣式
+  .diversity-excellence-section {
+    margin: 5rem auto 0;
+    padding: 2rem;
+
+    .diversity-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 15rem;
+      margin-bottom: 1.5rem;
+
+      .diversity-logo {
+        margin-right: 1.5rem;
+      }
+
+      .diversity-title {
+        text-align: left;
+        h2 {
+          @include heading-large;
+          margin-bottom: 0.5rem;
+          color: $color-brown-dark;
+        }
+        p {
+          @include heading-large;
+        }
+      }
+    }
+
+    .diversity-description {
+      @include label-style;
+      font-weight: 700;
+      margin-bottom: $spacing-xxl;
+      text-align: left;
+    }
+
+    .diversity-items {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 1.5rem 0;
+
+      .diversity-item {
+        width: 80%;
+        margin-bottom: 2rem;
+
+        &.title-item {
+          flex: 0 0 100%;
+          margin-bottom: 2rem;
+          .item-text {
+            @include paragraph-style;
+          }
+        }
+      }
+    }
+  }
+}
+
+.advantage-list,
+.standard-list {
+  list-style-type: disc;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em 2em;
+  justify-items: start;
+  li {
+    color: $color-accent-gold;
+    margin-bottom: 1em;
+    @include body-large;
+    padding-left: 2em;
+  }
+}
+.advantage-list {
+  margin-left: 8rem;
+}
+.diversity-list {
+  text-align: left;
+  margin-left: 10rem;
+
+  li {
+    @include body-large;
+    margin-top: $spacing-lg;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .content-section .aacsb-section .aacsb-header {
+    margin-left: 0;
+  }
+  .standard-list,
+  .advantage-list {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 20rem;
+    li {
+      padding-left: 0;
+    }
+  }
+  .content-section .aacsb-section .advantage-items {
+    margin-left: 2rem;
+    margin-right: 0;
+  }
+  .advantage-list {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .content-section .diversity-excellence-section .diversity-header {
+    margin-left: 0;
+    margin-bottom: $spacing-lg;
+    .diversity-logo {
+      margin-top: 3rem;
+    }
+    .diversity-title {
+      h2 {
+        font-size: $font-size-xl;
+      }
+      p {
+        font-size: $font-size-xl;
+        margin-left: 0;
+      }
+    }
+  }
+  .content-section
+    .diversity-excellence-section
+    .diversity-items
+    .diversity-list {
+    margin-left: 2rem;
+  }
+  .rankings-awards-container .uic-rankings-section {
+    .rankings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
+}

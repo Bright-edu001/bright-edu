@@ -1,0 +1,167 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.about-uic-page {
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: $spacing-sm;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .intro {
+    padding: $spacing-lg 0;
+    text-align: left; // 改為左對齊
+    margin-bottom: 3rem; // 增加與下方區塊的間距
+
+    p {
+      @include body-large;
+      color: $color-text-primary;
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem; // 增加段落間距
+      align-items: left;
+    }
+  }
+
+  .stats {
+    padding: $spacing-lg 0;
+
+    .stats-card-school {
+      background: $color-white;
+      @include card-border;
+      position: relative;
+      margin-bottom: 6rem;
+
+      h3 {
+        @include heading-medium;
+        color: $color-brown-dark;
+        text-align: left; //向左對齊
+      }
+
+      ul.left-aligned {
+        text-align: left;
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); // 上方卡片 4 列
+        gap: 2rem;
+
+        li {
+          display: flex;
+          flex-direction: column; // 確保 label 和 value 垂直排列
+          align-items: flex-start; // 向左對齊
+          margin-bottom: 10px; // 增加間距
+
+          .label {
+            @include label-style;
+            color: $color-text-secondary;
+            margin-bottom: 0.5rem;
+          }
+
+          .value {
+            @include value-style;
+            color: $color-accent-gold;
+          }
+        }
+      }
+    }
+
+    .stats-card-ranking {
+      background: $color-white;
+      @include card-border;
+      position: relative;
+
+      h3 {
+        @include heading-medium;
+        color: $color-brown-dark;
+        text-align: left; //向左對齊
+      }
+
+      .card-header {
+        .header-content {
+          display: flex;
+          justify-content: space-between; // h3 和 a 水平對齊
+          align-items: center; // 垂直居中
+        }
+      }
+
+      ul.left-aligned {
+        text-align: left;
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); // 下方卡片 3 列
+        gap: 2rem;
+
+        li {
+          display: flex;
+          flex-direction: column; // 確保 label 和 value 垂直排列
+          align-items: flex-start; // 向左對齊
+          margin-bottom: 10px; // 增加間距
+
+          .label {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .number {
+              font-size: $font-size-number;
+              font-weight: 400;
+              color: $color-accent-orange;
+              margin-bottom: 0.5rem;
+              margin-left: 3rem; // 將 number 向右移動
+            }
+            .text {
+              font-size: $font-size-xl;
+              font-weight: 700;
+              color: $color-accent-orange;
+              margin-right: 5px; // 可選，調整文字間距
+            }
+          }
+
+          .value {
+            margin-top: 5px; // 增加 label 和 value 之間的間距
+            font-size: $font-size-xs;
+            font-weight: 700;
+            line-height: 17px;
+          }
+        }
+      }
+    }
+  }
+
+  .business-school {
+    padding: $spacing-lg 0;
+
+    h3 {
+      @include heading-large;
+      margin-bottom: $spacing-xl;
+      color: $color-brown-dark;
+      text-align: center;
+    }
+
+    p {
+      @include body-large;
+      color: $color-brown-dark;
+      margin-bottom: $spacing-xl;
+      text-align: left;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .about-uic-page .stats .stats-card-school ul.left-aligned,
+  .about-uic-page .stats .stats-card-ranking ul.left-aligned {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+    padding: 0;
+    list-style: none;
+  }
+  .about-uic-page .stats .stats-card-school ul.left-aligned li,
+  .about-uic-page .stats .stats-card-ranking ul.left-aligned li {
+    margin: 0;
+  }
+}

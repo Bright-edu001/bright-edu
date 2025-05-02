@@ -1,0 +1,91 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+@import "./mba-common";
+
+.mba-advantages {
+  // 共用文本樣式
+  p,
+  li {
+    @extend .mba-paragraph;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    max-width: 100%;
+  }
+
+  // 共用標題樣式
+  h3 {
+    @extend .mba-heading-large;
+  }
+
+  .intro {
+    padding: $spacing-lg 0;
+    margin-bottom: 3rem; // 增加與下方區塊的間距
+
+    p {
+      max-width: 100%;
+      font-weight: 400;
+    }
+  }
+
+  .learn .container {
+    h3 {
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      margin-bottom: $spacing-lg;
+      font-weight: 400;
+    }
+
+    ul {
+      @extend .mba-list;
+    }
+
+    .experience-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem 0;
+
+      li {
+        margin-bottom: 2.2rem;
+        line-height: 1.7;
+
+        strong {
+          display: block;
+          @include heading-large;
+          line-height: 30px;
+          color: $color-footer;
+          margin-bottom: 1rem;
+        }
+
+        div {
+          font-weight: 700;
+          line-height: 30px;
+          color: $color-brown-dark;
+          margin-left: 0;
+        }
+      }
+    }
+    h4 {
+      @include body-large;
+      font-size: $font-size-xl;
+      line-height: 30px;
+      margin-top: $spacing-xxl;
+      margin-bottom: $spacing-xxl;
+    }
+  }
+
+  .case-study,
+  .networking,
+  .speech-skills {
+    .container {
+      h3 {
+        margin-bottom: $spacing-xl;
+      }
+
+      p {
+        margin-bottom: 7rem;
+      }
+    }
+  }
+}

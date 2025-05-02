@@ -1,0 +1,44 @@
+@import "../../../../styles/variables"; // 引入變數
+@import "../../../../styles/mixins"; // 引入混合宏
+
+.heedContainer {
+  max-width: $container-max-width;
+  margin: 0 auto;
+
+  .contentSection {
+    padding: $spacing-lg $spacing-xl;
+
+    h2 {
+      font-size: $font-size-xl;
+      color: $color-accent-gold; // 使用金色強調標題
+      margin-top: $spacing-lg;
+      margin-bottom: $spacing-md;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    p {
+      @include value-style;
+      font-size: $font-size-lg;
+      line-height: 30px;
+      margin-bottom: $spacing-md;
+      text-align: left;
+    }
+
+    ul {
+      list-style: disc;
+      margin-left: $spacing-lg;
+      margin-bottom: $spacing-md;
+
+      li {
+        @include value-style;
+        margin-bottom: $spacing-xs;
+        text-align: left;
+      }
+      span {
+        @include value-style;
+        font-size: $font-size-md;
+      }
+    }
+  }
+}

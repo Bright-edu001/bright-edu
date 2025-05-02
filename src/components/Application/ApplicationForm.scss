@@ -1,0 +1,98 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.mba-application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-top: -$spacing-lg;
+
+  input,
+  textarea {
+    width: 700px;
+    max-width: 700px;
+    min-width: 260px;
+    align-self: center;
+    border: 1px solid #b88a2b;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: $font-size-md;
+    font-weight: 700;
+    outline: none;
+    transition: border 0.2s;
+    &:focus {
+      border-color: #f5b82e;
+    }
+  }
+  textarea {
+    min-height: 150px;
+  }
+  button {
+    background: #f5b82e;
+    color: #222;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 24px;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: $spacing-md;
+    margin-bottom: $spacing-xxl;
+    &:hover {
+      background: $color-brown-light;
+      color: $color-white;
+    }
+  }
+
+  // 響應式設計：螢幕寬度小於700px時調整表單元素寬度與樣式
+  @media (max-width: 700px) {
+    input,
+    textarea {
+      width: 90%;
+      max-width: 100%;
+      min-width: unset;
+      font-size: 1rem;
+      padding: 10px 8px;
+    }
+    button {
+      width: 90%;
+      font-size: 1rem;
+      padding: 10px 0;
+      display: block;
+    }
+  }
+}
+
+// 申請條件與標題樣式移植自 Application.scss
+.mba-application-section-title {
+  @include body-large;
+  font-size: $font-size-xxl;
+  margin-bottom: $spacing-xxl;
+  color: $color-accent-gold;
+  text-align: center;
+
+  @media (max-width: 700px) {
+    font-size: $font-size-xxl;
+    margin-bottom: $spacing-lg;
+    padding: 0 8px;
+  }
+}
+
+.mba-application-condition-desc {
+  color: $color-brown-dark;
+  font-size: 1rem;
+  text-align: left;
+  margin-bottom: $spacing-lg;
+  margin-left: $spacing-lg;
+
+  @media (max-width: 700px) {
+    font-size: 0.95rem;
+    margin-left: 0;
+    padding: 0 8px;
+    text-align: justify;
+  }
+}

@@ -1,0 +1,168 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+@import "./mba-common.scss";
+
+.mba-areas-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2.5rem 0 3rem 0;
+  color: #3a2c13;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+}
+
+.mba-areas-title {
+  @include body-large;
+  color: $color-brown-light;
+  text-align: center;
+  margin-bottom: $spacing-xxl;
+  letter-spacing: 0.05em;
+}
+
+.mba-areas-desc {
+  text-align: left;
+  font-size: 1rem;
+  margin-bottom: $spacing-xxl;
+  color: $color-brown-dark;
+}
+
+.mba-areas-why {
+  margin-bottom: 2.5rem;
+  .mba-areas-why-title {
+    @include heading-large;
+    color: $color-accent-gold;
+    text-align: center;
+    margin-bottom: $spacing-lg;
+    letter-spacing: 0.03em;
+  }
+  .mba-areas-why-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    text-align: left;
+    li {
+      margin-bottom: 1.1rem;
+      font-size: 1rem;
+      line-height: 1.7;
+      .highlight {
+        color: $color-footer;
+        @include body-large;
+      }
+    }
+  }
+}
+
+.mba-areas-advantage {
+  margin-bottom: 2.5rem;
+  .mba-areas-advantage-title {
+    @include heading-large;
+    text-align: center;
+    margin-bottom: 1.1rem;
+    .highlight-gold {
+      color: $color-accent-gold;
+      letter-spacing: 0.03em;
+    }
+    .subtitle {
+      @include body-large;
+      color: $color-accent-gold;
+      font-size: $font-size-lg;
+      letter-spacing: 0.01em;
+    }
+  }
+  .mba-areas-advantage-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    text-align: left;
+    li {
+      margin-bottom: 1.1rem;
+      font-size: 1rem;
+      line-height: 1.7;
+      .highlight {
+        color: $color-footer;
+        @include body-large;
+      }
+    }
+  }
+  .mba-areas-advantage-note {
+    text-align: center;
+    @include body-large;
+    color: $color-brown-dark;
+    margin-top: $spacing-xxl;
+    margin-bottom: $spacing-xxl;
+    letter-spacing: 0.01em;
+  }
+}
+
+.mba-areas-concentrations {
+  margin-top: 2.5rem;
+  .mba-areas-concentrations-title {
+    text-align: center;
+    @include heading-medium;
+    color: $color-footer;
+    margin-bottom: $spacing-xxl;
+    letter-spacing: 0.04em;
+  }
+  .mba-areas-concentration-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    justify-items: center;
+    .mba-areas-concentration-card {
+      background: #ebebeb;
+      border: 1px solid #ebebeb;
+      border-radius: 10px;
+      padding: 1.5rem 1.5rem;
+      width: 400px;
+      min-height: 120px;
+      box-shadow: 0 2px 8px rgba(212, 160, 23, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .concentration-title {
+        color: $color-accent-gold;
+        @include heading-medium;
+        margin-bottom: 0.5rem;
+        text-align: left;
+      }
+      .concentration-desc {
+        color: #3a2c13;
+        font-size: 0.97rem;
+        line-height: 1.5;
+        text-align: left;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .mba-areas-concentrations .mba-areas-concentration-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    justify-items: center;
+    .mba-areas-concentration-card {
+      background: #ebebeb;
+      border: 1px solid #ebebeb;
+      border-radius: 10px;
+      padding: 1.5rem 1.5rem;
+      width: 300px;
+      min-height: 120px;
+      box-shadow: 0 2px 8px rgba(212, 160, 23, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .concentration-title {
+        color: $color-accent-gold;
+        @include heading-medium;
+        margin-bottom: 0.5rem;
+        text-align: left;
+      }
+      .concentration-desc {
+        color: #3a2c13;
+        font-size: 0.97rem;
+        line-height: 1.5;
+        text-align: left;
+      }
+    }
+  }
+}

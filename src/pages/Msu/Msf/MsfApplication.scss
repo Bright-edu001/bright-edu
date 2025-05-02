@@ -1,0 +1,79 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.msf-application-list {
+  margin: $spacing-xxl auto;
+  padding-left: 18rem;
+  ul {
+    list-style: disc;
+    li {
+      text-align: left;
+      @include body-large;
+      color: $color-footer;
+      margin-top: $spacing-xl;
+    }
+  }
+  .english-requirements {
+    li {
+      @include label-style;
+      color: $color-brown-dark;
+      font-weight: 900;
+      margin-top: $spacing-md;
+      margin-left: $spacing-lg;
+    }
+  }
+  p {
+    font-size: $font-size-xs;
+    font-weight: 700;
+    line-height: 17px;
+    color: $color-brown-dark;
+    margin-top: $spacing-lg; // 原本是 $spacing-xl，縮短垂直距離
+    margin-left: 0;
+    margin-bottom: $spacing-lg; // 原本是 $spacing-xxl，縮短垂直距離
+  }
+  span {
+    font-size: $font-size-xs;
+    font-weight: 700;
+    line-height: 17px;
+    color: $color-brown-dark;
+    position: static; // 取消定位，與 p 對齊
+    margin-left: -46rem; // 向左移動，與 p 左對齊，可依實際需求微調
+    display: block; // 讓 span 單獨一行，與 p 標籤一致
+    margin-top: 0.25rem; // 微調與 p 的距離
+    margin-bottom: 8rem; // 原本是 $spacing-xxl，縮短垂直距離
+  }
+
+  // 響應式設計：螢幕寬度小於 700px
+  @media (max-width: 700px) {
+    margin: $spacing-lg $spacing-md;
+    padding-left: 0;
+
+    ul {
+      padding-left: 1.5rem;
+      li {
+        font-size: $font-size-sm;
+        margin-top: $spacing-md;
+      }
+    }
+
+    .english-requirements {
+      li {
+        font-size: $font-size-xs;
+        margin-left: $spacing-md;
+        margin-top: $spacing-xs;
+      }
+    }
+
+    p {
+      font-size: $font-size-xs;
+      margin-top: $spacing-md;
+      margin-bottom: $spacing-md;
+    }
+
+    span {
+      font-size: $font-size-xs;
+      margin-left: 0;
+      margin-bottom: $spacing-xxl;
+    }
+  }
+}

@@ -1,0 +1,445 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+/* 全局 p 標籤樣式 */
+p {
+  @include paragraph-style;
+}
+
+/* 主頁整體樣式 */
+.home-page {
+  margin-top: 5rem;
+
+  /* 按鈕樣式 - 定義各種按鈕的外觀 */
+  .btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: $transition-normal;
+
+    /* 課程按鈕統一樣式 - 模組化設置 */
+    &.course-btn {
+      width: auto;
+      min-width: 150px;
+      padding: 0.5rem 1.5rem;
+      background: $color-btn-primary;
+      color: $color-text-secondary;
+      border: none;
+      display: inline-block;
+      text-align: center;
+
+      &:hover {
+        background: $color-gray;
+        color: $color-black;
+      }
+
+      &.with-arrow {
+        position: relative;
+        padding-right: 2.5rem;
+
+        &:after {
+          content: "→";
+          position: absolute;
+          right: 1rem;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover:after {
+          transform: translateX(3px);
+        }
+      }
+    }
+  }
+
+  /* Hero 區域樣式 - 頁面頂部的主要宣傳區塊 */
+  .hero {
+    background: none;
+    position: relative;
+    color: $color-white;
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+
+    // 背景圖片淡化（透明度 0.4，可依需求調整）
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("/public/media/Uic/UIC-Banner.jpg") center center/cover
+        no-repeat;
+      opacity: 0.6;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    // 讓內容在遮罩上層
+    .container,
+    &-content,
+    &-image {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 使用 width + margin auto */
+    width: 100%; // 確保寬度不超過視窗
+    max-width: 85rem; /* 限制最大寬度 */
+    height: 30rem;
+    margin: 0 auto; // 移除多餘的邊距
+
+    // 應用與header相同的容器設定
+    .container {
+      @include container();
+      display: flex;
+      gap: $spacing-lg;
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        font-size: 2.5rem;
+        margin-top: $spacing-md;
+        line-height: 1.2;
+
+        .title-en,
+        .title-zh {
+          display: block;
+          gap: 0.5rem; /* 調整標題間距 */
+        }
+
+        .title-zh {
+          margin-top: 0.5rem; /* 調整中文標題與英文標題的間距 */
+        }
+        span {
+          color: $color-text-primary;
+        }
+      }
+
+      p {
+        margin-bottom: $spacing-lg;
+        opacity: 0.9;
+        /* 繼承全局 p 樣式，只需覆蓋特定屬性 */
+        font-size: 1.2rem; /* 覆蓋全局設定的字體大小 */
+      }
+
+      /* Hero 按鈕樣式覆蓋 */
+      .hero-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem; /* 減少按鈕間隔 */
+        margin-top: 3rem;
+
+        .btn.course-btn {
+          margin: 0; /* 移除自動邊距，讓按鈕靠得更近 */
+        }
+      }
+    }
+
+    &-image {
+      flex: 1;
+      @include flex-center;
+    }
+  }
+
+  /* 圖片佔位符樣式 - 用於顯示預留的圖片位置 */
+  .image-placeholder {
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+    background: rgba($color-white, 0.1);
+    border-radius: 8px;
+    @include flex-center;
+    color: $color-white;
+    font-size: 1.2rem;
+  }
+
+  /* 關於我們區域樣式 - 展示平台介紹和信息 */
+  .about {
+    margin: 0 auto; // 移除多餘的邊距
+    padding: 4rem 0;
+
+    .container {
+      @include container();
+    }
+
+    /* 關於區域內容樣式 - 左右兩欄布局 */
+    .about-content {
+      display: flex;
+      gap: $spacing-lg;
+    }
+
+    /* 關於區域圖片樣式 - 左側圖片 */
+    .about-image {
+      flex: 1;
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+      }
+    }
+
+    /* 關於區域文字樣式 - 右側文字內容 */
+    .about-text {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .text-content {
+        flex: 1;
+      }
+
+      .section-title {
+        text-align: left;
+        margin-top: 0;
+        color: $color-title-accent;
+        font-weight: 700;
+      }
+
+      p {
+        text-align: left;
+        margin-bottom: $spacing-md;
+        max-width: 100%;
+        /* 繼承全局 p 樣式，weight已經是700了 */
+      }
+    }
+  }
+}
+
+/* 章節標題樣式 - 用於各區域的大標題 */
+.section-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 2rem;
+  color: $color-text-primary;
+}
+
+/* 特色功能區域樣式 - 展示平台的主要特色 */
+.features {
+  .container {
+    @include container();
+  }
+
+  .feature-cards {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .feature-card {
+    background: $color-background-light;
+    border-radius: 20px;
+    padding: 3rem 6rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+
+    h3 {
+      @include heading-medium;
+      color: $color-text-primary;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 1.5rem;
+
+        .ranking-title {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: $color-accent-orange;
+          margin-right: 0.5rem;
+        }
+
+        .ranking-number {
+          font-size: 2.5rem;
+          font-weight: 300;
+          color: $color-accent-orange;
+          margin-right: 0.5rem;
+        }
+
+        p {
+          font-size: 1rem;
+          color: $color-text-primary;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+/* 特色卡片列表樣式 */
+.feature-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+  justify-content: center;
+}
+
+/* 個別特色卡片樣式 */
+.feature-card {
+  @include card-base;
+  padding: $spacing-lg;
+  flex: 1;
+  min-width: 250px;
+  background: $color-background-main;
+  @include hover-lift;
+
+  &-icon {
+    font-size: 2.5rem;
+    margin-bottom: $spacing-sm;
+  }
+
+  h2 {
+    @include heading-large;
+    color: $color-text-primary;
+  }
+
+  p {
+    color: $color-text-secondary;
+    line-height: 1.6;
+  }
+}
+
+/* 文章Blog區域樣式 */
+.blog-area {
+  padding: 4rem 0;
+
+  .container {
+    @include container();
+  }
+
+  /* Blog 頁首區域 - 標題和瀏覽按鈕 */
+  .blog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+
+    .section-title {
+      margin-bottom: 0;
+      text-align: left;
+    }
+  }
+
+  /* Blog 子區塊 - 招生活動和最新消息 */
+  .blog-section {
+    margin-bottom: 1rem;
+
+    .subsection-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: $color-text-primary;
+      text-align: left;
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
+
+  /* 卡片圖片連結 */
+  .card-link {
+    display: block;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  /* 卡片容器 - 包含卡片和描述 */
+  .card-container {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  /* 卡片描述區域 */
+  .card-description {
+    margin-top: 1.5rem;
+    width: 100%; /* 確保與 course-card 寬度一致 */
+    p {
+      line-height: 1.4;
+      text-align: left;
+      font-size: $font-size-lg;
+      font-weight: 900;
+      margin-left: 0;
+    }
+  }
+}
+
+/* 課程卡片列表樣式 */
+.course-cards {
+  display: flex;
+  gap: $spacing-lg;
+  flex-wrap: wrap;
+}
+
+/* 個別課程卡片樣式 */
+.course-card {
+  @include card-base;
+  overflow: hidden;
+  width: 100%;
+  height: 20rem; /* 調整為更合適的高度 */
+  @include hover-lift;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 0;
+
+  &-image {
+    height: 100%; /* 讓圖片填滿整個卡片 */
+    background: #eee;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+/* 響應式：feature-card 在寬度700px以下垂直排列 */
+@media (max-width: 700px) {
+  .feature-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .feature-card {
+    max-width: 100%;
+    width: 100%;
+  }
+  .blog-area .blog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .course-cards {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+
+    .card-container {
+      width: 100%;
+      max-width: 100%;
+      margin-left: 12rem; // 置中
+    }
+  }
+}

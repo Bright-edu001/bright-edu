@@ -1,0 +1,53 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins";
+
+.transportation-section {
+  margin: $spacing-xl auto;
+  max-width: 1200px;
+  color: $color-brown-dark;
+}
+
+.transportation-block {
+  margin-bottom: $spacing-lg;
+}
+
+.transportation-title {
+  text-align: center;
+  font-size: $font-size-xl;
+  font-weight: 700;
+  margin-bottom: $spacing-md;
+  color: $color-footer;
+}
+
+.transportation-subblock {
+  margin-bottom: $spacing-sm;
+  strong {
+    display: block;
+    font-weight: 900;
+    font-size: $font-size-md;
+    margin-bottom: $spacing-xl;
+    color: $color-brown-dark;
+  }
+  ul {
+    margin: $spacing-md 0 0 $spacing-md;
+    padding: 0;
+    list-style: disc;
+    display: flex; // 水平排列
+    flex-wrap: wrap; // 換行
+    justify-content: space-evenly; // 兩端對齊
+    gap: $spacing-lg; // li 之間的間距加大
+    li {
+      color: $color-accent-gold;
+      font-size: $font-size-lg;
+      font-weight: 700;
+      margin-bottom: $spacing-xl;
+    }
+  }
+}
+
+.transportation-divider {
+  border: none;
+  border-top: 1px solid $color-footer;
+  margin: $spacing-lg 0;
+  width: 100%;
+}

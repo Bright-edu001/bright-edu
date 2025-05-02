@@ -1,0 +1,400 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+// 新增自定義混合類
+@mixin section-container {
+  margin: $spacing-xxl auto;
+  padding: $spacing-lg $spacing-xxl;
+}
+
+@mixin gold-heading {
+  @include body-large;
+  color: $color-accent-gold;
+}
+
+@mixin footer-heading {
+  @include body-large;
+  color: $color-footer;
+}
+
+@mixin standard-list {
+  text-align: left;
+  margin-left: 0;
+  padding-left: 15rem;
+  margin-bottom: $spacing-xl;
+}
+
+@mixin list-item {
+  @include heading-large;
+  color: $color-brown-dark;
+  font-size: $font-size-lg;
+}
+
+// 使用混合類重構樣式
+.ms-master-intro {
+  @include section-container;
+  text-align: left;
+  ul {
+    margin-left: 0;
+    padding-left: 15rem;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.ms-master-features {
+  @include section-container;
+  h3 {
+    @include gold-heading;
+  }
+  ul {
+    @include standard-list;
+    li {
+      @include list-item;
+    }
+  }
+}
+
+.ms-master-date {
+  @include section-container;
+  max-width: 80%;
+
+  h3 {
+    @include gold-heading;
+  }
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-align: left;
+    margin-bottom: $spacing-xl;
+    li {
+      @include list-item;
+    }
+  }
+}
+
+.ms-master-fiance {
+  margin: $spacing-xxl auto;
+  border-top: 1px solid $color-footer;
+  border-bottom: 1px solid $color-footer;
+  width: 95%;
+  .ms-master-fiance-intro {
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-xxl;
+  }
+  h4 {
+    @include footer-heading;
+    margin-bottom: $spacing-lg;
+    margin-top: $spacing-xxl;
+  }
+  h3 {
+    @include gold-heading;
+    margin-top: $spacing-xxl;
+  }
+  p {
+    margin-top: $spacing-md;
+  }
+  ul {
+    @include standard-list;
+    li {
+      @include list-item;
+    }
+  }
+}
+
+.ms-master-require {
+  @include section-container;
+  h2 {
+    @include body-large;
+    color: $color-brown-dark;
+  }
+  h3 {
+    @include gold-heading;
+    margin-bottom: $spacing-lg;
+  }
+  ul {
+    @include standard-list;
+
+    li {
+      @include heading-large;
+      color: $color-footer;
+      font-size: $font-size-lg;
+      margin-top: $spacing-lg;
+    }
+
+    span {
+      @include body-large;
+      font-size: $font-size-sm;
+      line-height: 17px;
+      color: $color-brown-dark;
+    }
+  }
+}
+
+.ms-master-require-select {
+  margin: $spacing-xxl auto;
+
+  h3 {
+    @include gold-heading;
+    margin-bottom: $spacing-xxl;
+    margin-top: $spacing-xxl;
+  }
+  p {
+    margin-bottom: $spacing-xxl;
+  }
+  .ms-master-require-select-list {
+    h3 {
+      color: $color-footer;
+      text-align: left;
+      margin-left: 13%;
+      margin-bottom: $spacing-lg;
+    }
+    li {
+      color: $color-brown-dark;
+    }
+  }
+}
+
+.ms-master-require-plan {
+  @include section-container;
+  .ms-master-require-plan-list {
+    h3 {
+      margin-left: 9rem;
+      text-align: left;
+      color: $color-footer;
+    }
+    ul {
+      padding-left: 11rem;
+      margin-top: $spacing-xl;
+      li {
+        color: $color-brown-dark;
+      }
+    }
+  }
+}
+
+@mixin feature-layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 0 auto;
+  margin-top: $spacing-xxl;
+  margin-bottom: $spacing-xxl;
+  max-width: 75%;
+}
+
+.ms-master-require-apply-features,
+.ms-master-require-career-features {
+  @include feature-layout;
+
+  .feature-block {
+    box-sizing: border-box;
+    width: 32%;
+    min-width: 180px;
+    margin-bottom: $spacing-xl;
+    margin-right: 2%;
+
+    .feature-title {
+      font-weight: bold;
+      color: $color-footer;
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-xs;
+      letter-spacing: 1px;
+      text-align: left;
+    }
+    .feature-subtitle {
+      font-weight: bold;
+      color: $color-footer;
+      font-size: $font-size-sm;
+      margin-bottom: $spacing-xs;
+      letter-spacing: 1px;
+      text-align: left;
+    }
+    .feature-desc {
+      color: $color-brown-dark;
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+  }
+
+  // 移除右邊距 for 每排最後一個
+  .feature-block:nth-child(3),
+  .feature-block:nth-child(5) {
+    margin-right: 0;
+  }
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    .feature-block {
+      width: 100% !important;
+      max-width: 100%;
+      margin-right: 0 !important;
+      margin-bottom: $spacing-lg;
+    }
+  }
+}
+
+@mixin section-header {
+  text-align: center;
+  margin-bottom: $spacing-xxl;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+@mixin section-intro {
+  max-width: 100%;
+  margin: 0 auto;
+
+  h3 {
+    text-align: center;
+    color: $color-accent-gold;
+    font-size: 22px;
+    margin-bottom: $spacing-xl;
+    font-weight: 700;
+  }
+
+  p {
+    line-height: 1.6;
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+.ms-master-cfa,
+.ms-master-network {
+  margin: 0 auto;
+  border-top: 1px solid $color-footer;
+  h2 {
+    @include section-header;
+  }
+
+  &-intro {
+    @include section-intro;
+  }
+
+  &-recognition {
+    margin-top: $spacing-xxl;
+
+    h3 {
+      margin-bottom: $spacing-xl;
+    }
+
+    .cfa-note {
+      font-size: 14px;
+      color: #666;
+      margin-top: $spacing-md;
+      margin-bottom: $spacing-xl;
+    }
+  }
+  .ms-master-network-intro {
+    h3 {
+      margin-bottom: $spacing-xl;
+    }
+    p {
+      margin-bottom: $spacing-xl;
+    }
+  }
+}
+
+// 響應式設計：寬度700px以下
+@media (max-width: 700px) {
+  .ms-master-intro,
+  .ms-master-features,
+  .ms-master-date,
+  .ms-master-require,
+  .ms-master-require-plan,
+  .ms-master-fiance {
+    padding: $spacing-md $spacing-sm;
+    margin: $spacing-lg auto;
+    max-width: 100%;
+  }
+
+  .ms-master-intro ul,
+  .ms-master-features ul,
+  .ms-master-date ul,
+  .ms-master-fiance ul,
+  .ms-master-require ul {
+    padding-left: 1.5rem;
+    margin-bottom: $spacing-lg;
+  }
+  .ms-master-intro {
+    p {
+      max-width: 90%;
+    }
+    ul {
+      margin-bottom: $spacing-xxl;
+      margin-left: $spacing-lg;
+      li {
+        font-size: $font-size-md;
+        margin-bottom: $spacing-md;
+      }
+    }
+  }
+  .ms-master-features,
+  .ms-master-date,
+  .ms-master-fiance,
+  .ms-master-require {
+    ul {
+      margin-left: $spacing-lg;
+    }
+  }
+
+  .ms-master-date ul {
+    flex-direction: column;
+    align-items: flex-start;
+    li {
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  .ms-master-fiance {
+    width: 100%;
+    .ms-master-fiance-intro {
+      margin-top: $spacing-md;
+      margin-bottom: $spacing-lg;
+    }
+    h4,
+    h3 {
+      margin-top: $spacing-lg;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  .ms-master-require-select .ms-master-require-select-list h3 {
+    margin-left: 0;
+    font-size: $font-size-md;
+  }
+
+  .ms-master-require-plan .ms-master-require-plan-list h3 {
+    margin-left: 0;
+    font-size: $font-size-md;
+  }
+  .ms-master-require-plan .ms-master-require-plan-list ul {
+    padding-left: 1.5rem;
+    margin-top: $spacing-md;
+  }
+
+  .ms-master-require-apply-features,
+  .ms-master-require-career-features {
+    flex-direction: column;
+    max-width: 100%;
+    .feature-block {
+      width: 100%;
+      min-width: unset;
+      margin-left: $spacing-md;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  .ms-master-cfa,
+  .ms-master-network {
+    padding: $spacing-md $spacing-sm;
+    h2 {
+      font-size: 20px;
+    }
+    &-intro h3 {
+      font-size: 18px;
+    }
+  }
+}

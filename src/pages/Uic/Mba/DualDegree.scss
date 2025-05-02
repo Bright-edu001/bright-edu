@@ -1,0 +1,23 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+@import "./mba-common";
+
+.mba-advantages {
+  .avantages,
+  .application {
+    margin-top: $spacing-xxl;
+    margin-bottom: $spacing-xxl;
+    ul {
+      margin-top: $spacing-xl;
+      li {
+        color: $color-footer;
+        span {
+          @include label-style;
+          font-size: $font-size-md;
+          color: $color-brown-dark;
+          margin-left: $spacing-xl;
+        }
+      }
+    }
+  }
+}

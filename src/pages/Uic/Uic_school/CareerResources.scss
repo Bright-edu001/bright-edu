@@ -1,0 +1,100 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+// 防止全域橫向捲動
+body,
+html {
+  overflow-x: hidden;
+}
+
+.career-list-item {
+  font-weight: 700;
+  font-size: $font-size-xl;
+  line-height: 40px;
+}
+
+.career-resources {
+  overflow-x: hidden;
+  max-width: 100vw; // 修正最大寬度
+  h3 {
+    @include heading-large;
+    margin-bottom: $spacing-xl;
+    color: $color-accent-gold;
+    text-align: center;
+  }
+
+  .intro {
+    position: relative;
+    text-align: left;
+    margin-bottom: 3rem;
+    margin-top: $spacing-xxl;
+
+    p {
+      @include body-large;
+      color: $color-text-primary;
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+    }
+
+    .career-resources-list {
+      margin-left: 5rem;
+      list-style: none;
+      li {
+        @extend .career-list-item;
+        margin-top: 3rem;
+        color: $color-footer;
+        div {
+          @include label-style;
+          line-height: 36px;
+          color: #9c9c9c;
+        }
+      }
+    }
+
+    img {
+      position: absolute;
+      width: 30%;
+      height: auto;
+      max-width: 100%; // 防止圖片溢出
+      margin-left: 65vw; // 用vw避免超出視窗
+      margin-top: -15rem;
+      margin-bottom: 10rem;
+    }
+  }
+
+  .career-process {
+    padding: $spacing-lg 0;
+    display: flex;
+    margin-top: $spacing-lg; // 增加上方間距，將區塊往下移動
+
+    .container {
+      @include container;
+      text-align: left;
+
+      .career-process-list {
+        margin-left: 5rem;
+        li {
+          @extend .career-list-item;
+          list-style-type: decimal;
+          margin-left: 1rem;
+          color: $color-brown-dark;
+        }
+      }
+
+      img {
+        width: 90%;
+        max-width: 1400px;
+        margin: 0 auto; // 置中圖片
+        margin-bottom: 5rem;
+        margin-left: 3rem;
+      }
+    }
+  }
+
+  .career-dot {
+    color: #ffd600;
+    font-size: $font-size-number;
+    position: relative;
+    top: 0.2rem;
+  }
+}

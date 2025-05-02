@@ -1,0 +1,102 @@
+/* 顏色變數 - 網站配色方案 */
+$color-black: #000000; // 原 $primary-color
+$color-nav: #553721; // 原 $nav-link-color
+$color-text-primary: #252322; // 原 $text-color
+$color-text-secondary: #000000; // 原 $text-light-color
+$color-white: #ffffff; // 原 $white
+$color-gray: #ddd; // 原 $gray
+$color-btn-primary: #fdcd5e; // 原 $btn
+$color-background-main: #fbefe2; // 原 $main
+$color-gradient-hero: linear-gradient(#d94f21 0%, #fceee2 100%); // 原 $hero
+$color-footer: #7c5f31; // 原 $footer
+$color-title-accent: #d13e3e; // 原 $title
+
+/* 主題顏色變數 - 從其他檔案整合而來 */
+$color-accent-orange: #d94f21; // 原 $orange
+$color-accent-gold: #f5bf00; // 原 $gold
+$color-brown-dark: #211700; // 原 $brown-dark
+$color-brown-light: #a88145; // 原 $brown-light
+$color-background-light: #fff7f0; // 原 $bg-light
+
+/* 字體變數 - 網站字體設定 */
+$font-family-base: "Inter", sans-serif;
+
+/* 常用字體大小 */
+$font-size-xs: 14px;
+$font-size-sm: 16px;
+$font-size-md: 18px;
+$font-size-lg: 20px;
+$font-size-xl: 24px;
+$font-size-xxl: 32px;
+$font-size-number: 48px;
+
+/* 段落文字樣式設定 */
+@mixin paragraph-style {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: $font-size-xl;
+  line-height: 40px;
+}
+
+/* 標題樣式混合器 */
+@mixin heading-large {
+  font-size: $font-size-xxl;
+  font-weight: 900;
+  line-height: 39px;
+}
+
+@mixin heading-medium {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+/* 正文樣式混合器 */
+@mixin body-large {
+  font-size: $font-size-xl;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+@mixin label-style {
+  font-size: $font-size-lg;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+@mixin value-style {
+  font-size: $font-size-xl;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+/* 卡片樣式混合器 */
+@mixin card-border {
+  border: 2px solid $color-brown-light;
+  border-radius: 20px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+}
+
+/* 布局變數 - 控制間距與容器尺寸 */
+$container-max-width: 1400px;
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+$spacing-xxl: 5rem;
+
+/* 斷點變數 - 響應式設計的螢幕尺寸斷點 */
+$breakpoint-sm: 300px; /* 手機最小寬度 (300px-699px) */
+$breakpoint-md: 700px; /* 平板最小寬度 (700px-1439px) */
+$breakpoint-lg: 1025px; /* 桌面最小寬度 (1440px以上) */
+$breakpoint-xl: 1920px; /* 大型螢幕 */
+
+/* 陰影變數 - 元素陰影效果 */
+$shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+/* 動畫變數 - 過渡與動畫效果 */
+$transition-normal: all 0.3s ease;

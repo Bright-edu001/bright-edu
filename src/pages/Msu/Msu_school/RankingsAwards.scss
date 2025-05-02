@@ -1,0 +1,131 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.rankings-awards-page {
+  .ranking,
+  .management {
+    h3 {
+      @include heading-medium;
+      color: $color-footer;
+      margin: $spacing-lg 0;
+    }
+    p {
+      @include value-style;
+      text-align: center;
+      margin-bottom: $spacing-xs;
+    }
+    ul {
+      @include label-style;
+      font-weight: 700;
+      display: flex;
+      flex-direction: row;
+      color: $color-accent-gold;
+      align-items: center;
+      justify-content: space-evenly;
+      margin: $spacing-xl 10rem;
+    }
+    .highlight {
+      text-align: left;
+      margin-top: $spacing-xxl;
+      margin-bottom: $spacing-xxl;
+    }
+  }
+  .class {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: $spacing-xxl;
+    margin-bottom: $spacing-xxl;
+    margin-left: 12rem;
+
+    .class-item {
+      text-align: center;
+      padding: 0 $spacing-sm;
+
+      .class-title-zh,
+      .class-title-en {
+        @include value-style;
+        margin-bottom: 4px;
+        color: $color-brown-dark;
+        letter-spacing: 2px;
+      }
+
+      ul {
+        list-style: disc inside;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        display: inline-block;
+
+        li.highlight {
+          color: #e6be2a;
+          font-weight: 700;
+          font-size: 18px;
+          margin-top: 8px;
+        }
+      }
+    }
+  }
+  .engineering {
+    h3 {
+      @include heading-medium;
+      color: $color-footer;
+      margin: $spacing-lg 0;
+    }
+    ul {
+      @include label-style;
+      color: $color-brown-dark;
+      margin: 0 25rem;
+      padding: $spacing-sm $spacing-xl;
+      font-weight: 700;
+      text-align: left;
+      margin-bottom: $spacing-xxl;
+      li {
+        margin-top: $spacing-md;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .rankings-awards-page {
+    .ranking,
+    .management {
+      ul {
+        flex-direction: row;
+        margin: $spacing-lg 0;
+        align-items: flex-start;
+        justify-content: space-around;
+      }
+      .highlight {
+        margin-top: $spacing-lg;
+        margin-bottom: $spacing-lg;
+      }
+    }
+    .management {
+      h3 {
+        margin: $spacing-lg $spacing-lg;
+      }
+    }
+    .class {
+      flex-direction: column;
+      margin-left: 0;
+      margin-top: $spacing-lg;
+      margin-bottom: $spacing-lg;
+
+      .class-item {
+        padding: 0 $spacing-xs;
+        margin-bottom: $spacing-md;
+        ul {
+          font-size: 15px;
+        }
+      }
+    }
+    .engineering {
+      ul {
+        margin: 0;
+        padding: $spacing-xs $spacing-xl;
+        font-size: 15px;
+      }
+    }
+  }
+}

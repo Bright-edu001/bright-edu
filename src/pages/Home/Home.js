@@ -1,0 +1,174 @@
+import React from "react";
+import "./Home.css";
+import ActionButton from "../../components/ActionButton/ActionButton";
+import { enrollmentEvents, news } from "../../data/blog"; // 新增：引入共用資料
+
+function Home() {
+  return (
+    <div className="home-page">
+      <section className="hero" aria-label="主要促銷區">
+        <div className="container container-aligned">
+          <div className="hero-content">
+            <h1>
+              <span className="title-en">Apply Now for Fall 2025!</span>
+              <span className="title-zh">2025秋季班熱烈招生中</span>
+            </h1>
+            <div className="hero-buttons">
+              <a
+                href="/uic-business-school/mba/application"
+                className="btn course-btn with-arrow"
+                title="申請UIC MBA項目"
+              >
+                UIC MBA 申請
+              </a>
+              <a
+                href="/uic-business-school/ms/application"
+                className="btn course-btn with-arrow"
+                title="申請UIC MS項目"
+              >
+                UIC MS 申請
+              </a>
+              <a
+                href="/msu-business-school/msf/application"
+                className="btn course-btn with-arrow"
+                title="申請MSU MSF項目"
+              >
+                MSU MSF 申請
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="about" id="about-us" aria-label="關於我們">
+        <div className="container">
+          <div className="about-content">
+            <div className="about-text">
+              <div className="text-content">
+                <h2 className="section-title">Bright Education</h2>
+                <p>
+                  Bright Education
+                  是專業的美國商科碩士申請輔導機構，致力於協助學生申請頂尖美國商學院項目。我們專注於UIC伊利諾大學芝加哥分校和MSU密西根州立大學的商科碩士申請。
+                </p>
+                <p>
+                  我們提供一站式的申請服務，包括學校選擇、申請材料準備、面試輔導以及簽證指導，讓您的留學申請過程更加順利，提高錄取機會。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="features" id="school-rankings" aria-label="學校排名">
+        <div className="container">
+          <div className="feature-cards">
+            <div className="feature-card">
+              <h3>UIC Rankings</h3>
+              <ul>
+                <li>
+                  <span className="ranking-title">Top</span>
+                  <span className="ranking-number">1</span>
+                  <p>The largest research university in Chicago</p>
+                </li>
+                <li>
+                  <span className="ranking-title">Top</span>
+                  <span className="ranking-number">39</span>
+                  <p>Among Top Public School in the nation</p>
+                </li>
+                <li>
+                  <span className="ranking-title">Top</span>
+                  <span className="ranking-number">80</span>
+                  <p>U.S. NEWS National Universities</p>
+                </li>
+              </ul>
+            </div>
+            <div className="feature-card">
+              <h3>MSU Rankings</h3>
+              <ul>
+                <li>
+                  <span className="ranking-title">Top</span>
+                  <span className="ranking-number">19</span>
+                  <p>TFE Times Master's of Finance</p>
+                </li>
+                <li>
+                  <span className="ranking-title">Top</span>
+                  <span className="ranking-number">30</span>
+                  <p>US News & World Report Top Public Schools</p>
+                </li>
+                <li>
+                  <span className="ranking-title">Top</span>
+                  <span className="ranking-number">63</span>
+                  <p>Among Top Public School in the nation</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="blog-area" id="blog-articles" aria-label="部落格文章">
+        <div className="container">
+          <div className="blog-header">
+            <h2 className="section-title">文章Blog</h2>
+            <ActionButton
+              text="瀏覽其他"
+              link="/blog"
+              className="ranking-btn"
+              title="瀏覽所有部落格文章"
+            />
+          </div>
+
+          <div className="blog-section">
+            <h3 className="subsection-title">招生活動</h3>
+            <div className="course-cards">
+              {enrollmentEvents.slice(0, 3).map((item) => (
+                <div className="card-container" key={item.id}>
+                  <div className="course-card">
+                    <a
+                      href={item.link}
+                      className="card-link"
+                      title={item.title}
+                    >
+                      <div className="course-image">
+                        <img src={item.image} alt={item.title} />
+                      </div>
+                    </a>
+                  </div>
+                  <div className="card-description">
+                    <p>{item.excerpt}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="blog-section">
+            <h3 className="subsection-title">最新消息</h3>
+            <div className="course-cards">
+              {news.slice(0, 3).map((item) => (
+                <div className="card-container" key={item.id}>
+                  <div className="course-card">
+                    <a
+                      href={item.link}
+                      className="card-link"
+                      title={item.title}
+                    >
+                      <div className="course-image">
+                        <img src={item.image} alt={item.title} />
+                      </div>
+                    </a>
+                  </div>
+                  <div className="card-description">
+                    <p>{item.excerpt}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default Home;

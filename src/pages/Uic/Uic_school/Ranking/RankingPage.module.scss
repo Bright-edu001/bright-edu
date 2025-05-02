@@ -1,0 +1,57 @@
+@import "../../../../styles/variables"; // 引入變數
+
+.rankingContainer {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  text-align: center; // 整體居中
+
+  .introSection {
+    margin-top: $spacing-lg;
+    margin-bottom: $spacing-xl;
+    text-align: center;
+    width: 100%;
+    p {
+      font-size: $font-size-lg;
+      line-height: 1.8;
+      margin: 0 auto; // 居中段落
+    }
+  }
+
+  .rankingsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); // 響應式網格
+    gap: $spacing-lg; // 網格間距
+
+    .rankingItem {
+      padding: $spacing-lg;
+      border-radius: 10px;
+
+      text-align: center;
+
+      margin-bottom: $spacing-sm;
+
+      .rank {
+        font-size: $font-size-number; // 使用數字字體大小
+        font-weight: 900;
+        color: $color-accent-orange; // 強調排名數字
+        margin-bottom: $spacing-sm;
+      }
+
+      .description {
+        font-size: $font-size-md;
+        font-weight: 700;
+        margin-bottom: $spacing-xs;
+        min-height: 50px; // 確保描述有最小高度，對齊
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .source {
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        line-height: 1.4;
+      }
+    }
+  }
+}

@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Bright Edu - 智慧教育平台
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bright Edu 是一個現代化的線上教育平台，旨在提供高品質的課程內容，幫助學習者提升專業能力。
 
-## Available Scripts
+## 功能特色
 
-In the project directory, you can run:
+- 多元化課程內容
+- 專業講師團隊
+- 靈活的學習方式
+- 學習進度追蹤
+- 學習社群互動
+
+## 技術架構
+
+- React.js 前端框架
+- 響應式設計
+- 現代化 UI/UX
+
+## 開始使用
+
+在專案目錄下，可以執行：
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+在開發模式下運行應用程序。\
+打開 [http://localhost:3000](http://localhost:3000) 在瀏覽器中查看。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+當您進行更改時，頁面將重新加載。\
+您還可能在控制台中看到任何 lint 錯誤。
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+在互動式監視模式下啟動測試運行器。\
+有關更多信息，請參閱[運行測試](https://facebook.github.io/create-react-app/docs/running-tests)部分。
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+將應用程序構建到`build`文件夾中以進行生產。\
+它在生產模式下正確捆綁 React 並優化構建以獲得最佳性能。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+構建被壓縮，文件名包含哈希值。\
+您的應用程序已準備好部署！
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 學習更多
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+如需了解更多關於專案的信息，請聯繫我們的開發團隊。

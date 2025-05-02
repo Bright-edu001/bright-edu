@@ -1,43 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#fbefe2" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Bright Education 專業提供美國商科碩士留學申請服務，包含UIC伊利諾大學芝加哥分校MBA、MS Programs及Michigan State University(MSU)金融碩士(MSF)申請指導，提供一站式留學解決方案。"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta
+      name="keywords"
+      content="UIC MBA,MSU MSF,美國留學,商科碩士,UIC商學院,伊利諾大學芝加哥分校,密西根州立大學,一年制MBA,碩士申請,芝加哥留學,金融碩士"
+    />
+    <meta name="author" content="Bright Education" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+    />
+    <link rel="canonical" href="https://bright-edu.com/" />
+    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="UIC｜MSU商學碩士申請資訊 | 美國商科留學專家 | Bright Education"
+    />
+    <meta
+      property="og:description"
+      content="專業提供UIC伊利諾大學芝加哥分校商學院和MSU密西根州立大學金融碩士申請輔導，一年制MBA和MS Programs專家，助您實現美國名校留學夢想。"
+    />
+    <meta property="og:url" content="https://bright-edu.com/" />
+    <meta
+      property="og:site_name"
+      content="Bright Education 美國商科碩士申請專家"
+    />
+    <meta property="og:updated_time" content="2025-03-05T17:03:09+08:00" />
+    <meta
+      property="og:image"
+      content="https://bright-edu.com/wp-content/uploads/2020/03/B-logo-16-RGB_01-1.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="UIC｜MSU商學碩士申請資訊 | 美國商科留學專家 | Bright Education"
+    />
+    <meta
+      name="twitter:description"
+      content="專業提供UIC伊利諾大學芝加哥分校商學院和MSU密西根州立大學金融碩士申請輔導，一年制MBA和MS Programs專家，助您實現美國名校留學夢想。"
+    />
+    <meta
+      name="twitter:image"
+      content="https://bright-edu.com/wp-content/uploads/2020/03/B-logo-16-RGB_01-1.png"
+    />
+    <link
+      rel="icon"
+      href="https://bright-edu.com/wp-content/uploads/2020/04/B-logo-01-圓白底-CYMK_01.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      href="https://bright-edu.com/wp-content/uploads/2020/04/B-logo-01-圓白底-CYMK_01.png"
+      sizes="192x192"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://bright-edu.com/wp-content/uploads/2020/04/B-logo-01-圓白底-CYMK_01.png"
+    />
+    <title>
+      Bright Education | UIC商學院MBA | MSU金融碩士 | 美國商科留學申請專家
+    </title>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <!-- 結構化資料標記 - 組織資訊 -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Bright Education",
+        "url": "https://bright-edu.com/",
+        "logo": "https://bright-edu.com/wp-content/uploads/2020/03/B-logo-16-RGB_01-1.png",
+        "description": "專業提供美國商科碩士留學申請服務，包含UIC伊利諾大學芝加哥分校MBA、MS Programs及Michigan State University(MSU)金融碩士(MSF)申請指導",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "高雄市前鎮區二聖一路168號",
+          "addressLocality": "高雄市",
+          "addressRegion": "前鎮區",
+          "postalCode": "80645",
+          "addressCountry": "TW"
+        },
+        "telephone": "07-7227407",
+        "sameAs": ["https://www.youtube.com/@BrightEdu18"]
+      }
+    </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>您需要啟用JavaScript才能運行此應用。</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>

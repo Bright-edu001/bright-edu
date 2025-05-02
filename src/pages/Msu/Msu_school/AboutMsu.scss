@@ -1,0 +1,246 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.about-msu-page {
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: $spacing-sm;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .intro {
+    padding: $spacing-lg 0;
+    text-align: left; // 改為左對齊
+    margin-bottom: 3rem; // 增加與下方區塊的間距
+
+    p {
+      @include body-large;
+      color: $color-text-primary;
+      letter-spacing: 0.05em;
+      margin: $spacing-xl auto; // 使段落置中
+      max-width: 100%; // 限制段落的最大寬度
+    }
+  }
+
+  .stats {
+    padding: $spacing-lg 0;
+
+    .stats-card-school {
+      background: $color-white;
+      @include card-border;
+      position: relative;
+      margin-bottom: 6rem;
+
+      h3 {
+        @include heading-medium;
+        color: $color-brown-dark;
+        text-align: left; //向左對齊
+      }
+
+      ul.left-aligned {
+        text-align: left;
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); // 上方卡片 4 列
+        gap: 2rem;
+
+        li {
+          display: flex;
+          flex-direction: column; // 確保 label 和 value 垂直排列
+          align-items: flex-start; // 向左對齊
+          margin-bottom: 10px; // 增加間距
+
+          .label {
+            @include label-style;
+            color: $color-text-secondary;
+            margin-bottom: 0.5rem;
+          }
+
+          .value {
+            @include value-style;
+            color: $color-accent-gold;
+          }
+          .sub-list {
+            @include value-style;
+            font-size: $font-size-md;
+            font-weight: 400;
+            color: $color-accent-gold;
+            list-style: disc;
+            margin-top: 0;
+            padding-left: 20px; // 添加左側內邊距使圓點可見
+
+            li {
+              margin: 0;
+              display: list-item; // 確保列表項顯示為列表元素
+              padding-left: 5px; // 為文字和圓點之間添加間距
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 700px) {
+    .about-msu-page {
+      .stats {
+        .stats-card-school {
+          ul.left-aligned {
+            grid-template-columns: repeat(2, 1fr); // 在小螢幕上改為 1 列 2 項目
+          }
+        }
+      }
+    }
+  }
+
+  .details {
+    padding: $spacing-lg 0;
+
+    .reasearch {
+      background: $color-white;
+      padding: $spacing-md;
+      margin-bottom: 2rem;
+
+      h3 {
+        @include heading-medium;
+        color: $color-accent-gold;
+        margin-bottom: $spacing-md;
+      }
+
+      .research-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 16rem;
+        h4 {
+          @include label-style;
+          color: $color-brown-dark;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+          text-align: left;
+        }
+
+        .research-funding,
+        .research-facilities,
+        .research-areas,
+        .research-centers {
+          margin-bottom: $spacing-md;
+        }
+
+        .funding-amount {
+          @include heading-medium;
+          color: $color-footer;
+          font-weight: bold;
+        }
+
+        .funding-year {
+          font-size: $font-size-sm;
+          font-weight: normal;
+        }
+
+        .facility p {
+          color: $color-footer;
+          font-weight: 700;
+          font-size: $font-size-lg;
+          margin: $spacing-sm 0;
+          max-width: 100%;
+        }
+
+        .areas-list {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap; // 允許在必要時換行
+          margin-left: $spacing-md; // 調整左側間距
+
+          li {
+            color: $color-footer;
+            font-weight: 700;
+            font-size: $font-size-xl;
+            position: relative;
+            margin-right: $spacing-xl; // 添加項目之間的間距
+            white-space: nowrap; // 防止項目內容換行
+            margin-bottom: $spacing-sm; // 如果需要換行，提供垂直間距
+          }
+        }
+        .research-centers p {
+          color: $color-footer;
+          font-weight: 700;
+          font-size: $font-size-lg;
+          margin: 0;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  .michigan-contribution,
+  .global-impact {
+    h3 {
+      @include heading-medium;
+      color: $color-accent-gold;
+      margin-bottom: $spacing-xl;
+    }
+    p {
+      margin: 0 auto;
+      margin-left: 18rem;
+    }
+  }
+  .global-impact {
+    h3 {
+      margin-top: $spacing-xxl;
+    }
+    .impact-list {
+      padding-left: $spacing-lg;
+      text-align: left;
+      color: $color-footer;
+      font-weight: 700;
+      margin-left: 17.5rem;
+
+      li {
+        margin-bottom: 1rem; // 增加 li 元素的上下間隔
+      }
+    }
+  }
+  .diversity-list {
+    padding-left: $spacing-lg;
+    text-align: left;
+    color: $color-brown-dark;
+    font-weight: 700;
+    margin-left: 17.5rem;
+    font-size: $font-size-xs;
+    margin-top: 0;
+
+    li {
+      margin-bottom: 1rem; // 增加 li 元素的上下間隔
+    }
+  }
+}
+@media screen and (max-width: 700px) {
+  .about-msu-page {
+    .details {
+      .reasearch {
+        .research-content {
+          margin-left: 1rem;
+        }
+      }
+    }
+    .michigan-contribution {
+      .contribution-content {
+        p {
+          margin-left: 2rem;
+        }
+      }
+    }
+    .global-impact {
+      .global-impact-content {
+        p {
+          margin-left: 2rem;
+        }
+        ul {
+          margin-left: 2rem;
+        }
+      }
+    }
+  }
+}

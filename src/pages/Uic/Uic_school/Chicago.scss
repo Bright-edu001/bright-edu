@@ -1,0 +1,75 @@
+@import "../../../styles/variables";
+
+.chicago-container {
+  .container {
+    margin: 0 auto;
+  }
+
+  .chicago-intro {
+    margin: $spacing-xl 0;
+
+    .intro-text {
+      @include label-style;
+      line-height: 36px;
+      color: $color-brown-dark;
+      text-align: left;
+    }
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: $spacing-xl;
+
+    h2 {
+      @include value-style;
+      font-size: $font-size-xxl;
+      color: $color-brown-dark;
+    }
+  }
+
+  .history-section,
+  .transport-section {
+    margin: 0 auto;
+
+    .section-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: $spacing-xl;
+
+      .history-text,
+      .transport-text {
+        text-align: left;
+
+        p {
+          margin-bottom: $spacing-md;
+          @include label-style;
+          line-height: 36px;
+          color: $color-brown-dark;
+          margin-bottom: $spacing-md;
+        }
+      }
+    }
+  }
+
+  .history-section {
+    position: relative;
+    padding-bottom: $spacing-xl;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: calc(72%); // 確保與 section-content 寬度一致
+      border-bottom: 1px solid $color-brown-light;
+      margin: 0 auto;
+    }
+  }
+}

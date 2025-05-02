@@ -1,0 +1,403 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+/* 頁頭整體樣式 */
+.header {
+  background: $color-background-main;
+  opacity: 100%;
+  box-shadow: $shadow-sm;
+  padding: $spacing-sm 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  /* 頁頭容器樣式 */
+  .container {
+    @include container;
+    display: flex;
+    align-items: center; /* 垂直置中 */
+    justify-content: space-between; /* 左右分佈 */
+  }
+
+  /* 網站標誌樣式 */
+  .logo {
+    display: flex;
+    align-items: center; /* 垂直置中 */
+
+    a {
+      display: flex;
+      align-items: center; /* 確保圖片垂直置中 */
+      text-decoration: none;
+
+      .logo-img {
+        max-height: 3rem; /* 限制圖片高度 */
+        width: auto;
+      }
+    }
+  }
+
+  /* 主要導航樣式 */
+  .header-nav {
+    div {
+      color: $color-nav;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 0 $spacing-sm;
+        display: flex;
+        align-items: center; /* 確保文字垂直置中 */
+      }
+
+      a {
+        text-decoration: none;
+        color: $color-nav;
+        font-weight: 700;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+    }
+
+    /* 下拉選單樣式 */
+    .dropdown-container {
+      position: relative;
+
+      .dropdown-toggle {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        .dropdown-arrow {
+          margin-left: 5px;
+          font-size: 0.8rem;
+          transition: $transition-normal;
+        }
+
+        &.open .dropdown-arrow {
+          transform: rotate(180deg);
+        }
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 150%;
+        left: -0.8rem;
+        background: $color-background-main;
+        box-shadow: $shadow-sm;
+        min-width: 140px;
+        display: none;
+        flex-direction: column;
+        border-radius: 4px;
+        overflow-x: visible;
+        z-index: 10;
+
+        &.show {
+          display: flex;
+          gap: $spacing-sm;
+          padding: $spacing-sm;
+          overflow-x: visible;
+        }
+
+        li {
+          margin: 0;
+          width: 100%;
+
+          a {
+            padding: $spacing-sm;
+            display: block;
+            width: 100%;
+            color: $color-nav;
+            text-decoration: none;
+            transition: $transition-normal;
+            text-align: left;
+          }
+
+          .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-left: $spacing-sm;
+          }
+        }
+
+        .dropdown-container {
+          position: relative;
+
+          .dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+            a {
+              flex: 1;
+            }
+          }
+
+          .dropdown-menu {
+            position: absolute;
+            top: -38%;
+            left: 100%;
+            margin-top: 0;
+
+            &.show {
+              display: flex;
+              padding: 0;
+              max-height: 800px;
+            }
+          }
+
+          // 新增：為 rankings-menu 和 chicago-menu 提供基礎定位
+          .dropdown-menu.rankings-menu,
+          .dropdown-menu.chicago-menu {
+            position: absolute;
+            top: -130%; // 根據需要調整垂直位置
+            left: 89%;
+            margin-left: $spacing-sm; // 與父選單的間距
+            min-width: 140px; // 確保有最小寬度
+
+            &.show {
+              display: flex;
+              padding: $spacing-sm; // 恢復內邊距
+              max-height: 800px;
+            }
+          }
+          .dropdown-menu.chicago-menu {
+            top: -100%; // 根據需要調整垂直位置
+          }
+          .dropdown-menu.east-lansing-menu {
+            position: absolute;
+            top: -40%; // 根據需要調整垂直位置
+            left: 89%;
+            margin-left: $spacing-sm; // 與父選單的間距
+            min-width: 140px; // 確保有最小寬度
+
+            &.show {
+              display: flex;
+              padding: $spacing-sm; // 恢復內邊距
+              max-height: 800px;
+            }
+          }
+        }
+      }
+
+      /* 五大領域下拉選單樣式 */
+      .areas-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        margin-bottom: -$spacing-sm;
+        margin-left: 0.5rem;
+
+        .dropdown-arrow {
+          transition: $transition-normal;
+          transform: rotate(0deg);
+        }
+        .dropdown-arrow.open {
+          display: inline-block;
+          transition: $transition-normal;
+          transform: rotate(180deg);
+        }
+      }
+
+      // 調整五大領域子選單位置往左下角
+      .areas-header + .dropdown-menu.show {
+        left: 89%;
+        top: 0;
+      }
+    }
+
+    /* 為 UICSub 子選單添加特定樣式 */
+    .dropdown-menu li .dropdown-menu li a {
+      text-align: center;
+    }
+
+    /* 確保帶有子選單的項目也水平置中 */
+    .dropdown-menu li .dropdown-menu .dropdown-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .dropdown-toggle-link {
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    /* 添加此樣式使下拉選單項目一致對齊 */
+    .dropdown-toggle-link {
+      align-items: center;
+      cursor: pointer;
+      margin-left: 1rem;
+      display: flex;
+      justify-content: space-between;
+
+      .dropdown-arrow {
+        font-size: 0.8rem;
+        transition: $transition-normal;
+        margin-left: 0.5rem;
+      }
+
+      &.open .dropdown-arrow {
+        display: inline-block;
+        transition: $transition-normal;
+        transform: rotate(180deg); // 保持向右箭頭旋轉90度
+      }
+    }
+  }
+
+  /* 漢堡選單按鈕 */
+  .hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+
+    span {
+      height: 3px;
+      width: 100%;
+      background-color: $color-black;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    &.active {
+      span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+
+      span:nth-child(2) {
+        opacity: 0;
+      }
+
+      span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+    }
+  }
+}
+
+/* 響應式布局 */
+@media (max-width: 700px) {
+  .header {
+    .hamburger-menu {
+      display: flex; /* 在小螢幕下顯示漢堡選單 */
+    }
+
+    .header-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: $color-background-main;
+      display: none;
+      padding: $spacing-sm;
+      box-shadow: $shadow-sm;
+
+      &.mobile-active {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 確保整個導航區塊置中 */
+      }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: center; /* 確保選單項目水平置中 */
+        text-align: center; /* 文字置中 */
+        width: 100%;
+
+        li {
+          margin: $spacing-sm 0;
+          width: 100%;
+          justify-content: center; /* 確保內容水平置中 */
+        }
+
+        .dropdown-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+
+          .dropdown-toggle {
+            justify-content: center; /* 確保下拉標題置中 */
+          }
+
+          .dropdown-menu {
+            position: relative; /* 改為 relative 而非 static */
+            top: auto; /* 移除絕對定位的 top 值 */
+            left: auto;
+            box-shadow: none;
+            width: 100%;
+            padding: 0; /* 清除內邊距 */
+            overflow: hidden; /* 隱藏溢出內容 */
+            transition: max-height 0.3s ease; /* 添加高度過渡效果 */
+            background: lighten(
+              $color-background-main,
+              5%
+            ); /* 稍微淺色背景以區分層次 */
+
+            &.show {
+              max-height: 800px; /* 展開時的最大高度 */
+              opacity: 1;
+              margin-top: $spacing-sm; /* 只有展開時才有頂部邊距 */
+            }
+
+            li {
+              text-align: center;
+
+              a {
+                justify-content: center;
+                text-align: center;
+              }
+            }
+
+            .dropdown-container {
+              .dropdown-menu {
+                position: relative;
+                left: auto;
+                margin-left: 1rem; // 在手機版中，子選單縮進顯示
+                width: calc(100% - 2rem);
+                background: lighten(
+                  $color-background-main,
+                  8%
+                ); // 再淺一點以區分層次
+              }
+
+              // 確保移動版子選單樣式一致
+              &.rankings-menu,
+              &.chicago-menu {
+                position: relative;
+                left: auto;
+                top: auto;
+                margin-left: 1rem; // 在手機版中，子選單縮進顯示
+                width: calc(100% - 2rem);
+                background: lighten(
+                  $color-background-main,
+                  8%
+                ); // 再淺一點以區分層次
+                box-shadow: none;
+                padding: $spacing-xs 0; // 調整移動版內邊距
+              }
+            }
+          }
+
+          /* 移動版五大領域下拉選單樣式 */
+          .dropdown-container .dropdown-menu {
+            left: 0;
+            top: auto;
+            position: relative;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+}

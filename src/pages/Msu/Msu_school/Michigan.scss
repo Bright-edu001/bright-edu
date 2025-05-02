@@ -1,0 +1,238 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.michigan-page {
+  h3 {
+    @include heading-medium;
+    margin-top: $spacing-xl;
+  }
+  .michigan-intro {
+    margin: $spacing-xxl $spacing-xxl;
+    border-bottom: 1px solid $color-footer;
+    p {
+      margin: 8rem 8rem 8rem 9rem;
+      padding: 0;
+      text-align: left;
+      /* 與標題、內容對齊 */
+    }
+    h3 {
+      @include heading-medium;
+      margin-top: $spacing-xl;
+    }
+    .intro-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem 2rem; // 行間距40px，欄間距80px
+      margin-top: $spacing-xxl;
+      margin-bottom: $spacing-xxl;
+      margin-left: $spacing-xxl;
+
+      .intro-col {
+        // 預設不置中
+        text-align: left;
+        align-items: flex-start;
+        flex: 1 1 320px;
+        max-width: 320px;
+        min-width: 220px;
+        margin-bottom: 0;
+        h4 {
+          color: $color-footer; // 圖片中的棕色
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: $spacing-sm;
+          text-align: left;
+        }
+        p {
+          color: $color-brown-dark;
+          font-size: 1rem;
+          margin: 0;
+        }
+      }
+      // 只針對第一行的三個欄位置中
+      .intro-col:nth-child(-n + 3) {
+        text-align: center;
+        align-items: center;
+      }
+    }
+  }
+  .outdoor-activities {
+    margin: 0 $spacing-xxl; // 上下各 60px，左右各 20px
+    padding: 60px 40px; // 上下各 60px，左右各 20px
+    text-align: center;
+    background-color: #fff; // 或您想要的背景色
+    border-bottom: 1px solid $color-footer;
+
+    h3 {
+      font-size: 1.8rem;
+      color: #5d4037; // 圖片中的棕色
+      margin-bottom: 30px; // 保持間距
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); // 修改：強制每行顯示兩個項目
+      gap: 40px; // 調整間距
+      // justify-items: center; // 移除或註解掉，讓項目自然填滿網格單元格寬度
+      max-width: 1200px; // 限制最大寬度
+      margin: $spacing-xxl auto; // 居中網格容器
+    }
+
+    .activity-item {
+      display: flex;
+      flex-direction: column;
+      // align-items: center; // 移除此行，允許內容左對齊
+      // text-align: center; // 移除此行
+      width: 100%; // 確保項目填滿網格列
+      max-width: 250px; // 設置統一的最大寬度 (與 grid minmax 匹配)
+      justify-self: center; // 如果希望項目本身在網格單元格內居中（但內容左對齊）
+
+      .activity-image-placeholder {
+        width: 120%; // 寬度佔滿父容器 (.activity-item)
+        height: 200px; // 固定的高度 (您可以根據需要調整)
+        background-color: #e0e0e0; // 佔位符顏色 (您可以保留或修改)
+        border-radius: 8px; // 圓角 (您可以保留或修改)
+        margin-bottom: 15px; // 圖片下方間距
+      }
+
+      h4 {
+        font-size: 1.2rem;
+        font-weight: 900;
+        color: $color-footer; // 棕色
+        margin-bottom: 5px; // 標題下方間距
+        text-align: left; // 文字左對齊
+        width: 100%; // 確保標題佔滿寬度以便左對齊
+      }
+
+      p {
+        font-size: 1rem;
+        font-weight: 700;
+        color: $color-brown-dark; // 灰色
+        text-align: left; // 文字左對齊
+        width: 100%; // 確保段落佔滿寬度以便左對齊
+        margin-right: $spacing-xxl; // 右側間距
+      }
+    }
+  }
+  .traffic {
+    margin: 0 $spacing-xxl; // 上下各 60px，左右各 20px
+    border-bottom: 1px solid $color-footer;
+    h3 {
+      color: $color-brown-dark; // 圖片中的棕色
+    }
+    ul {
+      color: $color-footer; // 圖片中的棕色
+      padding: $spacing-lg $spacing-xxl;
+      text-align: left;
+      font-size: $font-size-xl;
+      font-weight: 700;
+      margin-left: 10rem;
+      li {
+        margin-top: $spacing-lg;
+      }
+    }
+  }
+  .city-features {
+    margin: 0 $spacing-xxl; // 上下各 60px，左右各 20px
+    h3 {
+      color: $color-brown-dark; // 圖片中的棕色
+    }
+    ul {
+      margin-top: $spacing-xl;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); // 三欄佈局
+      gap: $spacing-lg; // 欄間距
+      color: $color-footer; // 圖片中的棕色
+      font-size: $font-size-xl;
+      font-weight: 700;
+      margin-left: $spacing-xxl; // 左側間距
+      margin-bottom: $spacing-xxl; // 下側間距
+      li {
+        margin-top: $spacing-lg; // 上側間距
+      }
+    }
+  }
+}
+
+// 響應式設計：寬度700px以下
+@media (max-width: 700px) {
+  .michigan-page {
+    h3 {
+      font-size: 1.3rem;
+      margin-top: $spacing-lg;
+    }
+    .michigan-intro {
+      margin: $spacing-lg $spacing-sm;
+      p {
+        margin: 2rem 1rem 3rem 1rem;
+        font-size: 1rem;
+        max-width: 100%;
+      }
+      h3 {
+        margin-top: $spacing-lg;
+        margin-bottom: $spacing-xl;
+      }
+      .intro-row {
+        grid-template-columns: (2, 1fr);
+        gap: 1rem;
+        margin-top: $spacing-lg;
+        margin-bottom: $spacing-lg;
+        margin-left: 0;
+        .intro-col {
+          max-width: 100%;
+          min-width: 0;
+        }
+        .intro-col:nth-child(-n + 3) {
+          text-align: left;
+          align-items: flex-start;
+        }
+      }
+    }
+    .outdoor-activities {
+      margin: 0 $spacing-sm;
+      padding: 30px 10px;
+      h3 {
+        margin-bottom: 15px;
+      }
+      .activities-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 100%;
+        margin: $spacing-lg auto;
+      }
+      .activity-item {
+        max-width: 100%;
+        align-items: center;
+        .activity-image-placeholder {
+          width: 80%;
+          height: 300px;
+        }
+        h4 {
+          font-weight: 900;
+          margin-left: 8rem;
+          text-align: left;
+        }
+        p {
+          margin-left: 3.5rem;
+          text-align: left;
+        }
+      }
+    }
+    .traffic {
+      margin: 0 $spacing-sm;
+      ul {
+        padding: $spacing-md $spacing-sm;
+        margin-left: 2rem;
+      }
+    }
+    .city-features {
+      margin: 0 $spacing-sm;
+      ul {
+        grid-template-columns: repeat(2, 1fr);
+        gap: $spacing-lg;
+        font-size: $font-size-lg;
+        margin-left: 2rem;
+        text-align: left;
+      }
+    }
+  }
+}

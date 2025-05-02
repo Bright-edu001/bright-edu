@@ -1,0 +1,85 @@
+@import "../../../../styles/variables"; // 引入變數
+@import "../../../../styles/mixins"; // 引入 mixins
+
+.management-container {
+  margin: 0 auto;
+
+  .section {
+    margin: $spacing-xxl auto auto auto; // 整合上下 margin
+    max-width: 90%;
+
+    .section-title {
+      @include heading-large;
+      margin-top: $spacing-md;
+      color: $color-brown-light;
+      text-align: center;
+      margin-bottom: $spacing-xl;
+      position: relative;
+    }
+    .section-subtitle {
+      @include heading-large;
+      color: $color-accent-gold;
+      margin-bottom: $spacing-xl;
+    }
+
+    .section-content {
+      p {
+        @include body-large;
+        color: $color-brown-dark;
+        margin-bottom: $spacing-xl;
+        text-align: left;
+      }
+    }
+  }
+
+  .intro {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #444;
+  }
+
+  .course-list {
+    .course-item {
+      margin-left: $spacing-md;
+      margin-bottom: $spacing-xl;
+      li {
+        @include body-large;
+        text-align: left;
+        color: $color-brown-dark;
+      }
+    }
+  }
+
+  .conclusion {
+    text-align: center;
+    padding: 30px 0;
+    @include heading-large;
+    color: $color-brown-dark;
+  }
+}
+
+// 響應式設計
+@media screen and (max-width: 768px) {
+  .management-container {
+    .hero-section {
+      flex-direction: column;
+
+      .hero-text,
+      .hero-image {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+    }
+
+    .course-list .course-item {
+      flex-direction: column;
+
+      .course-title {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

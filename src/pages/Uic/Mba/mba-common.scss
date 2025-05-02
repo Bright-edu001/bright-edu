@@ -1,0 +1,24 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+// 共用標題樣式
+.mba-heading-large {
+  @include heading-large;
+  color: $color-accent-gold;
+}
+
+// 共用段落樣式
+.mba-paragraph {
+  @include paragraph-style;
+  text-align: left;
+}
+
+// 共用列表樣式
+.mba-list {
+  margin-left: 1rem;
+  li {
+    @include paragraph-style;
+    text-align: left;
+    margin-bottom: $spacing-lg;
+  }
+}

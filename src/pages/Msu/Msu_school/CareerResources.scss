@@ -1,0 +1,160 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.career-resources-page {
+  .career-resources {
+    h3 {
+      @include heading-large;
+      color: $color-accent-gold;
+      margin-bottom: $spacing-md;
+      margin-top: $spacing-xxl;
+    }
+    h4 {
+      @include body-large;
+      color: $color-accent-gold;
+      margin-bottom: $spacing-lg;
+    }
+  }
+  .career-services {
+    h3 {
+      @include body-large;
+      color: $color-accent-gold;
+      margin-top: $spacing-xxl;
+    }
+    h4 {
+      @include body-large;
+      color: $color-footer;
+      margin-bottom: $spacing-lg;
+      text-align: left;
+      margin-left: 10rem;
+      margin-top: $spacing-xxl;
+      padding-left: $spacing-xxl;
+    }
+    .career-services-list {
+      @include value-style;
+      padding: $spacing-lg 16rem;
+      text-align: left;
+      color: $color-brown-light;
+      li {
+        margin-top: $spacing-md;
+      }
+    }
+  }
+  .employer-engagement {
+    h3 {
+      @include body-large;
+      color: $color-accent-gold;
+      margin-top: $spacing-xxl;
+      margin-bottom: $spacing-lg;
+    }
+    h4 {
+      @include body-large;
+      color: $color-footer;
+      margin-bottom: $spacing-lg;
+      text-align: left;
+      margin-left: 10rem;
+      margin-top: $spacing-xxl;
+      padding-left: $spacing-xxl;
+    }
+    .interview-list {
+      p {
+        margin-top: $spacing-lg;
+      }
+      .interview-list-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding-left: $spacing-lg;
+        margin-right: 42rem;
+        margin-top: 0.5rem;
+        font-weight: 700;
+      }
+    }
+  }
+  .carreer-virtual {
+    h3 {
+      @include body-large;
+      color: $color-accent-gold;
+      margin-top: $spacing-xxl;
+      margin-bottom: $spacing-lg;
+    }
+    .virtual-resource-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin: $spacing-xl $spacing-xxl;
+      gap: $spacing-lg;
+      h5 {
+        @include body-large;
+        color: $color-footer;
+        margin-bottom: $spacing-lg;
+        text-align: left;
+        margin-left: 5rem;
+        margin-top: $spacing-xxl;
+        padding-left: $spacing-xxl;
+      }
+      p {
+        margin-left: 10rem;
+      }
+    }
+  }
+
+  // 響應式設計：寬度700px以下
+  @media (max-width: 700px) {
+    .career-resources {
+      h3,
+      h4 {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center;
+      }
+    }
+    .career-services {
+      h3,
+      h4 {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: $spacing-md;
+        padding-right: $spacing-md;
+        text-align: left;
+      }
+      .career-services-list {
+        padding: $spacing-md $spacing-xl;
+      }
+    }
+    .employer-engagement {
+      h3,
+      h4 {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: $spacing-md;
+        padding-right: $spacing-md;
+        text-align: left;
+      }
+      .interview-list {
+        .interview-list-item {
+          flex-direction: column;
+          margin-right: 0;
+          padding-left: 5.3rem;
+          margin-top: $spacing-md;
+          text-align: left;
+        }
+      }
+    }
+    .carreer-virtual {
+      .virtual-resource-row {
+        grid-template-columns: 1fr;
+        margin: $spacing-md $spacing-xl;
+        gap: $spacing-md;
+        h5 {
+          margin-left: 0;
+          padding-left: $spacing-md;
+          margin-top: $spacing-lg;
+        }
+        p {
+          margin-left: 0;
+          padding-left: $spacing-md;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.image-text-section {
+  background-color: $color-gray; // 設置背景色，可依需求調整
+  height: 50vh; // 設置區塊高度為視窗高度
+
+  .container {
+    display: flex;
+    align-items: center; // 垂直居中對齊
+    max-width: $container-max-width; // 使用變數設定最大寬度
+    margin: 0 auto; // 水平居中
+    padding-top: 5rem; /* 增加此行，調整數值以符合需求 */
+
+    .text-content {
+      flex: 1; // 移除 position 和 left，改用 flex-basis 或 flex-grow 控制寬度
+      margin-left: 18rem;
+      h2,
+      h3 {
+        @include value-style; // 使用 mixin 定義的標題樣式
+        font-weight: 900;
+        color: $color-brown-dark; // 設定標題顏色
+        margin-bottom: $spacing-xs; // 設定標題下方間距
+      }
+
+      p {
+        @include value-style; // 使用 mixin 定義的段落樣式
+        font-size: $font-size-lg;
+        font-weight: 900;
+        color: $color-brown-dark; // 設定副標題顏色
+      }
+    }
+
+    .image-content {
+      flex: 0.8 1 0; // 移除 position 和 right，改用 flex-basis 或 flex-grow 控制寬度
+      margin-right: 20rem;
+    }
+    img {
+      width: 100%; // 確保圖片不超過容器寬度
+      height: auto; // 自動調整高度以保持比例
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .image-text-section {
+    height: auto; // 取消固定高度
+    .container {
+      flex-direction: row; // 垂直排列
+      padding-top: 1rem; // 調整上方間距
+      .image-content {
+        margin-right: 0;
+        margin-bottom: 1.5rem; // 圖片與文字間距
+        width: 90vw;
+        max-width: 350px;
+        align-self: center;
+      }
+      .text-content {
+        margin-left: 0;
+        width: 90vw;
+        max-width: 350px;
+        text-align: center;
+        h2,
+        h3 {
+          font-size: 1.3rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

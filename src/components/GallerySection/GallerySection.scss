@@ -1,0 +1,43 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.gallery {
+  padding: $spacing-lg 0;
+
+  .gallery-title {
+    @include heading-large;
+    text-align: center;
+    margin-bottom: $spacing-lg;
+    color: $color-brown-dark;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-lg;
+
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .gallery-item {
+    margin-bottom: 0;
+
+    img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: $shadow-sm;
+      transition: $transition-normal;
+
+      &:hover {
+        transform: scale(1.02);
+        box-shadow: $shadow-md;
+      }
+    }
+  }
+}

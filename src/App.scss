@@ -1,0 +1,91 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
+/* 全局重置樣式 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow-x: visible; // 防止橫向滾動條出現
+}
+
+/* 頁面主體樣式 */
+body {
+  font-family: $font-family-base;
+  line-height: 1.5;
+  color: $color-text-primary;
+  background-color: $color-white;
+}
+
+/* 應用程式主容器樣式 */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+
+  /* 應用程式標誌樣式 */
+  &-logo {
+    height: 40vmin;
+    pointer-events: none;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+
+  /* 應用程式頭部樣式 */
+  &-header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: $color-white;
+  }
+
+  /* 應用程式連結樣式 */
+  &-link {
+    color: #61dafb;
+  }
+}
+
+/* 標誌旋轉動畫 */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 主要內容區域樣式 - 使內容填滿可用空間 */
+.main-content {
+  flex: 1;
+}
+
+/* 按鈕通用樣式 */
+button {
+  font-family: inherit;
+}
+.btn {
+  background-color: $color-btn-primary;
+}
+
+/* 通用容器樣式 */
+.container {
+  @include container;
+}
+
+/* 連結通用樣式 */
+a {
+  text-decoration: none;
+}
+
+/* 圖片通用樣式 */
+img {
+  max-width: 100%;
+  height: auto;
+}
