@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/bright-edu/static/css/main.a490346a.css",
-    "main.js": "/bright-edu/static/js/main.d78e5916.js",
+    "main.js": "/bright-edu/static/js/main.993c3b73.js",
     "index.html": "/bright-edu/index.html",
     "main.a490346a.css.map": "/bright-edu/static/css/main.a490346a.css.map",
-    "main.d78e5916.js.map": "/bright-edu/static/js/main.d78e5916.js.map"
+    "main.993c3b73.js.map": "/bright-edu/static/js/main.993c3b73.js.map"
   },
   "entrypoints": [
     "static/css/main.a490346a.css",
-    "static/js/main.d78e5916.js"
+    "static/js/main.993c3b73.js"
   ]
 }
