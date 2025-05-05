@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/bright-edu/static/css/main.053fb0b9.css",
+    "main.js": "/bright-edu/static/js/main.cae48dc3.js",
+    "static/media/UIC-Banner.jpg": "/bright-edu/static/media/UIC-Banner.9c2bdf772a878e368626.jpg",
+    "index.html": "/bright-edu/index.html",
+    "main.053fb0b9.css.map": "/bright-edu/static/css/main.053fb0b9.css.map",
+    "main.cae48dc3.js.map": "/bright-edu/static/js/main.cae48dc3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.053fb0b9.css",
+    "static/js/main.cae48dc3.js"
+  ]
+}
