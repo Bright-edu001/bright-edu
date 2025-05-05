@@ -1,7 +1,10 @@
+const eventimgrul = "https://imgur.com/6n3nCHp.png";
+const newsimgurl = "https://imgur.com/u20UaN5.png";
+
 export const enrollmentEvents = [
   {
     id: 1,
-    image: "/media/Blog/event.png",
+    image: eventimgrul,
     title: "UIC MBA+MS Programs Application Deadline update",
     excerpt: "UIC MBA+MS Programs Application Deadline update Fall 20 […]",
     link: "/blog/1",
@@ -60,7 +63,7 @@ Nov/2025（目前最新公布截止日、若有更新則以更新為準）
   },
   {
     id: 2,
-    image: "/media/Blog/event.png",
+    image: eventimgrul,
     title: "UIC MBA Application Deadline update",
     excerpt: "UIC MBA Application Deadline update Spring 2025 春季班資訊開放",
     link: "/blog/2",
@@ -87,7 +90,7 @@ Nov/2025（目前最新公布截止日、若有更新則以更新為準）
   },
   {
     id: 3,
-    image: "/media/Blog/event.png",
+    image: eventimgrul,
     title: "UIC MBA Application Deadline update​​",
     excerpt: "UIC MBA Application Deadline update​",
     link: "/blog/3",
@@ -116,7 +119,7 @@ UIC MBA台灣招生中心:https://bright-edu.com/
   },
   {
     id: 4,
-    image: "/media/Blog/event.png",
+    image: eventimgrul,
     title: "Education USA美國小型教育展-高雄場​",
     excerpt: "Education USA美國小型教育展-高雄場​",
     link: "/blog/4",
@@ -132,7 +135,7 @@ UIC MBA台灣招生中心:https://bright-edu.com/
 export const news = [
   {
     id: 5,
-    image: "/media/BLOG/news.png",
+    image: newsimgurl,
     title: "UIC 最新排名賀報🎉",
     excerpt: "U.S. News 2025 最新排名",
     link: "/blog/7",
@@ -150,7 +153,7 @@ UIC Today News:https://today.uic.edu/uic-rises-in-2025-u-s-news-best-colleges-ra
   },
   {
     id: 6,
-    image: "/media/BLOG/news.png",
+    image: newsimgurl,
     title: "UIC U.S. NEWS Ranks 2022-2023 Best Colleges",
     excerpt: "UIC賀報🎉",
     link: "/blog/8",

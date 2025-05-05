@@ -8,7 +8,7 @@ function HeedPage() {
       <ImageTextSection
         title="HEED -Higher Education Excellent in Diversity"
         subtitle="高等教育多樣性卓越獎"
-        imageUrl="\media\ranking\HEED.png" // 請確認圖片路徑
+        imageUrl="https://imgur.com/JD9zLlj.png" // 請確認圖片路徑
         imageAlt="HEED Logo"
       />
 

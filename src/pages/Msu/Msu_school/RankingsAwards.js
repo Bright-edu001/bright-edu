@@ -8,7 +8,7 @@ function MsRankingsAwards() {
       <ImageTextSection
         title="MSU 密西根州立大學"
         subtitle="排名與獎項"
-        imageUrl="/media/ranking/Winners-cuate.png"
+        imageUrl="https://imgur.com/SvcpDCa.png"
         imageAlt="排名與獎項"
       />
       <section className="ranking">

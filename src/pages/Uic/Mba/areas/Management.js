@@ -35,7 +35,7 @@ const Management = () => {
       <ImageTextSection
         title="一年制MBA"
         subtitle="Management 管理"
-        imageUrl="/media/MBA_Programs/Audit-amico.png" // 圖片路徑
+        imageUrl="https://imgur.com/rycQiyw.png" // 圖片路徑
         imageAlt="Management 管理"
       />
 

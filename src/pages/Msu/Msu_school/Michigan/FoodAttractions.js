@@ -8,7 +8,7 @@ function MicFoodAttractions() {
       <ImageTextSection
         title="East Lansing 大學城"
         subtitle="景點 • 美食"
-        imageUrl="/media/Ms/Stamp collecting-amico.png"
+        imageUrl="https://imgur.com/hiUsC7y.png"
         imageAlt="景點 • 美食"
       />
       {/* 景點區塊開始 */}

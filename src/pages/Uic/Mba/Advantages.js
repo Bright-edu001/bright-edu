@@ -9,7 +9,7 @@ function Advantages() {
       <ImageTextSection
         title="一年制MBA"
         subtitle="課程優勢"
-        imageUrl="/media/MBA_Programs/Learning-rafiki.png"
+        imageUrl="https://imgur.com/vM0m15x.png"
         imageAlt="課程優勢"
       />
 

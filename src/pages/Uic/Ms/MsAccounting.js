@@ -56,7 +56,7 @@ function MsAccounting() {
       <ImageTextSection
         title="Master of Science"
         subtitle="Accounting"
-        imageUrl="/media/MBA_Programs/college-dmission-bro.png"
+        imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Accounting"
       />
       <h2>

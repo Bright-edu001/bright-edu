@@ -8,7 +8,7 @@ function Michigan() {
       <ImageTextSection
         title="密西根州"
         subtitle="East Lansing 大學城"
-        imageUrl="/media/Msf/Trip-cuate.png"
+        imageUrl="https://imgur.com/gXQw5KP.png"
         imageAlt="密西根州立大學"
       />
       <section className="michigan-intro">

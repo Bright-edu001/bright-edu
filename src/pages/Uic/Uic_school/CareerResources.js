@@ -8,7 +8,7 @@ function CareerResources() {
       <ImageTextSection
         title="UIC 美國商學院"
         subtitle="職涯資源"
-        imageUrl="/media/Uic/On-the-way-amico.png"
+        imageUrl="https://imgur.com/JD3FIrt.png"
         imageAlt="職涯資源"
       />
       <section
@@ -63,10 +63,7 @@ function CareerResources() {
       </section>
       <section className="career-process" aria-label="職涯規劃所標準流程">
         <div className="container">
-          <img
-            src="/media/Uic/uic_school/流程圖改手機.png"
-            alt="職業發展相關圖片"
-          ></img>
+          <img src="https://imgur.com/mKlo3T6.png" alt="職業發展相關圖片"></img>
           <h3>職涯規劃所標準流程</h3>
           <ul className="career-process-list">
             <li>畢業前幾個月至半年就可以先思考是否要在美國就業。</li>

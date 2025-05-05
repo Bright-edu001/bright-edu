@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.css";
+import "./Home.scss";
 import ActionButton from "../../components/ActionButton/ActionButton";
 import { enrollmentEvents, news } from "../../data/blog"; // 新增：引入共用資料
 
@@ -118,7 +118,7 @@ function Home() {
             />
           </div>
 
-          <div className="blog-section">
+          <div className="blog-section enrollment-section">
             <h3 className="subsection-title">招生活動</h3>
             <div className="course-cards">
               {enrollmentEvents.slice(0, 3).map((item) => (
@@ -128,11 +128,7 @@ function Home() {
                       href={item.link}
                       className="card-link"
                       title={item.title}
-                    >
-                      <div className="course-image">
-                        <img src={item.image} alt={item.title} />
-                      </div>
-                    </a>
+                    ></a>
                   </div>
                   <div className="card-description">
                     <p>{item.excerpt}</p>
@@ -142,7 +138,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="blog-section">
+          <div className="blog-section news-section">
             <h3 className="subsection-title">最新消息</h3>
             <div className="course-cards">
               {news.slice(0, 3).map((item) => (
@@ -152,11 +148,7 @@ function Home() {
                       href={item.link}
                       className="card-link"
                       title={item.title}
-                    >
-                      <div className="course-image">
-                        <img src={item.image} alt={item.title} />
-                      </div>
-                    </a>
+                    ></a>
                   </div>
                   <div className="card-description">
                     <p>{item.excerpt}</p>

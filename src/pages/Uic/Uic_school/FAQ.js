@@ -20,7 +20,7 @@ const FAQ = () => {
       <ImageTextSection
         title="UIC 美國商學院"
         subtitle="常見問題"
-        imageUrl="/media/Uic/Questions-bro.png"
+        imageUrl="https://imgur.com/JQLEfaj.png"
         imageAlt="常見問題"
       />
 

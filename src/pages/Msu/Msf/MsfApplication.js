@@ -9,7 +9,7 @@ function MsfApplication() {
       <ImageTextSection
         title="MSF 金融碩士"
         subtitle="申請資訊"
-        imageUrl="/media/MBA_Programs/college-dmission-bro.png"
+        imageUrl="https://imgur.com/Ighubkx.png"
         imageAlt="申請資訊"
       />
 

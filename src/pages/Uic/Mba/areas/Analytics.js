@@ -32,7 +32,7 @@ const Analytics = () => {
       <ImageTextSection
         title="一年制MBA"
         subtitle="Business Analytics 商業分析"
-        imageUrl="/media/MBA_Programs/Audit-amico.png" // 圖片路徑
+        imageUrl="https://imgur.com/rycQiyw.png" // 圖片路徑
         imageAlt="Business Analytics 商業分析"
       />
 

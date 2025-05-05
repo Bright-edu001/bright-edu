@@ -33,7 +33,7 @@ const Marketing = () => {
       <ImageTextSection
         title="一年制MBA"
         subtitle="Marketing 行銷"
-        imageUrl="/media/MBA_Programs/Audit-amico.png" // 圖片路徑
+        imageUrl="https://imgur.com/rycQiyw.png" // 圖片路徑
         imageAlt="Marketing 行銷"
       />
 

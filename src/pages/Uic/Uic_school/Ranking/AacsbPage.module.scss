@@ -2,7 +2,6 @@
 @import "../../../../styles/mixins"; // 引入混合宏
 
 .aacsbContainer {
-  max-width: $container-max-width;
   margin: 0 auto; // 水平居中
 
   .contentSection {
@@ -23,6 +22,7 @@
       line-height: 30px;
       margin-bottom: $spacing-md;
       text-align: left;
+      margin-left: 0;
     }
 
     ul {

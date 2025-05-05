@@ -116,7 +116,7 @@ function Footer() {
                 aria-label="前往 whatsapp"
               >
                 <img
-                  src="/media/media/whatsapp.svg"
+                  src="https://imgur.com/vfi3sBo.png"
                   alt="whatsapp 圖示"
                   width="24"
                   height="24"

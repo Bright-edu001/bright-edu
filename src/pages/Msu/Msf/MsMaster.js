@@ -8,7 +8,7 @@ function MsMaster() {
       <ImageTextSection
         title="Master of Science in Finance"
         subtitle="MSF 金融碩士"
-        imageUrl="/media/Msf/Audit-amico.png"
+        imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="MSF 金融碩士"
       />
       <div className="ms-master-intro">

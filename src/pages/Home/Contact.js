@@ -8,7 +8,7 @@ function Contact() {
     <div className="contact-page">
       <ImageTextSection
         title="聯絡表單"
-        imageUrl="/media/MBA_Programs/college-dmission-bro.png"
+        imageUrl="https://imgur.com/Ighubkx.png"
         imageAlt="聯繫我們"
       />
       <div className="empty"></div>

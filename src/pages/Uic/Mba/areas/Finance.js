@@ -36,7 +36,7 @@ const Finance = () => {
       <ImageTextSection
         title="一年制MBA"
         subtitle="Finance 金融"
-        imageUrl="/media/MBA_Programs/Audit-amico.png" // 圖片路徑
+        imageUrl="https://imgur.com/rycQiyw.png" // 圖片路徑
         imageAlt="Finance 金融"
       />
 

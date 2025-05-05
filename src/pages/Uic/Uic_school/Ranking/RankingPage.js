@@ -55,7 +55,7 @@ function RankingPage() {
       <ImageTextSection
         title="UIC RANKINGS"
         subtitle=""
-        imageUrl="\media\ranking\uic_ranking(去背).png" // 請確認圖片路徑
+        imageUrl="https://imgur.com/uhMmwNF.png" // 請確認圖片路徑
         imageAlt="Ranking Logo"
       />
 

@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import AboutUic from "./pages/Uic/Uic_school/AboutUic";
 import CareerResources from "./pages/Uic/Uic_school/CareerResources";
@@ -49,7 +49,7 @@ function App() {
     <div className="App">
       <Header />
       <main className="main-content">
-        <Router>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
@@ -190,8 +190,9 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogDetail />} />
             <Route path="/blog/search/:keyword" element={<BlogSearch />} />
+            {/* Add more routes as needed */}
           </Routes>
-        </Router>
+        </BrowserRouter>
       </main>
       <Footer />
     </div>

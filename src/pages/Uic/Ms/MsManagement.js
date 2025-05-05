@@ -90,7 +90,7 @@ function MsManagement() {
       <ImageTextSection
         title="Master of Science"
         subtitle="Supply Chain and Operations Management"
-        imageUrl="/media/Ms/Audit-amico.png"
+        imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Supply Chain and Operations Management"
       />
       <h2>

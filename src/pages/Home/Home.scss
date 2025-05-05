@@ -69,7 +69,8 @@ p {
       left: 0;
       right: 0;
       bottom: 0;
-      background: url("/public/media/Uic/UIC-Banner.jpg") center center/cover
+      /* 修正：移除 public，直接從根目錄引用 */
+      background: url("https://imgur.com/MJbcBPV.jpg") center center/cover
         no-repeat;
       opacity: 0.6;
       z-index: 0;
@@ -177,7 +178,6 @@ p {
     /* 關於區域圖片樣式 - 左側圖片 */
     .about-image {
       flex: 1;
-
       img {
         width: 100%;
         height: auto;
@@ -392,27 +392,27 @@ p {
 .course-card {
   @include card-base;
   overflow: hidden;
-  width: 100%;
+  padding: 0;
   height: 20rem; /* 調整為更合適的高度 */
   @include hover-lift;
-  border-radius: 8px 8px 0 0;
+  border-radius: 8px;
   margin-bottom: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 新增陰影效果 */
+}
 
-  &-image {
-    height: 100%; /* 讓圖片填滿整個卡片 */
-    background: #eee;
-    overflow: hidden;
+/* 招生活動區域樣式 */
+.enrollment-section {
+  .course-card {
+    background: url("https://imgur.com/6n3nCHp.png") center center/cover
+      no-repeat;
+  }
+}
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-
-      &:hover {
-        transform: scale(1.05);
-      }
-    }
+/* 最新消息區域樣式 */
+.news-section {
+  .course-card {
+    background: url("https://imgur.com/1EoFLTI.png") center center/cover
+      no-repeat;
   }
 }
 
@@ -439,7 +439,7 @@ p {
     .card-container {
       width: 100%;
       max-width: 100%;
-      margin-left: 12rem; // 置中
+      margin-left: 0.5rem; // 置中
     }
   }
 }

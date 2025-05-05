@@ -8,15 +8,15 @@ function AboutUic() {
   // 校園圖片數據
   const campusImages = [
     {
-      src: "/media/UIC/uic_school/uic-campus-1.png",
+      src: "https://imgur.com/io4JJ0y.png",
       alt: "UIC 校園圖片 1",
     },
     {
-      src: "/media/UIC/uic_school/uic-campus-2.png",
+      src: "https://imgur.com/tN5BwFK.png",
       alt: "UIC 校園圖片 2",
     },
     {
-      src: "/media/UIC/uic_school/uic-campus-3.png",
+      src: "https://imgur.com/p04suZU.png",
       alt: "UIC 校園圖片 3",
     },
   ];
@@ -26,7 +26,7 @@ function AboutUic() {
       <ImageTextSection
         title="伊利諾大學芝加哥分校"
         subtitle="UIC 美國商學院"
-        imageUrl="/media/Uic/On-the-way-amico.png"
+        imageUrl="https://imgur.com/JD3FIrt.png"
         imageAlt="UIC 美國商學院"
       />
 

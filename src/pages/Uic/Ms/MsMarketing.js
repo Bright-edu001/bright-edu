@@ -82,7 +82,7 @@ function MsMarketing() {
       <ImageTextSection
         title="Master of Science"
         subtitle="Marketing"
-        imageUrl="/media/Ms/Audit-amico.png"
+        imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Marketing"
       />
       <h2>

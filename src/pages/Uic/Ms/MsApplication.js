@@ -11,7 +11,7 @@ function MsApplication() {
       <ImageTextSection
         title="MS Programs"
         subtitle="申請資訊"
-        imageUrl="/media/MBA_Programs/college-dmission-bro.png"
+        imageUrl="https://imgur.com/Ighubkx.png"
         imageAlt="申請資訊"
       />
       <div className="ms-application-intro">

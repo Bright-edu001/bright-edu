@@ -199,13 +199,13 @@ function Header() {
         <div className="logo">
           <a href="/" title="Bright Education 首頁">
             <img
-              src="/media/logo/B - logo 10 (RGB)_01.png"
+              src="https://imgur.com/0bP0auA.png"
               className="logo-img"
               alt="Bright Education Logo"
-              fetchPriority="high"
+              fetchpriority="high"
               width="150"
               height="60"
-            ></img>
+            />
           </a>
         </div>
 

@@ -8,7 +8,7 @@ function AacsbPage() {
       <ImageTextSection
         title="AACSB商業及會計雙項認證"
         intro="不超過200間學校獲得此商業&會計的雙項認證"
-        imageUrl="\media\ranking\AACSB(去背).png" // 請確認圖片路徑
+        imageUrl="https://imgur.com/LAYY6IB.png" // 請確認圖片路徑
         imageAlt="AACSB Logo"
       />
 

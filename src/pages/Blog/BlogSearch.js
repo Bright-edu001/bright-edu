@@ -68,7 +68,7 @@ function BlogSearch() {
       <ImageTextSection
         title=" 活動與文章"
         subtitle={`搜索關鍵字:${keyword}`}
-        imageUrl="/media/Uic/Questions-bro.png"
+        imageUrl="https://imgur.com/JQLEfaj.png"
         imageAlt="搜尋結果"
       />
       <div className="blog-detail-mainrow">

@@ -110,7 +110,7 @@ function MsInformation() {
       <ImageTextSection
         title="Master of Science"
         subtitle="Management Information Systems"
-        imageUrl="/media/MBA_Programs/college-dmission-bro.png"
+        imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Management Information Systems"
       />
       <h2>

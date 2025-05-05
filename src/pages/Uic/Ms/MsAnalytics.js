@@ -80,7 +80,7 @@ function MsAnalttics() {
       <ImageTextSection
         title="Master of Science"
         subtitle="Business Analytics"
-        imageUrl="/media/Ms/Audit-amico.png"
+        imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Business Analytics"
       />
       <h2>

@@ -8,7 +8,7 @@ const Chicago = () => {
       <ImageTextSection
         title="芝加哥城市"
         subtitle="歷史發展 • 交通"
-        imageUrl="/media/Chicago/Trip-cuate.png" // 圖片路徑
+        imageUrl="https://imgur.com/nP2gMTI.png" // 圖片路徑
         imageAlt="歷史發展 • 交通"
       />
 
@@ -33,7 +33,7 @@ const Chicago = () => {
         <div className="container">
           <div className="section-header">
             <div className="history-image">
-              <img src="/media/Chicago/Create-bro.png" alt="芝加哥歷史發展" />
+              <img src="https://imgur.com/GPs7TSN.png" alt="芝加哥歷史發展" />
             </div>
             <h2>歷史發展</h2>
           </div>
@@ -60,7 +60,7 @@ const Chicago = () => {
           <div className="section-header">
             <h2>交通</h2>
             <div className="transport-image">
-              <img src="/media/Chicago/Train-bro.png" alt="芝加哥交通" />
+              <img src="https://imgur.com/Xbnfhxb.png" alt="芝加哥交通" />
             </div>
           </div>
           <div className="section-content">

@@ -8,7 +8,7 @@ function MsCareerResources() {
       <ImageTextSection
         title="MSU 密西根州立大學"
         subtitle="職涯資源"
-        imageUrl="/media/Uic/On-the-way-amico.png"
+        imageUrl="https://imgur.com/JD3FIrt.png"
         imageAlt="職涯資源"
       />
       <section className="career-resources">

@@ -46,7 +46,7 @@ function BlogDetail() {
     <div>
       <ImageTextSection
         title="活動與文章"
-        imageUrl="/media/Uic/Questions-bro.png"
+        imageUrl="https://imgur.com/JQLEfaj.png"
         imageAlt="活動與文章"
       />
       <div className="blog-detail-mainrow">

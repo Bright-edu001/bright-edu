@@ -1,7 +1,6 @@
 @import "../../../../styles/variables"; // 引入變數
 
 .rankingContainer {
-  max-width: $container-max-width;
   margin: 0 auto;
   text-align: center; // 整體居中
 
@@ -19,8 +18,9 @@
 
   .rankingsGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); // 響應式網格
-    gap: $spacing-lg; // 網格間距
+    grid-template-columns: repeat(4, 1fr); // 響應式網格
+    padding: $spacing-lg; // 網格內邊距
+    gap: $spacing-xl; // 網格間距
 
     .rankingItem {
       padding: $spacing-lg;

@@ -11,7 +11,7 @@ function Areas() {
       <ImageTextSection
         title="UIC 美國商學院"
         subtitle="MBA Program"
-        imageUrl="/media/MBA_Programs/college-project-rafiki.png"
+        imageUrl="https://imgur.com/f8MWoRF.png"
         imageAlt="MBA Program"
       />
       <SectionContainer>

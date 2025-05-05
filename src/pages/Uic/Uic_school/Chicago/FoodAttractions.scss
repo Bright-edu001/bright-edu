@@ -2,16 +2,32 @@
 @import "../../../../styles/mixins";
 
 .food-attractions-page {
+  .attractions-section,
+  .food-attractions-header,
+  .food-section {
+    max-width: 100%;
+    padding: 0 $spacing-xxl;
+    margin: 0 auto;
+  }
+  .food-attractions-header {
+    p {
+      margin-left: 15rem;
+    }
+  }
   .food-attractions-description,
   .food-attractions-text {
     @include label-style;
     text-align: left;
-    max-width: 71%;
-    margin: 0 auto;
+    margin: 0 $spacing-md;
     margin-top: $spacing-xxl;
   }
   .food-attractions-text {
     margin-top: $spacing-md;
+  }
+  .food-attractions-title {
+    @include heading-large;
+    margin-bottom: $spacing-xxl;
+    text-align: center;
   }
   .food-attractions-intro {
     margin-top: 7rem;
@@ -23,8 +39,8 @@
     p {
       @include label-style;
       margin: 0 auto;
+
       text-align: left;
-      max-width: 71%;
       margin-bottom: $spacing-xxl;
     }
     img {
@@ -35,13 +51,11 @@
   .card {
     display: flex;
     align-items: center;
-    margin: $spacing-xxl auto;
-    max-width: 71%;
+    margin: $spacing-md auto;
     overflow: hidden;
 
     &-content {
-      padding: $spacing-lg;
-      flex: 1;
+      padding: $spacing-sm;
 
       h4 {
         @include heading-medium;
@@ -56,13 +70,14 @@
       p {
         @include label-style;
         margin: 0 auto;
+        margin-left: 0;
         text-align: left;
-        max-width: 80%;
       }
     }
 
     img {
-      width: 40%;
+      width: 100%;
+      max-width: 40%;
       height: auto;
       object-fit: cover;
     }
@@ -73,7 +88,10 @@
 
     &-left {
       flex-direction: row-reverse;
-      margin-right: 9rem;
+      p {
+        margin: 0 auto;
+        margin-right: 0;
+      }
     }
   }
   .title {
@@ -86,7 +104,6 @@
     @include label-style;
     max-width: 80%;
     text-align: left;
-
     margin: 0 auto;
     margin-bottom: 8rem;
   }
@@ -95,9 +112,23 @@
     margin-top: -7rem; // 減少連續段落之間的間距
     margin-bottom: 6rem; // 調整底部間距
   }
+  .food-section {
+    .title.foodheader {
+      color: $color-footer;
+    }
+
+    .title.intro {
+      color: $color-accent-gold;
+    }
+  }
 }
 
 @media (max-width: 700px) {
+  .food-attractions-page .food-attractions-header {
+    p {
+      margin-left: 4rem;
+    }
+  }
   // 1. food-attractions-intro 圖片移至 h3 上方
   .food-attractions-intro {
     display: flex;

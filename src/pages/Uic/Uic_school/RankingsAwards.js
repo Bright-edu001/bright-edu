@@ -8,7 +8,7 @@ const RankingsAwards = () => {
       <ImageTextSection
         title="UIC 美國商學院"
         subtitle="排名與獎項"
-        imageUrl="/media/ranking/Winners-cuate.png" // 圖片路徑
+        imageUrl="https://imgur.com/JdvnypZ.png" // 圖片路徑
         imageAlt="排名與獎項"
       />
 
@@ -29,7 +29,7 @@ const RankingsAwards = () => {
         <div className="aacsb-section">
           <div className="aacsb-header">
             <div className="aacsb-logo">
-              <img src="/media/ranking/AACSB.png" alt="AACSB Logo" />
+              <img src="https://imgur.com/q8AsDEx.png" alt="AACSB Logo" />
             </div>
             <div className="aacsb-title">
               <h2>AACSB商業及會計雙項認證</h2>
@@ -72,7 +72,10 @@ const RankingsAwards = () => {
         <div className="diversity-excellence-section">
           <div className="diversity-header">
             <div className="diversity-logo">
-              <img src="/media/ranking/HEED.png" alt="HEED Excellence Award" />
+              <img
+                src="https://imgur.com/JD9zLlj.png"
+                alt="HEED Excellence Award"
+              />
             </div>
             <div className="diversity-title">
               <h2>HEED -Higher Education Excellent in Diversity</h2>
@@ -105,7 +108,7 @@ const RankingsAwards = () => {
         <div className="uic-rankings-section">
           <div className="rankings-header">
             <div className="rankings-logo">
-              <img src="/media/ranking/uic_ranking.png" alt="UIC Rankings" />
+              <img src="https://imgur.com/uhMmwNF.png" alt="UIC Rankings" />
             </div>
             <div className="rankings-title">
               <h2>UIC RANKINGS</h2>

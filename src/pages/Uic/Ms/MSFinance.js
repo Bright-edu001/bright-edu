@@ -91,7 +91,7 @@ function MSFinance() {
       <ImageTextSection
         title="Master of Science"
         subtitle="Finance"
-        imageUrl="/media/Ms/Audit-amico.png"
+        imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Finance"
       />
       <h2>

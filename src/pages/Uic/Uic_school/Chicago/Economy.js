@@ -8,7 +8,7 @@ const Economy = () => {
       <ImageTextSection
         title="芝加哥城市"
         subtitle="金融中心 • 經濟"
-        imageUrl="/media/Chicago/Chicago_economy/Piggy-bank-bro.png" // 圖片路徑
+        imageUrl="https://imgur.com/nP2gMTI.png" // 圖片路徑
         imageAlt="金融中心 • 經濟"
       />
       <section className="financial-center-section">
@@ -27,7 +27,7 @@ const Economy = () => {
           <div className="cme-header-row">
             <div className="cme-image-container">
               <img
-                src="/media/Chicago/Chicago_economy/CME.png"
+                src="https://imgur.com/JDSZDDs.png"
                 alt="芝加哥商業交易所集團"
               />
             </div>

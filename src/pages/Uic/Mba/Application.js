@@ -10,7 +10,7 @@ function Application() {
       <ImageTextSection
         title="一年制MBA"
         subtitle="申請資訊"
-        imageUrl="/media/MBA_Programs/college-dmission-bro.png"
+        imageUrl="https://imgur.com/Ighubkx.png"
         imageAlt="申請資訊"
       />
 

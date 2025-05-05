@@ -9,7 +9,7 @@ function CoreCourses() {
       <ImageTextSection
         title="一年制MBA"
         subtitle="核心課程簡介"
-        imageUrl="/media/MBA_Programs/college-entrance-exam-cuate.png"
+        imageUrl="https://imgur.com/MjVvKjl.png"
         imageAlt="核心課程簡介"
       />
       <p className="intro">
