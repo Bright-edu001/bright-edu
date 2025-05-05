@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -45,11 +45,18 @@ import BlogDetail from "./pages/Blog/BlogDetail";
 import BlogSearch from "./pages/Blog/BlogSearch";
 
 function App() {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get("redirect");
+    if (redirect) {
+      window.history.replaceState({}, "", redirect);
+    }
+  }, []);
   return (
     <div className="App">
       <Header />
       <main className="main-content">
-        <BrowserRouter>
+        <BrowserRouter basename="/bright-edu">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route

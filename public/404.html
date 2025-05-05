@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=/" />
+    <meta
+      http-equiv="refresh"
+      content="0; URL=/bright-edu/index.html?redirect=%2Fbright-edu%2F%23%2F"
+    />
+    <script>
+      // 進階：自動將路徑導回 index.html 並保留 hash 路徑
+      (function () {
+        var redirectTo =
+          "/bright-edu/index.html?redirect=" +
+          encodeURIComponent(
+            window.location.pathname +
+              window.location.search +
+              window.location.hash
+          );
+        window.location.replace(redirectTo);
+      })();
+    </script>
   </head>
-  <body>
-    <p>頁面不存在，正在為您導回首頁...</p>
-  </body>
+  <body></body>
 </html>
