@@ -123,16 +123,12 @@ function Home() {
             <div className="course-cards">
               {enrollmentEvents.slice(0, 3).map((item) => (
                 <div className="card-container" key={item.id}>
-                  <div className="course-card">
-                    <a
-                      href={item.link}
-                      className="card-link"
-                      title={item.title}
-                    ></a>
-                  </div>
-                  <div className="card-description">
-                    <p>{item.excerpt}</p>
-                  </div>
+                  <a href={item.link} className="card-link" title={item.title}>
+                    <div className="course-card"></div>
+                    <div className="card-description">
+                      <p>{item.excerpt}</p>
+                    </div>
+                  </a>
                 </div>
               ))}
             </div>
@@ -143,16 +139,12 @@ function Home() {
             <div className="course-cards">
               {news.slice(0, 3).map((item) => (
                 <div className="card-container" key={item.id}>
-                  <div className="course-card">
-                    <a
-                      href={item.link}
-                      className="card-link"
-                      title={item.title}
-                    ></a>
-                  </div>
-                  <div className="card-description">
-                    <p>{item.excerpt}</p>
-                  </div>
+                  <a href={item.link} className="card-link" title={item.title}>
+                    <div className="course-card"></div>
+                    <div className="card-description">
+                      <p>{item.excerpt}</p>
+                    </div>
+                  </a>
                 </div>
               ))}
             </div>

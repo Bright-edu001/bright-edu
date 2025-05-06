@@ -30,8 +30,19 @@ function MsAnalttics() {
 
   const companyTitle = "主要聘用 UIC 商學院 MSBA 畢業生的頂尖企業";
   const companyLogos = [
-    { src: "/media/Ms/Publicis Media.png", alt: "Publicis Media" },
-    { src: "/media/Ms/Circana.png", alt: "Circana" },
+    { src: "https://imgur.com/uB2jd6a.png", alt: "Accenture" },
+    { src: "https://imgur.com/yAYnv8c.png", alt: "BlueCrossBlueShield" },
+    { src: "https://imgur.com/6pG7vED.png", alt: "CWD" },
+    { src: "https://imgur.com/CTHOqZy.png", alt: "Zurich" },
+    { src: "https://imgur.com/F6xQe3p.png", alt: "Deloitte" },
+    {
+      src: "https://imgur.com/8UuFArA.png",
+      alt: "Discover Financial Services",
+    },
+    { src: "https://imgur.com/bkTWA3F.png", alt: "PWC" },
+    { src: "https://imgur.com/71PlcUk.png", alt: "RSM" },
+    { src: "https://imgur.com/pTbhLJz.png", alt: "SAP" },
+    { src: "https://imgur.com/2kTLBWN.png", alt: "United" },
   ];
 
   const courseArrangementTitle = "學分與課程安排";

@@ -24,10 +24,9 @@
 
       .question-list {
         .faq-item {
-          margin-bottom: 1rem;
+          margin-bottom: 2rem;
           border: 1px solid #e0e0e0;
           border-radius: 5px;
-          overflow: hidden;
 
           .question {
             padding: 1rem;
@@ -77,10 +76,11 @@
               @include value-style;
               text-align: left;
               margin-top: $spacing-xs;
+              margin-bottom: $spacing-xs;
             }
 
             &.expanded {
-              max-height: 500px; // 調整為適合內容的高度
+              max-height: 1000px; // 調整為適合內容的高度
               padding: 1rem;
               background-color: #fff;
             }

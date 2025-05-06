@@ -65,8 +65,8 @@
         flex-direction: row;
         justify-content: space-evenly;
         padding-left: $spacing-lg;
-        margin-right: 42rem;
-        margin-top: 0.5rem;
+        margin-right: 38rem;
+        margin-top: 1rem;
         font-weight: 700;
       }
     }
@@ -81,7 +81,9 @@
     .virtual-resource-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      margin: $spacing-xl $spacing-xxl;
+      margin: $spacing-xl 0;
+      margin-right: 12rem;
+      padding: 0 $spacing-xl;
       gap: $spacing-lg;
       h5 {
         @include body-large;

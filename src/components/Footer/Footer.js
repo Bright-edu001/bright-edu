@@ -109,11 +109,9 @@ function Footer() {
             </div>
             <div className="social-icons">
               <a
-                href="#!" // TODO: 替換為有效的 URL
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Bright Education whatsapp"
-                aria-label="前往 whatsapp"
+                href="tel:077227407"
+                title="撥打 Bright Education 電話"
+                aria-label="撥打電話 07-7227407"
               >
                 <img
                   src="https://imgur.com/vfi3sBo.png"

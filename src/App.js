@@ -1,9 +1,21 @@
 import React, { useEffect } from "react";
 import "./App.css";
+
+// components
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+
+// react-router
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// pages - Home & Blog
 import Home from "./pages/Home/Home";
+import Contact from "./pages/Home/Contact.js";
+import Blog from "./pages/Home/Blog.js";
+import BlogDetail from "./pages/Blog/BlogDetail";
+import BlogSearch from "./pages/Blog/BlogSearch";
+
+// pages - UIC
 import AboutUic from "./pages/Uic/Uic_school/AboutUic";
 import CareerResources from "./pages/Uic/Uic_school/CareerResources";
 import Areas from "./pages/Uic/Mba/Areas";
@@ -31,18 +43,16 @@ import MsAnalttics from "./pages/Uic/Ms/MsAnalytics.js";
 import MsApplication from "./pages/Uic/Ms/MsApplication.js";
 import MsInformation from "./pages/Uic/Ms/MsInformation.js";
 import MsAccounting from "./pages/Uic/Ms/MsAccounting.js";
+
+// pages - MSU
 import MsfApplication from "./pages/Msu/Msf/MsfApplication.js";
-import MsuMaster from "./pages/Msu/Msf//MsMaster.js";
+import MsuMaster from "./pages/Msu/Msf/MsMaster.js";
 import AboutMsu from "./pages/Msu/Msu_school/AboutMsu.js";
 import MsRankingsAwards from "./pages/Msu/Msu_school/RankingsAwards.js";
 import MsCareerResources from "./pages/Msu/Msu_school/CareerResources.js";
 import Michigan from "./pages/Msu/Msu_school/Michigan.js";
 import Transportation from "./pages/Msu/Msu_school/Michigan/Transportation.js";
 import MicFoodAttractions from "./pages/Msu/Msu_school/Michigan/FoodAttractions.js";
-import Contact from "./pages/Home/Contact.js";
-import Blog from "./pages/Home/Blog.js";
-import BlogDetail from "./pages/Blog/BlogDetail";
-import BlogSearch from "./pages/Blog/BlogSearch";
 
 function App() {
   useEffect(() => {
@@ -53,10 +63,10 @@ function App() {
     }
   }, []);
   return (
-    <div className="App">
-      <Header />
-      <main className="main-content">
-        <Router>
+    <Router>
+      <div className="App">
+        <Header />
+        <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
@@ -197,12 +207,11 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogDetail />} />
             <Route path="/blog/search/:keyword" element={<BlogSearch />} />
-            {/* Add more routes as needed */}
           </Routes>
-        </Router>
-      </main>
-      <Footer />
-    </div>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

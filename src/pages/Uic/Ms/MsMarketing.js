@@ -33,8 +33,8 @@ function MsMarketing() {
 
   const companyTitle = "主要聘用 UIC 商學院 MSM 畢業生的頂尖企業";
   const companyLogos = [
-    { src: "/media/Ms/Publicis Media.png", alt: "Publicis Media" },
-    { src: "/media/Ms/Circana.png", alt: "Circana" },
+    { src: "https://imgur.com/J7cu9zS.png", alt: "Publicis Media" },
+    { src: "https://imgur.com/JP2WPWz.png", alt: "Circana" },
   ];
 
   const courseArrangementTitle = "學位要求與課程安排";

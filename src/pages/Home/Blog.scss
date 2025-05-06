@@ -1,8 +1,8 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 .blog-content {
-  margin: $spacing-md auto;
-  padding: $spacing-lg $spacing-xxl;
+  margin: -5rem auto;
+  padding: 0 $spacing-xxl;
 }
 
 .blog-section {
@@ -19,6 +19,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  margin-bottom: 8rem;
 }
 
 @media (max-width: 700px) {
@@ -68,4 +69,23 @@
   line-height: 1.5;
   text-align: left;
   margin: 0;
+}
+
+.blog-back-btn {
+  margin: 32px auto 0;
+  display: block;
+  padding: 10px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  margin-bottom: $spacing-xxl;
+  &:hover,
+  &:focus {
+    background: $color-accent-gold;
+    color: $color-brown-dark;
+    border-color: $color-accent-gold;
+  }
 }

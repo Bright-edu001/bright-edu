@@ -34,10 +34,10 @@ function MSFinance() {
 
   const companyTitle = "主要聘用 UIC 商學院 MSF 畢業生的頂尖企業";
   const companyLogos = [
-    { src: "/media/Ms/JP Morgan Chase & Co.png", alt: "JP Morgan Chase & Co" },
-    { src: "/media/Ms/bofa-og-logo.png", alt: "bofa-og-logo" },
-    { src: "/media/Ms/US Bank.png", alt: "US Bank" },
-    { src: "/media/Ms/BMO Financial Group.png", alt: "BMO Financial Group" },
+    { src: "https://imgur.com/3cavVX8.png", alt: "JP Morgan Chase & Co" },
+    { src: "https://imgur.com/i5NAuDo.png", alt: "bofa-og-logo" },
+    { src: "https://imgur.com/yo7s6Vg.png", alt: "US Bank" },
+    { src: "https://imgur.com/M9D29br.png", alt: "BMO Financial Group" },
   ];
 
   const courseArrangementTitle = "學分與課程安排";

@@ -27,8 +27,16 @@ function MsAccounting() {
 
   const companyTitle = "主要聘用 UIC 商學院 MSA 畢業生的頂尖企業";
   const companyLogos = [
-    { src: "/media/Ms/Publicis Media.png", alt: "Publicis Media" },
-    { src: "/media/Ms/Circana.png", alt: "Circana" },
+    { src: "https://imgur.com/71PlcUk.png", alt: "RSM" },
+    { src: "https://imgur.com/F6xQe3p.png", alt: "Deloitte" },
+    { src: "https://imgur.com/bkTWA3F.png", alt: "PWC" },
+    { src: "https://imgur.com/68hhxLe.png", alt: "Grant Thornton" },
+    { src: "https://imgur.com/PjZgA8X.png", alt: "EY" },
+    { src: "https://imgur.com/mrP1kpY.png", alt: "Michael Sliver" },
+    { src: "https://imgur.com/YZ4ZMLw.png", alt: "Andersen" },
+    { src: "https://imgur.com/eVXr82m.png", alt: "Bakertilly" },
+    { src: "https://imgur.com/8nrAHBl.png", alt: "KMPG" },
+    { src: "https://imgur.com/cF6aKzR.png", alt: "Plante Moran" },
   ];
 
   const courseArrangementTitle = "學分與課程安排";

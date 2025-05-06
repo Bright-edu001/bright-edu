@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // 引入 useEffect
+import React, { useState, useEffect, useRef } from "react"; // 引入 useRef
 import "./Header.css";
 
 function Header() {
@@ -18,6 +18,7 @@ function Header() {
     eastLansingSub: false, // 新增東蘭辛市下拉
   });
   const [pendingLink, setPendingLink] = useState(null); // 新增
+  const headerRef = useRef(null); // 新增 ref
 
   // 加入 useEffect 監聽 resize 事件
   useEffect(() => {
@@ -36,6 +37,35 @@ function Header() {
       window.removeEventListener("resize", handleResize);
     };
   }, []); // 空依賴數組表示只在掛載和卸載時執行
+
+  // 點擊選單外關閉所有下拉選單
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (headerRef.current && !headerRef.current.contains(event.target)) {
+        setDropdownStates((prev) => ({
+          ...prev,
+          UIC: false,
+          MSU: false,
+          UICSub: false,
+          MBASub: false,
+          MSSub: false,
+          chicagoSub: false,
+          rankingsSub: false,
+          areasSub: false,
+          msuMainSub: false,
+          msfProgramsSub: false,
+          eastLansingSub: false,
+          // mobileMenu 不自動關閉
+        }));
+        setPendingLink(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // 通用選單切換函數
   const toggleDropdown =
@@ -194,7 +224,7 @@ function Header() {
   };
 
   return (
-    <header className="header" role="banner">
+    <header className="header" role="banner" ref={headerRef}>
       <div className="container">
         <div className="logo">
           <a href="/" title="Bright Education 首頁">

@@ -49,15 +49,19 @@ function Blog() {
 
   // 根據 category 過濾顯示
   let sections = [];
+  let subtitle = "";
   if (category === "enrollment") {
     sections = [{ title: "招生活動", items: enrollmentEvents }];
+    subtitle = "招生活動";
   } else if (category === "news") {
     sections = [{ title: "最新消息", items: news }];
+    subtitle = "最新消息";
   } else {
     sections = [
       { title: "招生活動", items: enrollmentEvents },
       { title: "最新消息", items: news },
     ];
+    subtitle = "";
   }
 
   return (
@@ -66,6 +70,7 @@ function Blog() {
         title="活動與文章"
         imageUrl="https://imgur.com/JQLEfaj.png"
         imageAlt="活動與文章"
+        subtitle={subtitle ? `目前分類：${subtitle}` : undefined}
       />
 
       <div className="blog-detail-mainrow">
@@ -79,6 +84,12 @@ function Blog() {
               />
             ))}
           </div>
+          {/* 新增：分類頁面時顯示返回按鈕 */}
+          {(category === "enrollment" || category === "news") && (
+            <button className="blog-back-btn" onClick={() => navigate("/blog")}>
+              ← 返回活動與文章
+            </button>
+          )}
         </div>
         <aside className="blog-detail-sidebar">
           {/* 關鍵字搜尋欄 */}

@@ -15,6 +15,16 @@ function BlogDetail() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
 
+  // 新增：判斷分類
+  let subtitle = "";
+  if (blog) {
+    if (enrollmentEvents.some((item) => String(item.id) === String(blog.id))) {
+      subtitle = "招生活動";
+    } else if (news.some((item) => String(item.id) === String(blog.id))) {
+      subtitle = "最新消息";
+    }
+  }
+
   // 分類點擊導向
   const handleCategoryClick = (category) => {
     if (category === "enrollment") {
@@ -48,6 +58,7 @@ function BlogDetail() {
         title="活動與文章"
         imageUrl="https://imgur.com/JQLEfaj.png"
         imageAlt="活動與文章"
+        subtitle={subtitle ? `目前分類：${subtitle}` : undefined}
       />
       <div className="blog-detail-mainrow">
         <div className="blog-detail-main">

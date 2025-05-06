@@ -36,6 +36,7 @@
   color: $color-accent-gold;
   font-size: $font-size-xxl;
   margin-bottom: $spacing-xl;
+  margin-left: 1rem;
 }
 .reasons-to-choose h3 {
   text-align: center;
@@ -83,11 +84,12 @@
   margin-top: $spacing-xxl;
   // h3 樣式已整合
   .company-logos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-xxl;
     margin-bottom: $spacing-xxl;
-    margin-top: $spacing-md;
+    margin-left: 15rem;
+    padding: 0 3rem;
   }
 }
 
@@ -194,6 +196,16 @@
   .ms-accounting .core-courses-intro {
     ul {
       padding-left: 5rem;
+    }
+  }
+  .company-courses {
+    margin-top: $spacing-xxl;
+    // h3 樣式已整合
+    .company-logos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-xxl;
+      margin-left: 3rem;
     }
   }
 }

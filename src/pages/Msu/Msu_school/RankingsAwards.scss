@@ -35,7 +35,7 @@
     justify-content: space-evenly;
     margin-top: $spacing-xxl;
     margin-bottom: $spacing-xxl;
-    margin-left: 12rem;
+    margin-left: 4rem;
 
     .class-item {
       text-align: center;
@@ -74,7 +74,7 @@
     ul {
       @include label-style;
       color: $color-brown-dark;
-      margin: 0 25rem;
+      margin: 0 20rem;
       padding: $spacing-sm $spacing-xl;
       font-weight: 700;
       text-align: left;
