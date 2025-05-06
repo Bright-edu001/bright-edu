@@ -7,7 +7,9 @@ export const enrollmentEvents = [
     image: eventimgrul,
     title: "UIC MBA+MS Programs Application Deadline update",
     excerpt: "UIC MBA+MS Programs Application Deadline update Fall 20 […]",
-    link: "/blog/1",
+    get link() {
+      return `/blog/${this.id}`;
+    },
     content: `🇱🇷Fall 2025 秋季班資訊
 
 ✅開放申請時間: 目前已經開放申請
@@ -66,7 +68,9 @@ Nov/2025（目前最新公布截止日、若有更新則以更新為準）
     image: eventimgrul,
     title: "UIC MBA Application Deadline update",
     excerpt: "UIC MBA Application Deadline update Spring 2025 春季班資訊開放",
-    link: "/blog/2",
+    get link() {
+      return `/blog/${this.id}`;
+    },
     content: `🇱🇷Spring 2025 春季班資訊
 ✅開放申請時間:目前已經開放申請!!
 ✅開課日期: Jan/13/2025
@@ -93,7 +97,9 @@ Nov/2025（目前最新公布截止日、若有更新則以更新為準）
     image: eventimgrul,
     title: "UIC MBA Application Deadline update​​",
     excerpt: "UIC MBA Application Deadline update​",
-    link: "/blog/3",
+    get link() {
+      return `/blog/${this.id}`;
+    },
     content: `🇱🇷Fall 2024秋季班資訊
 ✅開課日期: Aug/26/2024
 ✅Deadline: Jun/30/2023 (目前最新公布截止日、若有更新則以更新為準)
@@ -122,7 +128,9 @@ UIC MBA台灣招生中心:https://bright-edu.com/
     image: eventimgrul,
     title: "Education USA美國小型教育展-高雄場​",
     excerpt: "Education USA美國小型教育展-高雄場​",
-    link: "/blog/4",
+    get link() {
+      return `/blog/${this.id}`;
+    },
     content: `Education USA美國教育展高雄場來囉!🏃
 👉UIC MBA將參與此次展覽，將會由駐台招生代表現場與您諮詢申請細節及聊聊分享當地的生活喔!🧐
 屆時也會有許多美國知名大學蒞臨現場喔~歡迎大家來走走逛逛!
@@ -138,7 +146,9 @@ export const news = [
     image: newsimgurl,
     title: "UIC 最新排名賀報🎉",
     excerpt: "U.S. News 2025 最新排名",
-    link: "/blog/7",
+    get link() {
+      return `/blog/${this.id}`;
+    },
     content: `University of Illinois Chicago (UIC)
 ⭐️TOP 80⭐️ 
 2025 Best National University Rankings
@@ -156,7 +166,9 @@ UIC Today News:https://today.uic.edu/uic-rises-in-2025-u-s-news-best-colleges-ra
     image: newsimgurl,
     title: "UIC U.S. NEWS Ranks 2022-2023 Best Colleges",
     excerpt: "UIC賀報🎉",
-    link: "/blog/8",
+    get link() {
+      return `/blog/${this.id}`;
+    },
     content: `U.S. News & World Report 公布排名
 University of Illinois Chicago (UIC)
  

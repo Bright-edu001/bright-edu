@@ -118,6 +118,17 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        background: #f8f9fa;
+        transform: translateY(-4px) scale(1.03);
+        text-decoration: none;
+      }
+
       .concentration-title {
         color: $color-accent-gold;
         @include heading-medium;
@@ -151,6 +162,17 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        background: #f8f9fa;
+        transform: translateY(-4px) scale(1.03);
+        text-decoration: none;
+      }
+
       .concentration-title {
         color: $color-accent-gold;
         @include heading-medium;

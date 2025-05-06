@@ -1,9 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ApplicationForm.scss";
 
 function ApplicationForm({ showCondition = true }) {
+  const [form, setForm] = useState({
+    name: "",
+    lineId: "",
+    email: "",
+    message: "",
+  });
+
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // 檢查必填
+    if (!form.name || !form.lineId || !form.email || !form.message) {
+      alert("請完整填寫所有欄位！");
+      return;
+    }
+    // 新增基本驗證
+    if (form.name.trim().length < 2) {
+      alert("姓名需大於2個字！");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      alert("請輸入正確的 E-MAIL 格式！");
+      return;
+    }
+    if (form.message.trim().length < 10) {
+      alert("備註內容需大於10個字！");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      // 將此處 URL 換成你的 Google Apps Script Web App URL
+      const res = await fetch(
+        "https://script.google.com/macros/s/AKfycbwlPwvgxx7g-t1uy76JB09OFrGlVrlBDdEXVahMzvICKbxW2HvLcVpM-C35NoLSNUDS/exec",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+          mode: "no-cors", // 新增這行
+        }
+      );
+      // 因為 no-cors，res.ok/res.status 都無法用，只能假設送出
+      alert("送出成功，我們會盡快與您聯絡！");
+      setForm({ name: "", lineId: "", email: "", message: "" });
+      // 如果要嚴謹判斷成功與否，必須後端支援 CORS
+    } catch (err) {
+      alert("送出失敗，請檢查網路連線。");
+    }
+    setSubmitting(false);
+  };
+
   return (
-    <form className="mba-application-form">
+    <form className="mba-application-form" onSubmit={handleSubmit}>
       {/* 申請條件區塊 */}
       {showCondition && (
         <>
@@ -15,11 +75,40 @@ function ApplicationForm({ showCondition = true }) {
       )}
       {/* 預約諮詢標題 */}
       <div className="mba-application-section-title">預約諮詢</div>
-      <input type="text" placeholder="姓名" />
-      <input type="text" placeholder="LINE ID" />
-      <input type="email" placeholder="E-MAIL" />
-      <textarea placeholder="欲詢問的學校、課程，歡迎在此備註，我們會盡快向您聯絡"></textarea>
-      <button type="submit">確定送出</button>
+      <input
+        type="text"
+        name="name"
+        placeholder="姓名"
+        value={form.name}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="text"
+        name="lineId"
+        placeholder="LINE ID"
+        value={form.lineId}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="E-MAIL"
+        value={form.email}
+        onChange={handleChange}
+        required
+      />
+      <textarea
+        name="message"
+        placeholder="欲詢問的學校、課程，歡迎在此備註，我們會盡快向您聯絡"
+        value={form.message}
+        onChange={handleChange}
+        required
+      ></textarea>
+      <button type="submit" disabled={submitting}>
+        {submitting ? "送出中..." : "確定送出"}
+      </button>
     </form>
   );
 }

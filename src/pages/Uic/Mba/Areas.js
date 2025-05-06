@@ -83,19 +83,28 @@ function Areas() {
               Master of Business Administration Concentrations
             </div>
             <div className="mba-areas-concentration-list">
-              <div className="mba-areas-concentration-card">
+              <a
+                href="/uic-business-school/mba/areas/management"
+                className="mba-areas-concentration-card"
+              >
                 <div className="concentration-title">管理 Management</div>
                 <div className="concentration-desc">
                   專業著重於掌握領導個人和組織的知識，了解人力資源管理、策略管理、領導力、管理技能和物流
                 </div>
-              </div>
-              <div className="mba-areas-concentration-card">
+              </a>
+              <a
+                href="/uic-business-school/mba/areas/finance"
+                className="mba-areas-concentration-card"
+              >
                 <div className="concentration-title">金融 Finance</div>
                 <div className="concentration-desc">
                   加強同學對金融市場、資產及風險管理以及金融機構在充滿活力的全球經濟中的運作的理解，並促進金融專業人士的職業發展。利用芝加哥金融界的資源，提供金融市場及資產管理的最新知識。
                 </div>
-              </div>
-              <div className="mba-areas-concentration-card">
+              </a>
+              <a
+                href="/uic-business-school/mba/areas/analytics"
+                className="mba-areas-concentration-card"
+              >
                 <div className="concentration-title">
                   商業分析 Business Analytics
                 </div>
@@ -103,22 +112,33 @@ function Areas() {
                   學生掌握如何使用數據和模型進行商業決策，以及如何利用大數據和分析來獲得競爭優勢。商業分析專業的
                   MBA 學生準備滿足商業領域中發展最快的領域之一的需求。
                 </div>
-              </div>
-              <div className="mba-areas-concentration-card">
+              </a>
+              <a
+                href="/uic-business-school/mba/areas/marketing"
+                className="mba-areas-concentration-card"
+              >
                 <div className="concentration-title">行銷 Marketing</div>
                 <div className="concentration-desc">
                   選擇此領域的學生對商業的整個行銷過程（從研究和產品開發到溝通規劃和衡量）有深入的了解
                 </div>
-              </div>
-              <div className="mba-areas-concentration-card">
+              </a>
+              <a
+                href="/uic-business-school/mba/areas/human-resource"
+                className="mba-areas-concentration-card"
+              >
                 <div className="concentration-title">
                   人資管理 Human Resource Management
                 </div>
                 <div className="concentration-desc">
                   此專業領域與人力資源管理協會（SHRM）接軌，適合對組織中「人員管理」有興趣的學生。
                 </div>
-              </div>
+              </a>
             </div>
+            <div id="management"></div>
+            <div id="finance"></div>
+            <div id="analytics"></div>
+            <div id="marketing"></div>
+            <div id="hrm"></div>
           </div>
         </div>
       </SectionContainer>
