@@ -4,6 +4,7 @@ import "./App.css";
 // components
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import FloatingButtons from "./components/FloatingButtons/FloatingButtons";
 
 // react-router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -209,6 +210,7 @@ function App() {
             <Route path="/blog/search/:keyword" element={<BlogSearch />} />
           </Routes>
         </main>
+        <FloatingButtons />
         <Footer />
       </div>
     </Router>

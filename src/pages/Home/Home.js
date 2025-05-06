@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.scss";
 import ActionButton from "../../components/ActionButton/ActionButton";
-import { enrollmentEvents, news } from "../../data/blog"; // 新增：引入共用資料
+import { enrollmentEvents, news } from "../../data/blog";
+
+const heroImages = [
+  "https://imgur.com/MJbcBPV.png",
+  "https://imgur.com/pLQ3Y0G.png",
+  "https://imgur.com/B1dQnnp.png",
+  "https://imgur.com/nlz7oCg.png",
+];
 
 function Home() {
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="home-page">
-      <section className="hero" aria-label="主要促銷區">
+      <section
+        className="hero"
+        style={{
+          backgroundImage: `url(${heroImages[heroIndex]})`,
+        }}
+      >
+        <div className="hero-bg-mask" />
         <div className="container container-aligned">
           <div className="hero-content">
             <h1>
