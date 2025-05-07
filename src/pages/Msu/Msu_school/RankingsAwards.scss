@@ -129,3 +129,12 @@
     }
   }
 }
+@media screen and (max-width: 500px) {
+  .rankings-awards-page .ranking ul,
+  .rankings-awards-page .management ul {
+    justify-content: space-between;
+    font-size: $font-size-sm;
+    padding: 0 $spacing-lg;
+    text-align: left;
+  }
+}

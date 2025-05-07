@@ -89,27 +89,44 @@
       }
     }
   }
+}
+@media (max-width: 700px) {
+  .courses-content {
+    .course {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 2rem;
 
-  @media (max-width: 700px) {
-    .courses-content {
-      .course {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 2rem;
-
-        .course-title {
-          min-width: unset;
-          max-width: unset;
-          width: 100%;
-          margin-right: 0;
-          margin-bottom: 1.5rem;
-          text-align: left;
-          align-items: flex-start;
-        }
-        .course-desc {
-          width: 100%;
-        }
+      .course-title {
+        min-width: unset;
+        max-width: unset;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1.5rem;
+        text-align: left;
+        align-items: flex-start;
+      }
+      .course-desc {
+        width: 100%;
       }
     }
+  }
+}
+@media (max-width: 500px) {
+  .career-resources .intro .career-resources-list {
+    margin-left: 0;
+  }
+  .career-resources .career-process .container img {
+    margin-left: 1rem;
+  }
+  .mba-courses-page .courses-content .course {
+    flex-direction: column;
+  }
+  .mba-courses-page .courses-content .course .course-desc p {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  .mba-courses-page .courses-content .course .course-title {
+    margin: 0 auto;
   }
 }

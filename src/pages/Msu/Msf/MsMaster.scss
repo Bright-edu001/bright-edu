@@ -398,3 +398,17 @@
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .ms-master-require-apply-features,
+  .ms-master-require-career-features {
+    padding: 0 $spacing-md;
+  }
+  .ms-master-cfa-recognition .cfa-note {
+    word-break: break-word;
+    white-space: normal;
+  }
+  .ms-master-require-select p {
+    margin: 0 auto;
+  }
+}

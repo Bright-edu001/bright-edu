@@ -181,3 +181,20 @@
     }
   }
 }
+@media screen and (max-width: 500px) {
+  .food-attractions-page .food-attractions-header p {
+    margin: 0 auto;
+  }
+  .food-attractions-page .food-attractions-header {
+    padding: 0 $spacing-xs;
+  }
+  .food-attractions-page .attractions-section {
+    padding: 0 $spacing-xs;
+  }
+  .card.card-left {
+    margin-right: 0;
+  }
+  .food-attractions-page .food-section {
+    padding: 0 $spacing-xs;
+  }
+}

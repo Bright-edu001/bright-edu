@@ -4,6 +4,11 @@
   margin: -5rem auto;
   padding: 0 $spacing-xxl;
 }
+@media screen and (max-width: 400px) {
+  .blog-content {
+    padding: $spacing-xs;
+  }
+}
 
 .blog-section {
   margin-bottom: 3rem;
@@ -22,7 +27,7 @@
   margin-bottom: 8rem;
 }
 
-@media (max-width: 700px) {
+@media screen and (max-width: 700px) {
   .blog-grid {
     grid-template-columns: repeat(2, 1fr);
   }

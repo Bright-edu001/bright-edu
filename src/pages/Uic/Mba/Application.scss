@@ -61,3 +61,11 @@
     margin-left: $spacing-md;
   }
 }
+@media screen and (max-width: 500px) {
+  .mba-application-section {
+    margin-left: $spacing-sm;
+  }
+  .mba-info-section {
+    margin-left: $spacing-md;
+  }
+}

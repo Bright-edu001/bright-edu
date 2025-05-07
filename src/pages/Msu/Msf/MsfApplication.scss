@@ -44,7 +44,7 @@
   }
 
   // 響應式設計：螢幕寬度小於 700px
-  @media (max-width: 700px) {
+  @media screen and (max-width: 700px) {
     margin: $spacing-lg $spacing-md;
     padding-left: 0;
 
@@ -75,5 +75,13 @@
       margin-left: 0;
       margin-bottom: $spacing-xxl;
     }
+  }
+}
+@media screen and (max-width: 500px) {
+  .msf-application-list ul {
+    padding-left: 1rem;
+  }
+  .msf-application-list .english-requirements li {
+    margin-left: 0;
   }
 }

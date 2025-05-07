@@ -353,3 +353,35 @@
     }
   }
 }
+
+@media screen and (max-width: 400px) {
+  .content-section .aacsb-section {
+    padding: 0.5rem;
+    .aacsb-header {
+      .aacsb-logo {
+        margin-right: 0;
+      }
+      .aacsb-title {
+        margin-top: -4rem;
+      }
+    }
+  }
+  .standard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-right: 0;
+    margin-top: 0;
+
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding-left: 0;
+      // 若有 icon 或序號可加 margin-right
+    }
+  }
+  .rankings-awards-container .uic-rankings-section .rankings-grid {
+    margin-right: 4rem;
+  }
+}

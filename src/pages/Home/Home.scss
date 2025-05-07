@@ -455,3 +455,31 @@ p {
     }
   }
 }
+@media screen and (max-width: 400px) {
+  .home-page .btn.course-btn {
+    max-width: 80px;
+    min-width: 80px;
+    font-size: 0.7rem;
+  }
+  .home-page .hero {
+    height: 20rem; // 調整高度以適應小螢幕
+    padding: 2rem 0; // 調整內邊距
+  }
+
+  .home-page .hero-content {
+    margin-left: 3rem;
+    align-items: flex-start;
+    h1 {
+      font-size: 1.5rem; // 調整字體大小
+    }
+  }
+
+  .hero-content p {
+    font-size: 1rem; // 調整字體大小
+  }
+
+  .about-image img {
+    width: 100%; // 確保圖片在小螢幕上適應
+    height: auto;
+  }
+}

@@ -134,11 +134,6 @@ function Areas() {
                 </div>
               </a>
             </div>
-            <div id="management"></div>
-            <div id="finance"></div>
-            <div id="analytics"></div>
-            <div id="marketing"></div>
-            <div id="hrm"></div>
           </div>
         </div>
       </SectionContainer>
