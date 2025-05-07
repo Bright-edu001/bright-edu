@@ -100,6 +100,19 @@
   border-radius: 4px;
 }
 
+.blog-detail-category-label {
+  font-size: 1.5rem;
+  color: $color-footer;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.1s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    color: $color-accent-gold;
+    text-decoration: underline;
+  }
+}
+
 .blog-detail-image {
   width: 1000px;
   height: 600px;
@@ -110,13 +123,17 @@
 
 .blog-detail-back {
   display: flex;
-
   justify-content: center;
   font-size: $font-size-xl;
   color: $color-footer;
   margin-top: $spacing-lg;
   margin-bottom: 1rem;
   margin-left: 35rem;
+  &:hover {
+    color: $color-accent-gold;
+    transform: scale(1.05);
+    transition: all 0.1s ease-in-out;
+  }
 }
 
 .blog-detail-notfound {

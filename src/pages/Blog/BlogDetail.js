@@ -68,6 +68,19 @@ function BlogDetail() {
             alt={blog.title}
           />
           <h1 className="blog-detail-title">{blog.title}</h1>
+          {/* 分類標籤可點擊跳轉 */}
+          <a
+            className="blog-detail-category-label"
+            onClick={() =>
+              subtitle === "招生活動"
+                ? handleCategoryClick("enrollment")
+                : handleCategoryClick("news")
+            }
+            style={{ cursor: "pointer" }}
+            title={`查看${subtitle}分類`}
+          >
+            {subtitle && <>{subtitle}</>}
+          </a>
           <p className="blog-detail-excerpt">{blog.excerpt}</p>
           <div className="blog-detail-content">
             {blog.content
