@@ -21,13 +21,14 @@
       color: $color-text-primary;
       letter-spacing: 0.05em;
       margin-bottom: 2rem; // 增加段落間距
-      align-items: left;
+      margin-right: 0;
+      margin-left: 0; // 確保段落不會有額外的左右邊距
+      max-width: 1400px;
     }
   }
 
   .stats {
     padding: $spacing-lg 0;
-
     .stats-card-school {
       background: $color-white;
       @include card-border;
@@ -147,6 +148,7 @@
       color: $color-brown-dark;
       margin-bottom: $spacing-xl;
       text-align: left;
+      max-width: 1400px;
     }
   }
 }
