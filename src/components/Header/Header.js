@@ -232,7 +232,7 @@ function Header() {
               src="https://imgur.com/0bP0auA.png"
               className="logo-img"
               alt="Bright Education Logo"
-              fetchpriority="high"
+              // fetchpriority="high"
               width="150"
               height="60"
             />
