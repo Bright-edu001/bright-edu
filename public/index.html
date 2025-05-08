@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-  <!-- 提前覆寫 Safari 結構化資料擷取器函式，防止唯讀屬性錯誤 -->
-  <script>
-    try {
-      window.extractFilteredSchemaValuesFromMicroData = function () {};
-      window.extractSchemaValuesFromSchemaOrg = function () {};
-    } catch (e) {}
-  </script>
   <head>
+    <!-- 提前覆寫並攔截 Safari 結構化資料 extractor 的唯讀屬性錯誤 -->
+    <script>
+      try {
+        window.extractFilteredSchemaValuesFromMicroData = function () {};
+        window.extractSchemaValuesFromSchemaOrg = function () {};
+      } catch (e) {}
+      window.addEventListener("error", function (e) {
+        if (e.message && e.message.includes("readonly property")) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+        }
+      });
+      window.onerror = function (message) {
+        if (message && message.includes("readonly property")) {
+          return true;
+        }
+      };
+      window.addEventListener("unhandledrejection", function (e) {
+        if (
+          e.reason &&
+          e.reason.message &&
+          e.reason.message.includes("readonly property")
+        ) {
+          e.preventDefault();
+        }
+      });
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fbefe2" />
