@@ -411,4 +411,14 @@
   .ms-master-require-select p {
     margin: 0 auto;
   }
+  .ms-master-intro ul,
+  .ms-master-features ul,
+  .ms-master-date ul,
+  .ms-master-fiance ul,
+  .ms-master-require ul {
+    padding-left: 0;
+  }
+  .ms-master-require-plan .ms-master-require-plan-list ul {
+    padding-left: 0;
+  }
 }

@@ -168,7 +168,7 @@
         color: $color-accent-gold;
       }
       p {
-        margin-left: $spacing-lg;
+        margin-left: $spacing-xl;
         margin-right: 0;
       }
     }
@@ -196,5 +196,8 @@
   }
   .food-attractions-page .food-section {
     padding: 0 $spacing-xs;
+  }
+  .food-attractions-page .card.card.card-left .card-content p {
+    margin: 0 auto;
   }
 }
