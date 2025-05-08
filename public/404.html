@@ -8,14 +8,18 @@
     <script>
       // 進階：自動將路徑導回 index.html 並保留 hash 路徑
       (function () {
-        var redirectTo =
-          "/bright-edu/index.html?redirect=" +
-          encodeURIComponent(
-            window.location.pathname +
-              window.location.search +
-              window.location.hash
-          );
-        window.location.replace(redirectTo);
+        try {
+          var redirectTo =
+            "/bright-edu/index.html?redirect=" +
+            encodeURIComponent(
+              window.location.pathname +
+                window.location.search +
+                window.location.hash
+            );
+          window.location.replace(redirectTo);
+        } catch (e) {
+          // 忽略 Safari 結構化資料擷取器嘗試寫入唯讀屬性時的錯誤
+        }
       })();
     </script>
   </head>
