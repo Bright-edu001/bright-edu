@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- 覆寫 Safari 結構化資料擷取器的全域函式，避免唯讀屬性錯誤 -->
+    <script>
+      try {
+        window.extractFilteredSchemaValuesFromMicroData = function () {};
+        window.extractSchemaValuesFromSchemaOrg = function () {};
+      } catch (e) {
+        // 忽略任何覆寫錯誤
+      }
+    </script>
     <meta
       http-equiv="refresh"
       content="0; URL=/bright-edu/index.html?redirect=%2Fbright-edu%2F%23%2F"
