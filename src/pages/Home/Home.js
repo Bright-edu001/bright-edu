@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Home.scss";
 import ActionButton from "../../components/ActionButton/ActionButton";
+import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import { enrollmentEvents, news } from "../../data/blog";
 
 const heroImages = [
@@ -144,14 +145,7 @@ function Home() {
             <h3 className="subsection-title">招生活動</h3>
             <div className="course-cards">
               {enrollmentEvents.slice(0, 3).map((item) => (
-                <div className="card-container" key={item.id}>
-                  <a href={item.link} className="card-link" title={item.title}>
-                    <div className="course-card"></div>
-                    <div className="card-description">
-                      <p>{item.excerpt}</p>
-                    </div>
-                  </a>
-                </div>
+                <ArticleCard key={item.id} item={item} imageType="enrollment" />
               ))}
             </div>
           </div>
@@ -160,14 +154,7 @@ function Home() {
             <h3 className="subsection-title">最新消息</h3>
             <div className="course-cards">
               {news.slice(0, 3).map((item) => (
-                <div className="card-container" key={item.id}>
-                  <a href={item.link} className="card-link" title={item.title}>
-                    <div className="course-card"></div>
-                    <div className="card-description">
-                      <p>{item.excerpt}</p>
-                    </div>
-                  </a>
-                </div>
+                <ArticleCard key={item.id} item={item} imageType="news" />
               ))}
             </div>
           </div>

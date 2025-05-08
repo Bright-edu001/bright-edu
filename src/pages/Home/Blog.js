@@ -3,20 +3,15 @@ import "./Blog.scss";
 import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { enrollmentEvents, news } from "../../data/blog";
+import ArticleCard from "../../components/ArticleCard/ArticleCard";
 
-function BlogSection({ title, items }) {
+function BlogSection({ title, items, imageType }) {
   return (
     <section className="blog-section">
       <h2 className="blog-section-title">{title}</h2>
       <div className="blog-grid">
         {items.map((item) => (
-          <Link to={item.link} className="blog-card" key={item.id}>
-            <img src={item.image} alt={item.title} className="blog-card-img" />
-            <div className="blog-card-content">
-              <h3 className="blog-card-title">{item.title}</h3>
-              <p className="blog-card-excerpt">{item.excerpt}</p>
-            </div>
-          </Link>
+          <ArticleCard key={item.id} item={item} imageType={imageType} />
         ))}
       </div>
     </section>
@@ -51,15 +46,17 @@ function Blog() {
   let sections = [];
   let subtitle = "";
   if (category === "enrollment") {
-    sections = [{ title: "招生活動", items: enrollmentEvents }];
+    sections = [
+      { title: "招生活動", items: enrollmentEvents, imageType: "enrollment" },
+    ];
     subtitle = "招生活動";
   } else if (category === "news") {
-    sections = [{ title: "最新消息", items: news }];
+    sections = [{ title: "最新消息", items: news, imageType: "news" }];
     subtitle = "最新消息";
   } else {
     sections = [
-      { title: "招生活動", items: enrollmentEvents },
-      { title: "最新消息", items: news },
+      { title: "招生活動", items: enrollmentEvents, imageType: "enrollment" },
+      { title: "最新消息", items: news, imageType: "news" },
     ];
     subtitle = "";
   }
@@ -81,6 +78,7 @@ function Blog() {
                 key={section.title}
                 title={section.title}
                 items={section.items}
+                imageType={section.imageType}
               />
             ))}
           </div>

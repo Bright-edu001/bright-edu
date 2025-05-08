@@ -4,9 +4,9 @@
   margin: -5rem auto;
   padding: 0 $spacing-xxl;
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 700px) {
   .blog-content {
-    padding: $spacing-xs;
+    padding: $spacing-md;
   }
 }
 
@@ -30,6 +30,11 @@
 @media screen and (max-width: 700px) {
   .blog-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 500px) {
+  .blog-grid {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
