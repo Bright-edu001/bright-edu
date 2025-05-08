@@ -355,11 +355,29 @@
 }
 
 @media screen and (max-width: 500px) {
+  .content-section .aacsb-section .aacsb-header .aacsb-title h2,
+  .content-section
+    .diversity-excellence-section
+    .diversity-header
+    .diversity-title
+    h2 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .content-section
+    .diversity-excellence-section
+    .diversity-header
+    .diversity-title
+    p {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
   .content-section .aacsb-section {
     padding: 0.5rem;
     .aacsb-header {
       .aacsb-logo {
-        margin-right: 0;
+        width: 50%;
       }
       .aacsb-title {
         margin-top: -4rem;
@@ -367,6 +385,7 @@
     }
   }
   .standard-list {
+    list-style: none;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -374,11 +393,12 @@
     margin-top: 0;
 
     li {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding-left: 0;
-      // 若有 icon 或序號可加 margin-right
+      position: relative;
+      &::before {
+        content: "•";
+        color: $color-accent-gold;
+        margin-right: 0.5em;
+      }
     }
   }
   .rankings-awards-container .uic-rankings-section .rankings-grid {
