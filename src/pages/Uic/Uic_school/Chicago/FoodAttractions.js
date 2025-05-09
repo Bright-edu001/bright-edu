@@ -1,37 +1,6 @@
-import React from "react";
 import "./FoodAttractions.scss";
 import ImageTextSection from "../../../../components/ImageTextSection/ImageTextSection"; // 引入圖片與文字區塊組件
-// 創建可重用的卡片組件
-const InfoCard = ({ title, content, imageSrc, imageAlt, isRightImage }) => {
-  // 處理 content 可能為字串、陣列或物件的情況
-  const renderContent = () => {
-    if (Array.isArray(content)) {
-      return content.map((paragraph, idx) => <p key={idx}>{paragraph}</p>);
-    } else if (typeof content === "object" && content !== null) {
-      // 假設物件型態為 { first, second, third }
-      return (
-        <>
-          {content.first && <p>{content.first}</p>}
-          {content.second && <p>{content.second}</p>}
-          {content.third && <p>{content.third}</p>}
-        </>
-      );
-    } else if (typeof content === "string") {
-      return <p>{content}</p>;
-    }
-    return null;
-  };
-
-  return (
-    <div className={`card ${isRightImage ? "card-right" : "card-left"}`}>
-      <div className="card-content">
-        {title && <h4>{title}</h4>}
-        {renderContent()}
-      </div>
-      <img src={imageSrc} alt={imageAlt || title} />
-    </div>
-  );
-};
+import InfoCard from "../../../../components/InfoCard/InfoCard";
 
 function FoodAttractions() {
   return (
@@ -78,7 +47,7 @@ function FoodAttractions() {
           }}
           imageSrc="https://imgur.com/RexHI7g.png"
           imageAlt="菲爾德自然史博物館"
-          isRightImage={true}
+          imagePosition="right"
         />
 
         <InfoCard
@@ -91,7 +60,7 @@ function FoodAttractions() {
           }}
           imageSrc="https://imgur.com/aZ5oFWx.png"
           imageAlt="芝加哥美術館"
-          isRightImage={false}
+          imagePosition="left"
         />
 
         <h4 className="title">千禧公園的人臉噴泉及大豆子</h4>
@@ -100,14 +69,14 @@ function FoodAttractions() {
           content="坐落於格蘭特公園內的千禧公園是芝加哥著名且具城市特色的公園。千禧公園原先只是一片停車場，改建好後深受大家喜愛，便有了芝加哥前院之稱。公園共有四大經典區域，在公園內最具特色的則是皇冠噴泉，俗稱人臉噴泉，在噴泉兩側豎立兩座布滿液晶螢幕的牆面，上面有著會不時變換表情的人臉，這些人臉是取自芝加哥市民的真人臉像，也會配合表情吐出水柱，十分逗趣，也非常生動且奇特。"
           imageSrc="https://imgur.com/i5iBVis.png"
           imageAlt="千禧公園的人臉噴泉"
-          isRightImage={true}
+          imagePosition="right"
         />
 
         <InfoCard
           content="「雲門」（Cloud Gate）是這顆大豆子的原名，現在大多數人都叫他「The Bean」。大豆子的位置是在芝加哥千禧公園西北角的AT&T廣場上，這件作品也是英國的Anish Kapoor在美國的第一件戶外公共藝術作品。 此作品是用不銹鋼打造，表面採鏡面的處理，將芝加哥獨特的天際線和藍天白雲表現的一覽無遺。遊客們不管從那個角度來觀看這件作品都可以看到三分之二的天空，代表著人們對於自然的嚮往；不僅如此，作者把天上的雲移到了地面，讓人覺得雲朵就在伸手可得的地方。而大豆子的下方向上凹成一個拱門的形狀，讓遊客走進大豆子裡，並且看到鏡中自己的影像和四周的建築融合為一，讓人體驗到和土地的親密感。"
           imageSrc="https://imgur.com/ZPWcWfX.png"
           imageAlt="大豆子"
-          isRightImage={false}
+          imagePosition="left"
         />
       </section>
 
@@ -136,7 +105,7 @@ function FoodAttractions() {
           }}
           imageSrc="https://imgur.com/y7G2iJb.png"
           imageAlt="Lou Malnati's Pizzeria"
-          isRightImage={true}
+          imagePosition="right"
         />
 
         <h4 className="title">Chicago Hot Dog</h4>
@@ -155,7 +124,7 @@ function FoodAttractions() {
           content="Portillo’s Hot Dogs 創立於1963年，從一個小攤販到連鎖店，以多元化的方式來經營, 在美國各地設立不同類型的餐廳。如: 義大利餐廳Luigi House或是專賣早餐和午餐的Honey-Jam Cafe等等。"
           imageSrc="https://imgur.com/5wjIAah.png"
           imageAlt="Portillo’s Hot Dog"
-          isRightImage={false}
+          imagePosition="left"
         />
 
         <InfoCard
@@ -163,7 +132,7 @@ function FoodAttractions() {
           content="於1949年發跡於芝加哥，是芝加哥最具有傳統特色的小吃，在芝加哥有10多家分店，大部分的店都位於Magnificent Mile附近不怕找不到。"
           imageSrc="https://imgur.com/kF7jNkS.png"
           imageAlt="Garrett Popcorn"
-          isRightImage={true}
+          imagePosition="right"
         />
       </section>
     </div>
