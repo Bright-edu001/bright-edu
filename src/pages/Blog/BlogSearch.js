@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { enrollmentEvents, news } from "../../data/blog";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, Link } from "react-router-dom";
+import { BlogContext } from "../../context/BlogContext";
+import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import { SearchContext } from "../../context/SearchContext";
+
 import "./BlogDetail.scss";
 import "./BlogSearch.scss"; // 新增：引入樣式
 import "../../pages/Home/Blog.scss";
-import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
-import SearchBar from "../../components/SearchBar/SearchBar";
 
 // 直接複製 Blog.js 的 BlogSection 結構
 function BlogSection({ items }) {
@@ -29,40 +31,12 @@ function BlogSection({ items }) {
 function BlogSearch() {
   const { keyword } = useParams();
   const [searchResults, setSearchResults] = useState([]);
-  const [inputKeyword, setInputKeyword] = useState(keyword || "");
-  const navigate = useNavigate();
+  const { searchByKeyword } = useContext(BlogContext);
+  const { handleCategoryClick } = useContext(SearchContext);
 
   useEffect(() => {
-    const kw = (keyword || "").trim().toLowerCase();
-    const all = [...enrollmentEvents, ...news];
-    if (kw) {
-      setSearchResults(
-        all.filter(
-          (item) =>
-            item.title.toLowerCase().includes(kw) ||
-            (item.content && item.content.toLowerCase().includes(kw))
-        )
-      );
-    } else {
-      setSearchResults([]);
-    }
-  }, [keyword]);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (inputKeyword.trim()) {
-      navigate(`/blog/search/${encodeURIComponent(inputKeyword.trim())}`);
-      setInputKeyword(""); // 新增：搜尋後清空輸入欄
-    }
-  };
-
-  const handleCategoryClick = (category) => {
-    if (category === "enrollment") {
-      navigate("/blog?category=enrollment");
-    } else if (category === "news") {
-      navigate("/blog?category=news");
-    }
-  };
+    setSearchResults(searchByKeyword(keyword));
+  }, [keyword, searchByKeyword]);
 
   return (
     <div>
@@ -85,12 +59,7 @@ function BlogSearch() {
           </Link>
         </div>
         <aside className="blog-detail-sidebar">
-          <SearchBar
-            placeholder="搜尋..."
-            value={inputKeyword}
-            onChange={(e) => setInputKeyword(e.target.value)}
-            onSubmit={handleSearch}
-          />
+          <SearchBar placeholder="搜尋..." />
           <div className="blog-detail-categories">
             <h3>分類</h3>
             <ul>

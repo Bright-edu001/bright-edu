@@ -1,20 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "./BlogDetail.scss";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { enrollmentEvents, news } from "../../data/blog";
+import { useParams, Link } from "react-router-dom";
+import { BlogContext } from "../../context/BlogContext";
 import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
 import SearchBar from "../../components/SearchBar/SearchBar";
-
-function findBlogById(id) {
-  const all = [...enrollmentEvents, ...news];
-  return all.find((item) => String(item.id) === String(id));
-}
+import { SearchContext } from "../../context/SearchContext";
 
 function BlogDetail() {
   const { id } = useParams();
-  const blog = findBlogById(id);
-  const navigate = useNavigate();
-  const [keyword, setKeyword] = useState("");
+  const { enrollmentEvents, news, all } = useContext(BlogContext);
+  const blog = all.find((item) => String(item.id) === String(id));
+  const { handleCategoryClick } = useContext(SearchContext);
 
   // 新增：判斷分類
   let subtitle = "";
@@ -26,25 +22,10 @@ function BlogDetail() {
     }
   }
 
-  // 分類點擊導向
-  const handleCategoryClick = (category) => {
-    if (category === "enrollment") {
-      navigate("/blog?category=enrollment");
-    } else if (category === "news") {
-      navigate("/blog?category=news");
-    }
-  };
   // 計算分類參數用於Link
   const categoryParam = subtitle === "招生活動" ? "enrollment" : "news";
 
-  // 搜尋功能：導向搜尋結果頁面
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (keyword.trim()) {
-      navigate(`/blog/search/${encodeURIComponent(keyword.trim())}`);
-      setKeyword(""); // 新增：搜尋後清空輸入欄
-    }
-  };
+  // 搜尋與分類按鈕導向由 SearchContext handleSearch, handleCategoryClick 管理
 
   if (!blog) {
     return (
@@ -95,12 +76,7 @@ function BlogDetail() {
         </div>
         <aside className="blog-detail-sidebar">
           {/* 關鍵字搜尋欄 */}
-          <SearchBar
-            placeholder="搜尋..."
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            onSubmit={handleSearch}
-          />
+          <SearchBar placeholder="搜尋..." />
           <div className="blog-detail-categories">
             <h3>分類</h3>
             <ul>

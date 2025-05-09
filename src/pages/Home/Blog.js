@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "./Blog.scss";
 import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
 import { useLocation, useNavigate } from "react-router-dom";
-import { enrollmentEvents, news } from "../../data/blog";
+import { BlogContext } from "../../context/BlogContext";
+import { SearchContext } from "../../context/SearchContext";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 function BlogSection({ title, items, imageType }) {
   return (
@@ -19,28 +21,12 @@ function BlogSection({ title, items, imageType }) {
 }
 
 function Blog() {
-  // 取得網址 query string
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const category = params.get("category");
-
-  // 側邊欄搜尋功能
-  const [keyword, setKeyword] = useState("");
+  const { enrollmentEvents, news } = useContext(BlogContext);
+  const { handleCategoryClick } = useContext(SearchContext);
   const navigate = useNavigate();
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (keyword.trim()) {
-      navigate(`/blog/search/${encodeURIComponent(keyword.trim())}`);
-      setKeyword("");
-    }
-  };
-  const handleCategoryClick = (category) => {
-    if (category === "enrollment") {
-      navigate("/blog?category=enrollment");
-    } else if (category === "news") {
-      navigate("/blog?category=news");
-    }
-  };
 
   // 根據 category 過濾顯示
   let sections = [];
@@ -91,35 +77,7 @@ function Blog() {
         </div>
         <aside className="blog-detail-sidebar">
           {/* 關鍵字搜尋欄 */}
-          <form className="blog-detail-searchbar" onSubmit={handleSearch}>
-            <input
-              type="text"
-              placeholder="搜尋..."
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-            <button type="submit" aria-label="搜尋">
-              {/* 放大鏡 SVG */}
-              <svg viewBox="0 0 20 20" fill="none">
-                <circle
-                  cx="9"
-                  cy="9"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <line
-                  x1="14.2"
-                  y1="14.2"
-                  x2="18"
-                  y2="18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
-          </form>
+          <SearchBar placeholder="搜尋..." />
           <div className="blog-detail-categories">
             <h3>分類</h3>
             <ul>

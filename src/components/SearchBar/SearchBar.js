@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./SearchBar.scss";
+import { SearchContext } from "../../context/SearchContext";
 
-function SearchBar({ placeholder, value, onChange, onSubmit }) {
+// 全站搜尋輸入元件，使用 SearchContext 管理狀態與行為
+function SearchBar({ placeholder }) {
+  const { keyword, setKeyword, handleSearch } = useContext(SearchContext);
   return (
-    <form className="blog-detail-searchbar" onSubmit={onSubmit}>
+    <form className="blog-detail-searchbar" onSubmit={handleSearch}>
       <input
         type="text"
         placeholder={placeholder}
-        value={value}
-        onChange={onChange}
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
       />
       <button type="submit" aria-label="搜尋">
         <svg viewBox="0 0 20 20" fill="none">
