@@ -3,6 +3,7 @@ import "./BlogDetail.scss";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { enrollmentEvents, news } from "../../data/blog";
 import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 function findBlogById(id) {
   const all = [...enrollmentEvents, ...news];
@@ -33,6 +34,8 @@ function BlogDetail() {
       navigate("/blog?category=news");
     }
   };
+  // 計算分類參數用於Link
+  const categoryParam = subtitle === "招生活動" ? "enrollment" : "news";
 
   // 搜尋功能：導向搜尋結果頁面
   const handleSearch = (e) => {
@@ -68,19 +71,14 @@ function BlogDetail() {
             alt={blog.title}
           />
           <h1 className="blog-detail-title">{blog.title}</h1>
-          {/* 分類標籤可點擊跳轉 */}
-          <a
+          {/* 分類標籤：改用Link以提供href */}
+          <Link
             className="blog-detail-category-label"
-            onClick={() =>
-              subtitle === "招生活動"
-                ? handleCategoryClick("enrollment")
-                : handleCategoryClick("news")
-            }
-            style={{ cursor: "pointer" }}
+            to={`/blog?category=${categoryParam}`}
             title={`查看${subtitle}分類`}
           >
-            {subtitle && <>{subtitle}</>}
-          </a>
+            {subtitle}
+          </Link>
           <p className="blog-detail-excerpt">{blog.excerpt}</p>
           <div className="blog-detail-content">
             {blog.content
@@ -97,35 +95,12 @@ function BlogDetail() {
         </div>
         <aside className="blog-detail-sidebar">
           {/* 關鍵字搜尋欄 */}
-          <form className="blog-detail-searchbar" onSubmit={handleSearch}>
-            <input
-              type="text"
-              placeholder="搜尋..."
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-            <button type="submit" aria-label="搜尋">
-              {/* 放大鏡 SVG */}
-              <svg viewBox="0 0 20 20" fill="none">
-                <circle
-                  cx="9"
-                  cy="9"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <line
-                  x1="14.2"
-                  y1="14.2"
-                  x2="18"
-                  y2="18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
-          </form>
+          <SearchBar
+            placeholder="搜尋..."
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            onSubmit={handleSearch}
+          />
           <div className="blog-detail-categories">
             <h3>分類</h3>
             <ul>

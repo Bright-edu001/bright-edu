@@ -297,6 +297,18 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .advantage-list {
+    margin-left: 0;
+  }
+  .content-section .diversity-excellence-section .diversity-header {
+    margin-left: 7rem;
+  }
+  .diversity-list {
+    margin-left: 5rem;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .content-section .aacsb-section .aacsb-header {
     margin-left: 0;

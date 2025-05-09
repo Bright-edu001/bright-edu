@@ -5,6 +5,7 @@ import "./BlogDetail.scss";
 import "./BlogSearch.scss"; // 新增：引入樣式
 import "../../pages/Home/Blog.scss";
 import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 // 直接複製 Blog.js 的 BlogSection 結構
 function BlogSection({ items }) {
@@ -84,34 +85,12 @@ function BlogSearch() {
           </Link>
         </div>
         <aside className="blog-detail-sidebar">
-          <form className="blog-detail-searchbar" onSubmit={handleSearch}>
-            <input
-              type="text"
-              placeholder="搜尋..."
-              value={inputKeyword}
-              onChange={(e) => setInputKeyword(e.target.value)}
-            />
-            <button type="submit" aria-label="搜尋">
-              <svg viewBox="0 0 20 20" fill="none">
-                <circle
-                  cx="9"
-                  cy="9"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <line
-                  x1="14.2"
-                  y1="14.2"
-                  x2="18"
-                  y2="18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
-          </form>
+          <SearchBar
+            placeholder="搜尋..."
+            value={inputKeyword}
+            onChange={(e) => setInputKeyword(e.target.value)}
+            onSubmit={handleSearch}
+          />
           <div className="blog-detail-categories">
             <h3>分類</h3>
             <ul>

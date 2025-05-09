@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Blog.scss";
 import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { enrollmentEvents, news } from "../../data/blog";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 

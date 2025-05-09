@@ -1,51 +1,84 @@
-.card-container {
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.article-card {
   flex: 1;
   min-width: 300px;
-  display: flex;
-  flex-direction: column;
   margin-bottom: 2rem;
   text-align: left;
-}
 
-.card-link {
-  display: block;
-  text-decoration: none;
-  &:hover {
-    opacity: 0.9;
-    transform: scale(1.05);
+  &--vertical &__link {
+    display: flex;
+    flex-direction: column;
   }
-}
 
-.course-card {
-  width: 100%;
-  height: 20rem;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+  &--horizontal &__link {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
 
-.enrollment-bg {
-  background: url("https://imgur.com/6n3nCHp.png") center center/cover no-repeat;
-}
+  // 共用 hover 效果
+  &__link {
+    text-decoration: none;
+    display: block;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+    &:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+  }
 
-.news-bg {
-  background: url("https://imgur.com/1EoFLTI.png") center center/cover no-repeat;
-}
+  // 圖片或預設背景
+  &__img,
+  &__placeholder {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+  }
 
-.article-card-img {
-  width: 100%;
-  height: 20rem;
-  object-fit: cover;
-  border-radius: 8px;
-}
+  // 水平布局圖片調整
+  &--horizontal &__img,
+  &--horizontal &__placeholder {
+    width: 40%;
+    height: auto;
+    margin-right: 1rem;
+  }
 
-.card-description {
-  margin-top: 1.5rem;
-  width: 100%;
-  p {
+  // Placeholder 各類型背景
+  &__placeholder--enrollment {
+    background-image: url("https://imgur.com/6n3nCHp.png");
+  }
+  &__placeholder--news {
+    background-image: url("https://imgur.com/1EoFLTI.png");
+  }
+  &__placeholder--default {
+    background: #e0e0e0;
+  }
+
+  // 內文區塊
+  &__content {
+    margin-top: 1rem;
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: $color-accent-gold;
+  }
+
+  &__excerpt {
+    font-size: 1rem;
     line-height: 1.4;
-    text-align: left;
-    font-size: 1.1rem;
-    font-weight: 900;
-    margin-left: 0;
+    color: $color-brown-dark;
+    margin: 0;
+    font-weight: 700;
   }
 }

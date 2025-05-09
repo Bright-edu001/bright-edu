@@ -142,14 +142,14 @@ function Header() {
   const toggleMobileMenu = toggleDropdown("mobileMenu");
 
   // 判斷是否為 mobile 模式
-  const isMobile = () => window.innerWidth < 700;
+  const isMobile = () => window.innerWidth < 1025;
 
   // 通用下拉選單點擊處理（用於有子選單的連結）
   const handleDropdownLinkClick =
     (menuKey, href, closeKey = null) =>
     (e) => {
       const currentWidth = window.innerWidth; // 取得當前寬度
-      const mobileCheck = currentWidth < 700; // 執行寬度檢查
+      const mobileCheck = currentWidth < 1025; // 修改為 1025
       console.log(
         `[Header Click] Clicked ${menuKey}. Width: ${currentWidth}, isMobile: ${mobileCheck}` // 修正 log 訊息
       ); // 偵錯訊息 1 (包含寬度)

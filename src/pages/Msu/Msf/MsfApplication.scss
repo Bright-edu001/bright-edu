@@ -43,6 +43,38 @@
     margin-bottom: 8rem; // 原本是 $spacing-xxl，縮短垂直距離
   }
 
+  @media screen and (max-width: 1024px) {
+    margin: $spacing-lg auto;
+    padding-left: 1rem;
+
+    ul {
+      padding-left: 1.5rem;
+      li {
+        font-size: $font-size-sm;
+        margin-top: $spacing-md;
+      }
+    }
+
+    .english-requirements {
+      li {
+        font-size: $font-size-xs;
+        margin-left: $spacing-md;
+        margin-top: $spacing-xs;
+      }
+    }
+
+    p {
+      font-size: $font-size-xs;
+      margin: $spacing-md 0 $spacing-md 6rem; // 調整 p 的邊距
+    }
+
+    span {
+      font-size: $font-size-xs;
+      margin-left: 0;
+      margin-bottom: $spacing-xxl;
+    }
+  }
+
   // 響應式設計：螢幕寬度小於 700px
   @media screen and (max-width: 700px) {
     margin: $spacing-lg $spacing-md;

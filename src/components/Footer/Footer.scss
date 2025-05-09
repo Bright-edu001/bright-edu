@@ -172,6 +172,27 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .footer .container {
+    margin-left: 0; /* 移除左邊距 */
+    padding: 0 2rem; /* 增加左右邊距 */
+  }
+  .footer .footer-content .footer-section.brand {
+    margin-left: 0; /* 移除左邊距 */
+    max-width: 150px; /* 限制最大寬度 */
+  }
+  .footer .footer-bottom {
+    margin-left: 13rem; /* 移除左邊距 */
+    margin-top: $spacing-xxl;
+  }
+
+  .footer .footer-content .footer-section.footer-links-uic,
+  .footer .footer-content .footer-section.footer-links-msu,
+  .footer .footer-content .footer-section.articles {
+    max-width: 200px; /* 限制最大寬度 */
+  }
+}
+
 /* 響應式設計 - 針對小螢幕 */
 @media (max-width: 700px) {
   .footer {

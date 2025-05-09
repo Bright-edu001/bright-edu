@@ -91,7 +91,7 @@ function MsCareerResources() {
           </ul>
         </div>
       </section>
-      <section className="carreer-virtual">
+      <section className="career-virtual">
         <h3>線上職涯資源 | Virtual Resources</h3>
         <p>
           Broad 商學院提供多項線上職涯支援，讓學生隨時獲取求職相關資訊與工具：

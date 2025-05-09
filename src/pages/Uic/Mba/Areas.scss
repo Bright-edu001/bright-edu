@@ -144,6 +144,16 @@
     }
   }
 }
+@media screen and (max-width: 1024px) {
+  .mba-areas-concentrations .mba-areas-concentration-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    justify-items: center;
+    .mba-areas-concentration-card {
+      width: 400px;
+    }
+  }
+}
 
 @media (max-width: 700px) {
   .mba-areas-concentrations .mba-areas-concentration-list {

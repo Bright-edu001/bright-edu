@@ -1,0 +1,45 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-item {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.question.expanded {
+  font-weight: 600;
+}
+
+.toggle-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.1s ease;
+  display: flex;
+  flex-direction: column; /* 新增: 使內容垂直排列 */
+  align-items: center;
+}
+
+.answer.expanded {
+  max-height: 500px; /* 足量高度以展開內容 */
+  padding-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column; /* 新增: 使內容垂直排列 */
+  align-items: center;
+}

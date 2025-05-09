@@ -71,7 +71,7 @@
       }
     }
   }
-  .carreer-virtual {
+  .career-virtual {
     h3 {
       @include body-large;
       color: $color-accent-gold;
@@ -100,8 +100,30 @@
     }
   }
 
+  @media screen and (max-width: 1024px) {
+    // 1024px 以下移除左側內縮
+    & .career-virtual .virtual-resource-row {
+      margin-right: 0;
+    }
+    & .career-virtual .virtual-resource-row h5 {
+      padding-left: 0;
+      margin-left: 0;
+    }
+    & .career-virtual .virtual-resource-row p {
+      padding-left: 0;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    & .employer-engagement .interview-list .interview-list-item {
+      margin-right: 5rem;
+    }
+    & .employer-engagement h4 {
+      padding-left: 0;
+    }
+  }
+
   // 響應式設計：寬度700px以下
-  @media (max-width: 700px) {
+  @media screen and (max-width: 700px) {
     .career-resources {
       h3,
       h4 {
@@ -142,7 +164,7 @@
         }
       }
     }
-    .carreer-virtual {
+    .career-virtual {
       .virtual-resource-row {
         grid-template-columns: 1fr;
         margin: $spacing-md $spacing-xl;
@@ -161,7 +183,7 @@
   }
 }
 @media screen and (max-width: 500px) {
-  .career-resources-page .carreer-virtual .virtual-resource-row {
+  .career-resources-page .career-virtual .virtual-resource-row {
     padding: 0;
   }
 }

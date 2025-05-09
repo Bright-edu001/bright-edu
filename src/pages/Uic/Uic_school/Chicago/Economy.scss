@@ -86,6 +86,19 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .economy-page .cme-section .cme-image-container {
+    width: 70%;
+    img {
+      margin-left: 0;
+      width: 90%; // Make the image responsive
+    }
+  }
+  .economy-page .cme-section .cme-title-container h3 {
+    text-align: left;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .economy-page {
     .cme-section {

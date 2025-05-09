@@ -216,6 +216,23 @@
     }
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .about-msu-page .michigan-contribution p,
+  .about-msu-page .global-impact p {
+    margin-left: 8rem;
+  }
+  .about-msu-page .details .reasearch .research-content {
+    margin-left: 8rem;
+  }
+  .about-msu-page .global-impact .impact-list {
+    margin-left: 10rem;
+  }
+  .about-msu-page .diversity-list {
+    margin-left: 10rem;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .about-msu-page {
     .details {
