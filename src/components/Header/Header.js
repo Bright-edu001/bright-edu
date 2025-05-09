@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useRef } from "react"; // 引入 useRef
+import React, { useEffect, useContext } from "react";
 import "./Header.css";
+import { NavContext } from "../../context/NavContext";
 
 function Header() {
-  // 使用單一物件管理所有下拉選單狀態
-  const [dropdownStates, setDropdownStates] = useState({
-    UIC: false,
-    MSU: false,
-    UICSub: false,
-    MBASub: false,
-    MSSub: false,
-    chicagoSub: false,
-    rankingsSub: false, // 新增排名與獎項下拉選單狀態
-    mobileMenu: false,
-    areasSub: false, // 新增五大領域下拉選單狀態
-    msuMainSub: false, // MSU密西根州立大學下拉
-    msfProgramsSub: false, // MSF Programs下拉
-    eastLansingSub: false, // 新增東蘭辛市下拉
-  });
-  const [pendingLink, setPendingLink] = useState(null); // 新增
-  const headerRef = useRef(null); // 新增 ref
+  // 透過 NavContext 取得下拉選單狀態與行為
+  const {
+    dropdownStates,
+    toggleUICDropdown,
+    toggleMSUDropdown,
+    toggleUICSubDropdown,
+    toggleMBASubDropdown,
+    toggleMSSubDropdown,
+    toggleMSUMainSubDropdown,
+    toggleMSFProgramsSubDropdown,
+    toggleMobileMenu,
+    handleDropdownLinkClick,
+    handleMouseEnter,
+    handleMouseLeave,
+    headerRef,
+  } = useContext(NavContext);
 
   // 加入 useEffect 監聽 resize 事件
   useEffect(() => {
@@ -38,190 +38,9 @@ function Header() {
     };
   }, []); // 空依賴數組表示只在掛載和卸載時執行
 
-  // 點擊選單外關閉所有下拉選單
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (headerRef.current && !headerRef.current.contains(event.target)) {
-        setDropdownStates((prev) => ({
-          ...prev,
-          UIC: false,
-          MSU: false,
-          UICSub: false,
-          MBASub: false,
-          MSSub: false,
-          chicagoSub: false,
-          rankingsSub: false,
-          areasSub: false,
-          msuMainSub: false,
-          msfProgramsSub: false,
-          eastLansingSub: false,
-          // mobileMenu 不自動關閉
-        }));
-        setPendingLink(null);
-      }
-    };
+  // 點擊選單外關閉邏輯由 NavContext 處理，不需於此重複實作
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  // 通用選單切換函數
-  const toggleDropdown =
-    (menuKey, closeOthers = [], childMenus = []) =>
-    (e) => {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-
-      setDropdownStates((prevState) => {
-        const newState = { ...prevState };
-
-        // 關閉指定的其他選單
-        closeOthers.forEach((key) => {
-          newState[key] = false;
-        });
-
-        // 切換當前選單狀態
-        newState[menuKey] = !prevState[menuKey];
-
-        // 如果是從開啟變為關閉狀態，同時關閉所有子選單
-        if (prevState[menuKey] && childMenus.length > 0) {
-          childMenus.forEach((childKey) => {
-            newState[childKey] = false;
-          });
-        }
-
-        return newState;
-      });
-    };
-
-  // 主選單切換
-  const toggleUICDropdown = toggleDropdown(
-    "UIC",
-    ["MSU"],
-    ["UICSub", "MBASub", "MSSub", "chicagoSub", "rankingsSub", "areasSub"] // 確保所有子孫選單都被包含
-  );
-  // 修改這裡，加入 msuMainSub 與 msfProgramsSub 作為 MSU 的子選單
-  const toggleMSUDropdown = toggleDropdown(
-    "MSU",
-    ["UIC"],
-    ["msuMainSub", "msfProgramsSub"] // 當 MSU 關閉時，同步關閉這兩個子選單
-  );
-
-  // 子選單切換
-  const toggleUICSubDropdown = toggleDropdown(
-    "UICSub",
-    ["MBASub", "MSSub"], // 只關閉同層的 MBA 和 MS
-    ["chicagoSub", "rankingsSub"] // 定義自己的子選單
-  );
-  const toggleMBASubDropdown = toggleDropdown(
-    "MBASub",
-    ["UICSub", "MSSub"], // 只關閉同層的 UIC 和 MS
-    ["areasSub"] // 定義自己的子選單
-  );
-  const toggleMSSubDropdown = toggleDropdown(
-    "MSSub",
-    ["UICSub", "MBASub"] // 只關閉同層的 UIC 和 MBA
-  );
-
-  // MSU密西根州立大學下拉切換
-  const toggleMSUMainSubDropdown = toggleDropdown(
-    "msuMainSub",
-    ["msfProgramsSub"] // 關閉同層
-  );
-  // MSF Programs下拉切換
-  const toggleMSFProgramsSubDropdown = toggleDropdown(
-    "msfProgramsSub",
-    ["msuMainSub"] // 關閉同層
-  );
-
-  // 行動選單切換
-  const toggleMobileMenu = toggleDropdown("mobileMenu");
-
-  // 判斷是否為 mobile 模式
-  const isMobile = () => window.innerWidth < 1025;
-
-  // 通用下拉選單點擊處理（用於有子選單的連結）
-  const handleDropdownLinkClick =
-    (menuKey, href, closeKey = null) =>
-    (e) => {
-      const currentWidth = window.innerWidth; // 取得當前寬度
-      const mobileCheck = currentWidth < 1025; // 修改為 1025
-      console.log(
-        `[Header Click] Clicked ${menuKey}. Width: ${currentWidth}, isMobile: ${mobileCheck}` // 修正 log 訊息
-      ); // 偵錯訊息 1 (包含寬度)
-
-      if (mobileCheck) {
-        // 使用檢查結果
-        e.preventDefault(); // 始終阻止預設跳轉行為
-        e.stopPropagation(); // 阻止事件冒泡
-
-        const isCurrentlyOpen = dropdownStates[menuKey];
-        const isPending = pendingLink === menuKey;
-
-        console.log(
-          `[Header Click] - State: isCurrentlyOpen=${isCurrentlyOpen}, isPending=${isPending}`
-        ); // 偵錯訊息 2
-
-        if (!isCurrentlyOpen) {
-          // --- 情況 1: 下拉選單是關閉的 ---
-          console.log(
-            `[Header Click]   -> Action: Opening ${menuKey}, setting pending.`
-          ); // 偵錯訊息 3
-          setDropdownStates((prev) => ({
-            ...prev,
-            [menuKey]: true, // 打開當前選單
-            ...(closeKey ? { [closeKey]: false } : {}), // 關閉同層選單
-          }));
-          setPendingLink(menuKey); // 標記為等待跳轉
-        } else {
-          // --- 情況 2: 下拉選單已開啟 ---
-          if (isPending) {
-            // 它是開啟的，且是上次點擊的目標 -> 執行跳轉
-            console.log(`[Header Click]   -> Action: Navigating to ${href}`); // 偵錯訊息 4
-            setPendingLink(null); // 清除等待狀態
-            window.location.href = href; // 手動跳轉
-          } else {
-            // 它是開啟的，但不是上次點擊的目標 (例如點了別的項目後又點回來)
-            console.log(
-              `[Header Click]   -> Action: Setting ${menuKey} as pending (already open).`
-            ); // 偵錯訊息 5
-            setDropdownStates((prev) => ({
-              ...prev,
-              [menuKey]: true, // 確保保持開啟
-              ...(closeKey ? { [closeKey]: false } : {}), // 關閉同層選單
-            }));
-            setPendingLink(menuKey); // 標記為等待跳轉
-          }
-        }
-      }
-      // 桌機模式: 不執行任何操作，讓 <a> 標籤的預設行為處理跳轉
-      // (因為 e.preventDefault() 只在 mobileCheck 為 true 時調用)
-    };
-
-  // 滑鼠懸停展開（桌機用）
-  const handleMouseEnter = (menuKey, closeKey) => () => {
-    if (!isMobile()) {
-      setDropdownStates((prev) => ({
-        ...prev,
-        [menuKey]: true,
-        ...(closeKey ? { [closeKey]: false } : {}),
-      }));
-      setPendingLink(null);
-    }
-  };
-  const handleMouseLeave = (menuKey) => () => {
-    if (!isMobile()) {
-      setDropdownStates((prev) => ({
-        ...prev,
-        [menuKey]: false,
-      }));
-      setPendingLink(null);
-    }
-  };
+  // 點擊選單外關閉邏輯及切換函式均由 NavContext 管理
 
   return (
     <header className="header" role="banner" ref={headerRef}>
