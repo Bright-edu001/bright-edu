@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import "./ArticleCard.scss";
 
@@ -10,21 +10,23 @@ import "./ArticleCard.scss";
  * @param {'vertical'|'horizontal'} [props.layout='vertical'] - 卡片排版方向，預設為垂直(vertical)
  */
 function ArticleCard({ item, imageType, layout = "vertical" }) {
-  // 根據 link 決定使用 React Router 的 <Link> (內部路由) 或 <a> (外部連結)
-  const Wrapper = item.link && item.link.startsWith("/") ? Link : "a";
-  // 構建 Wrapper 屬性：內部連結傳 to，外部連結傳 href
+  // 提取內外部連結判斷
+  const isInternal = item.link?.startsWith("/");
+  const Wrapper = isInternal ? Link : "a";
+  // 構建 Wrapper 屬性：內部路由使用 to，外部連結使用 href 並加上安全屬性
   const wrapperProps = item.link
-    ? {
-        to: item.link.startsWith("/") ? item.link : undefined,
-        href: !item.link.startsWith("/") ? item.link : undefined,
-      }
+    ? isInternal
+      ? { to: item.link }
+      : { href: item.link, target: "_blank", rel: "noopener noreferrer" }
     : {};
   // 組合 BEM 類名並加上排版修飾符
   const cardClass = `article-card article-card--${layout}`;
   // 決定圖片樣式：有 image 則顯示 <img>，否則顯示對應背景的佔位容器
   const imgClass = item.image
     ? "article-card__img"
-    : `article-card__placeholder article-card__placeholder--${imageType || "default"}`;
+    : `article-card__placeholder article-card__placeholder--${
+        imageType || "default"
+      }`;
   return (
     <div className={cardClass} title={item.title}>
       <Wrapper className="article-card__link" {...wrapperProps}>
@@ -44,4 +46,4 @@ function ArticleCard({ item, imageType, layout = "vertical" }) {
   );
 }
 
-export default ArticleCard;
+export default memo(ArticleCard);

@@ -1,6 +1,16 @@
+import { memo, useMemo } from "react";
+import PropTypes from "prop-types";
 import "./InfoCard.scss";
 
-// 可重用的資訊卡片組件
+/**
+ * 可重用的資訊卡片組件
+ * @param {object} props
+ * @param {string} props.title - 資訊卡片標題
+ * @param {string|array|object} props.content - 主要內容，可為字串、陣列或物件
+ * @param {string} props.imageSrc - 圖片來源路徑
+ * @param {string} [props.imageAlt] - 圖片替代文字，預設為 title
+ * @param {'left'|'right'} [props.imagePosition='left'] - 圖片顯示位置
+ */
 const InfoCard = ({
   title,
   content,
@@ -8,19 +18,21 @@ const InfoCard = ({
   imageAlt,
   imagePosition = "left",
 }) => {
-  // 處理 content 可能為陣列、物件或字串
-  const renderContent = () => {
+  // 記憶化 content 節點，避免重複渲染
+  const contentNodes = useMemo(() => {
     if (Array.isArray(content)) {
       return content.map((paragraph, idx) => <p key={idx}>{paragraph}</p>);
-    } else if (typeof content === "object" && content !== null) {
+    }
+    if (content && typeof content === "object") {
       return Object.values(content).map(
         (paragraph, idx) => paragraph && <p key={idx}>{paragraph}</p>
       );
-    } else if (typeof content === "string") {
+    }
+    if (typeof content === "string") {
       return <p>{content}</p>;
     }
     return null;
-  };
+  }, [content]);
 
   const isRight = imagePosition === "right";
   return (
@@ -29,11 +41,28 @@ const InfoCard = ({
     >
       <div className="info-card-content">
         {title && <h4>{title}</h4>}
-        {renderContent()}
+        {contentNodes}
       </div>
       <img src={imageSrc} alt={imageAlt || title} />
     </div>
   );
 };
 
-export default InfoCard;
+// PropTypes 驗證與預設值
+InfoCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object,
+  ]).isRequired,
+  imageSrc: PropTypes.string.isRequired,
+  imageAlt: PropTypes.string,
+  imagePosition: PropTypes.oneOf(["left", "right"]),
+};
+InfoCard.defaultProps = {
+  imageAlt: "",
+  imagePosition: "left",
+};
+
+export default memo(InfoCard);

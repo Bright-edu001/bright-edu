@@ -1,27 +1,43 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./FloatingButtons.module.scss";
+
+// 按鈕資料陣列，避免重複程式碼
+const buttonData = [
+  {
+    href: "https://lin.ee/1WTpxdf",
+    title: "加入LINE",
+    aria: "加入LINE",
+    imgSrc: "https://imgur.com/3OVDChF.png",
+    imgAlt: "LINE",
+    external: true,
+  },
+  {
+    href: "tel:077227407",
+    title: "撥打電話",
+    aria: "撥打電話",
+    imgSrc: "https://imgur.com/6gVSyd1.png",
+    imgAlt: "電話",
+    external: false,
+  },
+];
 
 const FloatingButtons = () => (
   <div className={styles.floatingButtons}>
-    <a
-      href="https://lin.ee/1WTpxdf"
-      className={styles.floatingBtn}
-      target="_blank"
-      rel="noopener noreferrer"
-      title="加入LINE"
-      aria-label="加入LINE"
-    >
-      <img src="https://imgur.com/3OVDChF.png" alt="LINE" />
-    </a>
-    <a
-      href="tel:077227407"
-      className={styles.floatingBtn}
-      title="撥打電話"
-      aria-label="撥打電話"
-    >
-      <img src="https://imgur.com/6gVSyd1.png" alt="電話" />
-    </a>
+    {buttonData.map(({ href, title, aria, imgSrc, imgAlt, external }) => (
+      <a
+        key={href}
+        href={href}
+        className={styles.floatingBtn}
+        title={title}
+        aria-label={aria}
+        {...(external
+          ? { target: '_blank', rel: 'noopener noreferrer' }
+          : {})}
+      >
+        <img src={imgSrc} alt={imgAlt} loading="lazy" />
+      </a>
+    ))}
   </div>
 );
 
-export default FloatingButtons;
+export default memo(FloatingButtons);
