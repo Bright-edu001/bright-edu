@@ -10,7 +10,12 @@ import Footer from "./components/Footer/Footer";
 import FloatingButtons from "./components/FloatingButtons/FloatingButtons";
 
 // react-router
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 // pages - Home & Blog
 import Home from "./pages/Home/Home";
@@ -216,7 +221,25 @@ function App() {
                     path="/msu-business-school/msu/east-lansing/east-lansing-food-attractions"
                     element={<MicFoodAttractions />}
                   />
-                  <Route path="/Contact" element={<Contact />} />
+                  <Route
+                    path="/uic-business-school"
+                    element={
+                      <Navigate
+                        to="/uic-business-school/uic/about-uic"
+                        replace
+                      />
+                    }
+                  />
+                  <Route
+                    path="/msu-business-school"
+                    element={
+                      <Navigate
+                        to="/msu-business-school/msu/about-msu"
+                        replace
+                      />
+                    }
+                  />
+                  <Route path="/contact" element={<Contact />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/blog/:id" element={<BlogDetail />} />
                   <Route
