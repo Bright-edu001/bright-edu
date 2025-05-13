@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import "./ActionButton.scss";
-
+import { StyledActionButton } from "./ActionButtonStyles";
 /**
  * 可重用的動作按鈕元件
  * @param {object} props
@@ -17,14 +16,14 @@ const ActionButton = ({ text, link, className, ...props }) => {
     : {};
   // 組合按鈕類名
   return (
-    <a
+    <StyledActionButton
       href={link}
-      className={`action-btn ${className || ""}`}
+      className={className}
       {...externalProps}
       {...props}
     >
       {text}
-    </a>
+    </StyledActionButton>
   );
 };
 

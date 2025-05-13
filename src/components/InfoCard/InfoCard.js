@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import React, { memo, useMemo, isValidElement } from "react";
 import PropTypes from "prop-types";
 import "./InfoCard.scss";
 
@@ -20,24 +20,28 @@ const InfoCard = ({
 }) => {
   // 記憶化 content 節點，避免重複渲染
   const contentNodes = useMemo(() => {
+    if (isValidElement(content)) {
+      return content;
+    }
     if (Array.isArray(content)) {
       return content.map((paragraph, idx) => <p key={idx}>{paragraph}</p>);
+    }
+    if (typeof content === "string") {
+      return <p>{content}</p>;
     }
     if (content && typeof content === "object") {
       return Object.values(content).map(
         (paragraph, idx) => paragraph && <p key={idx}>{paragraph}</p>
       );
     }
-    if (typeof content === "string") {
-      return <p>{content}</p>;
-    }
     return null;
   }, [content]);
 
-  const isRight = imagePosition === "right";
   return (
     <div
-      className={`info-card ${isRight ? "info-card-right" : "info-card-left"}`}
+      className={`info-card ${
+        imagePosition === "right" ? "info-card-right" : "info-card-left"
+      }`}
     >
       <div className="info-card-content">
         {title && <h4>{title}</h4>}
@@ -51,11 +55,7 @@ const InfoCard = ({
 // PropTypes 驗證與預設值
 InfoCard.propTypes = {
   title: PropTypes.string.isRequired,
-  content: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.object,
-  ]).isRequired,
+  content: PropTypes.node.isRequired,
   imageSrc: PropTypes.string.isRequired,
   imageAlt: PropTypes.string,
   imagePosition: PropTypes.oneOf(["left", "right"]),

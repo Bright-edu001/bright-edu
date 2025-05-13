@@ -1,17 +1,23 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+import styled from "styled-components";
 
-.floatingButtons {
+// 浮動按鈕容器
+export const StyledFloatingButtons = styled.div`
   position: fixed;
-  right: $spacing-xl;
-  bottom: $spacing-xxl;
+  right: 3rem;
+  bottom: 5rem;
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
+  gap: 2rem;
   z-index: 9999;
-}
 
-.floatingBtn {
+  @media screen and (max-width: 500px) {
+    right: 1.5rem;
+    bottom: 2rem;
+  }
+`;
+
+// 個別按鈕
+export const StyledFloatingBtn = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,18 +36,10 @@
     width: 60px;
     height: 60px;
     object-fit: contain;
-  }
-}
-@media screen and (max-width: 500px) {
-  .floatingButtons {
-    right: $spacing-md;
-    bottom: $spacing-lg;
-  }
 
-  .floatingBtn {
-    img {
+    @media screen and (max-width: 500px) {
       width: 50px;
       height: 50px;
     }
   }
-}
+`;

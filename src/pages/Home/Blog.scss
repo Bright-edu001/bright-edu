@@ -16,6 +16,12 @@
     padding: $spacing-md;
   }
 }
+@media screen and (max-width: 500px) {
+  .blog-content {
+    margin: 0 auto;
+    padding: $spacing-xs;
+  }
+}
 
 .blog-section {
   margin-bottom: 3rem;

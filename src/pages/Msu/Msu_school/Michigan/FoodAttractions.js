@@ -25,7 +25,7 @@ function FoodAttractions() {
                 百老匯音樂劇、音樂、舞蹈等文化演出。
               </>
             }
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="景點圖片"
             imagePosition="right"
           />
@@ -38,7 +38,7 @@ function FoodAttractions() {
                 免費參觀，欣賞各類現當代藝術作品。
               </>
             }
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="景點圖片"
             imagePosition="left"
           />
@@ -51,7 +51,7 @@ function FoodAttractions() {
                 在地新鮮農產品、手作食品。
               </>
             }
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="景點圖片"
             imagePosition="right"
           />
@@ -64,7 +64,7 @@ function FoodAttractions() {
                 夏季消暑，適合家庭出遊。
               </>
             }
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="景點圖片"
             imagePosition="left"
           />
@@ -77,7 +77,7 @@ function FoodAttractions() {
                 安靜閱讀與自修好去處。
               </>
             }
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="景點圖片"
             imagePosition="right"
           />
@@ -90,70 +90,70 @@ function FoodAttractions() {
           <InfoCard
             title="State Room Restaurant"
             content="高級美式料理、精緻用餐環境"
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="美食圖片"
             imagePosition="left"
           />
           <InfoCard
             title="Crunchy’s"
             content="經典漢堡、學生最愛聚會場所"
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="美食圖片"
             imagePosition="right"
           />
           <InfoCard
             title="Beggar’s Banquet"
             content="多樣國際料理與在地佳餚"
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="美食圖片"
             imagePosition="left"
           />
           <InfoCard
             title="Peanut Barrel"
             content="漢堡+啤酒、戶外座位"
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="美食圖片"
             imagePosition="right"
           />
           <InfoCard
             title="HopCat"
             content="超多精釀啤酒與創意料理"
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="美食圖片"
             imagePosition="left"
           />
           <InfoCard
             title="Sansu"
             content="壽司及日式料理人氣名店"
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="美食圖片"
             imagePosition="right"
           />
           <InfoCard
             title="Pizza House"
             content="深盤披薩與聚餐好選擇"
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="美食圖片"
             imagePosition="left"
           />
           <InfoCard
             title="Swagath Indian Cuisine"
             content="道地印度料理"
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="美食圖片"
             imagePosition="right"
           />
           <InfoCard
             title="Harrison Roadhouse"
             content="美式餐點、休閒酒吧風格"
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="美食圖片"
             imagePosition="left"
           />
           <InfoCard
             title="Coral Gables"
             content="經典美式老牌餐廳"
-            imageSrc=""
+            imageSrc="https://imgur.com/uFf3zgt.png"
             imageAlt="美食圖片"
             imagePosition="right"
           />

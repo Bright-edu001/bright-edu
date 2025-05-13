@@ -1,13 +1,13 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+import styled from "styled-components";
 
-.mba-application-form {
+// 表單容器與共用樣式
+export const StyledApplicationForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
   max-width: 1400px;
   margin: 0 auto;
-  margin-top: -$spacing-lg;
+  margin-top: -2rem;
 
   input,
   textarea {
@@ -18,7 +18,7 @@
     border: 1px solid #b88a2b;
     border-radius: 6px;
     padding: 10px 12px;
-    font-size: $font-size-md;
+    font-size: 18px;
     font-weight: 700;
     outline: none;
     transition: border 0.2s;
@@ -26,9 +26,11 @@
       border-color: #f5b82e;
     }
   }
+
   textarea {
     min-height: 150px;
   }
+
   button {
     background: #f5b82e;
     color: #222;
@@ -40,15 +42,14 @@
     margin: 0 auto;
     cursor: pointer;
     transition: background 0.2s;
-    margin-top: $spacing-md;
-    margin-bottom: $spacing-xxl;
+    margin-top: 1.5rem;
+    margin-bottom: 5rem;
     &:hover {
-      background: $color-brown-light;
-      color: $color-white;
+      background: #a88145;
+      color: #ffffff;
     }
   }
 
-  // 響應式設計：螢幕寬度小於700px時調整表單元素寬度與樣式
   @media (max-width: 700px) {
     input,
     textarea {
@@ -65,29 +66,31 @@
       display: block;
     }
   }
-}
+`;
 
-// 申請條件與標題樣式移植自 Application.scss
-.mba-application-section-title {
-  @include body-large;
-  font-size: $font-size-xxl;
-  margin-bottom: $spacing-xxl;
-  color: $color-accent-gold;
+// 申請條件與標題
+export const StyledSectionTitle = styled.div`
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  margin-bottom: 5rem;
+  color: #f5bf00;
   text-align: center;
 
   @media (max-width: 700px) {
-    font-size: $font-size-xxl;
-    margin-bottom: $spacing-lg;
+    font-size: 32px;
+    margin-bottom: 2rem;
     padding: 0 8px;
   }
-}
+`;
 
-.mba-application-condition-desc {
-  color: $color-brown-dark;
+// 條件描述文字
+export const StyledConditionDesc = styled.div`
+  color: #211700;
   font-size: 1rem;
   text-align: left;
-  margin-bottom: $spacing-lg;
-  margin-left: $spacing-lg;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
 
   @media (max-width: 700px) {
     font-size: 0.95rem;
@@ -95,4 +98,4 @@
     padding: 0 8px;
     text-align: justify;
   }
-}
+`;

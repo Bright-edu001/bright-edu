@@ -1,6 +1,14 @@
 import React, { memo } from "react";
-import { Link } from "react-router-dom";
-import "./ArticleCard.scss";
+import {
+  StyledArticleCard,
+  StyledLink,
+  StyledAnchor,
+  StyledImage,
+  StyledPlaceholder,
+  StyledContent,
+  StyledTitle,
+  StyledExcerpt,
+} from "./ArticleCardStyles";
 
 /**
  * 通用文章卡片元件
@@ -12,37 +20,32 @@ import "./ArticleCard.scss";
 function ArticleCard({ item, imageType, layout = "vertical" }) {
   // 提取內外部連結判斷
   const isInternal = item.link?.startsWith("/");
-  const Wrapper = isInternal ? Link : "a";
+  const Wrapper = isInternal ? StyledLink : StyledAnchor;
   // 構建 Wrapper 屬性：內部路由使用 to，外部連結使用 href 並加上安全屬性
   const wrapperProps = item.link
     ? isInternal
       ? { to: item.link }
       : { href: item.link, target: "_blank", rel: "noopener noreferrer" }
     : {};
-  // 組合 BEM 類名並加上排版修飾符
-  const cardClass = `article-card article-card--${layout}`;
-  // 決定圖片樣式：有 image 則顯示 <img>，否則顯示對應背景的佔位容器
-  const imgClass = item.image
-    ? "article-card__img"
-    : `article-card__placeholder article-card__placeholder--${
-        imageType || "default"
-      }`;
   return (
-    <div className={cardClass} title={item.title}>
-      <Wrapper className="article-card__link" {...wrapperProps}>
+    <StyledArticleCard title={item.title}>
+      <Wrapper layout={layout} imageType={imageType} {...wrapperProps}>
         {/* 渲染圖片或背景佔位 */}
         {item.image ? (
-          <img src={item.image} alt={item.title} className={imgClass} />
+          <StyledImage src={item.image} alt={item.title} layout={layout} />
         ) : (
-          <div className={imgClass}></div>
+          <StyledPlaceholder
+            layout={layout}
+            imageType={imageType || "default"}
+          />
         )}
         {/* 內容區塊：標題與摘要 */}
-        <div className="article-card__content">
-          <h3 className="article-card__title">{item.title}</h3>
-          <p className="article-card__excerpt">{item.excerpt}</p>
-        </div>
+        <StyledContent>
+          <StyledTitle>{item.title}</StyledTitle>
+          <StyledExcerpt>{item.excerpt}</StyledExcerpt>
+        </StyledContent>
       </Wrapper>
-    </div>
+    </StyledArticleCard>
   );
 }
 

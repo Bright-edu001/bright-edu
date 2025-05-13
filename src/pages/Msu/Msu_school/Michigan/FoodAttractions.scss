@@ -18,11 +18,17 @@
 }
 
 .attractions-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 32px 40px;
-  justify-content: center;
   margin-bottom: $spacing-xxl;
+}
+
+// 手機瀏覽時調整為一欄
+@media (max-width: 700px) {
+  .attractions-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 .attraction-card {

@@ -121,3 +121,8 @@
     font-size: $font-size-lg;
   }
 }
+@media screen and (max-width: 500px) {
+  .blog-detail-sidebar {
+    margin-right: 4.3rem;
+  }
+}
