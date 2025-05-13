@@ -29,11 +29,6 @@ p {
       display: inline-block;
       text-align: center;
 
-      &:hover {
-        background: $color-gray;
-        color: $color-black;
-      }
-
       &.with-arrow {
         position: relative;
         padding-right: 2.5rem;
@@ -46,7 +41,7 @@ p {
         }
 
         &:hover:after {
-          transform: translateX(3px);
+          transform: translateX(6px);
         }
       }
     }
