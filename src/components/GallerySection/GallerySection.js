@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   StyledGallerySection,
   StyledGalleryTitle,
@@ -14,7 +14,7 @@ function GallerySection({ images, ariaLabel = "圖片畫廊", title = null }) {
         <StyledContainer>
           {title && <StyledGalleryTitle>{title}</StyledGalleryTitle>}
           {images.map((image, index) => (
-            <StyledGalleryItem key={index}>
+            <StyledGalleryItem key={image.src || index}>
               <img
                 className="responsive-img"
                 src={image.src}
@@ -29,4 +29,4 @@ function GallerySection({ images, ariaLabel = "圖片畫廊", title = null }) {
   );
 }
 
-export default GallerySection;
+export default memo(GallerySection);

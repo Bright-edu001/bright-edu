@@ -32,7 +32,12 @@ function ArticleCard({ item, imageType, layout = "vertical" }) {
       <Wrapper layout={layout} imageType={imageType} {...wrapperProps}>
         {/* 渲染圖片或背景佔位 */}
         {item.image ? (
-          <StyledImage src={item.image} alt={item.title} layout={layout} />
+          <StyledImage
+            src={item.image}
+            alt={item.title}
+            layout={layout}
+            loading="lazy"
+          />
         ) : (
           <StyledPlaceholder
             layout={layout}

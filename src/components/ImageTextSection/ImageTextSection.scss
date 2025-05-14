@@ -9,7 +9,8 @@
     align-items: center; // 垂直居中對齊
     max-width: $container-max-width; // 使用變數設定最大寬度
     margin: 0 auto; // 水平居中
-    padding-top: 5rem; /* 增加此行，調整數值以符合需求 */
+    padding-top: 2rem; /* 增加此行，調整數值以符合需求 */
+    padding-bottom: 4rem;
 
     .text-content {
       flex: 1; // 移除 position 和 left，改用 flex-basis 或 flex-grow 控制寬度

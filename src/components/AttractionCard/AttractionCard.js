@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./AttractionCard.scss";
 
 function AttractionCard({ name, desc }) {
@@ -20,4 +20,4 @@ function AttractionCard({ name, desc }) {
   );
 }
 
-export default AttractionCard;
+export default memo(AttractionCard);
