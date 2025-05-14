@@ -71,7 +71,7 @@
 
 .blog-detail-image {
   width: 1000px;
-  height: 600px;
+  margin-left: 1.5rem;
   object-fit: cover;
   max-width: 100%;
   margin-bottom: 1rem;
@@ -100,20 +100,33 @@
   margin-top: 1.2em;
   margin-bottom: 1.2em;
 }
+@media screen and (max-width: 1024px) {
+  .blog-detail-back {
+    margin-left: 20rem;
+  }
+}
 
 // 響應式設計：寬度700px以下
-@media (max-width: 700px) {
+@media screen and (max-width: 850px) {
   .blog-detail-mainrow {
     flex-direction: column-reverse;
     gap: 1.5rem;
     margin-top: $spacing-lg;
   }
+  .blog-detail-sidebar {
+    margin-left: 15rem;
+    margin-bottom: 2rem;
+  }
 
+  .blog-detail-excerpt {
+    margin-top: 2rem;
+  }
   .blog-detail-image {
     width: 100%;
     height: 200px;
     max-width: 100%;
     margin-bottom: 1rem;
+    margin-left: 0;
   }
 
   .blog-detail-back {
@@ -124,5 +137,6 @@
 @media screen and (max-width: 500px) {
   .blog-detail-sidebar {
     margin-right: 4.3rem;
+    margin-left: 4rem;
   }
 }
