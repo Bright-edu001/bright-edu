@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useRef } from "react";
+import React, { createContext, useState, useEffect, useRef, useMemo, useCallback } from "react";
 
 // 建立 NavContext，用於全站導航下拉選單狀態管理
 export const NavContext = createContext();
@@ -86,9 +86,8 @@ export const NavProvider = ({ children }) => {
   const toggleMobileMenu = toggleDropdown("mobileMenu");
 
   // 處理含子選單連結點擊行為
-  const handleDropdownLinkClick =
-    (menuKey, href, closeKey = null) =>
-    (e) => {
+  const handleDropdownLinkClick = useCallback(
+    (menuKey, href, closeKey = null) => (e) => {
       const mobileCheck = window.innerWidth < 1025;
       if (mobileCheck) {
         e.preventDefault();
@@ -109,44 +108,69 @@ export const NavProvider = ({ children }) => {
           setPendingLink(menuKey);
         }
       }
-    };
+    },
+    [dropdownStates, pendingLink]
+  );
 
-  // 滑鼠懸停展開（桌機）
-  const handleMouseEnter = (menuKey, closeKey) => () => {
-    if (window.innerWidth >= 1025) {
-      setDropdownStates((prev) => ({
-        ...prev,
-        [menuKey]: true,
-        ...(closeKey ? { [closeKey]: false } : {}),
-      }));
-      setPendingLink(null);
-    }
-  };
-  const handleMouseLeave = (menuKey) => () => {
-    if (window.innerWidth >= 1025) {
-      setDropdownStates((prev) => ({ ...prev, [menuKey]: false }));
-      setPendingLink(null);
-    }
-  };
+  // 滑鼠懸停展開與離開（桌機）
+  const handleMouseEnter = useCallback(
+    (menuKey, closeKey) => () => {
+      if (window.innerWidth >= 1025) {
+        setDropdownStates((prev) => ({
+          ...prev,
+          [menuKey]: true,
+          ...(closeKey ? { [closeKey]: false } : {}),
+        }));
+        setPendingLink(null);
+      }
+    },
+    []
+  );
+  const handleMouseLeave = useCallback(
+    (menuKey) => () => {
+      if (window.innerWidth >= 1025) {
+        setDropdownStates((prev) => ({ ...prev, [menuKey]: false }));
+        setPendingLink(null);
+      }
+    },
+    []
+  );
 
+  // 使用 useMemo 穩定 context value
+  const contextValue = useMemo(
+    () => ({
+      dropdownStates,
+      toggleUICDropdown,
+      toggleMSUDropdown,
+      toggleUICSubDropdown,
+      toggleMBASubDropdown,
+      toggleMSSubDropdown,
+      toggleMSUMainSubDropdown,
+      toggleMSFProgramsSubDropdown,
+      toggleMobileMenu,
+      handleDropdownLinkClick,
+      handleMouseEnter,
+      handleMouseLeave,
+      headerRef,
+    }),
+    [
+      dropdownStates,
+      toggleUICDropdown,
+      toggleMSUDropdown,
+      toggleUICSubDropdown,
+      toggleMBASubDropdown,
+      toggleMSSubDropdown,
+      toggleMSUMainSubDropdown,
+      toggleMSFProgramsSubDropdown,
+      toggleMobileMenu,
+      handleDropdownLinkClick,
+      handleMouseEnter,
+      handleMouseLeave,
+      headerRef,
+    ]
+  );
   return (
-    <NavContext.Provider
-      value={{
-        dropdownStates,
-        toggleUICDropdown,
-        toggleMSUDropdown,
-        toggleUICSubDropdown,
-        toggleMBASubDropdown,
-        toggleMSSubDropdown,
-        toggleMSUMainSubDropdown,
-        toggleMSFProgramsSubDropdown,
-        toggleMobileMenu,
-        handleDropdownLinkClick,
-        handleMouseEnter,
-        handleMouseLeave,
-        headerRef,
-      }}
-    >
+    <NavContext.Provider value={contextValue}>
       {children}
     </NavContext.Provider>
   );

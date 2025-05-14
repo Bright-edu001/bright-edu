@@ -1,4 +1,4 @@
-import React, { createContext, useState, useMemo } from "react";
+import React, { createContext, useState, useMemo, useCallback } from "react";
 import {
   enrollmentEvents as initialEnrollment,
   news as initialNews,
@@ -21,29 +21,36 @@ export const BlogProvider = ({ children }) => {
   );
 
   // 根據關鍵字搜尋文章，回傳符合標題或內容包含關鍵字的清單
-  const searchByKeyword = (keyword) => {
-    const kw = (keyword || "").trim().toLowerCase();
-    if (!kw) return [];
-    return all.filter(
-      (item) =>
-        item.title.toLowerCase().includes(kw) ||
-        (item.content && item.content.toLowerCase().includes(kw))
-    );
-  };
+  const searchByKeyword = useCallback(
+    (keyword) => {
+      const kw = (keyword || "").trim().toLowerCase();
+      if (!kw) return [];
+      return all.filter(
+        (item) =>
+          item.title.toLowerCase().includes(kw) ||
+          (item.content && item.content.toLowerCase().includes(kw))
+      );
+    },
+    [all]
+  );
 
   // 根據分類參數過濾文章，支援 "enrollment"、"news" 或回傳全部
-  const filterByCategory = (category) => {
-    if (category === "enrollment") return enrollmentEvents;
-    if (category === "news") return news;
-    return all;
-  };
+  const filterByCategory = useCallback(
+    (category) => {
+      if (category === "enrollment") return enrollmentEvents;
+      if (category === "news") return news;
+      return all;
+    },
+    [enrollmentEvents, news, all]
+  );
 
+  // 使用 useMemo 穩定 context value
+  const contextValue = useMemo(
+    () => ({ enrollmentEvents, news, all, searchByKeyword, filterByCategory }),
+    [enrollmentEvents, news, all, searchByKeyword, filterByCategory]
+  );
   // 提供全域資料與操作函式給子元件
   return (
-    <BlogContext.Provider
-      value={{ enrollmentEvents, news, all, searchByKeyword, filterByCategory }}
-    >
-      {children}
-    </BlogContext.Provider>
+    <BlogContext.Provider value={contextValue}>{children}</BlogContext.Provider>
   );
 };
