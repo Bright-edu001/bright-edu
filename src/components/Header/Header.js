@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import "./Header.css";
 import { NavContext } from "../../context/NavContext";
+import debounce from "../../utils/debounce";
 
 function Header() {
   // 透過 NavContext 取得下拉選單狀態與行為
@@ -26,15 +27,14 @@ function Header() {
       // 可以在這裡 log 寬度，或者根據需要更新狀態
       console.log(`[Header Resize] window.innerWidth: ${window.innerWidth}`);
     };
-
-    // 組件掛載時增加監聽器
-    window.addEventListener("resize", handleResize);
+    const debouncedResize = debounce(handleResize, 200);
+    window.addEventListener("resize", debouncedResize);
     // 初始執行一次以獲取當前寬度
     handleResize();
 
     // 組件卸載時移除監聽器，避免 memory leak
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", debouncedResize);
     };
   }, []); // 空依賴數組表示只在掛載和卸載時執行
 

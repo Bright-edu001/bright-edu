@@ -28,18 +28,17 @@
 }
 
 .answer {
-  max-height: 0;
   overflow: hidden;
-  transition: max-height 0.1s ease;
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+  will-change: transform;
   display: flex;
-  flex-direction: column; /* 新增: 使內容垂直排列 */
+  flex-direction: column;
   align-items: center;
 }
 
 .answer.expanded {
-  max-height: 500px; /* 足量高度以展開內容 */
+  transform: scaleY(1);
   padding-bottom: 0.75rem;
-  display: flex;
-  flex-direction: column; /* 新增: 使內容垂直排列 */
-  align-items: center;
 }

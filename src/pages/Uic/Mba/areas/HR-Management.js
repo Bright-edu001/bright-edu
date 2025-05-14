@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import debounce from "../../../../utils/debounce";
 import ImageTextSection from "../../../../components/ImageTextSection/ImageTextSection";
 import CourseList from "../../../../components/CourseList/CourseList";
 import "./MBA-Programs.scss";
@@ -31,7 +32,10 @@ const HR_Management = () => {
   const [showIntro, setShowIntro] = useState(window.innerWidth > 700);
 
   useEffect(() => {
-    const handleResize = () => setShowIntro(window.innerWidth > 700);
+    const handleResize = debounce(
+      () => setShowIntro(window.innerWidth > 700),
+      200
+    );
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
