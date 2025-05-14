@@ -55,3 +55,9 @@
   list-style: none;
   padding: 0;
 }
+
+.responsive-img {
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}

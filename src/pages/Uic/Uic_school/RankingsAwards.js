@@ -29,7 +29,12 @@ const RankingsAwards = () => {
         <div className="aacsb-section">
           <div className="aacsb-header">
             <div className="aacsb-logo">
-              <img src="https://imgur.com/q8AsDEx.png" alt="AACSB Logo" />
+              <img
+                className="responsive-img"
+                src="https://imgur.com/q8AsDEx.png"
+                alt="AACSB Logo"
+                loading="lazy"
+              />
             </div>
             <div className="aacsb-title">
               <h2>AACSB商業及會計雙項認證</h2>
@@ -73,8 +78,10 @@ const RankingsAwards = () => {
           <div className="diversity-header">
             <div className="diversity-logo">
               <img
+                className="responsive-img"
                 src="https://imgur.com/JD9zLlj.png"
                 alt="HEED Excellence Award"
+                loading="lazy"
               />
             </div>
             <div className="diversity-title">
@@ -108,7 +115,12 @@ const RankingsAwards = () => {
         <div className="uic-rankings-section">
           <div className="rankings-header">
             <div className="rankings-logo">
-              <img src="https://imgur.com/uhMmwNF.png" alt="UIC Rankings" />
+              <img
+                className="responsive-img"
+                src="https://imgur.com/uhMmwNF.png"
+                alt="UIC Rankings"
+                loading="lazy"
+              />
             </div>
             <div className="rankings-title">
               <h2>UIC RANKINGS</h2>

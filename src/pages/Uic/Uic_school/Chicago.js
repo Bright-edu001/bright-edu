@@ -33,7 +33,12 @@ const Chicago = () => {
         <div className="container">
           <div className="section-header">
             <div className="history-image">
-              <img src="https://imgur.com/GPs7TSN.png" alt="芝加哥歷史發展" />
+              <img
+                className="responsive-img"
+                src="https://imgur.com/GPs7TSN.png"
+                alt="芝加哥歷史發展"
+                loading="lazy"
+              />
             </div>
             <h2>歷史發展</h2>
           </div>
@@ -60,7 +65,12 @@ const Chicago = () => {
           <div className="section-header">
             <h2>交通</h2>
             <div className="transport-image">
-              <img src="https://imgur.com/Xbnfhxb.png" alt="芝加哥交通" />
+              <img
+                className="responsive-img"
+                src="https://imgur.com/Xbnfhxb.png"
+                alt="芝加哥交通"
+                loading="lazy"
+              />
             </div>
           </div>
           <div className="section-content">

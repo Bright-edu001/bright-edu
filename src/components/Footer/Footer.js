@@ -20,6 +20,7 @@ function Footer() {
                     alt="ICEF認證徽章 - Bright Education"
                     width="120"
                     height="120"
+                    loading="lazy"
                   />
                 </a>
               </div>
@@ -121,6 +122,7 @@ function Footer() {
                     alt="whatsapp 圖示"
                     width="24"
                     height="24"
+                    loading="lazy"
                   />
                 </a>
               </div>

@@ -17,7 +17,12 @@ function ImageTextSection({
           <p>{intro}</p>
         </div>
         <div className="image-content">
-          <img src={imageUrl} alt={imageAlt} />
+          <img
+            className="responsive-img"
+            src={imageUrl}
+            alt={imageAlt}
+            loading="lazy"
+          />
         </div>
       </div>
     </section>

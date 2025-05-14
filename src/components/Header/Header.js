@@ -49,11 +49,11 @@ function Header() {
           <a href="/" title="Bright Education 首頁">
             <img
               src="https://imgur.com/0bP0auA.png"
-              className="logo-img"
+              className="logo-img responsive-img"
               alt="Bright Education Logo"
-              // fetchpriority="high"
               width="150"
               height="60"
+              loading="lazy"
             />
           </a>
         </div>

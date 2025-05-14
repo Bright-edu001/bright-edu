@@ -79,7 +79,13 @@ function MSFinanceSection({
           {companyLogos && companyLogos.length > 0 && (
             <div className="company-logos">
               {companyLogos.map((logo, idx) => (
-                <img key={idx} src={logo.src} alt={logo.alt} />
+                <img
+                  key={idx}
+                  className="responsive-img"
+                  src={logo.src}
+                  alt={logo.alt}
+                  loading="lazy"
+                />
               ))}
             </div>
           )}

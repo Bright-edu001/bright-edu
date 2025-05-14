@@ -47,7 +47,12 @@ const InfoCard = ({
         {title && <h4>{title}</h4>}
         {contentNodes}
       </div>
-      <img src={imageSrc} alt={imageAlt || title} />
+      <img
+        className="responsive-img"
+        src={imageSrc}
+        alt={imageAlt || title}
+        loading="lazy"
+      />
     </div>
   );
 };

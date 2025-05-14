@@ -15,7 +15,12 @@ function GallerySection({ images, ariaLabel = "圖片畫廊", title = null }) {
           {title && <StyledGalleryTitle>{title}</StyledGalleryTitle>}
           {images.map((image, index) => (
             <StyledGalleryItem key={index}>
-              <img src={image.src} alt={image.alt} />
+              <img
+                className="responsive-img"
+                src={image.src}
+                alt={image.alt}
+                loading="lazy"
+              />
             </StyledGalleryItem>
           ))}
         </StyledContainer>
