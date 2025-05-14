@@ -22,16 +22,18 @@ const sharedLinkStyles = css`
 
 export const StyledLink = styled(Link)`
   ${sharedLinkStyles}
-  flex-direction: ${({ layout }) => (layout === "vertical" ? "column" : "row")};
-  align-items: ${({ layout }) =>
-    layout === "vertical" ? "stretch" : "flex-start"};
+  flex-direction: ${({ $layout }) =>
+    $layout === "vertical" ? "column" : "row"};
+  align-items: ${({ $layout }) =>
+    $layout === "vertical" ? "stretch" : "flex-start"};
 `;
 
 export const StyledAnchor = styled.a`
   ${sharedLinkStyles}
-  flex-direction: ${({ layout }) => (layout === "vertical" ? "column" : "row")};
-  align-items: ${({ layout }) =>
-    layout === "vertical" ? "stretch" : "flex-start"};
+  flex-direction: ${({ $layout }) =>
+    $layout === "vertical" ? "column" : "row"};
+  align-items: ${({ $layout }) =>
+    $layout === "vertical" ? "stretch" : "flex-start"};
 `;
 
 // 圖片樣式
@@ -43,8 +45,8 @@ export const StyledImage = styled.img`
   background-size: contain;
   background-position: center;
 
-  ${({ layout }) =>
-    layout === "horizontal" &&
+  ${({ $layout }) =>
+    $layout === "horizontal" &&
     css`
       width: 40%;
       height: auto;
@@ -60,8 +62,8 @@ export const StyledPlaceholder = styled.div`
   background-size: contain;
   background-position: center;
 
-  ${({ layout }) =>
-    layout === "horizontal" &&
+  ${({ $layout }) =>
+    $layout === "horizontal" &&
     css`
       width: 40%;
       height: auto;
@@ -69,13 +71,13 @@ export const StyledPlaceholder = styled.div`
     `}
 
   background: #e0e0e0;
-  ${({ imageType }) =>
-    imageType === "enrollment" &&
+  ${({ $imageType }) =>
+    $imageType === "enrollment" &&
     css`
       background-image: url("https://imgur.com/6n3nCHp.png");
     `}
-  ${({ imageType }) =>
-    imageType === "news" &&
+  ${({ $imageType }) =>
+    $imageType === "news" &&
     css`
       background-image: url("https://imgur.com/1EoFLTI.png");
     `}

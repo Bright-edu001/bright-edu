@@ -29,19 +29,19 @@ function ArticleCard({ item, imageType, layout = "vertical" }) {
     : {};
   return (
     <StyledArticleCard title={item.title}>
-      <Wrapper layout={layout} imageType={imageType} {...wrapperProps}>
+      <Wrapper $layout={layout} $imageType={imageType} {...wrapperProps}>
         {/* 渲染圖片或背景佔位 */}
         {item.image ? (
           <StyledImage
             src={item.image}
             alt={item.title}
-            layout={layout}
+            $layout={layout}
             loading="lazy"
           />
         ) : (
           <StyledPlaceholder
-            layout={layout}
-            imageType={imageType || "default"}
+            $layout={layout}
+            $imageType={imageType || "default"}
           />
         )}
         {/* 內容區塊：標題與摘要 */}
