@@ -1,5 +1,5 @@
-const eventimgrul = "https://imgur.com/02qzyGF.png";
-const newsimgurl = "https://imgur.com/jdRK6w9.png";
+const eventimgrul = `${process.env.PUBLIC_URL}/images/blog/eventimg.webp`;
+const newsimgurl = `${process.env.PUBLIC_URL}/images/blog/newsimg.webp`;
 
 export const enrollmentEvents = [
   {
@@ -125,7 +125,7 @@ UIC MBA台灣招生中心:https://bright-edu.com/
   },
   {
     id: 4,
-    image: "https://imgur.com/7ouBsUM.png",
+    image: `${process.env.PUBLIC_URL}/images/blog/eventimg2.webp`,
     title: "Education USA美國小型教育展-高雄場​",
     excerpt: "Education USA美國小型教育展-高雄場​",
     get link() {

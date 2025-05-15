@@ -5,10 +5,10 @@ import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import { enrollmentEvents, news } from "../../data/blog";
 
 const heroImages = [
-  "https://imgur.com/MJbcBPV.png",
-  "https://imgur.com/pLQ3Y0G.png",
-  "https://imgur.com/B1dQnnp.png",
-  "https://imgur.com/nlz7oCg.png",
+  `${process.env.PUBLIC_URL}/images/banner/banner1.webp`,
+  `${process.env.PUBLIC_URL}/images/banner/banner2.webp`,
+  `${process.env.PUBLIC_URL}/images/banner/banner3.webp`,
+  `${process.env.PUBLIC_URL}/images/banner/banner4.webp`,
 ];
 
 function Home() {
