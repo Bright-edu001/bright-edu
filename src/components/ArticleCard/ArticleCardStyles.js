@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // ArticleCard 外框
 export const StyledArticleCard = styled.div`
   flex: 1;
-  min-width: 300px;
+  min-width: 320px;
   margin-bottom: 2rem;
   text-align: left;
 `;

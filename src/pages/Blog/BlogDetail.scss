@@ -17,13 +17,10 @@
 
 // 側邊欄
 .blog-detail-sidebar {
-  width: 300px;
-  background: #fafbfc;
-  border-radius: 8px;
-  margin-right: 10rem;
-  padding: 0 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  height: fit-content;
+  flex: 0 0 300px; // 設定固定寬度且不縮放
+  max-width: 300px; // 確保最大寬度
+  margin-right: 0rem;
+  margin-left: 5rem;
 }
 
 .blog-detail-categories {

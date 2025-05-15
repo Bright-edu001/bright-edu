@@ -3,7 +3,6 @@ import "./Blog.scss";
 import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BlogContext } from "../../context/BlogContext";
-import { SearchContext } from "../../context/SearchContext";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
@@ -25,7 +24,6 @@ function Blog() {
   const params = new URLSearchParams(location.search);
   const category = params.get("category");
   const { enrollmentEvents, news } = useContext(BlogContext);
-  const { handleCategoryClick } = useContext(SearchContext);
   const navigate = useNavigate();
 
   // 根據 category 過濾顯示
@@ -78,27 +76,6 @@ function Blog() {
         <aside className="blog-detail-sidebar">
           {/* 關鍵字搜尋欄 */}
           <SearchBar placeholder="搜尋..." />
-          <div className="blog-detail-categories">
-            <h3>分類</h3>
-            <ul>
-              <li>
-                <button
-                  className="blog-detail-category-btn"
-                  onClick={() => handleCategoryClick("enrollment")}
-                >
-                  招生活動
-                </button>
-              </li>
-              <li>
-                <button
-                  className="blog-detail-category-btn"
-                  onClick={() => handleCategoryClick("news")}
-                >
-                  最新消息
-                </button>
-              </li>
-            </ul>
-          </div>
         </aside>
       </div>
     </div>

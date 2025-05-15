@@ -4,13 +4,11 @@ import { useParams, Link } from "react-router-dom";
 import { BlogContext } from "../../context/BlogContext";
 import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import { SearchContext } from "../../context/SearchContext";
 
 function BlogDetail() {
   const { id } = useParams();
   const { enrollmentEvents, news, all } = useContext(BlogContext);
   const blog = all.find((item) => String(item.id) === String(id));
-  const { handleCategoryClick } = useContext(SearchContext);
 
   // 新增：判斷分類
   let subtitle = "";
@@ -77,27 +75,6 @@ function BlogDetail() {
         <aside className="blog-detail-sidebar">
           {/* 關鍵字搜尋欄 */}
           <SearchBar placeholder="搜尋..." />
-          <div className="blog-detail-categories">
-            <h3>分類</h3>
-            <ul>
-              <li>
-                <button
-                  className="blog-detail-category-btn"
-                  onClick={() => handleCategoryClick("enrollment")}
-                >
-                  招生活動
-                </button>
-              </li>
-              <li>
-                <button
-                  className="blog-detail-category-btn"
-                  onClick={() => handleCategoryClick("news")}
-                >
-                  最新消息
-                </button>
-              </li>
-            </ul>
-          </div>
         </aside>
       </div>
     </div>

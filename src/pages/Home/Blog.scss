@@ -1,8 +1,8 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
+
 .blog-content {
-  margin: -5rem auto;
-  padding: 0 $spacing-xxl;
+  margin: 2rem auto;
 }
 @media screen and (max-width: 1024px) {
   .blog-content {
@@ -120,5 +120,42 @@
     background: $color-accent-gold;
     color: $color-brown-dark;
     border-color: $color-accent-gold;
+  }
+}
+
+.blog-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-detail-mainrow {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto; // 使主要內容區域居中
+  padding: $spacing-lg; // 添加一些內邊距
+  max-width: $container-max-width; // 限制最大寬度
+  width: 100%; // 確保在較小螢幕上佔滿寬度
+  overflow: hidden;
+}
+
+.blog-detail-main {
+  flex: 3; // 主要內容佔用較多空間
+  margin-right: $spacing-xl; // 與側邊欄的間距
+}
+
+.blog-detail-sidebar {
+  flex: 1; // 側邊欄佔用較少空間
+  // 保持 SearchBar.scss 中的樣式，這裡主要控制佈局
+}
+
+// 響應式調整：當螢幕寬度小於 $breakpoint-md 時，堆疊主要內容和側邊欄
+@media screen and (max-width: $breakpoint-md) {
+  .blog-detail-mainrow {
+    flex-direction: column;
+  }
+
+  .blog-detail-main {
+    margin-right: 0;
+    margin-bottom: $spacing-xl; // 在堆疊時添加底部間距
   }
 }

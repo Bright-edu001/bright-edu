@@ -6,7 +6,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  overflow-x: visible; // 防止橫向滾動條出現
+  // 防止橫向滾動條出現
 }
 
 /* 頁面主體樣式 */
@@ -15,6 +15,7 @@ body {
   line-height: 1.5;
   color: $color-text-primary;
   background-color: $color-white;
+  overflow-x: hidden;
 }
 
 /* 應用程式主容器樣式 */
