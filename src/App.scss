@@ -18,6 +18,15 @@ body {
   overflow-x: hidden;
 }
 
+/* 防止所有設備的橫向溢出 */
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
 /* 應用程式主容器樣式 */
 .App {
   display: flex;
