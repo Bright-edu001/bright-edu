@@ -28,6 +28,7 @@
       text-align: left;
       margin-top: $spacing-xxl;
       margin-bottom: $spacing-xxl;
+      margin-left: 6rem;
     }
   }
   .class {
@@ -91,6 +92,11 @@
     padding: 0;
     margin: 0 10rem 2rem;
   }
+  .rankings-awards-page .ranking .highlight,
+  .rankings-awards-page .management .highlight {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
 }
 
 @media (max-width: 700px) {
@@ -104,8 +110,7 @@
         justify-content: space-around;
       }
       .highlight {
-        margin-top: $spacing-lg;
-        margin-bottom: $spacing-lg;
+        margin: $spacing-lg $spacing-lg 1rem 1rem;
       }
     }
     .management {
