@@ -19,10 +19,9 @@ function Hero() {
   }, []);
 
   return (
-    <section
-      className="hero"
-      style={{ backgroundImage: `url(${heroImages[heroIndex]})` }}
-    >
+    <section className="hero">
+      {" "}
+      <img className="hero-img" src={heroImages[heroIndex]} alt="Hero banner" />
       <div className="hero-bg-mask" />
       <div className="container container-aligned">
         <div className="hero-content">
