@@ -8,15 +8,15 @@ function AboutUic() {
   // 校園圖片數據
   const campusImages = [
     {
-      src: "https://imgur.com/io4JJ0y.png",
+      src: `${process.env.PUBLIC_URL}/images/GallerySection/gallery1.webp`,
       alt: "UIC 校園圖片 1",
     },
     {
-      src: "https://imgur.com/tN5BwFK.png",
+      src: `${process.env.PUBLIC_URL}/images/GallerySection/gallery2.webp`,
       alt: "UIC 校園圖片 2",
     },
     {
-      src: "https://imgur.com/p04suZU.png",
+      src: `${process.env.PUBLIC_URL}/images/GallerySection/gallery3.webp`,
       alt: "UIC 校園圖片 3",
     },
   ];
