@@ -1,11 +1,14 @@
-import React from "react";
-import "./Areas.css";
-import "./mba-common.scss";
-import "./Areas.scss";
+import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 function Areas() {
+  useEffect(() => {
+    import("./Areas.css");
+    import("./mba-common.scss");
+    import("./Areas.scss");
+  }, []);
+
   return (
     <div className="mba-areas-page">
       <ImageTextSection

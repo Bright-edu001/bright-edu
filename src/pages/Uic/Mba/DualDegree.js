@@ -1,9 +1,12 @@
-import React from "react";
-import "./DualDegree.css";
+import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 function DualDegree() {
+  useEffect(() => {
+    import("./DualDegree.css");
+  }, []);
+
   return (
     <div className="mba-advantages">
       <ImageTextSection

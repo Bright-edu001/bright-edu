@@ -1,9 +1,12 @@
-import React from "react";
-import "./CoreCourses.css";
+import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 function CoreCourses() {
+  useEffect(() => {
+    import("./CoreCourses.css");
+  }, []);
+
   return (
     <div className="mba-courses-page">
       <ImageTextSection

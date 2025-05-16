@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import ActionButton from "../../../components/ActionButton/ActionButton";
 import Accordion from "../../../components/Accordion/Accordion";
@@ -6,6 +6,10 @@ import AccordionItem from "../../../components/Accordion/AccordionItem";
 import "./FAQ.css";
 
 const FAQ = () => {
+  useEffect(() => {
+    import("./FAQ.scss");
+  }, []);
+
   const [expandedQuestions, setExpandedQuestions] = useState({});
   const toggleQuestion = (questionId) => {
     setExpandedQuestions((prev) => ({

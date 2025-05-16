@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ImageTextSection from "../../../../components/ImageTextSection/ImageTextSection";
 import CourseList from "../../../../components/CourseList/CourseList";
-import "./MBA-Programs.scss";
 
 const Analytics = () => {
+  useEffect(() => {
+    import("./MBA-Programs.scss");
+  }, []);
+
   // 各區塊課程資料
 
   const featuredCourses = [

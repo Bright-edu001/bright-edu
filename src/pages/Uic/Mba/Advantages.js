@@ -1,9 +1,12 @@
-import React from "react";
-import "./Advantages.css";
+import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 function Advantages() {
+  useEffect(() => {
+    import("./Advantages.css");
+  }, []);
+
   return (
     <div className="mba-advantages">
       <ImageTextSection

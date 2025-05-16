@@ -1,9 +1,12 @@
-import React from "react";
-import "./MS.scss";
+import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
 
 function MsManagement() {
+  useEffect(() => {
+    import("./MS.scss");
+  }, []);
+
   const whyTitle = "為什麼選擇在 UIC 商學院攻讀行銷碩士學位？";
   const whyList = [
     {

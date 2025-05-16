@@ -1,8 +1,11 @@
-import React from "react";
-import "./Chicago.scss";
+import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 
 const Chicago = () => {
+  useEffect(() => {
+    import("./Chicago.scss");
+  }, []);
+
   return (
     <div className="chicago-container">
       <ImageTextSection
