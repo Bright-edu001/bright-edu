@@ -47,126 +47,6 @@ p {
     }
   }
 
-  /* Hero 區域樣式 - 頁面頂部的主要宣傳區塊 */
-  .hero {
-    background: none;
-    position: relative;
-    color: $color-white;
-    padding: 2rem 0;
-    display: flex;
-    align-items: center;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    transition: background-image 0.5s ease;
-
-    // 背景圖片淡化（透明度 0.4，可依需求調整）
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      /* 移除 background，改由 React 控制 */
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    // 讓內容在遮罩上層
-    .container,
-    &-content,
-    &-image {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* 使用 width + margin auto */
-    width: 100%; // 確保寬度不超過視窗
-    max-width: 85rem; /* 限制最大寬度 */
-    height: 30rem;
-    margin: 0 auto; // 移除多餘的邊距
-
-    // 應用與header相同的容器設定
-    .container {
-      @include container();
-      display: flex;
-      gap: $spacing-lg;
-    }
-
-    &-content {
-      display: flex;
-      flex-direction: column;
-
-      h1 {
-        font-size: 2.5rem;
-        margin-top: $spacing-md;
-        line-height: 1.2;
-
-        .title-en,
-        .title-zh {
-          display: block;
-          gap: 0.5rem; /* 調整標題間距 */
-        }
-
-        .title-zh {
-          margin-top: 0.5rem; /* 調整中文標題與英文標題的間距 */
-        }
-        span {
-          color: $color-text-primary;
-        }
-      }
-
-      p {
-        margin-bottom: $spacing-lg;
-        opacity: 0.9;
-        /* 繼承全局 p 樣式，只需覆蓋特定屬性 */
-        font-size: 1.2rem; /* 覆蓋全局設定的字體大小 */
-      }
-
-      /* Hero 按鈕樣式覆蓋 */
-      .hero-buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 1rem; /* 減少按鈕間隔 */
-        margin-top: 3rem;
-
-        .btn.course-btn {
-          margin: 0; /* 移除自動邊距，讓按鈕靠得更近 */
-        }
-      }
-    }
-
-    &-image {
-      flex: 1;
-      @include flex-center;
-    }
-  }
-
-  .hero-bg-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(231, 227, 227, 0.404); // 提高遮罩透明度
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  /* 圖片佔位符樣式 - 用於顯示預留的圖片位置 */
-  .image-placeholder {
-    width: 100%;
-    max-width: 500px;
-    height: 300px;
-    background: rgba($color-white, 0.1);
-    border-radius: 8px;
-    @include flex-center;
-    color: $color-white;
-    font-size: 1.2rem;
-  }
-
   /* 關於我們區域樣式 - 展示平台介紹和信息 */
   .about {
     margin: 0 auto; // 移除多餘的邊距
@@ -493,3 +373,6 @@ p {
     padding: 0.7rem 1rem;
   }
 }
+
+/* Hero 區域樣式 - 頁面頂部的主要宣傳區塊 */
+/* 已移至 components/Hero/Hero.scss，因此此處移除 */
