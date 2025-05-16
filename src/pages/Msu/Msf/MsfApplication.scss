@@ -97,15 +97,7 @@
     }
 
     p {
-      font-size: $font-size-xs;
-      margin-top: $spacing-md;
-      margin-bottom: $spacing-md;
-    }
-
-    span {
-      font-size: $font-size-xs;
-      margin-left: 0;
-      margin-bottom: $spacing-xxl;
+      margin: $spacing-md 0 $spacing-md 0; // 調整 p 的邊距
     }
   }
 }
