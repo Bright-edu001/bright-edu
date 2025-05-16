@@ -48,7 +48,7 @@ function Header() {
         <div className="logo">
           <a href="/" title="Bright Education 首頁">
             <img
-              src="https://imgur.com/0bP0auA.png"
+              src={`${process.env.PUBLIC_URL}/images/header/logo.webp`}
               className="logo-img responsive-img"
               alt="Bright Education Logo"
               width="150"
