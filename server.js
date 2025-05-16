@@ -11,8 +11,8 @@ app.use(compression({ level: 9 }));
 app.use(express.static(path.join(__dirname, "build")));
 
 // 支援 SPA 路由
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
