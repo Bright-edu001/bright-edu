@@ -6,6 +6,7 @@
   display: flex;
   gap: 2rem;
   margin-top: $spacing-xxl;
+  padding: 0;
 }
 
 // 主內容
@@ -13,14 +14,6 @@
   flex: 1;
   min-width: 0;
   padding: 0;
-}
-
-// 側邊欄
-.blog-detail-sidebar {
-  flex: 0 0 300px; // 設定固定寬度且不縮放
-  max-width: 300px; // 確保最大寬度
-  margin-right: 0rem;
-  margin-left: 5rem;
 }
 
 .blog-detail-categories {
@@ -110,10 +103,6 @@
     gap: 1.5rem;
     margin-top: $spacing-lg;
   }
-  .blog-detail-sidebar {
-    margin-left: 15rem;
-    margin-bottom: 2rem;
-  }
 
   .blog-detail-excerpt {
     margin-top: 2rem;
@@ -132,8 +121,4 @@
   }
 }
 @media screen and (max-width: 500px) {
-  .blog-detail-sidebar {
-    margin-right: 4.3rem;
-    margin-left: 4rem;
-  }
 }

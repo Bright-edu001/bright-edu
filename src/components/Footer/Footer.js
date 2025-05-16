@@ -16,7 +16,7 @@ function Footer() {
                   target="_blank"
                 >
                   <img
-                    src="https://icef-api-production.s3.eu-central-1.amazonaws.com/ias_material/001bG00000EAMX3QAP_badge.png"
+                    src={`${process.env.PUBLIC_URL}/images/footer/ICEF.webp`}
                     alt="ICEF認證徽章 - Bright Education"
                     width="120"
                     height="120"

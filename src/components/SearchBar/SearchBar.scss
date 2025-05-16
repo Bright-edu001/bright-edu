@@ -47,31 +47,39 @@
 
 // 側邊欄容器樣式
 .blog-detail-sidebar {
-  width: 300px;
+  flex: 0 0 300px;
+  max-width: 300px;
   background: #fafbfc;
   border-radius: 8px;
-  margin-right: 10rem;
-  padding: 0 1rem;
+
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   height: fit-content;
   overflow-x: visible;
 }
 
-// 響應式：螢幕寬度小於1024px 時，搜尋欄全寬且無陰影
+// 響應式調整（寬度小於 1024px）
 @media (max-width: 1024px) {
-  .blog-detail-searchbar {
-    width: 100%;
-    padding: 0.5rem 0.5rem;
+  .blog-detail-sidebar {
+    max-width: 800px;
+    margin: 0;
+    margin-left: 5rem;
+    margin-bottom: 1.5rem;
     box-shadow: none;
   }
-
+}
+// 響應式調整（寬度小於 850px）
+@media screen and (max-width: 850px) {
   .blog-detail-sidebar {
-    width: 100%;
-    margin: 0 auto;
-    margin-right: 2rem;
-    margin-bottom: 1.5rem;
-    padding: 0;
+    max-width: 600px;
+    margin-left: 5rem;
+    margin-bottom: 2rem;
     box-shadow: none;
+  }
+}
+// 響應式調整（寬度小於 500px）
+@media screen and (max-width: 500px) {
+  .blog-detail-sidebar {
+    margin: 0;
   }
 }
 
