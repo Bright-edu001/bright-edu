@@ -50,7 +50,27 @@
     <link rel="preload" href="https://imgur.com/MJbcBPV.png" as="image" />
     <link rel="canonical" href="https://bright-edu.com/" />
     <!-- Preload hero banner image for LCP optimization -->
-    <link rel="preload" as="image" href="%PUBLIC_URL%/images/banner/banner1.webp" />
+    <link
+      rel="preload"
+      as="image"
+      href="%PUBLIC_URL%/images/banner/banner1.webp"
+    />
+    <!-- Prefetch subsequent hero banners during idle to reduce rotation delays -->
+    <link
+      rel="prefetch"
+      as="image"
+      href="%PUBLIC_URL%/images/banner/banner2.webp"
+    />
+    <link
+      rel="prefetch"
+      as="image"
+      href="%PUBLIC_URL%/images/banner/banner3.webp"
+    />
+    <link
+      rel="prefetch"
+      as="image"
+      href="%PUBLIC_URL%/images/banner/banner4.webp"
+    />
     <meta property="og:locale" content="zh_TW" />
     <meta property="og:type" content="website" />
     <meta
