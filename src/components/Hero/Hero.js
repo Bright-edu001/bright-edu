@@ -2,10 +2,42 @@ import React, { useState, useEffect } from "react";
 import "./Hero.scss";
 
 const heroImages = [
-  `${process.env.PUBLIC_URL}/images/banner/banner1.webp`,
-  `${process.env.PUBLIC_URL}/images/banner/banner2.webp`,
-  `${process.env.PUBLIC_URL}/images/banner/banner3.webp`,
-  `${process.env.PUBLIC_URL}/images/banner/banner4.webp`,
+  {
+    srcSet: [
+      `${process.env.PUBLIC_URL}/images/banner/banner1-480.webp 480w`,
+      `${process.env.PUBLIC_URL}/images/banner/banner1-768.webp 768w`,
+      `${process.env.PUBLIC_URL}/images/banner/banner1-1280.webp 1280w`,
+    ].join(", "),
+    src: `${process.env.PUBLIC_URL}/images/banner/banner1-1280.webp`,
+    alt: "Banner 1",
+  },
+  {
+    srcSet: [
+      `${process.env.PUBLIC_URL}/images/banner/banner2-480.webp 480w`,
+      `${process.env.PUBLIC_URL}/images/banner/banner2-768.webp 768w`,
+      `${process.env.PUBLIC_URL}/images/banner/banner2-1280.webp 1280w`,
+    ].join(", "),
+    src: `${process.env.PUBLIC_URL}/images/banner/banner2-1280.webp`,
+    alt: "Banner 2",
+  },
+  {
+    srcSet: [
+      `${process.env.PUBLIC_URL}/images/banner/banner3-480.webp 480w`,
+      `${process.env.PUBLIC_URL}/images/banner/banner3-768.webp 768w`,
+      `${process.env.PUBLIC_URL}/images/banner/banner3-1280.webp 1280w`,
+    ].join(", "),
+    src: `${process.env.PUBLIC_URL}/images/banner/banner3-1280.webp`,
+    alt: "Banner 3",
+  },
+  {
+    srcSet: [
+      `${process.env.PUBLIC_URL}/images/banner/banner4-480.webp 480w`,
+      `${process.env.PUBLIC_URL}/images/banner/banner4-768.webp 768w`,
+      `${process.env.PUBLIC_URL}/images/banner/banner4-1280.webp 1280w`,
+    ].join(", "),
+    src: `${process.env.PUBLIC_URL}/images/banner/banner4-1280.webp`,
+    alt: "Banner 4",
+  },
 ];
 
 function Hero() {
@@ -21,7 +53,16 @@ function Hero() {
   return (
     <section className="hero">
       {" "}
-      <img className="hero-img" src={heroImages[heroIndex]} alt="Hero banner" />
+      <img
+        className="hero-img"
+        srcSet={heroImages[heroIndex].srcSet}
+        sizes="(max-width: 600px) 480px, (max-width: 900px) 768px, 1280px"
+        src={heroImages[heroIndex].src}
+        alt={heroImages[heroIndex].alt}
+        width="1280"
+        height="450"
+        loading="eager"
+      />
       <div className="hero-bg-mask" />
       <div className="container container-aligned">
         <div className="hero-content">
