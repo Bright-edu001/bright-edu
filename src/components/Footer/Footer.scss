@@ -161,13 +161,14 @@
   /* 頁腳底部區域樣式 */
   .footer-bottom {
     text-align: center;
-    margin-left: 25rem;
+    margin-left: 33rem;
     margin-top: $spacing-xxl;
 
     p {
       margin: 0;
       color: $color-white;
       font-size: 18px;
+      text-align: left;
     }
   }
 }
@@ -269,8 +270,11 @@
   }
 }
 @media screen and (max-width: 500px) {
+  .footer .footer-content {
+    margin-bottom: 0;
+  }
   .footer .footer-bottom {
-    margin-left: 3rem;
+    margin-left: 6rem;
     margin-right: 3.5rem;
   }
 }

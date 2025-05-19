@@ -29,7 +29,7 @@ function AboutUic() {
       <ImageTextSection
         title="伊利諾大學芝加哥分校"
         subtitle="UIC 美國商學院"
-        imageUrl="https://imgur.com/JD3FIrt.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC 新款logo (RGB-04)-01.webp`}
         imageAlt="UIC 美國商學院"
       />
 

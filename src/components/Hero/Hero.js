@@ -59,7 +59,7 @@ function Hero() {
       <img
         className="hero-img"
         srcSet={heroImages[heroIndex].srcSet}
-        sizes="(max-width: 600px) 480px, (max-width: 900px) 768px, 1280px"
+        sizes="(max-width: 600px) 480px, (max-width: 1024px) 768px, 1280px"
         src={heroImages[heroIndex].src}
         alt={heroImages[heroIndex].alt}
         width="1280"

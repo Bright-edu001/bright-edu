@@ -6,15 +6,16 @@
 
   .container {
     display: flex;
+    flex-direction: column-reverse; // 垂直排列
     align-items: center; // 垂直居中對齊
     max-width: $container-max-width; // 使用變數設定最大寬度
     margin: 0 auto; // 水平居中
-    padding-top: 2rem; /* 增加此行，調整數值以符合需求 */
-    padding-bottom: 4rem;
+    padding-top: 1rem; /* 增加此行，調整數值以符合需求 */
 
     .text-content {
       flex: 1; // 移除 position 和 left，改用 flex-basis 或 flex-grow 控制寬度
-      margin-left: 18rem;
+      margin-left: 1rem;
+      margin-top: 1rem;
       h2,
       h3 {
         @include value-style; // 使用 mixin 定義的標題樣式
@@ -34,7 +35,6 @@
 
     .image-content {
       flex: 0.8 1 0; // 移除 position 和 right，改用 flex-basis 或 flex-grow 控制寬度
-      margin-right: 20rem;
     }
     img {
       width: 100%; // 確保圖片不超過容器寬度
@@ -47,7 +47,6 @@
   .image-text-section {
     height: auto; // 取消固定高度
     .container {
-      flex-direction: row; // 垂直排列
       padding-top: 1rem; // 調整上方間距
       .image-content {
         margin-right: 0;
