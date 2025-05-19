@@ -71,6 +71,14 @@
       as="image"
       href="%PUBLIC_URL%/images/banner/banner4.webp"
     />
+    <!-- Preload LCP hero banner with srcset for最佳化 LCP -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/banner/banner1-1280.webp"
+      imagesrcset="/images/banner/banner1-480.webp 480w, /images/banner/banner1-768.webp 768w, /images/banner/banner1-1280.webp 1280w"
+      imagesizes="(max-width: 600px) 480px, (max-width: 900px) 768px, 1280px"
+    />
     <meta property="og:locale" content="zh_TW" />
     <meta property="og:type" content="website" />
     <meta

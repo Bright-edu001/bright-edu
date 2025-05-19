@@ -50,6 +50,9 @@ function Hero() {
     return () => clearInterval(interval);
   }, []);
 
+  // 判斷是否為第一張 Banner
+  const isFirst = heroIndex === 0;
+
   return (
     <section className="hero">
       {" "}
@@ -61,7 +64,8 @@ function Hero() {
         alt={heroImages[heroIndex].alt}
         width="1280"
         height="450"
-        loading="eager"
+        loading={isFirst ? "eager" : "lazy"}
+        fetchpriority={isFirst ? "high" : undefined}
       />
       <div className="hero-bg-mask" />
       <div className="container container-aligned">
