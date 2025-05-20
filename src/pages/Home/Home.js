@@ -2,6 +2,7 @@ import "./Home.scss";
 import Hero from "../../components/Hero/Hero";
 import ActionButton from "../../components/ActionButton/ActionButton";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
+import RankingNumberFlip from "../../components/RankingNumberFlip/RankingNumberFlip";
 import { enrollmentEvents, news } from "../../data/blog";
 
 function Home() {
@@ -39,17 +40,17 @@ function Home() {
               <ul>
                 <li>
                   <span className="ranking-title">Top</span>
-                  <span className="ranking-number">1</span>
+                  <RankingNumberFlip number={1} start={100} />
                   <p>The largest research university in Chicago</p>
                 </li>
                 <li>
                   <span className="ranking-title">Top</span>
-                  <span className="ranking-number">39</span>
+                  <RankingNumberFlip number={39} start={100} />
                   <p>Among Top Public School in the nation</p>
                 </li>
                 <li>
                   <span className="ranking-title">Top</span>
-                  <span className="ranking-number">80</span>
+                  <RankingNumberFlip number={80} start={100} />
                   <p>U.S. NEWS National Universities</p>
                 </li>
               </ul>
@@ -59,17 +60,17 @@ function Home() {
               <ul>
                 <li>
                   <span className="ranking-title">Top</span>
-                  <span className="ranking-number">19</span>
+                  <RankingNumberFlip number={19} start={100} />
                   <p>TFE Times Master's of Finance</p>
                 </li>
                 <li>
                   <span className="ranking-title">Top</span>
-                  <span className="ranking-number">30</span>
+                  <RankingNumberFlip number={30} start={100} />
                   <p>US News & World Report Top Public Schools</p>
                 </li>
                 <li>
                   <span className="ranking-title">Top</span>
-                  <span className="ranking-number">63</span>
+                  <RankingNumberFlip number={63} start={100} />
                   <p>Among Top Public School in the nation</p>
                 </li>
               </ul>

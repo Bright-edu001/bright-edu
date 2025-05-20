@@ -36,8 +36,10 @@
   text-align: left;
   ul {
     margin-left: 0;
-    padding-left: 15rem;
+    padding-left: 1.5rem;
     margin-bottom: $spacing-xl;
+    margin-top: $spacing-md;
+    color: $color-brown-dark;
   }
 }
 
@@ -96,6 +98,7 @@
   }
   ul {
     @include standard-list;
+    margin-top: 1rem;
     li {
       @include list-item;
     }
@@ -267,6 +270,7 @@
   border-top: 1px solid $color-footer;
   h2 {
     @include section-header;
+    margin-top: 1rem;
   }
 
   &-intro {
