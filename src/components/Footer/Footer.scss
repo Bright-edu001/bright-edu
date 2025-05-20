@@ -34,7 +34,7 @@
 
         .section-title {
           margin-bottom: $spacing-sm;
-          color: $color-white;
+          color: $color-brown-dark;
           font-size: 18px;
           font-weight: bold;
           width: 180px;
@@ -58,7 +58,7 @@
             margin-bottom: 8px;
 
             a {
-              color: $color-white;
+              color: $color-brown-dark;
               font-size: 16px;
               text-decoration: none;
 
@@ -76,13 +76,14 @@
         flex-direction: column;
         align-items: flex-start;
         margin-right: -9rem;
+        margin-top: -0.5rem;
 
         .contact {
           margin-bottom: 20px;
 
           .contact-title {
             margin-bottom: 10px;
-            color: $color-white;
+            color: $color-brown-dark;
             font-size: 18px;
             font-weight: bold;
             text-align: left;
@@ -95,7 +96,7 @@
             width: 100%;
             max-width: 180px;
             margin-bottom: 5px;
-            color: $color-white;
+            color: $color-brown-dark;
             font-size: 16px;
             font-style: normal;
             text-align: left;
@@ -114,10 +115,18 @@
           align-self: flex-start;
           margin-top: -1.5rem;
 
-          a img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
+          a {
+            .phone-icon {
+              width: 24px;
+              height: 24px;
+              object-fit: contain;
+            }
+            .line-icon {
+              width: 30px;
+              height: 30px;
+              object-fit: contain;
+              margin-top: -3px;
+            }
           }
         }
       }
@@ -127,7 +136,6 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        margin-left: 8rem;
 
         .footer-brand img {
           max-width: 120px;
@@ -144,7 +152,7 @@
         margin-right: 0;
 
         a {
-          color: $color-white;
+          color: $color-brown-dark;
           font-size: 18px;
           font-weight: bold;
           text-decoration: none;
@@ -166,7 +174,7 @@
 
     p {
       margin: 0;
-      color: $color-white;
+      color: $color-brown-dark;
       font-size: 18px;
       text-align: left;
     }
@@ -183,7 +191,7 @@
     max-width: 150px; /* 限制最大寬度 */
   }
   .footer .footer-bottom {
-    margin-left: 13rem; /* 移除左邊距 */
+    margin-left: 12rem; /* 移除左邊距 */
     margin-top: $spacing-xxl;
   }
 
@@ -195,7 +203,7 @@
 }
 
 /* 響應式設計 - 針對小螢幕 */
-@media (max-width: 700px) {
+@media (max-width: 850px) {
   .footer {
     padding: 20px 0;
 
@@ -229,7 +237,7 @@
           align-items: center; /* 置中內部元素 */
 
           .contact {
-            margin-bottom: 15px;
+            margin-bottom: 0.2rem;
             text-align: center; /* 置中聯絡資訊 */
 
             .contact-title,

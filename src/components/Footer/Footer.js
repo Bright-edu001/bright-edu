@@ -118,10 +118,25 @@ function Footer() {
                   aria-label="撥打電話 07-7227407"
                 >
                   <img
-                    src="https://imgur.com/vfi3sBo.png"
-                    alt="whatsapp 圖示"
+                    className="phone-icon"
+                    src={`/images/footer/phone.png`}
+                    alt="電話圖示"
                     width="24"
                     height="24"
+                    loading="lazy"
+                  />
+                </a>
+                <a
+                  href="https://lin.ee/1WTpxdf"
+                  title="聯絡我們的LINE"
+                  aria-label="聯絡我們的LINE"
+                >
+                  <img
+                    className="line-icon"
+                    src={`/images/footer/line.png`}
+                    alt="line 圖示"
+                    width="30"
+                    height="30"
                     loading="lazy"
                   />
                 </a>
