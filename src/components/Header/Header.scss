@@ -3,7 +3,7 @@
 
 /* 頁頭整體樣式 */
 .header {
-  background: $color-background-main;
+  background: #f6f6f9;
   opacity: 100%;
   box-shadow: $shadow-sm;
   padding: $spacing-sm 0;
@@ -88,7 +88,7 @@
         position: absolute;
         top: 150%;
         left: -0.8rem;
-        background: $color-background-main;
+        background: #f6f6f9;
         box-shadow: $shadow-sm;
         min-width: 140px;
         display: none;
@@ -102,6 +102,7 @@
           gap: $spacing-sm;
           padding: $spacing-sm;
           overflow-x: visible;
+          text-align: left;
         }
 
         li {
@@ -149,6 +150,7 @@
               display: flex;
               padding: 0;
               max-height: 800px;
+              text-align: left;
             }
           }
 
@@ -157,18 +159,19 @@
           .dropdown-menu.chicago-menu {
             position: absolute;
             top: -130%; // 根據需要調整垂直位置
-            left: 89%;
+            left: 88%;
             margin-left: $spacing-sm; // 與父選單的間距
             min-width: 140px; // 確保有最小寬度
 
             &.show {
               display: flex;
-              padding: $spacing-sm; // 恢復內邊距
+              padding: 0.5rem; // 恢復內邊距
               max-height: 800px;
             }
           }
           .dropdown-menu.chicago-menu {
             top: -100%; // 根據需要調整垂直位置
+            text-align: left;
           }
           .dropdown-menu.east-lansing-menu {
             position: absolute;
@@ -176,10 +179,12 @@
             left: 89%;
             margin-left: $spacing-sm; // 與父選單的間距
             min-width: 140px; // 確保有最小寬度
+            text-align: left;
 
             &.show {
               display: flex;
               padding: $spacing-sm; // 恢復內邊距
+              padding-left: 0;
               max-height: 800px;
             }
           }
@@ -193,7 +198,12 @@
         justify-content: space-between;
         cursor: pointer;
         margin-bottom: -$spacing-sm;
-        margin-left: 0.5rem;
+        text-align: left;
+
+        .areas-link {
+          padding-left: 0; // 內部連結不再額外縮排
+          margin-right: 1.4rem;
+        }
 
         .dropdown-arrow {
           transition: $transition-normal;
@@ -215,7 +225,7 @@
 
     /* 為 UICSub 子選單添加特定樣式 */
     .dropdown-menu li .dropdown-menu li a {
-      text-align: center;
+      text-align: left;
     }
 
     /* 確保帶有子選單的項目也水平置中 */
@@ -223,9 +233,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: left;
 
       .dropdown-toggle-link {
-        text-align: center;
+        text-align: left;
         justify-content: center;
       }
     }
@@ -234,7 +245,7 @@
     .dropdown-toggle-link {
       align-items: center;
       cursor: pointer;
-      margin-left: 1rem;
+
       display: flex;
       justify-content: space-between;
 

@@ -35,7 +35,7 @@ function Home() {
       <section className="features" id="school-rankings" aria-label="學校排名">
         <div className="container">
           <div className="feature-cards">
-            <div className="feature-card">
+            <div className="feature-card uic">
               <h3>UIC Rankings</h3>
               <ul>
                 <li>
@@ -55,7 +55,7 @@ function Home() {
                 </li>
               </ul>
             </div>
-            <div className="feature-card">
+            <div className="feature-card msu">
               <h3>MSU Rankings</h3>
               <ul>
                 <li>

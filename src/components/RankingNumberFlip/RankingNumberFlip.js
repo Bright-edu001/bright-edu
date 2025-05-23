@@ -18,7 +18,7 @@ function RankingNumberFlip({ number, duration = 10000, start = 99 }) {
     function getFrameDuration(progress) {
       // 前期快，後期慢（ease-out）
       // progress: 0~1
-      return (duration * (0.2 + 0.8 * Math.pow(progress, 2))) / totalFrames;
+      return (duration * (0.3 + 0.7 * Math.pow(progress, 2))) / totalFrames;
     }
     function animate() {
       frame++;

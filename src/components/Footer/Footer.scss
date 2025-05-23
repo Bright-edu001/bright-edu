@@ -3,7 +3,7 @@
 
 /* 頁腳整體樣式 */
 .footer {
-  background: $color-footer;
+  background: #f6f6f9;
   padding: 40px 0;
 
   /* 容器樣式 - 控制內容寬度與邊距 */
@@ -34,7 +34,7 @@
 
         .section-title {
           margin-bottom: $spacing-sm;
-          color: $color-brown-dark;
+          color: #1c184a;
           font-size: 18px;
           font-weight: bold;
           width: 180px;
@@ -58,7 +58,7 @@
             margin-bottom: 8px;
 
             a {
-              color: $color-brown-dark;
+              color: #717185;
               font-size: 16px;
               text-decoration: none;
 
@@ -83,7 +83,7 @@
 
           .contact-title {
             margin-bottom: 10px;
-            color: $color-brown-dark;
+            color: #1c184a;
             font-size: 18px;
             font-weight: bold;
             text-align: left;
@@ -96,7 +96,7 @@
             width: 100%;
             max-width: 180px;
             margin-bottom: 5px;
-            color: $color-brown-dark;
+            color: #717185;
             font-size: 16px;
             font-style: normal;
             text-align: left;
@@ -152,7 +152,7 @@
         margin-right: 0;
 
         a {
-          color: $color-brown-dark;
+          color: #1c184a;
           font-size: 18px;
           font-weight: bold;
           text-decoration: none;
@@ -174,7 +174,7 @@
 
     p {
       margin: 0;
-      color: $color-brown-dark;
+      color: #1c184a;
       font-size: 18px;
       text-align: left;
     }

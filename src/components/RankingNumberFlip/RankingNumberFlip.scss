@@ -8,7 +8,7 @@
 
 .ranking-number-flip .flip-inner {
   display: inline-block;
-  color: #d94f21;
+  color: #c71432;
   font-weight: bold;
   font-size: 2em;
   padding: 0.1em 0.5em;
@@ -27,3 +27,7 @@
 }
 
 /* 移除 perspectiveUp keyframes */
+
+.feature-card.msu .ranking-number-flip .flip-inner {
+  color: #19453c !important;
+}
