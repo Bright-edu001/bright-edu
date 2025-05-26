@@ -35,7 +35,17 @@ function Home() {
       <section className="features" id="school-rankings" aria-label="學校排名">
         <div className="container">
           <div className="feature-cards">
+            <img
+              className="feature-logo-img-uic"
+              src="/images/home/UIC - 網站LOGO - 03.webp"
+              alt="UIC Logo"
+            />
             <div className="feature-card uic">
+              <img
+                className="feature-bg-img"
+                src="/images/home/網站 - Rankings (透明框)_01.webp"
+                alt="UIC背景圖"
+              />
               <h3>UIC Rankings</h3>
               <ul>
                 <li>
@@ -55,7 +65,27 @@ function Home() {
                 </li>
               </ul>
             </div>
+            <img
+              className="feature-logo-img-msu"
+              src="/images/home/Michigan State University_01.webp"
+              alt="MSU Logo"
+            />
             <div className="feature-card msu">
+              <img
+                className="feature-bg-img"
+                src={`/images/home/網站 - Rankings (透明框)_02.webp`}
+                alt="MSU背景圖"
+                style={{
+                  opacity: 0.55,
+                  position: "absolute",
+                  left: 0,
+                  top: 0,
+                  width: "100%",
+                  height: "100%",
+                  zIndex: 0,
+                  pointerEvents: "none",
+                }}
+              />
               <h3>MSU Rankings</h3>
               <ul>
                 <li>

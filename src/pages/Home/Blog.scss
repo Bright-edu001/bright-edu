@@ -101,6 +101,7 @@
   font-weight: 600;
   margin-bottom: 0.5rem;
   text-align: left;
+  color: #1c184a;
 }
 
 .blog-card-excerpt {
@@ -124,9 +125,9 @@
   margin-bottom: $spacing-xxl;
   &:hover,
   &:focus {
-    background: $color-accent-gold;
-    color: $color-brown-dark;
-    border-color: $color-accent-gold;
+    background: #1c184a;
+    color: $color-white;
+    border-color: #1c184a;
   }
 }
 

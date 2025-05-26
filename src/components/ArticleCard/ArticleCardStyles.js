@@ -95,7 +95,7 @@ export const StyledTitle = styled.h3`
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0 0 0.5rem;
-  color: #f5bf00;
+  color: #1c184a;
 `;
 
 export const StyledExcerpt = styled.p`

@@ -21,7 +21,7 @@
     font-size: $font-size-xxl;
     margin-bottom: 1rem;
     font-weight: 900;
-    color: $color-brown-dark;
+    color: #1c184a;
   }
   ul {
     list-style: none;
@@ -38,7 +38,7 @@
 .blog-detail-category-btn {
   background: none;
   border: none;
-  color: $color-footer;
+  color: #1c184a;
   font-size: $font-size-lg;
   font-weight: 700;
   cursor: pointer;
@@ -48,13 +48,13 @@
 
 .blog-detail-category-label {
   font-size: 1.5rem;
-  color: $color-footer;
+  color: #1c184a;
   font-weight: 500;
   letter-spacing: 0.5px;
   transition: color 0.1s ease-in-out;
   cursor: pointer;
   &:hover {
-    color: $color-accent-gold;
+    color: #c71432;
     text-decoration: underline;
   }
 }
@@ -71,12 +71,12 @@
   display: flex;
   justify-content: center;
   font-size: $font-size-xl;
-  color: $color-footer;
+  color: #1c184a;
   margin-top: $spacing-lg;
   margin-bottom: 1rem;
   margin-left: 35rem;
   &:hover {
-    color: $color-accent-gold;
+    color: #c71432;
     transform: scale(1.05);
     transition: all 0.1s ease-in-out;
   }
