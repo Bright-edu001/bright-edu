@@ -9,7 +9,7 @@
     li {
       text-align: left;
       @include body-large;
-      color: $color-footer;
+      color: #19453c;
       margin-top: $spacing-xl;
     }
   }
@@ -101,6 +101,29 @@
     }
   }
 }
+
+// Specific overrides for ApplicationForm when inside MsfApplication
+.msf-application {
+  // Target the form element rendered by ApplicationForm,
+  // assuming ApplicationForm is a direct child of .msf-application
+  > form {
+    input,
+    textarea {
+      border-color: #19453c !important; // Change border color
+    }
+
+    button {
+      background-color: #19453c !important; // Change background color
+      // The original button has no border, so no need to change border-color here.
+      // The hover state for the button uses a different background (#1c184a),
+      // so this change will only affect the default state.
+    }
+    h2 {
+      color: #19453c !important; // Change heading color
+    }
+  }
+}
+
 @media screen and (max-width: 500px) {
   .msf-application-list ul {
     padding-left: 1rem;

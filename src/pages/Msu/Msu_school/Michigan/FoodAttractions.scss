@@ -2,16 +2,15 @@
 @import "../../../../styles/mixins";
 
 .attractions-section {
-  max-width: 900px;
   margin: 0 auto;
   padding: 32px 0 0 0;
-  border-bottom: 1px solid $color-footer;
+  border-bottom: 1px solid #19453c;
 }
 
 .attractions-title {
   text-align: center;
-  color: $color-footer;
-  font-size: $font-size-lg;
+  color: #19453c;
+  font-size: $font-size-xxl;
   font-weight: 700;
   letter-spacing: 2px;
   margin-bottom: 32px;
@@ -19,17 +18,16 @@
 
 .attractions-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
   gap: 32px 40px;
-  margin-left: 23rem;
-  margin-right: 8rem;
   margin-bottom: $spacing-xxl;
 }
 // 平板瀏覽時調整為兩欄
 @media (max-width: 1024px) {
   .attractions-list {
-    margin-left: 0rem;
-    margin-right: 0rem;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 2rem 3rem;
   }
 }
 

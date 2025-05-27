@@ -31,12 +31,13 @@
     .stats-card-school {
       background: $color-white;
       @include card-border;
+      border: 2px solid #19453c;
       position: relative;
       margin-bottom: 6rem;
 
       h3 {
         @include heading-medium;
-        color: $color-brown-dark;
+        color: #19453c;
         text-align: left; //向左對齊
       }
 
@@ -62,13 +63,13 @@
 
           .value {
             @include value-style;
-            color: $color-accent-gold;
+            color: #19453c;
           }
           .sub-list {
             @include value-style;
             font-size: $font-size-md;
             font-weight: 400;
-            color: $color-accent-gold;
+            color: #19453c;
             list-style: disc;
             margin-top: 0;
             padding-left: 20px; // 添加左側內邊距使圓點可見
@@ -105,7 +106,7 @@
 
       h3 {
         @include heading-medium;
-        color: $color-accent-gold;
+        color: #19453c;
         margin-bottom: $spacing-md;
       }
 
@@ -131,7 +132,7 @@
 
         .funding-amount {
           @include heading-medium;
-          color: $color-footer;
+          color: #19453c;
           font-weight: bold;
         }
 
@@ -141,7 +142,7 @@
         }
 
         .facility p {
-          color: $color-footer;
+          color: #19453c;
           font-weight: 700;
           font-size: $font-size-lg;
           margin: $spacing-sm 0;
@@ -155,7 +156,7 @@
           margin-left: $spacing-md; // 調整左側間距
 
           li {
-            color: $color-footer;
+            color: #19453c;
             font-weight: 700;
             font-size: $font-size-xl;
             position: relative;
@@ -165,7 +166,7 @@
           }
         }
         .research-centers p {
-          color: $color-footer;
+          color: #19453c;
           font-weight: 700;
           font-size: $font-size-lg;
           margin: 0;
@@ -178,13 +179,12 @@
   .global-impact {
     h3 {
       @include heading-medium;
-      color: $color-accent-gold;
+      color: #19453c;
       margin-bottom: $spacing-xl;
     }
-    p {
-      margin: 0 auto;
-      margin-left: 18rem;
-    }
+  }
+  .contribution-content {
+    margin: 0 2rem;
   }
   .global-impact {
     h3 {
@@ -193,9 +193,10 @@
     .impact-list {
       padding-left: $spacing-lg;
       text-align: left;
-      color: $color-footer;
+      color: #19453c;
       font-weight: 700;
-      margin-left: 17.5rem;
+      margin-left: 12rem;
+      margin-top: 1rem;
 
       li {
         margin-bottom: 1rem; // 增加 li 元素的上下間隔
@@ -207,7 +208,7 @@
     text-align: left;
     color: $color-brown-dark;
     font-weight: 700;
-    margin-left: 17.5rem;
+    margin-left: 12rem;
     font-size: $font-size-xs;
     margin-top: 0;
 

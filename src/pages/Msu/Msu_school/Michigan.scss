@@ -8,11 +8,12 @@
   }
   .michigan-intro {
     margin: $spacing-xxl $spacing-xxl;
-    border-bottom: 1px solid $color-footer;
+    border-bottom: 1px solid #19453c;
     p {
       margin: 8rem 8rem 8rem 9rem;
       padding: 0;
       text-align: left;
+      color: $color-text-secondary;
       /* 與標題、內容對齊 */
     }
     h3 {
@@ -22,10 +23,8 @@
     .intro-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem 2rem; // 行間距40px，欄間距80px
-      margin-top: $spacing-xxl;
-      margin-bottom: $spacing-xxl;
-      margin-left: $spacing-xxl;
+      gap: 3rem 2rem; // 行間距40px，欄間距80px
+      margin: $spacing-xxl $spacing-xxl; // 上下各 60px，左右各 20px
 
       .intro-col {
         // 預設不置中
@@ -36,22 +35,17 @@
         min-width: 220px;
         margin-bottom: 0;
         h4 {
-          color: $color-footer; // 圖片中的棕色
+          color: #19453c; // 圖片中的棕色
           font-size: 1.5rem;
           font-weight: 700;
           margin-bottom: $spacing-sm;
           text-align: left;
         }
         p {
-          color: $color-brown-dark;
+          color: $color-text-secondary;
           font-size: 1rem;
           margin: 0;
         }
-      }
-      // 只針對第一行的三個欄位置中
-      .intro-col:nth-child(-n + 3) {
-        text-align: center;
-        align-items: center;
       }
     }
   }
@@ -64,7 +58,7 @@
 
     h3 {
       font-size: 1.8rem;
-      color: #5d4037; // 圖片中的棕色
+      color: #19453c; // 圖片中的棕色
       margin-bottom: 30px; // 保持間距
     }
 
@@ -97,7 +91,7 @@
       h4 {
         font-size: 1.2rem;
         font-weight: 900;
-        color: $color-footer; // 棕色
+        color: #19453c; // 棕色
         margin-bottom: 5px; // 標題下方間距
         text-align: left; // 文字左對齊
         width: 100%; // 確保標題佔滿寬度以便左對齊
@@ -106,7 +100,7 @@
       p {
         font-size: 1rem;
         font-weight: 700;
-        color: $color-brown-dark; // 灰色
+        color: $color-text-secondary; // 灰色
         text-align: left; // 文字左對齊
         width: 100%; // 確保段落佔滿寬度以便左對齊
         margin-right: $spacing-xxl; // 右側間距
@@ -114,40 +108,44 @@
     }
   }
   .traffic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 0 $spacing-xxl; // 上下各 60px，左右各 20px
-    border-bottom: 1px solid $color-footer;
+    border-bottom: 1px solid #19453c;
     h3 {
-      color: $color-brown-dark; // 圖片中的棕色
+      color: $color-text-secondary; // 圖片中的棕色
     }
     ul {
-      color: $color-footer; // 圖片中的棕色
-      padding: $spacing-lg $spacing-xxl;
+      color: #19453c; // 圖片中的棕色
       text-align: left;
       font-size: $font-size-xl;
       font-weight: 700;
-      margin-left: 10rem;
+      margin-bottom: 2rem;
       li {
         margin-top: $spacing-lg;
       }
     }
   }
   .city-features {
+    display: flex;
+    flex-direction: column;
     margin: 0 $spacing-xxl; // 上下各 60px，左右各 20px
     h3 {
-      color: $color-brown-dark; // 圖片中的棕色
+      color: $color-text-secondary; // 圖片中的棕色
     }
     ul {
-      margin-top: $spacing-xl;
       display: grid;
       grid-template-columns: repeat(3, 1fr); // 三欄佈局
-      gap: $spacing-lg; // 欄間距
-      color: $color-footer; // 圖片中的棕色
+      justify-items: start;
+      gap: $spacing-xl; // 欄間距
+      color: #19453c; // 圖片中的棕色
       font-size: $font-size-xl;
       font-weight: 700;
-      margin-left: $spacing-xxl; // 左側間距
-      margin-bottom: $spacing-xxl; // 下側間距
+      margin: $spacing-xl auto; // 上下各 40px
+
       li {
-        margin-top: $spacing-lg; // 上側間距
+        text-align: left;
       }
     }
   }

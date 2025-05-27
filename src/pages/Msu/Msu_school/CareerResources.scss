@@ -5,25 +5,25 @@
   .career-resources {
     h3 {
       @include heading-large;
-      color: $color-accent-gold;
+      color: #19453c;
       margin-bottom: $spacing-md;
       margin-top: $spacing-xxl;
     }
     h4 {
       @include body-large;
-      color: $color-accent-gold;
+      color: #19453c;
       margin-bottom: $spacing-lg;
     }
   }
   .career-services {
     h3 {
       @include body-large;
-      color: $color-accent-gold;
+      color: #19453c;
       margin-top: $spacing-xxl;
     }
     h4 {
       @include body-large;
-      color: $color-footer;
+      color: #19453c;
       margin-bottom: $spacing-lg;
       text-align: left;
       margin-left: 10rem;
@@ -34,7 +34,7 @@
       @include value-style;
       padding: $spacing-lg 16rem;
       text-align: left;
-      color: $color-brown-light;
+      color: #19453c;
       li {
         margin-top: $spacing-md;
       }
@@ -43,13 +43,13 @@
   .employer-engagement {
     h3 {
       @include body-large;
-      color: $color-accent-gold;
+      color: #19453c;
       margin-top: $spacing-xxl;
       margin-bottom: $spacing-lg;
     }
     h4 {
       @include body-large;
-      color: $color-footer;
+      color: #19453c;
       margin-bottom: $spacing-lg;
       text-align: left;
       margin-left: 10rem;
@@ -74,7 +74,7 @@
   .career-virtual {
     h3 {
       @include body-large;
-      color: $color-accent-gold;
+      color: #19453c;
       margin-top: $spacing-xxl;
       margin-bottom: $spacing-lg;
     }
@@ -87,7 +87,7 @@
       gap: $spacing-lg;
       h5 {
         @include body-large;
-        color: $color-footer;
+        color: #19453c;
         margin-bottom: $spacing-lg;
         text-align: left;
         margin-left: 5rem;

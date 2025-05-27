@@ -3,8 +3,8 @@
 
 .transportation-section {
   margin: $spacing-xl auto;
-  max-width: 1200px;
-  color: $color-brown-dark;
+  padding: 1rem;
+  color: $color-text-secondary;
 }
 
 .transportation-block {
@@ -16,7 +16,7 @@
   font-size: $font-size-xl;
   font-weight: 700;
   margin-bottom: $spacing-md;
-  color: $color-footer;
+  color: #19453c;
 }
 
 .transportation-subblock {
@@ -26,7 +26,7 @@
     font-weight: 900;
     font-size: $font-size-md;
     margin-bottom: $spacing-xl;
-    color: $color-brown-dark;
+    color: $color-text-secondary;
   }
   ul {
     margin: $spacing-md 0 0 $spacing-md;
@@ -36,11 +36,21 @@
     flex-wrap: wrap; // 換行
     justify-content: space-evenly; // 兩端對齊
     gap: $spacing-lg; // li 之間的間距加大
+    text-align: left;
     li {
-      color: $color-accent-gold;
+      color: #19453c;
       font-size: $font-size-lg;
       font-weight: 700;
       margin-bottom: $spacing-xl;
+      text-align: left;
+    }
+    @media screen and (max-width: 500px) {
+      flex-direction: column; // 手機響應式，改為垂直排列
+      align-items: center; // 中心對齊
+      li {
+        text-align: center; // 手機上居中對齊
+        margin-bottom: $spacing-md; // 調整間距
+      }
     }
   }
 }

@@ -69,7 +69,7 @@ export const StyledApplicationForm = styled.form`
 `;
 
 // 申請條件與標題
-export const StyledSectionTitle = styled.div`
+export const StyledSectionTitle = styled.h2`
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;

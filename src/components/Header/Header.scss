@@ -319,7 +319,7 @@
       top: 100%;
       left: 0;
       width: 100%;
-      background: $color-background-main;
+      background: #f6f6f9;
       display: none;
       padding: $spacing-sm;
       box-shadow: $shadow-sm;
@@ -361,10 +361,6 @@
             padding: 0; /* 清除內邊距 */
             overflow: hidden; /* 隱藏溢出內容 */
             transition: max-height 0.3s ease; /* 添加高度過渡效果 */
-            background: lighten(
-              $color-background-main,
-              5%
-            ); /* 稍微淺色背景以區分層次 */
 
             &.show {
               max-height: 800px; /* 展開時的最大高度 */
@@ -387,10 +383,6 @@
                 left: auto;
                 margin-left: 1rem; // 在手機版中，子選單縮進顯示
                 width: calc(100% - 2rem);
-                background: lighten(
-                  $color-background-main,
-                  8%
-                ); // 再淺一點以區分層次
               }
 
               // 確保移動版子選單樣式一致

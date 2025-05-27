@@ -4,52 +4,62 @@
 // 新增自定義混合類
 @mixin section-container {
   margin: $spacing-xxl auto;
-  padding: $spacing-lg $spacing-xxl;
 }
 
 @mixin gold-heading {
   @include body-large;
-  color: $color-accent-gold;
+  color: #19453c;
 }
 
 @mixin footer-heading {
   @include body-large;
-  color: $color-footer;
+  color: #19453c;
 }
 
 @mixin standard-list {
   text-align: left;
-  margin-left: 0;
-  padding-left: 15rem;
-  margin-bottom: $spacing-xl;
 }
 
 @mixin list-item {
   @include heading-large;
-  color: $color-brown-dark;
+  color: $color-text-secondary;
   font-size: $font-size-lg;
+  margin: $spacing-md 0;
 }
 
 // 使用混合類重構樣式
 .ms-master-intro {
   @include section-container;
-  text-align: left;
+  text-align: left; // Keep or change to center if p text lines should be centered
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    font-size: 20px;
+    font-weight: 500;
+    // text-align: center; // Uncomment if p text lines should be centered
+  }
   ul {
-    margin-left: 0;
-    padding-left: 1.5rem;
-    margin-bottom: $spacing-xl;
-    margin-top: $spacing-md;
-    color: $color-brown-dark;
+    display: flex;
+    flex-direction: column;
+    margin: $spacing-lg 0;
+    color: #19453c;
+    font-size: 24px;
+    font-weight: 700;
   }
 }
 
 .ms-master-features {
   @include section-container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   h3 {
     @include gold-heading;
   }
   ul {
-    @include standard-list;
+    @include standard-list; // standard-list has text-align: left
+    // li text will be left-aligned. ul block is centered.
     li {
       @include list-item;
     }
@@ -58,7 +68,9 @@
 
 .ms-master-date {
   @include section-container;
-  max-width: 80%;
+  display: flex; // Added
+  flex-direction: column; // Added
+  align-items: center; // Added
 
   h3 {
     @include gold-heading;
@@ -69,6 +81,8 @@
     justify-content: space-evenly;
     text-align: left;
     margin-bottom: $spacing-xl;
+    width: 100%; // Added to help space-evenly spread items
+    max-width: 900px; // Optional: constrain the width of the date list
     li {
       @include list-item;
     }
@@ -77,12 +91,16 @@
 
 .ms-master-fiance {
   margin: $spacing-xxl auto;
-  border-top: 1px solid $color-footer;
-  border-bottom: 1px solid $color-footer;
-  width: 95%;
+  border-top: 1px solid #19453c;
+  border-bottom: 1px solid #19453c;
+  width: 90%;
+  display: flex; // Added
+  flex-direction: column; // Added
+  align-items: center; // Added
   .ms-master-fiance-intro {
     margin-top: $spacing-xl;
     margin-bottom: $spacing-xxl;
+    // text-align: center; // If text inside this div should be centered
   }
   h4 {
     @include footer-heading;
@@ -95,9 +113,10 @@
   }
   p {
     margin-top: $spacing-md;
+    // text-align: center; // Uncomment if p text lines should be centered
   }
   ul {
-    @include standard-list;
+    @include standard-list; // text-align: left
     margin-top: 1rem;
     li {
       @include list-item;
@@ -107,6 +126,9 @@
 
 .ms-master-require {
   @include section-container;
+  display: flex; // Added
+  flex-direction: column; // Added
+  align-items: center; // Added
   h2 {
     @include body-large;
     color: $color-brown-dark;
@@ -116,11 +138,11 @@
     margin-bottom: $spacing-lg;
   }
   ul {
-    @include standard-list;
+    @include standard-list; // text-align: left
 
     li {
       @include heading-large;
-      color: $color-footer;
+      color: #19453c;
       font-size: $font-size-lg;
       margin-top: $spacing-lg;
     }
@@ -135,19 +157,26 @@
 }
 
 .ms-master-require-select {
-  margin: $spacing-xxl auto;
+  margin: $spacing-lg auto;
+  display: flex; // Added
+  flex-direction: column; // Added
+  align-items: center; // Added
 
   h3 {
     @include gold-heading;
     margin-bottom: $spacing-xxl;
     margin-top: $spacing-xxl;
+    // text-align: center; // If this h3's text lines should be centered
   }
   p {
     margin-bottom: $spacing-xxl;
+    font-size: 20px;
+    font-weight: 500;
+    // text-align: center; // Uncomment if p text lines should be centered
   }
   .ms-master-require-select-list {
     h3 {
-      color: $color-footer;
+      color: #19453c;
       text-align: left;
       margin-left: 13%;
       margin-bottom: $spacing-lg;
@@ -160,11 +189,14 @@
 
 .ms-master-require-plan {
   @include section-container;
+  display: flex; // Added
+  flex-direction: column; // Added
+  align-items: center; // Added
   .ms-master-require-plan-list {
     h3 {
       margin-left: 9rem;
       text-align: left;
-      color: $color-footer;
+      color: #19453c;
     }
     ul {
       padding-left: 11rem;
@@ -179,11 +211,8 @@
 @mixin feature-layout {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  margin: 0 auto;
-  margin-top: $spacing-xxl;
-  margin-bottom: $spacing-xxl;
-  max-width: 75%;
+  justify-content: center; // Changed from flex-start
+  margin: $spacing-xxl auto;
 }
 
 .ms-master-require-apply-features,
@@ -192,32 +221,36 @@
 
   .feature-block {
     box-sizing: border-box;
-    width: 32%;
-    min-width: 180px;
+    width: 100%;
     margin-bottom: $spacing-xl;
     margin-right: 2%;
+    display: flex; // Added
+    flex-direction: column; // Added
+    align-items: center; // Added
+    // text-align: center; // Add this if all text lines within feature-block should be centered
 
     .feature-title {
       font-weight: bold;
-      color: $color-footer;
+      color: #19453c;
       font-size: $font-size-lg;
       margin-bottom: $spacing-xs;
       letter-spacing: 1px;
-      text-align: left;
+      text-align: left; // Overridden by parent's align-items: center for block centering. Text lines still left.
+      // Change to text-align: center if needed.
     }
     .feature-subtitle {
       font-weight: bold;
-      color: $color-footer;
+      color: #19453c;
       font-size: $font-size-sm;
       margin-bottom: $spacing-xs;
       letter-spacing: 1px;
-      text-align: left;
+      text-align: left; // Ditto
     }
     .feature-desc {
       color: $color-brown-dark;
       line-height: 1.6;
       letter-spacing: 0.5px;
-      text-align: left;
+      text-align: left; // Ditto
     }
   }
 
@@ -248,10 +281,13 @@
 @mixin section-intro {
   max-width: 100%;
   margin: 0 auto;
+  display: flex; // Added
+  flex-direction: column; // Added
+  align-items: center; // Added
 
   h3 {
-    text-align: center;
-    color: $color-accent-gold;
+    text-align: center; // Already centered
+    color: #19453c;
     font-size: 22px;
     margin-bottom: $spacing-xl;
     font-weight: 700;
@@ -261,6 +297,7 @@
     line-height: 1.6;
     font-size: 16px;
     font-weight: 700;
+    // text-align: center; // Uncomment if p text lines should be centered
   }
 }
 
@@ -268,6 +305,8 @@
 .ms-master-network {
   margin: 0 auto;
   border-top: 1px solid $color-footer;
+  // The main h2 is already text-align: center via section-header
+  // The -intro part is handled by the section-intro mixin modifications
   h2 {
     @include section-header;
     margin-top: 1rem;
@@ -279,9 +318,13 @@
 
   &-recognition {
     margin-top: $spacing-xxl;
+    display: flex; // Added
+    flex-direction: column; // Added
+    align-items: center; // Added
 
     h3 {
       margin-bottom: $spacing-xl;
+      // text-align: center; // Uncomment if h3 text lines should be centered
     }
 
     .cfa-note {
@@ -289,6 +332,7 @@
       color: #666;
       margin-top: $spacing-md;
       margin-bottom: $spacing-xl;
+      // text-align: center; // Uncomment if cfa-note text lines should be centered
     }
   }
   .ms-master-network-intro {
@@ -310,7 +354,7 @@
   .ms-master-require-plan,
   .ms-master-fiance {
     padding: $spacing-md $spacing-sm;
-    margin: $spacing-lg auto;
+    margin: $spacing-md auto;
     max-width: 100%;
   }
 
@@ -324,7 +368,7 @@
   }
   .ms-master-intro {
     p {
-      max-width: 90%;
+      max-width: 100%;
     }
     ul {
       margin-bottom: $spacing-xxl;
@@ -373,6 +417,7 @@
   .ms-master-require-plan .ms-master-require-plan-list h3 {
     margin-left: 0;
     font-size: $font-size-md;
+    text-align: center;
   }
   .ms-master-require-plan .ms-master-require-plan-list ul {
     padding-left: 1.5rem;
@@ -386,7 +431,7 @@
     .feature-block {
       width: 100%;
       min-width: unset;
-      margin-left: $spacing-md;
+
       margin-bottom: $spacing-md;
     }
   }
