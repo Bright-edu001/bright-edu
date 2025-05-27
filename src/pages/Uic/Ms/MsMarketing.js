@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
+import { PageH2, PageP, MsmUl } from "./MS.styles";
 
 function MsMarketing() {
-  useEffect(() => {
-    import("./MS.scss");
-  }, []);
+  useEffect(() => {}, []);
 
   const whyTitle = "為什麼選擇在 UIC 商學院攻讀行銷碩士學位？";
   const whyList = [
@@ -88,22 +87,22 @@ function MsMarketing() {
         imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Marketing"
       />
-      <h2>
+      <PageH2>
         UIC行銷碩士學位（Master of Science in Marketing, MSM）——
         加強你的行銷專業，開啟更多職涯機會
-      </h2>
-      <p>
+      </PageH2>
+      <PageP>
         伊利諾大學芝加哥分校（University of Illinois Chicago,
         UIC）提供的行銷碩士學位（Master of Science in Marketing,
         MSM），幫助你深入掌握行銷策略、市場研究、行銷計畫與數據分析等核心領域的知識與技能。這個課程非常適合：
-      </p>
-      <ul className="msm-ul">
+      </PageP>
+      <MsmUl>
         <li>非商業背景的專業人士 – 希望轉向行銷領域並取得專業資格的人士。</li>
         <li>
           希望提升行銷技能的專家 –
           想要獲得更高階的行銷知識與實務經驗，以便在現有職涯中更進一步的人。
         </li>
-      </ul>
+      </MsmUl>
       <MSFinanceSection
         whyTitle={whyTitle}
         whyList={whyList}

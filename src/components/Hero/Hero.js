@@ -52,27 +52,6 @@ function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // // 監控加載的圖片
-  // useEffect(() => {
-  //   if (imgRef.current) {
-  //     // 初始設置
-  //     setCurrentSrc(imgRef.current.currentSrc);
-
-  //     // 監聽圖片載入完成事件
-  //     const updateCurrentSrc = () => {
-  //       setCurrentSrc(imgRef.current.currentSrc);
-  //     };
-  //     imgRef.current.addEventListener("load", updateCurrentSrc);
-
-  //     return () => {
-  //       if (imgRef.current) {
-  //         imgRef.current.removeEventListener("load", updateCurrentSrc);
-  //       }
-  //     };
-  //   }
-  // }, [heroIndex]);
-
-  // 判斷是否為第一張 Banner
   const isFirst = heroIndex === 0;
 
   return (
@@ -107,22 +86,7 @@ function Hero() {
           fetchpriority={isFirst ? "high" : undefined}
         />
       </picture>
-      {/* {process.env.NODE_ENV === "development" && (
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            background: "rgba(0,0,0,0.7)",
-            color: "white",
-            padding: "5px",
-            fontSize: "12px",
-            zIndex: 100,
-          }}
-        >
-          當前載入圖片: {currentSrc.split("/").pop()}
-        </div>
-      )} */}
+
       <div className="hero-bg-mask" />
       <div className="container container-aligned">
         <div className="hero-content">

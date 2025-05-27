@@ -28,10 +28,13 @@
       display: flex;
       align-items: center; /* 確保圖片垂直置中 */
       text-decoration: none;
-
       .logo-img {
-        max-height: 3rem; /* 限制圖片高度 */
-        width: auto;
+        width: 250px;
+        max-height: 50px;
+        max-width: 250px;
+        min-width: 250px;
+        min-height: 50px;
+        object-fit: contain;
       }
     }
   }

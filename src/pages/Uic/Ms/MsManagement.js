@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
+import { PageH2, PageP } from "./MS.styles";
 
 function MsManagement() {
   useEffect(() => {
-    import("./MS.scss");
+    // 同 MSFinance.js 中的註解
   }, []);
 
   const whyTitle = "為什麼選擇在 UIC 商學院攻讀行銷碩士學位？";
@@ -96,18 +97,18 @@ function MsManagement() {
         imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Supply Chain and Operations Management"
       />
-      <h2>
+      <PageH2>
         UIC供應鏈與營運管理碩士學位（Master of Science in Supply Chain and
         Operations Management, MSSCOM）—— 掌握供應鏈與營運領域的專業知識
-      </h2>
-      <p>
+      </PageH2>
+      <PageP>
         伊利諾大學芝加哥分校（University of Illinois Chicago,
         UIC）提供的供應鏈與營運管理碩士學位（Master of Science in Supply Chain
         and Operations Management,
         MSSCOM），幫助你掌握分析建模、企業系統、AI技術與數據分析等基礎知識，讓你在這個快速變革的領域中脫穎而出。這個學位獲得
         STEM認證，讓你在全球化、大數據、電子商務、社群媒體與 AI
         驅動的供應鏈環境中保持競爭力。
-      </p>
+      </PageP>
 
       <MSFinanceSection
         whyTitle={whyTitle}

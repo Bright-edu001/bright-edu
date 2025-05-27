@@ -116,27 +116,33 @@
             .phone-icon {
               width: 24px;
               height: 24px;
+              min-width: 24px;
+              min-height: 24px;
               object-fit: contain;
             }
             .line-icon {
               width: 30px;
               height: 30px;
+              min-width: 30px;
+              min-height: 30px;
               object-fit: contain;
               margin-top: -3px;
             }
           }
         }
-      }
-
-      /* 品牌區域樣式 */
+      } /* 品牌區域樣式 */
       &.brand {
         display: flex;
         justify-content: flex-start;
         align-items: center;
 
         .footer-brand img {
+          width: 120px;
+          height: 120px;
           max-width: 120px;
-          height: auto;
+          min-width: 120px;
+          min-height: 120px;
+          object-fit: contain;
         }
       }
 

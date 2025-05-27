@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
+import { PageH2, PageP } from "./MS.styles";
 
 function MsAccounting() {
-  useEffect(() => {
-    import("./MS.scss");
-  }, []);
-
   const whyTitle = "為什麼選擇在 UIC 商學院攻讀會計碩士？";
   const whyList = [
     {
@@ -70,17 +66,17 @@ function MsAccounting() {
         imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Accounting"
       />
-      <h2>
+      <PageH2>
         UIC 會計碩士學位（Master of Science in Accounting,
         MSA）——邁向專業會計職涯的關鍵一步
-      </h2>
-      <p>
+      </PageH2>
+      <PageP>
         伊利諾大學芝加哥分校（University of Illinois Chicago, UIC） 提供的
         會計碩士學位（Master of Science in Accounting,
         MSA），距離芝加哥的商業中心僅幾步之遙。無論你未來希望成為
         註冊會計師（CPA）、財務主管、管理會計師，或是其他商業領域的專業人士，UIC
         商學院的 MSA 都能助你達成目標。
-      </p>
+      </PageP>
 
       <MSFinanceSection
         whyTitle={whyTitle}

@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
+import { PageH2, PageP } from "./MS.styles";
 
 function MsInformation() {
-  useEffect(() => {
-    import("./MS.scss");
-  }, []);
+  useEffect(() => {}, []);
 
   const whyTitle = "為什麼選擇在UIC商學院攻讀管理資訊系統碩士學位？";
   const whyList = [
@@ -127,18 +126,18 @@ function MsInformation() {
         imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Management Information Systems"
       />
-      <h2>
+      <PageH2>
         UIC管理資訊系統碩士學位（Master of Science in Management Information
         Systems, MSMIS）—— 將技術與商業決策完美結合
-      </h2>
-      <p>
+      </PageH2>
+      <PageP>
         伊利諾大學芝加哥分校（University of Illinois Chicago,
         UIC）提供的管理資訊系統碩士學位（Master of Science in Management
         Information Systems,
         MSMIS），幫助你掌握設計、實施與管理資訊系統的核心知識，利用技術來提升企業業務流程。課程強調商業智慧、人工智慧（AI）、數據挖掘以及
         供應鏈管理等關鍵領域，為你準備進入
         專案經理、技術領袖或首席資訊官（CIO）等領導角色，並由知名的研究與臨床師資團隊提供專業指導。這個學位還獲得STEM認證，確保你在技術與管理領域具備競爭優勢。
-      </p>
+      </PageP>
       <MSFinanceSection
         whyTitle={whyTitle}
         whyList={whyList}

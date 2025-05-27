@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
+import { PageH2, PageP } from "./MS.styles";
 
 function MSFinance() {
-  useEffect(() => {
-    import("./MS.scss");
-  }, []);
+  useEffect(() => {}, []);
 
   const whyTitle = "為什麼選擇在UIC商學院攻讀金融碩士學位？";
   const whyList = [
@@ -97,17 +96,17 @@ function MSFinance() {
         imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Finance"
       />
-      <h2>
+      <PageH2>
         UIC 會計碩士學位（Master of Science in Accounting,
         MSA）——邁向專業會計職涯的關鍵一步
-      </h2>
-      <p>
+      </PageH2>
+      <PageP>
         伊利諾大學芝加哥分校（University of Illinois Chicago, UIC）
         提供的金融碩士學位（Master of Science in Finance,
         MSF），幫助你實現成為財務分析師、投資銀行家、投資組合經理或首席財務官（CFO）的職涯目標。這個學位獲得
         STEM 認證 和 AACSB
         認證，並位於芝加哥金融區附近，讓你具備勝任各種高階金融職位的專業知識與技能。
-      </p>
+      </PageP>
       <MSFinanceSection
         whyTitle={whyTitle}
         whyList={whyList}

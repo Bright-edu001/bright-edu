@@ -94,6 +94,7 @@
   left: 0;
   z-index: 0;
   display: block;
+  aspect-ratio: 1280/450; /* 設定固定寬高比 */
 }
 @media screen and (max-width: 1024px) {
   .hero {

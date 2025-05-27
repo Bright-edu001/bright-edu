@@ -9,20 +9,14 @@ function AboutMsu() {
         title="MSU 密西根州立大學"
         imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
         imageAlt="Michigan State University"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner4-1280.webp`}
       />
       <section className="intro" aria-label="學校介紹">
         <div className="container">
           <p>
-            伊利諾大學芝加哥分校（University of Illinois
-            Chicago，簡稱UIC）位於美國伊利諾芝加哥，始建於1867年，是國家資助的公立大學。伊利諾大學共有三個校區：芝加哥校區、香檳校區和春田校區。目前芝加哥校區是芝加哥地區占地規模最大的大學，有約34,000名在校學生、2,800名教職員工；師生比例低至1:19，教學品質優良。
-          </p>
-          <p>
-            UIC
-            除了商學院外，還擁有全美國最大的醫療學院、教育學院、工學院、都市計畫學院、衛生學院、人文科學學院、護理學院、藥劑學院等16所學院，我們一直是全美研究經費排名前50的機構之一，目前伊利諾大學芝加哥分校
-            (UIC) 也在全世界建立了相當好的教學聲譽。
-          </p>
-          <p>
-            此外，UIC的課外活動供應充足。體育設施包括健身房，排球場、羽球場和壁球場，室內跑道，攀岩牆和一個室外球場，其中包括214,000平方英尺的足球和棒球比賽用的人造草皮。一個單獨的室外設施設有網球場和籃球場，以及游泳池，桑拿和健康中心。
+            密西根州立大學（Michigan State University,
+            MSU）成立於1855年，是一所全球知名的研究型公立大學，位於美國密西根州的East
+            Lansing。作為美國最早的土地贈與大學之一，MSU致力於為學生提供世界一流的教育機會，並積極參與研究、社區服務及全球發展。
           </p>
         </div>
       </section>

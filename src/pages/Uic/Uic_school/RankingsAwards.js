@@ -79,7 +79,7 @@ const RankingsAwards = () => {
             <div className="diversity-logo">
               <img
                 className="responsive-img"
-                src="https://imgur.com/JD9zLlj.png"
+                src={`/images/Uic/ranking/2023-INSIGHT-Into-Diversity-HEED-Award-Logo-1024x1024.webp`}
                 alt="HEED Excellence Award"
                 loading="lazy"
               />

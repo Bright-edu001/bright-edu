@@ -112,7 +112,7 @@
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      margin-left: 10rem;
+
       margin-bottom: 1.5rem;
 
       .aacsb-logo {
@@ -226,7 +226,7 @@
       margin-bottom: 1.5rem;
 
       .diversity-logo {
-        margin-right: 1.5rem;
+        width: 20%;
       }
 
       .diversity-title {
@@ -304,9 +304,7 @@
   .advantage-list {
     margin-left: 0;
   }
-  .content-section .diversity-excellence-section .diversity-header {
-    margin-left: 7rem;
-  }
+
   .diversity-list {
     margin-left: 5rem;
   }
@@ -338,10 +336,10 @@
     margin-left: 0;
   }
   .content-section .diversity-excellence-section .diversity-header {
-    margin-left: 0;
+    gap: 1rem;
     margin-bottom: $spacing-lg;
     .diversity-logo {
-      margin-top: 3rem;
+      width: 100%;
     }
     .diversity-title {
       h2 {

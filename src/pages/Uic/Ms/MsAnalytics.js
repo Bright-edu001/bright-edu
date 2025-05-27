@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
+import { PageH2, PageP } from "./MS.styles";
 
-function MsAnalttics() {
-  useEffect(() => {
-    import("./MS.scss");
-  }, []);
-
+function MsAnalytics() {
   const whyTitle = "為什麼選擇在 UIC 商學院攻讀商業分析碩士？";
   const whyList = [
     {
@@ -97,11 +93,11 @@ function MsAnalttics() {
         imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Business Analytics"
       />
-      <h2>
+      <PageH2>
         UIC 商業分析碩士學位（Master of Science in Business Analytics, MSBA）——
         掌握數據分析的核心競爭力
-      </h2>
-      <p>
+      </PageH2>
+      <PageP>
         伊利諾大學芝加哥分校（University of Illinois Chicago, UIC） 提供的
         商業分析碩士學位（Master of Science in Business Analytics,
         MSBA），幫助你掌握分析大型數據集的技能，並透過 數據視覺化、統計建模 和
@@ -109,7 +105,7 @@ function MsAnalttics() {
         預測分析
         等領域，並以扎實的商業基礎為核心，讓你具備全面的數據分析能力。該學位也獲得
         STEM 認證，讓你在數據驅動的世界中保持競爭優勢。
-      </p>
+      </PageP>
       <MSFinanceSection
         whyTitle={whyTitle}
         whyList={whyList}
@@ -129,4 +125,4 @@ function MsAnalttics() {
   );
 }
 
-export default MsAnalttics;
+export default MsAnalytics;

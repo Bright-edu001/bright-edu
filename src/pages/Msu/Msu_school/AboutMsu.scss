@@ -14,8 +14,6 @@
   .intro {
     padding: $spacing-lg $spacing-lg;
     text-align: left; // 改為左對齊
-    margin-bottom: 3rem; // 增加與下方區塊的間距
-
     p {
       @include body-large;
       color: $color-text-primary;

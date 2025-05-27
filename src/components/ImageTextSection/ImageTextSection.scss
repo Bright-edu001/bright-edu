@@ -2,6 +2,8 @@
 @import "../../styles/mixins";
 
 .image-text-section {
+  position: relative;
+  z-index: 0;
   background-color: $color-gray; // 設置背景色，可依需求調整
 
   .container {
@@ -32,15 +34,44 @@
         text-align: center;
       }
     }
-
     .image-content {
       flex: 0.8 1 0; // 移除 position 和 right，改用 flex-basis 或 flex-grow 控制寬度
     }
     img {
       width: 100%; // 確保圖片不超過容器寬度
       height: auto; // 自動調整高度以保持比例
+      aspect-ratio: 4/3; /* 設定固定寬高比 */
+      object-fit: contain;
     }
   }
+}
+
+.section-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.section-bg-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(231, 227, 227, 0.4); // 參考 hero-bg-mask
+  z-index: 0;
+  pointer-events: none;
+}
+
+.image-text-section > *:not(.section-bg-img):not(.section-bg-mask) {
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 700px) {

@@ -2,7 +2,6 @@
 @import "../../styles/mixins";
 
 .program-details {
-  max-width: 95%;
   display: flex;
   flex-direction: column;
   margin-top: $spacing-xxl;
@@ -17,7 +16,7 @@
   font-weight: 400;
   font-size: $font-size-md;
   text-align: left;
-  margin: 0 auto;
+  margin: 2rem auto;
   color: $color-brown-dark;
 }
 
@@ -36,6 +35,7 @@
   color: #1c184a;
   font-size: $font-size-xxl;
   margin-bottom: $spacing-xl;
+  padding: 0 1rem;
 }
 .reasons-to-choose h3 {
   text-align: center;
@@ -47,8 +47,7 @@
 
   ul {
     list-style: none;
-    margin: 0 $spacing-xxl;
-
+    padding: 0 2rem;
     li {
       font-size: $font-size-xl;
       line-height: 39px;
@@ -59,7 +58,8 @@
       div,
       &.label-style {
         @include label-style;
-        font-size: $font-size-md;
+        font-size: $font-size-lg;
+        font-weight: 500;
         color: $color-brown-dark;
         margin-top: $spacing-lg;
       }
@@ -74,6 +74,7 @@
           margin-top: $spacing-sm;
           margin-bottom: 0;
           line-height: 24px;
+          font-weight: 400;
         }
       }
     }
@@ -128,11 +129,9 @@
 }
 
 .core-courses-list {
-  display: flex;
-  justify-content: space-between;
-  max-width: 90%;
-  margin: 2rem auto;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0 5rem;
   gap: $spacing-xxl;
 }
 
@@ -169,10 +168,9 @@
 }
 
 .reasons-to-choose {
-  margin-top: $spacing-xl;
-  margin-bottom: $spacing-xxl;
-  margin-left: $spacing-xxl;
-  // h3, p 樣式已整合
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ms-management .msf-outcomes ul li,
@@ -184,6 +182,20 @@
   font-weight: 700;
   margin-left: $spacing-xl;
 }
+.core-courses-intro {
+  text-align: left;
+  margin-bottom: 1rem;
+  font-size: $font-size-lg;
+  font-weight: 500;
+  @media screen and (max-width: 500px) {
+    ul {
+      padding: 0 3rem;
+    }
+  }
+}
+.core-courses-foot {
+  font-size: $font-size-lg;
+}
 
 @media screen and (max-width: 1024px) {
   .company-courses .company-logos {
@@ -191,17 +203,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
-  .course-arrangement {
-    ul {
-      margin-left: 2rem;
-    }
-  }
-  .ms-accounting .core-courses-intro {
-    ul {
-      padding-left: 5rem;
-    }
-  }
+@media screen and (max-width: 850px) {
   .company-courses {
     margin-top: $spacing-xxl;
     // h3 樣式已整合
@@ -211,6 +213,28 @@
       gap: $spacing-xxl;
       margin-left: 3rem;
     }
+  }
+  .core-courses-list {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+
+    padding: 0 2rem;
+  }
+  .core-courses-intro {
+    ul {
+      padding: 0 5rem;
+    }
+  }
+  .course-arrangement {
+    ul {
+      padding: 0 5rem;
+    }
+  }
+  .core-courses-foot {
+    padding: 0 2rem;
+  }
+  .core-courses-pragaph {
+    padding: 0 2rem;
   }
 }
 @media screen and (max-width: 500px) {
@@ -224,7 +248,21 @@
   }
   .company-courses {
     .company-logos {
-      padding: 0;
+      padding: 0 1rem;
+      margin-left: 0;
     }
+  }
+  .core-courses-list {
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+    padding: 0 2rem;
+  }
+  .course-arrangement {
+    ul {
+      padding: 0 2rem;
+    }
+  }
+  .core-courses-foot {
+    padding: 0 1.5rem;
   }
 }

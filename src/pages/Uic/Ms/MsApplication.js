@@ -1,8 +1,10 @@
 import React from "react";
-import "./MS.scss";
+// import "./MS.scss"; // Commented out
 import "./MsApplication.scss";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import ApplicationForm from "../../../components/Application/ApplicationForm";
+// Import styled components as needed. For now, assuming only PageP might be relevant if h3/h4/ul are styled globally or via MsApplication.scss
+import { PageP } from "./MS.styles";
 
 function MsApplication() {
   return (
@@ -15,14 +17,18 @@ function MsApplication() {
         imageAlt="申請資訊"
       />
       <div className="ms-application-intro">
+        {/* Assuming h3 is styled by MsApplication.scss or globally */}
         <h3>入學要求</h3>
-        <p>
+        <PageP>
+          {" "}
+          {/* Using PageP for the paragraph */}
           申請者將根據個別情況進行審核。除了研究生學院的基本要求之外，申請者還必須滿足以下課程要求：
-        </p>
+        </PageP>
       </div>
       <section className="ms-application-requirements">
+        {/* Assuming h4 and ul are styled by MsApplication.scss or globally */}
         <h4>最低學歷要求</h4>
-        <p>需具備學士學位（Bachelor's degree）</p>
+        <PageP>需具備學士學位（Bachelor's degree）</PageP>
 
         <h4>平均成績要求（GPA）</h4>
         <ul>
@@ -33,7 +39,7 @@ function MsApplication() {
         </ul>
 
         <h4>英語語言能力要求</h4>
-        <p>申請者必須滿足以下任一英語能力考試的最低標準:</p>
+        <PageP>申請者必須滿足以下任一英語能力考試的最低標準:</PageP>
         <div className="english-requirements">
           <div>
             <strong>TOEFL iBT：總分 80，各部分最低分數：</strong>
@@ -59,7 +65,7 @@ function MsApplication() {
         </div>
 
         <h4>推薦信</h4>
-        <p>需提交2封推薦信</p>
+        <PageP>需提交2封推薦信</PageP>
 
         <h4>文件要求</h4>
         <ul>
