@@ -1,0 +1,29 @@
+{
+  "short_name": "Bright Education",
+  "name": "Bright Education - UIC & MSU 商學院留學諮詢",
+  "description": "專業的美國商學院留學諮詢服務，提供 UIC 和 MSU 商學院課程資訊",
+  "icons": [
+    {
+      "src": "images/header/logo.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/header/logo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#c71432",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "categories": ["education", "business"],
+  "lang": "zh-TW",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}

@@ -3,30 +3,34 @@
 
 .faq-page {
   width: 100%;
-  font-family: "Arial", sans-serif;
+  font-family: $font-family-base;
 
   .faq-container {
+    @include container;
     max-width: 1200px;
-    margin: 0 auto;
     padding: 3rem 1.5rem;
 
     .faq-section {
       margin-bottom: 3rem;
 
       .section-title {
-        font-size: 1.8rem;
-        font-weight: 600;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid #1c184a;
+        @include heading-medium;
+        border-bottom: 2px solid $color-nav;
         color: $color-brown-dark;
+        padding-bottom: 0.5rem;
       }
 
       .question-list {
         .faq-item {
           margin-bottom: 2rem;
-          border: 1px solid #e0e0e0;
-          border-radius: 5px;
+          border: 1px solid $color-gray;
+          border-radius: 8px;
+          overflow: hidden;
+          transition: $transition-normal;
+
+          &:hover {
+            box-shadow: $shadow-sm;
+          }
 
           .question {
             padding: 1rem;
@@ -35,18 +39,19 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: $transition-normal;
 
             h3 {
               margin: 0;
+              @include body-large;
               font-size: 1.1rem;
-              font-weight: 500;
-              color: #1c184a;
+              color: $color-nav;
             }
 
             .toggle-icon {
               font-size: 1.5rem;
               color: #c71432;
+              transition: $transition-normal;
             }
 
             &:hover {
@@ -55,11 +60,13 @@
 
             &.expanded {
               background-color: #c71432;
-              color: white;
+              color: $color-white;
 
               .toggle-icon {
-                color: white;
+                color: $color-white;
+                transform: rotate(180deg);
               }
+
               h3 {
                 color: $color-white;
               }
@@ -73,20 +80,53 @@
             padding: 0 1rem;
 
             p {
-              @include value-style;
+              @include label-style;
               text-align: left;
-              margin-top: $spacing-xs;
-              margin-bottom: $spacing-xs;
+              margin: $spacing-xs 0;
+              line-height: 1.6;
             }
 
             &.expanded {
-              max-height: 1400px; // 調整為適合內容的高度
+              max-height: 1400px;
               padding: 1rem;
-              background-color: #fff;
+              background-color: $color-white;
             }
           }
         }
       }
+    }
+  }
+}
+
+// 響應式設計
+@media (max-width: $breakpoint-md) {
+  .faq-page {
+    .faq-container {
+      padding: 2rem 1rem;
+
+      .faq-section {
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .question-list {
+          .faq-item {
+            .question {
+              h3 {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .faq-page {
+    .faq-container {
+      padding: 1.5rem 0.5rem;
     }
   }
 }

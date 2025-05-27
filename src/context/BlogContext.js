@@ -44,11 +44,18 @@ export const BlogProvider = ({ children }) => {
     [enrollmentEvents, news, all]
   );
 
-  // 使用 useMemo 穩定 context value
+  // 使用 useMemo 穩定 context value，只在相關數據改變時重新計算
   const contextValue = useMemo(
-    () => ({ enrollmentEvents, news, all, searchByKeyword, filterByCategory }),
+    () => ({
+      enrollmentEvents,
+      news,
+      all,
+      searchByKeyword,
+      filterByCategory,
+    }),
     [enrollmentEvents, news, all, searchByKeyword, filterByCategory]
   );
+
   // 提供全域資料與操作函式給子元件
   return (
     <BlogContext.Provider value={contextValue}>{children}</BlogContext.Provider>

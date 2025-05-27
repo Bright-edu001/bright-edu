@@ -1,40 +1,67 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import "./RankingNumberFlip.scss";
 
 function RankingNumberFlip({ number, duration = 10000, start = 99 }) {
   const [displayNumber, setDisplayNumber] = useState(start);
   const [flipping, setFlipping] = useState(false);
   const prevNumber = useRef(start);
+  const animationRef = useRef(null);
+
+  // 使用 useCallback 優化動畫函數
+  const animate = useCallback(
+    (from, to, totalFrames) => {
+      let frame = 0;
+      const step = (from - to) / totalFrames;
+
+      function getFrameDuration(progress) {
+        return (duration * (0.3 + 0.7 * Math.pow(progress, 2))) / totalFrames;
+      }
+
+      function animateFrame() {
+        frame++;
+        const next = Math.round(from - step * frame);
+        setDisplayNumber(next > to ? next : to);
+
+        if (frame < totalFrames) {
+          const progress = frame / totalFrames;
+          animationRef.current = setTimeout(
+            animateFrame,
+            getFrameDuration(progress)
+          );
+        } else {
+          setFlipping(false);
+          prevNumber.current = to;
+          animationRef.current = null;
+        }
+      }
+
+      animateFrame();
+    },
+    [duration]
+  );
 
   useEffect(() => {
     if (number === prevNumber.current) return;
+
+    // 清除現有動畫
+    if (animationRef.current) {
+      clearTimeout(animationRef.current);
+    }
+
     setFlipping(true);
-    let frame = 0;
-    const totalFrames = 40; // 減慢數字跳動速度，總幀數增加
+    const totalFrames = 40;
     const from = prevNumber.current;
     const to = number;
-    const step = (from - to) / totalFrames;
-    // 速度由慢到快：前期間隔長，後期間隔短
-    function getFrameDuration(progress) {
-      // 前期快，後期慢（ease-out）
-      // progress: 0~1
-      return (duration * (0.3 + 0.7 * Math.pow(progress, 2))) / totalFrames;
-    }
-    function animate() {
-      frame++;
-      const next = Math.round(from - step * frame);
-      setDisplayNumber(next > to ? next : to);
-      if (frame < totalFrames) {
-        const progress = frame / totalFrames;
-        setTimeout(animate, getFrameDuration(progress));
-      } else {
-        setFlipping(false);
-        prevNumber.current = to;
+
+    animate(from, to, totalFrames);
+
+    // 清理函數
+    return () => {
+      if (animationRef.current) {
+        clearTimeout(animationRef.current);
       }
-    }
-    animate();
-    // eslint-disable-next-line
-  }, [number, duration]);
+    };
+  }, [number, animate]);
 
   return (
     <span className={`ranking-number-flip${flipping ? " flipping" : ""}`}>
@@ -43,4 +70,4 @@ function RankingNumberFlip({ number, duration = 10000, start = 99 }) {
   );
 }
 
-export default RankingNumberFlip;
+export default memo(RankingNumberFlip);
