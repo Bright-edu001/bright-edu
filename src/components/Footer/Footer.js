@@ -119,7 +119,7 @@ function Footer() {
                 >
                   <img
                     className="phone-icon"
-                    src={`/images/footer/phone.png`}
+                    src={`/images/footer/phone.webp`}
                     alt="電話圖示"
                     width="24"
                     height="24"
@@ -133,7 +133,7 @@ function Footer() {
                 >
                   <img
                     className="line-icon"
-                    src={`/images/footer/line.png`}
+                    src={`/images/footer/line.webp`}
                     alt="line 圖示"
                     width="30"
                     height="30"

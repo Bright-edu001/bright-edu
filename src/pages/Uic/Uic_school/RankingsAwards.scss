@@ -221,7 +221,7 @@
     .diversity-header {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-evenly;
 
       margin-bottom: 1.5rem;
 
@@ -288,8 +288,11 @@
 }
 
 .diversity-list {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 1rem;
   text-align: left;
-  margin-left: 10rem;
 
   li {
     @include body-large;
@@ -311,7 +314,9 @@
 
 @media screen and (max-width: 700px) {
   .content-section .aacsb-section .aacsb-header {
-    margin-left: 0;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
   }
   .standard-list,
   .advantage-list {
@@ -390,9 +395,6 @@
     .aacsb-header {
       .aacsb-logo {
         width: 50%;
-      }
-      .aacsb-title {
-        margin-top: -4rem;
       }
     }
   }
