@@ -136,7 +136,7 @@
 
           .dropdown-toggle {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             width: 100%;
 
@@ -170,7 +170,6 @@
 
             &.show {
               display: flex;
-              padding: 0.5rem; // 恢復內邊距
               max-height: 800px;
             }
           }
@@ -249,6 +248,11 @@
       .dropdown-toggle-link {
         text-align: left;
         justify-content: center;
+      }
+      @media screen and (max-width: 700px) {
+        .dropdown-toggle-link {
+          text-align: center; // 在小螢幕下，確保下拉選單項目水平置中
+        }
       }
     }
 
@@ -372,8 +376,8 @@
               text-align: center;
 
               a {
-                justify-content: center;
                 text-align: center;
+                padding: $spacing-sm; /* 確保每個選項有足夠的點擊區域 */
               }
             }
 
@@ -381,8 +385,8 @@
               .dropdown-menu {
                 position: relative;
                 left: auto;
-                margin-left: 1rem; // 在手機版中，子選單縮進顯示
-                width: calc(100% - 2rem);
+                margin-left: 0;
+                text-align: center;
               }
 
               // 確保移動版子選單樣式一致
@@ -391,12 +395,6 @@
                 position: relative;
                 left: auto;
                 top: auto;
-                margin-left: 1rem; // 在手機版中，子選單縮進顯示
-                width: calc(100% - 2rem);
-                background: lighten(
-                  $color-background-main,
-                  8%
-                ); // 再淺一點以區分層次
                 box-shadow: none;
                 padding: $spacing-xs 0; // 調整移動版內邊距
               }
