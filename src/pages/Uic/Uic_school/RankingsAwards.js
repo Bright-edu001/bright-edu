@@ -134,7 +134,7 @@ const RankingsAwards = () => {
           <div className="rankings-grid">
             <div className="ranking-item">
               <div className="rank-header">
-                <h3 className="top-label">Top</h3>
+                <h3 className="top-label">TOP</h3>
                 <span className="rank-number">1</span>
               </div>
               <p className="rank-description">芝加哥最大規模研究型大學</p>
@@ -145,7 +145,7 @@ const RankingsAwards = () => {
 
             <div className="ranking-item">
               <div className="rank-header">
-                <h3 className="top-label">Top</h3>
+                <h3 className="top-label">TOP</h3>
                 <span className="rank-number">39</span>
               </div>
               <p className="rank-description">全美公立大學 U.S.NEWS.</p>
@@ -154,7 +154,7 @@ const RankingsAwards = () => {
 
             <div className="ranking-item">
               <div className="rank-header">
-                <h3 className="top-label">Top</h3>
+                <h3 className="top-label">TOP</h3>
                 <span className="rank-number">80</span>
               </div>
               <p className="rank-description">全美大學排行 U.S.NEWS</p>
@@ -163,7 +163,7 @@ const RankingsAwards = () => {
 
             <div className="ranking-item">
               <div className="rank-header">
-                <h3 className="top-label">Top</h3>
+                <h3 className="top-label">TOP</h3>
                 <span className="rank-number">81</span>
               </div>
               <p className="rank-description">
@@ -177,7 +177,7 @@ const RankingsAwards = () => {
 
             <div className="ranking-item">
               <div className="rank-header">
-                <h3 className="top-label">Top</h3>
+                <h3 className="top-label">TOP</h3>
                 <span className="rank-number">25%</span>
               </div>
               <p className="rank-description">全美商業學校</p>
@@ -189,7 +189,7 @@ const RankingsAwards = () => {
 
             <div className="ranking-item">
               <div className="rank-header">
-                <h3 className="top-label">Top</h3>
+                <h3 className="top-label">TOP</h3>
                 <span className="rank-number">8</span>
               </div>
               <p className="rank-description">
@@ -202,7 +202,7 @@ const RankingsAwards = () => {
 
             <div className="ranking-item">
               <div className="rank-header">
-                <h3 className="top-label">Top</h3>
+                <h3 className="top-label">TOP</h3>
                 <span className="rank-number">36</span>
               </div>
               <p className="rank-description">QS World 全美大學</p>
@@ -211,7 +211,7 @@ const RankingsAwards = () => {
 
             <div className="ranking-item">
               <div className="rank-header">
-                <h3 className="top-label">Top</h3>
+                <h3 className="top-label">TOP</h3>
                 <span className="rank-number">13</span>
               </div>
               <p className="rank-description">

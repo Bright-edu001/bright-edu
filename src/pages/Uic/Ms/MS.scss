@@ -3,7 +3,7 @@
 
 h2 {
   @include body-large;
-  color: $color-brown-light;
+  color: #1c184a;
   margin-top: $spacing-xxl;
   margin-bottom: $spacing-xxl;
 }
@@ -91,7 +91,7 @@ ul {
 }
 .ms-accounting .core-courses-intro {
   ul {
-    padding-left: 15rem; // 動態向右移動，可依需求調整
+    padding-left: 8rem; // 動態向右移動，可依需求調整
     li {
       text-align: left;
       @include value-style;

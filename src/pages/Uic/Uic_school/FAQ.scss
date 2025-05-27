@@ -18,7 +18,7 @@
         font-weight: 600;
         margin-bottom: 1.5rem;
         padding-bottom: 0.5rem;
-        border-bottom: 2px solid $color-accent-gold;
+        border-bottom: 2px solid #1c184a;
         color: $color-brown-dark;
       }
 
@@ -41,12 +41,12 @@
               margin: 0;
               font-size: 1.1rem;
               font-weight: 500;
-              color: $color-accent-gold;
+              color: #1c184a;
             }
 
             .toggle-icon {
               font-size: 1.5rem;
-              color: $color-accent-gold;
+              color: #c71432;
             }
 
             &:hover {
@@ -54,7 +54,7 @@
             }
 
             &.expanded {
-              background-color: $color-accent-gold;
+              background-color: #c71432;
               color: white;
 
               .toggle-icon {

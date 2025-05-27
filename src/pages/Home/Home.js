@@ -49,18 +49,30 @@ function Home() {
               <h3>UIC Rankings</h3>
               <ul>
                 <li>
-                  <span className="ranking-title">Top</span>
-                  <RankingNumberFlip number={1} start={100} />
+                  <div className="ranking-info">
+                    {" "}
+                    {/* 新增的 div */}
+                    <span className="ranking-title">TOP</span>
+                    <RankingNumberFlip number={1} start={100} />
+                  </div>
                   <p>The largest research university in Chicago</p>
                 </li>
                 <li>
-                  <span className="ranking-title">Top</span>
-                  <RankingNumberFlip number={39} start={100} />
+                  <div className="ranking-info">
+                    {" "}
+                    {/* 新增的 div */}
+                    <span className="ranking-title">TOP</span>
+                    <RankingNumberFlip number={39} start={100} />
+                  </div>
                   <p>Among Top Public School in the nation</p>
                 </li>
                 <li>
-                  <span className="ranking-title">Top</span>
-                  <RankingNumberFlip number={80} start={100} />
+                  <div className="ranking-info">
+                    {" "}
+                    {/* 新增的 div */}
+                    <span className="ranking-title">TOP</span>
+                    <RankingNumberFlip number={80} start={100} />
+                  </div>
                   <p>U.S. NEWS National Universities</p>
                 </li>
               </ul>
@@ -89,18 +101,30 @@ function Home() {
               <h3>MSU Rankings</h3>
               <ul>
                 <li>
-                  <span className="ranking-title">Top</span>
-                  <RankingNumberFlip number={19} start={100} />
+                  <div className="ranking-info">
+                    {" "}
+                    {/* 新增的 div */}
+                    <span className="ranking-title">TOP</span>
+                    <RankingNumberFlip number={19} start={100} />
+                  </div>
                   <p>TFE Times Master's of Finance</p>
                 </li>
                 <li>
-                  <span className="ranking-title">Top</span>
-                  <RankingNumberFlip number={30} start={100} />
+                  <div className="ranking-info">
+                    {" "}
+                    {/* 新增的 div */}
+                    <span className="ranking-title">TOP</span>
+                    <RankingNumberFlip number={30} start={100} />
+                  </div>
                   <p>US News & World Report Top Public Schools</p>
                 </li>
                 <li>
-                  <span className="ranking-title">Top</span>
-                  <RankingNumberFlip number={63} start={100} />
+                  <div className="ranking-info">
+                    {" "}
+                    {/* 新增的 div */}
+                    <span className="ranking-title">TOP</span>
+                    <RankingNumberFlip number={63} start={100} />
+                  </div>
                   <p>Among Top Public School in the nation</p>
                 </li>
               </ul>

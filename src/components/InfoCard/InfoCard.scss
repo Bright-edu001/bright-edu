@@ -13,6 +13,7 @@
     h4 {
       @include heading-medium;
       margin-bottom: $spacing-xxl;
+      color: #1c184a;
     }
     p {
       @include label-style;

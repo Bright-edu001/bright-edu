@@ -31,10 +31,21 @@
       margin-bottom: $spacing-sm;
 
       .rank {
-        font-size: $font-size-number; // 使用數字字體大小
         font-weight: 900;
-        color: $color-accent-orange; // 強調排名數字
+        color: #c71432; // 強調排名數字
         margin-bottom: $spacing-sm;
+        display: flex; // Added for alignment
+        align-items: baseline; // Align prefix and number
+        justify-content: center; // Center the rank block
+
+        .rankPrefix {
+          font-size: 32px; // Set font size for "TOP"
+          margin-right: 15px; // Add some space between TOP and number
+        }
+
+        .rankNumber {
+          font-size: 40px; // Set font size for the number
+        }
       }
 
       .description {

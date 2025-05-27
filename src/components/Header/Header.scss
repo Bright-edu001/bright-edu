@@ -83,7 +83,6 @@
           transform: rotate(180deg);
         }
       }
-
       .dropdown-menu {
         position: absolute;
         top: 150%;
@@ -103,6 +102,12 @@
           padding: $spacing-sm;
           overflow-x: visible;
           text-align: left;
+        }
+
+        // 特別為五大領域下拉選單增加寬度
+        &.show:has(.areas-header ~ &),
+        .areas-header + & {
+          min-width: 200px;
         }
 
         li {
@@ -142,7 +147,7 @@
 
           .dropdown-menu {
             position: absolute;
-            top: -38%;
+            top: 0; // 將此處從 -38% 修改為 0
             left: 100%;
             margin-top: 0;
 
@@ -158,7 +163,7 @@
           .dropdown-menu.rankings-menu,
           .dropdown-menu.chicago-menu {
             position: absolute;
-            top: -130%; // 根據需要調整垂直位置
+            top: 0; // 標準化垂直定位
             left: 88%;
             margin-left: $spacing-sm; // 與父選單的間距
             min-width: 140px; // 確保有最小寬度
@@ -170,12 +175,12 @@
             }
           }
           .dropdown-menu.chicago-menu {
-            top: -100%; // 根據需要調整垂直位置
+            // top: -100%; // 移除此處的 top 覆蓋，已在上面統一設置
             text-align: left;
           }
           .dropdown-menu.east-lansing-menu {
             position: absolute;
-            top: -40%; // 根據需要調整垂直位置
+            top: 0; // 標準化垂直定位
             left: 89%;
             margin-left: $spacing-sm; // 與父選單的間距
             min-width: 140px; // 確保有最小寬度
@@ -202,7 +207,7 @@
 
         .areas-link {
           padding-left: 0; // 內部連結不再額外縮排
-          margin-right: 1.4rem;
+          padding-right: 2.5rem;
         }
 
         .dropdown-arrow {
@@ -214,12 +219,18 @@
           transition: $transition-normal;
           transform: rotate(180deg);
         }
-      }
-
-      // 調整五大領域子選單位置往左下角
+      } // 調整五大領域子選單位置往左下角並增加寬度
       .areas-header + .dropdown-menu.show {
         left: 89%;
         top: 0;
+        min-width: 190px; // 增加五大領域下拉選單的寬度
+      }
+
+      // 調整 MS Programs 下拉選單寬度 - 使用具體的選擇器定位 MS Programs
+      .dropdown-toggle[aria-expanded] + .dropdown-menu.show {
+        &:has(> li > a[href^="/uic-business-school/ms/"]) {
+          min-width: 320px; // 增加 MS Programs 下拉選單的寬度
+        }
       }
     }
 

@@ -15,7 +15,7 @@ export const StyledApplicationForm = styled.form`
     max-width: 700px;
     min-width: 260px;
     align-self: center;
-    border: 1px solid #b88a2b;
+    border: 1px solid #c71432;
     border-radius: 6px;
     padding: 10px 12px;
     font-size: 18px;
@@ -32,8 +32,8 @@ export const StyledApplicationForm = styled.form`
   }
 
   button {
-    background: #f5b82e;
-    color: #222;
+    background: #c71432;
+    color: #ffffff;
     border: none;
     border-radius: 6px;
     padding: 8px 24px;
@@ -45,7 +45,7 @@ export const StyledApplicationForm = styled.form`
     margin-top: 1.5rem;
     margin-bottom: 5rem;
     &:hover {
-      background: #a88145;
+      background: #1c184a;
       color: #ffffff;
     }
   }
@@ -74,7 +74,7 @@ export const StyledSectionTitle = styled.div`
   font-weight: 700;
   line-height: 40px;
   margin-bottom: 5rem;
-  color: #f5bf00;
+  color: #c71432;
   text-align: center;
 
   @media (max-width: 700px) {

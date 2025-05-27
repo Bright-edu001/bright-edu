@@ -32,12 +32,13 @@
     .stats-card-school {
       background: $color-white;
       @include card-border;
+      border: 2px solid #c71432;
       position: relative;
       margin-bottom: 6rem;
 
       h3 {
         @include heading-medium;
-        color: $color-brown-dark;
+        color: #c71432;
         text-align: left; //向左對齊
       }
 
@@ -63,7 +64,7 @@
 
           .value {
             @include value-style;
-            color: $color-accent-gold;
+            color: #c71432;
           }
         }
       }
@@ -72,11 +73,12 @@
     .stats-card-ranking {
       background: $color-white;
       @include card-border;
+      border: 2px solid #c71432;
       position: relative;
 
       h3 {
         @include heading-medium;
-        color: $color-brown-dark;
+        color: #c71432;
         text-align: left; //向左對齊
       }
 
@@ -108,16 +110,16 @@
             align-items: center;
 
             .number {
-              font-size: $font-size-number;
-              font-weight: 400;
-              color: $color-accent-orange;
+              font-size: 40px;
+              font-weight: 700;
+              color: #c71432;
               margin-bottom: 0.5rem;
               margin-left: 3rem; // 將 number 向右移動
             }
             .text {
-              font-size: $font-size-xl;
+              font-size: 32px;
               font-weight: 700;
-              color: $color-accent-orange;
+              color: #c71432;
               margin-right: 5px; // 可選，調整文字間距
             }
           }

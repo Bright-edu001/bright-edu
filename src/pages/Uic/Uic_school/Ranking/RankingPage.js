@@ -5,46 +5,53 @@ import ImageTextSection from "../../../../components/ImageTextSection/ImageTextS
 function RankingPage() {
   const rankings = [
     {
-      rank: "Top 1",
+      rankPrefix: "TOP",
+      rankNumber: "1",
       description: "全美地區最大醫藥研究型大學",
       source: "Largest research university in Chicago",
     },
     {
-      rank: "Top 39",
+      rankPrefix: "TOP",
+      rankNumber: "39",
       description: "全美公立大學 U.S.NEWS.",
       source: "Top Public Schools",
     },
     {
-      rank: "Top 80",
+      rankPrefix: "TOP",
+      rankNumber: "80",
       description: "全美大學排行 U.S.NEWS",
       source: "National Universities 2025",
     },
     {
-      rank: "Top 81",
+      rankPrefix: "TOP",
+      rankNumber: "81",
       description: "全美大學排行 2020 泰晤士高等教育世界大學排名",
       source:
         "Times Higher Education World University Rankings 2020 U.S Ranking",
     },
     {
-      rank: "Top 25%",
-
+      rankPrefix: "TOP",
+      rankNumber: "25%",
       description: "全美商學院",
       source:
         "U.S. NEWS & World Report Top 25% of all Business Schools National",
     },
     {
-      rank: "Top 8",
+      rankPrefix: "TOP",
+      rankNumber: "8",
       description: "華爾街日報/泰晤士高等教育 最具價值學校前10排行榜",
       source:
         'Wall Street Journal/THE - Which college give you the "Best Value"',
     },
     {
-      rank: "Top 36",
+      rankPrefix: "TOP",
+      rankNumber: "36",
       description: "QS World 全美大學",
       source: "QS USA Rankings",
     },
     {
-      rank: "Top 13",
+      rankPrefix: "TOP",
+      rankNumber: "13",
       description: "華爾街日報 / 大學脈動 全美公立大學排名 2024",
       source: "Wall Street Journal/College Pulse U.S. Public universities 2024",
     },
@@ -69,7 +76,10 @@ function RankingPage() {
       <div className={styles.rankingsGrid}>
         {rankings.map((item, index) => (
           <div key={index} className={styles.rankingItem}>
-            <div className={styles.rank}>{item.rank}</div>
+            <div className={styles.rank}>
+              {item.rankPrefix && <span className={styles.rankPrefix}>{item.rankPrefix}</span>}
+              {item.rankNumber && <span className={styles.rankNumber}>{item.rankNumber}</span>}
+            </div>
             <div className={styles.description}>{item.description}</div>
             <div className={styles.source}>{item.source}</div>
           </div>

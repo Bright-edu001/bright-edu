@@ -11,14 +11,14 @@
     .section-title {
       @include heading-large;
       margin-top: $spacing-md;
-      color: $color-brown-light;
+      color: #1c184a;
       text-align: center;
       margin-bottom: $spacing-xl;
       position: relative;
     }
     .section-subtitle {
       @include heading-large;
-      color: $color-accent-gold;
+      color: #c71432;
       margin-bottom: $spacing-xl;
     }
 

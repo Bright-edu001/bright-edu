@@ -19,7 +19,7 @@ html {
   h3 {
     @include heading-large;
     margin-bottom: $spacing-xl;
-    color: $color-accent-gold;
+    color: #c71432;
     text-align: center;
   }
 
@@ -38,11 +38,11 @@ html {
 
     .career-resources-list {
       margin-left: 5rem;
-      list-style: none;
+      list-style: disc;
       li {
         @extend .career-list-item;
         margin-top: 3rem;
-        color: $color-footer;
+        color: #1c184a;
         div {
           @include label-style;
           line-height: 36px;
@@ -92,7 +92,7 @@ html {
   }
 
   .career-dot {
-    color: #ffd600;
+    color: #c71432;
     font-size: $font-size-number;
     position: relative;
     top: 0.2rem;

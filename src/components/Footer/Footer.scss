@@ -11,7 +11,6 @@
     width: 100%;
     max-width: 1440px;
     padding: 0;
-    margin: 0 0 0 8rem;
   }
 
   /* 頁腳主要內容區域 */
@@ -75,8 +74,6 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        margin-right: -9rem;
-        margin-top: -0.5rem;
 
         .contact {
           margin-bottom: 20px;
@@ -169,14 +166,13 @@
   /* 頁腳底部區域樣式 */
   .footer-bottom {
     text-align: center;
-    margin-left: 33rem;
-    margin-top: $spacing-xxl;
+    margin: 0 auto;
 
     p {
       margin: 0;
       color: #1c184a;
       font-size: 18px;
-      text-align: left;
+      text-align: center;
     }
   }
 }
@@ -189,10 +185,6 @@
   .footer .footer-content .footer-section.brand {
     margin-left: 0; /* 移除左邊距 */
     max-width: 150px; /* 限制最大寬度 */
-  }
-  .footer .footer-bottom {
-    margin-left: 12rem; /* 移除左邊距 */
-    margin-top: $spacing-xxl;
   }
 
   .footer .footer-content .footer-section.footer-links-uic,
@@ -267,22 +259,10 @@
         }
       }
     }
-
-    /* 調整頁腳底部 */
-    .footer-bottom {
-      order: 3; /* 第三順位 */
-      margin-left: 8rem; /* 移除左邊距 */
-      margin-top: 0; /* 移除上方間距 */
-      text-align: center; /* 置中文字 */
-    }
   }
 }
 @media screen and (max-width: 500px) {
   .footer .footer-content {
     margin-bottom: 0;
-  }
-  .footer .footer-bottom {
-    margin-left: 6rem;
-    margin-right: 3.5rem;
   }
 }

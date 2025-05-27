@@ -9,7 +9,7 @@
   }
   h3 {
     font-size: $font-size-xxl;
-    color: $color-accent-gold;
+    color: #1c184a;
     margin-bottom: $spacing-xxl;
   }
   p {
@@ -28,7 +28,7 @@
   max-width: 70%;
 
   h4 {
-    color: $color-footer;
+    color: #c71432;
     @include heading-large;
     margin-top: 24px;
     margin-bottom: 8px;
@@ -96,10 +96,10 @@
     @include paragraph-style;
     margin-top: $spacing-xl;
     padding: 12px 16px;
-    background: $color-background-main;
-    color: $color-footer;
-    border-left: 4px solid $color-accent-gold;
-    border-right: 4px solid $color-accent-gold;
+    background: #f6f6f9;
+    color: #1c184a;
+    border-left: 4px solid #c71432;
+    border-right: 4px solid #c71432;
     border-radius: 6px;
     text-align: center;
     margin-bottom: $spacing-xxl;
