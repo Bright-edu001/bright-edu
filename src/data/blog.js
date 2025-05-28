@@ -1,16 +1,13 @@
-const eventimgrul = `${process.env.PUBLIC_URL}/images/blog/eventimg.webp`;
-const newsimgurl = `${process.env.PUBLIC_URL}/images/blog/newsimg.webp`;
-
 export const enrollmentEvents = [
   {
     id: 1,
-    image: eventimgrul,
+    image: `${process.env.PUBLIC_URL}/images/blog/2025-02-03_UIC-申請截止日期_01.webp`,
     title: "UIC MBA+MS Programs Application Deadline update",
     excerpt: "UIC MBA+MS Programs Application Deadline update Fall 20 […]",
     get link() {
       return `/blog/${this.id}`;
     },
-    content: `🇱🇷Fall 2025 秋季班資訊
+    content: `Fall 2025 秋季班資訊
 
 ✅開放申請時間: 目前已經開放申請
 
@@ -65,7 +62,7 @@ Nov/2025（目前最新公布截止日、若有更新則以更新為準）
   },
   {
     id: 2,
-    image: eventimgrul,
+    image: `${process.env.PUBLIC_URL}/images/blog/2024-08-29_UIC-申請截止日期_01.webp`,
     title: "UIC MBA Application Deadline update",
     excerpt: "UIC MBA Application Deadline update Spring 2025 春季班資訊開放",
     get link() {
@@ -94,7 +91,7 @@ Nov/2025（目前最新公布截止日、若有更新則以更新為準）
   },
   {
     id: 3,
-    image: eventimgrul,
+    image: `${process.env.PUBLIC_URL}/images/blog/2024-04-08_UIC-申請截止日期.webp`,
     title: "UIC MBA Application Deadline update​​",
     excerpt: "UIC MBA Application Deadline update​",
     get link() {
@@ -125,7 +122,7 @@ UIC MBA台灣招生中心:https://bright-edu.com/
   },
   {
     id: 4,
-    image: `${process.env.PUBLIC_URL}/images/blog/eventimg2.webp`,
+    image: `${process.env.PUBLIC_URL}/images/blog/擷取.webp`,
     title: "Education USA美國小型教育展-高雄場​",
     excerpt: "Education USA美國小型教育展-高雄場​",
     get link() {
@@ -143,7 +140,7 @@ UIC MBA台灣招生中心:https://bright-edu.com/
 export const news = [
   {
     id: 5,
-    image: newsimgurl,
+    image: `${process.env.PUBLIC_URL}/images/blog/UIC-BEST-COLLEGE-橫幅2.webp`,
     title: "UIC 最新排名賀報🎉",
     excerpt: "U.S. News 2025 最新排名",
     get link() {
@@ -163,7 +160,7 @@ UIC Today News:https://today.uic.edu/uic-rises-in-2025-u-s-news-best-colleges-ra
   },
   {
     id: 6,
-    image: newsimgurl,
+    image: `${process.env.PUBLIC_URL}/images/blog/UIC-BEST-COLLEGE-橫幅.webp`,
     title: "UIC U.S. NEWS Ranks 2022-2023 Best Colleges",
     excerpt: "UIC賀報🎉",
     get link() {
