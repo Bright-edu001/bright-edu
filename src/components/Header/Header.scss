@@ -103,7 +103,6 @@
         &.show {
           display: flex;
           flex-direction: column;
-          padding: $spacing-sm;
         }
 
         // 統一的列表項目樣式
@@ -154,15 +153,11 @@
             .dropdown-arrow {
               padding-left: 1rem;
             }
-          }
-
-          // 二級下拉選單
+          } // 二級下拉選單
           .dropdown-menu {
             position: absolute;
             top: 0;
             left: 100%;
-            margin-left: 1rem;
-            margin-top: -1rem;
             min-width: max-content;
 
             &.show {
@@ -180,20 +175,37 @@
                 white-space: nowrap;
               }
             }
-          }
-        }
 
-        // 特殊選單類別的樣式調整
+            // 第3級下拉選單特殊定位調整
+            .dropdown-container .dropdown-menu {
+              top: -$spacing-sm; // 向上移動
+              left: calc(100% + $spacing-sm); // 向右移動更多
+              margin-left: 0; // 移除額外邊距
+            }
+          }
+        } // 特殊選單類別的樣式調整
         &.areas-menu {
           min-width: 190px;
           left: 89%;
           top: 0;
+
+          // 五大領域的第3級選單調整
+          .dropdown-container .dropdown-menu {
+            top: 1rem; // 向上移動更多
+            left: calc(100% + $spacing-md); // 向右移動
+          }
         }
 
         &.rankings-menu,
         &.chicago-menu,
         &.east-lansing-menu {
           min-width: 140px;
+
+          // 排名獎項、芝加哥、東蘭辛的第3級選單調整
+          .dropdown-container .dropdown-menu {
+            top: -$spacing-md; // 向上移動
+            left: calc(100% + $spacing-sm); // 向右移動
+          }
         }
 
         &.ms-programs-menu {
