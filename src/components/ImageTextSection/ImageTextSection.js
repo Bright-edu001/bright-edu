@@ -24,7 +24,7 @@ function ImageTextSection({
           <div className="section-bg-mask" />
         </>
       )}
-      <div className="container">
+      <div className="content">
         <div className="text-content">
           <h2>{title}</h2>
           <h3>{subtitle}</h3>

@@ -125,6 +125,7 @@ function MsInformation() {
         subtitle="Management Information Systems"
         imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Management Information Systems"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169918_y.webp`}
       />
       <PageH2>
         UIC管理資訊系統碩士學位（Master of Science in Management Information

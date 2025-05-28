@@ -14,6 +14,7 @@ function CoreCourses() {
         subtitle="核心課程簡介"
         imageUrl="https://imgur.com/MjVvKjl.png"
         imageAlt="核心課程簡介"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
       <p className="intro">
         核心課程中包括七門必修課程，課程內容涵蓋商業學科的基本知識。以下是各課程的簡要說明:

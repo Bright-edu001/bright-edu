@@ -41,6 +41,7 @@ const Finance = () => {
         subtitle="Finance 金融"
         imageUrl="https://imgur.com/rycQiyw.png" // 圖片路徑
         imageAlt="Finance 金融"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169917_y.webp`}
       />
 
       {/* UIC MBA 管理專業簡介 */}

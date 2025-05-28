@@ -16,6 +16,7 @@ function Areas() {
         subtitle="MBA Program"
         imageUrl="https://imgur.com/f8MWoRF.png"
         imageAlt="MBA Program"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169917_y.webp`}
       />
       <SectionContainer>
         <div className="mba-areas-content">

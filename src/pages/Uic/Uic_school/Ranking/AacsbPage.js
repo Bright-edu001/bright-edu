@@ -10,6 +10,7 @@ function AacsbPage() {
         intro="不超過200間學校獲得此商業&會計的雙項認證"
         imageUrl="https://imgur.com/LAYY6IB.png" // 請確認圖片路徑
         imageAlt="AACSB Logo"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
 
       <div className={styles.contentSection}>

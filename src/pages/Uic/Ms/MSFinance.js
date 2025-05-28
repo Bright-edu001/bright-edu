@@ -95,6 +95,7 @@ function MSFinance() {
         subtitle="Finance"
         imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Finance"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169918_y.webp`}
       />
       <PageH2>
         UIC 會計碩士學位（Master of Science in Accounting,

@@ -96,6 +96,7 @@ function MsManagement() {
         subtitle="Supply Chain and Operations Management"
         imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Supply Chain and Operations Management"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169918_y.webp`}
       />
       <PageH2>
         UIC供應鏈與營運管理碩士學位（Master of Science in Supply Chain and

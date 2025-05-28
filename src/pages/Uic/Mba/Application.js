@@ -12,6 +12,7 @@ function Application() {
         subtitle="申請資訊"
         imageUrl="https://imgur.com/Ighubkx.png"
         imageAlt="申請資訊"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
 
       {/* 說明文字 */}

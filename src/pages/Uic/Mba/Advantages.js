@@ -14,6 +14,7 @@ function Advantages() {
         subtitle="課程優勢"
         imageUrl="https://imgur.com/vM0m15x.png"
         imageAlt="課程優勢"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
 
       <SectionContainer className="intro" ariaLabel="課程優勢">

@@ -15,6 +15,7 @@ function MsApplication() {
         subtitle="申請資訊"
         imageUrl="https://imgur.com/Ighubkx.png"
         imageAlt="申請資訊"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169918_y.webp`}
       />
       <div className="ms-application-intro">
         {/* Assuming h3 is styled by MsApplication.scss or globally */}

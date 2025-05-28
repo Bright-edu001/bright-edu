@@ -9,30 +9,30 @@
     line-height: 39px;
     color: $color-brown-dark;
     text-align: left;
-    max-width: 90%;
+    padding: 0 $spacing-lg;
     margin: 0 auto;
   }
 }
 .mba-info-section {
   display: flex;
   flex-direction: column;
-  max-width: 90%;
+  align-items: center;
   text-align: left;
-  margin-left: 6rem;
-  margin-bottom: $spacing-xxl;
+  padding: 0 $spacing-lg;
+  margin: $spacing-xxl 0;
   .mba-info-section-title {
-    font-size: $font-size-xl;
+    font-size: $font-size-xxl;
     line-height: 39px;
-    color: $color-brown-dark;
+    color: $color-text-secondary;
     text-align: left;
   }
   .mba-info-list {
+    padding: 0 $spacing-lg;
     li {
       @include heading-large;
-      color: $color-brown-dark;
-      font-size: $font-size-lg;
+      color: $color-text-secondary;
+      font-size: $font-size-xl;
       line-height: 24px;
-      margin-left: $spacing-xxl;
       margin-top: $spacing-lg;
     }
   }

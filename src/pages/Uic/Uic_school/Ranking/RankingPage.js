@@ -64,6 +64,7 @@ function RankingPage() {
         subtitle=""
         imageUrl="https://imgur.com/uhMmwNF.png" // 請確認圖片路徑
         imageAlt="Ranking Logo"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
 
       <div className={styles.introSection}>
@@ -77,8 +78,12 @@ function RankingPage() {
         {rankings.map((item, index) => (
           <div key={index} className={styles.rankingItem}>
             <div className={styles.rank}>
-              {item.rankPrefix && <span className={styles.rankPrefix}>{item.rankPrefix}</span>}
-              {item.rankNumber && <span className={styles.rankNumber}>{item.rankNumber}</span>}
+              {item.rankPrefix && (
+                <span className={styles.rankPrefix}>{item.rankPrefix}</span>
+              )}
+              {item.rankNumber && (
+                <span className={styles.rankNumber}>{item.rankNumber}</span>
+              )}
             </div>
             <div className={styles.description}>{item.description}</div>
             <div className={styles.source}>{item.source}</div>

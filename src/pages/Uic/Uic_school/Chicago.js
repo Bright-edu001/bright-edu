@@ -13,6 +13,7 @@ const Chicago = () => {
         subtitle="歷史發展 • 交通"
         imageUrl="https://imgur.com/nP2gMTI.png" // 圖片路徑
         imageAlt="歷史發展 • 交通"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
 
       <section className="chicago-intro">

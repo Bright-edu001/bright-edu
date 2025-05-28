@@ -10,6 +10,7 @@ const RankingsAwards = () => {
         subtitle="排名與獎項"
         imageUrl="https://imgur.com/JdvnypZ.png" // 圖片路徑
         imageAlt="排名與獎項"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
 
       <div className="content-section">

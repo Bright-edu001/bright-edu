@@ -10,6 +10,7 @@ function CareerResources() {
         subtitle="職涯資源"
         imageUrl="https://imgur.com/JD3FIrt.png"
         imageAlt="職涯資源"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
       <section
         className="intro"

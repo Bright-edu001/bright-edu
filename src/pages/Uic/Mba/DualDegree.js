@@ -14,6 +14,7 @@ function DualDegree() {
         subtitle="雙碩士銜接"
         imageUrl="https://imgur.com/pal1PBO.png"
         imageAlt="雙碩士銜接"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
 
       <SectionContainer className="intro" ariaLabel="雙學位課程">

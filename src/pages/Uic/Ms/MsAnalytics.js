@@ -92,6 +92,7 @@ function MsAnalytics() {
         subtitle="Business Analytics"
         imageUrl="https://imgur.com/rycQiyw.png"
         imageAlt="Business Analytics"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169918_y.webp`}
       />
       <PageH2>
         UIC 商業分析碩士學位（Master of Science in Business Analytics, MSBA）——

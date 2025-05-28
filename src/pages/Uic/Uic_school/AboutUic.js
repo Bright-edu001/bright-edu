@@ -31,6 +31,7 @@ function AboutUic() {
         subtitle="UIC 美國商學院"
         imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC 新款logo (RGB-04)-01.webp`}
         imageAlt="UIC 美國商學院"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169915_y.webp`}
       />
 
       <section className="intro" aria-label="學校介紹">

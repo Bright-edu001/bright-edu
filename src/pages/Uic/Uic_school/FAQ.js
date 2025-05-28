@@ -21,6 +21,7 @@ const FAQ = () => {
         subtitle="常見問題"
         imageUrl="https://imgur.com/JQLEfaj.png"
         imageAlt="常見問題"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
 
       <div className="faq-container">

@@ -8,16 +8,41 @@
     margin-top: $spacing-xxl;
     margin-bottom: $spacing-xxl;
     ul {
-      margin-top: $spacing-xl;
+      text-align: left;
       li {
-        color: $color-footer;
+        color: #c71432;
+        font-size: $font-size-xl;
+        margin-top: $spacing-lg;
         span {
           @include label-style;
-          font-size: $font-size-md;
-          color: $color-brown-dark;
+          font-size: $font-size-lg;
+          color: #c71432;
           margin-left: $spacing-xl;
         }
       }
+    }
+  }
+  @media screen and (max-width: 850px) {
+    ul {
+      padding: 0 $spacing-lg;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    ul {
+      padding: 0 $spacing-lg;
+    }
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: $font-size-lg;
+    margin-top: $spacing-xl;
+    font-weight: 500;
+    h3 {
+      @include heading-large;
+      color: #1c184a;
+      margin-bottom: $spacing-lg;
     }
   }
 }

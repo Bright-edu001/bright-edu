@@ -10,6 +10,7 @@ function HeedPage() {
         subtitle="高等教育多樣性卓越獎"
         imageUrl="https://imgur.com/JD9zLlj.png" // 請確認圖片路徑
         imageAlt="HEED Logo"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
 
       <div className={styles.contentSection}>

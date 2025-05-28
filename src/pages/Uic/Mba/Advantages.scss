@@ -30,6 +30,7 @@
   .learn .container {
     h3 {
       margin-bottom: $spacing-md;
+      color: #1c184a;
     }
 
     p {
@@ -54,7 +55,7 @@
           display: block;
           @include heading-large;
           line-height: 30px;
-          color: $color-footer;
+          color: #c71432;
           margin-bottom: 1rem;
         }
 
@@ -81,6 +82,7 @@
     .container {
       h3 {
         margin-bottom: $spacing-xl;
+        color: #1c184a;
       }
 
       p {
