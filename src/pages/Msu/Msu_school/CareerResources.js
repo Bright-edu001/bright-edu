@@ -8,8 +8,9 @@ function MsCareerResources() {
       <ImageTextSection
         title="MSU 密西根州立大學"
         subtitle="職涯資源"
-        imageUrl="https://imgur.com/JD3FIrt.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
         imageAlt="職涯資源"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner4-768.webp`}
       />
       <section className="career-resources">
         <h3>職涯管理中心</h3>

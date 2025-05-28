@@ -10,6 +10,7 @@ function Transportation() {
         subtitle="交通指南"
         imageUrl="https://imgur.com/Xbnfhxb.png"
         imageAlt="密西根州立大學"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner4-768.webp`}
       />
       {/* 設計稿內容開始 */}
       <div className="transportation-section">

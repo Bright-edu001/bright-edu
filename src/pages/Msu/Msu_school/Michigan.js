@@ -8,8 +8,9 @@ function Michigan() {
       <ImageTextSection
         title="密西根州"
         subtitle="East Lansing 大學城"
-        imageUrl="https://imgur.com/gXQw5KP.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
         imageAlt="密西根州立大學"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner4-768.webp`}
       />
       <section className="michigan-intro">
         <p>

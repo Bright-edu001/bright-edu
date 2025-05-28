@@ -5,20 +5,22 @@
   position: relative;
   z-index: 0;
   background-color: $color-gray; // 設置背景色，可依需求調整
-  height: 500px;
+  height: 570px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
 
   .content {
     display: flex;
     flex-direction: column-reverse; // 垂直排列
     align-items: center; // 垂直居中對齊
-    padding-top: 1rem; /* 增加此行，調整數值以符合需求 */
+    justify-content: center;
+    padding: 0rem 17rem;
 
     .text-content {
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.7);
       width: 100%;
+
       h2,
       h3 {
         @include value-style; // 使用 mixin 定義的標題樣式
@@ -34,12 +36,6 @@
         color: $color-white; // 設定副標題顏色
         text-align: center;
       }
-    }
-
-    img {
-      width: 100%; // 確保圖片不超過容器寬度
-      height: auto; // 自動調整高度以保持比例
-      object-fit: contain;
     }
   }
 }

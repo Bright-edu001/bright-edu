@@ -8,8 +8,9 @@ function MsMaster() {
       <ImageTextSection
         title="Master of Science in Finance"
         subtitle="MSF 金融碩士"
-        imageUrl="https://imgur.com/rycQiyw.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
         imageAlt="MSF 金融碩士"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner3-768.webp`}
       />
       <div className="ms-master-intro">
         <p>

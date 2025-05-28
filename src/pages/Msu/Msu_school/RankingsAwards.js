@@ -8,8 +8,9 @@ function MsRankingsAwards() {
       <ImageTextSection
         title="MSU 密西根州立大學"
         subtitle="排名與獎項"
-        imageUrl="https://imgur.com/SvcpDCa.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
         imageAlt="排名與獎項"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner4-768.webp`}
       />
       <section className="ranking">
         <h3>全國及全球排名亮點</h3>

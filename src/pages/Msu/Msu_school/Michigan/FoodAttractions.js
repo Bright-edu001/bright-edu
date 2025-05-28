@@ -44,6 +44,7 @@ function MicFoodAttractions() {
         subtitle="景點 • 美食"
         imageUrl="https://imgur.com/hiUsC7y.png"
         imageAlt="景點 • 美食"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner4-768.webp`}
       />
       {/* 景點區塊開始 */}
       <div className="attractions-section">

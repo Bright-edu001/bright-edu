@@ -9,8 +9,9 @@ function MsfApplication() {
       <ImageTextSection
         title="MSF 金融碩士"
         subtitle="申請資訊"
-        imageUrl="https://imgur.com/Ighubkx.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
         imageAlt="申請資訊"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner3-768.webp`}
       />
 
       <div className="msf-application-list">
