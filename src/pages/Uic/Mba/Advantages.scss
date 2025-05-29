@@ -3,7 +3,7 @@
 @import "./mba-common";
 
 .mba-advantages {
-  // 共用文本樣式
+  // ??��??��???
   p,
   li {
     @extend .mba-paragraph;
@@ -12,14 +12,14 @@
     max-width: 100%;
   }
 
-  // 共用標題樣式
+  // ??�μ�?????
   h3 {
     @extend .mba-heading-large;
   }
 
   .intro {
     padding: $spacing-lg 0;
-    margin-bottom: 3rem; // 增加與下方區塊的間距
+    margin-bottom: 3rem; // �W??????????��??????
 
     p {
       max-width: 100%;
@@ -30,7 +30,7 @@
   .learn .container {
     h3 {
       margin-bottom: $spacing-md;
-      color: #1c184a;
+      color: $color-nav;
     }
 
     p {
@@ -55,14 +55,13 @@
           display: block;
           @include heading-large;
           line-height: 30px;
-          color: #c71432;
+          color: $color-uic;
           margin-bottom: 1rem;
         }
-
         div {
           font-weight: 700;
           line-height: 30px;
-          color: $color-brown-dark;
+          color: $color-black;
           margin-left: 0;
         }
       }
@@ -82,7 +81,7 @@
     .container {
       h3 {
         margin-bottom: $spacing-xl;
-        color: #1c184a;
+        color: $color-nav;
       }
 
       p {

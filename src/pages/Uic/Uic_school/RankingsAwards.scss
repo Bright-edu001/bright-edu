@@ -29,14 +29,14 @@
       .rankings-title {
         h2 {
           @include heading-large;
-          color: $color-brown-dark;
+          color: $color-black;
         }
       }
     }
     .rankings-intro {
       @include label-style;
       font-weight: 700;
-      color: $color-brown-dark;
+      color: $color-black;
       margin-bottom: $spacing-xxl;
     }
 
@@ -63,7 +63,7 @@
 
           .top-label {
             @include body-large;
-            color: #c71432;
+            color: $color-uic;
             margin: 0;
             padding: 0;
             margin-right: 10px;
@@ -72,17 +72,16 @@
           .rank-number {
             @include label-style;
             font-size: 48px;
-            color: #c71432;
+            color: $color-uic;
             margin: 5px 0 15px;
           }
         }
-
         .rank-description,
         .rank-sub-description {
           @include body-large;
           font-size: $font-size-xs;
           line-height: 17px;
-          color: $color-brown-dark;
+          color: $color-black;
           margin: 5px 0 5px;
           text-align: left;
         }
@@ -91,7 +90,7 @@
   }
 }
 
-// 內容區塊
+// ??�e????
 .content-section {
   margin-bottom: $spacing-xxl;
   margin: $spacing-xxl auto;
@@ -103,7 +102,7 @@
     padding: 0 2rem;
   }
 
-  // AACSB 部分樣式
+  // AACSB ???????
   .aacsb-section {
     margin: 0 auto;
     padding: 2rem;
@@ -127,7 +126,7 @@
         width: 40%;
         h2 {
           margin-bottom: 0.5rem;
-          color: $color-brown-dark;
+          color: $color-black;
           font-weight: 900;
         }
         p {
@@ -145,10 +144,9 @@
       text-align: left;
       margin-bottom: $spacing-xxl;
     }
-
     .standard-title,
     .international-title {
-      color: $color-brown-dark;
+      color: $color-black;
       margin: 2rem 0 1rem;
     }
 
@@ -213,7 +211,7 @@
     }
   }
 
-  // 多元性卓越獎部分樣式
+  // �h??????�V?????????
   .diversity-excellence-section {
     margin: 5rem auto 0;
     padding: 2rem;
@@ -234,7 +232,7 @@
         h2 {
           @include heading-large;
           margin-bottom: 0.5rem;
-          color: $color-brown-dark;
+          color: $color-black;
         }
         p {
           @include heading-large;
@@ -280,7 +278,7 @@
   gap: 1.5em 2em;
   justify-items: start;
   li {
-    color: #c71432;
+    color: $color-uic;
     margin-bottom: 1em;
     @include body-large;
     padding-left: 2em;
@@ -407,8 +405,7 @@
     li {
       position: relative;
       &::before {
-        content: "•";
-        color: $color-accent-gold;
+        content: "�E";
         margin-right: 0.5em;
       }
     }

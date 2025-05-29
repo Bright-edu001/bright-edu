@@ -12,11 +12,10 @@
 
     .faq-section {
       margin-bottom: 3rem;
-
       .section-title {
         @include heading-medium;
         border-bottom: 2px solid $color-nav;
-        color: $color-brown-dark;
+        color: $color-black;
         padding-bottom: 0.5rem;
       }
 
@@ -31,10 +30,9 @@
           &:hover {
             box-shadow: $shadow-sm;
           }
-
           .question {
             padding: 1rem;
-            background-color: #f9f9f9;
+            background-color: $color-gray-lighter;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -50,16 +48,15 @@
 
             .toggle-icon {
               font-size: 1.5rem;
-              color: #c71432;
+              color: $color-uic;
               transition: $transition-normal;
             }
-
             &:hover {
-              background-color: #f0f0f0;
+              background-color: $color-gray-lightest;
             }
 
             &.expanded {
-              background-color: #c71432;
+              background-color: $color-uic;
               color: $color-white;
 
               .toggle-icon {
@@ -98,7 +95,7 @@
   }
 }
 
-// ÈüøÊáâÂºèË®≠Ë®à
+// ????¶°≥]??
 @media (max-width: $breakpoint-md) {
   .faq-page {
     .faq-container {
@@ -131,7 +128,7 @@
   }
 }
 
-// ÈüøÊáâÂºèË®≠Ë®à
+// ????¶°≥]??
 @media (max-width: 768px) {
   .faq-page {
     .faq-banner {

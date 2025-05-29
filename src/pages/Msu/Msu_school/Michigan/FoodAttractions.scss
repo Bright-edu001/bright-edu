@@ -4,12 +4,12 @@
 .attractions-section {
   margin: 0 auto;
   padding: 32px 0 0 0;
-  border-bottom: 1px solid #19453c;
+  border-bottom: 1px solid $color-msu;
 }
 
 .attractions-title {
   text-align: center;
-  color: #19453c;
+  color: $color-msu;
   font-size: $font-size-xxl;
   font-weight: 700;
   letter-spacing: 2px;
@@ -23,7 +23,7 @@
   gap: 32px 40px;
   margin-bottom: $spacing-xxl;
 }
-// 平板瀏覽時調整為兩欄
+// 平板?�覽?�調?�為?��?
 @media (max-width: 1024px) {
   .attractions-list {
     grid-template-columns: repeat(2, 1fr);
@@ -31,7 +31,7 @@
   }
 }
 
-// 手機瀏覽時調整為一欄
+// ?��??�覽?�調?�為一�?
 @media (max-width: 700px) {
   .attractions-list {
     grid-template-columns: 1fr;

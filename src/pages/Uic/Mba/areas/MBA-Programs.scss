@@ -1,31 +1,30 @@
-@import "../../../../styles/variables"; // 引入變數
-@import "../../../../styles/mixins"; // 引入 mixins
+@import "../../../../styles/variables"; // �ޤJ�ܼ�
+@import "../../../../styles/mixins"; // �ޤJ mixins
 
 .management-container {
   margin: 0 auto;
 
   .section {
-    margin: $spacing-xxl auto auto auto; // 整合上下 margin
+    margin: $spacing-xxl auto auto auto; // ????�W?? margin
     max-width: 90%;
 
     .section-title {
       @include heading-large;
       margin-top: $spacing-md;
-      color: #1c184a;
+      color: $color-nav;
       text-align: center;
       margin-bottom: $spacing-xl;
       position: relative;
     }
     .section-subtitle {
       @include heading-large;
-      color: #c71432;
+      color: $color-uic;
       margin-bottom: $spacing-xl;
     }
-
     .section-content {
       p {
         @include body-large;
-        color: $color-brown-dark;
+        color: $color-black;
         margin-bottom: $spacing-xl;
         text-align: left;
       }
@@ -47,20 +46,19 @@
       li {
         @include body-large;
         text-align: left;
-        color: $color-brown-dark;
+        color: $color-black;
       }
     }
   }
-
   .conclusion {
     text-align: center;
     padding: 30px 0;
     @include heading-large;
-    color: $color-brown-dark;
+    color: $color-black;
   }
 }
 
-// 響應式設計
+// ????���]??
 @media screen and (max-width: 768px) {
   .management-container {
     .hero-section {

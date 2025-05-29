@@ -13,16 +13,16 @@
 
   .intro {
     padding: $spacing-lg $spacing-lg;
-    text-align: left; // æ”¹ç‚ºå·¦å°é½Š
-    margin-bottom: 3rem; // å¢åŠ èˆ‡ä¸‹æ–¹å€å¡Šçš„é–“è·
+    text-align: left; // ??¬°¥ª????
+    margin-bottom: 3rem; // ¼W??????????¶ô??????
 
     p {
       @include body-large;
       color: $color-text-primary;
       letter-spacing: 0.05em;
-      margin-bottom: 2rem; // å¢åŠ æ®µè½é–“è·
+      margin-bottom: 2rem; // ¼W??¬q¸¨????
       margin-right: 0;
-      margin-left: 0; // ç¢ºä¿æ®µè½ä¸æœƒæœ‰é¡å¤–çš„å·¦å³é‚Šè·
+      margin-left: 0; // ½T??¬q¸¨¤£??????¥~??¥ª¥k????
       max-width: 1400px;
     }
   }
@@ -32,14 +32,14 @@
     .stats-card-school {
       background: $color-white;
       @include card-border;
-      border: 2px solid #c71432;
+      border: 2px solid $color-uic;
       position: relative;
       margin-bottom: 6rem;
 
       h3 {
         @include heading-medium;
-        color: #c71432;
-        text-align: left; //å‘å·¦å°é½Š
+        color: $color-uic;
+        text-align: left; //??¥ª¹ï??
       }
 
       ul.left-aligned {
@@ -47,24 +47,24 @@
         list-style: none;
         padding: 0;
         display: grid;
-        grid-template-columns: repeat(4, 1fr); // ä¸Šæ–¹å¡ç‰‡ 4 åˆ—
+        grid-template-columns: repeat(4, 1fr); // ¤W¤è???? 4 ??
         gap: 2rem;
 
         li {
           display: flex;
-          flex-direction: column; // ç¢ºä¿ label å’Œ value å‚ç›´æ’åˆ—
-          align-items: flex-start; // å‘å·¦å°é½Š
-          margin-bottom: 10px; // å¢åŠ é–“è·
+          flex-direction: column; // ½T?? label ??value ??ª½????
+          align-items: flex-start; // ??¥ª¹ï??
+          margin-bottom: 10px; // ¼W??????
 
           .label {
             @include label-style;
-            color: $color-text-secondary;
+            color: $color-black;
             margin-bottom: 0.5rem;
           }
 
           .value {
             @include value-style;
-            color: #c71432;
+            color: $color-uic;
           }
         }
       }
@@ -73,20 +73,20 @@
     .stats-card-ranking {
       background: $color-white;
       @include card-border;
-      border: 2px solid #c71432;
+      border: 2px solid $color-uic;
       position: relative;
 
       h3 {
         @include heading-medium;
-        color: #c71432;
-        text-align: left; //å‘å·¦å°é½Š
+        color: $color-uic;
+        text-align: left; //??¥ª¹ï??
       }
 
       .card-header {
         .header-content {
           display: flex;
-          justify-content: space-between; // h3 å’Œ a æ°´å¹³å°é½Š
-          align-items: center; // å‚ç›´å±…ä¸­
+          justify-content: space-between; // h3 ??a ¤ô¥­¹ï??
+          align-items: center; // ??ª½©~¤¤
         }
       }
 
@@ -95,14 +95,14 @@
         list-style: none;
         padding: 0;
         display: grid;
-        grid-template-columns: repeat(3, 1fr); // ä¸‹æ–¹å¡ç‰‡ 3 åˆ—
+        grid-template-columns: repeat(3, 1fr); // ¤U¤è???? 3 ??
         gap: 2rem;
 
         li {
           display: flex;
-          flex-direction: column; // ç¢ºä¿ label å’Œ value å‚ç›´æ’åˆ—
-          align-items: flex-start; // å‘å·¦å°é½Š
-          margin-bottom: 10px; // å¢åŠ é–“è·
+          flex-direction: column; // ½T?? label ??value ??ª½????
+          align-items: flex-start; // ??¥ª¹ï??
+          margin-bottom: 10px; // ¼W??????
 
           .label {
             display: flex;
@@ -112,20 +112,20 @@
             .number {
               font-size: 40px;
               font-weight: 700;
-              color: #c71432;
+              color: $color-uic;
               margin-bottom: 0.5rem;
-              margin-left: 3rem; // å°‡ number å‘å³ç§»å‹•
+              margin-left: 3rem; // ??number ??¥k²¾??
             }
             .text {
               font-size: 32px;
               font-weight: 700;
-              color: #c71432;
-              margin-right: 5px; // å¯é¸ï¼Œèª¿æ•´æ–‡å­—é–“è·
+              color: $color-uic;
+              margin-right: 5px; // ??¿ï¡A½Õ????¦r????
             }
           }
 
           .value {
-            margin-top: 5px; // å¢åŠ  label å’Œ value ä¹‹é–“çš„é–“è·
+            margin-top: 5px; // ¼W?? label ??value ¤§????????
             font-size: $font-size-xs;
             font-weight: 700;
             line-height: 17px;
@@ -137,17 +137,16 @@
 
   .business-school {
     padding: $spacing-lg 0;
-
     h3 {
       @include heading-large;
       margin-bottom: $spacing-xl;
-      color: $color-brown-dark;
+      color: $color-black;
       text-align: center;
     }
 
     p {
       @include body-large;
-      color: $color-brown-dark;
+      color: $color-black;
       margin-bottom: $spacing-xl;
       text-align: left;
       max-width: 1400px;
@@ -165,7 +164,7 @@
   .about-uic-page .stats .stats-card-school ul.left-aligned,
   .about-uic-page .stats .stats-card-ranking ul.left-aligned {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); // åœ¨å°è¢å¹•ä¸Šæ”¹ç‚º 2 åˆ—
+    grid-template-columns: repeat(2, 1fr); // ????????¤W§ï??2 ??
     gap: 12px 24px;
     padding: 0;
     list-style: none;

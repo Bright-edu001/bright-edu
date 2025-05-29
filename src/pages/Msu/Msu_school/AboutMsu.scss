@@ -13,13 +13,13 @@
 
   .intro {
     padding: $spacing-lg $spacing-lg;
-    text-align: left; // 改為左對齊
+    text-align: left; // ??����????
     p {
       @include body-large;
       color: $color-text-primary;
       letter-spacing: 0.05em;
-      margin: $spacing-xl auto; // 使段落置中
-      max-width: 100%; // 限制段落的最大寬度
+      margin: $spacing-xl auto; // �Ϭq??�m??
+      max-width: 100%; // ??��q��????�j�e??
     }
   }
 
@@ -29,14 +29,14 @@
     .stats-card-school {
       background: $color-white;
       @include card-border;
-      border: 2px solid #19453c;
+      border: 2px solid $color-msu;
       position: relative;
       margin-bottom: 6rem;
 
       h3 {
         @include heading-medium;
-        color: #19453c;
-        text-align: left; //向左對齊
+        color: $color-msu;
+        text-align: left; //??����??
       }
 
       ul.left-aligned {
@@ -44,38 +44,38 @@
         list-style: none;
         padding: 0;
         display: grid;
-        grid-template-columns: repeat(3, 1fr); // 上方卡片 4 列
+        grid-template-columns: repeat(3, 1fr); // �W��???? 4 ??
         gap: 2rem;
 
         li {
           display: flex;
-          flex-direction: column; // 確保 label 和 value 垂直排列
-          align-items: flex-start; // 向左對齊
-          margin-bottom: 10px; // 增加間距
+          flex-direction: column; // �T?? label ??value ??��????
+          align-items: flex-start; // ??����??
+          margin-bottom: 10px; // �W??????
 
           .label {
             @include label-style;
-            color: $color-text-secondary;
+            color: $color-black;
             margin-bottom: 0.5rem;
           }
 
           .value {
             @include value-style;
-            color: #19453c;
+            color: $color-msu;
           }
           .sub-list {
             @include value-style;
             font-size: $font-size-md;
             font-weight: 400;
-            color: #19453c;
+            color: $color-msu;
             list-style: disc;
             margin-top: 0;
-            padding-left: 20px; // 添加左側內邊距使圓點可見
+            padding-left: 20px; // �K??����????�Z��????????
 
             li {
               margin: 0;
-              display: list-item; // 確保列表項顯示為列表元素
-              padding-left: 5px; // 為文字和圓點之間添加間距
+              display: list-item; // �T????��??��ܬ�??��????
+              padding-left: 5px; // ????�r??????��??�K??????
             }
           }
         }
@@ -87,7 +87,7 @@
       .stats {
         .stats-card-school {
           ul.left-aligned {
-            grid-template-columns: repeat(2, 1fr); // 在小螢幕上改為 1 列 2 項目
+            grid-template-columns: repeat(2, 1fr); // ????????�W��??1 ??2 ??��
           }
         }
       }
@@ -104,7 +104,7 @@
 
       h3 {
         @include heading-medium;
-        color: #19453c;
+        color: $color-msu;
         margin-bottom: $spacing-md;
       }
 
@@ -115,7 +115,7 @@
         margin-left: 16rem;
         h4 {
           @include label-style;
-          color: $color-brown-dark;
+          color: $color-black;
           font-weight: 700;
           margin-bottom: 0.5rem;
           text-align: left;
@@ -130,7 +130,7 @@
 
         .funding-amount {
           @include heading-medium;
-          color: #19453c;
+          color: $color-msu;
           font-weight: bold;
         }
 
@@ -140,7 +140,7 @@
         }
 
         .facility p {
-          color: #19453c;
+          color: $color-msu;
           font-weight: 700;
           font-size: $font-size-lg;
           margin: $spacing-sm 0;
@@ -150,21 +150,21 @@
         .areas-list {
           display: flex;
           flex-direction: row;
-          flex-wrap: wrap; // 允許在必要時換行
-          margin-left: $spacing-md; // 調整左側間距
+          flex-wrap: wrap; // ??�\????�n??????
+          margin-left: $spacing-md; // �վ㥪��????
 
           li {
-            color: #19453c;
+            color: $color-msu;
             font-weight: 700;
             font-size: $font-size-xl;
             position: relative;
-            margin-right: $spacing-xl; // 添加項目之間的間距
-            white-space: nowrap; // 防止項目內容換行
-            margin-bottom: $spacing-sm; // 如果需要換行，提供垂直間距
+            margin-right: $spacing-xl; // �K????�ؤ�????????
+            white-space: nowrap; // ??��??��??�e????
+            margin-bottom: $spacing-sm; // �p????�n??��????????��????
           }
         }
         .research-centers p {
-          color: #19453c;
+          color: $color-msu;
           font-weight: 700;
           font-size: $font-size-lg;
           margin: 0;
@@ -177,7 +177,7 @@
   .global-impact {
     h3 {
       @include heading-medium;
-      color: #19453c;
+      color: $color-msu;
       margin-bottom: $spacing-xl;
     }
   }
@@ -191,27 +191,27 @@
     .impact-list {
       padding-left: $spacing-lg;
       text-align: left;
-      color: #19453c;
+      color: $color-msu;
       font-weight: 700;
       margin-left: 12rem;
       margin-top: 1rem;
 
       li {
-        margin-bottom: 1rem; // 增加 li 元素的上下間隔
+        margin-bottom: 1rem; // �W?? li ????????�U????
       }
     }
   }
   .diversity-list {
     padding-left: $spacing-lg;
     text-align: left;
-    color: $color-brown-dark;
+    color: $color-black;
     font-weight: 700;
     margin-left: 12rem;
     font-size: $font-size-xs;
     margin-top: 0;
 
     li {
-      margin-bottom: 1rem; // 增加 li 元素的上下間隔
+      margin-bottom: 1rem; // �W?? li ????????�U????
     }
   }
 }

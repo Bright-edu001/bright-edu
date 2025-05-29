@@ -17,7 +17,7 @@
   font-size: $font-size-md;
   text-align: left;
   margin: 2rem auto;
-  color: $color-brown-dark;
+  color: $color-black;
 }
 
 .reasons-to-choose p {
@@ -32,7 +32,7 @@
 .msf-outcomes h3,
 .reasons-to-choose h3 {
   @include value-style;
-  color: #1c184a;
+  color: $color-nav;
   font-size: $font-size-xxl;
   margin-bottom: $spacing-xl;
   padding: 0 1rem;
@@ -52,25 +52,24 @@
       font-size: $font-size-xl;
       line-height: 39px;
       margin-bottom: $spacing-md;
-      color: #c71432;
+      color: $color-uic;
       text-align: left;
-      // label-style ÂÖ±Áî®
-      div,
+      // label-style ¶@•Œ      div,
       &.label-style {
         @include label-style;
         font-size: $font-size-lg;
         font-weight: 500;
-        color: $color-brown-dark;
+        color: $color-black;
         margin-top: $spacing-lg;
       }
-      // Êñ∞Â¢ûÔºöextra-list li Ê®£ÂºèËàá desc ‰∏ÄËá¥
+      // ∑sºW°Gextra-list li ºÀ¶°ªP desc §@≠P
       ul {
         margin-top: 0.2em;
         margin-bottom: 0.2em;
         li {
           @include label-style;
           font-size: $font-size-md;
-          color: $color-brown-dark;
+          color: $color-black;
           margin-top: $spacing-sm;
           margin-bottom: 0;
           line-height: 24px;
@@ -83,7 +82,7 @@
 
 .company-courses {
   margin: $spacing-xxl auto;
-  // h3 Ê®£ÂºèÂ∑≤Êï¥Âêà
+  // h3 ºÀ¶°§wæ„¶X
   .company-logos {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -96,14 +95,14 @@
 
 .course-arrangement {
   margin: 0 auto;
-  // h3 Ê®£ÂºèÂ∑≤Êï¥Âêà
+  // h3 ºÀ¶°§wæ„¶X
   ul {
     list-style: disc;
     li {
       @include heading-large;
       font-size: $font-size-lg;
       line-height: 24px;
-      color: $color-brown-dark;
+      color: $color-black;
       text-align: left;
       margin-bottom: $spacing-sm;
     }
@@ -117,13 +116,13 @@
 .core-courses-title {
   text-align: center;
   @include value-style;
-  color: $color-accent-gold;
+  color: $color-nav;
   font-size: $font-size-xxl;
   margin-bottom: $spacing-xl;
 }
 .core-courses-pragaph {
   @include paragraph-style;
-  color: $color-brown-dark;
+  color: $color-black;
   margin: 0 auto;
   margin-bottom: $spacing-lg;
 }
@@ -143,27 +142,27 @@
   gap: $spacing-lg;
 }
 
-// Âêà‰Ωµ core-course-zh Âíå core-course-en ÁöÑÂÖ±Áî®Ê®£Âºè
+// ¶X®÷ core-course-zh ©M core-course-en ™∫¶@•ŒºÀ¶°
 .core-course-zh,
 .core-course-en {
   font-weight: bold;
-  color: #c71432;
+  color: $color-uic;
   text-align: left;
   font-size: $font-size-lg;
 }
 
 .core-course-desc {
   font-size: $font-size-md;
-  color: $color-text-secondary;
+  color: $color-black;
   margin-top: 0.2em;
   text-align: left;
 }
 
-// label-style ÂÖ±Áî® selector
+// label-style ¶@•Œ selector
 .label-style {
   @include label-style;
   font-size: $font-size-md;
-  color: $color-brown-dark;
+  color: $color-black;
   margin-top: $spacing-lg;
 }
 
@@ -178,7 +177,7 @@
 .ms-information .msf-outcomes ul li {
   list-style: disc;
   font-size: $font-size-md;
-  color: $color-brown-dark;
+  color: $color-black;
   font-weight: 700;
   margin-left: $spacing-xl;
 }
@@ -206,7 +205,7 @@
 @media screen and (max-width: 850px) {
   .company-courses {
     margin-top: $spacing-xxl;
-    // h3 Ê®£ÂºèÂ∑≤Êï¥Âêà
+    // h3 ºÀ¶°§wæ„¶X
     .company-logos {
       display: grid;
       grid-template-columns: repeat(2, 1fr);

@@ -9,14 +9,14 @@
     li {
       text-align: left;
       @include body-large;
-      color: #19453c;
+      color: $color-msu;
       margin-top: $spacing-xl;
     }
   }
   .english-requirements {
     li {
       @include label-style;
-      color: $color-brown-dark;
+      color: $color-black;
       font-weight: 900;
       margin-top: $spacing-md;
       margin-left: $spacing-lg;
@@ -26,21 +26,21 @@
     font-size: $font-size-xs;
     font-weight: 700;
     line-height: 17px;
-    color: $color-brown-dark;
-    margin-top: $spacing-lg; // 原本是 $spacing-xl，縮短垂直距離
+    color: $color-black;
+    margin-top: $spacing-lg;
     margin-left: 0;
-    margin-bottom: $spacing-lg; // 原本是 $spacing-xxl，縮短垂直距離
+    margin-bottom: $spacing-lg;
   }
   span {
     font-size: $font-size-xs;
     font-weight: 700;
     line-height: 17px;
-    color: $color-brown-dark;
-    position: static; // 取消定位，與 p 對齊
-    margin-left: -46rem; // 向左移動，與 p 左對齊，可依實際需求微調
-    display: block; // 讓 span 單獨一行，與 p 標籤一致
-    margin-top: 0.25rem; // 微調與 p 的距離
-    margin-bottom: 8rem; // 原本是 $spacing-xxl，縮短垂直距離
+    color: $color-black;
+    position: static;
+    margin-left: -46rem;
+    display: block;
+    margin-top: 0.25rem;
+    margin-bottom: 8rem;
   }
 
   @media screen and (max-width: 1024px) {
@@ -65,7 +65,7 @@
 
     p {
       font-size: $font-size-xs;
-      margin: $spacing-md 0 $spacing-md 6rem; // 調整 p 的邊距
+      margin: $spacing-md 0 $spacing-md 6rem;
     }
 
     span {
@@ -75,7 +75,7 @@
     }
   }
 
-  // 響應式設計：螢幕寬度小於 700px
+  // �����]�p�e�פp�� 700px
   @media screen and (max-width: 700px) {
     margin: $spacing-lg $spacing-md;
     padding-left: 0;
@@ -97,7 +97,7 @@
     }
 
     p {
-      margin: $spacing-md 0 $spacing-md 0; // 調整 p 的邊距
+      margin: $spacing-md 0 $spacing-md 0; // �վ� p ���Ҫ��W�U���Z
     }
   }
 }
@@ -109,17 +109,17 @@
   > form {
     input,
     textarea {
-      border-color: #19453c !important; // Change border color
+      border-color: $color-msu !important; // Change border color
     }
 
     button {
-      background-color: #19453c !important; // Change background color
+      background-color: $color-msu !important; // Change background color
       // The original button has no border, so no need to change border-color here.
-      // The hover state for the button uses a different background (#1c184a),
+      // The hover state for the button uses a different background ($color-nav),
       // so this change will only affect the default state.
     }
     h2 {
-      color: #19453c !important; // Change heading color
+      color: $color-msu !important; // Change heading color
     }
   }
 }

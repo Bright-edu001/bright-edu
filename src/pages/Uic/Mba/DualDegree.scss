@@ -10,13 +10,13 @@
     ul {
       text-align: left;
       li {
-        color: #c71432;
+        color: $color-uic;
         font-size: $font-size-xl;
         margin-top: $spacing-lg;
         span {
           @include label-style;
           font-size: $font-size-lg;
-          color: #c71432;
+          color: $color-uic;
           margin-left: $spacing-xl;
         }
       }
@@ -41,7 +41,7 @@
     font-weight: 500;
     h3 {
       @include heading-large;
-      color: #1c184a;
+      color: $color-nav;
       margin-bottom: $spacing-lg;
     }
   }

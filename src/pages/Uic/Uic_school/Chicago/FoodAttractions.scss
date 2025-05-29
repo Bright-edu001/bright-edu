@@ -30,7 +30,7 @@
     h3 {
       @include heading-large;
       margin-bottom: $spacing-xxl;
-      color: #1c184a;
+      color: $color-nav;
     }
     p {
       @include label-style;
@@ -105,16 +105,16 @@
   }
 
   .food-attractions-hotdog + .food-attractions-hotdog {
-    margin-top: -7rem; // 減少連續段落之間的間距
-    margin-bottom: 6rem; // 調整底部間距
+    margin-top: -7rem;
+    margin-bottom: 6rem;
   }
   .food-section {
     .title.foodheader {
-      color: #1c184a;
+      color: $color-nav;
     }
 
     .title.intro {
-      color: #1c184a;
+      color: $color-nav;
     }
   }
 }
@@ -130,7 +130,7 @@
       margin-left: 4rem;
     }
   }
-  // 1. food-attractions-intro 圖片移至 h3 上方
+
   .food-attractions-intro {
     display: flex;
     flex-direction: column;
@@ -148,7 +148,6 @@
     }
   }
 
-  // 2. InfoCard 垂直排列 img > title > content
   .food-attractions-page .card {
     display: flex;
     flex-direction: column !important;
@@ -166,7 +165,6 @@
       padding: 0;
       h4 {
         margin-top: $spacing-md;
-        color: $color-accent-gold;
       }
       p {
         margin-left: $spacing-xl;

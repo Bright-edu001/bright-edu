@@ -4,7 +4,7 @@
 .image-text-section {
   position: relative;
   z-index: 0;
-  background-color: $color-gray; // 設置背景色，可依需求調整
+  background-color: $color-gray; // 設置?�景?��??��??�求調??
   height: 570px;
   display: flex;
   align-items: flex-end;
@@ -12,8 +12,8 @@
 
   .content {
     display: flex;
-    flex-direction: column-reverse; // 垂直排列
-    align-items: center; // 垂直居中對齊
+    flex-direction: column-reverse; // ?�直?��?
+    align-items: center; // ?�直居中對�?
     justify-content: center;
     padding: 0rem 17rem;
 
@@ -23,17 +23,17 @@
 
       h2,
       h3 {
-        @include value-style; // 使用 mixin 定義的標題樣式
+        @include value-style; // 使用 mixin 定義?��?題樣�?
         font-weight: 900;
-        color: $color-white; // 設定標題顏色
-        margin-bottom: $spacing-xs; // 設定標題下方間距
+        color: $color-white; // 設�?標�?顏色
+        margin-bottom: $spacing-xs; // 設�?標�?下方?��?
       }
 
       p {
-        @include value-style; // 使用 mixin 定義的段落樣式
+        @include value-style; // 使用 mixin 定義?�段?�樣�?
         font-size: $font-size-lg;
         font-weight: 900;
-        color: $color-white; // 設定副標題顏色
+        color: $color-white; // 設�??��?題�???
         text-align: center;
       }
     }
@@ -58,7 +58,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(231, 227, 227, 0.4); // 參考 hero-bg-mask
+  background: rgba(231, 227, 227, 0.4); // ?��?hero-bg-mask
   z-index: 0;
   pointer-events: none;
 }
@@ -70,7 +70,7 @@
 
 @media screen and (max-width: 1024px) {
   .image-text-section {
-    height: 400px; // 取消固定高度
+    height: 400px; // ?��??��?高度
     .content {
       padding: 0rem 10rem;
     }
@@ -78,12 +78,12 @@
 }
 @media (max-width: 700px) {
   .image-text-section {
-    height: auto; // 取消固定高度
+    height: auto; // ?��??��?高度
     .content {
       padding: 0;
       .image-content {
         margin-right: 0;
-        margin-bottom: 1.5rem; // 圖片與文字間距
+        margin-bottom: 1.5rem; // ?��??��?字�?�?
         width: 90vw;
         max-width: 350px;
         align-self: center;

@@ -7,11 +7,11 @@ p {
   @include paragraph-style;
 }
 
-/* 主頁整體樣式 */
+/* 首頁整體樣式 */
 .home-page {
   margin-top: 5rem;
 
-  /* 按鈕樣式 - 定義各種按鈕的外觀 */
+  /* 按鈕樣式 - 首先定義通用按鈕外觀 */
   .btn {
     padding: 0.8rem 1.5rem;
     border-radius: 6px;
@@ -19,12 +19,12 @@ p {
     cursor: pointer;
     transition: $transition-normal;
 
-    /* 課程按鈕統一樣式 - 模組化設置 */
+    /* 課程按鈕特定樣式 - 繼承自通用按鈕 */
     &.course-btn {
       width: auto;
       min-width: 150px;
       padding: 0.5rem 1.5rem;
-      background: #1c184a;
+      background: $color-nav;
       color: $color-white;
       border: none;
       display: inline-block;
@@ -35,7 +35,7 @@ p {
         padding-right: 2.5rem;
 
         &:after {
-          content: "→";
+          content: "→"; // 箭頭符號
           position: absolute;
           right: 1rem;
           transition: transform 0.3s ease;
@@ -48,22 +48,22 @@ p {
     }
   }
 
-  /* 關於我們區域樣式 - 展示平台介紹和信息 */
+  /* 關於我們區塊樣式 - 用於介紹公司或服務 */
   .about {
-    margin: 0 auto; // 移除多餘的邊距
+    margin: 0 auto; // 使區塊水平居中
     padding: 4rem 0;
 
     .container {
       @include container();
     }
 
-    /* 關於區域內容樣式 - 左右兩欄布局 */
+    /* 關於我們內容區塊樣式 - 包含圖片和文字 */
     .about-content {
       display: flex;
       gap: $spacing-lg;
     }
 
-    /* 關於區域圖片樣式 - 左側圖片 */
+    /* 關於我們圖片樣式 - 左側圖片 */
     .about-image {
       flex: 1;
       img {
@@ -74,7 +74,7 @@ p {
       }
     }
 
-    /* 關於區域文字樣式 - 右側文字內容 */
+    /* 關於我們文本樣式 - 右側文本內容 */
     .about-text {
       flex: 1;
       display: flex;
@@ -89,7 +89,7 @@ p {
       .section-title {
         text-align: left;
         margin-top: 0;
-        color: $color-title-accent;
+        color: $color-uic;
         font-weight: 700;
       }
 
@@ -97,13 +97,13 @@ p {
         text-align: left;
         margin-bottom: $spacing-md;
         max-width: 100%;
-        /* 繼承全局 p 樣式，weight已經是700了 */
+        /* 注意此處 p 樣式，weight可能已被覆蓋 */
       }
     }
   }
 }
 
-/* 章節標題樣式 - 用於各區域的大標題 */
+/* 通用區塊標題樣式 - 例如用於各個主要區塊的標題 */
 .section-title {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -111,7 +111,7 @@ p {
   color: $color-text-primary;
 }
 
-/* 特色功能區域樣式 - 展示平台的主要特色 */
+/* 特色亮點區塊樣式 - 用於展示主要特色或優勢 */
 .features {
   .container {
     @include container();
@@ -125,7 +125,7 @@ p {
   .feature-card {
     position: relative;
     overflow: hidden;
-    background: #f6f6f9;
+    background: $color-gray-ultralight;
     border-radius: 20px;
     padding: 3rem 6rem;
     width: 100%;
@@ -156,12 +156,12 @@ p {
       pointer-events: none;
       display: block;
       object-fit: cover;
-      aspect-ratio: 16/9; /* 設定固定寬高比 */
+      aspect-ratio: 16/9; /* 設定長寬比 */
     }
 
     h3 {
       @include heading-medium;
-      color: #c71432;
+      color: $color-uic;
     }
 
     ul {
@@ -182,13 +182,13 @@ p {
         .ranking-title {
           font-size: 32px;
           font-weight: 600;
-          color: #c71432;
+          color: $color-uic;
           margin-right: 0.5rem;
         }
 
         p {
           font-size: 1rem;
-          color: #717185;
+          color: $color-gray-dark;
           margin: 0;
         }
       }
@@ -196,7 +196,7 @@ p {
   }
 }
 
-/* 特色卡片列表樣式 */
+/* 特色卡片容器樣式 */
 .feature-cards {
   display: flex;
   flex-wrap: wrap;
@@ -215,7 +215,7 @@ p {
     position: absolute;
     left: 22%;
     transform: translateX(-50%);
-    top: -60px; // 可依需求微調
+    top: -60px; // 可向上調整位置
   }
   .feature-logo-img-msu {
     transform: translateX(50%);
@@ -260,7 +260,7 @@ p {
   }
 }
 
-/* 特色卡片樣式 - 用於展示平台的主要功能 */
+/* 特色卡片樣式 - 單個特色項目的卡片 */
 .feature-card {
   @include card-base;
   padding: $spacing-lg;
@@ -281,12 +281,12 @@ p {
   }
 
   p {
-    color: $color-text-secondary;
+    color: $color-black;
     line-height: 1.6;
   }
 }
 
-/* 文章Blog區域樣式 */
+/* 文章Blog區塊樣式 */
 .blog-area {
   padding: 4rem 0;
 
@@ -294,7 +294,7 @@ p {
     @include container();
   }
 
-  /* Blog 頁首區域 - 標題和瀏覽按鈕 */
+  /* Blog 標題區塊 - 包含標題和查看更多按鈕 */
   .blog-header {
     display: flex;
     justify-content: space-between;
@@ -307,7 +307,7 @@ p {
     }
   }
 
-  /* Blog 子區塊 - 招生活動和最新消息 */
+  /* Blog 子區塊 - 如“最新消息”或“熱門文章” */
   .blog-section {
     margin-bottom: 1rem;
 
@@ -321,7 +321,7 @@ p {
     }
   }
 
-  /* 卡片圖片連結 */
+  /* 卡片連結樣式 */
   .card-link {
     display: block;
     text-decoration: none;
@@ -331,7 +331,7 @@ p {
     }
   }
 
-  /* 卡片容器 - 包含卡片和描述 */
+  /* 卡片容器 - 包裹卡片內容和描述 */
   .card-container {
     flex: 1;
     min-width: 300px;
@@ -341,7 +341,7 @@ p {
     text-align: left;
   }
 
-  /* 卡片描述區域 */
+  /* 卡片描述區塊 */
   .card-description {
     margin-top: 1.5rem;
     width: 100%; /* 確保與 course-card 寬度一致 */
@@ -355,26 +355,26 @@ p {
   }
 }
 
-/* 課程卡片列表樣式 */
+/* 課程卡片容器樣式 */
 .course-cards {
   display: flex;
   gap: $spacing-lg;
   flex-wrap: wrap;
 }
 
-/* 個別課程卡片樣式 */
+/* 單個課程卡片樣式 */
 .course-card {
   @include card-base;
   overflow: hidden;
   padding: 0;
-  height: 20rem; /* 調整為更合適的高度 */
+  height: 20rem; /* 設定固定高度，可調整 */
   @include hover-lift;
   border-radius: 8px;
   margin-bottom: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 新增陰影效果 */
 }
 
-/* 招生活動區域樣式 */
+/* 招生資訊區塊樣式 */
 .enrollment-section {
   .course-card {
     background: url("https://imgur.com/6n3nCHp.png") center center/cover
@@ -382,7 +382,7 @@ p {
   }
 }
 
-/* 最新消息區域樣式 */
+/* 最新消息區塊樣式 */
 .news-section {
   .course-card {
     background: url("https://imgur.com/1EoFLTI.png") center center/cover
@@ -390,7 +390,7 @@ p {
   }
 }
 
-/* 響應式：feature-card 在寬度700px以下垂直排列 */
+/* 注意：當feature-card在螢幕寬度700px以下時的佈局調整 */
 @media (max-width: 700px) {
   .feature-cards {
     flex-direction: column;
@@ -414,7 +414,7 @@ p {
     .card-container {
       width: 100%;
       max-width: 100%;
-      margin-left: 0.5rem; // 置中
+      margin-left: 0.5rem; // 微調
     }
   }
 }
@@ -425,7 +425,7 @@ p {
     font-size: 0.7rem;
   }
   .home-page .hero {
-    height: 20rem; // 調整高度以適應小螢幕
+    height: 20rem; // 調整高度，適應小螢幕
     padding: 2rem 0; // 調整內邊距
   }
 
@@ -433,16 +433,16 @@ p {
     margin-left: 3rem;
     align-items: flex-start;
     h1 {
-      font-size: 1.5rem; // 調整字體大小
+      font-size: 1.5rem; // 調整標題大小
     }
   }
 
   .hero-content p {
-    font-size: 1rem; // 調整字體大小
+    font-size: 1rem; // 調整段落文字大小
   }
 
   .about-image img {
-    width: 100%; // 確保圖片在小螢幕上適應
+    width: 100%; // 確保圖片在小螢幕上填滿寬度
     height: auto;
   }
 }
@@ -462,20 +462,20 @@ p {
   }
 }
 
-/* Hero 區域樣式 - 頁面頂部的主要宣傳區塊 */
-/* 已移至 components/Hero/Hero.scss，因此此處移除 */
+/* Hero 區塊樣式 - 首頁頂部的主要展示區域 */
+/* 已移至 components/Hero/Hero.scss，此處不再重複 */
 
-/* UIC 與 MSU Rankings 特殊樣式設定 */
+/* UIC 和 MSU Rankings 顏色樣式定義 */
 .feature-card {
   &.msu {
     h3,
     .ranking-title,
     .ranking-number,
     .ranking-number-flip {
-      color: #19453c !important;
+      color: $color-msu !important;
     }
     p {
-      color: #717185 !important;
+      color: $color-gray-dark !important;
     }
   }
 }

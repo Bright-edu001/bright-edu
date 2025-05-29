@@ -101,12 +101,12 @@
   font-weight: 600;
   margin-bottom: 0.5rem;
   text-align: left;
-  color: #1c184a;
+  color: $color-nav;
 }
 
 .blog-card-excerpt {
   font-size: 0.95rem;
-  color: $color-brown-dark;
+  color: $color-black;
   line-height: 1.5;
   text-align: left;
   margin: 0;
@@ -125,9 +125,9 @@
   margin-bottom: $spacing-xxl;
   &:hover,
   &:focus {
-    background: #1c184a;
+    background: $color-nav;
     color: $color-white;
-    border-color: #1c184a;
+    border-color: $color-nav;
   }
 }
 
@@ -139,24 +139,24 @@
 .blog-detail-mainrow {
   display: flex;
   flex-direction: row;
-  margin: 0 auto; // ä½¿ä¸»è¦å…§å®¹å€åŸŸå±…ä¸­
-  padding: $spacing-sm; // æ·»åŠ ä¸€äº›å…§é‚Šè·
-  max-width: $container-max-width; // é™åˆ¶æœ€å¤§å¯¬åº¦
-  width: 100%; // ç¢ºä¿åœ¨è¼ƒå°è¢å¹•ä¸Šä½”æ»¿å¯¬åº¦
+  margin: 0 auto; // ¨Ï¥D­n¤º®e°Ï°ì©~¤¤
+  padding: $spacing-sm; // ²K¥[¤@¨Ç¤ºÃä¶Z
+  max-width: $container-max-width; // ­­¨î³Ì¤j¼e«×
+  width: 100%; // ½T«O¦b¸û¤p¿Ã¹õ¤W¦ûº¡¼e«×
   overflow: hidden;
 }
 
 .blog-detail-main {
-  flex: 3; // ä¸»è¦å…§å®¹ä½”ç”¨è¼ƒå¤šç©ºé–“
-  margin-right: $spacing-xl; // èˆ‡å´é‚Šæ¬„çš„é–“è·
+  flex: 3; // ¥D­n¤º®e¦û¥Î¸û¦hªÅ¶¡
+  margin-right: $spacing-xl; // »P°¼ÃäÄæªº¶¡¶Z
 }
 
 .blog-detail-sidebar {
-  flex: 1; // å´é‚Šæ¬„ä½”ç”¨è¼ƒå°‘ç©ºé–“
-  // ä¿æŒ SearchBar.scss ä¸­çš„æ¨£å¼ï¼Œé€™è£¡ä¸»è¦æ§åˆ¶ä½ˆå±€
+  flex: 1; // °¼ÃäÄæ¦û¥Î¸û¤ÖªÅ¶¡
+  // «O«ù SearchBar.scss ¤¤ªº¼Ë¦¡¡A³o¸Ì¥D­n±±¨î§G§½
 }
 
-// éŸ¿æ‡‰å¼èª¿æ•´ï¼šç•¶è¢å¹•å¯¬åº¦å°æ–¼ $breakpoint-md æ™‚ï¼Œå †ç–Šä¸»è¦å…§å®¹å’Œå´é‚Šæ¬„
+// ÅTÀ³¦¡½Õ¾ã¡G·í¿Ã¹õ¼e«×¤p©ó $breakpoint-md ®É¡A°ïÅ|¥D­n¤º®e©M°¼ÃäÄæ
 @media screen and (max-width: $breakpoint-md) {
   .blog-detail-mainrow {
     flex-direction: column;
@@ -164,7 +164,7 @@
 
   .blog-detail-main {
     margin-right: 0;
-    margin-bottom: $spacing-xl; // åœ¨å †ç–Šæ™‚æ·»åŠ åº•éƒ¨é–“è·
+    margin-bottom: $spacing-xl; // ¦b°ïÅ|®É²K¥[©³³¡¶¡¶Z
   }
 }
 @media screen and (max-width: 1025px) {
@@ -174,7 +174,7 @@
   }
 
   .blog-detail-sidebar {
-    /* è®“æœå°‹åˆ—é¡¯ç¤ºåœ¨ä¸»å…§å®¹ä¸Šæ–¹ */
+    /* Åı·j´M¦CÅã¥Ü¦b¥D¤º®e¤W¤è */
     order: -1;
     margin-bottom: $spacing-xl;
   }

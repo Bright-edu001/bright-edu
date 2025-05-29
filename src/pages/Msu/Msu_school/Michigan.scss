@@ -8,13 +8,12 @@
   }
   .michigan-intro {
     margin: $spacing-xxl $spacing-xxl;
-    border-bottom: 1px solid #19453c;
+    border-bottom: 1px solid $color-msu;
     p {
       margin: 8rem 8rem 8rem 9rem;
       padding: 0;
       text-align: left;
-      color: $color-text-secondary;
-      /* èˆ‡æ¨™é¡Œã€å…§å®¹å°é½Š */
+      color: $color-black;
     }
     h3 {
       @include heading-medium;
@@ -23,11 +22,11 @@
     .intro-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 3rem 2rem; // è¡Œé–“è·40pxï¼Œæ¬„é–“è·80px
-      margin: $spacing-xxl $spacing-xxl; // ä¸Šä¸‹å„ 60pxï¼Œå·¦å³å„ 20px
+      gap: 3rem 2rem; // ¦æ????0px¡A??????80px
+      margin: $spacing-xxl $spacing-xxl; // ¤W????60px¡A¥ª???? 20px
 
       .intro-col {
-        // é è¨­ä¸ç½®ä¸­
+        // ??³]¤£¸m??
         text-align: left;
         align-items: flex-start;
         flex: 1 1 320px;
@@ -35,14 +34,14 @@
         min-width: 220px;
         margin-bottom: 0;
         h4 {
-          color: #19453c; // åœ–ç‰‡ä¸­çš„æ£•è‰²
+          color: $color-msu; // ????¤¤??´Ä¦â
           font-size: 1.5rem;
           font-weight: 700;
           margin-bottom: $spacing-sm;
           text-align: left;
         }
         p {
-          color: $color-text-secondary;
+          color: $color-black;
           font-size: 1rem;
           margin: 0;
         }
@@ -50,60 +49,60 @@
     }
   }
   .outdoor-activities {
-    margin: 0 $spacing-xxl; // ä¸Šä¸‹å„ 60pxï¼Œå·¦å³å„ 20px
-    padding: 60px 40px; // ä¸Šä¸‹å„ 60pxï¼Œå·¦å³å„ 20px
+    margin: 0 $spacing-xxl; // ¤W????60px¡A¥ª???? 20px
+    padding: 60px 40px; // ¤W????60px¡A¥ª???? 20px
     text-align: center;
-    background-color: #fff; // æˆ–æ‚¨æƒ³è¦çš„èƒŒæ™¯è‰²
-    border-bottom: 1px solid $color-footer;
+    background-color: #fff; // ??±z??????????¦â
+    border-bottom: 1px solid $color-msu;
 
     h3 {
       font-size: 1.8rem;
-      color: #19453c; // åœ–ç‰‡ä¸­çš„æ£•è‰²
-      margin-bottom: 30px; // ä¿æŒé–“è·
+      color: $color-msu; // ????¤¤??´Ä¦â
+      margin-bottom: 30px; // «O??????
     }
 
     .activities-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); // ä¿®æ”¹ï¼šå¼·åˆ¶æ¯è¡Œé¡¯ç¤ºå…©å€‹é …ç›®
-      gap: 40px; // èª¿æ•´é–“è·
-      // justify-items: center; // ç§»é™¤æˆ–è¨»è§£æ‰ï¼Œè®“é …ç›®è‡ªç„¶å¡«æ»¿ç¶²æ ¼å–®å…ƒæ ¼å¯¬åº¦
-      max-width: 1200px; // é™åˆ¶æœ€å¤§å¯¬åº¦
-      margin: $spacing-xxl auto; // å±…ä¸­ç¶²æ ¼å®¹å™¨
+      grid-template-columns: repeat(2, 1fr); // ­×§ï¡G±j????¦æÅã¥Ü¨â??????
+      gap: 40px; // ½Õ¾ã????
+      // justify-items: center; // ²¾°£??µù???¡A????¥Ø??µM¶ñº¡ºô®æ??????¼e??
+      max-width: 1200px; // ??¨î??¤j¼e??
+      margin: $spacing-xxl auto; // ©~¤¤ºô®æ®e¾¹
     }
 
     .activity-item {
       display: flex;
       flex-direction: column;
-      // align-items: center; // ç§»é™¤æ­¤è¡Œï¼Œå…è¨±å…§å®¹å·¦å°é½Š
-      // text-align: center; // ç§»é™¤æ­¤è¡Œ
-      width: 100%; // ç¢ºä¿é …ç›®å¡«æ»¿ç¶²æ ¼åˆ—
-      max-width: 250px; // è¨­ç½®çµ±ä¸€çš„æœ€å¤§å¯¬åº¦ (èˆ‡ grid minmax åŒ¹é…)
-      justify-self: center; // å¦‚æœå¸Œæœ›é …ç›®æœ¬èº«åœ¨ç¶²æ ¼å–®å…ƒæ ¼å…§å±…ä¸­ï¼ˆä½†å…§å®¹å·¦å°é½Šï¼‰
+      // align-items: center; // ²¾°£¦¹??¡A??³\¤º®e¥ª¹ï??
+      // text-align: center; // ²¾°£¦¹??
+      width: 100%; // ½T????¥Ø¶ñº¡ºô®æ??
+      max-width: 250px; // ³]¸m²Î??????¤j¼e??(??grid minmax ????)
+      justify-self: center; // ¦p??§Æ????¥Ø??¨­??ºô??³æ??®æ????¤¤??¦ı¤º®e¥ª¹ï????
 
       .activity-image-placeholder {
-        width: 120%; // å¯¬åº¦ä½”æ»¿çˆ¶å®¹å™¨ (.activity-item)
-        height: 200px; // å›ºå®šçš„é«˜åº¦ (æ‚¨å¯ä»¥æ ¹æ“šéœ€è¦èª¿æ•´)
-        background-color: #e0e0e0; // ä½”ä½ç¬¦é¡è‰² (æ‚¨å¯ä»¥ä¿ç•™æˆ–ä¿®æ”¹)
-        border-radius: 8px; // åœ“è§’ (æ‚¨å¯ä»¥ä¿ç•™æˆ–ä¿®æ”¹)
-        margin-bottom: 15px; // åœ–ç‰‡ä¸‹æ–¹é–“è·
+        width: 120%; // ¼e«×¦ûº¡??®e??(.activity-item)
+        height: 200px; // ??????????(??¥i¥H®Ú????­n½Õ??
+        background-color: $color-gray-light; // ¦û??²Å????(??¥i¥H??????­×§ï)
+        border-radius: 8px; // ???? (??¥i¥H??????­×§ï)
+        margin-bottom: 15px; // ????¤U¤è????
       }
 
       h4 {
         font-size: 1.2rem;
         font-weight: 900;
-        color: #19453c; // æ£•è‰²
-        margin-bottom: 5px; // æ¨™é¡Œä¸‹æ–¹é–“è·
-        text-align: left; // æ–‡å­—å·¦å°é½Š
-        width: 100%; // ç¢ºä¿æ¨™é¡Œä½”æ»¿å¯¬åº¦ä»¥ä¾¿å·¦å°é½Š
+        color: $color-msu; // ´Ä¦â
+        margin-bottom: 5px; // ¼Ğ??¤U¤è????
+        text-align: left; // ????¥ª????
+        width: 100%; // ½T??¼Ğ??¦ûº¡¼e«×¥H«K¥ª????
       }
 
       p {
         font-size: 1rem;
         font-weight: 700;
-        color: $color-text-secondary; // ç°è‰²
-        text-align: left; // æ–‡å­—å·¦å°é½Š
-        width: 100%; // ç¢ºä¿æ®µè½ä½”æ»¿å¯¬åº¦ä»¥ä¾¿å·¦å°é½Š
-        margin-right: $spacing-xxl; // å³å´é–“è·
+        color: $color-black; // ??¦â
+        text-align: left; // ????¥ª????
+        width: 100%; // ½T??¬q¸¨¦ûº¡¼e«×¥H«K¥ª????
+        margin-right: $spacing-xxl; // ??°¼????
       }
     }
   }
@@ -111,13 +110,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 $spacing-xxl; // ä¸Šä¸‹å„ 60pxï¼Œå·¦å³å„ 20px
-    border-bottom: 1px solid #19453c;
+    margin: 0 $spacing-xxl; // ¤W????60px¡A¥ª???? 20px
+    border-bottom: 1px solid $color-msu;
     h3 {
-      color: $color-text-secondary; // åœ–ç‰‡ä¸­çš„æ£•è‰²
+      color: $color-black; // ????¤¤??´Ä¦â
     }
     ul {
-      color: #19453c; // åœ–ç‰‡ä¸­çš„æ£•è‰²
+      color: $color-msu; // ????¤¤??´Ä¦â
       text-align: left;
       font-size: $font-size-xl;
       font-weight: 700;
@@ -130,19 +129,19 @@
   .city-features {
     display: flex;
     flex-direction: column;
-    margin: 0 $spacing-xxl; // ä¸Šä¸‹å„ 60pxï¼Œå·¦å³å„ 20px
+    margin: 0 $spacing-xxl; // ¤W????60px¡A¥ª???? 20px
     h3 {
-      color: $color-text-secondary; // åœ–ç‰‡ä¸­çš„æ£•è‰²
+      color: $color-black; // ????¤¤??´Ä¦â
     }
     ul {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); // ä¸‰æ¬„ä½ˆå±€
+      grid-template-columns: repeat(3, 1fr); // ¤T??§G??
       justify-items: start;
-      gap: $spacing-xl; // æ¬„é–“è·
-      color: #19453c; // åœ–ç‰‡ä¸­çš„æ£•è‰²
+      gap: $spacing-xl; // Äæ????
+      color: $color-msu; // ????¤¤??´Ä¦â
       font-size: $font-size-xl;
       font-weight: 700;
-      margin: $spacing-xl auto; // ä¸Šä¸‹å„ 40px
+      margin: $spacing-xl auto; // ¤W????40px
 
       li {
         text-align: left;
@@ -151,7 +150,7 @@
   }
 }
 
-// éŸ¿æ‡‰å¼è¨­è¨ˆï¼šå¯¬åº¦700pxä»¥ä¸‹
+// ????¦¡³]­p??¼e«×700px¥H??
 @media (max-width: 700px) {
   .michigan-page {
     h3 {

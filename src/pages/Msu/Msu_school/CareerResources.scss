@@ -5,25 +5,25 @@
   .career-resources {
     h3 {
       @include heading-large;
-      color: #19453c;
+      color: $color-msu;
       margin-bottom: $spacing-md;
       margin-top: $spacing-xxl;
     }
     h4 {
       @include body-large;
-      color: #19453c;
+      color: $color-msu;
       margin-bottom: $spacing-lg;
     }
   }
   .career-services {
     h3 {
       @include body-large;
-      color: #19453c;
+      color: $color-msu;
       margin-top: $spacing-xxl;
     }
     h4 {
       @include body-large;
-      color: #19453c;
+      color: $color-msu;
       margin-bottom: $spacing-lg;
       text-align: left;
       margin-left: 10rem;
@@ -34,7 +34,7 @@
       @include value-style;
       padding: $spacing-lg 16rem;
       text-align: left;
-      color: #19453c;
+      color: $color-msu;
       li {
         margin-top: $spacing-md;
       }
@@ -43,13 +43,13 @@
   .employer-engagement {
     h3 {
       @include body-large;
-      color: #19453c;
+      color: $color-msu;
       margin-top: $spacing-xxl;
       margin-bottom: $spacing-lg;
     }
     h4 {
       @include body-large;
-      color: #19453c;
+      color: $color-msu;
       margin-bottom: $spacing-lg;
       text-align: left;
       margin-left: 10rem;
@@ -74,7 +74,7 @@
   .career-virtual {
     h3 {
       @include body-large;
-      color: #19453c;
+      color: $color-msu;
       margin-top: $spacing-xxl;
       margin-bottom: $spacing-lg;
     }
@@ -87,7 +87,7 @@
       gap: $spacing-lg;
       h5 {
         @include body-large;
-        color: #19453c;
+        color: $color-msu;
         margin-bottom: $spacing-lg;
         text-align: left;
         margin-left: 5rem;
@@ -101,7 +101,7 @@
   }
 
   @media screen and (max-width: 1024px) {
-    // 1024px 以下移除左側內縮
+    // 1024px 以�?移除左側?�縮
     & .career-virtual .virtual-resource-row {
       margin-right: 0;
     }
@@ -122,7 +122,7 @@
     }
   }
 
-  // 響應式設計：寬度700px以下
+  // ?��?式設計�?寬度700px以�?
   @media screen and (max-width: 700px) {
     .career-resources {
       h3,

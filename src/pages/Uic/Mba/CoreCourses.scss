@@ -23,7 +23,7 @@
       gap: 5rem;
       margin-bottom: $spacing-xxl;
 
-      // å·¦å´æ¨™é¡Œå€
+      // ¥ª°¼¼Ğ????
       .course-title {
         min-width: 350px;
         max-width: 450px;
@@ -32,7 +32,7 @@
         align-items: center;
         text-align: right;
         margin-right: 2rem;
-        color: #c71432;
+        color: $color-uic;
         h4 {
           font-size: $font-size-xxl;
           font-weight: 700;
@@ -47,12 +47,12 @@
         }
       }
 
-      // å³å´èªªæ˜å€
+      // ??°¼»¡????
       .course-desc {
         flex: 1;
         p {
           font-size: $font-size-lg;
-          color: $color-brown-dark;
+          color: $color-black;
           font-weight: 700;
           line-height: 1.7;
           margin: 0;
@@ -68,18 +68,18 @@
       flex-direction: column;
       align-items: center;
       margin-bottom: $spacing-md;
-      width: 100%; // è®“å…§å®¹æ’æ»¿æœ€å¤§å¯¬åº¦
-      border-top: 1px solid #1c184a;
+      width: 100%; // Åı¤º®e??º¡??¤j¼e??
+      border-top: 1px solid $color-nav;
       h3 {
         @extend .mba-heading-large;
         text-align: left;
         margin-top: $spacing-xxl;
         margin-bottom: $spacing-md;
-        color: #c71432;
+        color: $color-uic;
       }
       li {
         @include label-style;
-        color: $color-text-secondary;
+        color: $color-black;
         text-align: left;
       }
     }

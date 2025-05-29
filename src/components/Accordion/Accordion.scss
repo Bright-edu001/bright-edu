@@ -1,3 +1,8 @@
+@import "../../styles/_variables.scss";
+
+// 臨時變數定義（如果導入失敗）
+$color-gray-light: #e0e0e0 !default;
+
 .accordion {
   display: flex;
   flex-direction: column;
@@ -5,7 +10,7 @@
 
 .faq-item {
   margin-bottom: 1rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid $color-gray-light;
 }
 
 .question {

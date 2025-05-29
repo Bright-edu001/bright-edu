@@ -12,7 +12,7 @@
 
 .mba-areas-title {
   @include body-large;
-  color: #1c184a;
+  color: $color-nav;
   text-align: center;
   margin-bottom: $spacing-xxl;
   letter-spacing: 0.05em;
@@ -22,14 +22,14 @@
   text-align: left;
   font-size: 1rem;
   margin-bottom: $spacing-xxl;
-  color: $color-text-secondary;
+  color: $color-black;
 }
 
 .mba-areas-why {
   margin-bottom: 2.5rem;
   .mba-areas-why-title {
     @include heading-large;
-    color: #1c184a;
+    color: $color-nav;
     text-align: center;
     margin-bottom: $spacing-lg;
     letter-spacing: 0.03em;
@@ -43,9 +43,9 @@
       margin-bottom: 1.1rem;
       font-size: 1rem;
       line-height: 1.7;
-      color: $color-text-secondary;
+      color: $color-black;
       .highlight {
-        color: #c71432;
+        color: $color-uic;
         @include body-large;
       }
     }
@@ -59,12 +59,12 @@
     text-align: center;
     margin-bottom: 1.1rem;
     .highlight-gold {
-      color: #1c184a;
+      color: $color-nav;
       letter-spacing: 0.03em;
     }
     .subtitle {
       @include body-large;
-      color: #1c184a;
+      color: $color-nav;
       font-size: $font-size-lg;
       letter-spacing: 0.01em;
     }
@@ -78,9 +78,9 @@
       margin-bottom: 1.1rem;
       font-size: 1rem;
       line-height: 1.7;
-      color: #c71432;
+      color: $color-uic;
       .highlight {
-        color: #c71432;
+        color: $color-uic;
         @include body-large;
       }
     }
@@ -88,7 +88,7 @@
   .mba-areas-advantage-note {
     text-align: center;
     @include body-large;
-    color: $color-brown-dark;
+    color: $color-black;
     margin-top: $spacing-xxl;
     margin-bottom: $spacing-xxl;
     letter-spacing: 0.01em;
@@ -100,7 +100,7 @@
   .mba-areas-concentrations-title {
     text-align: center;
     @include heading-medium;
-    color: #1c184a;
+    color: $color-nav;
     margin-bottom: $spacing-xxl;
     letter-spacing: 0.04em;
   }
@@ -132,13 +132,13 @@
       }
 
       .concentration-title {
-        color: #1c184a;
+        color: $color-nav;
         @include heading-medium;
         margin-bottom: 0.5rem;
         text-align: left;
       }
       .concentration-desc {
-        color: $color-text-secondary;
+        color: $color-black;
         font-size: 0.97rem;
         line-height: 1.5;
         text-align: left;
@@ -186,7 +186,6 @@
       }
 
       .concentration-title {
-        color: $color-accent-gold;
         @include heading-medium;
         margin-bottom: 0.5rem;
         text-align: left;

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useRef, useCallback } from "react";
 import "./Header.css";
 import { NavContext } from "../../context/NavContext";
 import debounce from "../../utils/debounce";
@@ -21,22 +21,92 @@ function Header() {
     headerRef,
   } = useContext(NavContext);
 
+  const eastLansingMenuRef = useRef(null);
+
+  const checkEastLansingMenuPosition = useCallback(() => {
+    const menuElement = eastLansingMenuRef.current;
+    console.log("[Debug] checkEastLansingMenuPosition called. menuElement:", menuElement);
+    if (menuElement) {
+      if (dropdownStates.eastLansingSub) {
+        console.log("[Debug] eastLansingSub is true. Checking position...");
+
+        // Temporarily remove 'submenu-below' to measure its "natural" side-positioned extent
+        const originallyHadSubmenuBelow = menuElement.classList.contains('submenu-below');
+        if (originallyHadSubmenuBelow) {
+          menuElement.classList.remove('submenu-below');
+          // Reading a layout property to try and force reflow after class removal, before getBoundingClientRect
+          // This might not be strictly necessary as getBoundingClientRect itself often forces reflow.
+          // menuElement.offsetHeight; 
+        }
+
+        const menuRect = menuElement.getBoundingClientRect();
+        const naturalRight = menuRect.right;
+        const viewportWidth = window.innerWidth;
+
+        console.log(`[Debug] Natural right (as if positioned to side): ${naturalRight}, Viewport width: ${viewportWidth}, Originally had .submenu-below: ${originallyHadSubmenuBelow}`);
+
+        if (naturalRight > viewportWidth) {
+          console.log("[Debug] Natural position would overflow. Ensuring .submenu-below is present.");
+          if (!originallyHadSubmenuBelow) {
+            menuElement.classList.add('submenu-below');
+          }
+        } else {
+          console.log("[Debug] Natural position would not overflow. Ensuring .submenu-below is absent.");
+          // If it was removed at the start of this block (because originallyHadSubmenuBelow was true),
+          // and it shouldn't be there now, it remains removed. This is correct.
+          // If it wasn't there originally, and shouldn't be there, it remains absent. Correct.
+          // So, if originallyHadSubmenuBelow was true, it's already removed. If it was false, it stays false.
+          // The only action needed is to re-add it if it was removed AND naturalRight > viewportWidth (covered above)
+          // OR remove it if it was NOT originally there but somehow got added (not possible with this logic)
+          // OR remove it if it WAS there and naturalRight <= viewportWidth (already done by the first remove)
+        }
+        
+        // Simplified final state setting:
+        // After calculating naturalRight, decide the final state.
+        if (naturalRight > viewportWidth) {
+            if (!menuElement.classList.contains('submenu-below')) {
+                menuElement.classList.add('submenu-below');
+                console.log("[Debug] Added .submenu-below as it was missing and needed.");
+            }
+        } else {
+            if (menuElement.classList.contains('submenu-below')) {
+                menuElement.classList.remove('submenu-below');
+                console.log("[Debug] Removed .submenu-below as it was present but not needed.");
+            }
+        }
+
+      } else {
+        console.log("[Debug] eastLansingSub is false. Removing .submenu-below if present.");
+        if (menuElement.classList.contains('submenu-below')) {
+            menuElement.classList.remove('submenu-below');
+        }
+      }
+    } else {
+      console.log("[Debug] menuElement is null.");
+    }
+  }, [dropdownStates.eastLansingSub]);
+
+  useEffect(() => {
+    checkEastLansingMenuPosition();
+  }, [checkEastLansingMenuPosition]);
+
   // 加入 useEffect 監聽 resize 事件
   useEffect(() => {
     const handleResize = () => {
       // 可以在這裡 log 寬度，或者根據需要更新狀態
       console.log(`[Header Resize] window.innerWidth: ${window.innerWidth}`);
+      checkEastLansingMenuPosition(); // Call the check function
     };
     const debouncedResize = debounce(handleResize, 200);
     window.addEventListener("resize", debouncedResize);
-    // 初始執行一次以獲取當前寬度
+    // 初始執行一次以獲取當前寬度並檢查選單位置
     handleResize();
 
     // 組件卸載時移除監聽器，避免 memory leak
     return () => {
       window.removeEventListener("resize", debouncedResize);
     };
-  }, []); // 空依賴數組表示只在掛載和卸載時執行
+  }, [checkEastLansingMenuPosition]); // // Re-attach listener if checkEastLansingMenuPosition changes
 
   // 點擊選單外關閉邏輯由 NavContext 處理，不需於此重複實作
 
@@ -539,6 +609,7 @@ function Header() {
                         <span className="dropdown-arrow">▶</span>
                       </a>
                       <ul
+                        ref={eastLansingMenuRef}
                         className={`dropdown-menu east-lansing-menu ${
                           dropdownStates.eastLansingSub ? "show" : ""
                         }`}

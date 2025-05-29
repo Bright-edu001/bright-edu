@@ -7,7 +7,7 @@
   p {
     font-size: $font-size-xl;
     line-height: 39px;
-    color: $color-brown-dark;
+    color: $color-black;
     text-align: left;
     padding: 0 $spacing-lg;
     margin: 0 auto;
@@ -23,14 +23,14 @@
   .mba-info-section-title {
     font-size: $font-size-xxl;
     line-height: 39px;
-    color: $color-text-secondary;
+    color: $color-black;
     text-align: left;
   }
   .mba-info-list {
     padding: 0 $spacing-lg;
     li {
       @include heading-large;
-      color: $color-text-secondary;
+      color: $color-black;
       font-size: $font-size-xl;
       line-height: 24px;
       margin-top: $spacing-lg;
@@ -60,7 +60,7 @@
   .mba-info-section .mba-info-list {
     li {
       @include heading-large;
-      color: $color-brown-dark;
+      color: $color-black;
       font-size: $font-size-lg;
       line-height: 24px;
       margin-left: 2rem;

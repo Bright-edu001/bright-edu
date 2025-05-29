@@ -6,7 +6,7 @@
     @include body-large;
     font-size: 56px;
     line-height: 68px;
-    color: $color-brown-dark;
+    color: $color-black;
     text-align: center;
     margin-top: $spacing-xxl; // Space above the heading
     margin-bottom: $spacing-xxl; // Space below the heading
@@ -72,15 +72,15 @@
       }
     }
   }
-
   .economy-section {
-    border-top: 1px solid $color-footer;
+    border-top: 1px solid $color-uic;
     max-width: 75%; // Specific max-width for economy-section
     // Inherits margin: 0 auto and margin-bottom: 50px from the common group
+
     p {
       @include label-style;
       line-height: 36px;
-      color: $color-brown-dark;
+      color: $color-black;
       // Inherits max-width: 90%, margin: 0 auto, text-align: justify from base p
     }
   }

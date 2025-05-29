@@ -1,7 +1,7 @@
 @import "../../../styles/variables";
 @import "../../../styles/mixins";
 
-// 防止全域橫向捲動
+// ??��????��??????
 body,
 html {
   overflow-x: hidden;
@@ -15,11 +15,11 @@ html {
 
 .career-resources {
   overflow-x: hidden;
-  max-width: 100vw; // 修正最大寬度
+  max-width: 100vw; // �ץ�??�j�e??
   h3 {
     @include heading-large;
     margin-bottom: $spacing-xl;
-    color: #c71432;
+    color: $color-uic;
     text-align: center;
   }
 
@@ -42,11 +42,11 @@ html {
       li {
         @extend .career-list-item;
         margin-top: 3rem;
-        color: #1c184a;
+        color: $color-nav;
         div {
           @include label-style;
           line-height: 36px;
-          color: #9c9c9c;
+          color: $color-gray-medium;
         }
       }
     }
@@ -55,8 +55,8 @@ html {
       position: absolute;
       width: 30%;
       height: auto;
-      max-width: 100%; // 防止圖片溢出
-      margin-left: 65vw; // 用vw避免超出視窗
+      max-width: 100%; // ??��????���X
+      margin-left: 65vw; // ??vw????�W�X��??
       margin-top: -15rem;
       margin-bottom: 10rem;
     }
@@ -65,7 +65,7 @@ html {
   .career-process {
     padding: $spacing-lg 0;
     display: flex;
-    margin-top: $spacing-lg; // 增加上方間距，將區塊往下移動
+    margin-top: $spacing-lg; // �W??�W��????�A????��??�U��??
 
     .container {
       @include container;
@@ -77,14 +77,14 @@ html {
           @extend .career-list-item;
           list-style-type: decimal;
           margin-left: 1rem;
-          color: $color-brown-dark;
+          color: $color-black;
         }
       }
 
       img {
         width: 90%;
         max-width: 1400px;
-        margin: 0 auto; // 置中圖片
+        margin: 0 auto; // �m��????
         margin-bottom: 5rem;
         margin-left: 3rem;
       }
@@ -92,7 +92,7 @@ html {
   }
 
   .career-dot {
-    color: #c71432;
+    color: $color-uic;
     font-size: $font-size-number;
     position: relative;
     top: 0.2rem;

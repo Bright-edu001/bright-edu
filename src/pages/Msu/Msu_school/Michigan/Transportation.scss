@@ -4,7 +4,7 @@
 .transportation-section {
   margin: $spacing-xl auto;
   padding: 1rem;
-  color: $color-text-secondary;
+  color: $color-black;
 }
 
 .transportation-block {
@@ -16,7 +16,7 @@
   font-size: $font-size-xl;
   font-weight: 700;
   margin-bottom: $spacing-md;
-  color: #19453c;
+  color: $color-msu;
 }
 
 .transportation-subblock {
@@ -26,30 +26,30 @@
     font-weight: 900;
     font-size: $font-size-md;
     margin-bottom: $spacing-xl;
-    color: $color-text-secondary;
+    color: $color-black;
   }
   ul {
     margin: $spacing-md 0 0 $spacing-md;
     padding: 0;
     list-style: disc;
-    display: flex; // æ°´å¹³æ’åˆ—
-    flex-wrap: wrap; // æ›è¡Œ
-    justify-content: space-evenly; // å…©ç«¯å°é½Š
-    gap: $spacing-lg; // li ä¹‹é–“çš„é–“è·åŠ å¤§
+    display: flex; // ¤ô¥­????
+    flex-wrap: wrap; // ????
+    justify-content: space-evenly; // ??ºİ¹ï??
+    gap: $spacing-lg; // li ¤§??????¶Z????
     text-align: left;
     li {
-      color: #19453c;
+      color: $color-msu;
       font-size: $font-size-lg;
       font-weight: 700;
       margin-bottom: $spacing-xl;
       text-align: left;
     }
     @media screen and (max-width: 500px) {
-      flex-direction: column; // æ‰‹æ©ŸéŸ¿æ‡‰å¼ï¼Œæ”¹ç‚ºå‚ç›´æ’åˆ—
-      align-items: center; // ä¸­å¿ƒå°é½Š
+      flex-direction: column; // ????????¦¡????¬°??ª½????
+      align-items: center; // ¤¤??¹ï??
       li {
-        text-align: center; // æ‰‹æ©Ÿä¸Šå±…ä¸­å°é½Š
-        margin-bottom: $spacing-md; // èª¿æ•´é–“è·
+        text-align: center; // ????¤W??¤¤????
+        margin-bottom: $spacing-md; // ½Õ¾ã????
       }
     }
   }
@@ -57,7 +57,7 @@
 
 .transportation-divider {
   border: none;
-  border-top: 1px solid $color-footer;
+  border-top: 1px solid $color-msu;
   margin: $spacing-lg 0;
   width: 100%;
 }

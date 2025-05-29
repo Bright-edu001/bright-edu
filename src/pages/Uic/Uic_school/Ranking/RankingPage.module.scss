@@ -1,8 +1,8 @@
-@import "../../../../styles/variables"; // 引入變數
+@import "../../../../styles/variables"; // �ޤJ�ܼ�
 
 .rankingContainer {
   margin: 0 auto;
-  text-align: center; // 整體居中
+  text-align: center;
 
   .introSection {
     margin-top: $spacing-lg;
@@ -12,15 +12,15 @@
     p {
       font-size: $font-size-lg;
       line-height: 1.8;
-      margin: 0 auto; // 居中段落
+      margin: 0 auto; // �~���q��
     }
   }
 
   .rankingsGrid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); // 響應式網格
-    padding: $spacing-lg; // 網格內邊距
-    gap: $spacing-xl; // 網格間距
+    grid-template-columns: repeat(4, 1fr);
+    padding: $spacing-lg;
+    gap: $spacing-xl;
 
     .rankingItem {
       padding: $spacing-lg;
@@ -32,7 +32,7 @@
 
       .rank {
         font-weight: 900;
-        color: #c71432; // 強調排名數字
+        color: $color-uic;
         margin-bottom: $spacing-sm;
         display: flex; // Added for alignment
         align-items: baseline; // Align prefix and number
@@ -52,7 +52,7 @@
         font-size: $font-size-md;
         font-weight: 700;
         margin-bottom: $spacing-xs;
-        min-height: 50px; // 確保描述有最小高度，對齊
+        min-height: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -60,7 +60,7 @@
 
       .source {
         font-size: $font-size-sm;
-        color: $color-text-secondary;
+        color: $color-black;
         line-height: 1.4;
       }
     }
@@ -69,14 +69,14 @@
 @media screen and (max-width: 700px) {
   .rankingContainer {
     .rankingsGrid {
-      grid-template-columns: repeat(3, 1fr); // 手機響應式網格
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }
 @media screen and (max-width: 500px) {
   .rankingContainer {
     .rankingsGrid {
-      grid-template-columns: repeat(1, 1fr); // 手機響應式網格
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 }

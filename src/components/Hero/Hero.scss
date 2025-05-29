@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-/* Hero 區域樣式 - 頁面頂部的主要宣傳區塊 */
+/* Hero 區域樣式 - 頁面上部主要宣傳區域 */
 .hero {
   position: relative;
   padding: 2rem 0;
@@ -12,7 +12,7 @@
   max-width: 85rem;
   height: 35rem;
   margin: 0 auto;
-  overflow: hidden; // 新增，避免圖片外溢
+  overflow: hidden; //
   .container,
   &-content,
   &-image {

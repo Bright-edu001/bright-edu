@@ -13,7 +13,7 @@
     h4 {
       @include heading-medium;
       margin-bottom: $spacing-xxl;
-      color: #1c184a;
+      color: $color-nav;
     }
     p {
       @include label-style;
@@ -26,7 +26,7 @@
     max-width: 40%;
     height: auto;
     object-fit: cover;
-    aspect-ratio: 4/3; /* 設定固定寬高比防止 CLS */
+    aspect-ratio: 4/3; /* 設�??��?寬�?比防�?CLS */
   }
 
   &-right {
@@ -57,7 +57,7 @@
       padding: 0;
       h4 {
         margin-top: $spacing-md;
-        color: $color-accent-gold;
+        color: $color-nav;
       }
       p {
         margin: 0 $spacing-xl;

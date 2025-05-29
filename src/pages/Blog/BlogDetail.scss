@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-// 主內容與側邊欄橫向排列
+// 主內容�??��?欄橫?��???
 .blog-detail-mainrow {
   display: flex;
   gap: 2rem;
@@ -9,7 +9,7 @@
   padding: 0;
 }
 
-// 主內容
+// 主內�?
 .blog-detail-main {
   flex: 1;
   min-width: 0;
@@ -21,7 +21,7 @@
     font-size: $font-size-xxl;
     margin-bottom: 1rem;
     font-weight: 900;
-    color: #1c184a;
+    color: $color-nav;
   }
   ul {
     list-style: none;
@@ -38,7 +38,7 @@
 .blog-detail-category-btn {
   background: none;
   border: none;
-  color: #1c184a;
+  color: $color-nav;
   font-size: $font-size-lg;
   font-weight: 700;
   cursor: pointer;
@@ -48,13 +48,13 @@
 
 .blog-detail-category-label {
   font-size: 1.5rem;
-  color: #1c184a;
+  color: $color-nav;
   font-weight: 500;
   letter-spacing: 0.5px;
   transition: color 0.1s ease-in-out;
   cursor: pointer;
   &:hover {
-    color: #c71432;
+    color: $color-uic;
     text-decoration: underline;
   }
 }
@@ -71,12 +71,12 @@
   display: flex;
   justify-content: center;
   font-size: $font-size-xl;
-  color: #1c184a;
+  color: $color-nav;
   margin-top: $spacing-lg;
   margin-bottom: 1rem;
   margin-left: 35rem;
   &:hover {
-    color: #c71432;
+    color: $color-uic;
     transform: scale(1.05);
     transition: all 0.1s ease-in-out;
   }
@@ -96,7 +96,7 @@
   }
 }
 
-// 響應式設計：寬度700px以下
+// ?��?式設計�?寬度700px以�?
 @media screen and (max-width: 850px) {
   .blog-detail-mainrow {
     flex-direction: column-reverse;

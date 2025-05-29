@@ -6,7 +6,7 @@
   .management {
     h3 {
       @include heading-medium;
-      color: #19453c;
+      color: $color-msu;
       margin: $spacing-lg 0;
     }
     p {
@@ -19,7 +19,7 @@
       font-weight: 700;
       display: flex;
       flex-direction: row;
-      color: #19453c;
+      color: $color-msu;
       align-items: center;
       justify-content: space-evenly;
       margin: $spacing-xl 10rem;
@@ -43,7 +43,7 @@
       .class-title-en {
         @include value-style;
         margin-bottom: 4px;
-        color: $color-brown-dark;
+        color: $color-black;
         letter-spacing: 2px;
       }
 
@@ -55,7 +55,7 @@
         display: inline-block;
 
         li.highlight {
-          color: #19453c;
+          color: $color-msu;
           font-weight: 700;
           font-size: 18px;
           margin-top: 8px;
@@ -69,12 +69,12 @@
     align-items: center;
     h3 {
       @include heading-medium;
-      color: #19453c;
+      color: $color-msu;
       margin: $spacing-lg 0;
     }
     ul {
       @include label-style;
-      color: $color-brown-dark;
+      color: $color-black;
       font-weight: 700;
       margin-bottom: $spacing-xl;
       li {

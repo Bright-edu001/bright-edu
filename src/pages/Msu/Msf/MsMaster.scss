@@ -1,19 +1,19 @@
 @import "../../../styles/variables";
 @import "../../../styles/mixins";
 
-// æ–°å¢è‡ªå®šç¾©æ··åˆé¡
+// ????????¸q²V????
 @mixin section-container {
   margin: $spacing-xxl auto;
 }
 
 @mixin gold-heading {
   @include body-large;
-  color: #19453c;
+  color: $color-msu;
 }
 
 @mixin footer-heading {
   @include body-large;
-  color: #19453c;
+  color: $color-msu;
 }
 
 @mixin standard-list {
@@ -22,12 +22,12 @@
 
 @mixin list-item {
   @include heading-large;
-  color: $color-text-secondary;
+  color: $color-black;
   font-size: $font-size-lg;
   margin: $spacing-md 0;
 }
 
-// ä½¿ç”¨æ··åˆé¡é‡æ§‹æ¨£å¼
+// ¨Ï¥Î²V??Ãş??ºc¼Ë??
 .ms-master-intro {
   @include section-container;
   text-align: left; // Keep or change to center if p text lines should be centered
@@ -43,7 +43,7 @@
     display: flex;
     flex-direction: column;
     margin: $spacing-lg 0;
-    color: #19453c;
+    color: $color-msu;
     font-size: 24px;
     font-weight: 700;
   }
@@ -91,8 +91,8 @@
 
 .ms-master-fiance {
   margin: $spacing-xxl auto;
-  border-top: 1px solid #19453c;
-  border-bottom: 1px solid #19453c;
+  border-top: 1px solid $color-msu;
+  border-bottom: 1px solid $color-msu;
   width: 90%;
   display: flex; // Added
   flex-direction: column; // Added
@@ -129,9 +129,10 @@
   display: flex; // Added
   flex-direction: column; // Added
   align-items: center; // Added
+
   h2 {
     @include body-large;
-    color: $color-brown-dark;
+    color: $color-black;
   }
   h3 {
     @include gold-heading;
@@ -142,16 +143,16 @@
 
     li {
       @include heading-large;
-      color: #19453c;
+      color: $color-msu;
       font-size: $font-size-lg;
       margin-top: $spacing-lg;
-    }
 
-    span {
-      @include body-large;
-      font-size: $font-size-sm;
-      line-height: 17px;
-      color: $color-brown-dark;
+      span {
+        @include body-large;
+        font-size: $font-size-sm;
+        line-height: 17px;
+        color: $color-black;
+      }
     }
   }
 }
@@ -176,13 +177,13 @@
   }
   .ms-master-require-select-list {
     h3 {
-      color: #19453c;
+      color: $color-msu;
       text-align: left;
       margin-left: 13%;
       margin-bottom: $spacing-lg;
     }
     li {
-      color: $color-brown-dark;
+      color: $color-black;
     }
   }
 }
@@ -196,13 +197,13 @@
     h3 {
       margin-left: 9rem;
       text-align: left;
-      color: #19453c;
+      color: $color-msu;
     }
     ul {
       padding-left: 11rem;
       margin-top: $spacing-xl;
       li {
-        color: $color-brown-dark;
+        color: $color-black;
       }
     }
   }
@@ -231,7 +232,7 @@
 
     .feature-title {
       font-weight: bold;
-      color: #19453c;
+      color: $color-msu;
       font-size: $font-size-lg;
       margin-bottom: $spacing-xs;
       letter-spacing: 1px;
@@ -240,21 +241,21 @@
     }
     .feature-subtitle {
       font-weight: bold;
-      color: #19453c;
+      color: $color-msu;
       font-size: $font-size-sm;
       margin-bottom: $spacing-xs;
       letter-spacing: 1px;
       text-align: left; // Ditto
     }
     .feature-desc {
-      color: $color-brown-dark;
+      color: $color-black;
       line-height: 1.6;
       letter-spacing: 0.5px;
       text-align: left; // Ditto
     }
   }
 
-  // ç§»é™¤å³é‚Šè· for æ¯æ’æœ€å¾Œä¸€å€‹
+  // ²¾°£??????for ¨C????«á????
   .feature-block:nth-child(3),
   .feature-block:nth-child(5) {
     margin-right: 0;
@@ -287,7 +288,7 @@
 
   h3 {
     text-align: center; // Already centered
-    color: #19453c;
+    color: $color-msu;
     font-size: 22px;
     margin-bottom: $spacing-xl;
     font-weight: 700;
@@ -304,7 +305,7 @@
 .ms-master-cfa,
 .ms-master-network {
   margin: 0 auto;
-  border-top: 1px solid $color-footer;
+  border-top: 1px solid $color-msu;
   // The main h2 is already text-align: center via section-header
   // The -intro part is handled by the section-intro mixin modifications
   h2 {
@@ -345,7 +346,7 @@
   }
 }
 
-// éŸ¿æ‡‰å¼è¨­è¨ˆï¼šå¯¬åº¦700pxä»¥ä¸‹
+// ????¦¡³]­p??¼e«×700px¥H??
 @media (max-width: 700px) {
   .ms-master-intro,
   .ms-master-features,
