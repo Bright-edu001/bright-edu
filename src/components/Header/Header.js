@@ -30,13 +30,13 @@ function Header() {
       if (dropdownStates.eastLansingSub) {
         console.log("[Debug] eastLansingSub is true. Checking position...");
 
-        // Temporarily remove 'submenu-below' to measure its "natural" side-positioned extent
+        // 暫時移除 'submenu-below' 以測量其「自然」側邊定位時的範圍
         const originallyHadSubmenuBelow = menuElement.classList.contains('submenu-below');
         if (originallyHadSubmenuBelow) {
           menuElement.classList.remove('submenu-below');
-          // Reading a layout property to try and force reflow after class removal, before getBoundingClientRect
-          // This might not be strictly necessary as getBoundingClientRect itself often forces reflow.
-          // menuElement.offsetHeight; 
+          // 讀取一個佈局屬性以嘗試在移除 class 後、呼叫 getBoundingClientRect 之前強制重排 (reflow)
+          // 這可能不是嚴格必要的，因為 getBoundingClientRect 本身通常會強制重排。
+          // menuElement.offsetHeight;
         }
 
         const menuRect = menuElement.getBoundingClientRect();
@@ -52,17 +52,17 @@ function Header() {
           }
         } else {
           console.log("[Debug] Natural position would not overflow. Ensuring .submenu-below is absent.");
-          // If it was removed at the start of this block (because originallyHadSubmenuBelow was true),
-          // and it shouldn't be there now, it remains removed. This is correct.
-          // If it wasn't there originally, and shouldn't be there, it remains absent. Correct.
-          // So, if originallyHadSubmenuBelow was true, it's already removed. If it was false, it stays false.
-          // The only action needed is to re-add it if it was removed AND naturalRight > viewportWidth (covered above)
-          // OR remove it if it was NOT originally there but somehow got added (not possible with this logic)
-          // OR remove it if it WAS there and naturalRight <= viewportWidth (already done by the first remove)
+          // 如果它在此區塊開始時被移除（因為 originallyHadSubmenuBelow 為 true），
+          // 且現在不應該存在，則它保持被移除狀態。這是正確的。
+          // 如果它原本不存在，且不應該存在，則它保持不存在狀態。正確。
+          // 所以，如果 originallyHadSubmenuBelow 為 true，它已經被移除了。如果為 false，則保持 false。
+          // 唯一需要的操作是：如果它被移除了「且」naturalRight > viewportWidth（已在上方處理），則重新添加它；
+          // 或者，如果它原本不存在但不知何故被添加了（此邏輯不可能發生），則移除它；
+          // 或者，如果它「曾」存在且 naturalRight <= viewportWidth（已由第一次移除完成），則移除它。
         }
         
-        // Simplified final state setting:
-        // After calculating naturalRight, decide the final state.
+        // 簡化的最終狀態設定：
+        // 計算完 naturalRight 後，決定最終狀態。
         if (naturalRight > viewportWidth) {
             if (!menuElement.classList.contains('submenu-below')) {
                 menuElement.classList.add('submenu-below');
@@ -94,8 +94,8 @@ function Header() {
   useEffect(() => {
     const handleResize = () => {
       // 可以在這裡 log 寬度，或者根據需要更新狀態
-      console.log(`[Header Resize] window.innerWidth: ${window.innerWidth}`);
-      checkEastLansingMenuPosition(); // Call the check function
+      // console.log(`[Header Resize] window.innerWidth: ${window.innerWidth}`);
+      checkEastLansingMenuPosition(); // 呼叫檢查函式
     };
     const debouncedResize = debounce(handleResize, 200);
     window.addEventListener("resize", debouncedResize);
@@ -106,7 +106,7 @@ function Header() {
     return () => {
       window.removeEventListener("resize", debouncedResize);
     };
-  }, [checkEastLansingMenuPosition]); // // Re-attach listener if checkEastLansingMenuPosition changes
+  }, [checkEastLansingMenuPosition]); // // 如果 checkEastLansingMenuPosition 改變，則重新附加監聽器
 
   // 點擊選單外關閉邏輯由 NavContext 處理，不需於此重複實作
 

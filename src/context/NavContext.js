@@ -23,8 +23,9 @@ export const NavProvider = ({ children }) => {
   const [dropdownStates, setDropdownStates] = useState(initialStates);
   const [pendingLink, setPendingLink] = useState(null);
   const headerRef = useRef(null);
+  const menuLeaveTimersRef = useRef({}); // 新增：用於存儲選單離開的計時器
 
-  // Define the full menu hierarchy
+  // 定義完整的選單層級結構
   const fullMenuHierarchy = useMemo(() => ({
     UIC: ["UICSub", "MBASub", "MSSub"],
     MSU: ["msuMainSub", "msfProgramsSub"],
@@ -40,17 +41,17 @@ export const NavProvider = ({ children }) => {
     mobileMenu: []
   }), []);
 
-  // Helper to get all descendants (children, grandchildren, etc.)
+  // 輔助函數：獲取所有後代選單（子選單、孫選單等）
   const getAllDescendants = useCallback((parentKey, hierarchy) => {
     let descendants = new Set();
     const children = hierarchy[parentKey] || [];
     children.forEach(child => {
       descendants.add(child);
-      const grandchildren = getAllDescendants(child, hierarchy);
+      const grandchildren = getAllDescendants(child, hierarchy); // 遞歸調用自身
       grandchildren.forEach(gc => descendants.add(gc));
     });
     return descendants;
-  }, []);
+  }, []); // 移除了 fullMenuHierarchy，因為它在 useMemo 中且依賴為 []，不會改變
 
   // 點擊選單外關閉所有下拉選單
   useEffect(() => {
@@ -65,7 +66,7 @@ export const NavProvider = ({ children }) => {
   }, []);
 
   // 通用切換函數
-  const toggleDropdown =
+  const toggleDropdown = useCallback(
     (menuKey, closeOthers = [], childMenus = []) =>
     (e) => {
       if (e) {
@@ -76,49 +77,52 @@ export const NavProvider = ({ children }) => {
         const newDropdownStates = { ...prevStates };
         const menuKeyIsCurrentlyOpen = prevStates[menuKey];
 
-        // Toggle the state of the primary menu
+        // 切換主要選單的狀態
         newDropdownStates[menuKey] = !menuKeyIsCurrentlyOpen;
 
-        // Determine which parent menus are being closed (either menuKey itself or those in closeOthers)
-        // Their children will also need to be closed.
+        // 判斷哪些父選單正在被關閉（menuKey 本身或 closeOthers 中的選單）
+        // 它們的子選單也需要被關閉。
         const parentMenusBeingClosed = new Set();
 
         closeOthers.forEach(otherKey => {
-          if (newDropdownStates[otherKey] === true || prevStates[otherKey] === true) { // If it was open or is still marked open before this logic
+          // 如果它之前是開啟的，或者在此邏輯之前仍標記為開啟
+          if (newDropdownStates[otherKey] === true || prevStates[otherKey] === true) { 
             parentMenusBeingClosed.add(otherKey);
           }
         });
 
-        // If the primary menu (menuKey) was open and is now being closed
+        // 如果主要選單 (menuKey) 原本是開啟的，現在要被關閉
         if (menuKeyIsCurrentlyOpen && !newDropdownStates[menuKey]) {
           parentMenusBeingClosed.add(menuKey);
         }
         
         const finalKeysToSetFalse = new Set();
         parentMenusBeingClosed.forEach(parentToClose => {
-          finalKeysToSetFalse.add(parentToClose); // Add the parent itself to be closed
+          finalKeysToSetFalse.add(parentToClose); // 將父選單本身加入待關閉列表
           const descendants = getAllDescendants(parentToClose, fullMenuHierarchy);
           descendants.forEach(descendant => finalKeysToSetFalse.add(descendant));
         });
 
         finalKeysToSetFalse.forEach(keyToClose => {
-          // If keyToClose is the menuKey that we just decided to OPEN, don't set it to false.
+          // 如果 keyToClose 是我們剛決定要開啟的 menuKey，則不要將其設為 false。
           if (keyToClose === menuKey && newDropdownStates[menuKey] === true) {
-            // Do nothing, keep it open
+            // 不執行任何操作，保持開啟狀態
           } else {
             newDropdownStates[keyToClose] = false;
           }
         });
         
-        // If menuKey is being OPENED, ensure its DIRECT children (from childMenus param) are closed (reset).
-        if (newDropdownStates[menuKey]) { // If menuKey is now open
+        // 如果 menuKey 正在被開啟，確保其直接子選單（來自 childMenus 參數）被關閉（重置）。
+        if (newDropdownStates[menuKey]) { // 如果 menuKey 現在是開啟狀態
           (childMenus || []).forEach(directChildKey => {
             newDropdownStates[directChildKey] = false;
           });
         }
         return newDropdownStates;
       });
-    };
+    },
+    [getAllDescendants, fullMenuHierarchy] // 新增：useCallback 及依賴項
+  );
 
   // 定義各選單 toggle
   const toggleUICDropdown = toggleDropdown(
@@ -141,13 +145,13 @@ export const NavProvider = ({ children }) => {
     ["UICSub", "MSSub"],
     ["areasSub"]
   );
-  const toggleMSSubDropdown = toggleDropdown("MSSub", ["UICSub", "MBASub"]); // Assuming MSSub has no children based on original structure
+  const toggleMSSubDropdown = toggleDropdown("MSSub", ["UICSub", "MBASub"]); // 假設 MSSub 根據原始結構沒有子選單
   const toggleMSUMainSubDropdown = toggleDropdown("msuMainSub", [
     "msfProgramsSub",
-  ], ["eastLansingSub"]); // Corrected: Added ["eastLansingSub"] as childMenu
+  ], ["eastLansingSub"]); // 已修正：將 ["eastLansingSub"] 作為子選單加入
   const toggleMSFProgramsSubDropdown = toggleDropdown("msfProgramsSub", [
     "msuMainSub",
-  ]); // Assuming msfProgramsSub has no children
+  ]); // 假設 msfProgramsSub 沒有子選單
   const toggleMobileMenu = toggleDropdown("mobileMenu");
 
   // 處理含子選單連結點擊行為
@@ -179,26 +183,68 @@ export const NavProvider = ({ children }) => {
 
   // 滑鼠懸停展開與離開（桌機）
   const handleMouseEnter = useCallback(
-    (menuKey, closeKey) => () => {
-      if (window.innerWidth >= 1025) {
-        setDropdownStates((prev) => ({
-          ...prev,
-          [menuKey]: true,
-          ...(closeKey ? { [closeKey]: false } : {}),
-        }));
-        setPendingLink(null);
-      }
-    },
-    []
+    (menuKey, closeKey = null) => // 移除內部回呼函數的 () =>
+      () => { // 保留外部的 () => 以便在 JSX 中使用
+        if (window.innerWidth >= 1025) {
+          // 清除可能存在的關閉計時器
+          if (menuLeaveTimersRef.current[menuKey]) {
+            clearTimeout(menuLeaveTimersRef.current[menuKey]);
+            menuLeaveTimersRef.current[menuKey] = null;
+          }
+
+          setDropdownStates((prev) => {
+            const newState = {
+              ...prev,
+              [menuKey]: true,
+            };
+            if (closeKey && prev[closeKey]) { // 如果 closeKey 存在且之前是打開的
+              newState[closeKey] = false;
+              // 遞歸關閉 closeKey 的子孫選單
+              const descendantsToClose = getAllDescendants(closeKey, fullMenuHierarchy);
+              descendantsToClose.forEach(desc => {
+                newState[desc] = false;
+                // 如果子孫選單也有計時器，一併清除
+                if (menuLeaveTimersRef.current[desc]) {
+                  clearTimeout(menuLeaveTimersRef.current[desc]);
+                  menuLeaveTimersRef.current[desc] = null;
+                }
+              });
+            }
+            return newState;
+          });
+          setPendingLink(null);
+        }
+      },
+    [getAllDescendants, fullMenuHierarchy] // 更新：將 fullMenuHierarchy 加回依賴項
   );
+
   const handleMouseLeave = useCallback(
-    (menuKey) => () => {
-      if (window.innerWidth >= 1025) {
-        setDropdownStates((prev) => ({ ...prev, [menuKey]: false }));
-        setPendingLink(null);
-      }
-    },
-    []
+    (menuKey) => 
+      () => { 
+        if (window.innerWidth >= 1025) {
+          // 清除已有的計時器，以防重複設置
+          if (menuLeaveTimersRef.current[menuKey]) {
+            clearTimeout(menuLeaveTimersRef.current[menuKey]);
+          }
+          menuLeaveTimersRef.current[menuKey] = setTimeout(() => {
+            // 在關閉時，也遞歸關閉其所有子選單
+            setDropdownStates((prev) => {
+              const newState = { ...prev, [menuKey]: false };
+              const descendantsToClose = getAllDescendants(menuKey, fullMenuHierarchy);
+              descendantsToClose.forEach(desc => {
+                newState[desc] = false;
+                if (menuLeaveTimersRef.current[desc]) {
+                  clearTimeout(menuLeaveTimersRef.current[desc]);
+                  menuLeaveTimersRef.current[desc] = null;
+                }
+              });
+              return newState;
+            });
+            menuLeaveTimersRef.current[menuKey] = null;
+          }, 200); // 200ms 延遲
+        }
+      },
+    [getAllDescendants, fullMenuHierarchy] // 更新：將 fullMenuHierarchy 加回依賴項
   );
 
   // 使用 useMemo 穩定 context value
