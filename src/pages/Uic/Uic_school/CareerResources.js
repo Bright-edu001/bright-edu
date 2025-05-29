@@ -8,7 +8,7 @@ function CareerResources() {
       <ImageTextSection
         title="UIC 美國商學院"
         subtitle="職涯資源"
-        imageUrl="https://imgur.com/JD3FIrt.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="職涯資源"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />

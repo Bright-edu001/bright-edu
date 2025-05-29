@@ -35,7 +35,7 @@ const Analytics = () => {
       <ImageTextSection
         title="一年制MBA"
         subtitle="Business Analytics 商業分析"
-        imageUrl="https://imgur.com/rycQiyw.png" // 圖片路徑
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="Business Analytics 商業分析"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169917_y.webp`}
       />

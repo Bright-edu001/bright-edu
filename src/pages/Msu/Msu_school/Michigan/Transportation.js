@@ -8,7 +8,7 @@ function Transportation() {
       <ImageTextSection
         title="East Lansing 大學城"
         subtitle="交通指南"
-        imageUrl="https://imgur.com/Xbnfhxb.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
         imageAlt="密西根州立大學"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner4-768.webp`}
       />

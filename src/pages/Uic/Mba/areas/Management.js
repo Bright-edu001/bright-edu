@@ -38,7 +38,7 @@ const Management = () => {
       <ImageTextSection
         title="一年制MBA"
         subtitle="Management 管理"
-        imageUrl="https://imgur.com/rycQiyw.png" // 圖片路徑
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="Management 管理"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169917_y.webp`}
       />

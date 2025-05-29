@@ -14,7 +14,7 @@ function Areas() {
       <ImageTextSection
         title="UIC 美國商學院"
         subtitle="MBA Program"
-        imageUrl="https://imgur.com/f8MWoRF.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="MBA Program"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169917_y.webp`}
       />

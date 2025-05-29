@@ -12,7 +12,7 @@ function CoreCourses() {
       <ImageTextSection
         title="一年制MBA"
         subtitle="核心課程簡介"
-        imageUrl="https://imgur.com/MjVvKjl.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="核心課程簡介"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />

@@ -51,7 +51,7 @@ const HR_Management = () => {
         title="一年制MBA"
         subtitle="Human Resource Management"
         intro={showIntro ? "人資管理" : undefined}
-        imageUrl="https://imgur.com/rycQiyw.png" // 圖片路徑
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="Human Resource Management"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169917_y.webp`}
       />

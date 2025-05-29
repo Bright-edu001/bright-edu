@@ -11,7 +11,7 @@ const Chicago = () => {
       <ImageTextSection
         title="芝加哥城市"
         subtitle="歷史發展 • 交通"
-        imageUrl="https://imgur.com/nP2gMTI.png" // 圖片路徑
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="歷史發展 • 交通"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />

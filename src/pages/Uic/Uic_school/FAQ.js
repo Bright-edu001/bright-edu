@@ -19,7 +19,7 @@ const FAQ = () => {
       <ImageTextSection
         title="UIC 美國商學院"
         subtitle="常見問題"
-        imageUrl="https://imgur.com/JQLEfaj.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="常見問題"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />

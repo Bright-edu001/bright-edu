@@ -13,7 +13,7 @@ function MsApplication() {
       <ImageTextSection
         title="MS Programs"
         subtitle="申請資訊"
-        imageUrl="https://imgur.com/Ighubkx.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="申請資訊"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169918_y.webp`}
       />

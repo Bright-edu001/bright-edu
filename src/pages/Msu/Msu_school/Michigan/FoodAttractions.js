@@ -42,7 +42,7 @@ function MicFoodAttractions() {
       <ImageTextSection
         title="East Lansing 大學城"
         subtitle="景點 • 美食"
-        imageUrl="https://imgur.com/hiUsC7y.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
         imageAlt="景點 • 美食"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner4-768.webp`}
       />

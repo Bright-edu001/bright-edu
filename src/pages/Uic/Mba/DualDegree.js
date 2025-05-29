@@ -12,7 +12,7 @@ function DualDegree() {
       <ImageTextSection
         title="一年制MBA"
         subtitle="雙碩士銜接"
-        imageUrl="https://imgur.com/pal1PBO.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="雙碩士銜接"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />

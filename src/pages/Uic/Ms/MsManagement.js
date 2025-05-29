@@ -94,7 +94,7 @@ function MsManagement() {
       <ImageTextSection
         title="Master of Science"
         subtitle="Supply Chain and Operations Management"
-        imageUrl="https://imgur.com/rycQiyw.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="Supply Chain and Operations Management"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169918_y.webp`}
       />

@@ -90,7 +90,7 @@ function MsAnalytics() {
       <ImageTextSection
         title="Master of Science"
         subtitle="Business Analytics"
-        imageUrl="https://imgur.com/rycQiyw.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="Business Analytics"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169918_y.webp`}
       />

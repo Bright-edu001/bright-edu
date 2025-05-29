@@ -81,6 +81,36 @@
       box-sizing: border-box;
     }
 
+    // 特定規則：MS Programs 子選單 (UIC商學院碩士 > MS Programs) - 預設寬度
+    // 路徑：.header .header-nav > ul.nav-links > li.dropdown-container (UIC商學院碩士) > ul.dropdown-menu > li.dropdown-container (MS Programs) > ul.dropdown-menu
+    > ul.nav-links
+      > li.dropdown-container:nth-child(2) // UIC商學院碩士
+      > ul.dropdown-menu // Dropdown of UIC商學院碩士
+      > li.dropdown-container:nth-child(3) // MS Programs (li container)
+      > ul.dropdown-menu {
+      // Submenu of MS Programs
+      width: 250px;
+      min-width: 250px;
+      max-width: 250px;
+      box-sizing: border-box;
+    }
+
+    // 特定規則：五大領域 子選單 (UIC商學院碩士 > MBA Programs > 五大領域) - 預設寬度
+    // 路徑：.header .header-nav > ul.nav-links > li.dropdown-container (UIC商學院碩士) > ul.dropdown-menu > li.dropdown-container (MBA Programs) > ul.dropdown-menu > li.dropdown-container (五大領域) > ul.dropdown-menu
+    > ul.nav-links
+      > li.dropdown-container:nth-child(2) // UIC商學院碩士
+      > ul.dropdown-menu // Dropdown of UIC商學院碩士
+      > li.dropdown-container:nth-child(2) // MBA Programs (li container)
+      > ul.dropdown-menu // Dropdown of MBA Programs
+      > li.dropdown-container:nth-child(1) // 五大領域 (li container)
+      > ul.dropdown-menu {
+      // Submenu of 五大領域
+      width: 185px;
+      min-width: 185px;
+      max-width: 185px;
+      box-sizing: border-box;
+    }
+
     /* 下拉選單樣式 - 基本 */
     .dropdown-container {
       position: relative;
@@ -197,12 +227,13 @@
               // 這適用於如 .east-lansing-menu 這類的第三層或更深層的選單
               top: -15%;
               left: calc(100% + $spacing-xs); // 預設向右移動一些
-              width: 140px;
+              width: 100px;
               &.submenu-below {
                 // 當 JavaScript 偵測到遮擋時添加此 class
                 top: 100%; // 定位到其父項目下方
                 left: 0; // 與其父項目左側對齊
                 margin-left: -7px; // 重設左邊距
+                width: 140px;
               }
             }
           }

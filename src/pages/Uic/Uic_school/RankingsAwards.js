@@ -8,7 +8,7 @@ const RankingsAwards = () => {
       <ImageTextSection
         title="UIC 美國商學院"
         subtitle="排名與獎項"
-        imageUrl="https://imgur.com/JdvnypZ.png" // 圖片路徑
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="排名與獎項"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />

@@ -12,7 +12,7 @@ function Advantages() {
       <ImageTextSection
         title="一年制MBA"
         subtitle="課程優勢"
-        imageUrl="https://imgur.com/vM0m15x.png"
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="課程優勢"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
