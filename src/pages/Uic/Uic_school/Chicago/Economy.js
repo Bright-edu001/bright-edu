@@ -8,8 +8,9 @@ const Economy = () => {
       <ImageTextSection
         title="芝加哥城市"
         subtitle="金融中心 • 經濟"
-        imageUrl="https://imgur.com/nP2gMTI.png" // 圖片路徑
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="金融中心 • 經濟"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
       <section className="financial-center-section">
         <h2>金融中心</h2>

@@ -8,8 +8,9 @@ function FoodAttractions() {
       <ImageTextSection
         title="芝加哥城市"
         subtitle="景點 • 美食"
-        imageUrl="https://imgur.com/hiUsC7y.png" // 圖片路徑
+        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="景點 • 美食"
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />
       <section className="food-attractions-header">
         <h2 className="food-attractions-title">景點</h2>
