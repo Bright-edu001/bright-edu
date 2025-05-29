@@ -24,6 +24,34 @@ export const NavProvider = ({ children }) => {
   const [pendingLink, setPendingLink] = useState(null);
   const headerRef = useRef(null);
 
+  // Define the full menu hierarchy
+  const fullMenuHierarchy = useMemo(() => ({
+    UIC: ["UICSub", "MBASub", "MSSub"],
+    MSU: ["msuMainSub", "msfProgramsSub"],
+    UICSub: ["chicagoSub", "rankingsSub"],
+    MBASub: ["areasSub"],
+    MSSub: [],
+    msuMainSub: ["eastLansingSub"],
+    msfProgramsSub: [],
+    chicagoSub: [],
+    rankingsSub: [],
+    areasSub: [],
+    eastLansingSub: [],
+    mobileMenu: []
+  }), []);
+
+  // Helper to get all descendants (children, grandchildren, etc.)
+  const getAllDescendants = useCallback((parentKey, hierarchy) => {
+    let descendants = new Set();
+    const children = hierarchy[parentKey] || [];
+    children.forEach(child => {
+      descendants.add(child);
+      const grandchildren = getAllDescendants(child, hierarchy);
+      grandchildren.forEach(gc => descendants.add(gc));
+    });
+    return descendants;
+  }, []);
+
   // 點擊選單外關閉所有下拉選單
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -44,14 +72,51 @@ export const NavProvider = ({ children }) => {
         e.preventDefault();
         e.stopPropagation();
       }
-      setDropdownStates((prev) => {
-        const next = { ...prev };
-        closeOthers.forEach((key) => (next[key] = false));
-        next[menuKey] = !prev[menuKey];
-        if (prev[menuKey] && childMenus.length) {
-          childMenus.forEach((key) => (next[key] = false));
+      setDropdownStates((prevStates) => {
+        const newDropdownStates = { ...prevStates };
+        const menuKeyIsCurrentlyOpen = prevStates[menuKey];
+
+        // Toggle the state of the primary menu
+        newDropdownStates[menuKey] = !menuKeyIsCurrentlyOpen;
+
+        // Determine which parent menus are being closed (either menuKey itself or those in closeOthers)
+        // Their children will also need to be closed.
+        const parentMenusBeingClosed = new Set();
+
+        closeOthers.forEach(otherKey => {
+          if (newDropdownStates[otherKey] === true || prevStates[otherKey] === true) { // If it was open or is still marked open before this logic
+            parentMenusBeingClosed.add(otherKey);
+          }
+        });
+
+        // If the primary menu (menuKey) was open and is now being closed
+        if (menuKeyIsCurrentlyOpen && !newDropdownStates[menuKey]) {
+          parentMenusBeingClosed.add(menuKey);
         }
-        return next;
+        
+        const finalKeysToSetFalse = new Set();
+        parentMenusBeingClosed.forEach(parentToClose => {
+          finalKeysToSetFalse.add(parentToClose); // Add the parent itself to be closed
+          const descendants = getAllDescendants(parentToClose, fullMenuHierarchy);
+          descendants.forEach(descendant => finalKeysToSetFalse.add(descendant));
+        });
+
+        finalKeysToSetFalse.forEach(keyToClose => {
+          // If keyToClose is the menuKey that we just decided to OPEN, don't set it to false.
+          if (keyToClose === menuKey && newDropdownStates[menuKey] === true) {
+            // Do nothing, keep it open
+          } else {
+            newDropdownStates[keyToClose] = false;
+          }
+        });
+        
+        // If menuKey is being OPENED, ensure its DIRECT children (from childMenus param) are closed (reset).
+        if (newDropdownStates[menuKey]) { // If menuKey is now open
+          (childMenus || []).forEach(directChildKey => {
+            newDropdownStates[directChildKey] = false;
+          });
+        }
+        return newDropdownStates;
       });
     };
 
@@ -76,13 +141,13 @@ export const NavProvider = ({ children }) => {
     ["UICSub", "MSSub"],
     ["areasSub"]
   );
-  const toggleMSSubDropdown = toggleDropdown("MSSub", ["UICSub", "MBASub"]);
+  const toggleMSSubDropdown = toggleDropdown("MSSub", ["UICSub", "MBASub"]); // Assuming MSSub has no children based on original structure
   const toggleMSUMainSubDropdown = toggleDropdown("msuMainSub", [
     "msfProgramsSub",
-  ]);
+  ], ["eastLansingSub"]); // Corrected: Added ["eastLansingSub"] as childMenu
   const toggleMSFProgramsSubDropdown = toggleDropdown("msfProgramsSub", [
     "msuMainSub",
-  ]);
+  ]); // Assuming msfProgramsSub has no children
   const toggleMobileMenu = toggleDropdown("mobileMenu");
 
   // 處理含子選單連結點擊行為
