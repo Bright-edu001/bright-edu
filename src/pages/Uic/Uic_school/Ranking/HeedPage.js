@@ -8,7 +8,7 @@ function HeedPage() {
       <ImageTextSection
         title="HEED -Higher Education Excellent in Diversity"
         subtitle="高等教育多樣性卓越獎"
-        imageUrl="https://imgur.com/JD9zLlj.png" // 請確認圖片路徑
+        imageUrl={`/images/Uic/ranking/2023-INSIGHT-Into-Diversity-HEED-Award-Logo-1024x1024.webp`} // 請確認圖片路徑
         imageAlt="HEED Logo"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
       />

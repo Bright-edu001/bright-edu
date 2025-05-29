@@ -1,5 +1,5 @@
 @import "../../../../styles/variables"; // 引入變數
-@import "../../../../styles/mixins"; // 引入混�?�?
+@import "../../../../styles/mixins"; // 引入 mixins
 
 .aacsbContainer {
   margin: 0 auto; // 水平居中
@@ -9,7 +9,7 @@
 
     h2 {
       font-size: $font-size-xl;
-      color: $color-uic; // 使用?�色強調標�?
+      color: $color-uic; // 使用色彩強調標題
       margin-top: $spacing-lg;
       margin-bottom: $spacing-md;
       font-weight: 700;

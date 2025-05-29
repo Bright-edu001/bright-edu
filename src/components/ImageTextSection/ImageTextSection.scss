@@ -4,7 +4,7 @@
 .image-text-section {
   position: relative;
   z-index: 0;
-  background-color: $color-gray; // 設置?�景?��??��??�求調??
+  background-color: $color-gray; // 設置背景顏色，可根據需求調整
   height: 570px;
   display: flex;
   align-items: flex-end;
@@ -12,10 +12,10 @@
 
   .content {
     display: flex;
-    flex-direction: column-reverse; // ?�直?��?
-    align-items: center; // ?�直居中對�?
+    flex-direction: column-reverse; // 垂直排列
+    align-items: center; // 垂直居中對齊
     justify-content: center;
-    padding: 0rem 17rem;
+    width: 50%;
 
     .text-content {
       background: rgba(0, 0, 0, 0.7);
@@ -23,17 +23,17 @@
 
       h2,
       h3 {
-        @include value-style; // 使用 mixin 定義?��?題樣�?
+        @include value-style; // 使用 mixin 定義標題樣式
         font-weight: 900;
-        color: $color-white; // 設�?標�?顏色
-        margin-bottom: $spacing-xs; // 設�?標�?下方?��?
+        color: $color-white; // 設置標題顏色
+        margin-bottom: $spacing-xs; // 設置標題下方間距
       }
 
       p {
-        @include value-style; // 使用 mixin 定義?�段?�樣�?
+        @include value-style; // 使用 mixin 定義段落樣式
         font-size: $font-size-lg;
         font-weight: 900;
-        color: $color-white; // 設�??��?題�???
+        color: $color-white; // 設置文字顏色
         text-align: center;
       }
     }
@@ -58,7 +58,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(231, 227, 227, 0.4); // ?��?hero-bg-mask
+  background: rgba(231, 227, 227, 0.4); // hero背景遮罩
   z-index: 0;
   pointer-events: none;
 }
@@ -70,20 +70,17 @@
 
 @media screen and (max-width: 1024px) {
   .image-text-section {
-    height: 400px; // ?��??��?高度
-    .content {
-      padding: 0rem 10rem;
-    }
+    height: 400px; // 調整組件高度
   }
 }
 @media (max-width: 700px) {
   .image-text-section {
-    height: auto; // ?��??��?高度
+    height: auto; // 調整組件高度
     .content {
       padding: 0;
       .image-content {
         margin-right: 0;
-        margin-bottom: 1.5rem; // ?��??��?字�?�?
+        margin-bottom: 1.5rem; // 調整與文字間距
         width: 90vw;
         max-width: 350px;
         align-self: center;
