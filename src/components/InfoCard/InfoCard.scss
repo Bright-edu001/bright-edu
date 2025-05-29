@@ -26,7 +26,7 @@
     max-width: 40%;
     height: auto;
     object-fit: cover;
-    aspect-ratio: 4/3; /* 設�??��?寬�?比防�?CLS */
+    aspect-ratio: 4/3; /* 設定長寬比防止CLS */
   }
 
   &-right {

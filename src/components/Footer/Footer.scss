@@ -130,7 +130,7 @@
             }
           }
         }
-      } /* ?��??�?�樣�?*/
+      } /* 品牌區塊樣式 */
       &.brand {
         display: flex;
         justify-content: flex-start; //確保 Logo 靠左對齊
@@ -175,7 +175,7 @@
     }
   }
 
-  /* ?�腳底部?�?�樣�?*/
+  /* 頁腳底部內容樣式 */
   .footer-bottom {
     text-align: center;
     margin: 0 auto;
@@ -191,83 +191,83 @@
 
 @media screen and (max-width: 1024px) {
   .footer .container {
-    margin-left: 0; /* 移除左�?�?*/
-    padding: 0 2rem; /* 增�?左右?��? */
+    margin-left: 0; /* 移除左邊間距 */
+    padding: 0 2rem; /* 增加左右內距 */
   }
   .footer .footer-content .footer-section.brand {
-    margin-left: 0; /* 移除左�?�?*/
-    max-width: 150px; /* ?�制?�大寬�?*/
+    margin-left: 0; /* 移除左邊間距 */
+    max-width: 150px; /* 限制最大寬度 */
   }
 
   .footer .footer-content .footer-section.footer-links-uic,
   .footer .footer-content .footer-section.footer-links-msu,
   .footer .footer-content .footer-section.articles {
-    max-width: 200px; /* ?�制?�大寬�?*/
+    max-width: 200px; /* 限制最大寬度 */
   }
 }
 
-/* ?��?式設�?- ?��?小螢�?*/
+/* 響應式設計 - 適用於小螢幕 */
 @media (max-width: 850px) {
   .footer {
     padding: 20px 0;
 
     .container {
       margin: 0 auto; /* 置中容器 */
-      padding: 0 15px; /* 增�?左右?��? */
+      padding: 0 15px; /* 增加左右內距 */
     }
 
     .footer-content {
-      flex-direction: column; /* ?�直?��? */
-      align-items: center; /* 置中對�??�目 */
+      flex-direction: column; /* 垂直排列 */
+      align-items: center; /* 置中對齊項目 */
       margin-bottom: 2rem;
 
       .footer-section {
-        flex: none; /* ?��? flex 佔用空�? */
+        flex: none; /* 取消 flex 佔用空間 */
         width: 100%; /* 佔滿寬度 */
-        margin-bottom: 20px; /* 增�??�塊�?�?*/
-        text-align: center; /* ?�部?��?置中 */
+        margin-bottom: 20px; /* 增加區塊間距 */
+        text-align: center; /* 內部文字置中 */
 
-        /* ?��?不�?要�??��?*/
+        /* 隱藏不需要的區塊 */
         &.footer-links-uic,
         &.footer-links-msu,
         &.articles {
           display: none;
         }
 
-        /* 調整?�於?�們�?�?*/
+        /* 調整"關於我們"區塊 */
         &.about {
-          order: 1; /* 第�??��? */
-          margin-right: 0; /* 移除?��?�?*/
-          align-items: center; /* 置中?�部?��? */
+          order: 1; /* 第一順位顯示 */
+          margin-right: 0; /* 移除右邊間距 */
+          align-items: center; /* 置中內部元素 */
 
           .contact {
             margin-bottom: 0.2rem;
-            text-align: center; /* 置中?�絡資�? */
+            text-align: center; /* 置中聯絡資訊 */
 
             .contact-title,
             .contact-address,
             .contact-phone {
-              text-align: center; /* 置中?��? */
+              text-align: center; /* 文字置中 */
               margin-left: auto;
               margin-right: auto;
-              max-width: none; /* 移除?�大寬度�???*/
+              max-width: none; /* 移除最大寬度限制 */
             }
           }
 
           .social-icons {
-            margin-top: 0.1rem; /* 增�?上方?��? */
-            align-self: center; /* 置中社群?�示 */
-            justify-content: center; /* ?�示置中 */
+            margin-top: 0.1rem; /* 增加上方間距 */
+            align-self: center; /* 置中社群圖示 */
+            justify-content: center; /* 圖示置中 */
             width: 100%;
           }
         }
 
-        /* 調整?��??��?*/
+        /* 調整品牌區塊 */
         &.brand {
-          order: 2; /* 第�??��? */
-          margin-left: 0; /* 移除左�?�?*/
-          justify-content: center; /* 置中?��??��? */
-          margin-bottom: 30px; /* 增�??��??��??��? */
+          order: 2; /* 第二順位顯示 */
+          margin-left: 0; /* 移除左邊間距 */
+          justify-content: center; /* 置中品牌Logo */
+          margin-bottom: 30px; /* 增加品牌區塊與底部間距 */
         }
       }
     }

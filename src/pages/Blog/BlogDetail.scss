@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-// 主內容�??��?欄橫?��???
+// 主內容與側邊欄橫向排列
 .blog-detail-mainrow {
   display: flex;
   gap: 2rem;
@@ -9,7 +9,7 @@
   padding: 0;
 }
 
-// 主內�?
+// 主內容
 .blog-detail-main {
   flex: 1;
   min-width: 0;
@@ -96,7 +96,7 @@
   }
 }
 
-// ?��?式設計�?寬度700px以�?
+// 響應式設計：寬度850px以下
 @media screen and (max-width: 850px) {
   .blog-detail-mainrow {
     flex-direction: column-reverse;
