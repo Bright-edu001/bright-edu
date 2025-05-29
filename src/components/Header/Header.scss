@@ -358,7 +358,7 @@
         > ul.dropdown-menu
         > li.dropdown-container:nth-child(2)
         > ul.dropdown-menu {
-        width: 165px;
+        width: 160px;
         min-width: auto; // 覆蓋通用的 min-width
       }
 
@@ -420,12 +420,27 @@
         width: 160px;
         min-width: auto;
       }
+
+      // 特定規則：密西根州-東蘭辛市(大學城) 子選單 (MSU金融碩士 > MSU密西根州立大學 > 密西根州-東蘭辛市(大學城))
+      > ul.nav-links // .header-nav > ul.nav-links
+        > li.dropdown-container:nth-child(3) // MSU金融碩士
+        > ul.dropdown-menu // Dropdown of MSU金融碩士
+        > li.dropdown-container:nth-child(1) // MSU密西根州立大學 (li container)
+        > ul.dropdown-menu // Submenu of MSU密西根州立大學
+        > li.dropdown-container:nth-child(4) // 密西根州-東蘭辛市(大學城) (li container)
+        > ul.dropdown-menu.east-lansing-menu {
+        // The actual ul for East Lansing
+        width: 140px;
+        min-width: 140px;
+        max-width: 140px;
+        box-sizing: border-box;
+      }
     }
   }
 }
 
 /* 響應式布局 - 基本 */
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .header {
     .hamburger-menu {
       display: flex; /* 小螢幕下顯示漢堡選單 */
