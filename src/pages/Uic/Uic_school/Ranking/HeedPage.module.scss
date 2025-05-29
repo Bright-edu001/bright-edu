@@ -43,6 +43,13 @@
   }
 }
 
+@media (max-width: 1024px) {
+  :global(.image-text-section .image-content img) {
+    position: relative;
+    top: 1rem;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .heedContainer {
     .contentSection {
