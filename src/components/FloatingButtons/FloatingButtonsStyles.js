@@ -3,8 +3,8 @@ import styled from "styled-components";
 // 浮動按鈕容器
 export const StyledFloatingButtons = styled.div`
   position: fixed;
-  right: 1rem;
-  bottom: 3.5rem;
+  right: 2rem;
+  bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
