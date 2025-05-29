@@ -21,7 +21,7 @@
 
     /* 頁腳區塊樣式 - 用於不同類別的頁腳內容 */
     .footer-section {
-      margin: 15px; // 统一外边距
+      margin: 10px; // 统一外边距
       min-width: 220px; // 最小宽度，确保内容不会过窄
       min-height: 120px; // 新增：为页脚区域设置最小高度以减少CLS
 
@@ -87,6 +87,9 @@
             text-align: left;
             margin-right: 0;
             margin-left: 0;
+            min-height: 24px; /* 新增：確保標題有最小高度 */
+            display: flex; /* 新增：使其可以設定 align-items */
+            align-items: center; /* 新增：垂直居中 */
           }
 
           .contact-address,
@@ -100,6 +103,9 @@
             text-align: left;
             margin-left: 0;
             margin-right: 0;
+            min-height: 20px; /* 新增：確保地址和電話有最小高度 */
+            display: flex; /* 新增：使其可以設定 align-items */
+            align-items: center; /* 新增：垂直居中 */
           }
 
           .contact-address {
@@ -158,8 +164,8 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        margin-top: -2px;
         margin-right: 0;
+        min-height: 24px; /* 新增：確保區塊有最小高度 */
 
         a {
           color: $color-nav;
@@ -167,6 +173,7 @@
           font-weight: bold;
           text-decoration: none;
           display: inline-block;
+          line-height: 24px; /* 新增：確保文字垂直居中並佔據高度 */
 
           &:hover {
             text-decoration: none;
