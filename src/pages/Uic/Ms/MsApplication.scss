@@ -19,7 +19,6 @@
     text-align: left;
     max-width: 90%;
     margin: 0 auto;
-    margin-bottom: $spacing-xxl;
   }
 }
 
@@ -29,7 +28,7 @@
   h4 {
     color: $color-uic;
     @include heading-large;
-    margin-top: 24px;
+    margin-top: $spacing-xl;
     margin-bottom: 8px;
     text-align: left;
   }
