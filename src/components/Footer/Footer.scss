@@ -1,30 +1,30 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-/* ?�腳?��?�?? */
+/* 頁腳樣式 */
 .footer {
   background: $color-gray-ultralight;
   padding: 40px 0;
 
-  /* 容器�?? - ?�制?�容寬度?��?�?*/
+  /* 容器樣式 - 控制內容寬度和居中 */
   .container {
     width: 100%;
     max-width: 1440px;
     padding: 0;
   }
 
-  /* ?�腳主�??�容?�??*/
+  /* 頁腳主要內容區域 */
   .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 3rem;
 
-    /* ?�腳?��?�?? - ?�於不�?類�??��??�內�?*/
+    /* 頁腳區塊樣式 - 用於不同類別的頁腳內容 */
     .footer-section {
       flex: 1;
 
-      /* ????�?�樣�?*/
+      /* 連結區塊樣式 */
       &.footer-links-uic,
       &.footer-links-msu {
         display: flex;
@@ -37,7 +37,7 @@
           font-size: 18px;
           font-weight: bold;
           width: 180px;
-          height: 24px; /* ?��?標�?高度以確保�?�?*/
+          height: 24px; /* 設定標題高度以確保對齊 */
           display: flex;
           align-items: center;
           margin-left: 0;
@@ -51,7 +51,7 @@
           margin: 0;
 
           li {
-            height: 24px; /* ?��?每個�?表�?高度 */
+            height: 24px; /* 設定每個列表項高度 */
             display: flex;
             align-items: center;
             margin-bottom: 8px;
@@ -69,11 +69,11 @@
         }
       }
 
-      /* ?�於?�們�??�樣�?*/
+      /* "關於我們"區塊樣式 */
       &.about {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-start; //確保 "關於我們" 區塊內容靠左對齊
 
         .contact {
           margin-bottom: 20px;
@@ -130,11 +130,17 @@
             }
           }
         }
-      } /* ?��??�?�樣�?*/
+      } /* ?��??�?�樣�?*/
       &.brand {
         display: flex;
-        justify-content: flex-start;
+        justify-content: flex-start; //確保 Logo 靠左對齊
         align-items: center;
+        img {
+          // 新增以下屬性以避免 CLS
+          width: 120px; // 與 JS 中設定的寬度一致
+          height: 120px; // 與 JS 中設定的高度一致
+          aspect-ratio: 1 / 1; // 保持圖片的長寬比
+        }
 
         .footer-brand img {
           width: 120px;
@@ -146,7 +152,7 @@
         }
       }
 
-      /* ?��??�?�樣�?*/
+      /* 文章區塊樣式 */
       &.articles {
         display: flex;
         justify-content: flex-start;
@@ -169,7 +175,7 @@
     }
   }
 
-  /* ?�腳底部?�?�樣�?*/
+  /* ?�腳底部?�?�樣�?*/
   .footer-bottom {
     text-align: center;
     margin: 0 auto;
@@ -185,83 +191,83 @@
 
 @media screen and (max-width: 1024px) {
   .footer .container {
-    margin-left: 0; /* 移除左�?�?*/
-    padding: 0 2rem; /* 增�?左右?��? */
+    margin-left: 0; /* 移除左�?�?*/
+    padding: 0 2rem; /* 增�?左右?��? */
   }
   .footer .footer-content .footer-section.brand {
-    margin-left: 0; /* 移除左�?�?*/
-    max-width: 150px; /* ?�制?�大寬�?*/
+    margin-left: 0; /* 移除左�?�?*/
+    max-width: 150px; /* ?�制?�大寬�?*/
   }
 
   .footer .footer-content .footer-section.footer-links-uic,
   .footer .footer-content .footer-section.footer-links-msu,
   .footer .footer-content .footer-section.articles {
-    max-width: 200px; /* ?�制?�大寬�?*/
+    max-width: 200px; /* ?�制?�大寬�?*/
   }
 }
 
-/* ?��?式設�?- ?��?小螢�?*/
+/* ?��?式設�?- ?��?小螢�?*/
 @media (max-width: 850px) {
   .footer {
     padding: 20px 0;
 
     .container {
       margin: 0 auto; /* 置中容器 */
-      padding: 0 15px; /* 增�?左右?��? */
+      padding: 0 15px; /* 增�?左右?��? */
     }
 
     .footer-content {
-      flex-direction: column; /* ?�直?��? */
-      align-items: center; /* 置中對�??�目 */
+      flex-direction: column; /* ?�直?��? */
+      align-items: center; /* 置中對�??�目 */
       margin-bottom: 2rem;
 
       .footer-section {
-        flex: none; /* ?��? flex 佔用空�? */
+        flex: none; /* ?��? flex 佔用空�? */
         width: 100%; /* 佔滿寬度 */
-        margin-bottom: 20px; /* 增�??�塊�?�?*/
-        text-align: center; /* ?�部?��?置中 */
+        margin-bottom: 20px; /* 增�??�塊�?�?*/
+        text-align: center; /* ?�部?��?置中 */
 
-        /* ?��?不�?要�??��?*/
+        /* ?��?不�?要�??��?*/
         &.footer-links-uic,
         &.footer-links-msu,
         &.articles {
           display: none;
         }
 
-        /* 調整?�於?�們�?�?*/
+        /* 調整?�於?�們�?�?*/
         &.about {
-          order: 1; /* 第�??��? */
-          margin-right: 0; /* 移除?��?�?*/
-          align-items: center; /* 置中?�部?��? */
+          order: 1; /* 第�??��? */
+          margin-right: 0; /* 移除?��?�?*/
+          align-items: center; /* 置中?�部?��? */
 
           .contact {
             margin-bottom: 0.2rem;
-            text-align: center; /* 置中?�絡資�? */
+            text-align: center; /* 置中?�絡資�? */
 
             .contact-title,
             .contact-address,
             .contact-phone {
-              text-align: center; /* 置中?��? */
+              text-align: center; /* 置中?��? */
               margin-left: auto;
               margin-right: auto;
-              max-width: none; /* 移除?�大寬度�???*/
+              max-width: none; /* 移除?�大寬度�???*/
             }
           }
 
           .social-icons {
-            margin-top: 0.1rem; /* 增�?上方?��? */
-            align-self: center; /* 置中社群?�示 */
-            justify-content: center; /* ?�示置中 */
+            margin-top: 0.1rem; /* 增�?上方?��? */
+            align-self: center; /* 置中社群?�示 */
+            justify-content: center; /* ?�示置中 */
             width: 100%;
           }
         }
 
-        /* 調整?��??��?*/
+        /* 調整?��??��?*/
         &.brand {
-          order: 2; /* 第�??��? */
-          margin-left: 0; /* 移除左�?�?*/
-          justify-content: center; /* 置中?��??��? */
-          margin-bottom: 30px; /* 增�??��??��??��? */
+          order: 2; /* 第�??��? */
+          margin-left: 0; /* 移除左�?�?*/
+          justify-content: center; /* 置中?��??��? */
+          margin-bottom: 30px; /* 增�??��??��??��? */
         }
       }
     }
