@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import "./RankingNumberFlip.scss";
 
-function RankingNumberFlip({ number, duration = 10000, start = 99 }) {
+function RankingNumberFlip({
+  number,
+  duration = 10000,
+  start = 99,
+  startAnimation,
+}) {
   const [displayNumber, setDisplayNumber] = useState(start);
   const [flipping, setFlipping] = useState(false);
   const prevNumber = useRef(start);
@@ -14,7 +19,7 @@ function RankingNumberFlip({ number, duration = 10000, start = 99 }) {
       const step = (from - to) / totalFrames;
 
       function getFrameDuration(progress) {
-        return (duration * (0.3 + 0.7 * Math.pow(progress, 2))) / totalFrames;
+        return (duration * (0.1 + 0.9 * Math.pow(progress, 2))) / totalFrames;
       }
 
       function animateFrame() {
@@ -41,7 +46,7 @@ function RankingNumberFlip({ number, duration = 10000, start = 99 }) {
   );
 
   useEffect(() => {
-    if (number === prevNumber.current) return;
+    if (!startAnimation || number === prevNumber.current) return; // 只有當 startAnimation 為 true 才執行
 
     // 清除現有動畫
     if (animationRef.current) {
@@ -61,7 +66,7 @@ function RankingNumberFlip({ number, duration = 10000, start = 99 }) {
         clearTimeout(animationRef.current);
       }
     };
-  }, [number, animate]);
+  }, [number, animate, startAnimation]); // 將 startAnimation 加入依賴項
 
   return (
     <span className={`ranking-number-flip${flipping ? " flipping" : ""}`}>

@@ -4,9 +4,41 @@ import ActionButton from "../../components/ActionButton/ActionButton";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import RankingNumberFlip from "../../components/RankingNumberFlip/RankingNumberFlip";
 import { enrollmentEvents, news } from "../../data/blog";
+import React, { useState, useEffect, useRef } from "react";
 
 function Home() {
-  // Hero carousel logic moved to <Hero /> component
+  const [animateRanking, setAnimateRanking] = useState(false);
+  const featuresRef = useRef(null);
+
+  useEffect(() => {
+    const currentFeaturesRef = featuresRef.current; // 將 ref.current 賦值給本地變數
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAnimateRanking(true);
+          if (currentFeaturesRef) {
+            // 檢查 currentFeaturesRef 是否存在
+            observer.unobserve(currentFeaturesRef);
+          }
+        }
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      }
+    );
+
+    if (currentFeaturesRef) {
+      observer.observe(currentFeaturesRef);
+    }
+
+    return () => {
+      if (currentFeaturesRef) {
+        observer.unobserve(currentFeaturesRef);
+      }
+    };
+  }, []); // 空依賴陣列，effect 只在掛載和卸載時執行
 
   return (
     <div className="home-page">
@@ -32,7 +64,12 @@ function Home() {
         </div>
       </section>
 
-      <section className="features" id="school-rankings" aria-label="學校排名">
+      <section
+        className="features"
+        id="school-rankings"
+        aria-label="學校排名"
+        ref={featuresRef}
+      >
         <div className="container">
           <div className="feature-cards">
             <img
@@ -51,27 +88,36 @@ function Home() {
                 <li>
                   <div className="ranking-info">
                     {" "}
-                    {/* 新增的 div */}
                     <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip number={1} start={100} />
+                    <RankingNumberFlip
+                      number={1}
+                      start={100}
+                      startAnimation={animateRanking}
+                    />
                   </div>
                   <p>The largest research university in Chicago</p>
                 </li>
                 <li>
                   <div className="ranking-info">
                     {" "}
-                    {/* 新增的 div */}
                     <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip number={39} start={100} />
+                    <RankingNumberFlip
+                      number={39}
+                      start={100}
+                      startAnimation={animateRanking}
+                    />
                   </div>
                   <p>Among Top Public School in the nation</p>
                 </li>
                 <li>
                   <div className="ranking-info">
                     {" "}
-                    {/* 新增的 div */}
                     <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip number={80} start={100} />
+                    <RankingNumberFlip
+                      number={80}
+                      start={100}
+                      startAnimation={animateRanking}
+                    />
                   </div>
                   <p>U.S. NEWS National Universities</p>
                 </li>
@@ -103,27 +149,36 @@ function Home() {
                 <li>
                   <div className="ranking-info">
                     {" "}
-                    {/* 新增的 div */}
                     <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip number={19} start={100} />
+                    <RankingNumberFlip
+                      number={19}
+                      start={100}
+                      startAnimation={animateRanking}
+                    />
                   </div>
                   <p>TFE Times Master's of Finance</p>
                 </li>
                 <li>
                   <div className="ranking-info">
                     {" "}
-                    {/* 新增的 div */}
                     <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip number={30} start={100} />
+                    <RankingNumberFlip
+                      number={30}
+                      start={100}
+                      startAnimation={animateRanking}
+                    />
                   </div>
                   <p>US News & World Report Top Public Schools</p>
                 </li>
                 <li>
                   <div className="ranking-info">
                     {" "}
-                    {/* 新增的 div */}
                     <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip number={63} start={100} />
+                    <RankingNumberFlip
+                      number={63}
+                      start={100}
+                      startAnimation={animateRanking}
+                    />
                   </div>
                   <p>Among Top Public School in the nation</p>
                 </li>
