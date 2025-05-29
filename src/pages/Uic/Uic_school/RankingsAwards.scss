@@ -102,14 +102,14 @@
     padding: 0 2rem;
   }
 
-  // AACSB ???????
+  // AACSB 認證相關
   .aacsb-section {
     margin: 0 auto;
     padding: 2rem;
 
     .aacsb-header {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
 
       margin-bottom: 1.5rem;
@@ -130,9 +130,7 @@
           font-weight: 900;
         }
         p {
-          @include label-style;
-          margin-left: 0;
-          margin-right: 0;
+          @include heading-large;
         }
       }
     }
@@ -211,7 +209,7 @@
     }
   }
 
-  // �h??????�V?????????
+  // 多元化與卓越表現
   .diversity-excellence-section {
     margin: 5rem auto 0;
     padding: 2rem;
@@ -219,8 +217,7 @@
     .diversity-header {
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
-
+      justify-content: center;
       margin-bottom: 1.5rem;
 
       .diversity-logo {
@@ -405,7 +402,7 @@
     li {
       position: relative;
       &::before {
-        content: "�E";
+        content: "•"; // 使用標準項目符號
         margin-right: 0.5em;
       }
     }
