@@ -246,7 +246,6 @@
         /* 調整"關於我們"區塊 */
         &.about {
           order: 1; /* 第一順位顯示 */
-          margin-right: 0; /* 移除右邊間距 */
           align-items: center; /* 置中內部元素 */
 
           .contact {
@@ -260,6 +259,7 @@
               margin-left: auto;
               margin-right: auto;
               max-width: none; /* 移除最大寬度限制 */
+              justify-content: center;
             }
           }
 
@@ -274,7 +274,7 @@
         /* 調整品牌區塊 */
         &.brand {
           order: 2; /* 第二順位顯示 */
-          margin-left: 0; /* 移除左邊間距 */
+          margin: 0; /* 移除左邊間距 */
           justify-content: center; /* 置中品牌Logo */
           margin-bottom: 30px; /* 增加品牌區塊與底部間距 */
         }
