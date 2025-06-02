@@ -1,15 +1,15 @@
 @import "./styles/variables";
 @import "./styles/mixins";
 
-/* ?��??�置�?? */
+/* 全局重置樣式 */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  // ?�止橫�?滾�?條出??
+  font-family: $font-family-base;
 }
 
-/* ?�面主�?�?? */
+/* 頁面主體樣式 */
 body {
   font-family: $font-family-base;
   line-height: 1.5;
@@ -18,7 +18,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ?�止?�?�設?��?橫�?溢出 */
+/* 防止移動設備橫向溢出 */
 html,
 body {
   overflow-x: hidden;
@@ -27,14 +27,14 @@ body {
   padding-right: env(safe-area-inset-right);
 }
 
-/* ?�用程�?主容?�樣�?*/
+/* 應用程式主容器樣式 */
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   text-align: center;
 
-  /* ?�用程�?標�?�?? */
+  /* 應用程式標誌樣式 */
   &-logo {
     height: 40vmin;
     pointer-events: none;
@@ -44,7 +44,7 @@ body {
     }
   }
 
-  /* ?�用程�??�部�?? */
+  /* 應用程式頭部樣式 */
   &-header {
     min-height: 100vh;
     display: flex;
@@ -55,13 +55,13 @@ body {
     color: $color-white;
   }
 
-  /* ?�用程�????�?? */
+  /* 應用程式連結樣式 */
   &-link {
     color: #61dafb;
   }
 }
 
-/* 標�??��??�畫 */
+/* 標誌旋轉動畫 */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -71,30 +71,27 @@ body {
   }
 }
 
-/* 主�??�容?�?�樣�?- 使內容填滿可?�空??*/
+/* 主要內容區域樣式 - 使內容填滿可用空間 */
 .main-content {
   flex: 1;
 }
 
-/* ?��??�用�?? */
+/* 按鈕通用樣式 */
 button {
   font-family: inherit;
 }
-.btn {
-  background-color: $color-btn-primary;
-}
 
-/* ?�用容器�?? */
+/* 通用容器樣式 */
 .container {
   @include container;
 }
 
-/* ????�用�?? */
+/* 連結通用樣式 */
 a {
   text-decoration: none;
 }
 
-/* ?��??�用�?? */
+/* 圖片通用樣式 */
 img {
   max-width: 100%;
   height: auto;
