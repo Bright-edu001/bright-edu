@@ -50,6 +50,7 @@
           list-style: none;
           padding: 0;
           margin: 0;
+          min-height: 96px; /* 新增：確保ul為3個li項目保留足夠空間 (3 * (24px height + 8px margin-bottom)) */
 
           li {
             height: 24px; /* 設定每個列表項高度 */
