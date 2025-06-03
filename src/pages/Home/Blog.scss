@@ -1,9 +1,6 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-.blog-content {
-  margin: 1rem 2rem 0 0;
-}
 @media screen and (max-width: 1024px) {
   .blog-content {
     margin: 2rem auto;
@@ -139,24 +136,16 @@
 .blog-detail-mainrow {
   display: flex;
   flex-direction: row;
-  margin: 0 auto; // ¨Ï¥D­n¤º®e°Ï°ì©~¤¤
-  padding: $spacing-sm; // ²K¥[¤@¨Ç¤ºÃä¶Z
-  max-width: $container-max-width; // ­­¨î³Ì¤j¼e«×
-  width: 100%; // ½T«O¦b¸û¤p¿Ã¹õ¤W¦ûº¡¼e«×
+  justify-content: center;
+  padding: $spacing-lg; // å¢åŠ å…§é‚Šè·
+  width: 100%; // é¿å…å®¹å™¨å¯¬åº¦è¶…å‡º
   overflow: hidden;
+  .blog-detail-main {
+    padding: 2rem;
+  }
 }
 
-.blog-detail-main {
-  flex: 3; // ¥D­n¤º®e¦û¥Î¸û¦hªÅ¶¡
-  margin-right: $spacing-xl; // »P°¼ÃäÄæªº¶¡¶Z
-}
-
-.blog-detail-sidebar {
-  flex: 1; // °¼ÃäÄæ¦û¥Î¸û¤ÖªÅ¶¡
-  // «O«ù SearchBar.scss ¤¤ªº¼Ë¦¡¡A³o¸Ì¥D­n±±¨î§G§½
-}
-
-// ÅTÀ³¦¡½Õ¾ã¡G·í¿Ã¹õ¼e«×¤p©ó $breakpoint-md ®É¡A°ïÅ|¥D­n¤º®e©M°¼ÃäÄæ
+// ç•¶ç•«é¢å¯¬åº¦å°æ–¼ $breakpoint-md æ™‚ï¼Œå°‡ä¸»å…§å®¹å€å¡Šæ”¹ç‚ºå‚ç›´æ’åˆ—
 @media screen and (max-width: $breakpoint-md) {
   .blog-detail-mainrow {
     flex-direction: column;
@@ -164,7 +153,7 @@
 
   .blog-detail-main {
     margin-right: 0;
-    margin-bottom: $spacing-xl; // ¦b°ïÅ|®É²K¥[©³³¡¶¡¶Z
+    margin-bottom: $spacing-xl;
   }
 }
 @media screen and (max-width: 1025px) {
@@ -174,7 +163,6 @@
   }
 
   .blog-detail-sidebar {
-    /* Åı·j´M¦CÅã¥Ü¦b¥D¤º®e¤W¤è */
     order: -1;
     margin-bottom: $spacing-xl;
   }

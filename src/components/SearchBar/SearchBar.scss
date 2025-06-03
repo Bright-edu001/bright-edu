@@ -47,14 +47,12 @@
 
 // 側邊欄樣式
 .blog-detail-sidebar {
-  flex: 0 0 300px;
-  max-width: 300px;
   background: #fafbfc;
   border-radius: 8px;
-
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   height: fit-content;
   overflow-x: visible;
+  padding-left: 1rem;
 }
 
 // 響應式斷點寬度小於 1024px時

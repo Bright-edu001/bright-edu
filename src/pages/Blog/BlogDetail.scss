@@ -11,7 +11,8 @@
 
 // 主內容
 .blog-detail-main {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   padding: 0;
 }
@@ -61,7 +62,7 @@
 
 .blog-detail-image {
   width: 1000px;
-  margin-left: 1.5rem;
+  padding: 0 1.5rem;
   object-fit: cover;
   max-width: 100%;
   margin-bottom: 1rem;
@@ -74,7 +75,6 @@
   color: $color-nav;
   margin-top: $spacing-lg;
   margin-bottom: 1rem;
-  margin-left: 35rem;
   &:hover {
     color: $color-uic;
     transform: scale(1.05);
@@ -89,11 +89,6 @@
 .blog-detail-content p {
   margin-top: 1.2em;
   margin-bottom: 1.2em;
-}
-@media screen and (max-width: 1024px) {
-  .blog-detail-back {
-    margin-left: 20rem;
-  }
 }
 
 // 響應式設計：寬度850px以下
