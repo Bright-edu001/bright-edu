@@ -13,13 +13,13 @@
 
   .intro {
     padding: $spacing-lg $spacing-lg;
-    text-align: left; // ??¬°¥ª????
+    text-align: left;
     p {
       @include body-large;
       color: $color-text-primary;
       letter-spacing: 0.05em;
-      margin: $spacing-xl auto; // ¨Ï¬q??¸m??
-      max-width: 100%; // ??¨î¬q¸¨????¤j¼e??
+      margin: $spacing-xl auto;
+      max-width: 100%;
     }
   }
 
@@ -36,7 +36,7 @@
       h3 {
         @include heading-medium;
         color: $color-msu;
-        text-align: left; //??¥ª¹ï??
+        text-align: left; // æ¨™é¡Œé å·¦å°é½Š
       }
 
       ul.left-aligned {
@@ -44,14 +44,14 @@
         list-style: none;
         padding: 0;
         display: grid;
-        grid-template-columns: repeat(3, 1fr); // ¤W¤è???? 4 ??
+        grid-template-columns: repeat(3, 1fr); // ä¸‰æ¬„æ’åˆ—
         gap: 2rem;
 
         li {
           display: flex;
-          flex-direction: column; // ½T?? label ??value ??ª½????
-          align-items: flex-start; // ??¥ª¹ï??
-          margin-bottom: 10px; // ¼W??????
+          flex-direction: column; // ä¸€å€‹ label ä¸€å€‹ value å‚ç›´æ’åˆ—
+          align-items: flex-start; // å…§å®¹é å·¦å°é½Š
+          margin-bottom: 10px; // å€å¡Šä¸‹æ–¹é–“è·
 
           .label {
             @include label-style;
@@ -70,12 +70,12 @@
             color: $color-msu;
             list-style: disc;
             margin-top: 0;
-            padding-left: 20px; // ²K??¥ª°¼????¶Z¨Ï????????
+            padding-left: 20px; // å­é …ç›®ç¸®æ’
 
             li {
               margin: 0;
-              display: list-item; // ½T????ªí??Åã¥Ü¬°??ªí????
-              padding-left: 5px; // ????¦r??????¤§??²K??????
+              display: list-item; // å­é …ç›®é¡¯ç¤ºç‚ºåˆ—è¡¨
+              padding-left: 5px; // å­é …ç›®å·¦å´é–“è·
             }
           }
         }
@@ -87,7 +87,7 @@
       .stats {
         .stats-card-school {
           ul.left-aligned {
-            grid-template-columns: repeat(2, 1fr); // ????????¤W§ï??1 ??2 ??¥Ø
+            grid-template-columns: repeat(2, 1fr);
           }
         }
       }
@@ -95,8 +95,6 @@
   }
 
   .details {
-    padding: $spacing-lg 0;
-
     .reasearch {
       background: $color-white;
       padding: $spacing-md;
@@ -112,7 +110,9 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        margin-left: 16rem;
+        text-align: center;
+        padding: 3rem 16rem;
+
         h4 {
           @include label-style;
           color: $color-black;
@@ -150,17 +150,17 @@
         .areas-list {
           display: flex;
           flex-direction: row;
-          flex-wrap: wrap; // ??³\????­n??????
-          margin-left: $spacing-md; // ½Õ¾ã¥ª°¼????
+          flex-wrap: wrap; // å…è¨±è‡ªå‹•æ›è¡Œ
+          margin-left: $spacing-md; // å·¦å´é–“è·
 
           li {
             color: $color-msu;
             font-weight: 700;
             font-size: $font-size-xl;
             position: relative;
-            margin-right: $spacing-xl; // ²K????¥Ø¤§????????
-            white-space: nowrap; // ??¤î??¥Ø??®e????
-            margin-bottom: $spacing-sm; // ¦p????­n??¦æ????????ª½????
+            margin-right: $spacing-xl; // å³å´é–“è·
+            white-space: nowrap; // ä¸æ›è¡Œ
+            margin-bottom: $spacing-sm; // ä¸‹æ–¹é–“è·
           }
         }
         .research-centers p {
@@ -181,8 +181,17 @@
       margin-bottom: $spacing-xl;
     }
   }
+  .global-impact-content {
+    p {
+      font-size: $font-size-lg;
+      font-weight: 500;
+      padding: 0 2rem;
+    }
+  }
   .contribution-content {
     margin: 0 2rem;
+    font-size: $font-size-lg;
+    font-weight: 500;
   }
   .global-impact {
     h3 {
@@ -197,7 +206,7 @@
       margin-top: 1rem;
 
       li {
-        margin-bottom: 1rem; // ¼W?? li ????????¤U????
+        margin-bottom: 1rem; // æ¯å€‹ li å…ƒç´ ä¸‹æ–¹é–“è·
       }
     }
   }
@@ -211,48 +220,29 @@
     margin-top: 0;
 
     li {
-      margin-bottom: 1rem; // ¼W?? li ????????¤U????
+      margin-bottom: 1rem; // æ¯å€‹ li å…ƒç´ ä¸‹æ–¹é–“è·
     }
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .about-msu-page .michigan-contribution p,
-  .about-msu-page .global-impact p {
-    margin-left: 8rem;
-  }
   .about-msu-page .details .reasearch .research-content {
-    margin-left: 8rem;
+    padding: 2rem 8rem;
   }
   .about-msu-page .global-impact .impact-list {
-    margin-left: 10rem;
+    margin: 1rem 4rem;
+    font-size: $font-size-md;
   }
   .about-msu-page .diversity-list {
-    margin-left: 10rem;
+    margin: 1rem 4rem;
+    font-size: $font-size-md;
   }
 }
 
 @media screen and (max-width: 700px) {
   .about-msu-page {
-    .details {
-      .reasearch {
-        .research-content {
-          margin-left: 1rem;
-        }
-      }
-    }
-    .michigan-contribution {
-      .contribution-content {
-        p {
-          margin-left: 2rem;
-        }
-      }
-    }
     .global-impact {
       .global-impact-content {
-        p {
-          margin-left: 2rem;
-        }
         ul {
           margin-left: 2rem;
         }
@@ -261,6 +251,9 @@
   }
 }
 @media screen and (max-width: 500px) {
+  .about-msu-page .details .reasearch .research-content {
+    padding: 1rem;
+  }
   .about-msu-page .stats .stats-card-school ul.left-aligned li .sub-list {
     padding-left: 0;
   }
