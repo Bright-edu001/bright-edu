@@ -18,11 +18,11 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 3rem;
+    text-align: left;
 
     /* 頁腳區塊樣式 - 用於不同類別的頁腳內容 */
     .footer-section {
-      margin: 10px; // 统一外边距
-      min-width: 220px; // 最小宽度，确保内容不会过窄
+      margin: 10px 0; // 统一外边距
       min-height: 120px; // 新增：为页脚区域设置最小高度以减少CLS
 
       /* 連結區塊樣式 */

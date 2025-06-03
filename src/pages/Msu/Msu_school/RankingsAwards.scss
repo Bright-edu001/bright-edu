@@ -22,8 +22,10 @@
       color: $color-msu;
       align-items: center;
       justify-content: space-evenly;
-      margin: $spacing-xl 10rem;
+      gap: $spacing-xl;
+      margin: 2rem 0;
     }
+
     .highlight {
       text-align: left;
       margin-top: $spacing-xxl;
@@ -31,10 +33,16 @@
       padding: 0 7rem;
     }
   }
+  .management {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .class {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin: $spacing-xxl 0;
+    padding: 0 2rem;
 
     .class-item {
       text-align: center;
@@ -90,10 +98,8 @@
     padding: 0;
     margin: 0 10rem 2rem;
   }
-  .rankings-awards-page .ranking .highlight,
   .rankings-awards-page .management .highlight {
-    margin-left: 3rem;
-    margin-right: 3rem;
+    padding: 0 2rem;
   }
 }
 

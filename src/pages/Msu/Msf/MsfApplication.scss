@@ -2,8 +2,10 @@
 @import "../../../styles/mixins";
 
 .msf-application-list {
-  margin: $spacing-xxl auto;
-  padding-left: 18rem;
+  display: flex;
+  flex-direction: column;
+  margin: $spacing-md auto;
+  padding: 0 9rem;
   ul {
     list-style: disc;
     li {
@@ -37,18 +39,14 @@
     line-height: 17px;
     color: $color-black;
     position: static;
-    margin-left: -46rem;
-    display: block;
-    margin-top: 0.25rem;
-    margin-bottom: 8rem;
+    margin-bottom: 3rem;
   }
 
   @media screen and (max-width: 1024px) {
     margin: $spacing-lg auto;
-    padding-left: 1rem;
+    padding: 0 3rem;
 
     ul {
-      padding-left: 1.5rem;
       li {
         font-size: $font-size-sm;
         margin-top: $spacing-md;
@@ -65,20 +63,19 @@
 
     p {
       font-size: $font-size-xs;
-      margin: $spacing-md 0 $spacing-md 6rem;
     }
 
     span {
       font-size: $font-size-xs;
       margin-left: 0;
       margin-bottom: $spacing-xxl;
+      text-align: left;
     }
   }
 
-  // 版面設計寬度小於 700px
   @media screen and (max-width: 700px) {
     margin: $spacing-lg $spacing-md;
-    padding-left: 0;
+    padding: 0;
 
     ul {
       padding-left: 1.5rem;
@@ -97,7 +94,7 @@
     }
 
     p {
-      margin: $spacing-md 0 $spacing-md 0; // 調整 p 標籤的上下間距
+      margin: $spacing-md 0 $spacing-md 0;
     }
   }
 }
