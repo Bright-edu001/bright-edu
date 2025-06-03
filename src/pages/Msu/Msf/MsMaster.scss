@@ -144,7 +144,6 @@
   }
   h3 {
     @include gold-heading;
-    margin-bottom: $spacing-lg;
   }
   ul {
     @include standard-list; // text-align: left
@@ -203,14 +202,14 @@
   flex-direction: column; // Added
   align-items: center; // Added
   .ms-master-require-plan-list {
+    display: flex;
+    flex-direction: column; // Changed to column for better stacking
     h3 {
-      margin-left: 9rem;
+      margin: 3rem auto;
       text-align: left;
       color: $color-msu;
     }
     ul {
-      padding-left: 11rem;
-      margin-top: $spacing-xl;
       li {
         color: $color-black;
       }
@@ -228,7 +227,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center; // Changed from flex-start
-  margin: $spacing-xxl auto;
+  margin: $spacing-xl auto;
 }
 
 .ms-master-require-apply-features,
@@ -326,7 +325,8 @@
   // The -intro part is handled by the section-intro mixin modifications
   h2 {
     @include section-header;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
   }
 
   &-intro {
