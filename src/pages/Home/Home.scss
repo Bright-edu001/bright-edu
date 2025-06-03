@@ -129,7 +129,6 @@ p {
     border-radius: 20px;
     padding: 3rem 6rem;
     width: 100%;
-    max-width: 600px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: left;
     .feature-logo-img {
@@ -213,13 +212,13 @@ p {
     max-height: 100px;
     z-index: 2;
     position: absolute;
-    left: 22%;
+    left: 24%;
     transform: translateX(-50%);
     top: -60px; // 可向上調整位置
   }
   .feature-logo-img-msu {
     transform: translateX(50%);
-    left: 41%;
+    left: 38%;
   }
   @media screen and (max-width: 1024px) {
     .feature-logo-img-uic,

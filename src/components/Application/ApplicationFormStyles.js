@@ -5,7 +5,6 @@ export const StyledApplicationForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 1400px;
   margin: 0 auto;
   margin-top: -2rem;
 
@@ -23,7 +22,7 @@ export const StyledApplicationForm = styled.form`
     outline: none;
     transition: border 0.2s;
     &:focus {
-      border-color: #f5b82e;
+      border-color: #1c184a;
     }
   }
 
@@ -87,15 +86,16 @@ export const StyledSectionTitle = styled.h2`
 // 條件描述文字
 export const StyledConditionDesc = styled.div`
   color: #211700;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
   text-align: left;
   margin-bottom: 2rem;
-  margin-left: 2rem;
+  padding: 0 24px;
 
   @media (max-width: 700px) {
     font-size: 0.95rem;
     margin-left: 0;
-    padding: 0 8px;
+    padding: 0 16px;
     text-align: justify;
   }
 `;

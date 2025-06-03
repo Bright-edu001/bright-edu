@@ -31,6 +31,9 @@
     margin-top: $spacing-xl;
     margin-bottom: 8px;
     text-align: left;
+    @media screen and (max-width: 700px) {
+      text-align: center;
+    }
   }
 
   p {
@@ -40,6 +43,9 @@
     text-align: left;
     margin-left: 0;
     margin-top: $spacing-sm;
+    @media screen and (max-width: 700px) {
+      text-align: center;
+    }
   }
 
   ul {

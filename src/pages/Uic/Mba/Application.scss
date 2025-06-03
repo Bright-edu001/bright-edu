@@ -41,16 +41,11 @@
 .mba-application-section {
   display: flex;
   flex-direction: column;
-  max-width: 90%;
   text-align: left;
-  margin-left: $spacing-xxl;
-  margin-bottom: $spacing-xxl;
+  padding: 0 2rem;
 }
 
 @media screen and (max-width: 1024px) {
-  .mba-info-section {
-    margin-left: $spacing-xxl;
-  }
   .mba-application-condition-desc {
     margin-left: 0;
   }
