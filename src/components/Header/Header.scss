@@ -7,7 +7,7 @@
   height: 164px;
   opacity: 100%;
   box-shadow: $shadow-sm;
-  padding: $spacing-sm 0;
+  padding: 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -15,11 +15,12 @@
   /* 頁首容器樣式 */
   .container {
     @include container;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 0;
-    gap: clamp(2rem, 10vw, 10rem); // 使用 clamp 隨螢幕寬度自適應
+    padding: 0;
   }
 
   /* 網站標誌樣式 */
@@ -631,7 +632,6 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 100%;
 }
 
 .mba-management-sub {

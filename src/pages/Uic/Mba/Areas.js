@@ -16,13 +16,15 @@ function Areas() {
       <SectionContainer>
         <div className="mba-areas-content">
           <div className="mba-areas-title">五大領域</div>
-          <div className="mba-areas-desc">
-            UIC
-            一年制MBA課程以金融、管理等碩士聞名，同學們可以針對自己的興趣或者是自己所想增進的專業目標做選擇。
-          </div>
-          <div className="mba-areas-desc">
-            我們目前開設五個領域給予同學選擇，主要優勢在於同學可以根據特定興趣領域靈活調整MBA學習傾向，為培養全方位的當代管理技能和文化意識，使學生能夠在當今的全球商業環境中有效競爭。
-          </div>
+          <div className="mba-areas-desc-wrapper"> {/* Added wrapper div */}
+            <div className="mba-areas-desc">
+              UIC
+              一年制MBA課程以金融、管理等碩士聞名，同學們可以針對自己的興趣或者是自己所想增進的專業目標做選擇。
+            </div>
+            <div className="mba-areas-desc">
+              我們目前開設五個領域給予同學選擇，主要優勢在於同學可以根據特定興趣領域靈活調整MBA學習傾向，為培養全方位的當代管理技能和文化意識，使學生能夠在當今的全球商業環境中有效競爭。
+            </div>
+          </div> {/* Closing wrapper div */}
           <div className="mba-areas-why">
             <div className="mba-areas-why-title">UIC 商學院</div>
             <ul className="mba-areas-why-list">
@@ -74,7 +76,7 @@ function Areas() {
           </div>
           <div className="mba-areas-concentrations">
             <div className="mba-areas-concentrations-title">
-              Master of Business Administration Concentrations
+              Master of Business Administration Focus Areas
             </div>
             <div className="mba-areas-concentration-list">
               <a

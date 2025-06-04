@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 // Gallery section container
 export const StyledGallerySection = styled.section`
-  padding: 2rem 0;
+  padding: 0;
 `;
 
 // Title

@@ -20,7 +20,6 @@
       font-size: 18px;
       font-weight: 500;
       margin-bottom: 1rem;
-
       max-width: 1400px;
     }
   }
@@ -31,12 +30,14 @@
       @include card-border;
       border: 2px solid $color-uic;
       position: relative;
-      margin-bottom: 6rem;
+      margin-bottom: 2rem;
 
       h3 {
-        @include heading-medium;
+        font-size: 24px;
+        font-weight: 900;
         color: $color-uic;
         text-align: left; // 標題靠左對齊
+        margin-bottom: $spacing-xs;
       }
 
       ul.left-aligned {
@@ -63,6 +64,12 @@
             @include value-style;
             color: $color-uic;
           }
+
+          .stats-value-detail {
+            font-size: 16px;
+            font-weight: 500;
+            color: #c71432; // UIC red
+          }
         }
       }
     }
@@ -70,11 +77,12 @@
     .stats-card-ranking {
       background: $color-white;
       @include card-border;
-      border: 2px solid $color-uic;
       position: relative;
-
+      margin-bottom: 0;
       h3 {
-        @include heading-medium;
+        font-size: 24px;
+        font-weight: 900;
+        margin-bottom: $spacing-xs;
         color: $color-uic;
         text-align: left; // 標題靠左對齊
       }
@@ -82,8 +90,8 @@
       .card-header {
         .header-content {
           display: flex;
-          justify-content: space-between; // h3 ??a ������??
-          align-items: center; // ??���~��
+          justify-content: space-between;
+          align-items: center;
         }
       }
 
@@ -107,14 +115,14 @@
             align-items: center;
 
             .number {
-              font-size: 40px;
+              font-size: 36px;
               font-weight: 700;
               color: $color-uic;
               margin-bottom: 0.5rem;
               margin-left: 0.5rem; // number 左側間距
             }
             .text {
-              font-size: 32px;
+              font-size: 28px;
               font-weight: 700;
               color: $color-uic;
               margin-right: 5px; // 右側文字間距

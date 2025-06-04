@@ -18,6 +18,9 @@
   padding: 2rem 0;
   color: #3a2c13;
   font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+  .mba-areas-desc-wrapper {
+    margin-bottom: $spacing-md;
+  }
 }
 
 .mba-areas-title {
@@ -30,18 +33,16 @@
 .mba-areas-desc {
   text-align: left;
   font-size: 18px;
-  margin-bottom: $spacing-sm;
   color: $color-black;
 }
 
 .mba-areas-why {
-  margin-bottom: 2.5rem;
   .mba-areas-why-title {
-    @include heading-large;
     font-size: 24px;
+    font-weight: 700;
     color: $color-nav;
     text-align: left;
-    margin-bottom: $spacing-sm;
+    margin-bottom: $spacing-xs;
   }
   .mba-areas-why-list {
     list-style: none;
@@ -51,7 +52,6 @@
     li {
       margin-bottom: 0.5rem;
       font-size: 1rem;
-      line-height: 1.7;
       color: $color-black;
       .highlight {
         color: $color-uic;
@@ -63,13 +63,12 @@
 }
 
 .mba-areas-advantage {
-  margin-bottom: 2.5rem;
   .mba-areas-advantage-title {
     font-size: 24px;
-    font-weight: 900;
+    font-weight: 700;
     color: #1c184a;
     text-align: left;
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-xs;
   }
   .mba-areas-advantage-list {
     list-style: none;
@@ -91,13 +90,13 @@
 }
 
 .mba-areas-concentrations {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   .mba-areas-concentrations-title {
     text-align: left;
     font-size: 24px;
     font-weight: 700;
     color: $color-nav;
-    margin-bottom: $spacing-lg;
+    margin-bottom: $spacing-md;
     letter-spacing: 0.04em;
   }
   .mba-areas-concentration-list {
@@ -130,7 +129,7 @@
       .concentration-title {
         color: $color-nav;
         font-size: 24px;
-        font-weight: 900;
+        font-weight: 700;
         margin-bottom: 0.5rem;
         text-align: left;
       }
