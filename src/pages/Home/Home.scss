@@ -9,7 +9,7 @@ p {
 
 /* 首頁整體樣式 */
 .home-page {
-  margin-top: 5rem;
+  margin-top: 3rem;
 
   /* 按鈕樣式 - 首先定義通用按鈕外觀 */
   .btn {
@@ -51,7 +51,7 @@ p {
   /* 關於我們區塊樣式 - 用於介紹公司或服務 */
   .about {
     margin: 0 auto; // 使區塊水平居中
-    padding: 4rem 0;
+    padding: 3rem 0;
 
     .container {
       @include container();
@@ -95,8 +95,9 @@ p {
 
       p {
         text-align: left;
-        margin-bottom: $spacing-md;
+        margin-bottom: $spacing-sm;
         max-width: 100%;
+        font-size: 18px;
         /* 注意此處 p 樣式，weight可能已被覆蓋 */
       }
     }
@@ -106,8 +107,8 @@ p {
 /* 通用區塊標題樣式 - 例如用於各個主要區塊的標題 */
 .section-title {
   text-align: center;
-  margin-bottom: 2.5rem;
-  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
   color: $color-text-primary;
 }
 
@@ -127,7 +128,7 @@ p {
     overflow: hidden;
     background: $color-gray-ultralight;
     border-radius: 20px;
-    padding: 3rem 6rem;
+    padding: 2rem 6rem;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: left;
@@ -161,6 +162,7 @@ p {
     h3 {
       @include heading-medium;
       color: $color-uic;
+      margin-bottom: 0.5rem;
     }
 
     ul {
@@ -171,7 +173,7 @@ p {
         display: flex;
         flex-direction: column; // Changed from row to column
         align-items: flex-start; // Or center, depending on desired alignment of the block
-        margin-bottom: 20px; // Add some space between list items
+        margin-bottom: 10px; // Add some space between list items
 
         .ranking-info {
           display: flex;

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ImageTextSection from "../../../../components/ImageTextSection/ImageTextSection";
 import CourseList from "../../../../components/CourseList/CourseList";
 
 const Management = () => {
@@ -34,15 +33,6 @@ const Management = () => {
 
   return (
     <div className="management-container">
-      {/* 頂部標題和圖示部分 */}
-      <ImageTextSection
-        title="一年制MBA"
-        subtitle="Management 管理"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="Management 管理"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169917_y.webp`}
-      />
-
       {/* UIC MBA 管理專業簡介 */}
       <div className="section">
         <h2 className="section-title">

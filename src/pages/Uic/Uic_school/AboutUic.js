@@ -78,14 +78,16 @@ function AboutUic() {
               </li>
               <li>
                 <span className="label">所在城市</span>
-                <span className="value">
-                  芝加哥（芝加哥唯一公立研究型大學）
+                <span className="value">芝加哥</span>
+                <span style={{ fontSize: "16px", color: "#c71432" }}>
+                  芝加哥唯一公立研究型大學
                 </span>
               </li>
               <li>
                 <span className="label">校園面積</span>
-                <span className="value">
-                  233英畝（芝加哥最大，約132個足球場大小）
+                <span className="value">233英畝</span>
+                <span style={{ fontSize: "16px", color: "#c71432" }}>
+                  芝加哥占地最大，約132個足球場大小
                 </span>
               </li>
             </ul>
@@ -104,51 +106,54 @@ function AboutUic() {
             <ul className="left-aligned">
               <li>
                 <span className="label">
-                  <span className="text">Top</span>
+                  <span className="text">TOP</span>
                   <span className="number">1</span>
                 </span>
                 <span className="value">芝加哥區最大規模研究型大學</span>
               </li>
               <li>
                 <span className="label">
-                  <span className="text">Top</span>
+                  <span className="text">TOP</span>
                   <span className="number">39</span>
                 </span>
-                <span className="value">全美公立大學 U.S.NEWS.</span>
+                <span className="value">2025 全美公立大學 U.S.NEWS.</span>
               </li>
               <li>
                 <span className="label">
-                  <span className="text">Top</span>
+                  <span className="text">TOP</span>
                   <span className="number">21</span>
                 </span>
                 <span className="value">
-                  全美公立大學排行榜《華爾街日報》/《泰晤士報高等教育》大學數據
+                  全美公立大學排行榜 <br />
+                  《WSJ》/《THE》大學數據
                 </span>
               </li>
               <li>
                 <span className="label">
-                  <span className="text">Top</span>
+                  <span className="text">TOP</span>
                   <span className="number">80</span>
                 </span>
-                <span className="value">全美大學排行 U.S.NEWS</span>
+                <span className="value">2025 全美大學排行 U.S.NEWS</span>
               </li>
               <li>
                 <span className="label">
-                  <span className="text">Top</span>
+                  <span className="text">TOP</span>
                   <span className="number">81</span>
                 </span>
                 <span className="value">
-                  全美大學排行 2020泰晤士高等教育世界大學排名
+                  2020 全美大學排行
+                  <br />
+                  泰晤士高等教育世界大學排名
                 </span>
               </li>
               <li>
                 <span className="label">
-                  <span className="text">Top</span>
+                  <span className="text">TOP</span>
                   <span className="number">7</span>
                 </span>
                 <span className="value">
-                  The Best Value 最具價值就讀大學排名2018
-                  《華爾街日報》/《泰晤士報高等教育》- (排名僅次於哈佛大學)
+                  The Best Value 最具價值就讀大學排名 《WSJ》/《THE》-
+                  (排名僅次於哈佛大學)
                 </span>
               </li>
             </ul>

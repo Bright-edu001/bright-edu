@@ -12,23 +12,20 @@
   }
 
   .intro {
-    padding: $spacing-lg $spacing-lg;
-    text-align: left; // ??¬°¥ª????
-    margin-bottom: 3rem; // ¼W??????????¶ô??????
+    padding: $spacing-lg;
+    text-align: left;
 
     p {
-      @include body-large;
       color: $color-text-primary;
-      letter-spacing: 0.05em;
-      margin-bottom: 2rem; // ¼W??¬q¸¨????
-      margin-right: 0;
-      margin-left: 0; // ½T??¬q¸¨¤£??????¥~??¥ª¥k????
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 1rem;
+
       max-width: 1400px;
     }
   }
 
   .stats {
-    padding: $spacing-lg 0;
     .stats-card-school {
       background: $color-white;
       @include card-border;
@@ -39,7 +36,7 @@
       h3 {
         @include heading-medium;
         color: $color-uic;
-        text-align: left; //??¥ª¹ï??
+        text-align: left; // æ¨™é¡Œé å·¦å°é½Š
       }
 
       ul.left-aligned {
@@ -47,14 +44,14 @@
         list-style: none;
         padding: 0;
         display: grid;
-        grid-template-columns: repeat(4, 1fr); // ¤W¤è???? 4 ??
+        grid-template-columns: repeat(4, 1fr); // å››æ¬„æ’åˆ—
         gap: 2rem;
 
         li {
           display: flex;
-          flex-direction: column; // ½T?? label ??value ??ª½????
-          align-items: flex-start; // ??¥ª¹ï??
-          margin-bottom: 10px; // ¼W??????
+          flex-direction: column; // ä¸€å€‹ label ä¸€å€‹ value å‚ç›´æ’åˆ—
+          align-items: flex-start; // å…§å®¹é å·¦å°é½Š
+          margin-bottom: 10px; // å€å¡Šä¸‹æ–¹é–“è·
 
           .label {
             @include label-style;
@@ -79,14 +76,14 @@
       h3 {
         @include heading-medium;
         color: $color-uic;
-        text-align: left; //??¥ª¹ï??
+        text-align: left; // æ¨™é¡Œé å·¦å°é½Š
       }
 
       .card-header {
         .header-content {
           display: flex;
-          justify-content: space-between; // h3 ??a ¤ô¥­¹ï??
-          align-items: center; // ??ª½©~¤¤
+          justify-content: space-between; // h3 ??a ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½??
+          align-items: center; // ??ï¿½ï¿½ï¿½~ï¿½ï¿½
         }
       }
 
@@ -95,14 +92,14 @@
         list-style: none;
         padding: 0;
         display: grid;
-        grid-template-columns: repeat(3, 1fr); // ¤U¤è???? 3 ??
+        grid-template-columns: repeat(3, 1fr); // ä¸‰æ¬„æ’åˆ—
         gap: 2rem;
 
         li {
           display: flex;
-          flex-direction: column; // ½T?? label ??value ??ª½????
-          align-items: flex-start; // ??¥ª¹ï??
-          margin-bottom: 10px; // ¼W??????
+          flex-direction: column; // ä¸€å€‹ label ä¸€å€‹ value å‚ç›´æ’åˆ—
+          align-items: flex-start; // å…§å®¹é å·¦å°é½Š
+          margin-bottom: 10px; // å€å¡Šä¸‹æ–¹é–“è·
 
           .label {
             display: flex;
@@ -114,21 +111,20 @@
               font-weight: 700;
               color: $color-uic;
               margin-bottom: 0.5rem;
-              margin-left: 3rem; // ??number ??¥k²¾??
+              margin-left: 0.5rem; // number å·¦å´é–“è·
             }
             .text {
               font-size: 32px;
               font-weight: 700;
               color: $color-uic;
-              margin-right: 5px; // ??¿ï¡A½Õ????¦r????
+              margin-right: 5px; // å³å´æ–‡å­—é–“è·
             }
           }
 
           .value {
-            margin-top: 5px; // ¼W?? label ??value ¤§????????
-            font-size: $font-size-xs;
+            margin-top: 5px; // label èˆ‡ value é–“è·
+            font-size: 19px;
             font-weight: 700;
-            line-height: 17px;
           }
         }
       }
@@ -139,15 +135,17 @@
     padding: $spacing-lg 0;
     h3 {
       @include heading-large;
-      margin-bottom: $spacing-xl;
+      font-size: 28px;
+      margin-bottom: $spacing-md;
       color: $color-black;
       text-align: center;
     }
 
     p {
-      @include body-large;
+      font-size: 18px;
+      font-weight: 500;
       color: $color-black;
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-md;
       text-align: left;
       max-width: 1400px;
     }
@@ -164,7 +162,7 @@
   .about-uic-page .stats .stats-card-school ul.left-aligned,
   .about-uic-page .stats .stats-card-ranking ul.left-aligned {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); // ????????¤W§ï??2 ??
+    grid-template-columns: repeat(2, 1fr); // éŸ¿æ‡‰å¼ï¼šå…©æ¬„æ’åˆ—
     gap: 12px 24px;
     padding: 0;
     list-style: none;
