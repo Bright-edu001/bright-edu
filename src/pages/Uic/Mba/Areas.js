@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 function Areas() {
@@ -11,23 +10,21 @@ function Areas() {
 
   return (
     <div className="mba-areas-page">
-      <ImageTextSection
-        title="UIC 美國商學院"
-        subtitle="MBA Program"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="MBA Program"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169917_y.webp`}
-      />
+      <div className="mba-areas-hero">
+        <h1>UIC Business</h1>
+      </div>
       <SectionContainer>
         <div className="mba-areas-content">
-          <div className="mba-areas-title">
-            世界級城市中的世界等級教育品質 —— UIC CMBA課程
+          <div className="mba-areas-title">五大領域</div>
+          <div className="mba-areas-desc">
+            UIC
+            一年制MBA課程以金融、管理等碩士聞名，同學們可以針對自己的興趣或者是自己所想增進的專業目標做選擇。
           </div>
           <div className="mba-areas-desc">
-            這項全職、面授且通過AACSB認證的MBA課程，專為希望赴美深造並在一年內完成學位的國際專業人士所設計，助你提升專業競爭力，加速職涯發展。
+            我們目前開設五個領域給予同學選擇，主要優勢在於同學可以根據特定興趣領域靈活調整MBA學習傾向，為培養全方位的當代管理技能和文化意識，使學生能夠在當今的全球商業環境中有效競爭。
           </div>
           <div className="mba-areas-why">
-            <div className="mba-areas-why-title">為什麼選擇 UIC 商學院？</div>
+            <div className="mba-areas-why-title">UIC 商學院</div>
             <ul className="mba-areas-why-list">
               <li>
                 <span className="highlight">最佳價值（Best Value）</span>
@@ -52,11 +49,7 @@ function Areas() {
             </ul>
           </div>
           <div className="mba-areas-advantage">
-            <div className="mba-areas-advantage-title">
-              <span className="highlight-gold">UIC CMBA的企業導向優勢</span>
-              <br />
-              <span className="subtitle">The Corporate MBA Advantages</span>
-            </div>
+            <div className="mba-areas-advantage-title">UIC MBA優勢</div>
             <ul className="mba-areas-advantage-list">
               <li>
                 <span className="highlight">時間效益高</span>
@@ -78,9 +71,6 @@ function Areas() {
                 校園鄰近世界十大經濟影響力城市之一的核心商業區，讓你可直接接觸金融市場（如CBOE芝加哥期權交易所）、跨國企業與創新機會，學習與實戰同步。
               </li>
             </ul>
-            <div className="mba-areas-advantage-note">
-              這是一個讓你在短時間內完成知識學習、強化實戰、強化實力的MBA學位課程，特別適合想要快速進入全球職場舞台的專業人士！
-            </div>
           </div>
           <div className="mba-areas-concentrations">
             <div className="mba-areas-concentrations-title">

@@ -61,7 +61,7 @@
     }
   }
 
-  // ????�G����?????? ul
+  // 申請所需文件 ul
   .horizontal-list {
     display: flex;
     flex-wrap: wrap;
@@ -74,7 +74,7 @@
       list-style: disc;
       font-size: $font-size-lg;
       color: $color-black;
-      margin-top: $spacing-sm; // ??????�D��??????
+      margin-top: $spacing-sm; // 與上方間距
       font-weight: 700;
     }
   }

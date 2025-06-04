@@ -18,6 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 0;
     gap: clamp(2rem, 10vw, 10rem); // 使用 clamp 隨螢幕寬度自適應
   }
 
@@ -107,9 +108,9 @@
       > li.dropdown-container:nth-child(1) // 五大領域 (li container)
       > ul.dropdown-menu {
       // Submenu of 五大領域
-      width: 185px;
-      min-width: 185px;
-      max-width: 185px;
+      width: 190px;
+      min-width: 190px;
+      max-width: 190px;
       box-sizing: border-box;
     }
 
@@ -631,4 +632,8 @@
   align-items: center;
   height: 100%;
   width: 100%;
+}
+
+.mba-management-sub {
+  font-size: 14px;
 }

@@ -188,7 +188,9 @@ function Header() {
                   <span className="dropdown-arrow">▼</span>
                 </div>
                 <ul
-                  className={`dropdown-menu ${dropdownStates.UIC ? "show" : ""}`}
+                  className={`dropdown-menu ${
+                    dropdownStates.UIC ? "show" : ""
+                  }`}
                 >
                   <li className="dropdown-container">
                     <div
@@ -393,7 +395,10 @@ function Header() {
                               href="/uic-business-school/mba/areas/management" // 修改導向
                               title="MBA-Management "
                             >
-                              MBA-Management
+                              MBA-
+                              <span className="mba-management-sub">
+                                Management
+                              </span>
                             </a>
                           </li>
                           <li>
@@ -401,7 +406,10 @@ function Header() {
                               href="/uic-business-school/mba/areas/finance"
                               title="MBA-Finance"
                             >
-                              MBA-Finance
+                              MBA-
+                              <span className="mba-management-sub">
+                                Finance
+                              </span>
                             </a>
                           </li>
                           <li>
@@ -409,7 +417,10 @@ function Header() {
                               href="/uic-business-school/mba/areas/analytics"
                               title="MBA-Business Analytics"
                             >
-                              MBA-Business Analytics
+                              MBA-
+                              <span className="mba-management-sub">
+                                Business Analytics
+                              </span>
                             </a>
                           </li>
                           <li>
@@ -417,7 +428,10 @@ function Header() {
                               href="/uic-business-school/mba/areas/marketing"
                               title="MBA-Marketing"
                             >
-                              MBA-Marketing
+                              MBA-
+                              <span className="mba-management-sub">
+                                Marketing
+                              </span>
                             </a>
                           </li>
                           <li>
@@ -425,7 +439,10 @@ function Header() {
                               href="/uic-business-school/mba/areas/human-resource"
                               title="MBA-Human Resource Management"
                             >
-                              MBA-Human Resource Management
+                              MBA-
+                              <span className="mba-management-sub">
+                                Human Resource Management
+                              </span>
                             </a>
                           </li>
                         </ul>
@@ -557,7 +574,9 @@ function Header() {
                   <span className="dropdown-arrow">▼</span>
                 </div>
                 <ul
-                  className={`dropdown-menu ${dropdownStates.MSU ? "show" : ""}`}
+                  className={`dropdown-menu ${
+                    dropdownStates.MSU ? "show" : ""
+                  }`}
                 >
                   {/* MSU密西根州立大學下拉選單 */}
                   <li className="dropdown-container">
