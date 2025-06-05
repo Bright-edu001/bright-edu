@@ -2,5 +2,8 @@
 @import "../../styles/mixins";
 
 .empty {
-  margin-bottom: $spacing-xxl;
+  margin-bottom: $spacing-xl;
+  @media screen and (max-width: 700px) {
+    margin-bottom: $spacing-md;
+  }
 }

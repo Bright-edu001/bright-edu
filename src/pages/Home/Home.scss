@@ -51,7 +51,7 @@ p {
   /* 關於我們區塊樣式 - 用於介紹公司或服務 */
   .about {
     margin: 0 auto; // 使區塊水平居中
-    padding: 3rem 0;
+    padding: 2rem 0 4rem;
 
     .container {
       @include container();

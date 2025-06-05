@@ -94,14 +94,17 @@ export const StyledContent = styled.div`
 export const StyledTitle = styled.h3`
   font-size: 1.25rem;
   font-weight: 700;
-  margin: 0 0 0.5rem;
   color: #1c184a;
+  @media (max-width: 1024px) {
+  text-align: center;
 `;
 
 export const StyledExcerpt = styled.p`
   font-size: 1rem;
   line-height: 1.4;
   color: #211700;
-  margin: 0;
   font-weight: 700;
+  @media (max-width: 1024px) {
+    text-align: center;
+  }
 `;

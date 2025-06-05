@@ -6,7 +6,7 @@ export const StyledApplicationForm = styled.form`
   flex-direction: column;
   gap: 12px;
   margin: 0 auto;
-  margin-top: -2rem;
+  padding: 0 5rem;
 
   input,
   textarea {
@@ -42,7 +42,7 @@ export const StyledApplicationForm = styled.form`
     cursor: pointer;
     transition: background 0.2s;
     margin-top: 1.5rem;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
     &:hover {
       background: #1c184a;
       color: #ffffff;
@@ -52,7 +52,7 @@ export const StyledApplicationForm = styled.form`
   @media (max-width: 700px) {
     input,
     textarea {
-      width: 90%;
+      width: 100%;
       max-width: 100%;
       min-width: unset;
       font-size: 1rem;
@@ -72,14 +72,13 @@ export const StyledSectionTitle = styled.h2`
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
   color: #c71432;
   text-align: center;
 
   @media (max-width: 700px) {
     font-size: 32px;
-    margin-bottom: 2rem;
-    padding: 0 8px;
+    margin-bottom: 1rem;
   }
 `;
 
