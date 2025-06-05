@@ -1,4 +1,4 @@
-@import "../../../../styles/variables"; // 引入變數
+@import "../../../../styles/variables";
 
 .rankingContainer {
   margin: 0 auto;
@@ -12,7 +12,7 @@
     p {
       font-size: $font-size-lg;
       line-height: 1.8;
-      margin: 0 auto; // 居中段落
+      margin: 0 auto;
     }
   }
 

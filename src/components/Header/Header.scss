@@ -4,7 +4,7 @@
 /* 頁首基本樣式 */
 .header {
   background: $color-gray-ultralight;
-  height: 164px;
+  height: 150px;
   opacity: 100%;
   box-shadow: $shadow-sm;
   padding: 0;
@@ -18,9 +18,9 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 0;
-    padding: 0;
+    padding: 0 2rem;
   }
 
   /* 網站標誌樣式 */
@@ -126,6 +126,17 @@
       box-sizing: border-box;
     }
 
+    // MSU金融碩士子選單寬度單獨調整
+    // 路徑：.header .header-nav > ul.nav-links > li.dropdown-container:nth-child(3) > ul.dropdown-menu
+    > ul.nav-links
+      > li.dropdown-container:nth-child(3) // MSU金融碩士
+      > ul.dropdown-menu {
+      width: 160px;
+      min-width: 160px;
+      max-width: 160px;
+      box-sizing: border-box;
+    }
+
     /* 下拉選單樣式 - 基本 */
     .dropdown-container {
       position: relative;
@@ -185,7 +196,6 @@
             width: 100%;
             color: $color-nav;
             text-decoration: none;
-            text-align: left; // 統一向左對齊
             padding: $spacing-xs $spacing-xs;
             transition: $transition-normal;
           }
@@ -194,7 +204,7 @@
         // 巢狀下拉選單容器
         .dropdown-container {
           position: relative;
-          padding: $spacing-xs 0; // 統一上下間距
+          padding: 0; // 統一上下間距
 
           .dropdown-toggle {
             display: flex;
@@ -224,12 +234,12 @@
             &.show {
               display: flex;
               flex-direction: column;
-              padding: $spacing-xs;
+              padding: 0;
             }
 
             // 確認二級選單項目也是統一設定
             li {
-              padding: $spacing-xs 0;
+              padding: 0;
 
               a {
                 text-align: left;
@@ -241,7 +251,7 @@
             .dropdown-container .dropdown-menu {
               // 這適用於如 .east-lansing-menu 這類的第三層或更深層的選單
               top: -15%;
-              left: calc(100% + $spacing-xs); // 預設向右移動一些
+              left: 100%; // 預設向右移動一些
               width: 100px;
               &.submenu-below {
                 // 當 JavaScript 偵測到遮擋時添加此 class

@@ -95,7 +95,6 @@ p {
 
       p {
         text-align: left;
-        margin-bottom: $spacing-sm;
         max-width: 100%;
         font-size: 18px;
         /* 注意此處 p 樣式，weight可能已被覆蓋 */
@@ -162,7 +161,7 @@ p {
     h3 {
       @include heading-medium;
       color: $color-uic;
-      margin-bottom: 0rem;
+      margin-bottom: 0.5rem;
     }
 
     ul {
@@ -208,14 +207,13 @@ p {
   .feature-logo-img-uic,
   .feature-logo-img-msu {
     display: block;
-    margin-bottom: 1.2rem;
     max-width: 500px;
     max-height: 100px;
     z-index: 2;
     position: absolute;
-    left: 24%;
+    left: 25%;
     transform: translateX(-50%);
-    top: -60px; // 可向上調整位置
+    top: -40px; // 可向上調整位置
   }
   .feature-logo-img-msu {
     transform: translateX(50%);
@@ -288,7 +286,7 @@ p {
 
 /* 文章Blog區塊樣式 */
 .blog-area {
-  padding: 4rem 0;
+  padding: 3rem 0;
 
   .container {
     @include container();

@@ -4,18 +4,15 @@
 .rankings-awards-container {
   margin: 0 auto;
   .content-section {
-    max-width: 100%;
+    padding: 0 10rem;
   }
 
   .uic-rankings-section {
-    margin-top: 60px;
-    padding: 20px 0;
-
     .rankings-header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 30px;
+      justify-content: flex-start;
+      margin-bottom: 0.5rem;
 
       .rankings-logo {
         max-width: 300px;
@@ -28,25 +25,24 @@
 
       .rankings-title {
         h2 {
-          @include heading-large;
+          font-size: 24px;
+          font-weight: 700;
           color: $color-black;
         }
       }
     }
     .rankings-intro {
-      @include label-style;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 500;
       color: $color-black;
-      margin-bottom: $spacing-xxl;
+      margin-bottom: $spacing-md;
+      text-align: left;
     }
 
     .rankings-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
-      margin-top: 30px;
-      width: 80%;
-      margin: 0 auto;
 
       .ranking-item {
         padding: 20px;
@@ -92,27 +88,23 @@
 
 // 響應式設計
 .content-section {
-  margin-bottom: $spacing-xxl;
-  margin: $spacing-xxl auto;
+  margin: $spacing-xl auto;
 
   .intro-text {
-    @include value-style;
-    margin-bottom: $spacing-lg;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: $spacing-xs;
     text-align: left;
-    padding: 0 2rem;
   }
 
   // AACSB 認證相關
   .aacsb-section {
     margin: 0 auto;
-    padding: 2rem;
 
     .aacsb-header {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-
-      margin-bottom: 1.5rem;
 
       .aacsb-logo {
         margin-right: 1.5rem;
@@ -127,20 +119,21 @@
         h2 {
           margin-bottom: 0.5rem;
           color: $color-black;
-          font-weight: 900;
+          font-weight: 700;
         }
         p {
-          @include heading-large;
+          font-size: 24px;
+          font-weight: 500;
         }
       }
     }
 
     .aacsb-description {
-      @include label-style;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 500;
       margin-bottom: 2rem;
       text-align: left;
-      margin-bottom: $spacing-xxl;
+      margin-bottom: $spacing-md;
     }
     .standard-title,
     .international-title {
@@ -150,6 +143,7 @@
 
     .standard-categories {
       display: flex;
+      flex-direction: column;
       flex-wrap: wrap;
       justify-content: center;
       margin: 1.5rem 0;
@@ -163,10 +157,12 @@
         text-align: center;
 
         &.title-item {
-          flex: 0 0 100%;
-          margin-bottom: 2rem;
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: 0.5rem;
           .item-text {
-            @include paragraph-style;
+            font-size: 24px;
+            font-weight: 500;
           }
         }
       }
@@ -187,8 +183,7 @@
     .advantage-items {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      margin: 1.5rem $spacing-xxl;
+      justify-content: flex-start;
 
       .advantage-item {
         flex: 0 0 45%;
@@ -199,10 +194,12 @@
         text-align: center;
 
         &.title-item {
-          flex: 0 0 100%;
-          margin-bottom: 2rem;
+          margin-bottom: 0.5rem;
+          display: flex;
+          align-items: flex-start;
           .item-text {
-            @include paragraph-style;
+            font-size: 24px;
+            font-weight: 500;
           }
         }
       }
@@ -211,44 +208,36 @@
 
   // 多元化與卓越表現
   .diversity-excellence-section {
-    margin: 5rem auto 0;
-    padding: 2rem;
-
     .diversity-header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-
-      .diversity-logo {
-        width: 20%;
-      }
+      justify-content: flex-start;
 
       .diversity-title {
         text-align: left;
         h2 {
-          @include heading-large;
+          font-size: 24px;
+          font-weight: 700;
           margin-bottom: 0.5rem;
           color: $color-black;
         }
         p {
-          @include heading-large;
+          font-size: 24px;
+          font-weight: 500;
         }
       }
     }
 
     .diversity-description {
-      @include label-style;
-      font-weight: 700;
-      margin-bottom: $spacing-xxl;
-      text-align: center;
+      font-size: 18px;
+      font-weight: 500;
+      text-align: left;
     }
 
     .diversity-items {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      margin: 1.5rem 0;
+      align-items: flex-start;
 
       .diversity-item {
         width: 80%;
@@ -272,26 +261,26 @@
   padding-left: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5em 2em;
+  gap: 2em 2em;
   justify-items: start;
   li {
     color: $color-uic;
-    margin-bottom: 1em;
-    @include body-large;
-    padding-left: 2em;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
   }
 }
 
 .diversity-list {
   display: flex;
   flex-direction: column;
-
-  padding: 0 1rem;
+  gap: 0.5rem;
   text-align: left;
+  margin: 0.5rem 0;
 
   li {
-    @include body-large;
-    margin-top: $spacing-lg;
+    font-size: 18px;
+    font-weight: 500;
   }
 }
 
