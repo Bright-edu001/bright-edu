@@ -154,6 +154,7 @@ function Home() {
                       number={19}
                       start={100}
                       startAnimation={animateRanking}
+                      msu={true}
                     />
                   </div>
                   <p>TFE Times Master's of Finance</p>
@@ -166,6 +167,7 @@ function Home() {
                       number={30}
                       start={100}
                       startAnimation={animateRanking}
+                      msu={true}
                     />
                   </div>
                   <p>US News & World Report Top Public Schools</p>
@@ -178,6 +180,7 @@ function Home() {
                       number={63}
                       start={100}
                       startAnimation={animateRanking}
+                      msu={true}
                     />
                   </div>
                   <p>Among Top Public School in the nation</p>

@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
-import "./RankingNumberFlip.scss";
+import {
+  RankingNumberFlipWrapper,
+  FlipInner,
+} from "./RankingNumberFlip.styled";
 
 function RankingNumberFlip({
   number,
   duration = 10000,
   start = 99,
   startAnimation,
+  msu = false, // 若有 feature-card.msu 需求，可傳入 msu props
 }) {
   const [displayNumber, setDisplayNumber] = useState(start);
   const [flipping, setFlipping] = useState(false);
@@ -69,9 +73,13 @@ function RankingNumberFlip({
   }, [number, animate, startAnimation]); // 將 startAnimation 加入依賴項
 
   return (
-    <span className={`ranking-number-flip${flipping ? " flipping" : ""}`}>
-      <span className="flip-inner perspective-up">{displayNumber}</span>
-    </span>
+    <RankingNumberFlipWrapper
+      className={`ranking-number-flip${flipping ? " flipping" : ""}`}
+    >
+      <FlipInner className={`flip-inner${msu ? " msu" : ""}`} msu={msu}>
+        {displayNumber}
+      </FlipInner>
+    </RankingNumberFlipWrapper>
   );
 }
 

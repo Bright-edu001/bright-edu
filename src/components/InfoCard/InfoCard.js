@@ -1,6 +1,10 @@
 import React, { memo, useMemo, isValidElement } from "react";
 import PropTypes from "prop-types";
-import "./InfoCard.scss";
+import {
+  InfoCardWrapper,
+  InfoCardContent,
+  InfoCardImg,
+} from "./InfoCard.styled";
 
 /**
  * 可重用的資訊卡片組件
@@ -38,22 +42,22 @@ const InfoCard = ({
   }, [content]);
 
   return (
-    <div
-      className={`info-card ${
+    <InfoCardWrapper
+      className={
         imagePosition === "right" ? "info-card-right" : "info-card-left"
-      }`}
+      }
     >
-      <div className="info-card-content">
+      <InfoCardContent className="info-card-content">
         {title && <h4>{title}</h4>}
         {contentNodes}
-      </div>
-      <img
-        className="responsive-img"
+      </InfoCardContent>
+      <InfoCardImg
+        className="info-card-img"
         src={imageSrc}
         alt={imageAlt || title}
         loading="lazy"
       />
-    </div>
+    </InfoCardWrapper>
   );
 };
 
