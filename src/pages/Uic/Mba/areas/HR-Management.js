@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import debounce from "../../../../utils/debounce";
-import ImageTextSection from "../../../../components/ImageTextSection/ImageTextSection";
+import React, { useEffect } from "react";
+// import debounce from "../../../../utils/debounce";
+import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
+import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
 import CourseList from "../../../../components/CourseList/CourseList";
 // import "./MBA-Programs.scss";
 
@@ -32,86 +33,68 @@ const HR_Management = () => {
     "勞資關係經理（Labor Relations Manager） – 管理勞資協議，協調談判並解決勞資糾紛。",
   ];
 
-  // 新增：根據螢幕寬度決定是否顯示 intro
-  const [showIntro, setShowIntro] = useState(window.innerWidth > 700);
-
-  useEffect(() => {
-    const handleResize = debounce(
-      () => setShowIntro(window.innerWidth > 700),
-      200
-    );
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <div className="management-container">
-      {/* 頂部標題和圖示部分 */}
-      <ImageTextSection
-        title="一年制MBA"
-        subtitle="Human Resource Management"
-        intro={showIntro ? "人資管理" : undefined}
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="Human Resource Management"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169917_y.webp`}
-      />
-
-      {/* UIC MBA 管理專業簡介 */}
-      <div className="section">
-        <h2 className="section-title">
-          UIC MBA人力資源管理專業領域 – 銜接員工與企業之間的溝通橋樑
-        </h2>
-        <div className="section-content">
-          <p>
-            伊利諾大學芝加哥分校（UIC）的MBA人力資源管理（HR
-            Management）領域，讓你掌握 薪酬與福利、員工參與、人才招聘、勞動法規
-            等專業知識，幫助你有效支持員工的發展與管理，並在企業中發揮關鍵作用。
-          </p>
+      <MbaAreasHero />
+      <SectionContainer>
+        {/* UIC MBA 管理專業簡介 */}
+        <div className="section">
+          <h2 className="section-title">
+            UIC MBA人力資源管理專業領域 – 銜接員工與企業之間的溝通橋樑
+          </h2>
+          <div className="section-content">
+            <p>
+              伊利諾大學芝加哥分校（UIC）的MBA人力資源管理（HR
+              Management）領域，讓你掌握
+              薪酬與福利、員工參與、人才招聘、勞動法規
+              等專業知識，幫助你有效支持員工的發展與管理，並在企業中發揮關鍵作用。
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* 學位概述部分 */}
-      <div className="section">
-        <h3 className="section-subtitle">學位概述</h3>
-        <div className="section-content">
-          <p>
-            此 AACSB 認證
-            的MBA課程，結合了人力資源管理協會（SHRM）建議的核心主題，為學生提供最前沿的人力資源管理知識，並為取得
-            SHRM 認證專業資格（SHRM-CP®） 做好充分準備。
-            在學習這套課程時，你不僅能夠深入了解 組織行為、行銷、會計
-            等基礎商業實務，還能掌握領導與管理員工的必要技能。
-          </p>
-          <p>此專業課程特別適合：</p>
-          <CourseList items={overviewCourses} />
+        {/* 學位概述部分 */}
+        <div className="section">
+          <h3 className="section-subtitle">學位概述</h3>
+          <div className="section-content">
+            <p>
+              此 AACSB 認證
+              的MBA課程，結合了人力資源管理協會（SHRM）建議的核心主題，為學生提供最前沿的人力資源管理知識，並為取得
+              SHRM 認證專業資格（SHRM-CP®） 做好充分準備。
+              在學習這套課程時，你不僅能夠深入了解 組織行為、行銷、會計
+              等基礎商業實務，還能掌握領導與管理員工的必要技能。
+            </p>
+            <p>此專業課程特別適合：</p>
+            <CourseList items={overviewCourses} />
+          </div>
         </div>
-      </div>
 
-      {/* 特色課程項目 */}
-      <div className="section">
-        <h3 className="section-subtitle">特色課程範例</h3>
-        <CourseList items={featuredCourses} />
-      </div>
+        {/* 特色課程項目 */}
+        <div className="section">
+          <h3 className="section-subtitle">特色課程範例</h3>
+          <CourseList items={featuredCourses} />
+        </div>
 
-      {/* 學習成果 */}
-      <div className="section">
-        <h3 className="section-subtitle">學習成果</h3>
-        <div className="section-content">
-          <p>完成課程後，你將具備以下核心能力：</p>
-          <CourseList items={outcomesCourses} />
+        {/* 學習成果 */}
+        <div className="section">
+          <h3 className="section-subtitle">學習成果</h3>
+          <div className="section-content">
+            <p>完成課程後，你將具備以下核心能力：</p>
+            <CourseList items={outcomesCourses} />
+          </div>
         </div>
-      </div>
-      {/* 職業發展方向 */}
-      <div className="section">
-        <h3 className="section-subtitle">職涯發展方向</h3>
-        <div className="section-content">
-          <p>完成人力資源管理領域的 MBA 課程後，你將有機會從事以下職位：</p>
-          <CourseList items={careerCourses} />
+        {/* 職業發展方向 */}
+        <div className="section">
+          <h3 className="section-subtitle">職涯發展方向</h3>
+          <div className="section-content">
+            <p>完成人力資源管理領域的 MBA 課程後，你將有機會從事以下職位：</p>
+            <CourseList items={careerCourses} />
+          </div>
         </div>
-      </div>
-      {/* 結束語 */}
-      <div className="conclusion">
-        透過這個課程，你將獲得處理複雜人力資源問題的專業技能，為企業創造價值，並在不斷變化的職場中保持競爭優勢！
-      </div>
+        {/* 結束語 */}
+        <div className="conclusion">
+          透過這個課程，你將獲得處理複雜人力資源問題的專業技能，為企業創造價值，並在不斷變化的職場中保持競爭優勢！
+        </div>
+      </SectionContainer>
     </div>
   );
 };

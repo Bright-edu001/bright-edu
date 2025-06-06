@@ -1,17 +1,11 @@
 import React from "react";
 import "./RankingsAwards.scss";
-import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
+import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 
 const RankingsAwards = () => {
   return (
     <div className="rankings-awards-container">
-      <ImageTextSection
-        title="UIC 美國商學院"
-        subtitle="排名與獎項"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="排名與獎項"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
-      />
+      <MbaAreasHero />
 
       <div className="content-section">
         <p className="intro-text">

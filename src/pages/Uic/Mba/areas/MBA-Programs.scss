@@ -1,31 +1,37 @@
-@import "../../../../styles/variables"; // §ﬁ§J≈‹º∆
-@import "../../../../styles/mixins"; // §ﬁ§J mixins
+@import "../../../../styles/variables"; // Â∞éÂÖ•ËÆäÊï∏
+@import "../../../../styles/mixins"; // Â∞éÂÖ• mixins
 
 .management-container {
   margin: 0 auto;
-
+  @media screen and (max-width: 1024px) {
+    padding: 0 5rem;
+  }
+  @media screen and (max-width: 500px) {
+    padding: 0 2rem;
+  }
   .section {
-    margin: $spacing-xxl auto auto auto; // ????§W?? margin
-    max-width: 90%;
-
     .section-title {
-      @include heading-large;
+      font-size: 24px;
+      font-weight: 700;
       margin-top: $spacing-md;
       color: $color-nav;
-      text-align: center;
-      margin-bottom: $spacing-xl;
+      text-align: left;
+      margin-bottom: $spacing-sm;
       position: relative;
     }
     .section-subtitle {
-      @include heading-large;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: left;
       color: $color-uic;
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-sm;
     }
     .section-content {
       p {
-        @include body-large;
+        font-size: 18px;
+        font-weight: 500;
         color: $color-black;
-        margin-bottom: $spacing-xl;
+        margin-bottom: $spacing-sm;
         text-align: left;
       }
     }
@@ -41,10 +47,10 @@
 
   .course-list {
     .course-item {
-      margin-left: $spacing-md;
       margin-bottom: $spacing-xl;
       li {
-        @include body-large;
+        font-size: 18px;
+        font-weight: 500;
         text-align: left;
         color: $color-black;
       }
@@ -52,13 +58,14 @@
   }
   .conclusion {
     text-align: center;
-    padding: 30px 0;
-    @include heading-large;
+    font-size: 24px;
+    font-weight: 700;
     color: $color-black;
+    margin-bottom: $spacing-sm;
   }
 }
 
-// ????¶°≥]??
+// ÈüøÊáâÂºèË®≠ÂÆö
 @media screen and (max-width: 768px) {
   .management-container {
     .hero-section {

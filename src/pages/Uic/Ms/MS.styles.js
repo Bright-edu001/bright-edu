@@ -9,6 +9,8 @@ const theme = {
   },
   spacing: {
     xs: "0.5rem", // $spacing-xs
+    sm: "1rem", // $spacing-sm
+    md: "1.5rem", // $spacing-md
     lg: "2rem", // $spacing-lg
     xxl: "3rem", // $spacing-xxl
   },
@@ -33,9 +35,11 @@ const theme = {
 };
 
 export const PageH2 = styled.h2`
-  ${theme.mixins.bodyLarge};
+  font-size: 24px;
+  font-weight: 700;
   color: ${theme.colors.navy};
-  margin: ${theme.spacing.xxl} ${theme.spacing.lg};
+  text-align: left;
+  margin: ${theme.spacing.sm} 0;
   @media screen and (max-width: 700px) {
     margin: ${theme.spacing.xxl} ${theme.spacing.xs};
   }
@@ -43,11 +47,9 @@ export const PageH2 = styled.h2`
 
 export const PageP = styled.p`
   font-weight: 500;
-  max-width: 75%;
-  font-size: ${theme.fontSizes.lg};
-  line-height: 30px;
+  font-size: 18px;
+
   text-align: left;
-  margin: 0 auto;
   color: ${theme.colors.brownDark};
 `;
 
@@ -59,14 +61,11 @@ export const MsmUl = styled.ul`
   list-style-type: disc;
   list-style-position: outside;
   text-align: left;
-  padding-left: 1.5em;
-  max-width: 75%;
-  margin: 0 auto;
-  margin-top: ${theme.spacing.lg};
-
+  margin-top: ${theme.spacing.xs};
   li {
     color: ${theme.colors.brownDark};
-    font-weight: 900;
+    font-size: 16px;
+    font-weight: 700;
   }
 `;
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import ImageTextSection from "../../../../components/ImageTextSection/ImageTextSection";
+import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
+import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
 import CourseList from "../../../../components/CourseList/CourseList";
 
 const Finance = () => {
@@ -35,68 +36,60 @@ const Finance = () => {
 
   return (
     <div className="management-container">
-      {/* 頂部標題和圖示部分 */}
-      <ImageTextSection
-        title="一年制MBA"
-        subtitle="Finance 金融"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="Finance 金融"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169917_y.webp`}
-      />
-
-      {/* UIC MBA 管理專業簡介 */}
-      <div className="section">
-        <h2 className="section-title">
-          金融方向課程讓你掌握 財務分析、投資策略、風險管理 和 經濟原理
-          等關鍵技能，並為你在 金融服務、企業財務 及 投資管理
-          等領域的職涯發展做好充分準備。
-        </h2>
-      </div>
-
-      {/* 學位概述部分 */}
-      <div className="section">
-        <h3 className="section-subtitle">學位概述</h3>
-        <div className="section-content">
-          <p>
-            這個獲得 AACSB 認證 的碩士學位課程，將深入探討金融相關主題，例如：
-          </p>
-          <CourseList items={overviewCourses} />
-          <p>
-            除了學習當今最前沿的財務管理實踐外，基礎課程還涵蓋
-            會計、營運管理、行銷 和 組織行為
-            等領域的知識。你還可以透過選修課程，探索
-            數據挖掘、人力資源管理、決策科學
-            等相關領域的進階研究，進一步拓展你的專業能力。
-          </p>
+      <MbaAreasHero />
+      <SectionContainer>
+        {" "}
+        {/* UIC MBA 管理專業簡介 */}
+        <div className="section">
+          <h2 className="section-title">
+            金融方向課程讓你掌握 財務分析、投資策略、風險管理 和 經濟原理
+            等關鍵技能，並為你在 金融服務、企業財務 及 投資管理
+            等領域的職涯發展做好充分準備。
+          </h2>
         </div>
-      </div>
-
-      {/* 特色課程項目 */}
-      <div className="section">
-        <h3 className="section-subtitle">特色課程範例</h3>
-        <CourseList items={featuredCourses} />
-      </div>
-
-      {/* 學習成果 */}
-      <div className="section">
-        <h3 className="section-subtitle">學習成果</h3>
-        <div className="section-content">
-          <p>完成課程後，你將具備以下能力：</p>
-          <CourseList items={outcomesCourses} />
+        {/* 學位概述部分 */}
+        <div className="section">
+          <h3 className="section-subtitle">學位概述</h3>
+          <div className="section-content">
+            <p>
+              這個獲得 AACSB 認證 的碩士學位課程，將深入探討金融相關主題，例如：
+            </p>
+            <CourseList items={overviewCourses} />
+            <p>
+              除了學習當今最前沿的財務管理實踐外，基礎課程還涵蓋
+              會計、營運管理、行銷 和 組織行為
+              等領域的知識。你還可以透過選修課程，探索
+              數據挖掘、人力資源管理、決策科學
+              等相關領域的進階研究，進一步拓展你的專業能力。
+            </p>
+          </div>
         </div>
-      </div>
-      {/* 職業發展方向 */}
-      <div className="section">
-        <h3 className="section-subtitle">職涯發展方向</h3>
-        <div className="section-content">
-          <p>獲得金融方向的碩士學位後，你將有機會進入以下高潛力職位：</p>
-          <CourseList items={careerCourses} />
+        {/* 特色課程項目 */}
+        <div className="section">
+          <h3 className="section-subtitle">特色課程範例</h3>
+          <CourseList items={featuredCourses} />
         </div>
-      </div>
-      {/* 結束語 */}
-      <div className="conclusion">
-        透過這個課程，你將為自己的職涯鋪平道路，成為財務領域的專業人才！
-      </div>
+        {/* 學習成果 */}
+        <div className="section">
+          <h3 className="section-subtitle">學習成果</h3>
+          <div className="section-content">
+            <p>完成課程後，你將具備以下能力：</p>
+            <CourseList items={outcomesCourses} />
+          </div>
+        </div>
+        {/* 職業發展方向 */}
+        <div className="section">
+          <h3 className="section-subtitle">職涯發展方向</h3>
+          <div className="section-content">
+            <p>獲得金融方向的碩士學位後，你將有機會進入以下高潛力職位：</p>
+            <CourseList items={careerCourses} />
+          </div>
+        </div>
+        {/* 結束語 */}
+        <div className="conclusion">
+          透過這個課程，你將為自己的職涯鋪平道路，成為財務領域的專業人才！
+        </div>
+      </SectionContainer>
     </div>
   );
 };

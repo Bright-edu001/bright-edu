@@ -1,7 +1,7 @@
 @import "../../../styles/variables";
 @import "../../../styles/mixins";
 
-// ??��????��??????
+// 全域橫向捲軸隱藏
 body,
 html {
   overflow-x: hidden;
@@ -12,40 +12,45 @@ html {
   font-size: $font-size-xl;
   line-height: 40px;
 }
-
+.career-resources-intro-list {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: $spacing-sm;
+  list-style: none;
+}
 .career-resources {
   overflow-x: hidden;
-  max-width: 100vw; // �ץ�??�j�e??
   h3 {
-    @include heading-large;
-    margin-bottom: $spacing-xl;
+    font-size: 24px;
+    margin-bottom: $spacing-md;
     color: $color-uic;
-    text-align: center;
+    text-align: left;
   }
 
   .intro {
     position: relative;
     text-align: left;
     margin-bottom: 3rem;
-    margin-top: $spacing-xxl;
+    margin-top: $spacing-lg;
 
     p {
-      @include body-large;
+      font-size: 18px;
+      font-weight: 500;
       color: $color-text-primary;
-      letter-spacing: 0.05em;
-      margin-bottom: 2rem;
     }
 
     .career-resources-list {
-      margin-left: 5rem;
       list-style: disc;
+      padding-left: $spacing-md;
       li {
-        @extend .career-list-item;
-        margin-top: 3rem;
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: $spacing-sm;
         color: $color-nav;
         div {
-          @include label-style;
-          line-height: 36px;
+          font-size: 16px;
+          font-weight: 400;
+
           color: $color-gray-medium;
         }
       }
@@ -55,47 +60,36 @@ html {
       position: absolute;
       width: 30%;
       height: auto;
-      max-width: 100%; // ??��????���X
-      margin-left: 65vw; // ??vw????�W�X��??
+      max-width: 100%; // 保持圖片不超出
+      margin-left: 65vw; // 右側對齊
       margin-top: -15rem;
       margin-bottom: 10rem;
     }
   }
 
   .career-process {
-    padding: $spacing-lg 0;
     display: flex;
-    margin-top: $spacing-lg; // �W??�W��????�A????��??�U��??
 
     .container {
       @include container;
       text-align: left;
 
       .career-process-list {
-        margin-left: 5rem;
+        padding-left: $spacing-md;
         li {
-          @extend .career-list-item;
+          font-size: 18px;
+          font-weight: 500;
           list-style-type: decimal;
-          margin-left: 1rem;
           color: $color-black;
         }
       }
 
       img {
-        width: 90%;
-        max-width: 1400px;
-        margin: 0 auto; // �m��????
-        margin-bottom: 5rem;
-        margin-left: 3rem;
+        width: 100%;
+        margin: 0 auto; // 置中
+        margin-bottom: $spacing-md; // 下方間距
       }
     }
-  }
-
-  .career-dot {
-    color: $color-uic;
-    font-size: $font-size-number;
-    position: relative;
-    top: 0.2rem;
   }
 }
 @media screen and (max-width: 768px) {

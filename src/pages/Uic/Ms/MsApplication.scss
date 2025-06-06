@@ -5,31 +5,28 @@
   .ms-application-intro {
     display: flex;
     flex-direction: column;
-    margin-top: $spacing-xxl;
+    margin-top: $spacing-lg;
   }
   h3 {
     font-size: $font-size-xxl;
     color: $color-nav;
-    margin-bottom: $spacing-xxl;
+    text-align: left;
+    margin-bottom: $spacing-xs;
   }
   p {
     font-size: $font-size-md;
     line-height: 39px;
     color: $color-black;
     text-align: left;
-    max-width: 90%;
-    margin: 0 auto;
   }
 }
 
 .ms-application-requirements {
-  margin: 0 auto;
-  max-width: 70%;
   h4 {
     color: $color-uic;
-    @include heading-large;
-    margin-top: $spacing-xl;
-    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: $spacing-md;
     text-align: left;
     @media screen and (max-width: 700px) {
       text-align: center;
@@ -49,8 +46,6 @@
   }
 
   ul {
-    margin-left: 20px;
-    margin-bottom: 12px;
     text-align: left;
     li {
       margin-bottom: 4px;

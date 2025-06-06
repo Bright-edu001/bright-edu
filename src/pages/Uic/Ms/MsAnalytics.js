@@ -1,4 +1,5 @@
-import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
+import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
 import { PageH2, PageP } from "./MS.styles";
 
@@ -87,41 +88,37 @@ function MsAnalytics() {
 
   return (
     <div className="ms-analytics">
-      <ImageTextSection
-        title="Master of Science"
-        subtitle="Business Analytics"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="Business Analytics"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169918_y.webp`}
-      />
-      <PageH2>
-        UIC 商業分析碩士學位（Master of Science in Business Analytics, MSBA）——
-        掌握數據分析的核心競爭力
-      </PageH2>
-      <PageP>
-        伊利諾大學芝加哥分校（University of Illinois Chicago, UIC） 提供的
-        商業分析碩士學位（Master of Science in Business Analytics,
-        MSBA），幫助你掌握分析大型數據集的技能，並透過 數據視覺化、統計建模 和
-        數據挖掘 技術，深入洞察業務問題。課程還涵蓋 數據管理、機器學習 和
-        預測分析
-        等領域，並以扎實的商業基礎為核心，讓你具備全面的數據分析能力。該學位也獲得
-        STEM 認證，讓你在數據驅動的世界中保持競爭優勢。
-      </PageP>
-      <MSFinanceSection
-        whyTitle={whyTitle}
-        whyList={whyList}
-        outcomesTitle={outcomesTitle}
-        outcomesDesc={outcomesDesc}
-        companyTitle={companyTitle}
-        companyLogos={companyLogos}
-        courseArrangementTitle={courseArrangementTitle}
-        courseArrangementList={courseArrangementList}
-        coreCoursesTitle={coreCoursesTitle}
-        coreCoursePragaph={coreCoursePragaph}
-        coreCoursesList={coreCoursesList}
-        reasonsTitle={reasonsTitle}
-        reasonsDesc={reasonsDesc}
-      />
+      <MbaAreasHero />
+      <SectionContainer>
+        <PageH2>
+          UIC 商業分析碩士學位（Master of Science in Business Analytics,
+          MSBA）—— 掌握數據分析的核心競爭力
+        </PageH2>
+        <PageP>
+          伊利諾大學芝加哥分校（University of Illinois Chicago, UIC） 提供的
+          商業分析碩士學位（Master of Science in Business Analytics,
+          MSBA），幫助你掌握分析大型數據集的技能，並透過 數據視覺化、統計建模 和
+          數據挖掘 技術，深入洞察業務問題。課程還涵蓋 數據管理、機器學習 和
+          預測分析
+          等領域，並以扎實的商業基礎為核心，讓你具備全面的數據分析能力。該學位也獲得
+          STEM 認證，讓你在數據驅動的世界中保持競爭優勢。
+        </PageP>
+        <MSFinanceSection
+          whyTitle={whyTitle}
+          whyList={whyList}
+          outcomesTitle={outcomesTitle}
+          outcomesDesc={outcomesDesc}
+          companyTitle={companyTitle}
+          companyLogos={companyLogos}
+          courseArrangementTitle={courseArrangementTitle}
+          courseArrangementList={courseArrangementList}
+          coreCoursesTitle={coreCoursesTitle}
+          coreCoursePragaph={coreCoursePragaph}
+          coreCoursesList={coreCoursesList}
+          reasonsTitle={reasonsTitle}
+          reasonsDesc={reasonsDesc}
+        />
+      </SectionContainer>
     </div>
   );
 }

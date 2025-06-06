@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import CourseList from "../../../../components/CourseList/CourseList";
+import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
+import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
 
 const Management = () => {
   useEffect(() => {
@@ -33,67 +35,70 @@ const Management = () => {
 
   return (
     <div className="management-container">
+      <MbaAreasHero />
       {/* UIC MBA 管理專業簡介 */}
-      <div className="section">
-        <h2 className="section-title">
-          UIC MBA 管理專業領域– 培養全方位的管理與領導能力
-        </h2>
-        <div className="section-content">
-          <p>
-            伊利諾大學芝加哥分校（UIC） 的管理方向 MBA
-            課程，讓你深入了解企業關鍵領域的最佳實踐，包括
-            會計、營運、策略管理、組織行為 和 行銷
-            等核心知識。課程不僅幫助你掌握專業技能，還能培養卓越的領導能力，為未來在管理職位上發揮影響力做好準備。
-            課程，讓你深入了解企業營運與經濟運作方面，包括資訊、營銷、運營管理、組織行為和戰略管理等相關知識和實踐。該課程旨在培養學員的專業管理能力，通過優質的師資和實用的課程內容，為未來在全球範圍內發揮管理才能作準備。
-          </p>
+      <SectionContainer>
+        <div className="section">
+          <h2 className="section-title">
+            UIC MBA 管理專業領域– 培養全方位的管理與領導能力
+          </h2>
+          <div className="section-content">
+            <p>
+              伊利諾大學芝加哥分校（UIC） 的管理方向 MBA
+              課程，讓你深入了解企業關鍵領域的最佳實踐，包括
+              會計、營運、策略管理、組織行為 和 行銷
+              等核心知識。課程不僅幫助你掌握專業技能，還能培養卓越的領導能力，為未來在管理職位上發揮影響力做好準備。
+              課程，讓你深入了解企業營運與經濟運作方面，包括資訊、營銷、運營管理、組織行為和戰略管理等相關知識和實踐。該課程旨在培養學員的專業管理能力，通過優質的師資和實用的課程內容，為未來在全球範圍內發揮管理才能作準備。
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* 學位概述部分 */}
-      <div className="section">
-        <h3 className="section-subtitle">學位概述</h3>
-        <div className="section-content">
-          <p>
-            完成這個 AACSB 認證 的 MBA
-            管理課程後，你將具備領導團隊和管理企業的專業知識，適合擔任
-            管理高層、企業主、營運主管 及 商業顧問 等重要角色。
-          </p>
-          <p>
-            除了核心的管理專業課程外，你還可以透過
-            數據挖掘、人力資源管理、企業財務
-            等選修課程，進一步拓展專業知識，提升多元化的業務能力。
-          </p>
-          <p>這個課程專注於幫助你掌握：</p>
-          <CourseList items={overviewCourses} />
+        {/* 學位概述部分 */}
+        <div className="section">
+          <h3 className="section-subtitle">學位概述</h3>
+          <div className="section-content">
+            <p>
+              完成這個 AACSB 認證 的 MBA
+              管理課程後，你將具備領導團隊和管理企業的專業知識，適合擔任
+              管理高層、企業主、營運主管 及 商業顧問 等重要角色。
+            </p>
+            <p>
+              除了核心的管理專業課程外，你還可以透過
+              數據挖掘、人力資源管理、企業財務
+              等選修課程，進一步拓展專業知識，提升多元化的業務能力。
+            </p>
+            <p>這個課程專注於幫助你掌握：</p>
+            <CourseList items={overviewCourses} />
+          </div>
         </div>
-      </div>
 
-      {/* 特色課程項目 */}
-      <div className="section">
-        <h3 className="section-subtitle">特色課程範例</h3>
-        <CourseList items={featuredCourses} />
-      </div>
+        {/* 特色課程項目 */}
+        <div className="section">
+          <h3 className="section-subtitle">特色課程範例</h3>
+          <CourseList items={featuredCourses} />
+        </div>
 
-      {/* 學習成果 */}
-      <div className="section">
-        <h3 className="section-subtitle">學習成果</h3>
-        <div className="section-content">
-          <p>完成課程後，你將具備以下能力：</p>
-          <CourseList items={outcomesCourses} />
+        {/* 學習成果 */}
+        <div className="section">
+          <h3 className="section-subtitle">學習成果</h3>
+          <div className="section-content">
+            <p>完成課程後，你將具備以下能力：</p>
+            <CourseList items={outcomesCourses} />
+          </div>
         </div>
-      </div>
-      {/* 職業發展方向 */}
-      <div className="section">
-        <h3 className="section-subtitle">職涯發展方向</h3>
-        <div className="section-content">
-          <p>獲得管理方向 MBA 學位後，你將有機會進入以下職位：</p>
-          <CourseList items={careerCourses} />
+        {/* 職業發展方向 */}
+        <div className="section">
+          <h3 className="section-subtitle">職涯發展方向</h3>
+          <div className="section-content">
+            <p>獲得管理方向 MBA 學位後，你將有機會進入以下職位：</p>
+            <CourseList items={careerCourses} />
+          </div>
         </div>
-      </div>
-      {/* 結束語 */}
-      <div className="conclusion">
-        通過這個課程，你將具備全面的管理與領導能力，成為企業不可或缺的關鍵人才！
-      </div>
+        {/* 結束語 */}
+        <div className="conclusion">
+          通過這個課程，你將具備全面的管理與領導能力，成為企業不可或缺的關鍵人才！
+        </div>
+      </SectionContainer>
     </div>
   );
 };

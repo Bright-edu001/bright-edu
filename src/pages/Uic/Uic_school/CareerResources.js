@@ -1,17 +1,11 @@
 import React from "react";
 import "./CareerResources.scss";
-import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection"; // 引入圖片與文字區塊組件
+import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 
 function CareerResources() {
   return (
     <div className="career-resources">
-      <ImageTextSection
-        title="UIC 美國商學院"
-        subtitle="職涯資源"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="職涯資源"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
-      />
+      <MbaAreasHero />
       <section
         className="intro"
         aria-label="商學院職涯規劃所(Business Career Center)"
@@ -21,18 +15,17 @@ function CareerResources() {
           <p>
             芝加哥是美國第二大商業中心區，許多大企業的總部皆設立於此，因此各式的工作機會也相當豐富，是一個非常適合發展職涯的城市，為協助碩士同學畢業後的職涯發展銜接，伊利諾大學芝加哥分校特別設立職涯規劃所的資源提供給商學院的同學做諮詢，藉此幫助想要在美國開啟璀璨職涯的同學順利找到工作。
           </p>
-          <p>
-            <span className="career-dot">●</span>
-            職涯規劃所於周一至周五上午9：00至下午5：00不論透過電話或電子郵件都可以為UIC商學院的同學提供全方位的服務項目。
-          </p>
-          <p>
-            <span className="career-dot">●</span>
-            商學院同學可以在學校職涯規劃所做諮詢，同學也可以隨時利用這裡的資源，預約面談協助等等。以過往的經驗，成功在美國取得OPT或持續在美發展之同學，大部分都是透過此學校單位的協助。
-          </p>
-          <p>
-            <span className="career-dot">●</span>
-            主要服務內容如下(依每個同學諮詢狀況為準，這裡提供畢業生說明的範例)：
-          </p>
+          <ul className="career-resources-intro-list">
+            <li>
+              職涯規劃所於周一至周五上午9：00至下午5：00不論透過電話或電子郵件都可以為UIC商學院的同學提供全方位的服務項目。
+            </li>
+            <li>
+              商學院同學可以在學校職涯規劃所做諮詢，同學也可以隨時利用這裡的資源，預約面談協助等等。以過往的經驗，成功在美國取得OPT或持續在美發展之同學，大部分都是透過此學校單位的協助。
+            </li>
+            <li>
+              主要服務內容如下(依每個同學諮詢狀況為準，這裡提供畢業生說明的範例)：
+            </li>
+          </ul>
           <ul className="career-resources-list">
             <li>
               修改履歷表(職涯規劃所的advisor會不斷協助同學寫出符合美國標準之履歷)

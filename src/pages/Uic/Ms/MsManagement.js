@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
+import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
 import { PageH2, PageP } from "./MS.styles";
 
@@ -91,40 +92,36 @@ function MsManagement() {
 
   return (
     <div className="ms-management">
-      <ImageTextSection
-        title="Master of Science"
-        subtitle="Supply Chain and Operations Management"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="Supply Chain and Operations Management"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169918_y.webp`}
-      />
-      <PageH2>
-        UIC供應鏈與營運管理碩士學位（Master of Science in Supply Chain and
-        Operations Management, MSSCOM）—— 掌握供應鏈與營運領域的專業知識
-      </PageH2>
-      <PageP>
-        伊利諾大學芝加哥分校（University of Illinois Chicago,
-        UIC）提供的供應鏈與營運管理碩士學位（Master of Science in Supply Chain
-        and Operations Management,
-        MSSCOM），幫助你掌握分析建模、企業系統、AI技術與數據分析等基礎知識，讓你在這個快速變革的領域中脫穎而出。這個學位獲得
-        STEM認證，讓你在全球化、大數據、電子商務、社群媒體與 AI
-        驅動的供應鏈環境中保持競爭力。
-      </PageP>
+      <MbaAreasHero />
+      <SectionContainer>
+        <PageH2>
+          UIC供應鏈與營運管理碩士學位（Master of Science in Supply Chain and
+          Operations Management, MSSCOM）—— 掌握供應鏈與營運領域的專業知識
+        </PageH2>
+        <PageP>
+          伊利諾大學芝加哥分校（University of Illinois Chicago,
+          UIC）提供的供應鏈與營運管理碩士學位（Master of Science in Supply Chain
+          and Operations Management,
+          MSSCOM），幫助你掌握分析建模、企業系統、AI技術與數據分析等基礎知識，讓你在這個快速變革的領域中脫穎而出。這個學位獲得
+          STEM認證，讓你在全球化、大數據、電子商務、社群媒體與 AI
+          驅動的供應鏈環境中保持競爭力。
+        </PageP>
 
-      <MSFinanceSection
-        whyTitle={whyTitle}
-        whyList={whyList}
-        outcomesTitle={outcomesTitle}
-        outcomesDesc={outcomesDesc}
-        extraCoursesTitle={extraCoursesTitle}
-        extraCoursesList={extraCoursesList}
-        courseArrangementTitle={courseArrangementTitle}
-        courseArrangementList={courseArrangementList}
-        coreCoursesTitle={coreCoursesTitle}
-        coreCoursesList={coreCoursesList}
-        reasonsTitle={reasonsTitle}
-        reasonsDesc={reasonsDesc}
-      />
+        <MSFinanceSection
+          whyTitle={whyTitle}
+          whyList={whyList}
+          outcomesTitle={outcomesTitle}
+          outcomesDesc={outcomesDesc}
+          extraCoursesTitle={extraCoursesTitle}
+          extraCoursesList={extraCoursesList}
+          courseArrangementTitle={courseArrangementTitle}
+          courseArrangementList={courseArrangementList}
+          coreCoursesTitle={coreCoursesTitle}
+          coreCoursesList={coreCoursesList}
+          reasonsTitle={reasonsTitle}
+          reasonsDesc={reasonsDesc}
+        />
+      </SectionContainer>
     </div>
   );
 }
