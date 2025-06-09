@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./RankingPage.module.scss"; // 修正：引入 SCSS 模組
-import ImageTextSection from "../../../../components/ImageTextSection/ImageTextSection"; // 引入圖片與文字區塊組件
+import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
+import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
 
 function RankingPage() {
   const rankings = [
@@ -59,37 +60,32 @@ function RankingPage() {
 
   return (
     <div className={styles.rankingContainer}>
-      <ImageTextSection
-        title="UIC RANKINGS"
-        subtitle=""
-        imageUrl="https://imgur.com/uhMmwNF.png" // 請確認圖片路徑
-        imageAlt="Ranking Logo"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
-      />
+      <MbaAreasHero />
+      <SectionContainer>
+        <div className={styles.introSection}>
+          <p>
+            UIC
+            屬於美國公立大學，擁有商學院及醫學院等科系，優異的師資及教學品質，使不管在公立大學排名中或者是美國大學排名中榮獲許多優異的成績。
+          </p>
+        </div>
 
-      <div className={styles.introSection}>
-        <p>
-          UIC
-          屬於美國公立大學，擁有商學院及醫學院等科系，優異的師資及教學品質，使不管在公立大學排名中或者是美國大學排名中榮獲許多優異的成績。
-        </p>
-      </div>
-
-      <div className={styles.rankingsGrid}>
-        {rankings.map((item, index) => (
-          <div key={index} className={styles.rankingItem}>
-            <div className={styles.rank}>
-              {item.rankPrefix && (
-                <span className={styles.rankPrefix}>{item.rankPrefix}</span>
-              )}
-              {item.rankNumber && (
-                <span className={styles.rankNumber}>{item.rankNumber}</span>
-              )}
+        <div className={styles.rankingsGrid}>
+          {rankings.map((item, index) => (
+            <div key={index} className={styles.rankingItem}>
+              <div className={styles.rank}>
+                {item.rankPrefix && (
+                  <span className={styles.rankPrefix}>{item.rankPrefix}</span>
+                )}
+                {item.rankNumber && (
+                  <span className={styles.rankNumber}>{item.rankNumber}</span>
+                )}
+              </div>
+              <div className={styles.description}>{item.description}</div>
+              <div className={styles.source}>{item.source}</div>
             </div>
-            <div className={styles.description}>{item.description}</div>
-            <div className={styles.source}>{item.source}</div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </SectionContainer>
     </div>
   );
 }

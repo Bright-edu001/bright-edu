@@ -2,36 +2,30 @@
 @import "../../../../styles/mixins"; // 引入混和
 
 .heedContainer {
-  margin: 0 auto;
-
   .contentSection {
-    padding: $spacing-lg $spacing-xl;
-
     h2 {
-      font-size: $font-size-xl;
+      font-size: 24px;
       color: $color-uic; // 使用顏色強調標題
       margin-top: $spacing-lg;
-      margin-bottom: $spacing-md;
+      margin-bottom: $spacing-xs;
       font-weight: 700;
       text-align: left;
     }
 
     p {
-      @include value-style;
-      font-size: $font-size-lg;
-      line-height: 30px;
-      margin-bottom: $spacing-md;
+      font-size: 18px;
+      font-weight: 500;
+      margin: $spacing-md 0;
       text-align: left;
-      margin-left: 0;
     }
 
     ul {
       list-style: disc;
-      margin-left: $spacing-lg;
       margin-bottom: $spacing-md;
 
       li {
-        @include value-style;
+        font-size: 18px;
+        font-weight: 500;
         margin-bottom: $spacing-xs;
         text-align: left;
       }

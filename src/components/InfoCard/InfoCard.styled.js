@@ -5,18 +5,17 @@ const colorNav = "#1c184a";
 const spacingSm = "1rem";
 const spacingMd = "1.5rem";
 const spacingXl = "3rem";
-const fontSizeLg = "20px";
+const fontSizeLg = "18px";
 
 // mixins
 const headingMedium = css`
-  font-size: 1.8rem;
+  font-size: 24px;
   font-weight: 900;
   margin-bottom: 1.5rem;
 `;
 const labelStyle = css`
   font-size: ${fontSizeLg};
   font-weight: 400;
-  line-height: 26px;
 `;
 
 export const InfoCardWrapper = styled.div`

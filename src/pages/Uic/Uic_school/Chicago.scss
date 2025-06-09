@@ -1,15 +1,11 @@
 @import "../../../styles/variables";
 
 .chicago-container {
-  .container {
-    margin: 0 auto;
-  }
-
   .chicago-intro {
-    margin: $spacing-xl 0;
+    margin: $spacing-md 0;
     .intro-text {
-      @include label-style;
-      line-height: 36px;
+      font-size: 18px;
+      font-weight: 500;
       color: $color-black;
       text-align: left;
     }
@@ -20,10 +16,10 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-md;
     h2 {
-      @include value-style;
-      font-size: $font-size-xxl;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-black;
     }
   }
@@ -37,17 +33,16 @@
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-md;
 
       .history-text,
       .transport-text {
         text-align: left;
         p {
-          margin-bottom: $spacing-md;
-          @include label-style;
-          line-height: 36px;
+          font-size: 18px;
+          font-weight: 500;
           color: $color-black;
-          margin-bottom: $spacing-md;
+          text-align: left;
         }
       }
     }
@@ -55,7 +50,7 @@
 
   .history-section {
     position: relative;
-    padding-bottom: $spacing-xl;
+    padding-bottom: $spacing-sm;
 
     &::after {
       content: "";
@@ -64,7 +59,6 @@
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
-      max-width: calc(72%); // ½T????section-content ¼e«×¤@??
       border-bottom: 1px solid $color-uic;
       margin: 0 auto;
     }

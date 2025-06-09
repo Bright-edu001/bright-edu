@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
+import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import ActionButton from "../../../components/ActionButton/ActionButton";
 import Accordion from "../../../components/Accordion/Accordion";
 import AccordionItem from "../../../components/Accordion/AccordionItem";
@@ -16,13 +16,7 @@ const FAQ = () => {
 
   return (
     <div className="faq-page">
-      <ImageTextSection
-        title="UIC 美國商學院"
-        subtitle="常見問題"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="常見問題"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
-      />
+      <MbaAreasHero />
 
       <div className="faq-container">
         {/* 學校申請問題 */}

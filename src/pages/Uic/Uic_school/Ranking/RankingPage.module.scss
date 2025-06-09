@@ -10,16 +10,15 @@
     text-align: center;
     width: 100%;
     p {
-      font-size: $font-size-lg;
-      line-height: 1.8;
-      margin: 0 auto;
+      font-size: 24px;
+      font-weight: 500;
+      text-align: left;
     }
   }
 
   .rankingsGrid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding: $spacing-lg;
     gap: $spacing-xl;
 
     .rankingItem {

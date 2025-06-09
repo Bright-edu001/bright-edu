@@ -14,7 +14,9 @@
   .intro {
     padding: $spacing-lg;
     text-align: left;
-
+    @media screen and (max-width: 500px) {
+      padding: $spacing-sm;
+    }
     p {
       color: $color-text-primary;
       font-size: 18px;

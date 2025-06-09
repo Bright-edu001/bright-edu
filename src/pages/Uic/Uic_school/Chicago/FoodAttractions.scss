@@ -5,42 +5,39 @@
   .attractions-section,
   .food-attractions-header,
   .food-section {
-    max-width: 100%;
-    padding: 0 $spacing-xxl;
     margin: 0 auto;
   }
 
   .food-attractions-description,
   .food-attractions-text {
-    @include label-style;
+    font-size: 18px;
+    font-weight: 500;
     text-align: left;
-    margin-top: $spacing-xxl;
-  }
-  .food-attractions-text {
-    margin-top: $spacing-md;
   }
   .food-attractions-title {
-    @include heading-large;
-    margin-bottom: $spacing-xxl;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: $spacing-sm;
     padding-top: 2rem;
-    text-align: center;
+    text-align: left;
   }
   .food-attractions-intro {
-    margin-top: 7rem;
+    margin-top: $spacing-lg;
     h3 {
-      @include heading-large;
-      margin-bottom: $spacing-xxl;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: $spacing-sm;
       color: $color-nav;
+      text-align: left;
     }
     p {
-      @include label-style;
-      margin: 0 auto;
-
+      font-size: 18px;
+      font-weight: 500;
       text-align: left;
-      margin-bottom: $spacing-xxl;
+      margin-bottom: $spacing-md;
     }
     img {
-      margin-bottom: $spacing-xxl;
+      margin-bottom: $spacing-lg;
     }
   }
 
@@ -91,30 +88,32 @@
     }
   }
   .title {
-    @include heading-medium;
-    margin-bottom: 5rem;
-    margin-top: $spacing-xxl;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: $spacing-sm;
+    margin-top: $spacing-lg;
   }
   .food-attractions-pizza,
   .food-attractions-hotdog {
     @include label-style;
-    max-width: 80%;
     text-align: left;
-    margin: 0 auto;
-    margin-bottom: 8rem;
+    margin-bottom: $spacing-sm;
   }
 
-  .food-attractions-hotdog + .food-attractions-hotdog {
-    margin-top: -7rem;
-    margin-bottom: 6rem;
-  }
   .food-section {
     .title.foodheader {
       color: $color-nav;
+      text-align: left;
     }
 
     .title.intro {
       color: $color-nav;
+      text-align: left;
+    }
+    p {
+      text-align: left;
+      font-size: 18px;
+      font-weight: 500;
     }
   }
 }
