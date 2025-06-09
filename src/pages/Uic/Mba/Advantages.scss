@@ -3,39 +3,42 @@
 @import "./mba-common";
 
 .mba-advantages {
-  // ??��??��???
+  // 全域段落與列表樣式
   p,
   li {
-    @extend .mba-paragraph;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    font-size: 18px;
+    font-weight: 500;
     max-width: 100%;
+    text-align: left;
   }
 
-  // ??�μ�?????
+  // 標題樣式
   h3 {
     @extend .mba-heading-large;
   }
 
   .intro {
     padding: $spacing-lg 0;
-    margin-bottom: 3rem; // �W??????????��??????
+    margin-bottom: $spacing-md; // 上方區塊與下方區塊間距
 
     p {
       max-width: 100%;
-      font-weight: 400;
+      font-weight: 500;
     }
   }
 
   .learn .container {
     h3 {
-      margin-bottom: $spacing-md;
+      margin-bottom: $spacing-sm;
       color: $color-nav;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: left;
     }
 
     p {
-      margin-bottom: $spacing-lg;
-      font-weight: 400;
+      margin-bottom: $spacing-sm;
+      font-weight: 500;
     }
 
     ul {
@@ -48,30 +51,24 @@
       margin: 0 0 2rem 0;
 
       li {
-        margin-bottom: 2.2rem;
-        line-height: 1.7;
-
+        margin-bottom: 0;
         strong {
           display: block;
-          @include heading-large;
-          line-height: 30px;
+          font-size: 24px;
+          font-weight: 700;
           color: $color-uic;
-          margin-bottom: 1rem;
         }
         div {
-          font-weight: 700;
-          line-height: 30px;
+          font-weight: 500;
+          font-size: 18px;
           color: $color-black;
-          margin-left: 0;
         }
       }
     }
     h4 {
-      @include body-large;
-      font-size: $font-size-xl;
-      line-height: 30px;
-      margin-top: $spacing-xxl;
-      margin-bottom: $spacing-xxl;
+      font-size: 24px;
+      font-weight: 700;
+      margin: $spacing-md 0;
     }
   }
 
@@ -80,12 +77,17 @@
   .speech-skills {
     .container {
       h3 {
-        margin-bottom: $spacing-xl;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: $spacing-xs;
         color: $color-nav;
+        text-align: left;
       }
 
       p {
-        margin-bottom: 7rem;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: $spacing-md;
       }
     }
   }

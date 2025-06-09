@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 
 function Advantages() {
   useEffect(() => {
@@ -9,13 +9,7 @@ function Advantages() {
 
   return (
     <div className="mba-advantages">
-      <ImageTextSection
-        title="一年制MBA"
-        subtitle="課程優勢"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="課程優勢"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
-      />
+      <MbaAreasHero />
 
       <SectionContainer className="intro" ariaLabel="課程優勢">
         <p>

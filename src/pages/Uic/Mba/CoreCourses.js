@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
+import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero"; // 引入新的組件
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 function CoreCourses() {
@@ -9,13 +9,7 @@ function CoreCourses() {
 
   return (
     <div className="mba-courses-page">
-      <ImageTextSection
-        title="一年制MBA"
-        subtitle="核心課程簡介"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="核心課程簡介"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
-      />
+      <MbaAreasHero />
       <p className="intro">
         核心課程中包括七門必修課程，課程內容涵蓋商業學科的基本知識。以下是各課程的簡要說明:
       </p>

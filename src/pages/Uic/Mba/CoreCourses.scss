@@ -4,9 +4,9 @@
 
 .mba-courses-page {
   .intro {
-    @include label-style;
-    margin-top: $spacing-xxl;
-    margin-bottom: 10rem;
+    font-size: 18px;
+    font-weight: 500;
+    margin: $spacing-md 0;
   }
 
   .courses-content {
@@ -21,43 +21,37 @@
       align-items: flex-start;
       justify-content: center;
       gap: 5rem;
-      margin-bottom: $spacing-xxl;
+      margin-bottom: $spacing-md;
 
-      // •™∞ºº–????
+      // Ë™≤Á®ãÊ®ôÈ°åÂçÄÂ°ä
       .course-title {
         min-width: 350px;
         max-width: 450px;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: right;
-        margin-right: 2rem;
+        align-items: flex-start;
+        text-align: left;
         color: $color-uic;
         h4 {
-          font-size: $font-size-xxl;
+          font-size: 24px;
           font-weight: 700;
           margin-bottom: 0.5rem;
-          line-height: 1.2;
+          text-align: left;
         }
         h3 {
-          font-size: $font-size-lg;
-          font-weight: 400;
-          margin-bottom: 0;
-          line-height: 1.2;
+          font-size: 18px;
+          font-weight: 700;
         }
       }
 
-      // ??∞ºª°????
+      // Ë™≤Á®ãÊèèËø∞ÂçÄÂ°ä
       .course-desc {
         flex: 1;
         p {
-          font-size: $font-size-lg;
+          font-size: 18px;
           color: $color-black;
-          font-weight: 700;
-          line-height: 1.7;
-          margin: 0;
+          font-weight: 500;
           text-align: left;
-          max-width: 100%;
         }
       }
     }
@@ -66,21 +60,26 @@
     .course {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       margin-bottom: $spacing-md;
-      width: 100%; // ≈˝§∫Æe??∫°??§jºe??
+      width: 100%; // ‰øùÊåÅÂØ¨Â∫¶ÊúÄÂ§ßÂåñ
       border-top: 1px solid $color-nav;
       h3 {
-        @extend .mba-heading-large;
+        font-size: 24px;
+        font-weight: 700;
         text-align: left;
-        margin-top: $spacing-xxl;
-        margin-bottom: $spacing-md;
+        margin-top: $spacing-sm;
+        margin-bottom: $spacing-sm;
         color: $color-uic;
       }
-      li {
-        @include label-style;
-        color: $color-black;
-        text-align: left;
+      ul {
+        padding-left: 1rem;
+        li {
+          font-size: 18px;
+          font-weight: 500;
+          color: $color-black;
+          text-align: left;
+        }
       }
     }
   }
@@ -96,8 +95,6 @@
         min-width: unset;
         max-width: unset;
         width: 100%;
-        margin-right: 0;
-        margin-bottom: 1.5rem;
         text-align: left;
         align-items: flex-start;
       }
@@ -108,20 +105,19 @@
   }
 }
 @media (max-width: 500px) {
+  .mba-courses-page .courses-content {
+    margin-top: $spacing-sm;
+  }
   .career-resources .intro .career-resources-list {
     margin-left: 0;
   }
-  .career-resources .career-process .container img {
-    margin-left: 1rem;
+  .mba-courses-page .intro {
+    padding: 0 $spacing-md;
+    margin: $spacing-xs 0;
   }
+
   .mba-courses-page .courses-content .course {
     flex-direction: column;
-  }
-  .mba-courses-page .courses-content .course .course-desc p {
-    max-width: 80%;
-    margin: 0 auto;
-  }
-  .mba-courses-page .courses-content .course .course-title {
-    margin: 0 auto;
+    gap: 1rem;
   }
 }

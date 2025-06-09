@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
+import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero"; // 引入新的組件
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 function DualDegree() {
@@ -9,13 +9,7 @@ function DualDegree() {
 
   return (
     <div className="mba-advantages">
-      <ImageTextSection
-        title="一年制MBA"
-        subtitle="雙碩士銜接"
-        imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
-        imageAlt="雙碩士銜接"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169916_y.webp`}
-      />
+      <MbaAreasHero />
 
       <SectionContainer className="intro" ariaLabel="雙學位課程">
         <p>

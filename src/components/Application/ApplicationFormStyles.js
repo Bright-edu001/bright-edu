@@ -5,8 +5,10 @@ export const StyledApplicationForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin: 0 auto;
   padding: 0 5rem;
+  @media (max-width: 850px) {
+    padding: 0;
+  }
 
   input,
   textarea {
@@ -38,11 +40,10 @@ export const StyledApplicationForm = styled.form`
     padding: 8px 24px;
     font-size: 1rem;
     font-weight: 400;
-    margin: 0 auto;
+    margin: 1.5rem auto;
     cursor: pointer;
     transition: background 0.2s;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
+
     &:hover {
       background: #1c184a;
       color: #ffffff;
@@ -69,7 +70,7 @@ export const StyledApplicationForm = styled.form`
 
 // 申請條件與標題
 export const StyledSectionTitle = styled.h2`
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
   line-height: 40px;
   margin-bottom: 1rem;
@@ -78,18 +79,17 @@ export const StyledSectionTitle = styled.h2`
 
   @media (max-width: 700px) {
     font-size: 32px;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
   }
 `;
 
 // 條件描述文字
 export const StyledConditionDesc = styled.div`
   color: #211700;
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 500;
   text-align: left;
-  margin-bottom: 2rem;
-  padding: 0 24px;
+  margin-bottom: 1rem;
 
   @media (max-width: 700px) {
     font-size: 0.95rem;
