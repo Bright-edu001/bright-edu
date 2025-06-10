@@ -2,54 +2,49 @@
 @import "../../../../styles/mixins";
 
 .transportation-section {
-  margin: $spacing-xl auto;
-  padding: 1rem;
   color: $color-black;
 }
 
 .transportation-block {
-  margin-bottom: $spacing-lg;
+  margin: $spacing-md 0;
 }
 
 .transportation-title {
-  text-align: center;
-  font-size: $font-size-xl;
+  text-align: left;
+  font-size: 24px;
   font-weight: 700;
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-sm;
   color: $color-msu;
 }
 
 .transportation-subblock {
+  text-align: left;
   margin-bottom: $spacing-sm;
   strong {
-    display: block;
-    font-weight: 900;
-    font-size: $font-size-md;
-    margin-bottom: $spacing-xl;
+    font-weight: 700;
+    font-size: 18px;
     color: $color-black;
   }
   ul {
-    margin: $spacing-md 0 0 $spacing-md;
-    padding: 0;
     list-style: disc;
-    display: flex; // ¤ô¥­????
-    flex-wrap: wrap; // ????
-    justify-content: space-evenly; // ??ºİ¹ï??
-    gap: $spacing-lg; // li ¤§??????¶Z????
+    display: flex; // åˆ—è¡¨æ©«å‘æ’åˆ—
+    flex-wrap: wrap; // è‡ªå‹•æ›è¡Œ
+    justify-content: flex-start; // å¹³å‡åˆ†é…ç©ºé–“
+    gap: $spacing-lg; // li ä¹‹é–“é–“è·
     text-align: left;
+    margin-top: $spacing-xs;
     li {
       color: $color-msu;
-      font-size: $font-size-lg;
-      font-weight: 700;
-      margin-bottom: $spacing-xl;
+      font-size: 18px;
+      font-weight: 500;
       text-align: left;
     }
     @media screen and (max-width: 500px) {
-      flex-direction: column; // ????????¦¡????¬°??ª½????
-      align-items: center; // ¤¤??¹ï??
+      gap: $spacing-xs; // å°è¢å¹•é–“è·èª¿æ•´
+      flex-direction: column; // å°è¢å¹•æ”¹ç‚ºç¸±å‘æ’åˆ—
+      align-items: flex-start; // ç½®ä¸­
       li {
-        text-align: center; // ????¤W??¤¤????
-        margin-bottom: $spacing-md; // ½Õ¾ã????
+        text-align: center; // å°è¢å¹•ç½®ä¸­
       }
     }
   }

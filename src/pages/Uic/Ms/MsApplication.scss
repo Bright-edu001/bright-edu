@@ -8,7 +8,8 @@
     margin-top: $spacing-lg;
   }
   h3 {
-    font-size: $font-size-xxl;
+    font-size: 24px;
+    font-weight: 700;
     color: $color-nav;
     text-align: left;
     margin-bottom: $spacing-xs;
@@ -26,7 +27,7 @@
     color: $color-uic;
     font-size: 24px;
     font-weight: 700;
-    margin-top: $spacing-md;
+    margin-top: $spacing-sm;
     text-align: left;
     @media screen and (max-width: 700px) {
       text-align: center;
@@ -34,12 +35,11 @@
   }
 
   p {
-    margin-bottom: $spacing-lg;
-    @include label-style;
+    margin-bottom: $spacing-sm;
+    font-size: 18px;
+    font-weight: 500;
     color: $color-black;
     text-align: left;
-    margin-left: 0;
-    margin-top: $spacing-sm;
     @media screen and (max-width: 700px) {
       text-align: center;
     }
@@ -48,8 +48,8 @@
   ul {
     text-align: left;
     li {
-      margin-bottom: 4px;
-      font-size: $font-size-lg;
+      font-size: 18px;
+      font-weight: 500;
       color: $color-black;
 
       text-align: left;
@@ -64,10 +64,8 @@
     gap: 24px;
     padding-left: 0;
     li {
-      margin-bottom: 0;
-      margin-right: 0;
       list-style: disc;
-      font-size: $font-size-lg;
+      font-size: 18px;
       color: $color-black;
       margin-top: $spacing-sm; // 與上方間距
       font-weight: 700;
@@ -75,12 +73,12 @@
   }
 
   .english-requirements {
-    margin-bottom: 16px;
     text-align: left;
     div {
-      margin-bottom: $spacing-md;
+      margin-bottom: $spacing-sm;
       strong {
-        @include label-style;
+        font-size: 18px;
+        font-weight: 500;
         color: $color-black;
       }
       ul {
@@ -93,7 +91,6 @@
 
   .reminder {
     @include paragraph-style;
-    margin-top: $spacing-xl;
     padding: 12px 16px;
     background: $color-gray-ultralight;
     color: $color-nav;
@@ -101,6 +98,6 @@
     border-right: 4px solid $color-uic;
     border-radius: 6px;
     text-align: center;
-    margin-bottom: $spacing-xxl;
+    margin: $spacing-md auto;
   }
 }

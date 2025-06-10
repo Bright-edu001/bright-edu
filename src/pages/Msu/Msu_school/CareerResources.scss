@@ -4,43 +4,50 @@
 .career-resources-page {
   .career-resources {
     h3 {
-      @include heading-large;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-msu;
-      margin-bottom: $spacing-md;
-      margin-top: $spacing-xxl;
+      text-align: left;
+      margin: $spacing-md 0;
+      margin-bottom: 0;
     }
     h4 {
-      @include body-large;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-msu;
-      margin-bottom: $spacing-lg;
+      text-align: left;
+      margin-bottom: $spacing-xs;
     }
     p {
-      font-size: $font-size-lg;
+      font-size: 18px;
       font-weight: 500;
-      padding: 0 2rem;
+      text-align: left;
     }
   }
   .career-services {
     h3 {
-      @include body-large;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-msu;
-      margin-top: $spacing-xxl;
+      text-align: left;
+      margin-top: $spacing-md;
     }
     h4 {
-      @include body-large;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-msu;
-      margin-bottom: $spacing-lg;
-      text-align: center;
-      margin-top: $spacing-xxl;
+      margin-bottom: $spacing-xs;
+      text-align: left;
+      margin-top: $spacing-md;
     }
     p {
-      font-size: $font-size-lg;
+      font-size: 18px;
       font-weight: 500;
-      padding: 0 2rem;
+      text-align: left;
     }
     .career-services-list {
-      @include value-style;
-      padding: $spacing-lg 16rem;
+      font-size: 18px;
+      font-weight: 500;
       text-align: left;
       color: $color-msu;
       li {
@@ -50,75 +57,69 @@
   }
   .employer-engagement {
     h3 {
-      @include body-large;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-msu;
-      margin-top: $spacing-xxl;
-      margin-bottom: $spacing-lg;
+      text-align: left;
+      margin-top: $spacing-md;
+      margin-bottom: $spacing-xs;
     }
     h4 {
-      @include body-large;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-msu;
-      margin-bottom: $spacing-lg;
+      margin-bottom: $spacing-xs;
       text-align: left;
-      margin-left: 10rem;
-      margin-top: $spacing-xxl;
-      padding-left: $spacing-xxl;
+      margin-top: $spacing-md;
     }
     p {
-      font-size: $font-size-lg;
+      font-size: 18px;
       font-weight: 500;
-      padding: 0 2rem;
+      text-align: left;
     }
     .interview-list {
       p {
-        margin-top: $spacing-lg;
+        margin-top: $spacing-xs;
       }
       .interview-list-item {
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
-        padding-left: $spacing-lg;
-        margin-right: 38rem;
-        margin-top: 1rem;
+        justify-content: flex-start;
+        gap: $spacing-md;
+        margin-top: $spacing-xs;
         font-weight: 700;
       }
     }
   }
   .career-virtual {
     h3 {
-      @include body-large;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-msu;
-      margin-top: $spacing-xxl;
-      margin-bottom: $spacing-lg;
+      text-align: left;
+      margin-top: $spacing-md;
+      margin-bottom: $spacing-xs;
     }
     p {
-      font-size: $font-size-lg;
+      font-size: 18px;
       font-weight: 500;
-      padding: 0 2rem;
+      text-align: left;
     }
     .virtual-resource-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      margin: $spacing-xl 0;
-      padding: 0 $spacing-xl;
-      gap: $spacing-lg;
+      margin: $spacing-md 0;
+      gap: $spacing-md;
       h5 {
-        @include body-large;
+        font-size: 24px;
+        font-weight: 700;
         color: $color-msu;
-        margin-bottom: $spacing-lg;
         text-align: left;
-        margin-left: 5rem;
-        margin-top: $spacing-xxl;
-        padding-left: $spacing-xxl;
-      }
-      p {
-        margin-left: 10rem;
       }
     }
   }
 
   @media screen and (max-width: 1024px) {
-    // 1024px 以�?移除左側?�縮
     & .career-virtual .virtual-resource-row {
       margin-right: 0;
     }
@@ -132,75 +133,28 @@
       margin-right: 0;
     }
     & .employer-engagement .interview-list .interview-list-item {
-      margin-right: 5rem;
+      justify-content: space-between;
     }
     & .employer-engagement h4 {
       padding-left: 0;
     }
   }
 
-  // ?��?式設計�?寬度700px以�?
   @media screen and (max-width: 700px) {
-    .career-resources {
-      h3,
-      h4 {
-        margin-left: 0;
-        margin-right: 0;
-        text-align: center;
-      }
-    }
-    .career-services {
-      h3,
-      h4 {
-        margin-left: 0;
-        margin-right: 0;
-        padding-left: $spacing-md;
-        padding-right: $spacing-md;
-        text-align: left;
-      }
-      .career-services-list {
-        padding: $spacing-md $spacing-xl;
-      }
-    }
     .employer-engagement {
-      h3,
-      h4 {
-        margin-left: 0;
-        margin-right: 0;
-        padding-left: $spacing-md;
-        padding-right: $spacing-md;
-        text-align: left;
-      }
       .interview-list {
         .interview-list-item {
           flex-direction: column;
-          margin-right: 0;
-          padding-left: 5.3rem;
-          margin-top: $spacing-md;
           text-align: left;
+          gap: $spacing-xs;
         }
       }
     }
     .career-virtual {
       .virtual-resource-row {
         grid-template-columns: 1fr;
-        margin: $spacing-md $spacing-xl;
-        gap: $spacing-md;
-        h5 {
-          margin-left: 0;
-          padding-left: $spacing-md;
-          margin-top: $spacing-lg;
-        }
-        p {
-          margin-left: 0;
-          padding-left: $spacing-md;
-        }
+        gap: $spacing-xs;
       }
     }
-  }
-}
-@media screen and (max-width: 500px) {
-  .career-resources-page .career-virtual .virtual-resource-row {
-    padding: 0;
   }
 }

@@ -1,5 +1,6 @@
 import "./FoodAttractions.scss";
-import ImageTextSection from "../../../../components/ImageTextSection/ImageTextSection";
+import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
+import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
 import AttractionCard from "../../../../components/AttractionCard/AttractionCard";
 
 function MicFoodAttractions() {
@@ -39,31 +40,27 @@ function MicFoodAttractions() {
   ];
   return (
     <div className="food-attractions-page">
-      <ImageTextSection
-        title="East Lansing 大學城"
-        subtitle="景點 • 美食"
-        imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
-        imageAlt="景點 • 美食"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner4-768.webp`}
-      />
-      {/* 景點區塊開始 */}
-      <div className="attractions-section">
-        <h2 className="attractions-title">景點</h2>
-        <div className="attractions-list">
-          {attractionsData.map((item, idx) => (
-            <AttractionCard key={idx} name={item.name} desc={item.desc} />
-          ))}
+      <MbaAreasHero />
+      <SectionContainer>
+        {/* 景點區塊開始 */}
+        <div className="attractions-section">
+          <h2 className="attractions-title">景點</h2>
+          <div className="attractions-list">
+            {attractionsData.map((item, idx) => (
+              <AttractionCard key={idx} name={item.name} desc={item.desc} />
+            ))}
+          </div>
         </div>
-      </div>
-      {/* 景點區塊結束 */}
-      <div className="attractions-section">
-        <h2 className="attractions-title">美食</h2>
-        <div className="attractions-list">
-          {foodData.map((item, idx) => (
-            <AttractionCard key={idx} name={item.name} desc={item.desc} />
-          ))}
+        {/* 景點區塊結束 */}
+        <div className="attractions-section">
+          <h2 className="attractions-title">美食</h2>
+          <div className="attractions-list">
+            {foodData.map((item, idx) => (
+              <AttractionCard key={idx} name={item.name} desc={item.desc} />
+            ))}
+          </div>
         </div>
-      </div>
+      </SectionContainer>
     </div>
   );
 }

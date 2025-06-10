@@ -2,32 +2,28 @@
 @import "../../../../styles/mixins";
 
 .attractions-section {
-  margin: 0 auto;
-  padding: 32px 0 0 0;
   border-bottom: 1px solid $color-msu;
 }
 
 .attractions-title {
-  text-align: center;
+  text-align: left;
   color: $color-msu;
-  font-size: $font-size-xxl;
+  font-size: 24px;
   font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 32px;
+  margin: $spacing-md 0;
 }
 
 .attractions-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
-  gap: 32px 40px;
-  margin-bottom: $spacing-xxl;
+  justify-items: start;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
 }
 // 平板瀏覽調整為兩欄
 @media (max-width: 1024px) {
   .attractions-list {
     grid-template-columns: repeat(2, 1fr);
-    margin: 2rem 3rem;
   }
 }
 
@@ -35,15 +31,5 @@
 @media (max-width: 700px) {
   .attractions-list {
     grid-template-columns: 1fr;
-  }
-}
-@media screen and (max-width: 500px) {
-  .attractions-list {
-    margin-left: 3rem;
-  }
-}
-@media screen and (max-width: 400px) {
-  .attractions-list {
-    margin-left: 2rem;
   }
 }

@@ -3,11 +3,12 @@
 
 // 通用區塊容器樣式
 @mixin section-container {
-  margin: $spacing-xxl auto;
+  margin: $spacing-md 0;
 }
 
 @mixin gold-heading {
-  @include body-large;
+  font-size: 24px;
+  font-weight: 700;
   color: $color-msu;
 }
 
@@ -21,10 +22,10 @@
 }
 
 @mixin list-item {
-  @include heading-large;
+  font-size: 18px;
+  font-weight: 500;
   color: $color-black;
-  font-size: $font-size-lg;
-  margin: $spacing-md 0;
+  margin: $spacing-sm 0;
 }
 
 // MS Master 介紹區塊樣式
@@ -33,20 +34,21 @@
   text-align: left; // Keep or change to center if p text lines should be centered
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   p {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
-    padding: 0 2rem;
+    text-align: left;
     // text-align: center; // Uncomment if p text lines should be centered
   }
   ul {
     display: flex;
     flex-direction: column;
-    margin: $spacing-lg 0;
+    margin: $spacing-xs 0;
     color: $color-msu;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 500;
+    gap: $spacing-xs;
   }
 }
 
@@ -54,7 +56,7 @@
   @include section-container;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   h3 {
     @include gold-heading;
   }
@@ -71,7 +73,7 @@
   @include section-container;
   display: flex; // Added
   flex-direction: column; // Added
-  align-items: center; // Added
+  align-items: flex-start; // Added
 
   h3 {
     @include gold-heading;
@@ -79,11 +81,10 @@
   ul {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     text-align: left;
-    margin-bottom: $spacing-xl;
-    width: 100%; // Added to help space-evenly spread items
-    max-width: 900px; // Optional: constrain the width of the date list
+    gap: $spacing-md;
+
     li {
       @include list-item;
     }
@@ -91,32 +92,26 @@
 }
 
 .ms-master-fiance {
-  margin: $spacing-xxl auto;
+  margin: $spacing-md auto;
   border-top: 1px solid $color-msu;
   border-bottom: 1px solid $color-msu;
-  width: 90%;
   display: flex; // Added
   flex-direction: column; // Added
-  align-items: center; // Added
-  .ms-master-fiance-intro {
-    margin-top: $spacing-xl;
-    margin-bottom: $spacing-xxl;
-    // text-align: center; // If text inside this div should be centered
-  }
+  align-items: flex-start; // Added
+
   h4 {
     @include footer-heading;
-    margin-bottom: $spacing-lg;
-    margin-top: $spacing-xxl;
+    margin-top: $spacing-md;
   }
   h3 {
     @include gold-heading;
-    margin-top: $spacing-xxl;
+    margin-top: $spacing-md;
   }
   p {
-    margin-top: $spacing-md;
-    font-size: $font-size-lg;
+    margin-top: $spacing-xs;
+    font-size: 18px;
     font-weight: 500;
-    // text-align: center; // Uncomment if p text lines should be centered
+    text-align: left;
   }
   ul {
     @include standard-list; // text-align: left
@@ -131,11 +126,13 @@
   @include section-container;
   display: flex; // Added
   flex-direction: column; // Added
-  align-items: center; // Added
+  align-items: flex-start; // Added
   .ms-master-require-intro {
+    margin-top: $spacing-sm;
     p {
-      font-size: $font-size-lg;
+      font-size: 18px;
       font-weight: 500;
+      text-align: left;
     }
   }
   h2 {
@@ -144,15 +141,16 @@
   }
   h3 {
     @include gold-heading;
+    text-align: left;
   }
   ul {
     @include standard-list; // text-align: left
 
     li {
-      @include heading-large;
+      font-size: 18px;
+      font-weight: 500;
       color: $color-msu;
-      font-size: $font-size-lg;
-      margin-top: $spacing-lg;
+      margin-top: $spacing-xs;
 
       span {
         @include body-large;
@@ -165,33 +163,27 @@
 }
 
 .ms-master-require-select {
-  margin: $spacing-lg auto;
+  margin: $spacing-sm 0;
   display: flex; // Added
   flex-direction: column; // Added
-  align-items: center; // Added
+  align-items: flex-start; // Added
 
   h3 {
     @include gold-heading;
-    margin-bottom: $spacing-xxl;
-    margin-top: $spacing-xxl;
+    margin: $spacing-md 0;
     // text-align: center; // If this h3's text lines should be centered
   }
   p {
-    margin-bottom: $spacing-xxl;
     font-size: 20px;
     font-weight: 500;
-    padding: 0 2rem;
-    // text-align: center; // Uncomment if p text lines should be centered
+    text-align: left;
   }
   .ms-master-require-select-list {
     h3 {
       color: $color-msu;
       text-align: left;
-      margin-left: 13%;
-      margin-bottom: $spacing-lg;
-    }
-    li {
-      color: $color-black;
+
+      margin-bottom: $spacing-sm;
     }
   }
 }
@@ -200,26 +192,23 @@
   @include section-container;
   display: flex; // Added
   flex-direction: column; // Added
-  align-items: center; // Added
+  align-items: flex-start; // Added
   .ms-master-require-plan-list {
     display: flex;
     flex-direction: column; // Changed to column for better stacking
     h3 {
-      margin: 3rem auto;
+      margin: $spacing-sm 0;
+      margin-bottom: 0;
       text-align: left;
       color: $color-msu;
-    }
-    ul {
-      li {
-        color: $color-black;
-      }
     }
   }
 }
 .ms-master-require-apply {
   p {
-    font-size: $font-size-lg;
+    font-size: 18px;
     font-weight: 500;
+    text-align: left;
   }
 }
 
@@ -232,15 +221,14 @@
 
 .ms-master-require-apply-features,
 .ms-master-require-career-features {
-  @include feature-layout;
-
+  margin: $spacing-md auto;
   .feature-block {
     box-sizing: border-box;
     width: 100%;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-md;
     display: flex; // Added
     flex-direction: column; // Added
-    align-items: center; // Added
+    align-items: flex-start; // Added
     // text-align: center; // Add this if all text lines within feature-block should be centered
 
     .feature-title {
@@ -304,43 +292,42 @@
   h3 {
     text-align: center; // Already centered
     color: $color-msu;
-    font-size: 22px;
-    margin-bottom: $spacing-xl;
+    font-size: 24px;
+    margin-bottom: $spacing-sm;
     font-weight: 700;
   }
 
   p {
-    line-height: 1.6;
-    font-size: 16px;
-    font-weight: 700;
-    // text-align: center; // Uncomment if p text lines should be centered
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
   }
 }
 
 .ms-master-cfa,
 .ms-master-network {
-  margin: 0 auto;
   border-top: 1px solid $color-msu;
-  // The main h2 is already text-align: center via section-header
-  // The -intro part is handled by the section-intro mixin modifications
+
   h2 {
-    @include section-header;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: left;
+    margin: $spacing-md 0;
   }
 
   &-intro {
     @include section-intro;
+    align-items: flex-start;
   }
 
   &-recognition {
-    margin-top: $spacing-xxl;
+    margin-top: $spacing-md;
     display: flex; // Added
     flex-direction: column; // Added
-    align-items: center; // Added
+    align-items: flex-start; // Added
 
     h3 {
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-sm;
       // text-align: center; // Uncomment if h3 text lines should be centered
     }
 
@@ -354,91 +341,53 @@
   }
   .ms-master-network-intro {
     h3 {
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-sm;
     }
     p {
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-md;
     }
   }
 }
 
 // 響應式設計 - 最大寬度 700px
 @media (max-width: 700px) {
-  .ms-master-intro,
-  .ms-master-features,
-  .ms-master-date,
-  .ms-master-require,
-  .ms-master-require-plan,
-  .ms-master-fiance {
-    padding: $spacing-md $spacing-sm;
-    margin: $spacing-md auto;
-    max-width: 100%;
-  }
-
   .ms-master-intro ul,
   .ms-master-features ul,
   .ms-master-date ul,
   .ms-master-fiance ul,
   .ms-master-require ul {
     padding-left: 1.5rem;
-    margin-bottom: $spacing-lg;
   }
   .ms-master-intro {
     p {
       max-width: 100%;
     }
     ul {
-      margin-bottom: $spacing-xxl;
-      margin-left: $spacing-lg;
       li {
         font-size: $font-size-md;
         margin-bottom: $spacing-md;
       }
     }
   }
-  .ms-master-features,
-  .ms-master-date,
-  .ms-master-fiance,
-  .ms-master-require {
-    ul {
-      margin-left: $spacing-lg;
-    }
-  }
 
   .ms-master-date ul {
     flex-direction: column;
     align-items: flex-start;
-    li {
-      margin-bottom: $spacing-md;
-    }
+    gap: 0;
   }
 
   .ms-master-fiance {
     width: 100%;
-    .ms-master-fiance-intro {
-      margin-top: $spacing-md;
-      margin-bottom: $spacing-lg;
-    }
+
     h4,
     h3 {
       margin-top: $spacing-lg;
-      margin-bottom: $spacing-md;
+      text-align: left;
     }
   }
 
-  .ms-master-require-select .ms-master-require-select-list h3 {
-    margin-left: 0;
-    font-size: $font-size-md;
-  }
-
-  .ms-master-require-plan .ms-master-require-plan-list h3 {
-    margin-left: 0;
-    font-size: $font-size-md;
-    text-align: center;
-  }
   .ms-master-require-plan .ms-master-require-plan-list ul {
     padding-left: 1.5rem;
-    margin-top: $spacing-md;
   }
 
   .ms-master-require-apply-features,
@@ -448,43 +397,15 @@
     .feature-block {
       width: 100%;
       min-width: unset;
-
       margin-bottom: $spacing-md;
-    }
-  }
-
-  .ms-master-cfa,
-  .ms-master-network {
-    padding: $spacing-md $spacing-sm;
-    h2 {
-      font-size: 20px;
-    }
-    &-intro h3 {
-      font-size: 18px;
     }
   }
 }
 
 @media screen and (max-width: 500px) {
-  .ms-master-require-apply-features,
-  .ms-master-require-career-features {
-    padding: 0 $spacing-md;
-  }
-  .ms-master-cfa-recognition .cfa-note {
-    word-break: break-word;
-    white-space: normal;
-  }
-  .ms-master-require-select p {
-    margin: 0 auto;
-  }
-  .ms-master-intro ul,
-  .ms-master-features ul,
-  .ms-master-date ul,
-  .ms-master-fiance ul,
-  .ms-master-require ul {
-    padding-left: 0;
-  }
-  .ms-master-require-plan .ms-master-require-plan-list ul {
-    padding-left: 0;
+  .ms-master-require-career {
+    p {
+      text-align: left;
+    }
   }
 }

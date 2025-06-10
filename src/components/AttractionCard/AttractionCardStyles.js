@@ -27,9 +27,9 @@ export const StyledAttractionInfo = styled.div`
 
 // 標題
 export const StyledAttractionName = styled.div`
-  font-weight: 900;
+  font-weight: 700;
   color: #19453c;
-  font-size: 20px;
+  font-size: 24px;
   margin-bottom: 6px;
   text-align: left;
 `;
@@ -37,8 +37,7 @@ export const StyledAttractionName = styled.div`
 // 說明文字
 export const StyledAttractionDesc = styled.div`
   color: #000000;
-  font-size: 1rem;
-  line-height: 1.6;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 500;
   text-align: left;
 `;

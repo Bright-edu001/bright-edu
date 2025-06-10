@@ -12,31 +12,30 @@
   }
 
   .intro {
-    padding: $spacing-lg $spacing-lg;
     text-align: left;
     p {
-      @include body-large;
+      font-size: 18px;
+      font-weight: 500;
       color: $color-text-primary;
       letter-spacing: 0.05em;
-      margin: $spacing-xl auto;
-      max-width: 100%;
+      margin: $spacing-md 0;
     }
   }
 
   .stats {
-    padding: $spacing-lg 0;
-
     .stats-card-school {
       background: $color-white;
       @include card-border;
       border: 2px solid $color-msu;
       position: relative;
-      margin-bottom: 6rem;
+      margin-bottom: $spacing-md;
 
       h3 {
-        @include heading-medium;
+        font-size: 24px;
+        font-weight: 700;
         color: $color-msu;
         text-align: left; // 標題靠左對齊
+        margin-bottom: $spacing-sm;
       }
 
       ul.left-aligned {
@@ -54,7 +53,8 @@
           margin-bottom: 10px; // 區塊下方間距
 
           .label {
-            @include label-style;
+            font-size: 18px;
+            font-weight: 500;
             color: $color-black;
             margin-bottom: 0.5rem;
           }
@@ -95,15 +95,23 @@
   }
 
   .details {
+    .michigan-contribution {
+      padding: 0 2rem;
+      .contribution-content {
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
     .reasearch {
       background: $color-white;
-      padding: $spacing-md;
-      margin-bottom: 2rem;
+      padding: 0 2rem;
 
       h3 {
-        @include heading-medium;
+        font-size: 24px;
+        font-weight: 700;
+        text-align: left;
         color: $color-msu;
-        margin-bottom: $spacing-md;
+        margin-bottom: $spacing-xs;
       }
 
       .research-content {
@@ -111,10 +119,10 @@
         flex-direction: column;
         align-items: flex-start;
         text-align: center;
-        padding: 3rem 16rem;
-
+        margin-bottom: $spacing-md;
         h4 {
-          @include label-style;
+          font-size: 18px;
+          font-weight: 700;
           color: $color-black;
           font-weight: 700;
           margin-bottom: 0.5rem;
@@ -125,11 +133,12 @@
         .research-facilities,
         .research-areas,
         .research-centers {
-          margin-bottom: $spacing-md;
+          margin-bottom: $spacing-xs;
         }
 
         .funding-amount {
-          @include heading-medium;
+          font-size: 24px;
+          font-weight: 700;
           color: $color-msu;
           font-weight: bold;
         }
@@ -156,11 +165,10 @@
           li {
             color: $color-msu;
             font-weight: 700;
-            font-size: $font-size-xl;
+            font-size: 18px;
             position: relative;
             margin-right: $spacing-xl; // 右側間距
             white-space: nowrap; // 不換行
-            margin-bottom: $spacing-sm; // 下方間距
           }
         }
         .research-centers p {
@@ -173,36 +181,40 @@
       }
     }
   }
+  .global-impact {
+    padding: 0 2rem;
+  }
   .michigan-contribution,
   .global-impact {
     h3 {
-      @include heading-medium;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-msu;
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-xs;
+      text-align: left;
     }
   }
   .global-impact-content {
     p {
       font-size: $font-size-lg;
       font-weight: 500;
-      padding: 0 2rem;
+      text-align: left;
     }
   }
   .contribution-content {
-    margin: 0 2rem;
     font-size: $font-size-lg;
     font-weight: 500;
+    text-align: left;
   }
   .global-impact {
     h3 {
-      margin-top: $spacing-xxl;
+      margin-top: $spacing-md;
     }
     .impact-list {
-      padding-left: $spacing-lg;
       text-align: left;
       color: $color-msu;
-      font-weight: 700;
-      margin-left: 12rem;
+      font-size: 18px;
+      font-weight: 500;
       margin-top: 1rem;
 
       li {
@@ -211,12 +223,10 @@
     }
   }
   .diversity-list {
-    padding-left: $spacing-lg;
     text-align: left;
     color: $color-black;
-    font-weight: 700;
-    margin-left: 12rem;
-    font-size: $font-size-xs;
+    font-weight: 500;
+    font-size: 18px;
     margin-top: 0;
 
     li {

@@ -5,47 +5,44 @@
   .ranking,
   .management {
     h3 {
-      @include heading-medium;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: left;
       color: $color-msu;
-      margin: $spacing-lg 0;
+      margin: $spacing-md 0;
     }
     p {
-      @include value-style;
-      text-align: center;
-      margin-bottom: $spacing-xs;
+      font-size: 18px;
+      font-weight: 500;
+      text-align: left;
     }
     ul {
-      @include label-style;
+      font-size: 18px;
       font-weight: 700;
       display: flex;
       flex-direction: row;
       color: $color-msu;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: flex-start;
       gap: $spacing-xl;
-      margin: 2rem 0;
+      margin: $spacing-xs 0;
     }
 
     .highlight {
       text-align: left;
-      margin-top: $spacing-xxl;
-      margin-bottom: $spacing-xl;
-      padding: 0 7rem;
-      @media screen and (max-width: 700px) {
-        padding: 0 2rem;
-      }
+      margin-bottom: 0;
     }
   }
   .management {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
   .class {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    margin: $spacing-xxl 0;
-    padding: 0 2rem;
+    justify-content: space-between;
+    margin: $spacing-sm 0;
 
     .class-item {
       text-align: center;
@@ -69,7 +66,6 @@
           color: $color-msu;
           font-weight: 700;
           font-size: 18px;
-          margin-top: 8px;
         }
       }
     }
@@ -77,19 +73,20 @@
   .engineering {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     h3 {
-      @include heading-medium;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-msu;
-      margin: $spacing-lg 0;
+      margin-top: $spacing-sm;
     }
     ul {
-      @include label-style;
+      font-size: 18px;
       color: $color-black;
-      font-weight: 700;
-      margin-bottom: $spacing-xl;
+      font-weight: 500;
+      margin-bottom: $spacing-md;
       li {
-        margin-top: $spacing-md;
+        margin-top: $spacing-xs;
         text-align: left;
       }
     }

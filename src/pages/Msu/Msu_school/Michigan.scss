@@ -3,25 +3,25 @@
 
 .michigan-page {
   .michigan-intro {
-    margin: $spacing-xxl $spacing-xxl;
+    margin: $spacing-lg 0;
     border-bottom: 1px solid $color-msu;
     p {
-      margin: 6rem;
-      padding: 0;
       text-align: left;
       color: $color-black;
-      font-size: $font-size-lg;
+      font-size: 18px;
       font-weight: 500;
     }
     h3 {
-      @include heading-medium;
-      margin-top: $spacing-xl;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: left;
+      margin-top: $spacing-md;
     }
     .intro-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 3rem 2rem; // 行間距 3rem，欄間距 2rem
-      margin: $spacing-xxl $spacing-xxl; // 上下左右間距 $spacing-xxl
+      gap: 2rem; // 行間距 3rem，欄間距 2rem
+      margin: $spacing-sm 0;
 
       .intro-col {
         // 欄位設定
@@ -35,28 +35,27 @@
           color: $color-msu; // MSU 主色調
           font-size: 1.5rem;
           font-weight: 700;
-          margin-bottom: $spacing-sm;
+          margin-bottom: $spacing-xs;
           text-align: left;
         }
         p {
           color: $color-black;
-          font-size: 1rem;
-          margin: 0;
+          font-size: 18px;
+          font-weight: 500;
         }
       }
     }
   }
   .outdoor-activities {
-    margin: 0 $spacing-xxl; // 上下間距 0，左右間距 $spacing-xxl
-    padding: 60px 40px; // 上下內距 60px，左右內距 40px
-    text-align: center;
+    text-align: left;
     background-color: #fff; // 背景白色
     border-bottom: 1px solid $color-msu;
 
     h3 {
-      font-size: 1.8rem;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-msu; // MSU 主色調
-      margin-bottom: 30px; // 與下方間距
+      margin-bottom: $spacing-xs; // 與下方間距
     }
 
     .activities-grid {
@@ -64,89 +63,81 @@
       grid-template-columns: repeat(2, 1fr); // 設定為兩欄網格
       gap: 40px; // 間距 40px
       // justify-items: center; // 水平置中網格項目 (此處未使用)
-      max-width: 1200px; // 最大寬度 1200px
-      margin: $spacing-xxl auto; // 上下間距 $spacing-xxl 並水平置中
     }
 
     .activity-item {
       display: flex;
       flex-direction: column;
-      // align-items: center; // 垂直置中項目 (此處未使用)
-      // text-align: center; // 文字置中 (此處未使用)
       width: 100%; // 寬度 100%
-      max-width: 250px; // 設定項目最大寬度 (可配合 grid minmax)
       justify-self: center; // 使項目本身在網格區域中水平置中
+      margin-bottom: $spacing-xs; // 與下方項目間距
 
       .activity-image-placeholder {
-        width: 120%; // 寬度相對於父元素 (.activity-item)
-        height: 200px; // 固定高度 (可依內容調整)
+        width: 100%; // 寬度相對於父元素 (.activity-item)
         background-color: $color-gray-light; // 淺灰色背景 (可替換)
         border-radius: 8px; // 圓角 (可調整)
-        margin-bottom: 15px; // 與下方標題的間距
+        margin-bottom: $spacing-xs; // 與下方標題間距
       }
 
       h4 {
-        font-size: 1.2rem;
-        font-weight: 900;
+        font-size: 24px;
+        font-weight: 700;
         color: $color-msu; // MSU 主色調
-        margin-bottom: 5px; // 與下方段落的間距
+        margin-bottom: $spacing-xs; // 與下方段落間距
         text-align: left; // 文字靠左
-        width: 100%; // 確保標題填滿寬度
       }
 
       p {
-        font-size: 1rem;
-        font-weight: 700;
+        font-size: 18px;
+        font-weight: 500;
         color: $color-black; // 黑色文字
         text-align: left; // 文字靠左
-        width: 100%; // 確保段落填滿寬度
-        margin-right: $spacing-xxl; // 右邊外距
       }
     }
   }
   .traffic {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     border-bottom: 1px solid $color-msu;
     h3 {
-      @include heading-medium;
+      font-size: 24px;
+      font-weight: 700;
       color: $color-black; // 黑色文字
-      margin: $spacing-lg 0; // 上下間距 $spacing-lg
+      margin: $spacing-md 0;
+      margin-bottom: 0;
     }
     ul {
       color: $color-msu; // MSU 主色調
       text-align: left;
-      font-size: $font-size-xl;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 500;
       margin-bottom: 2rem;
       li {
-        margin-top: $spacing-lg;
+        margin-top: $spacing-sm;
       }
     }
   }
   .city-features {
     display: flex;
     flex-direction: column;
-    margin: 0 $spacing-xxl; // 上下間距 0，左右間距 $spacing-xxl
+    margin-bottom: $spacing-md;
     h3 {
-      @include heading-medium;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: left;
       color: $color-black; // 黑色文字
-      margin: $spacing-lg 0;
+      margin: $spacing-md 0;
     }
     ul {
       display: grid;
       grid-template-columns: repeat(3, 1fr); // 三欄網格
       justify-items: start;
-      gap: $spacing-xl; // 間距 $spacing-xl
+      gap: $spacing-md; // 間距 $spacing-md
       color: $color-msu; // MSU 主色調
-      font-size: $font-size-xl;
-      font-weight: 700;
-      margin: $spacing-xl auto; // 上下間距 $spacing-xl 並水平置中
-
-      li {
-        text-align: left;
-      }
+      font-size: 18px;
+      font-weight: 500;
+      text-align: left;
     }
   }
 }
@@ -154,83 +145,18 @@
 // RWD：螢幕寬度700px以下
 @media (max-width: 700px) {
   .michigan-page {
-    h3 {
-      font-size: 1.3rem;
-      margin-top: $spacing-lg;
-    }
     .michigan-intro {
-      margin: $spacing-lg $spacing-sm;
-      p {
-        margin: 2rem 1rem 3rem 1rem;
-        font-size: 1rem;
-        max-width: 100%; // 確保文字在小螢幕正常換行
-      }
-      h3 {
-        margin-top: $spacing-lg;
-        margin-bottom: $spacing-xl; // 增加標題與下方內容間距
-      }
       .intro-row {
-        grid-template-columns: repeat(2, 1fr); // 改為兩欄
-        gap: 1rem; // 縮小間距
-        margin-top: $spacing-lg;
-        margin-bottom: $spacing-lg;
-        margin-left: 0; // 移除左邊間距
-        .intro-col {
-          max-width: 100%; // 允許欄位填滿
-          min-width: 0; // 移除最小寬度限制
-        }
-        .intro-col:nth-child(-n + 3) {
-          // 選取前三個項目 (雖然現在只有兩欄，但保留彈性)
-          text-align: left;
-          align-items: flex-start; // 保持靠上對齊
-        }
+        grid-template-columns: repeat(1, 1fr); // 改為兩欄
       }
     }
     .outdoor-activities {
-      margin: 0 $spacing-sm; // 調整左右間距
-      padding: 30px 10px; // 調整上下左右內距
       h3 {
         margin-bottom: 15px; // 縮小標題與下方間距
       }
       .activities-grid {
         grid-template-columns: 1fr; // 改為單欄
-        gap: 20px; // 調整間距
-        max-width: 100%; // 填滿寬度
-        margin: $spacing-lg auto; // 調整上下間距並水平置中
-      }
-      .activity-item {
-        max-width: 100%; // 填滿寬度
-        align-items: center; // 項目內容置中
-        .activity-image-placeholder {
-          width: 80%; // 圖片寬度調整為80%
-          height: 300px; // 調整圖片高度
-        }
-        h4 {
-          font-weight: 900;
-          margin-left: 8rem; // 標題左邊間距 (可能需要依實際視覺調整)
-          text-align: left; // 文字靠左
-        }
-        p {
-          margin-left: 3.5rem; // 段落左邊間距 (可能需要依實際視覺調整)
-          text-align: left; // 文字靠左
-        }
-      }
-    }
-    .traffic {
-      margin: 0 $spacing-sm; // 調整左右間距
-      ul {
-        padding: $spacing-md $spacing-sm; // 調整清單內距
-        margin-left: 2rem; // 清單左邊間距
-      }
-    }
-    .city-features {
-      margin: 0 $spacing-sm; // 調整左右間距
-      ul {
-        grid-template-columns: repeat(2, 1fr); // 改為兩欄
-        gap: $spacing-lg; // 調整間距
-        font-size: $font-size-lg; // 調整字體大小
-        margin-left: 2rem; // 清單左邊間距
-        text-align: left; // 文字靠左
+        gap: $spacing-xs; // 調整間距
       }
     }
   }
