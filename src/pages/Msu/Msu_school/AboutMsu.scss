@@ -29,6 +29,7 @@
       border: 2px solid $color-msu;
       position: relative;
       margin-bottom: $spacing-md;
+      padding: 1.5rem;
 
       h3 {
         font-size: 24px;
@@ -100,6 +101,7 @@
       .contribution-content {
         font-size: 18px;
         font-weight: 500;
+        margin-bottom: $spacing-md;
       }
     }
     .reasearch {
@@ -125,7 +127,6 @@
           font-weight: 700;
           color: $color-black;
           font-weight: 700;
-          margin-bottom: 0.5rem;
           text-align: left;
         }
 
@@ -152,7 +153,6 @@
           color: $color-msu;
           font-weight: 700;
           font-size: $font-size-lg;
-          margin: $spacing-sm 0;
           max-width: 100%;
         }
 
@@ -207,18 +207,15 @@
     text-align: left;
   }
   .global-impact {
-    h3 {
-      margin-top: $spacing-md;
-    }
     .impact-list {
       text-align: left;
       color: $color-msu;
       font-size: 18px;
       font-weight: 500;
-      margin-top: 1rem;
+      margin-top: $spacing-xs;
 
       li {
-        margin-bottom: 1rem; // 每個 li 元素下方間距
+        margin-bottom: $spacing-xs; // 每個 li 元素下方間距
       }
     }
   }
@@ -230,7 +227,7 @@
     margin-top: 0;
 
     li {
-      margin-bottom: 1rem; // 每個 li 元素下方間距
+      margin-bottom: $spacing-xs; // 每個 li 元素下方間距
     }
   }
 }
