@@ -74,6 +74,7 @@
   .company-logos {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    align-items: center;
     gap: $spacing-xxl;
     margin: 0 auto;
     margin-bottom: $spacing-lg;
