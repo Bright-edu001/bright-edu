@@ -1,5 +1,24 @@
 import React from "react";
-import "./MSFinanceSection.scss";
+import {
+  ProgramDetailsSection,
+  OutcomesParagraph,
+  ReasonsToChooseParagraph,
+  SectionTitle,
+  ReasonsToChooseTitle,
+  WhyUicMsfDiv,
+  MsfOutcomesDiv,
+  CompanyCoursesDiv,
+  CourseArrangementDiv,
+  CoreCoursesSectionDiv,
+  CoreCoursesTitle,
+  CoreCourseParagraphDiv,
+  CoreCoursesIntroDiv,
+  CoreCoursesListDiv,
+  CoreCoursesColDiv,
+  CoreCourseItemDiv,
+  CoreCourseFootParagraph,
+  ResponsiveImg,
+} from "./MSFinanceSection.styled";
 
 function MSFinanceSection({
   whyTitle,
@@ -21,11 +40,21 @@ function MSFinanceSection({
   reasonsTitle,
   reasonsDesc,
 }) {
+  const hasCoreCoursePragaph = Array.isArray(coreCoursePragaph)
+    ? coreCoursePragaph.length > 0
+    : !!coreCoursePragaph;
+  const hasCoreCoursesIntroList =
+    coreCoursesIntroList && coreCoursesIntroList.length > 0;
+  const hasCoreCourses =
+    coreCoursesList &&
+    coreCoursesList.length > 0 &&
+    coreCoursesList.some((col) => col && col.length > 0);
+
   return (
-    <section className="program-details">
+    <ProgramDetailsSection>
       {/* 為什麼選擇UIC MSF */}
-      <div className="why-uic-msf">
-        <h3>{whyTitle}</h3>
+      <WhyUicMsfDiv>
+        <SectionTitle>{whyTitle}</SectionTitle>
         {/* 支援條列式或多段落 */}
         {Array.isArray(whyList) ? (
           <ul>
@@ -49,14 +78,14 @@ function MSFinanceSection({
         ) : (
           <div>{whyList}</div>
         )}
-      </div>
+      </WhyUicMsfDiv>
 
       {/* 職涯發展與成果區塊，支援段落或條列 */}
-      <div className="msf-outcomes">
-        <h3>{outcomesTitle}</h3>
+      <MsfOutcomesDiv>
+        <SectionTitle>{outcomesTitle}</SectionTitle>
         {typeof outcomesDesc === "object" && outcomesDesc !== null ? (
           <>
-            <p>{outcomesDesc.desc}</p>
+            <OutcomesParagraph>{outcomesDesc.desc}</OutcomesParagraph>
             <ul>
               {outcomesDesc.list &&
                 outcomesDesc.list.map((item, idx) => <li key={idx}>{item}</li>)}
@@ -69,19 +98,21 @@ function MSFinanceSection({
             ))}
           </ul>
         ) : (
-          <p>{outcomesDesc}</p>
+          <OutcomesParagraph>{outcomesDesc}</OutcomesParagraph>
         )}
-      </div>
+      </MsfOutcomesDiv>
 
       {(companyTitle || (companyLogos && companyLogos.length > 0)) && (
-        <div className="company-courses">
-          <h3>{companyTitle}</h3>
+        <CompanyCoursesDiv>
+          <SectionTitle>{companyTitle}</SectionTitle>
           {companyLogos && companyLogos.length > 0 && (
             <div className="company-logos">
+              {" "}
+              {/* Keep class or create sub-component */}
               {companyLogos.map((logo, idx) => (
-                <img
+                <ResponsiveImg
                   key={idx}
-                  className="responsive-img"
+                  // className="responsive-img" // Handled by styled component
                   src={logo.src}
                   alt={logo.alt}
                   loading="lazy"
@@ -89,75 +120,80 @@ function MSFinanceSection({
               ))}
             </div>
           )}
-        </div>
+        </CompanyCoursesDiv>
       )}
 
       {/* 新增區域：額外課程範例區塊 */}
       {extraCoursesTitle &&
         extraCoursesList &&
         Array.isArray(extraCoursesList) && (
-          <div className="core-courses-section">
-            <h3 className="core-courses-title">{extraCoursesTitle}</h3>
-            <div className="core-courses-list">
+          // Assuming similar structure to CoreCoursesSectionDiv, or create a new one
+          <CoreCoursesSectionDiv>
+            <CoreCoursesTitle>{extraCoursesTitle}</CoreCoursesTitle>
+            {/* Assuming similar structure to CoreCoursesListDiv, or create a new one */}
+            <CoreCoursesListDiv>
               {extraCoursesList.map((col, colIdx) => (
-                <div className="core-courses-col" key={colIdx}>
+                <CoreCoursesColDiv key={colIdx}>
                   {col.map((course, idx) => (
-                    <div className="core-course-item" key={idx}>
+                    // Assuming similar structure to CoreCourseItemDiv, or create a new one
+                    <CoreCourseItemDiv key={idx}>
                       <div className="core-course-zh">{course.zh}</div>
-                    </div>
+                    </CoreCourseItemDiv>
                   ))}
-                </div>
+                </CoreCoursesColDiv>
               ))}
-            </div>
-          </div>
+            </CoreCoursesListDiv>
+          </CoreCoursesSectionDiv>
         )}
       {/* end 額外課程範例區塊 */}
 
-      <div className="course-arrangement">
-        <h3>{courseArrangementTitle}</h3>
+      <CourseArrangementDiv>
+        <SectionTitle>{courseArrangementTitle}</SectionTitle>
         <ul>
           {courseArrangementList.map((item, idx) => (
             <li key={idx}>{item}</li>
           ))}
         </ul>
-      </div>
+      </CourseArrangementDiv>
       {/* 核心課程範例區塊 */}
-      <div className="core-courses-section">
-        <h3 className="core-courses-title">{coreCoursesTitle}</h3>
-        <div className="core-courses-pragaph">
+      <CoreCoursesSectionDiv>
+        <CoreCoursesTitle>{coreCoursesTitle}</CoreCoursesTitle>
+        <CoreCourseParagraphDiv hasContent={hasCoreCoursePragaph}>
           {Array.isArray(coreCoursePragaph) && coreCoursePragaph.length > 0
             ? coreCoursePragaph.map((p, idx) => <p key={idx}>{p}</p>)
             : coreCoursePragaph && <p>{coreCoursePragaph}</p>}
-        </div>
-        <div className="core-courses-intro">
+        </CoreCourseParagraphDiv>
+        <CoreCoursesIntroDiv hasContent={hasCoreCoursesIntroList}>
           <ul>
             {(coreCoursesIntroList || []).map((item, idx) => (
               <li key={idx}>{item}</li>
             ))}
           </ul>
-        </div>
-        <div className="core-courses-list">
+        </CoreCoursesIntroDiv>
+        <CoreCoursesListDiv hasCoreCourses={hasCoreCourses}>
           {(coreCoursesList || []).map((col, colIdx) => (
-            <div className="core-courses-col" key={colIdx}>
+            <CoreCoursesColDiv key={colIdx}>
               {Array.isArray(col) &&
                 col.map((course, idx) => (
-                  <div className="core-course-item" key={idx}>
+                  <CoreCourseItemDiv key={idx}>
                     <div className="core-course-zh">{course.zh}</div>
                     <div className="core-course-en">{course.en}</div>
                     <div className="core-course-desc">{course.desc}</div>
-                  </div>
+                  </CoreCourseItemDiv>
                 ))}
-            </div>
+            </CoreCoursesColDiv>
           ))}
-        </div>
-        <p className="core-courses-foot">{coreCourseFoot}</p>
-      </div>
+        </CoreCoursesListDiv>
+        <CoreCourseFootParagraph>{coreCourseFoot}</CoreCourseFootParagraph>
+      </CoreCoursesSectionDiv>
       {/* end 核心課程範例區塊 */}
-      <div className="reasons-to-choose">
-        <h3>{reasonsTitle}</h3>
-        <p>{reasonsDesc}</p>
+      <div>
+        {" "}
+        {/* Changed from reasons-to-choose to a generic div with styled components below */}
+        <ReasonsToChooseTitle>{reasonsTitle}</ReasonsToChooseTitle>
+        <ReasonsToChooseParagraph>{reasonsDesc}</ReasonsToChooseParagraph>
       </div>
-    </section>
+    </ProgramDetailsSection>
   );
 }
 
