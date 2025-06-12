@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./Blog.scss";
-import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
+import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BlogContext } from "../../context/BlogContext";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
@@ -28,31 +28,23 @@ function Blog() {
 
   // 根據 category 過濾顯示
   let sections = [];
-  let subtitle = "";
+
   if (category === "enrollment") {
     sections = [
       { title: "招生活動", items: enrollmentEvents, imageType: "enrollment" },
     ];
-    subtitle = "招生活動";
   } else if (category === "news") {
     sections = [{ title: "最新消息", items: news, imageType: "news" }];
-    subtitle = "最新消息";
   } else {
     sections = [
       { title: "招生活動", items: enrollmentEvents, imageType: "enrollment" },
       { title: "最新消息", items: news, imageType: "news" },
     ];
-    subtitle = "";
   }
 
   return (
     <div className="blog-page">
-      <ImageTextSection
-        title="活動與文章"
-        imageUrl="https://imgur.com/JQLEfaj.png"
-        imageAlt="活動與文章"
-        subtitle={subtitle ? `目前分類：${subtitle}` : undefined}
-      />
+      <MbaAreasHero />
 
       <div className="blog-detail-mainrow">
         <div className="blog-detail-main">

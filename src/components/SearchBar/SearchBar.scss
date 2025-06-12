@@ -58,19 +58,13 @@
 // 響應式斷點寬度小於 1024px時
 @media (max-width: 1024px) {
   .blog-detail-sidebar {
-    max-width: 800px;
     margin: 0;
-    margin-left: 5rem;
-    margin-bottom: 1.5rem;
     box-shadow: none;
   }
 }
 // 響應式斷點寬度小於 850px時
 @media screen and (max-width: 850px) {
   .blog-detail-sidebar {
-    max-width: 600px;
-    margin-left: 5rem;
-    margin-bottom: 2rem;
     box-shadow: none;
   }
 }

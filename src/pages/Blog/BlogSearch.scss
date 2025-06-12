@@ -2,16 +2,11 @@
 @import "../../styles/mixins";
 
 .blog-section {
-  margin-top: $spacing-xxl;
+  margin-top: $spacing-md;
 }
-.blog-detail-title {
-  margin-bottom: $spacing-lg;
-}
+
 @media screen and (max-width: 700px) {
   .blog-section {
-    margin-top: $spacing-xxl;
-    margin-left: 0;
-    padding-left: $spacing-xs;
-    padding-right: $spacing-xs;
+    margin: $spacing-md 0;
   }
 }

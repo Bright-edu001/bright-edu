@@ -1,16 +1,12 @@
 import React from "react";
 import "./Contact.css";
-import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
+import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import ApplicationForm from "../../components/Application/ApplicationForm";
 
 function Contact() {
   return (
     <div className="contact-page">
-      <ImageTextSection
-        title="聯絡表單"
-        imageUrl="https://imgur.com/Ighubkx.png"
-        imageAlt="聯繫我們"
-      />
+      <MbaAreasHero />
       <div className="empty"></div>
       <ApplicationForm showCondition={false} />
     </div>

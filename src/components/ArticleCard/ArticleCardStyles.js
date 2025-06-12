@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 
 // ArticleCard 外框
 export const StyledArticleCard = styled.div`
-  flex: 1;
-  min-width: 320px;
-  margin-bottom: 2rem;
   text-align: left;
 `;
 
@@ -39,7 +36,6 @@ export const StyledAnchor = styled.a`
 // 圖片樣式
 export const StyledImage = styled.img`
   width: 100%;
-  height: 20rem;
   object-fit: contain;
   border-radius: 8px;
   background-size: contain;
@@ -96,7 +92,7 @@ export const StyledTitle = styled.h3`
   font-weight: 700;
   color: #1c184a;
   @media (max-width: 1024px) {
-  text-align: center;
+  text-align: left;
 `;
 
 export const StyledExcerpt = styled.p`
@@ -105,6 +101,6 @@ export const StyledExcerpt = styled.p`
   color: #211700;
   font-weight: 700;
   @media (max-width: 1024px) {
-    text-align: center;
+    text-align: left;
   }
 `;

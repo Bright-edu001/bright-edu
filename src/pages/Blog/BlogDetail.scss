@@ -5,8 +5,12 @@
 .blog-detail-mainrow {
   display: flex;
   gap: 2rem;
-  margin-top: $spacing-xxl;
+  margin-top: $spacing-md;
   padding: 0;
+  align-items: baseline;
+  @media screen and (max-width: 1025px) {
+    align-items: normal;
+  }
 }
 
 // 主內容
@@ -92,8 +96,7 @@
   justify-content: center;
   font-size: $font-size-xl;
   color: $color-nav;
-  margin-top: $spacing-lg;
-  margin-bottom: 1rem;
+
   &:hover {
     color: $color-uic;
     transform: scale(1.05);
@@ -113,9 +116,10 @@
 // 響應式設計：寬度850px以下
 @media screen and (max-width: 850px) {
   .blog-detail-mainrow {
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 1.5rem;
     margin-top: $spacing-lg;
+    align-items: normal;
   }
 
   .blog-detail-excerpt {
@@ -133,6 +137,4 @@
     margin-left: 0;
     font-size: $font-size-lg;
   }
-}
-@media screen and (max-width: 500px) {
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { BlogContext } from "../../context/BlogContext";
-import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
+import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
 import "./BlogDetail.scss";
@@ -38,12 +38,7 @@ function BlogSearch() {
 
   return (
     <div>
-      <ImageTextSection
-        title=" 活動與文章"
-        subtitle={`搜索關鍵字:${keyword}`}
-        imageUrl="https://imgur.com/JQLEfaj.png"
-        imageAlt="搜尋結果"
-      />
+      <MbaAreasHero />
       <div className="blog-detail-mainrow">
         <div className="blog-detail-main">
           <h1 className="blog-detail-title">搜尋關鍵字: {keyword}</h1>

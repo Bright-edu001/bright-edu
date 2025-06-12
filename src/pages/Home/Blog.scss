@@ -1,25 +1,6 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-@media screen and (max-width: 1024px) {
-  .blog-content {
-    margin: 2rem auto;
-    margin-left: 1rem;
-    padding: 0 $spacing-xs;
-  }
-}
-@media screen and (max-width: 700px) {
-  .blog-content {
-    padding: $spacing-md;
-  }
-}
-@media screen and (max-width: 500px) {
-  .blog-content {
-    margin: 0 auto;
-    padding: $spacing-xs;
-  }
-}
-
 .blog-section {
   margin-bottom: 3rem;
 }
@@ -44,24 +25,24 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  margin-bottom: 8rem;
 }
 @media screen and (max-width: 1025px) {
   .blog-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 17rem;
+    gap: 5rem;
   }
 }
 
 @media screen and (max-width: 850px) {
   .blog-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 5rem;
+    gap: 3rem;
   }
 }
 @media screen and (max-width: 500px) {
   .blog-grid {
     grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
   }
 }
 
@@ -85,7 +66,6 @@
 
 .blog-card-img {
   width: 100%;
-  height: 160px;
   object-fit: cover;
 }
 
@@ -110,7 +90,7 @@
 }
 
 .blog-back-btn {
-  margin: 32px auto 0;
+  margin: 0 auto;
   display: block;
   padding: 10px 24px;
   font-size: 1rem;
@@ -119,7 +99,7 @@
   background: #fff;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border 0.2s;
-  margin-bottom: $spacing-xxl;
+
   &:hover,
   &:focus {
     background: $color-nav;
@@ -153,17 +133,16 @@
 
   .blog-detail-main {
     margin-right: 0;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-md;
   }
 }
 @media screen and (max-width: 1025px) {
   .blog-detail-mainrow {
-    display: flex;
     flex-direction: column;
   }
 
   .blog-detail-sidebar {
     order: -1;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-md;
   }
 }

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./BlogDetail.scss";
 import { useParams, Link } from "react-router-dom";
 import { BlogContext } from "../../context/BlogContext";
-import ImageTextSection from "../../components/ImageTextSection/ImageTextSection";
+import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
 function BlogDetail() {
@@ -36,12 +36,7 @@ function BlogDetail() {
 
   return (
     <div>
-      <ImageTextSection
-        title="活動與文章"
-        imageUrl="https://imgur.com/JQLEfaj.png"
-        imageAlt="活動與文章"
-        subtitle={subtitle ? `目前分類：${subtitle}` : undefined}
-      />
+      <MbaAreasHero />
       <div className="blog-detail-mainrow">
         <div className="blog-detail-main">
           <img
