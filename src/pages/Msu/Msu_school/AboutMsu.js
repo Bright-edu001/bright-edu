@@ -11,7 +11,7 @@ function AboutMsu() {
         subtitle="Michigan State University"
         imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
         imageAlt="Michigan State University"
-        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner4-768.webp`}
+        bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner3-768.webp`}
       />
       <SectionContainer>
         <section className="intro" aria-label="學校介紹">
