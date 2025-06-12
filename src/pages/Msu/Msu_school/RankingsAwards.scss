@@ -49,10 +49,9 @@
 
       .class-title-zh,
       .class-title-en {
-        @include value-style;
-        margin-bottom: 4px;
         color: $color-black;
-        letter-spacing: 2px;
+        font-size: 18px;
+        font-weight: 700;
       }
 
       ul {
@@ -96,9 +95,6 @@
   .rankings-awards-page .engineering ul {
     padding: 0;
   }
-  .rankings-awards-page .management .highlight {
-    padding: 0 2rem;
-  }
 }
 
 @media (max-width: 700px) {
@@ -107,38 +103,20 @@
     .management {
       ul {
         flex-direction: row;
-        margin: $spacing-lg 0;
         align-items: flex-start;
         justify-content: space-around;
       }
-      .highlight {
-        margin: $spacing-md;
-      }
     }
-    .management {
-      h3 {
-        margin: $spacing-lg $spacing-lg;
-      }
-    }
+
     .class {
       flex-direction: column;
-      margin-left: 0;
-      margin-top: $spacing-lg;
-      margin-bottom: $spacing-lg;
 
       .class-item {
         padding: 0 $spacing-xs;
-        margin-bottom: $spacing-md;
+        margin-bottom: $spacing-sm;
         ul {
           font-size: 15px;
         }
-      }
-    }
-    .engineering {
-      ul {
-        margin: 0;
-        padding: $spacing-xs $spacing-xl;
-        font-size: 15px;
       }
     }
   }
@@ -147,8 +125,6 @@
   .rankings-awards-page .ranking ul,
   .rankings-awards-page .management ul {
     justify-content: space-between;
-    font-size: $font-size-sm;
-    padding: 0 $spacing-lg;
     text-align: left;
   }
 }
