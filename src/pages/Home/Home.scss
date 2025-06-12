@@ -354,9 +354,9 @@ p {
 
 /* 課程卡片容器樣式 */
 .course-cards {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: $spacing-lg;
-  flex-wrap: wrap;
 }
 
 /* 單個課程卡片樣式 */
