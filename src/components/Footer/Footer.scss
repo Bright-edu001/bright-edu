@@ -5,6 +5,7 @@
 .footer {
   background: $color-gray-ultralight;
   padding: 10px 0;
+  transform: translateZ(0); // Added for potential CLS improvement
 
   /* 容器樣式 - 控制內容寬度和居中 */
   .container {
@@ -116,6 +117,7 @@
           gap: 15px;
           align-self: flex-start;
           margin-top: -1.5rem;
+          transform: translateZ(0); // Added for potential CLS improvement
 
           a {
             .phone-icon {
@@ -242,6 +244,13 @@
         &.footer-links-msu,
         &.articles {
           display: none;
+          height: 0;
+          min-height: 0;
+          padding: 0;
+          margin: 0;
+          border: none;
+          overflow: hidden;
+          visibility: hidden;
         }
 
         /* 調整"關於我們"區塊 */
