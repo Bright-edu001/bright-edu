@@ -4,7 +4,6 @@ import styled, { css } from "styled-components";
 const colorNav = "#1c184a";
 const spacingSm = "1rem";
 const spacingMd = "1.5rem";
-const spacingXl = "3rem";
 const fontSizeLg = "18px";
 
 // mixins
@@ -50,9 +49,6 @@ export const InfoCardWrapper = styled.div`
       h4 {
         margin-top: ${spacingMd};
         color: ${colorNav};
-      }
-      p {
-        margin: 0 ${spacingXl};
       }
     }
   }

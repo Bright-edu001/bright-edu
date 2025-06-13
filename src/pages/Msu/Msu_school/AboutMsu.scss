@@ -46,6 +46,9 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr); // 三欄排列
         gap: 2rem;
+        @media screen and (max-width: 700px) {
+          grid-template-columns: repeat(2, 1fr); // 小螢幕改為二欄排列
+        }
 
         li {
           display: flex;
@@ -154,6 +157,7 @@
           font-weight: 700;
           font-size: $font-size-lg;
           max-width: 100%;
+          text-align: left;
         }
 
         .areas-list {
@@ -229,42 +233,5 @@
     li {
       margin-bottom: $spacing-xs; // 每個 li 元素下方間距
     }
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .about-msu-page .details .reasearch .research-content {
-    padding: 2rem 8rem;
-  }
-  .about-msu-page .global-impact .impact-list {
-    margin: 1rem 4rem;
-    font-size: $font-size-md;
-  }
-  .about-msu-page .diversity-list {
-    margin: 1rem 4rem;
-    font-size: $font-size-md;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  .about-msu-page {
-    .global-impact {
-      .global-impact-content {
-        ul {
-          margin-left: 2rem;
-        }
-      }
-    }
-  }
-}
-@media screen and (max-width: 500px) {
-  .about-msu-page .details .reasearch .research-content {
-    padding: 1rem;
-  }
-  .about-msu-page .stats .stats-card-school ul.left-aligned li .sub-list {
-    padding-left: 0;
-  }
-  .about-msu-page .global-impact .impact-list {
-    padding-left: 1rem;
   }
 }

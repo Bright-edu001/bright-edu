@@ -71,7 +71,6 @@ html {
     display: flex;
 
     .container {
-      @include container;
       text-align: left;
 
       .career-process-list {
@@ -91,17 +90,5 @@ html {
         margin-bottom: $spacing-md; // 下方間距
       }
     }
-  }
-}
-@media screen and (max-width: 768px) {
-  .career-resources {
-    .intro {
-      .career-resources-list {
-        margin-left: 2rem;
-      }
-    }
-  }
-  .career-resources .career-process .container .career-process-list {
-    margin-left: 1rem;
   }
 }

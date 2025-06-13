@@ -3,12 +3,6 @@
 
 .management-container {
   margin: 0 auto;
-  @media screen and (max-width: 1024px) {
-    padding: 0 5rem;
-  }
-  @media screen and (max-width: 500px) {
-    padding: 0 2rem;
-  }
   .section {
     .section-title {
       font-size: 24px;
@@ -47,7 +41,7 @@
 
   .course-list {
     .course-item {
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-md;
       li {
         font-size: 18px;
         font-weight: 500;
@@ -57,7 +51,7 @@
     }
   }
   .conclusion {
-    text-align: center;
+    text-align: left;
     font-size: 24px;
     font-weight: 700;
     color: $color-black;

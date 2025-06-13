@@ -117,19 +117,8 @@
     }
   }
 }
-@media screen and (max-width: 1200px) {
-  .food-attractions-page .food-attractions-header p {
-    margin-left: 6rem;
-  }
-}
 
 @media (max-width: 700px) {
-  .food-attractions-page .food-attractions-header {
-    p {
-      margin-left: 4rem;
-    }
-  }
-
   .food-attractions-intro {
     display: flex;
     flex-direction: column;
@@ -164,10 +153,6 @@
       padding: 0;
       h4 {
         margin-top: $spacing-md;
-      }
-      p {
-        margin-left: $spacing-xl;
-        margin-right: 0;
       }
     }
   }

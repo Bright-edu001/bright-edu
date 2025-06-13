@@ -103,7 +103,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 4rem;
-    justify-items: center;
+    justify-items: start;
     .mba-areas-concentration-card {
       background: #ebebeb;
       border: 1px solid #ebebeb;
@@ -146,7 +146,6 @@
   .mba-areas-concentrations .mba-areas-concentration-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-    justify-items: center;
     .mba-areas-concentration-card {
       width: 400px;
     }
