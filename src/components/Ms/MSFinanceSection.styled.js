@@ -4,7 +4,6 @@ import {
   spacingSm,
   spacingMd,
   spacingLg,
-  spacingXxl,
   colorNav,
   colorUic,
   colorBlack,
