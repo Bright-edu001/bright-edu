@@ -37,6 +37,8 @@ function ArticleCard({ item, imageType, layout = "vertical" }) {
             alt={item.title}
             $layout={layout}
             loading="lazy"
+            width={item.imageWidth}
+            height={item.imageHeight}
           />
         ) : (
           <StyledPlaceholder
