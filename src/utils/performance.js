@@ -18,17 +18,6 @@ export const loadStylesheet = (stylePath) => {
   });
 };
 
-// 預載入關鍵 CSS
-export const preloadCriticalStyles = async () => {
-  const criticalStyles = [
-    "./components/Header/Header.css",
-    "./components/Footer/Footer.css",
-    "./pages/Home/Home.scss",
-  ];
-
-  await Promise.all(criticalStyles.map((style) => loadStylesheet(style)));
-};
-
 // Debounce 工具優化
 export const debounce = (func, wait, immediate = false) => {
   let timeout;
