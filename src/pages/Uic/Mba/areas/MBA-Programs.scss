@@ -42,6 +42,7 @@
   .course-list {
     .course-item {
       margin-bottom: $spacing-md;
+      list-style-position: inside;
       li {
         font-size: 18px;
         font-weight: 500;

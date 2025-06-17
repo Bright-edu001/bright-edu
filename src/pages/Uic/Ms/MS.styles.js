@@ -3,8 +3,7 @@ import styled from "styled-components";
 // 假設您的 SCSS 變數和 mixins 已經轉換或將在此處定義
 const theme = {
   colors: {
-    brownDark: "#211700", // $color-brown-dark
-    gold: "#8c6b2c",
+    Dark: "#000000", // $color-brown-dark
     navy: "#1c184a", // For h2 color: #1c184a;
   },
   spacing: {
@@ -50,20 +49,21 @@ export const PageP = styled.p`
   font-size: 18px;
 
   text-align: left;
-  color: ${theme.colors.brownDark};
+  color: ${theme.colors.Dark};
 `;
 
 export const PageUl = styled.ul`
   margin-top: ${theme.spacing.lg};
+  list-style-position: inside;
 `;
 
 export const MsmUl = styled.ul`
   list-style-type: disc;
-  list-style-position: outside;
+  list-style-position: inside;
   text-align: left;
   margin-top: ${theme.spacing.xs};
   li {
-    color: ${theme.colors.brownDark};
+    color: ${theme.colors.Dark};
     font-size: 16px;
     font-weight: 700;
   }
@@ -71,7 +71,7 @@ export const MsmUl = styled.ul`
 
 export const OutcomesList = styled.ul`
   font-size: ${theme.fontSizes.lg};
-  color: ${theme.colors.brownDark};
+  color: ${theme.colors.Dark};
   margin-left: 1.5em;
   line-height: 1.7;
 `;
@@ -85,7 +85,6 @@ export const MsCoreCoursesRow = styled.div`
 export const MsCoreCoursesCol = styled.div`
   flex: 1;
   margin: 0 1rem;
-  color: ${theme.colors.gold};
   font-size: 1.1rem;
   font-weight: 500;
 `;

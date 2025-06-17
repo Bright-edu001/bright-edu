@@ -15,12 +15,13 @@
     p {
       font-size: 18px;
       font-weight: 500;
-      margin: $spacing-md 0;
+      margin: $spacing-sm 0 $spacing-xs;
       text-align: left;
     }
 
     ul {
       list-style: disc;
+      list-style-position: inside;
       margin-bottom: $spacing-md;
 
       li {
