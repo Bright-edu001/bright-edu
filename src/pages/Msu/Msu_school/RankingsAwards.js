@@ -9,6 +9,7 @@ function MsRankingsAwards() {
       <MbaAreasHero />
       <SectionContainer>
         <section className="ranking">
+          <h3 className="ranking-title">排名與獎項</h3>
           <h3>全國及全球排名亮點</h3>
           <p>《美國新聞與世界報導》</p>
           <p>U.S. News & World Report 2024</p>

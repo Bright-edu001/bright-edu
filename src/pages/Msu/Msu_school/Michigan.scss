@@ -2,8 +2,15 @@
 @import "../../../styles/mixins";
 
 .michigan-page {
+  .section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-msu; // MSU 主色調
+    text-align: left;
+    margin: $spacing-md 0 0 0;
+  }
   .michigan-intro {
-    margin: $spacing-lg 0;
+    margin: 0 0 $spacing-md 0;
     border-bottom: 1px solid $color-msu;
     p {
       text-align: left;
@@ -16,6 +23,7 @@
       font-weight: 700;
       text-align: left;
       margin-top: $spacing-md;
+      color: $color-msu; // MSU 主色調
     }
     .intro-row {
       display: grid;
@@ -33,15 +41,14 @@
         margin-bottom: 0;
         h4 {
           color: $color-msu; // MSU 主色調
-          font-size: 1.5rem;
-          font-weight: 700;
-          margin-bottom: $spacing-xs;
+          font-size: 18px;
+          font-weight: 400;
           text-align: left;
         }
         p {
           color: $color-black;
           font-size: 18px;
-          font-weight: 500;
+          font-weight: 400;
         }
       }
     }
@@ -62,6 +69,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr); // 設定為兩欄網格
       gap: 40px; // 間距 40px
+      margin-bottom: $spacing-sm; // 與下方間距
       // justify-items: center; // 水平置中網格項目 (此處未使用)
     }
 
@@ -80,16 +88,15 @@
       }
 
       h4 {
-        font-size: 24px;
-        font-weight: 700;
+        font-size: 18px;
+        font-weight: 400;
         color: $color-msu; // MSU 主色調
-        margin-bottom: $spacing-xs; // 與下方段落間距
         text-align: left; // 文字靠左
       }
 
       p {
         font-size: 18px;
-        font-weight: 500;
+        font-weight: 400;
         color: $color-black; // 黑色文字
         text-align: left; // 文字靠左
       }
@@ -103,7 +110,7 @@
     h3 {
       font-size: 24px;
       font-weight: 700;
-      color: $color-black; // 黑色文字
+      color: $color-msu; // 黑色文字
       margin: $spacing-md 0;
       margin-bottom: 0;
     }
@@ -111,8 +118,8 @@
       color: $color-msu; // MSU 主色調
       text-align: left;
       font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
       li {
         margin-top: $spacing-sm;
       }
@@ -126,7 +133,7 @@
       font-size: 24px;
       font-weight: 700;
       text-align: left;
-      color: $color-black; // 黑色文字
+      color: $color-msu; // 黑色文字
       margin: $spacing-md 0;
     }
     ul {
@@ -136,7 +143,7 @@
       gap: $spacing-md; // 間距 $spacing-md
       color: $color-msu; // MSU 主色調
       font-size: 18px;
-      font-weight: 500;
+      font-weight: 400;
       text-align: left;
     }
   }

@@ -6,6 +6,8 @@
   flex-direction: column;
   ul {
     list-style: disc;
+    list-style-position: inside;
+    padding-left: 0; // Remove default padding
     li {
       text-align: left;
       font-size: 18px;

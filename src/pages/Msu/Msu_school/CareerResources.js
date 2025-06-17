@@ -8,6 +8,7 @@ function MsCareerResources() {
     <div className="career-resources-page">
       <MbaAreasHero />
       <SectionContainer>
+        <h3 className="section-title">職涯資源</h3>
         <section className="career-resources">
           <h3>職涯管理中心</h3>
           <h4>The Russell Palmer Career Management Center</h4>

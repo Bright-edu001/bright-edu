@@ -103,12 +103,14 @@
       padding: 0 2rem;
       .contribution-content {
         font-size: 18px;
-        font-weight: 500;
+        font-weight: 400;
         margin-bottom: $spacing-md;
+        margin-top: $spacing-sm;
       }
     }
     .reasearch {
       background: $color-white;
+
       padding: 0 2rem;
 
       h3 {
@@ -117,6 +119,7 @@
         text-align: left;
         color: $color-msu;
         margin-bottom: $spacing-xs;
+        border-bottom: 1px solid $color-msu;
       }
 
       .research-content {
@@ -125,12 +128,12 @@
         align-items: flex-start;
         text-align: center;
         margin-bottom: $spacing-md;
+        margin-top: $spacing-sm;
         h4 {
           font-size: 18px;
-          font-weight: 700;
           color: $color-black;
-          font-weight: 700;
           text-align: left;
+          font-weight: 400;
         }
 
         .research-funding,
@@ -141,10 +144,9 @@
         }
 
         .funding-amount {
-          font-size: 24px;
-          font-weight: 700;
+          font-size: 18px;
+          font-weight: 400;
           color: $color-msu;
-          font-weight: bold;
         }
 
         .funding-year {
@@ -154,8 +156,8 @@
 
         .facility p {
           color: $color-msu;
-          font-weight: 700;
-          font-size: $font-size-lg;
+          font-weight: 400;
+          font-size: 18px;
           max-width: 100%;
           text-align: left;
         }
@@ -168,7 +170,7 @@
 
           li {
             color: $color-msu;
-            font-weight: 700;
+            font-weight: 400;
             font-size: 18px;
             position: relative;
             margin-right: $spacing-xl; // 右側間距
@@ -177,7 +179,7 @@
         }
         .research-centers p {
           color: $color-msu;
-          font-weight: 700;
+          font-weight: 400;
           font-size: $font-size-lg;
           margin: 0;
           max-width: 100%;
@@ -187,6 +189,10 @@
   }
   .global-impact {
     padding: 0 2rem;
+    .global-impact-content {
+      margin-top: $spacing-sm;
+      margin-bottom: $spacing-md;
+    }
   }
   .michigan-contribution,
   .global-impact {
@@ -196,18 +202,19 @@
       color: $color-msu;
       margin-bottom: $spacing-xs;
       text-align: left;
+      border-bottom: 1px solid $color-msu;
     }
   }
   .global-impact-content {
     p {
-      font-size: $font-size-lg;
-      font-weight: 500;
+      font-size: 18px;
+      font-weight: 400;
       text-align: left;
     }
   }
   .contribution-content {
     font-size: $font-size-lg;
-    font-weight: 500;
+    font-weight: 400;
     text-align: left;
   }
   .global-impact {
@@ -215,7 +222,7 @@
       text-align: left;
       color: $color-msu;
       font-size: 18px;
-      font-weight: 500;
+      font-weight: 400;
       margin-top: $spacing-xs;
 
       li {
@@ -226,7 +233,7 @@
   .diversity-list {
     text-align: left;
     color: $color-black;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 18px;
     margin-top: 0;
 

@@ -7,6 +7,7 @@ function Michigan() {
     <div className="michigan-page">
       <MbaAreasHero />
       <SectionContainer>
+        <h3 className="section-title">密西根州立大學</h3>
         <section className="michigan-intro">
           <p>
             East

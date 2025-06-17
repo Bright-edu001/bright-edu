@@ -49,6 +49,8 @@
     font-size: 18px;
     font-weight: 500;
     gap: $spacing-xs;
+    list-style-position: inside; // 新增
+    padding-left: 0; // 新增
   }
 }
 
@@ -63,6 +65,8 @@
   ul {
     @include standard-list; // standard-list has text-align: left
     // li text will be left-aligned. ul block is centered.
+    list-style-position: inside; // 新增
+    padding-left: 0; // 新增
     li {
       @include list-item;
     }
@@ -84,6 +88,8 @@
     justify-content: flex-start;
     text-align: left;
     gap: $spacing-md;
+    list-style-position: inside; // 新增
+    padding-left: 0; // 新增
 
     li {
       @include list-item;
@@ -116,6 +122,8 @@
   ul {
     @include standard-list; // text-align: left
     margin-top: 1rem;
+    list-style-position: inside; // 新增
+    padding-left: 0; // 新增
     li {
       @include list-item;
     }
@@ -126,7 +134,6 @@
   @include section-container;
   display: flex; // Added
   flex-direction: column; // Added
-  align-items: flex-start; // Added
   .ms-master-require-intro {
     margin-top: $spacing-sm;
     p {
@@ -138,13 +145,21 @@
   h2 {
     @include body-large;
     color: $color-black;
+    text-align: left;
   }
   h3 {
     @include gold-heading;
     text-align: left;
   }
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    text-align: left;
+  }
   ul {
     @include standard-list; // text-align: left
+    list-style-position: inside;
+    padding-left: 0; // 新增
 
     li {
       font-size: 18px;
@@ -189,10 +204,10 @@
 }
 
 .ms-master-require-plan {
-  @include section-container;
   display: flex; // Added
   flex-direction: column; // Added
   align-items: flex-start; // Added
+  border-bottom: 1px solid $color-msu;
   .ms-master-require-plan-list {
     display: flex;
     flex-direction: column; // Changed to column for better stacking
@@ -221,11 +236,11 @@
 
 .ms-master-require-apply-features,
 .ms-master-require-career-features {
-  margin: $spacing-md auto;
+  margin: $spacing-sm auto;
   .feature-block {
     box-sizing: border-box;
     width: 100%;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-xs;
     display: flex; // Added
     flex-direction: column; // Added
     align-items: flex-start; // Added
@@ -241,9 +256,8 @@
       // Change to text-align: center if needed.
     }
     .feature-subtitle {
-      font-weight: bold;
       color: $color-msu;
-      font-size: $font-size-sm;
+      font-size: 18px;
       margin-bottom: $spacing-xs;
       letter-spacing: 1px;
       text-align: left; // Ditto
@@ -292,14 +306,14 @@
   h3 {
     text-align: center; // Already centered
     color: $color-msu;
-    font-size: 24px;
-    margin-bottom: $spacing-sm;
+    font-size: 18px;
+    margin-bottom: $spacing-xs;
     font-weight: 700;
   }
 
   p {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 400;
     text-align: left;
   }
 }
@@ -312,7 +326,7 @@
     font-size: 24px;
     font-weight: 700;
     text-align: left;
-    margin: $spacing-md 0;
+    margin: $spacing-md 0 $spacing-xs;
   }
 
   &-intro {
@@ -327,24 +341,24 @@
     align-items: flex-start; // Added
 
     h3 {
-      margin-bottom: $spacing-sm;
+      margin-bottom: $spacing-xs;
       // text-align: center; // Uncomment if h3 text lines should be centered
     }
 
     .cfa-note {
       font-size: 14px;
       color: #666;
-      margin-top: $spacing-md;
-      margin-bottom: $spacing-xl;
+      margin-top: $spacing-xs;
+      margin-bottom: $spacing-sm;
       // text-align: center; // Uncomment if cfa-note text lines should be centered
     }
   }
   .ms-master-network-intro {
     h3 {
-      margin-bottom: $spacing-sm;
+      margin-bottom: 0;
     }
     p {
-      margin-bottom: $spacing-md;
+      margin-bottom: $spacing-sm;
     }
   }
 }
@@ -408,4 +422,31 @@
       text-align: left;
     }
   }
+}
+
+.other-courses-list {
+  margin-bottom: 1rem;
+  list-style-position: inside; // 新增
+  padding-left: 0; // 新增
+}
+.ms-master-require-apply {
+  margin-top: $spacing-md;
+  border-bottom: 1px solid $color-msu;
+}
+.ms-master-require-career {
+  margin-top: $spacing-sm;
+
+  h3 {
+    text-align: left; // If this h3's text lines should be centered, change to center
+  }
+  p {
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+    margin-top: $spacing-xs;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  // ...existing responsive styles for other components...
 }

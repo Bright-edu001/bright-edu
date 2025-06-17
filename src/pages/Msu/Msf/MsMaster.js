@@ -172,7 +172,7 @@ function MsMaster() {
                 <li>FI 890: International Business Law（國際商業法） 3學分</li>
               </ul>
               <h3>其他可選課程 | Examples of Available Courses</h3>
-              <ul>
+              <ul className="other-courses-list">
                 <li>
                   FI 891: Deep Learning and Neural Networks in
                   Finance（金融中的深度學習與神經網絡） 3 學分

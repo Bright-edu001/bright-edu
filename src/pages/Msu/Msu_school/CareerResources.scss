@@ -2,6 +2,13 @@
 @import "../../../styles/mixins";
 
 .career-resources-page {
+  .section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-msu;
+    text-align: left;
+    margin: $spacing-md 0;
+  }
   .career-resources {
     h3 {
       font-size: 24px;
