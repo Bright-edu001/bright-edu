@@ -76,9 +76,8 @@
 }
 
 .blog-detail-categories {
-  margin-top: 1.5rem;
   h3 {
-    font-size: 1.2rem;
+    font-size: 24px;
     margin-bottom: 0.8rem;
     color: $color-black;
   }
@@ -100,7 +99,7 @@
   background-color: transparent; // 新增：背景透明
   border: none; // 新增：無邊框
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 700;
   color: $color-nav; // 新增：設定文字顏色
   cursor: pointer;

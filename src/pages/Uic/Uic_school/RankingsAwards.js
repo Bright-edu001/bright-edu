@@ -8,6 +8,7 @@ const RankingsAwards = () => {
       <MbaAreasHero />
 
       <div className="content-section">
+        <h3 className="intro-title">排名與獎項</h3>
         <p className="intro-text">
           伊利諾大學芝加哥分校
           (以下簡稱UIC)，在近年來的美國大學排名中，UIC的工商管理碩士頻頻獲得亮眼的成績。因依託芝加哥的金融中心優勢，與各個行業的結合交流十分緊密，就讀一年MBA的學生有很多與世界尖端行業企業交流及未來工作的機會。坐擁充足的學術和就業資源，占據著巨大的地理優勢。
@@ -26,7 +27,7 @@ const RankingsAwards = () => {
             <div className="aacsb-logo">
               <img
                 className="responsive-img"
-                src="https://imgur.com/q8AsDEx.png"
+                src={`/images/Uic/ranking/Aacsb.webp`}
                 alt="AACSB Logo"
                 loading="lazy"
               />
@@ -112,7 +113,7 @@ const RankingsAwards = () => {
             <div className="rankings-logo">
               <img
                 className="responsive-img"
-                src="https://imgur.com/uhMmwNF.png"
+                src={`/images/Uic/ranking/Ranking.webp`}
                 alt="UIC Rankings"
                 loading="lazy"
               />

@@ -4,7 +4,7 @@
 /* 頁腳樣式 */
 .footer {
   background: $color-gray-ultralight;
-  padding: 10px 0;
+  padding: $spacing-sm 0;
   transform: translateZ(0); // Added for potential CLS improvement
 
   /* 容器樣式 - 控制內容寬度和居中 */

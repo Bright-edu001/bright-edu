@@ -17,7 +17,6 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      margin-bottom: 0.5rem;
 
       .rankings-logo {
         max-width: 300px;
@@ -47,7 +46,6 @@
     .rankings-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
 
       .ranking-item {
         padding: 20px;
@@ -63,7 +61,8 @@
           width: 100%;
 
           .top-label {
-            @include body-large;
+            font-size: 32px;
+            font-weight: 600;
             color: $color-uic;
             margin: 0;
             padding: 0;
@@ -71,19 +70,16 @@
           }
 
           .rank-number {
-            @include label-style;
+            font-weight: 700;
             font-size: 48px;
             color: $color-uic;
-            margin: 5px 0 15px;
           }
         }
         .rank-description,
         .rank-sub-description {
-          @include body-large;
-          font-size: $font-size-xs;
-          line-height: 17px;
+          font-size: 16px;
+          font-weight: 500;
           color: $color-black;
-          margin: 5px 0 5px;
           text-align: left;
         }
       }
@@ -94,6 +90,13 @@
 // 響應式設計
 .content-section {
   margin: $spacing-xl auto;
+  .intro-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-nav;
+    text-align: left;
+    margin-bottom: $spacing-xs;
+  }
 
   .intro-text {
     font-size: 18px;
@@ -105,6 +108,7 @@
   // AACSB 認證相關
   .aacsb-section {
     margin: 0 auto;
+    border-bottom: 1px solid $color-uic;
 
     .aacsb-header {
       display: flex;
@@ -190,6 +194,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
+      margin-bottom: $spacing-sm;
 
       .advantage-item {
         flex: 0 0 45%;
@@ -244,6 +249,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      margin-bottom: $spacing-sm;
 
       .diversity-item {
         width: 80%;
@@ -263,17 +269,19 @@
 
 .advantage-list,
 .standard-list {
-  list-style-type: disc;
+  list-style-position: inside; // 讓項目符號在文字內部
   padding-left: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2em 2em;
+  gap: 0.5rem 0;
   justify-items: start;
   li {
     color: $color-uic;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     text-align: left;
+    padding-left: 1.4em; // 為文字內容創建左內邊距
+    text-indent: -1.4em; // 將第一行（含項目符號）向左縮排
   }
 }
 
@@ -283,11 +291,19 @@
   gap: 0.5rem;
   text-align: left;
   margin: 0.5rem 0;
-
+  list-style-position: inside;
   li {
     font-size: 18px;
     font-weight: 500;
+    padding-left: 1.4em; // 為文字內容創建左內邊距
+    text-indent: -1.4em; // 將第一行（含項目符號）向左縮排
   }
+}
+.diversity-excellence-section {
+  border-bottom: 1px solid $color-uic;
+}
+.uic-rankings-section {
+  margin-top: $spacing-xs;
 }
 
 @media screen and (max-width: 1024px) {

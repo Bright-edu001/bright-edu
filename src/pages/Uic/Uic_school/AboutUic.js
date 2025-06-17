@@ -27,8 +27,8 @@ function AboutUic() {
   return (
     <div className="about-uic-page">
       <ImageTextSection
-        title="伊利諾大學芝加哥分校"
-        subtitle="UIC 美國商學院"
+        title="UIC 伊利諾大學芝加哥分校"
+        subtitle="學校介紹"
         imageUrl={`${process.env.PUBLIC_URL}/images/UIC/UIC - 網站LOGO - 03.webp`}
         imageAlt="UIC 美國商學院"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/UIC/banner/photo_6177208882540169915_y.webp`}
