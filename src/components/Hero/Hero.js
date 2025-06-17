@@ -81,9 +81,10 @@ function Hero() {
           src={heroImages[heroIndex].src}
           alt={heroImages[heroIndex].alt}
           width="1280"
-          height="450"
+          height="600"
           loading={isFirst ? "eager" : "lazy"}
           fetchpriority={isFirst ? "high" : undefined}
+          style={{ aspectRatio: "1280 / 600", width: "100%", height: "auto" }}
         />
       </picture>
 
