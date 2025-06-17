@@ -12,6 +12,7 @@ function Advantages() {
       <MbaAreasHero />
 
       <SectionContainer className="intro" ariaLabel="課程優勢">
+        <h3 className="intro-title">課程優勢</h3>
         <p>
           UIC 一年制MBA的商業分析課程是商業決策領域中新興的前沿學科，隨著大數據時代的到來，商務活動的全球化和數字化促使企業向數據驅動型轉型。
           越來越多的企業青睞既有良好的商業素養和業務知識，又具備紮實的數據分析技能的管理者和員工。

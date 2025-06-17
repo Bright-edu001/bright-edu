@@ -12,15 +12,15 @@
     text-align: left;
   }
 
-  // 標題樣式
-  h3 {
-    @extend .mba-heading-large;
-  }
-
   .intro {
     padding: $spacing-lg 0;
-    margin-bottom: $spacing-md; // 上方區塊與下方區塊間距
-
+    .intro-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: $color-nav;
+      margin-bottom: $spacing-sm;
+      text-align: left;
+    }
     p {
       max-width: 100%;
       font-weight: 500;
@@ -29,7 +29,7 @@
 
   .learn .container {
     h3 {
-      margin-bottom: $spacing-sm;
+      margin-bottom: $spacing-xs;
       color: $color-nav;
       font-size: 24px;
       font-weight: 700;
@@ -69,6 +69,7 @@
       font-size: 24px;
       font-weight: 700;
       margin: $spacing-md 0;
+      text-align: left;
     }
   }
 

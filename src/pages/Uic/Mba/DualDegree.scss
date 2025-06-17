@@ -3,6 +3,9 @@
 @import "./mba-common";
 
 .mba-advantages {
+  .intro-title {
+    margin-bottom: $spacing-sm;
+  }
   .avantages,
   .application {
     margin: $spacing-md 0;

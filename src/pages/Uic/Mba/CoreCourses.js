@@ -10,10 +10,12 @@ function CoreCourses() {
   return (
     <div className="mba-courses-page">
       <MbaAreasHero />
-      <p className="intro">
-        核心課程中包括七門必修課程，課程內容涵蓋商業學科的基本知識。以下是各課程的簡要說明:
-      </p>
+
       <SectionContainer className="courses-content">
+        <h3 className="intro-title">核心課程</h3>
+        <p className="intro">
+          核心課程中包括七門必修課程，課程內容涵蓋商業學科的基本知識。以下是各課程的簡要說明:
+        </p>
         <div className="course">
           <div className="course-title">
             <h4>財務會計導論</h4>

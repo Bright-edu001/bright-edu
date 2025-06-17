@@ -3,6 +3,13 @@
 .chicago-container {
   .chicago-intro {
     margin: $spacing-md 0;
+    .intro-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: $color-nav;
+      text-align: left;
+      margin-bottom: $spacing-sm;
+    }
     .intro-text {
       font-size: 18px;
       font-weight: 500;

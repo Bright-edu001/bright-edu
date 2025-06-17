@@ -12,6 +12,7 @@ function DualDegree() {
       <MbaAreasHero />
 
       <SectionContainer className="intro" ariaLabel="雙學位課程">
+        <h3 className="intro-title">雙碩士學位銜接計畫</h3>
         <p>
           這是針對選擇不同領域然後想持續進修的學生，特別設計的雙碩士學位銜接計畫。
         </p>

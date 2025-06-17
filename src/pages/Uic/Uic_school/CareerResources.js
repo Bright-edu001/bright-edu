@@ -13,6 +13,7 @@ function CareerResources() {
           aria-label="商學院職涯規劃所(Business Career Center)"
         >
           <div className="container">
+            <h2 className="intro-title">職涯資源</h2>
             <h3>商學院職涯規劃所(Business Career Center)</h3>
             <p>
               芝加哥是美國第二大商業中心區，許多大企業的總部皆設立於此，因此各式的工作機會也相當豐富，是一個非常適合發展職涯的城市，為協助碩士同學畢業後的職涯發展銜接，伊利諾大學芝加哥分校特別設立職涯規劃所的資源提供給商學院的同學做諮詢，藉此幫助想要在美國開啟璀璨職涯的同學順利找到工作。

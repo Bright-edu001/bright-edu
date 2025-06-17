@@ -6,7 +6,12 @@ body,
 html {
   overflow-x: hidden;
 }
-
+.intro-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: $color-nav;
+  margin-bottom: $spacing-xs;
+}
 .career-list-item {
   font-weight: 700;
   font-size: $font-size-xl;

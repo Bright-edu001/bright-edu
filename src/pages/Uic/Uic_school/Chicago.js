@@ -13,6 +13,7 @@ const Chicago = () => {
       <SectionContainer>
         <section className="chicago-intro">
           <div className="container">
+            <h3 className="intro-title">芝加哥城市</h3>
             <p className="intro-text">
               芝加哥為美國第三大城市，也是為五大湖地區最大的工業中心。美國最大的商業中心區和最大的期貨市場之一，其都市區新增的企業數一直位居美國第一位，被評為美國發展最均衡的經濟體。
             </p>
