@@ -43,6 +43,7 @@
     color: $color-nav;
     text-align: left;
     margin-bottom: $spacing-xs;
+    border-bottom: 1px solid $color-uic;
   }
   .mba-areas-why-list {
     list-style: none;
@@ -69,6 +70,7 @@
     color: #1c184a;
     text-align: left;
     margin-bottom: $spacing-xs;
+    border-bottom: 1px solid $color-uic;
   }
   .mba-areas-advantage-list {
     list-style: none;
@@ -97,7 +99,7 @@
     font-weight: 700;
     color: $color-nav;
     margin-bottom: $spacing-md;
-    letter-spacing: 0.04em;
+    border-bottom: 1px solid $color-uic;
   }
   .mba-areas-concentration-list {
     display: grid;
@@ -135,8 +137,7 @@
       }
       .concentration-desc {
         color: $color-black;
-        font-size: 0.97rem;
-        line-height: 1.5;
+        font-size: 18px;
         text-align: left;
       }
     }

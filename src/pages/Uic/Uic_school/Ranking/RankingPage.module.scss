@@ -1,7 +1,7 @@
 @import "../../../../styles/variables";
 
 .rankingContainer {
-  margin: 0 auto;
+  margin: 0 auto $spacing-md;
 
   .introSection {
     margin: $spacing-md 0;
@@ -9,21 +9,20 @@
     width: 100%;
     p {
       font-size: 18px;
-      font-weight: 500;
     }
   }
 
   .rankingsGrid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-xs;
 
     .rankingItem {
-      padding: $spacing-md;
+      padding: $spacing-sm 0;
       border-radius: 10px;
       .rank {
         font-weight: 900;
         color: $color-uic;
-        margin-bottom: $spacing-sm;
         display: flex; // Added for alignment
         align-items: baseline; // Align prefix and number
         justify-content: flex-start; // Center the rank block
@@ -40,15 +39,14 @@
 
       .description {
         font-size: $font-size-md;
-        font-weight: 700;
-        min-height: 50px;
+
         display: flex;
         align-items: center;
         text-align: left;
       }
 
       .source {
-        font-size: $font-size-sm;
+        font-size: 18px;
         color: $color-black;
         text-align: left;
       }

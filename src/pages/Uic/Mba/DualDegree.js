@@ -43,8 +43,7 @@ function DualDegree() {
           <li>學生需要在就讀MBA時，保持良好GPA成績</li>
           <li>在畢業前3個月，系上會有survey確認學生銜接意願，參加workshop</li>
           <li>
-            第二碩士系所審核後通知是否錄取
-            <span> *申請細節及錄取結果以系所屆時公布為準</span>
+            第二碩士系所審核後通知是否錄取 *申請細節及錄取結果以系所屆時公布為準
           </li>
         </ul>
       </SectionContainer>

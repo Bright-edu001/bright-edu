@@ -3,6 +3,7 @@ import styled from "styled-components";
 // Gallery section container
 export const StyledGallerySection = styled.section`
   padding: 0;
+  margin-bottom: 2rem;
 `;
 
 // Title

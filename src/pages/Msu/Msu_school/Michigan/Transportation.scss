@@ -13,13 +13,13 @@
   text-align: left;
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: $spacing-sm;
+  margin-bottom: $spacing-xs;
   color: $color-msu;
 }
 
 .transportation-subblock {
   text-align: left;
-  margin-bottom: $spacing-sm;
+  margin-bottom: $spacing-xs;
   strong {
     font-weight: 700;
     font-size: 18px;
@@ -33,10 +33,10 @@
     gap: $spacing-lg; // li 之間間距
     text-align: left;
     margin-top: $spacing-xs;
+    list-style-position: inside;
     li {
       color: $color-msu;
       font-size: 18px;
-      font-weight: 500;
       text-align: left;
     }
     @media screen and (max-width: 500px) {
@@ -53,6 +53,6 @@
 .transportation-divider {
   border: none;
   border-top: 1px solid $color-msu;
-  margin: $spacing-lg 0;
+  margin: $spacing-md 0;
   width: 100%;
 }

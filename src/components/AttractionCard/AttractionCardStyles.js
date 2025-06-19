@@ -38,6 +38,5 @@ export const StyledAttractionName = styled.div`
 export const StyledAttractionDesc = styled.div`
   color: #000000;
   font-size: 18px;
-  font-weight: 500;
   text-align: left;
 `;

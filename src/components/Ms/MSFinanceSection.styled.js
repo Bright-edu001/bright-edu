@@ -20,7 +20,6 @@ export const OutcomesParagraph = styled.p`
   // from .msf-outcomes p, .reasons-to-choose p
   // @include value-style; // Assuming this mixin applies common text styles, handle manually or create a base component
   margin-bottom: ${spacingMd};
-  font-weight: 500;
   font-size: 18px;
   text-align: left;
   color: ${colorBlack};
@@ -29,7 +28,6 @@ export const OutcomesParagraph = styled.p`
 export const ReasonsToChooseParagraph = styled(OutcomesParagraph)`
   // from .reasons-to-choose p
   font-size: 18px;
-  font-weight: 700;
 `;
 
 export const SectionTitle = styled.h3`
@@ -53,12 +51,12 @@ export const WhyUicMsfDiv = styled.div`
     padding-left: 0; // Reset default padding
     li {
       font-size: 18px;
-      margin-bottom: ${spacingMd};
+      margin-bottom: ${spacingXs};
       color: ${colorUic};
       text-align: left;
+
       &.label-style {
         font-size: 16px;
-        font-weight: 500;
         color: ${colorBlack};
         margin-top: ${spacingLg};
       }
@@ -69,7 +67,6 @@ export const WhyUicMsfDiv = styled.div`
           color: ${colorBlack};
           margin-top: ${spacingXs};
           margin-bottom: 0;
-          font-weight: 500;
           list-style-type: disc; // Add disc for nested lists if desired
         }
       }
@@ -81,7 +78,7 @@ export const MsfOutcomesDiv = styled.div`
   // from .msf-outcomes
   ul {
     list-style: disc; // Assuming outcomes list should have discs
-    padding-left: ${spacingMd}; // Indent list
+    list-style-position: inside; // Keep list style inside
     li {
       font-size: 18px;
       margin-bottom: ${spacingMd};
@@ -106,10 +103,9 @@ export const CourseArrangementDiv = styled.div`
   // from .course-arrangement
   ul {
     list-style: disc;
-    padding-left: ${spacingMd}; // Indent list
+    list-style-position: inside;
     li {
       font-size: 18px;
-      font-weight: 700;
       color: ${colorBlack};
       text-align: left;
       margin-bottom: ${spacingSm};
@@ -122,9 +118,7 @@ export const CoreCoursesSectionDiv = styled.div`
 `;
 
 export const CoreCoursesTitle = styled(SectionTitle)`
-  // from .core-courses-title
   text-align: left;
-  // @include value-style; // Apply styles manually if needed
 `;
 
 export const CoreCourseParagraphDiv = styled.div`
@@ -133,7 +127,6 @@ export const CoreCourseParagraphDiv = styled.div`
   p {
     // @include value-style;
     font-size: 18px;
-    font-weight: 500;
     color: ${colorBlack};
     text-align: left;
     margin-bottom: ${spacingMd}; // Default margin for paragraphs within
@@ -151,7 +144,6 @@ export const CoreCoursesIntroDiv = styled.div`
     padding-left: 0;
     li {
       font-size: 18px;
-      font-weight: 500;
       color: ${colorBlack};
       text-align: left;
       margin-bottom: ${spacingXs};
@@ -216,7 +208,6 @@ export const CoreCourseItemDiv = styled.div`
   .core-course-desc {
     font-size: ${fontSizeMd};
     color: ${colorBlack};
-    font-weight: 500;
     text-align: left;
     // If description should take remaining space and potentially scroll:
     // flex-grow: 1;
@@ -228,7 +219,6 @@ export const CoreCourseFootParagraph = styled.p`
   // from .core-courses-foot
   // @include value-style;
   font-size: 18px; // Assuming default from value-style
-  font-weight: 500; // Assuming default from value-style
   color: ${colorBlack}; // Assuming default from value-style
   text-align: left;
   margin-bottom: ${spacingXs};

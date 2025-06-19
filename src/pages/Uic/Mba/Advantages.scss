@@ -7,7 +7,6 @@
   p,
   li {
     font-size: 18px;
-    font-weight: 500;
     max-width: 100%;
     text-align: left;
   }
@@ -18,12 +17,8 @@
       font-size: 24px;
       font-weight: 700;
       color: $color-nav;
-      margin-bottom: $spacing-sm;
+      margin-bottom: $spacing-xs;
       text-align: left;
-    }
-    p {
-      max-width: 100%;
-      font-weight: 500;
     }
   }
 
@@ -34,11 +29,11 @@
       font-size: 24px;
       font-weight: 700;
       text-align: left;
+      border-bottom: 1px solid $color-uic;
     }
 
     p {
-      margin-bottom: $spacing-sm;
-      font-weight: 500;
+      margin: $spacing-sm 0;
     }
 
     ul {
@@ -59,7 +54,7 @@
           color: $color-uic;
         }
         div {
-          font-weight: 500;
+          font-weight: 400;
           font-size: 18px;
           color: $color-black;
         }
@@ -83,12 +78,12 @@
         margin-bottom: $spacing-xs;
         color: $color-nav;
         text-align: left;
+        border-bottom: 1px solid $color-uic;
       }
 
       p {
         font-size: 18px;
-        font-weight: 500;
-        margin-bottom: $spacing-md;
+        margin: $spacing-sm 0;
       }
     }
   }

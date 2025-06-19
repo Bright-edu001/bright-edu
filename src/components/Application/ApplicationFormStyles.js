@@ -87,7 +87,6 @@ export const StyledSectionTitle = styled.h2`
 export const StyledConditionDesc = styled.div`
   color: #211700;
   font-size: 18px;
-  font-weight: 500;
   text-align: left;
   margin-bottom: 1rem;
 

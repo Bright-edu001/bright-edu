@@ -12,7 +12,11 @@
       margin: $spacing-md 0;
     }
     .ranking-title {
+      width: 100%;
       margin-bottom: 0;
+    }
+    .ranking-subtitle {
+      border-bottom: 1px solid $color-msu;
     }
     p {
       font-size: 18px;
@@ -21,7 +25,6 @@
     }
     ul {
       font-size: 18px;
-      font-weight: 700;
       display: flex;
       flex-direction: row;
       color: $color-msu;
@@ -41,7 +44,6 @@
   .management {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
   }
   .class {
     width: 100%;
@@ -68,7 +70,6 @@
 
         li.highlight {
           color: $color-msu;
-          font-weight: 700;
           font-size: 18px;
         }
       }
@@ -77,18 +78,18 @@
   .engineering {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    margin-bottom: $spacing-md;
     h3 {
       font-size: 24px;
       font-weight: 700;
       color: $color-msu;
-      margin-top: $spacing-sm;
+      text-align: left;
+      margin: $spacing-sm 0;
+      border-bottom: 1px solid $color-msu;
     }
     ul {
       font-size: 18px;
       color: $color-black;
-      font-weight: 500;
-      margin-bottom: $spacing-md;
       list-style-position: inside; // 新增此行
       padding-left: 0; // 建議新增以移除預設邊距
       li {

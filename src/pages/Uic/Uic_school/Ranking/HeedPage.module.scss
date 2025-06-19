@@ -2,6 +2,7 @@
 @import "../../../../styles/mixins"; // 引入混和
 
 .heedContainer {
+  margin-bottom: $spacing-md;
   .contentSection {
     h2 {
       font-size: 24px;
@@ -14,7 +15,6 @@
 
     p {
       font-size: 18px;
-      font-weight: 500;
       margin: $spacing-sm 0 $spacing-xs;
       text-align: left;
     }
@@ -26,13 +26,8 @@
 
       li {
         font-size: 18px;
-        font-weight: 500;
         margin-bottom: $spacing-xs;
         text-align: left;
-      }
-      span {
-        @include value-style;
-        font-size: $font-size-md;
       }
     }
   }

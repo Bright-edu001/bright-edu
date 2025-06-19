@@ -19,7 +19,6 @@ html {
 }
 .career-resources-intro-list {
   font-size: 20px;
-  font-weight: 500;
   margin-top: $spacing-sm;
   list-style: none;
 }
@@ -27,7 +26,7 @@ html {
   overflow-x: hidden;
   h3 {
     font-size: 24px;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-xs;
     color: $color-uic;
     text-align: left;
   }
@@ -40,7 +39,6 @@ html {
 
     p {
       font-size: 18px;
-      font-weight: 500;
       color: $color-text-primary;
     }
 
@@ -49,13 +47,10 @@ html {
       padding-left: $spacing-md;
       li {
         font-size: 18px;
-        font-weight: 500;
         margin-top: $spacing-sm;
         color: $color-nav;
         div {
           font-size: 16px;
-          font-weight: 400;
-
           color: $color-gray-medium;
         }
       }
@@ -83,7 +78,6 @@ html {
         margin-bottom: $spacing-md;
         li {
           font-size: 18px;
-          font-weight: 500;
           list-style-type: decimal;
           color: $color-black;
         }

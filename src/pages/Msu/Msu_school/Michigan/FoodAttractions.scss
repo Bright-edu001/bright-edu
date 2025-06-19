@@ -3,6 +3,11 @@
 
 .attractions-section {
   border-bottom: 1px solid $color-msu;
+  margin-bottom: $spacing-md;
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .attractions-title {

@@ -20,8 +20,7 @@
     p {
       color: $color-text-primary;
       font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 1rem;
+      margin-bottom: $spacing-xs;
       max-width: 1400px;
     }
   }
@@ -57,9 +56,8 @@
           margin-bottom: 10px; // 區塊下方間距
 
           .label {
-            @include label-style;
+            font-size: 18px;
             color: $color-black;
-            margin-bottom: 0.5rem;
           }
 
           .value {
@@ -69,7 +67,7 @@
 
           .stats-value-detail {
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 400;
             color: #c71432; // UIC red
           }
         }
@@ -120,7 +118,6 @@
               font-size: 36px;
               font-weight: 700;
               color: $color-uic;
-              margin-bottom: 0.5rem;
               margin-left: 0.5rem; // number 左側間距
             }
             .text {
@@ -132,9 +129,8 @@
           }
 
           .value {
-            margin-top: 5px; // label 與 value 間距
-            font-size: 19px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 400;
           }
         }
       }
@@ -144,18 +140,16 @@
   .business-school {
     padding: $spacing-lg 0;
     h3 {
-      @include heading-large;
-      font-size: 28px;
-      margin-bottom: $spacing-md;
+      font-size: 24px;
+      margin-bottom: $spacing-xs;
       color: $color-black;
       text-align: left;
     }
 
     p {
       font-size: 18px;
-      font-weight: 500;
       color: $color-black;
-      margin-bottom: $spacing-md;
+      margin-bottom: $spacing-xs;
       text-align: left;
       max-width: 1400px;
     }

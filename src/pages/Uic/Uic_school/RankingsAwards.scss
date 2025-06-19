@@ -37,9 +37,7 @@
     }
     .rankings-intro {
       font-size: 18px;
-      font-weight: 500;
       color: $color-black;
-      margin-bottom: $spacing-md;
       text-align: left;
     }
 
@@ -48,8 +46,7 @@
       grid-template-columns: repeat(4, 1fr);
 
       .ranking-item {
-        padding: 20px;
-        border-radius: 10px;
+        padding: 10px 0;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -77,8 +74,7 @@
         }
         .rank-description,
         .rank-sub-description {
-          font-size: 16px;
-          font-weight: 500;
+          font-size: 18px;
           color: $color-black;
           text-align: left;
         }
@@ -100,7 +96,6 @@
 
   .intro-text {
     font-size: 18px;
-    font-weight: 500;
     margin-bottom: $spacing-xs;
     text-align: left;
   }
@@ -124,8 +119,6 @@
         text-align: left;
         display: flex;
         flex-direction: column;
-
-        width: 40%;
         h2 {
           margin-bottom: 0.5rem;
           color: $color-black;
@@ -133,7 +126,6 @@
         }
         p {
           font-size: 24px;
-          font-weight: 500;
         }
       }
     }
@@ -278,7 +270,6 @@
   li {
     color: $color-uic;
     font-size: 18px;
-    font-weight: 500;
     text-align: left;
     padding-left: 1.4em; // 為文字內容創建左內邊距
     text-indent: -1.4em; // 將第一行（含項目符號）向左縮排
@@ -294,7 +285,6 @@
   list-style-position: inside;
   li {
     font-size: 18px;
-    font-weight: 500;
     padding-left: 1.4em; // 為文字內容創建左內邊距
     text-indent: -1.4em; // 將第一行（含項目符號）向左縮排
   }

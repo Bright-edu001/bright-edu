@@ -37,7 +37,6 @@
   p {
     margin-bottom: $spacing-sm;
     font-size: 18px;
-    font-weight: 500;
     color: $color-black;
     text-align: left;
     @media screen and (max-width: 700px) {
@@ -49,9 +48,7 @@
     text-align: left;
     li {
       font-size: 18px;
-      font-weight: 500;
       color: $color-black;
-
       text-align: left;
     }
   }
@@ -68,7 +65,6 @@
       font-size: 18px;
       color: $color-black;
       margin-top: $spacing-sm; // 與上方間距
-      font-weight: 700;
     }
   }
 

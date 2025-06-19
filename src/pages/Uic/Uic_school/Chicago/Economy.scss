@@ -13,7 +13,6 @@
 
   p {
     font-size: 18px;
-    font-weight: 500;
     text-align: left; // Align text to the left
   }
 
@@ -65,7 +64,6 @@
 
     p {
       font-size: 18px;
-      font-weight: 500;
       color: $color-black;
       // Inherits max-width: 90%, margin: 0 auto, text-align: justify from base p
     }

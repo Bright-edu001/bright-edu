@@ -45,9 +45,7 @@ export const PageH2 = styled.h2`
 `;
 
 export const PageP = styled.p`
-  font-weight: 500;
   font-size: 18px;
-
   text-align: left;
   color: ${theme.colors.Dark};
 `;
@@ -64,16 +62,14 @@ export const MsmUl = styled.ul`
   margin-top: ${theme.spacing.xs};
   li {
     color: ${theme.colors.Dark};
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 18px;
   }
 `;
 
 export const OutcomesList = styled.ul`
   font-size: ${theme.fontSizes.lg};
   color: ${theme.colors.Dark};
-  margin-left: 1.5em;
-  line-height: 1.7;
+  list-style-position: inside;
 `;
 
 export const MsCoreCoursesRow = styled.div`

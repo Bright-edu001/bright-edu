@@ -45,7 +45,7 @@
         padding: 0;
         display: grid;
         grid-template-columns: repeat(3, 1fr); // 三欄排列
-        gap: 2rem;
+        gap: 1rem;
         @media screen and (max-width: 700px) {
           grid-template-columns: repeat(2, 1fr); // 小螢幕改為二欄排列
         }
@@ -74,12 +74,10 @@
             color: $color-msu;
             list-style: disc;
             margin-top: 0;
-            padding-left: 20px; // 子項目縮排
 
             li {
               margin: 0;
               display: list-item; // 子項目顯示為列表
-              padding-left: 5px; // 子項目左側間距
             }
           }
         }

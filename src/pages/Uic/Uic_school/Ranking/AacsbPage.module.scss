@@ -8,14 +8,12 @@
       font-size: 24px;
       font-weight: 700;
       color: $color-uic; // 使用色彩強調標題
-
       margin-bottom: $spacing-xs;
       text-align: left;
     }
 
     p {
       font-size: 18px;
-      font-weight: 500;
       margin-bottom: $spacing-sm;
       text-align: left;
     }
@@ -24,7 +22,6 @@
       list-style: disc;
       list-style-position: inside;
       font-size: 18px;
-      font-weight: 500;
       margin-bottom: $spacing-xs;
 
       li {
