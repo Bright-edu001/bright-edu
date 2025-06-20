@@ -22,12 +22,11 @@
   }
   @media screen and (max-width: 850px) {
     ul {
-      padding: 0 $spacing-lg;
-    }
-  }
-  @media screen and (max-width: 500px) {
-    ul {
-      padding: 0 $spacing-lg;
+      padding-left: 0;
+      li {
+        padding-left: 1.5rem;
+        text-indent: -1.5rem; // 移除縮排
+      }
     }
   }
   .container {

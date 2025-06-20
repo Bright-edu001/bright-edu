@@ -8,7 +8,7 @@ function AboutMsu() {
     <div className="about-msu-page">
       <ImageTextSection
         title="MSU 密西根州立大學"
-        subtitle="Michigan State University"
+        subtitle="學校介紹"
         imageUrl={`${process.env.PUBLIC_URL}/images/Msu/Michigan State University_01.webp`}
         imageAlt="Michigan State University"
         bgImageUrl={`${process.env.PUBLIC_URL}/images/banner/banner3-768.webp`}

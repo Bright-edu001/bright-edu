@@ -10,6 +10,7 @@ function MsfApplication() {
       <MbaAreasHero />
       <SectionContainer>
         <div className="msf-application-list">
+          <h3 className="msf-application-title">申請資訊</h3>
           <ul>
             <li>
               申請資格：申請者須持有認可教育機構頒發的四年制學士學位，累積 GPA

@@ -22,7 +22,7 @@ export const FlipInner = styled.span`
   padding: 0.1em 0.5em;
   transform-origin: initial;
   animation: none;
-  color: ${(props) => (props.msu ? colorMsu : colorUic)};
+  color: ${(props) => (props.$msu ? colorMsu : colorUic)};
 
   &.perspective-up {
     animation: none;

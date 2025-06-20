@@ -76,7 +76,7 @@ function RankingNumberFlip({
     <RankingNumberFlipWrapper
       className={`ranking-number-flip${flipping ? " flipping" : ""}`}
     >
-      <FlipInner className={`flip-inner${msu ? " msu" : ""}`} msu={msu}>
+      <FlipInner className={`flip-inner${msu ? " msu" : ""}`} $msu={msu}>
         {displayNumber}
       </FlipInner>
     </RankingNumberFlipWrapper>

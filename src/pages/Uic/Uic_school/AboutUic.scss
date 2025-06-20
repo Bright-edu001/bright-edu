@@ -160,7 +160,7 @@
   .about-uic-page .stats .stats-card-school {
     padding: 1.5rem;
     h3 {
-      text-align: center;
+      text-align: left;
     }
   }
   .about-uic-page .stats .stats-card-school ul.left-aligned,
@@ -178,7 +178,7 @@
 }
 @media screen and (max-width: 500px) {
   .about-uic-page .stats .stats-card-ranking {
-    padding: 1rem;
+    padding: 1.5rem;
     h3 {
       margin-bottom: 0;
     }

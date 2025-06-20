@@ -10,6 +10,7 @@ function MsMaster() {
       <SectionContainer>
         {" "}
         <div className="ms-master-intro">
+          <h3 className="ms-master-title">MSF金融碩士</h3>
           <p>
             金融碩士（MSF）是一個高強度、加速型的課程，專為應屆大學畢業生與職場專業人士設計，旨在培養學生的分析能力與電腦技術，特別是在以下金融領域：
           </p>

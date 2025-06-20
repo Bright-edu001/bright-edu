@@ -182,15 +182,7 @@
       }
 
       .concentration-title {
-        @include heading-medium;
         margin-bottom: 0.5rem;
-        text-align: left;
-      }
-      .concentration-desc {
-        color: #3a2c13;
-        font-size: 0.97rem;
-        line-height: 1.5;
-        text-align: left;
       }
     }
   }

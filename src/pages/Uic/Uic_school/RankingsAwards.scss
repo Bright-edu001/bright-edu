@@ -44,6 +44,10 @@
     .rankings-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+      @media screen and (max-width: 850px) {
+        gap: 0.5rem;
+        grid-template-columns: repeat(3, 1fr);
+      }
 
       .ranking-item {
         padding: 10px 0;
@@ -164,7 +168,7 @@
           margin-bottom: 0.5rem;
           .item-text {
             font-size: 24px;
-            font-weight: 500;
+            text-align: left;
           }
         }
       }
@@ -296,16 +300,6 @@
   margin-top: $spacing-xs;
 }
 
-@media screen and (max-width: 1024px) {
-  .advantage-list {
-    margin-left: 0;
-  }
-
-  .diversity-list {
-    margin-left: 5rem;
-  }
-}
-
 @media screen and (max-width: 700px) {
   .content-section .aacsb-section .aacsb-header {
     display: flex;
@@ -317,19 +311,13 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    margin-right: 20rem;
     li {
       padding-left: 0;
     }
   }
-  .content-section .aacsb-section .advantage-items {
-    margin-left: 2rem;
-    margin-right: 0;
-  }
+
   .advantage-list {
     width: 100%;
-    margin-right: 0;
-    margin-left: 0;
   }
   .content-section .diversity-excellence-section .diversity-header {
     gap: 1rem;
@@ -343,16 +331,10 @@
       }
       p {
         font-size: $font-size-xl;
-        margin-left: 0;
       }
     }
   }
-  .content-section
-    .diversity-excellence-section
-    .diversity-items
-    .diversity-list {
-    margin-left: 2rem;
-  }
+
   .rankings-awards-container .uic-rankings-section {
     .rankings-grid {
       display: grid;
@@ -364,19 +346,13 @@
 
 @media screen and (max-width: 500px) {
   .standard-list {
-    list-style: none;
+    list-style-position: inside;
     display: flex;
-    flex-direction: column;
-    gap: 1em;
-    margin-right: 0;
-    margin-top: 0;
+    flex-direction: row;
+    gap: 2rem;
 
     li {
       position: relative;
-      &::before {
-        content: "•"; // 使用標準項目符號
-        margin-right: 0.5em;
-      }
     }
   }
 }

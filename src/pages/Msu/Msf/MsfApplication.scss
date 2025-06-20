@@ -4,6 +4,14 @@
 .msf-application-list {
   display: flex;
   flex-direction: column;
+  .msf-application-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-msu;
+    text-align: left;
+    margin-bottom: $spacing-xs;
+    margin-top: $spacing-md;
+  }
   ul {
     list-style: disc;
     list-style-position: inside;
@@ -11,29 +19,27 @@
     li {
       text-align: left;
       font-size: 18px;
-      font-weight: 500;
       color: $color-msu;
-      margin-top: $spacing-md;
+      margin-top: $spacing-xs;
     }
   }
   .english-requirements {
+    padding-left: 1.5rem;
+    list-style: decimal;
     li {
       font-size: 18px;
-      font-weight: 500;
       color: $color-black;
       margin-top: $spacing-xs;
     }
   }
   p {
     font-size: 18px;
-    font-weight: 500;
     text-align: left;
     color: $color-black;
     margin: $spacing-md 0;
   }
   span {
     font-size: 16px;
-    font-weight: 500;
     text-align: left;
     color: $color-black;
     position: static;

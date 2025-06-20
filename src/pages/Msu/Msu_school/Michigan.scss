@@ -16,7 +16,6 @@
       text-align: left;
       color: $color-black;
       font-size: 18px;
-      font-weight: 500;
     }
     h3 {
       font-size: 24px;
@@ -120,6 +119,8 @@
       font-size: 18px;
       font-weight: 400;
       margin-bottom: 1rem;
+      list-style-position: inside;
+      padding-left: 0; // 移除預設的左邊距
       li {
         margin-top: $spacing-sm;
       }
@@ -145,6 +146,8 @@
       font-size: 18px;
       font-weight: 400;
       text-align: left;
+      list-style-position: inside; // 項目符號在文字內部
+      padding-left: 0; // 移除預設的左邊距
     }
   }
 }

@@ -3,7 +3,7 @@
 
 /* 全局 p 標籤樣式 */
 p {
-  @include paragraph-style;
+  font-size: 18px;
 }
 
 /* 首頁整體樣式 */
@@ -131,6 +131,9 @@ p {
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: left;
+    @media screen and (max-width: 850px) {
+      padding: 2rem 3rem;
+    }
     .feature-logo-img {
       display: block;
       margin: 0 auto 1.2rem auto;
@@ -249,11 +252,11 @@ p {
       max-width: 400px;
     }
     .feature-logo-img-msu {
-      left: -50%;
+      left: -70%;
       top: 50%;
     }
     .feature-logo-img-uic {
-      left: 49%;
+      left: 50%;
     }
   }
 }
@@ -286,7 +289,7 @@ p {
 
 /* 文章Blog區塊樣式 */
 .blog-area {
-  padding: 3rem 0;
+  padding: 3rem 0 1.5rem;
 
   .container {
     @include container();
@@ -358,6 +361,7 @@ p {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: $spacing-lg;
+  align-items: baseline;
 }
 
 /* 單個課程卡片樣式 */
@@ -394,7 +398,7 @@ p {
     flex-direction: column;
     align-items: center;
   }
-  .feature-card {
+  .features .feature-card {
     max-width: 100%;
     width: 100%;
     margin-top: 3rem;
@@ -456,7 +460,11 @@ p {
     min-width: 0;
     max-width: 100%;
     font-size: 1rem;
-    padding: 0.7rem 1rem;
+    padding: 0.5rem;
+    text-align: left;
+    &::after {
+      right: 2rem; // 調整箭頭位置
+    }
   }
 }
 
