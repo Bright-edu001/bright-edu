@@ -35,19 +35,19 @@ function MsInformation() {
           </li>
           <li style={{ listStyle: "none", paddingLeft: 0, marginTop: "0.5em" }}>
             <div>
-              <strong>
+              <strong style={{ fontWeight: "400" }}>
                 服務運營與供應鏈管理（Service Operations and Supply Chain
                 Management）
               </strong>
             </div>
             <div>
-              <strong>
+              <strong style={{ fontWeight: "400" }}>
                 企業資訊科技／技術專案管理（Enterprise Information
                 Technology/Technology Project Management）
               </strong>
             </div>
             <div>
-              <strong>
+              <strong style={{ fontWeight: "400" }}>
                 金融與行銷領域的數據挖掘（Data Mining for Finance and Marketing
                 Sectors）
               </strong>

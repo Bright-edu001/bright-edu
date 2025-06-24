@@ -158,7 +158,7 @@ export const CoreCoursesListDiv = styled.div`
   // from .core-courses-list
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin: ${(props) => (props.hasCoreCourses ? spacingMd : "0")} 0;
+  margin: ${(props) => (props.hasCoreCourses ? spacingSm : "0")} 0;
   gap: ${spacingLg};
   align-items: stretch; // Added to make columns in a row have the same height
 
