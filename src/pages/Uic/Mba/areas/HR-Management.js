@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 // import debounce from "../../../../utils/debounce";
 import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
 import CourseList from "../../../../components/CourseList/CourseList";
-// import "./MBA-Programs.scss";
+import "./MBA-Programs.scss";
 
 const HR_Management = () => {
-  useEffect(() => {
-    import("./MBA-Programs.scss");
-  }, []);
-
   // 各區塊課程資料
   const overviewCourses = [
     "對人力資源管理有興趣的學生 – 希望成為組織中「人員管理」的重要推動者，致力於提升企業的人才管理和發展。",

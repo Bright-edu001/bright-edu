@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
+import "./CoreCourses.css";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero"; // 引入新的組件
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 function CoreCourses() {
-  useEffect(() => {
-    import("./CoreCourses.css");
-  }, []);
-
   return (
     <div className="mba-courses-page">
       <MbaAreasHero />

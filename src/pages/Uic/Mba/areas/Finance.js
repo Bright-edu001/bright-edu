@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
 import CourseList from "../../../../components/CourseList/CourseList";
+import "./MBA-Programs.scss";
 
 const Finance = () => {
-  useEffect(() => {
-    import("./MBA-Programs.scss");
-  }, []);
-
   // 各區塊課程資料
   const overviewCourses = [
     "投資分析 – 評估投資機會並制定策略。",

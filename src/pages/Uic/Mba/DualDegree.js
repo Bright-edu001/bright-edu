@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
+import "./DualDegree.css";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero"; // 引入新的組件
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 function DualDegree() {
-  useEffect(() => {
-    import("./DualDegree.css");
-  }, []);
-
   return (
     <div className="mba-advantages">
       <MbaAreasHero />

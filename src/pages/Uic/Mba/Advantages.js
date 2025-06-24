@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
+import "./Advantages.scss";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 
 function Advantages() {
-  useEffect(() => {
-    import("./Advantages.css");
-  }, []);
-
   return (
     <div className="mba-advantages">
       <MbaAreasHero />

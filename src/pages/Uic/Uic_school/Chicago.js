@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
+import "./Chicago.scss";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 
 const Chicago = () => {
-  useEffect(() => {
-    import("./Chicago.scss");
-  }, []);
-
   return (
     <div className="chicago-container">
       <MbaAreasHero />

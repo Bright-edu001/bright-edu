@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
+import "./Areas.css";
+import "./mba-common.scss";
+import "./Areas.scss";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero"; // 引入新的組件
 
 function Areas() {
-  useEffect(() => {
-    import("./Areas.css");
-    import("./mba-common.scss");
-    import("./Areas.scss");
-  }, []);
-
   return (
     <div className="mba-areas-page">
       <MbaAreasHero /> {/* 使用新的組件 */}

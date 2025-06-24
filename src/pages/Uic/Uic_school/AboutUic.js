@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
+import "./AboutUic.scss";
 import GallerySection from "../../../components/GallerySection/GallerySection";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import ActionButton from "../../../components/ActionButton/ActionButton";
 
 function AboutUic() {
-  useEffect(() => {
-    import("./AboutUic.scss");
-  }, []);
-
   // 校園圖片數據
   const campusImages = [
     {

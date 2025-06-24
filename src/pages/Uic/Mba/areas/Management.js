@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CourseList from "../../../../components/CourseList/CourseList";
 import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
+import "./MBA-Programs.scss";
 
 const Management = () => {
-  useEffect(() => {
-    import("./MBA-Programs.scss");
-  }, []);
-
   // 各區塊課程資料
   const overviewCourses = [
     "人力資源管理（Human Resource Management） – 深入了解如何激勵團隊、管理人才並提升員工績效。",
