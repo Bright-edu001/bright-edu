@@ -166,9 +166,7 @@ export const CoreCoursesListDiv = styled.div`
     display: flex; // Explicitly set display to flex for mobile
     flex-direction: column;
     gap: ${(props) =>
-      props.hasCoreCourses
-        ? spacingLg
-        : "0"}; // Keep gap if has courses, else 0
+      props.hasCoreCourses ? 0 : "0"}; // Keep gap if has courses, else 0
   }
 `;
 

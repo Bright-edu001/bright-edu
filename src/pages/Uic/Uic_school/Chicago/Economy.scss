@@ -8,7 +8,10 @@
     color: $color-black;
     text-align: left;
     margin-top: $spacing-sm; // Space above the heading
-    margin-bottom: $spacing-md; // Space below the heading
+    margin-bottom: $spacing-xs; // Space below the heading
+    @media screen and (max-width: 500px) {
+      margin-bottom: $spacing-xs; // Adjust space for smaller screens
+    }
   }
 
   p {
@@ -89,7 +92,7 @@
     .cme-section {
       .cme-header-row {
         flex-direction: column; // Stack items vertically on small screens
-        align-items: center; // Align to the start
+        align-items: flex-start; // Align to the start
       }
 
       .cme-image-container {

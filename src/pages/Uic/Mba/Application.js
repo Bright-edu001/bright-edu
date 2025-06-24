@@ -10,6 +10,7 @@ function Application() {
     <div className="mba-application-page">
       <MbaAreasHero />
       <SectionContainer>
+        <h3 className="mba-application-title">申請資訊</h3>
         {/* 說明文字 */}
         <div className="mba-application-desc">
           <p>

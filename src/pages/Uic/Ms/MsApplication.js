@@ -15,7 +15,7 @@ function MsApplication() {
       <SectionContainer>
         <div className="ms-application-intro">
           {/* Assuming h3 is styled by MsApplication.scss or globally */}
-          <h3>入學要求</h3>
+          <h3>申請資訊</h3>
           <PageP>
             {" "}
             {/* Using PageP for the paragraph */}

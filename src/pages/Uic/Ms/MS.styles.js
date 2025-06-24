@@ -39,9 +39,6 @@ export const PageH2 = styled.h2`
   color: ${theme.colors.navy};
   text-align: left;
   margin: ${theme.spacing.sm} 0;
-  @media screen and (max-width: 700px) {
-    margin: ${theme.spacing.xxl} ${theme.spacing.xs};
-  }
 `;
 
 export const PageP = styled.p`

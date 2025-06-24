@@ -49,6 +49,8 @@ export const InfoCardWrapper = styled.div`
       h4 {
         margin-top: ${spacingMd};
         color: ${colorNav};
+        text-align: left;
+        margin-bottom: 0.5rem;
       }
     }
   }

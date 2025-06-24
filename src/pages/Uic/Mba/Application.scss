@@ -2,8 +2,16 @@
 @import "../../../styles/mixins";
 @import "./mba-common";
 
-.mba-application-desc {
+.mba-application-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: $color-nav;
+  text-align: left;
   margin-top: $spacing-md;
+}
+
+.mba-application-desc {
+  margin-top: $spacing-xs;
   p {
     font-size: 18px;
     color: $color-black;

@@ -12,6 +12,9 @@
       text-align: left;
       margin-bottom: $spacing-sm;
       position: relative;
+      @media screen and (max-width: 500px) {
+        margin-bottom: $spacing-xs;
+      }
     }
     .section-subtitle {
       font-size: 24px;
@@ -27,6 +30,9 @@
         color: $color-black;
         margin-bottom: $spacing-xs;
         text-align: left;
+        @media screen and (max-width: 500px) {
+          margin-bottom: $spacing-sm;
+        }
       }
     }
   }

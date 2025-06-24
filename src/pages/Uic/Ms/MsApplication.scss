@@ -5,7 +5,7 @@
   .ms-application-intro {
     display: flex;
     flex-direction: column;
-    margin-top: $spacing-lg;
+    margin-top: $spacing-md;
   }
   h3 {
     font-size: 24px;
@@ -30,7 +30,7 @@
     margin-top: $spacing-sm;
     text-align: left;
     @media screen and (max-width: 700px) {
-      text-align: center;
+      text-align: left;
     }
   }
 
@@ -40,12 +40,14 @@
     color: $color-black;
     text-align: left;
     @media screen and (max-width: 700px) {
-      text-align: center;
+      text-align: left;
     }
   }
 
   ul {
     text-align: left;
+    list-style-position: inside;
+
     li {
       font-size: 18px;
       color: $color-black;
@@ -59,7 +61,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 24px;
-    padding-left: 0;
+    padding: 0 $spacing-sm;
+
     li {
       list-style: disc;
       font-size: 18px;
@@ -76,11 +79,6 @@
         font-size: 18px;
         font-weight: 500;
         color: $color-black;
-      }
-      ul {
-        margin-top: 4px;
-        margin-bottom: 0;
-        text-align: left;
       }
     }
   }
