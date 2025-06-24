@@ -12,7 +12,13 @@ function MsInformation() {
     {
       title: "快速且靈活的學位設計",
       desc: (
-        <ul style={{ listStyle: "disc", paddingLeft: "1.5em" }}>
+        <ul
+          style={{
+            listStyle: "disc",
+            listStylePosition: "inside",
+            paddingLeft: "0",
+          }}
+        >
           <li>
             MSMIS課程總共32個學分，可以在1年內完成全日制學習，或選擇
             多年間兼職修讀，根據你的個人時間安排進行課程規劃。
@@ -26,7 +32,13 @@ function MsInformation() {
     {
       title: "核心課程與專業方向選擇",
       desc: (
-        <ul style={{ listStyle: "disc", paddingLeft: "1.5em" }}>
+        <ul
+          style={{
+            listStyle: "disc",
+            listStylePosition: "inside",
+            paddingLeft: "0",
+          }}
+        >
           <li>
             核心課程包括企業應用與基礎設施、數據庫管理與資訊系統管理，為你建立堅實的基礎。
           </li>
