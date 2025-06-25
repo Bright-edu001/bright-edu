@@ -23,7 +23,6 @@
 
 @mixin list-item {
   font-size: 18px;
-  font-weight: 500;
   color: $color-black;
   margin: $spacing-sm 0;
 }
@@ -43,7 +42,6 @@
   }
   p {
     font-size: 18px;
-    font-weight: 500;
     text-align: left;
     // text-align: center; // Uncomment if p text lines should be centered
   }
@@ -53,7 +51,6 @@
     margin: $spacing-xs 0;
     color: $color-msu;
     font-size: 18px;
-    font-weight: 500;
     gap: $spacing-xs;
     list-style-position: inside; // 新增
     padding-left: 0; // 新增
@@ -114,24 +111,27 @@
   h4 {
     @include footer-heading;
     margin-top: $spacing-md;
+    margin-bottom: $spacing-xs;
   }
   h3 {
     @include gold-heading;
     margin-top: $spacing-md;
   }
   p {
-    margin-top: $spacing-xs;
     font-size: 18px;
-    font-weight: 500;
     text-align: left;
   }
   ul {
     @include standard-list; // text-align: left
-    margin-top: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column; // Changed to column for better stacking
+    gap: $spacing-xs;
     list-style-position: inside; // 新增
     padding-left: 0; // 新增
     li {
-      @include list-item;
+      font-size: 18px;
+      color: $color-black;
     }
   }
 }
@@ -144,7 +144,6 @@
     margin-top: $spacing-sm;
     p {
       font-size: 18px;
-      font-weight: 500;
       text-align: left;
     }
   }
@@ -159,7 +158,6 @@
   }
   p {
     font-size: 18px;
-    font-weight: 400;
     text-align: left;
   }
   ul {
@@ -169,7 +167,6 @@
 
     li {
       font-size: 18px;
-      font-weight: 500;
       color: $color-msu;
       margin-top: $spacing-xs;
 
@@ -184,26 +181,25 @@
 }
 
 .ms-master-require-select {
-  margin: $spacing-sm 0;
+  margin: 0 0 $spacing-sm;
   display: flex; // Added
   flex-direction: column; // Added
   align-items: flex-start; // Added
 
   h3 {
     @include gold-heading;
-    margin: $spacing-md 0;
+    margin: $spacing-md 0 0;
     // text-align: center; // If this h3's text lines should be centered
   }
   p {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 18px;
     text-align: left;
   }
   .ms-master-require-select-list {
     h3 {
       color: $color-msu;
       text-align: left;
-
+      margin-top: $spacing-xs;
       margin-bottom: $spacing-sm;
     }
   }
@@ -228,7 +224,6 @@
 .ms-master-require-apply {
   p {
     font-size: 18px;
-    font-weight: 500;
     text-align: left;
   }
 }
@@ -256,7 +251,6 @@
       font-weight: bold;
       color: $color-msu;
       font-size: $font-size-lg;
-      margin-bottom: $spacing-xs;
       letter-spacing: 1px;
       text-align: left; // Overridden by parent's align-items: center for block centering. Text lines still left.
       // Change to text-align: center if needed.
@@ -313,7 +307,6 @@
     text-align: center; // Already centered
     color: $color-msu;
     font-size: 18px;
-    margin-bottom: $spacing-xs;
     font-weight: 700;
   }
 
@@ -346,15 +339,9 @@
     flex-direction: column; // Added
     align-items: flex-start; // Added
 
-    h3 {
-      margin-bottom: $spacing-xs;
-      // text-align: center; // Uncomment if h3 text lines should be centered
-    }
-
     .cfa-note {
-      font-size: 14px;
+      font-size: 16px;
       color: #666;
-      margin-top: $spacing-xs;
       margin-bottom: $spacing-sm;
       // text-align: center; // Uncomment if cfa-note text lines should be centered
     }
@@ -447,9 +434,7 @@
   }
   p {
     font-size: 18px;
-    font-weight: 500;
     text-align: left;
-    margin-top: $spacing-xs;
   }
 }
 

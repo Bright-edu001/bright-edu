@@ -223,6 +223,7 @@
       color: $color-msu;
       font-size: 18px;
       font-weight: 400;
+      list-style-position: inside;
       margin-top: $spacing-xs;
 
       li {
@@ -235,6 +236,7 @@
     color: $color-black;
     font-weight: 400;
     font-size: 18px;
+    list-style-position: inside;
     margin-top: 0;
 
     li {
