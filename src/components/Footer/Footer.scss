@@ -20,6 +20,7 @@
     align-items: flex-start;
     margin: 1rem 0;
     text-align: left;
+    min-height: 220px; // 預留空間以減少 CLS
 
     /* 頁腳區塊樣式 - 用於不同類別的頁腳內容 */
     .footer-section {
@@ -224,7 +225,6 @@
     .footer-content {
       flex-direction: column; /* 垂直排列 */
       align-items: center; /* 置中對齊項目 */
-      margin-bottom: 2rem;
 
       .footer-section {
         flex: none; /* 取消 flex 佔用空間 */

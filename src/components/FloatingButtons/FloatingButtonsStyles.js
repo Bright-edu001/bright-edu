@@ -4,10 +4,10 @@ import styled from "styled-components";
 export const StyledFloatingButtons = styled.div`
   position: fixed;
   right: 2rem;
-  bottom: 1.5rem;
+  bottom: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 0.5rem;
   z-index: 9999;
 
   @media screen and (max-width: 500px) {
