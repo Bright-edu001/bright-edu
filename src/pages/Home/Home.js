@@ -72,120 +72,124 @@ function Home() {
       >
         <div className="container">
           <div className="feature-cards">
-            <img
-              className="feature-logo-img-uic"
-              src="/images/home/UIC - 網站LOGO - 03.webp"
-              alt="UIC Logo"
-            />
-            <div className="feature-card uic">
+            <div className="feature-card-outside">
               <img
-                className="feature-bg-img"
-                src="/images/home/網站 - Rankings (透明框)_01.webp"
-                alt="UIC背景圖"
+                className="feature-logo-img-uic"
+                src="/images/home/UIC - 網站LOGO - 03.webp"
+                alt="UIC Logo"
               />
-              <h3>UIC Rankings</h3>
-              <ul>
-                <li>
-                  <div className="ranking-info">
-                    {" "}
-                    <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip
-                      number={1}
-                      start={100}
-                      startAnimation={animateRanking}
-                    />
-                  </div>
-                  <p>The largest research university in Chicago</p>
-                </li>
-                <li>
-                  <div className="ranking-info">
-                    {" "}
-                    <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip
-                      number={39}
-                      start={100}
-                      startAnimation={animateRanking}
-                    />
-                  </div>
-                  <p>Among Top Public School in the nation</p>
-                </li>
-                <li>
-                  <div className="ranking-info">
-                    {" "}
-                    <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip
-                      number={80}
-                      start={100}
-                      startAnimation={animateRanking}
-                    />
-                  </div>
-                  <p>U.S. NEWS National Universities</p>
-                </li>
-              </ul>
+              <div className="feature-card uic">
+                <img
+                  className="feature-bg-img"
+                  src="/images/home/網站 - Rankings (透明框)_01.webp"
+                  alt="UIC背景圖"
+                />
+                <h3>UIC Rankings</h3>
+                <ul>
+                  <li>
+                    <div className="ranking-info">
+                      {" "}
+                      <span className="ranking-title">TOP</span>
+                      <RankingNumberFlip
+                        number={1}
+                        start={100}
+                        startAnimation={animateRanking}
+                      />
+                    </div>
+                    <p>The largest research university in Chicago</p>
+                  </li>
+                  <li>
+                    <div className="ranking-info">
+                      {" "}
+                      <span className="ranking-title">TOP</span>
+                      <RankingNumberFlip
+                        number={39}
+                        start={100}
+                        startAnimation={animateRanking}
+                      />
+                    </div>
+                    <p>Among Top Public School in the nation</p>
+                  </li>
+                  <li>
+                    <div className="ranking-info">
+                      {" "}
+                      <span className="ranking-title">TOP</span>
+                      <RankingNumberFlip
+                        number={80}
+                        start={100}
+                        startAnimation={animateRanking}
+                      />
+                    </div>
+                    <p>U.S. NEWS National Universities</p>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <img
-              className="feature-logo-img-msu"
-              src="/images/home/Michigan State University_01.webp"
-              alt="MSU Logo"
-            />
-            <div className="feature-card msu">
+            <div className="feature-card-outside">
               <img
-                className="feature-bg-img"
-                src={`/images/home/網站 - Rankings (透明框)_02.webp`}
-                alt="MSU背景圖"
-                style={{
-                  opacity: 0.55,
-                  position: "absolute",
-                  left: 0,
-                  top: 0,
-                  width: "100%",
-                  height: "100%",
-                  zIndex: 0,
-                  pointerEvents: "none",
-                }}
+                className="feature-logo-img-msu"
+                src="/images/home/Michigan State University_01.webp"
+                alt="MSU Logo"
               />
-              <h3>MSU Rankings</h3>
-              <ul>
-                <li>
-                  <div className="ranking-info">
-                    {" "}
-                    <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip
-                      number={19}
-                      start={100}
-                      startAnimation={animateRanking}
-                      msu={true}
-                    />
-                  </div>
-                  <p>TFE Times Master's of Finance</p>
-                </li>
-                <li>
-                  <div className="ranking-info">
-                    {" "}
-                    <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip
-                      number={30}
-                      start={100}
-                      startAnimation={animateRanking}
-                      msu={true}
-                    />
-                  </div>
-                  <p>US News & World Report Top Public Schools</p>
-                </li>
-                <li>
-                  <div className="ranking-info">
-                    {" "}
-                    <span className="ranking-title">TOP</span>
-                    <RankingNumberFlip
-                      number={63}
-                      start={100}
-                      startAnimation={animateRanking}
-                      msu={true}
-                    />
-                  </div>
-                  <p>Among Top Public School in the nation</p>
-                </li>
-              </ul>
+              <div className="feature-card msu">
+                <img
+                  className="feature-bg-img"
+                  src={`/images/home/網站 - Rankings (透明框)_02.webp`}
+                  alt="MSU背景圖"
+                  style={{
+                    opacity: 0.55,
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    width: "100%",
+                    height: "100%",
+                    zIndex: 0,
+                    pointerEvents: "none",
+                  }}
+                />
+                <h3>MSU Rankings</h3>
+                <ul>
+                  <li>
+                    <div className="ranking-info">
+                      {" "}
+                      <span className="ranking-title">TOP</span>
+                      <RankingNumberFlip
+                        number={19}
+                        start={100}
+                        startAnimation={animateRanking}
+                        msu={true}
+                      />
+                    </div>
+                    <p>TFE Times Master's of Finance</p>
+                  </li>
+                  <li>
+                    <div className="ranking-info">
+                      {" "}
+                      <span className="ranking-title">TOP</span>
+                      <RankingNumberFlip
+                        number={30}
+                        start={100}
+                        startAnimation={animateRanking}
+                        msu={true}
+                      />
+                    </div>
+                    <p>US News & World Report Top Public Schools</p>
+                  </li>
+                  <li>
+                    <div className="ranking-info">
+                      {" "}
+                      <span className="ranking-title">TOP</span>
+                      <RankingNumberFlip
+                        number={63}
+                        start={100}
+                        startAnimation={animateRanking}
+                        msu={true}
+                      />
+                    </div>
+                    <p>Among Top Public School in the nation</p>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

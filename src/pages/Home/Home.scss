@@ -51,7 +51,10 @@ p {
   /* 關於我們區塊樣式 - 用於介紹公司或服務 */
   .about {
     margin: 0 auto; // 使區塊水平居中
-    padding: 2rem 0 4rem;
+    padding: 2rem 0;
+    @media screen and (max-width: 500px) {
+      padding: 1rem 0; // 在小螢幕上減少內邊距
+    }
 
     .container {
       @include container();
@@ -120,6 +123,25 @@ p {
   .feature-cards {
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 500px) {
+      width: 100%;
+    }
+    .feature-card-outside {
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
+      .feature-logo-img-uic,
+      .feature-logo-img-msu {
+        width: 500px;
+        @media screen and (max-width: 500px) {
+          width: 350px;
+        }
+      }
+    }
   }
 
   .feature-card {
@@ -133,6 +155,9 @@ p {
     text-align: left;
     @media screen and (max-width: 850px) {
       padding: 2rem 3rem;
+    }
+    @media screen and (max-width: 500px) {
+      padding: 1rem;
     }
     .feature-logo-img {
       display: block;
@@ -206,22 +231,10 @@ p {
   justify-content: center;
   align-items: flex-start;
   position: relative;
+  @media screen and (max-width: 850px) {
+    gap: 0;
+  }
 
-  .feature-logo-img-uic,
-  .feature-logo-img-msu {
-    display: block;
-    max-width: 500px;
-    max-height: 100px;
-    z-index: 2;
-    position: absolute;
-    left: 25%;
-    transform: translateX(-50%);
-    top: -40px; // 可向上調整位置
-  }
-  .feature-logo-img-msu {
-    transform: translateX(50%);
-    left: 38%;
-  }
   @media screen and (max-width: 1024px) {
     .feature-logo-img-uic,
     .feature-logo-img-msu {
@@ -290,6 +303,9 @@ p {
 /* 文章Blog區塊樣式 */
 .blog-area {
   padding: 3rem 0 1.5rem;
+  @media screen and (max-width: 500px) {
+    padding: 1.5rem 0; // 在小螢幕上減少內邊距
+  }
 
   .container {
     @include container();
@@ -401,7 +417,7 @@ p {
   .features .feature-card {
     max-width: 100%;
     width: 100%;
-    margin-top: 3rem;
+    margin: 1rem 0;
   }
   .blog-area .blog-header {
     display: flex;
