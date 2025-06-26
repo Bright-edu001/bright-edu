@@ -30,10 +30,10 @@ function ArticleCard({ item, imageType, layout = "vertical" }) {
   return (
     <StyledArticleCard title={item.title}>
       <Wrapper $layout={layout} $imageType={imageType} {...wrapperProps}>
-        {/* 渲染圖片或背景佔位 */}
-        {item.image ? (
+        {/* 圖片區塊：優先使用 thumbnail，無則 fallback image */}
+        {item.thumbnail || item.image ? (
           <StyledImage
-            src={item.image}
+            src={item.thumbnail || item.image}
             alt={item.title}
             $layout={layout}
             loading="lazy"

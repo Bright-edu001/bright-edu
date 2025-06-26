@@ -1,6 +1,7 @@
 export const enrollmentEvents = [
   {
     id: 1,
+    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/2025-02-03_UIC-申請截止日期_01.webp`,
     image: `${process.env.PUBLIC_URL}/images/blog/2025-02-03_UIC-申請截止日期_01.webp`,
     imageWidth: 300,
     imageHeight: 200,
@@ -56,7 +57,9 @@ Jul/1/2025（目前最新公布截止日、若有更新則以更新為準）
 6️⃣ MS in Accounting
 
 ✅Deadline
-▶️International students requiring a visa:
+▶️International students requiring a visa:Nov/2025（目前最新公布截止日、若有更新則以更新為準）
+▶️Student with either an F1 student visa or legal status in the U.S.:
+
 Nov/2025（目前最新公布截止日、若有更新則以更新為準）
 ▶️Student with either an F1 student visa or legal status in the U.S.:
 Nov/2025（目前最新公布截止日、若有更新則以更新為準）
@@ -64,6 +67,7 @@ Nov/2025（目前最新公布截止日、若有更新則以更新為準）
   },
   {
     id: 2,
+    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/2024-08-29_UIC-申請截止日期_01.webp`,
     image: `${process.env.PUBLIC_URL}/images/blog/2024-08-29_UIC-申請截止日期_01.webp`,
     imageWidth: 300,
     imageHeight: 200,
@@ -95,6 +99,7 @@ Nov/2025（目前最新公布截止日、若有更新則以更新為準）
   },
   {
     id: 3,
+    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/2024-04-08_UIC-申請截止日期.webp`,
     image: `${process.env.PUBLIC_URL}/images/blog/2024-04-08_UIC-申請截止日期.webp`,
     imageWidth: 300,
     imageHeight: 200,
@@ -128,6 +133,7 @@ UIC MBA台灣招生中心:https://bright-edu.com/
   },
   {
     id: 4,
+    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/擷取.webp`,
     image: `${process.env.PUBLIC_URL}/images/blog/擷取.webp`,
     imageWidth: 300,
     imageHeight: 200,
@@ -148,6 +154,7 @@ UIC MBA台灣招生中心:https://bright-edu.com/
 export const news = [
   {
     id: 5,
+    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/UIC-BEST-COLLEGE-橫幅2.webp`,
     image: `${process.env.PUBLIC_URL}/images/blog/UIC-BEST-COLLEGE-橫幅2.webp`,
     imageWidth: 320,
     imageHeight: 180,
@@ -170,6 +177,7 @@ UIC Today News:https://today.uic.edu/uic-rises-in-2025-u-s-news-best-colleges-ra
   },
   {
     id: 6,
+    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/UIC-BEST-COLLEGE-橫幅.webp`,
     image: `${process.env.PUBLIC_URL}/images/blog/UIC-BEST-COLLEGE-橫幅.webp`,
     imageWidth: 320,
     imageHeight: 180,
