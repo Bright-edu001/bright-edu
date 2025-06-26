@@ -23,6 +23,7 @@ export const StyledApplicationForm = styled.form`
     font-weight: 700;
     outline: none;
     transition: border 0.2s;
+    resize: none;
     &:focus {
       border-color: #1c184a;
     }
