@@ -77,6 +77,8 @@ function Home() {
                 className="feature-logo-img-uic"
                 src="/images/home/UIC - 網站LOGO - 03.webp"
                 alt="UIC Logo"
+                width="500"
+                height="58"
               />
               <div className="feature-card uic">
                 <img
@@ -130,6 +132,8 @@ function Home() {
                 className="feature-logo-img-msu"
                 src="/images/home/Michigan State University_01.webp"
                 alt="MSU Logo"
+                width="500"
+                height="58"
               />
               <div className="feature-card msu">
                 <img
