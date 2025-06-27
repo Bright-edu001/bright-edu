@@ -182,8 +182,10 @@
 
   /* 頁腳底部內容樣式 */
   .footer-bottom {
-    text-align: center;
-    margin: 0 auto $spacing-sm;
+    min-height: 48px; // 預留版權行高度，避免 CLS
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     p {
       margin: 0;
@@ -192,6 +194,9 @@
       line-height: 1.5; // Added explicit line-height
       text-align: center;
     }
+  }
+  .footer-section.about {
+    padding-bottom: 32px; // 預留空間，避免內容過少時高度驟降
   }
 }
 
@@ -230,7 +235,6 @@
       .footer-section {
         flex: none; /* 取消 flex 佔用空間 */
         width: 100%; /* 佔滿寬度 */
-        margin-bottom: 20px; /* 增加區塊間距 */
         text-align: center; /* 內部文字置中 */
 
         /* 隱藏不需要的區塊 */
@@ -251,6 +255,7 @@
         &.about {
           order: 1; /* 第一順位顯示 */
           align-items: center; /* 置中內部元素 */
+          padding-bottom: 0;
 
           .contact {
             margin-bottom: 0.2rem;
@@ -280,7 +285,6 @@
           order: 2; /* 第二順位顯示 */
           margin: 0; /* 移除左邊間距 */
           justify-content: center; /* 置中品牌Logo */
-          margin-bottom: 30px; /* 增加品牌區塊與底部間距 */
         }
       }
     }
