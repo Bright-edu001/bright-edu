@@ -26,13 +26,28 @@ function BlogDetail() {
   // 搜尋與分類按鈕導向由 SearchContext handleSearch, handleCategoryClick 管理
 
   if (!blog) {
-    return (
-      <div className="blog-detail-notfound">
-        <h2>找不到文章</h2>
-        <Link to="/blog">回部落格列表</Link>
-      </div>
-    );
+    return <div>找不到文章</div>;
   }
+
+  // 遞迴渲染詳細資訊的函式
+  const renderDetails = (details, isNested = false) => {
+    return details.map((detail, index) => (
+      <div key={index} className={`detail-item ${isNested ? "nested" : ""}`}>
+        <p>
+          {detail.icon && <span className="detail-icon">{detail.icon}</span>}
+          {detail.text}
+        </p>
+        {detail.list && (
+          <ul>
+            {detail.list.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        )}
+        {detail.subDetails && renderDetails(detail.subDetails, true)}
+      </div>
+    ));
+  };
 
   return (
     <div>
@@ -55,12 +70,21 @@ function BlogDetail() {
           </Link>
           <p className="blog-detail-excerpt">{blog.excerpt}</p>
           <div className="blog-detail-content">
-            {blog.content
-              .split("\n")
-              .filter((line) => line.trim() !== "")
-              .map((line, idx) => (
-                <p key={idx}>{line}</p>
-              ))}
+            {typeof blog.content === "string"
+              ? blog.content
+                  .split("\n")
+                  .filter((line) => line.trim() !== "")
+                  .map((line, idx) => <p key={idx}>{line}</p>)
+              : blog.type === "enrollment"
+              ? blog.content.map((semesterInfo, index) => (
+                  <div key={index} className="semester-section">
+                    <h2>{semesterInfo.title}</h2>
+                    {renderDetails(semesterInfo.details)}
+                  </div>
+                ))
+              : blog.type === "article" && typeof blog.content === "object"
+              ? renderDetails(blog.content.details)
+              : null}
           </div>
           <Link to="/blog" className="blog-detail-back">
             ← 返回部落格

@@ -27,9 +27,11 @@
   }
   .blog-detail-excerpt {
     font-size: 18px;
-    font-weight: 500;
     text-align: left;
     padding: 0 1.5rem;
+    @media screen and (max-width: 500px) {
+      margin: 1rem 0;
+    }
   }
   .blog-detail-category-label {
     font-size: 24px;
@@ -46,10 +48,29 @@
   }
   .blog-detail-content {
     font-size: 18px;
-    font-weight: 500;
     text-align: left;
     padding: 0 1.5rem;
     color: $color-black;
+
+    .detail-item {
+      // 預設無縮排
+      &.nested {
+        margin-left: 20px; // 套用至巢狀項目
+        @media screen and (max-width: 500px) {
+          margin-left: 0; // 手機版縮小縮排
+          ul {
+            display: flex;
+            flex-direction: column;
+            list-style-position: inside;
+            gap: $spacing-xs;
+          }
+        }
+      }
+    }
+
+    .detail-icon {
+      margin-right: 10px;
+    }
   }
 }
 
