@@ -30,11 +30,21 @@ function BlogSection({ items }) {
 function BlogSearch() {
   const { keyword } = useParams();
   const [searchResults, setSearchResults] = useState([]);
-  const { searchByKeyword } = useContext(BlogContext);
+  const { searchByKeyword, loading, error } = useContext(BlogContext);
 
   useEffect(() => {
-    setSearchResults(searchByKeyword(keyword));
-  }, [keyword, searchByKeyword]);
+    if (!loading && !error) {
+      setSearchResults(searchByKeyword(keyword));
+    }
+  }, [keyword, searchByKeyword, loading, error]);
+
+  if (loading) {
+    return <div>載入中...</div>;
+  }
+
+  if (error) {
+    return <div>讀取資料時發生錯誤: {error}</div>;
+  }
 
   return (
     <div>

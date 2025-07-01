@@ -7,8 +7,18 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 
 function BlogDetail() {
   const { id } = useParams();
-  const { enrollmentEvents, news, all } = useContext(BlogContext);
+  const { enrollmentEvents, news, all, loading, error } =
+    useContext(BlogContext);
   const blog = all.find((item) => String(item.id) === String(id));
+
+  // 新增：處理載入與錯誤狀態
+  if (loading) {
+    return <div>載入中...</div>;
+  }
+
+  if (error) {
+    return <div>讀取文章時發生錯誤: {error}</div>;
+  }
 
   // 新增：判斷分類
   let subtitle = "";

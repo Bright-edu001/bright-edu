@@ -12,7 +12,7 @@
   }
 
   .intro {
-    padding: $spacing-lg 0;
+    padding: $spacing-lg 0 $spacing-xl;
     .intro-title {
       font-size: 24px;
       font-weight: 700;
@@ -63,7 +63,7 @@
     h4 {
       font-size: 24px;
       font-weight: 700;
-      margin: $spacing-md 0;
+      margin: $spacing-md 0 $spacing-xl;
       text-align: left;
     }
   }
@@ -86,5 +86,8 @@
         margin: $spacing-sm 0;
       }
     }
+  }
+  .speech-skills {
+    margin-bottom: $spacing-lg;
   }
 }

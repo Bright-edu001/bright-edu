@@ -28,6 +28,7 @@ export const OutcomesParagraph = styled.p`
 export const ReasonsToChooseParagraph = styled(OutcomesParagraph)`
   // from .reasons-to-choose p
   font-size: 18px;
+  margin-bottom: ${spacingLg};
 `;
 
 export const SectionTitle = styled.h3`

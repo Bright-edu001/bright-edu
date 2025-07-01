@@ -3,10 +3,11 @@ import Hero from "../../components/Hero/Hero";
 import ActionButton from "../../components/ActionButton/ActionButton";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import RankingNumberFlip from "../../components/RankingNumberFlip/RankingNumberFlip";
-import { enrollmentEvents, news } from "../../data/blog";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { BlogContext } from "../../context/BlogContext";
 
 function Home() {
+  const { enrollmentEvents, news, loading, error } = useContext(BlogContext);
   const [animateRanking, setAnimateRanking] = useState(false);
   const featuresRef = useRef(null);
 
@@ -214,18 +215,34 @@ function Home() {
           <div className="blog-section enrollment-section">
             <h3 className="subsection-title">招生活動</h3>
             <div className="course-cards">
-              {enrollmentEvents.slice(0, 3).map((item) => (
-                <ArticleCard key={item.id} item={item} imageType="enrollment" />
-              ))}
+              {loading && <p>Loading...</p>}
+              {error && <p>Error: {error}</p>}
+              {!loading &&
+                !error &&
+                enrollmentEvents
+                  .slice(0, 3)
+                  .map((item) => (
+                    <ArticleCard
+                      key={item.id}
+                      item={item}
+                      imageType="enrollment"
+                    />
+                  ))}
             </div>
           </div>
 
           <div className="blog-section news-section">
             <h3 className="subsection-title">最新消息</h3>
             <div className="course-cards">
-              {news.slice(0, 3).map((item) => (
-                <ArticleCard key={item.id} item={item} imageType="news" />
-              ))}
+              {loading && <p>Loading...</p>}
+              {error && <p>Error: {error}</p>}
+              {!loading &&
+                !error &&
+                news
+                  .slice(0, 3)
+                  .map((item) => (
+                    <ArticleCard key={item.id} item={item} imageType="news" />
+                  ))}
             </div>
           </div>
         </div>

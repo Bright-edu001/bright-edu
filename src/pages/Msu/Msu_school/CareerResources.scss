@@ -7,7 +7,7 @@
     font-weight: 700;
     color: $color-msu;
     text-align: left;
-    margin: $spacing-md 0;
+    margin: $spacing-md 0 0;
   }
   .career-resources {
     h3 {
@@ -15,8 +15,7 @@
       font-weight: 700;
       color: $color-msu;
       text-align: left;
-      margin: $spacing-md 0;
-      margin-bottom: 0;
+      margin: $spacing-xs 0 0;
     }
     h4 {
       font-size: 24px;
@@ -116,7 +115,7 @@
     .virtual-resource-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      margin: $spacing-md 0;
+      margin: $spacing-md 0 $spacing-lg;
       gap: $spacing-md;
       h5 {
         font-size: 24px;

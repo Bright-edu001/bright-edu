@@ -4,13 +4,14 @@ import styled, { css } from "styled-components";
 const colorNav = "#1c184a";
 const spacingSm = "1rem";
 const spacingMd = "1.5rem";
+const spacingLg = "2rem";
 const fontSizeLg = "18px";
 
 // mixins
 const headingMedium = css`
   font-size: 24px;
   font-weight: 900;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 `;
 const labelStyle = css`
   font-size: ${fontSizeLg};
@@ -20,7 +21,7 @@ const labelStyle = css`
 export const InfoCardWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin: ${spacingMd} auto;
+  margin: ${spacingLg} auto;
   overflow: hidden;
 
   &.info-card-right {

@@ -34,7 +34,6 @@ html {
   .intro {
     position: relative;
     text-align: left;
-    margin-bottom: 3rem;
     margin-top: $spacing-lg;
 
     p {
@@ -75,7 +74,7 @@ html {
 
       .career-process-list {
         padding-left: $spacing-md;
-        margin-bottom: $spacing-md;
+        margin-bottom: $spacing-lg;
         li {
           font-size: 18px;
           list-style-type: decimal;

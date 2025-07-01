@@ -16,8 +16,8 @@
   .food-attractions-title {
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: $spacing-sm;
-    padding-top: 2rem;
+    margin: $spacing-md 0 $spacing-xs;
+    color: $color-nav;
     text-align: left;
   }
   .food-attractions-intro {
@@ -25,7 +25,7 @@
     h3 {
       font-size: 24px;
       font-weight: 700;
-      margin-bottom: $spacing-sm;
+      margin-bottom: $spacing-xs;
       color: $color-nav;
       text-align: left;
     }
@@ -88,7 +88,7 @@
   .title {
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: $spacing-sm;
+    margin-bottom: $spacing-xs;
     margin-top: $spacing-lg;
     @media screen and (max-width: 500px) {
       text-align: left;

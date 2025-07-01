@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import {
-  StyledApplicationForm,
-  StyledSectionTitle,
-  StyledConditionDesc,
-} from "./ApplicationFormStyles";
+import * as defaultStyles from "./ApplicationFormStyles";
 
-function ApplicationForm({ showCondition = true }) {
+function ApplicationForm({ showCondition = true, customStyles }) {
+  const { StyledApplicationForm, StyledSectionTitle, StyledConditionDesc } =
+    customStyles || defaultStyles;
+
   const [form, setForm] = useState({
     name: "",
     lineId: "",

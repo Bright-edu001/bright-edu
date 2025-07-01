@@ -14,10 +14,11 @@
 
     p {
       font-size: 18px;
-      margin-bottom: $spacing-sm;
       text-align: left;
     }
-
+    p:last-child {
+      margin-bottom: $spacing-lg;
+    }
     ul {
       list-style: disc;
       list-style-position: inside;

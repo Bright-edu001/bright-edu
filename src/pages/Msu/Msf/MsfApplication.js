@@ -3,6 +3,7 @@ import "./MsfApplication.scss";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import ApplicationForm from "../../../components/Application/ApplicationForm";
+import * as MsfStyles from "../../../components/Application/MsfApplicationFormStyles";
 
 function MsfApplication() {
   return (
@@ -47,7 +48,7 @@ function MsfApplication() {
           </span>
         </div>
 
-        <ApplicationForm showCondition={false} />
+        <ApplicationForm showCondition={false} customStyles={MsfStyles} />
       </SectionContainer>
     </div>
   );

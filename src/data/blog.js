@@ -1,450 +1,72 @@
-export const enrollmentEvents = [
-  {
-    id: 1,
-    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/2025-02-03_UIC-申請截止日期_01.webp`,
-    image: `${process.env.PUBLIC_URL}/images/blog/2025-02-03_UIC-申請截止日期_01.webp`,
-    imageWidth: 450,
-    imageHeight: 300,
-    title: "UIC MBA+MS Programs Application Deadline update",
-    excerpt: "UIC MBA+MS Programs Application Deadline update Fall 20 […]",
-    get link() {
-      return `/blog/${this.id}`;
-    },
-    type: "enrollment", // 新增類型欄位
-    content: [
-      // 將 content 改為陣列
-      {
-        semester: "Fall 2025",
-        title: "🇺🇸Fall 2025 秋季班資訊",
-        details: [
-          {
-            icon: "✅",
-            text: "開放申請時間:目前已經開放申請",
-          },
-          {
-            icon: "✅",
-            text: "開課日期",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "MBA：Aug/9/2025",
-                subDetails: [
-                  {
-                    icon: "📕",
-                    text: "MBA開課領域:",
-                    list: [
-                      "Strategic and International Business Management (SIM) 國際策略管理",
-                      "Business Analytics (BA) 商業分析",
-                      "Financial Markets and Asset Management (FMAM) 金融與資產管理",
-                    ],
-                  },
-                ],
-              },
-              {
-                icon: "▶️",
-                text: "MS：Aug/25/2025",
-                subDetails: [
-                  {
-                    icon: "📕",
-                    text: "MS開課領域:",
-                    list: [
-                      "MS in Supply Chain and Operations Management",
-                      "MS in Business Analytics",
-                      "MS in Finance",
-                      "MS in Mgmt Information Systems",
-                      "MS in Marketing",
-                      "MS in Accounting",
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            icon: "✅",
-            text: "Deadline",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "International students requiring a visa: Jun/1/2025 (目前最新公布截止日、若有更新則以更新為準)",
-              },
-              {
-                icon: "▶️",
-                text: "Student with either an F1 student visa or legal status in the U.S.: Jul/1/2025 (目前最新公布截止日、若有更新則以更新為準)",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        semester: "Spring 2026",
-        title: "🇺🇸Spring 2026 春季班資訊",
-        details: [
-          {
-            icon: "✅",
-            text: "開放申請時間:目前已經開放申請",
-          },
-          {
-            icon: "✅",
-            text: "開課日期",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "MBA：Jan/2025",
-                subDetails: [
-                  {
-                    icon: "📕",
-                    text: "MBA開課領域:",
-                    list: [
-                      "Strategic and International Business Management (SIM) 國際策略管理",
-                      "Business Analytics (BA) 商業分析",
-                      "Financial Markets and Asset Management (FMAM) 金融與資產管理",
-                    ],
-                  },
-                ],
-              },
-              {
-                icon: "▶️",
-                text: "MS：Jan/2025",
-                subDetails: [
-                  {
-                    icon: "📕",
-                    text: "MS開課領域:",
-                    list: [
-                      "MS in Supply Chain and Operations Management",
-                      "MS in Business Analytics",
-                      "MS in Finance",
-                      "MS in Mgmt Information Systems",
-                      "MS in Marketing",
-                      "MS in Accounting",
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            icon: "✅",
-            text: "Deadline",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "International students requiring a visa: Nov/2025 (目前最新公布截止日、若有更新則以更新為準)",
-              },
-              {
-                icon: "▶️",
-                text: "Student with either an F1 student visa or legal status in the U.S.: Nov/2025 (目前最新公布截止日、若有更新則以更新為準)",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/2024-08-29_UIC-申請截止日期_01.webp`,
-    image: `${process.env.PUBLIC_URL}/images/blog/2024-08-29_UIC-申請截止日期_01.webp`,
-    imageWidth: 450,
-    imageHeight: 300,
-    title: "UIC MBA Application Deadline update",
-    excerpt: "UIC MBA Application Deadline update Spring 2025 春季班資訊開放",
-    get link() {
-      return `/blog/${this.id}`;
-    },
-    type: "enrollment",
-    content: [
-      {
-        semester: "Spring 2025",
-        title: "🇺🇸Spring 2025 春季班資訊",
-        details: [
-          {
-            icon: "✅",
-            text: "開放申請時間:目前已經開放申請!!",
-          },
-          {
-            icon: "✅",
-            text: "開課日期",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "MBA：Jan/13/2025",
-                subDetails: [
-                  {
-                    icon: "📕",
-                    text: "MBA開課領域:",
-                    list: [
-                      "Strategic and International Business Management (SIM) 國際策略管理",
-                      "Business Analytics (BA) 商業分析",
-                      "Financial Markets and Asset Management (FMAM) 金融與資產管理",
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            icon: "✅",
-            text: "Deadline",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "All students: Nov/15/2024 (目前最新公布截止日、若有更新則以更新為準)",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        semester: "Fall 2025",
-        title: "🇺🇸Fall 2025 秋季班資訊",
-        details: [
-          {
-            icon: "✅",
-            text: "開放申請時間: Aug/1/2024",
-          },
-          {
-            icon: "✅",
-            text: "開課日期",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "MBA：Aug/25/2025",
-                subDetails: [
-                  {
-                    icon: "📕",
-                    text: "MBA開課領域:",
-                    list: [
-                      "Strategic and International Business Management (SIM) 國際策略管理",
-                      "Business Analytics (BA) 商業分析",
-                      "Financial Markets and Asset Management (FMAM) 金融與資產管理",
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            icon: "✅",
-            text: "Deadline",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "All students: N/A (目前最新公布截止日、若有更新則以更新為準)",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 3,
-    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/2024-04-08_UIC-申請截止日期.webp`,
-    image: `${process.env.PUBLIC_URL}/images/blog/2024-04-08_UIC-申請截止日期.webp`,
-    imageWidth: 450,
-    imageHeight: 300,
-    title: "UIC MBA Application Deadline update​​",
-    excerpt: "UIC MBA Application Deadline update​",
-    get link() {
-      return `/blog/${this.id}`;
-    },
-    type: "enrollment",
-    content: [
-      {
-        semester: "Fall 2024",
-        title: "🇺🇸Fall 2024秋季班資訊",
-        details: [
-          {
-            icon: "✅",
-            text: "開放申請時間: 已開放",
-          },
-          {
-            icon: "✅",
-            text: "開課日期",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "MBA：Aug/26/2024",
-                subDetails: [
-                  {
-                    icon: "📕",
-                    text: "MBA開課領域:",
-                    list: [
-                      "Strategic and International Business Management (SIM) 國際策略管理",
-                      "Financial Markets and Asset Management (FMAM) 金融與資產管理",
-                      "Management of Healthcare (MOH) 醫務管理",
-                      "Business Analytics (BA) 商業分析",
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            icon: "✅",
-            text: "Deadline",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "All students: Jun/30/2023 (目前最新公布截止日、若有更新則以更新為準)",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        semester: "Spring 2025",
-        title: "🇺🇸Spring 2025 春季班資訊",
-        details: [
-          {
-            icon: "✅",
-            text: "開放申請時間: 已開放",
-          },
-          {
-            icon: "✅",
-            text: "開課日期",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "MBA：Jan/13/2025",
-                subDetails: [
-                  {
-                    icon: "📕",
-                    text: "MBA開課領域:",
-                    list: [
-                      "Strategic and International Business Management (SIM) 國際策略管理",
-                      "Financial Markets and Asset Management (FMAM) 金融與資產管理",
-                      "Business Analytics (BA) 商業分析",
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            icon: "✅",
-            text: "Deadline",
-            subDetails: [
-              {
-                icon: "▶️",
-                text: "All students: Sep/30/2024 (目前最新公布截止日、若有更新則以更新為準)",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 4,
-    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/擷取.webp`,
-    image: `${process.env.PUBLIC_URL}/images/blog/擷取.webp`,
-    imageWidth: 450,
-    imageHeight: 300,
-    title: "Education USA美國小型教育展-高雄場​",
-    excerpt: "Education USA美國小型教育展-高雄場​",
-    get link() {
-      return `/blog/${this.id}`;
-    },
-    type: "article", // 新增類型欄位
-    content: `Education USA美國教育展高雄場來囉!🏃
-👉UIC MBA將參與此次展覽，將會由駐台招生代表現場與您諮詢申請細節及聊聊分享當地的生活喔!🧐
-屆時也會有許多美國知名大學蒞臨現場喔~歡迎大家來走走逛逛!
-🎉歡迎對前往美國留學有興趣的朋友一起來共襄盛舉!
-時間：1月14日（六）2 pm- 5 pm
-地點：高雄市立圖書館河堤分館 (高雄市三民區裕誠路1號)`,
-  },
-];
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001//api";
 
-export const news = [
-  {
-    id: 5,
-    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/UIC-BEST-COLLEGE-橫幅2.webp`,
-    image: `${process.env.PUBLIC_URL}/images/blog/UIC-BEST-COLLEGE-橫幅2.webp`,
-    imageWidth: 320,
-    imageHeight: 180,
-    title: "UIC 最新排名賀報🎉",
-    excerpt: "U.S. News 2025 最新排名",
-    get link() {
-      return `/blog/${this.id}`;
-    },
-    type: "article", // 新增類型欄位
-    content: {
-      details: [
-        {
-          text: "University of Illinois Chicago (UIC)",
-        },
-        {
-          icon: "⭐️",
-          text: "TOP 80",
-          subDetails: [
-            { text: "2025 Best National University Rankings" },
-            { icon: "🎊", text: "全美百大大學，再次往前挺進2名" },
-          ],
-        },
-        {
-          icon: "⭐️",
-          text: "TOP 39",
-          subDetails: [
-            { text: "2025 Top Public Schools" },
-            { icon: "🎊", text: "頂尖公立大學名次再次上升1名" },
-          ],
-        },
-        {
-          icon: "👉",
-          text: "想了解UIC一年制MBA課程的同學，歡迎聯繫我們或合作顧問機構喔",
-        },
-        {
-          text: "UIC Today News:https://today.uic.edu/uic-rises-in-2025-u-s-news-best-colleges-rankings/",
-        },
-      ],
-    },
-  },
-  {
-    id: 6,
-    thumbnail: `${process.env.PUBLIC_URL}/images/blog/thumbnail/UIC-BEST-COLLEGE-橫幅.webp`,
-    image: `${process.env.PUBLIC_URL}/images/blog/UIC-BEST-COLLEGE-橫幅.webp`,
-    imageWidth: 450,
-    imageHeight: 300,
-    title: "UIC U.S. NEWS Ranks 2022-2023 Best Colleges",
-    excerpt: "UIC賀報🎉",
-    get link() {
-      return `/blog/${this.id}`;
-    },
-    type: "article", // 新增類型欄位
-    content: {
-      details: [
-        {
-          text: "U.S. News & World Report 公布排名",
-        },
-        {
-          text: "University of Illinois Chicago (UIC)",
-        },
-        {
-          icon: "⭐️",
-          text: "TOP 97",
-          subDetails: [
-            { text: "2023 Top Public Schools" },
-            { text: "2023 Best National University Rankings" },
-            { icon: "🎊", text: "全美百大大學" },
-          ],
-        },
-        {
-          icon: "⭐️",
-          text: "TOP 42",
-          subDetails: [
-            { text: "2023 Top Public Schools" },
-            { icon: "🎊", text: "頂尖公立大學名次再次挺進4名" },
-          ],
-        },
-        {
-          icon: "👉",
-          text: "想了解UIC一年制MBA課程的同學，歡迎來電或來信聯繫我們!",
-        },
-      ],
-    },
-  },
-];
+// Function to process and add the public URL to image paths
+const processBlogData = (data) => {
+  const processedData = JSON.parse(JSON.stringify(data)); // Deep copy
 
-export const all = [...enrollmentEvents, ...news];
+  const updateImagePaths = (item) => {
+    if (item.thumbnail) {
+      item.thumbnail = `${process.env.PUBLIC_URL}${item.thumbnail}`;
+    }
+    if (item.image) {
+      item.image = `${process.env.PUBLIC_URL}${item.image}`;
+    }
+    return item;
+  };
+
+  if (Array.isArray(processedData)) {
+    return processedData.map(updateImagePaths);
+  } else if (typeof processedData === "object" && processedData !== null) {
+    return updateImagePaths(processedData);
+  }
+  return processedData;
+};
+
+export const getAllBlogPosts = async () => {
+  const response = await fetch(`${API_URL}/blog`);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const data = await response.json();
+  const allPosts = [...data.enrollmentEvents, ...data.news];
+  return processBlogData(allPosts);
+};
+
+export const getEnrollmentEvents = async () => {
+  const response = await fetch(`${API_URL}/enrollmentEvents`);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const data = await response.json();
+  return processBlogData(data);
+};
+
+export const getNews = async () => {
+  const response = await fetch(`${API_URL}/news`);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const data = await response.json();
+  return processBlogData(data);
+};
+
+export const getBlogPost = async (id) => {
+  const allPosts = await getAllBlogPosts();
+  // Note: This is inefficient. It's better to have a dedicated API endpoint
+  // like /api/blog/:id, but for now, we'll work with what we have.
+  return allPosts.find((post) => post.id === parseInt(id));
+};
+
+// The 'all' export is now a function that fetches the data
+export const all = async () => {
+  try {
+    const [enrollmentEvents, news] = await Promise.all([
+      getEnrollmentEvents(),
+      getNews(),
+    ]);
+    return [...enrollmentEvents, ...news];
+  } catch (error) {
+    console.error("Failed to fetch blog posts:", error);
+    return []; // Return empty array on error
+  }
+};

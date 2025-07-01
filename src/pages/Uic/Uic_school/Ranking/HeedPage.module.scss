@@ -2,50 +2,79 @@
 @import "../../../../styles/mixins"; // 引入混和
 
 .heedContainer {
-  margin-bottom: $spacing-md;
-  .contentSection {
-    h2 {
-      font-size: 24px;
-      color: $color-uic; // 使用顏色強調標題
-      margin-top: $spacing-lg;
-      margin-bottom: $spacing-xs;
-      font-weight: 700;
-      text-align: left;
-    }
+  margin-bottom: $spacing-lg;
+  padding: 0 $spacing-md; // 增加左右內邊距
+  .introSection {
+    margin-top: $spacing-md; // 為 introSection 增加上邊距
+  }
 
-    p {
-      font-size: 18px;
-      margin: $spacing-sm 0 $spacing-xs;
-      text-align: left;
-    }
+  // 統一的區塊標題樣式
+  .sectionTitle {
+    font-size: 24px;
+    color: $color-uic; // 使用 UIC 主題色
+    margin: $spacing-xs 0; // 標題和內容間距
+    font-weight: 700;
+    text-align: left;
+  }
 
-    ul {
-      list-style: disc;
-      list-style-position: inside;
-      margin-bottom: $spacing-md;
+  // 統一的段落樣式
+  .sectionParagraph {
+    font-size: 18px;
+    line-height: 1.6; // 增加行高以提升可讀性
+    text-align: left;
+  }
 
-      li {
-        font-size: 18px;
-        margin-bottom: $spacing-xs;
-        text-align: left;
-      }
-    }
+  // 統一的列表樣式
+  .sectionList {
+    list-style: disc;
+    list-style-position: inside; // 讓項目符號在內容內部
+    display: flex;
+    flex-direction: column; // 列表項目垂直排列
+    gap: $spacing-xs; // 列表項目之間的間距
+    margin: $spacing-sm 0; // 列表的上下邊距
+  }
+
+  // 統一的列表項目樣式
+  .sectionListItem {
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: left;
   }
 }
 
+// 響應式設計
 @media (max-width: 1024px) {
+  // 這個全域樣式是針對另一個組件，保持不動
   :global(.image-text-section .image-content img) {
     position: relative;
     top: 1rem;
   }
 }
 
+@media screen and (max-width: 768px) {
+  .heedContainer {
+    .sectionTitle {
+      font-size: 22px; // 在中等螢幕上稍微縮小標題
+    }
+
+    .sectionParagraph,
+    .sectionListItem {
+      font-size: 16px; // 同樣縮小內文
+    }
+  }
+}
+
 @media screen and (max-width: 500px) {
   .heedContainer {
-    .contentSection {
-      p {
-        margin: 0 auto;
-      }
+    padding: 0 $spacing-sm; // 在小螢幕上減少內邊距
+
+    .sectionTitle {
+      font-size: 20px;
+    }
+
+    .sectionParagraph,
+    .sectionListItem {
+      font-size: 16px;
     }
   }
 }

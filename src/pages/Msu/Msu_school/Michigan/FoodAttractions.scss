@@ -23,7 +23,7 @@
   grid-template-columns: repeat(3, 1fr);
   justify-items: start;
   gap: $spacing-md;
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-lg;
 }
 // 平板瀏覽調整為兩欄
 @media (max-width: 1024px) {

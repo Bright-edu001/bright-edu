@@ -138,6 +138,7 @@
 
 .ms-master-require {
   @include section-container;
+  margin-bottom: $spacing-lg;
   display: flex; // Added
   flex-direction: column; // Added
   .ms-master-require-intro {

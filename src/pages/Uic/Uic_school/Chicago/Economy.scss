@@ -7,7 +7,7 @@
     font-weight: 700;
     color: $color-black;
     text-align: left;
-    margin-top: $spacing-sm; // Space above the heading
+    margin-top: $spacing-md; // Space above the heading
     margin-bottom: $spacing-xs; // Space below the heading
     @media screen and (max-width: 500px) {
       margin-bottom: $spacing-xs; // Adjust space for smaller screens
@@ -23,7 +23,7 @@
   .financial-center-section,
   .economy-section {
     margin: 0 auto; // Center the section
-    margin-bottom: $spacing-md; // Space below each section
+    margin-bottom: $spacing-lg; // Space below each section
   }
 
   .cme-section {

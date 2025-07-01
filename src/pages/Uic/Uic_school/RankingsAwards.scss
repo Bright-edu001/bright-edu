@@ -3,7 +3,7 @@
 
 .rankings-awards-container {
   .content-section {
-    margin: 1rem 10rem;
+    margin: 1.5rem 10rem;
     @media screen and (max-width: 1024px) {
       margin: 1rem 5rem;
     }
@@ -219,6 +219,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      margin-top: $spacing-xs;
 
       .diversity-title {
         text-align: left;
@@ -262,6 +263,9 @@
     }
   }
 }
+.advantage-list {
+  margin-bottom: $spacing-xs;
+}
 
 .advantage-list,
 .standard-list {
@@ -298,6 +302,7 @@
 }
 .uic-rankings-section {
   margin-top: $spacing-xs;
+  margin-bottom: $spacing-lg;
 }
 
 @media screen and (max-width: 700px) {

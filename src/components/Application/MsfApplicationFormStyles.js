@@ -16,7 +16,7 @@ export const StyledApplicationForm = styled.form`
     max-width: 700px;
     min-width: 260px;
     align-self: center;
-    border: 1px solid #c71432;
+    border: 1px solid #19453c;
     border-radius: 6px;
     padding: 10px 12px;
     font-size: 18px;
@@ -34,7 +34,7 @@ export const StyledApplicationForm = styled.form`
   }
 
   button {
-    background: #c71432;
+    background: #19453c;
     color: #ffffff;
     border: none;
     border-radius: 6px;
@@ -75,7 +75,7 @@ export const StyledSectionTitle = styled.h2`
   font-weight: 700;
   line-height: 40px;
   margin-bottom: 1rem;
-  color: #c71432;
+  color: #19453c;
   text-align: center;
 
   @media (max-width: 700px) {
