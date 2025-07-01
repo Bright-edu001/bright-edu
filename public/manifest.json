@@ -5,15 +5,9 @@
   "icons": [
     {
       "src": "images/header/logo.webp",
-      "sizes": "192x192",
+      "sizes": "any",
       "type": "image/webp",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "images/header/logo.webp",
-      "sizes": "512x512",
-      "type": "image/webp",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "start_url": "/",
