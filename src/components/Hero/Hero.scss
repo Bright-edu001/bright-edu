@@ -36,6 +36,9 @@
       line-height: 1.2;
       display: flex;
       flex-direction: column;
+      span {
+        text-align: left;
+      }
     }
 
     p {
