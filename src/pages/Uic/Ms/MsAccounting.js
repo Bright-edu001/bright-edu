@@ -90,6 +90,11 @@ function MsAccounting() {
           coreCourseFoot={coreCourseFoot}
           reasonsTitle={reasonsTitle}
           reasonsDesc={reasonsDesc}
+          coreCoursesIntroMarginBottom={0}
+          coreCoursesListMarginBottom={
+            coreCoursesList.length === 0 ? 0 : undefined
+          }
+          coreCoursePragaphMarginBottom={0}
         />
       </SectionContainer>
     </div>

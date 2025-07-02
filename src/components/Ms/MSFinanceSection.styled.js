@@ -13,7 +13,7 @@ import {
 export const ProgramDetailsSection = styled.section`
   display: flex;
   flex-direction: column;
-  margin-top: ${spacingSm};
+  margin-top: ${spacingMd};
 `;
 
 export const OutcomesParagraph = styled.p`
@@ -47,6 +47,7 @@ export const ReasonsToChooseTitle = styled(SectionTitle)`
 
 export const WhyUicMsfDiv = styled.div`
   // from .why-uic-msf
+  margin-bottom: ${spacingMd};
   ul {
     list-style: none;
     padding-left: 0; // Reset default padding
@@ -77,6 +78,7 @@ export const WhyUicMsfDiv = styled.div`
 
 export const MsfOutcomesDiv = styled.div`
   // from .msf-outcomes
+  margin-bottom: ${spacingMd};
   ul {
     list-style: disc; // Assuming outcomes list should have discs
     list-style-position: inside; // Keep list style inside
@@ -91,6 +93,7 @@ export const MsfOutcomesDiv = styled.div`
 
 export const CompanyCoursesDiv = styled.div`
   // from .company-courses
+  margin-bottom: ${spacingMd};
   .company-logos {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -102,6 +105,7 @@ export const CompanyCoursesDiv = styled.div`
 
 export const CourseArrangementDiv = styled.div`
   // from .course-arrangement
+  margin-bottom: ${spacingMd};
   ul {
     list-style: disc;
     list-style-position: inside;
@@ -143,14 +147,11 @@ export const CoreCoursesIntroDiv = styled.div`
   ul {
     list-style: none;
     padding-left: 0;
+    margin-bottom: ${spacingSm}; // Default margin for the list
     li {
       font-size: 18px;
       color: ${colorBlack};
       text-align: left;
-      margin-bottom: ${spacingXs};
-      &:last-child {
-        margin-bottom: 0;
-      }
     }
   }
 `;
@@ -159,8 +160,8 @@ export const CoreCoursesListDiv = styled.div`
   // from .core-courses-list
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin: ${(props) => (props.hasCoreCourses ? spacingSm : "0")} 0;
-  gap: ${spacingLg};
+  margin-bottom: ${spacingMd};
+  gap: 0 ${spacingMd};
   align-items: stretch; // Added to make columns in a row have the same height
 
   @media (max-width: 768px) {
@@ -208,19 +209,14 @@ export const CoreCourseItemDiv = styled.div`
     font-size: ${fontSizeMd};
     color: ${colorBlack};
     text-align: left;
-    // If description should take remaining space and potentially scroll:
-    // flex-grow: 1;
-    // overflow-y: auto;
   }
 `;
 
 export const CoreCourseFootParagraph = styled.p`
-  // from .core-courses-foot
-  // @include value-style;
   font-size: 18px; // Assuming default from value-style
   color: ${colorBlack}; // Assuming default from value-style
   text-align: left;
-  margin-bottom: ${spacingXs};
+  margin-bottom: ${spacingMd};
 `;
 
 export const ResponsiveImg = styled.img`

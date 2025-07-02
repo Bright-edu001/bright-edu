@@ -109,7 +109,7 @@
   width: 100%; // 避免容器寬度超出
   overflow: hidden;
   .blog-detail-main {
-    padding: 2rem;
+    padding: 0 2rem;
     @media screen and (max-width: 500px) {
       padding: 2rem 1rem 0;
     }

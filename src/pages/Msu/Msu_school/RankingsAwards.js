@@ -11,8 +11,10 @@ function MsRankingsAwards() {
         <section className="ranking">
           <h3 className="ranking-title">排名與獎項</h3>
           <h3 className="ranking-subtitle">全國及全球排名亮點</h3>
-          <p>《美國新聞與世界報導》</p>
-          <p>U.S. News & World Report 2024</p>
+          <div className="ranking-highlights">
+            <p>《美國新聞與世界報導》</p>
+            <p>U.S. News & World Report 2024</p>
+          </div>
           <ul>
             <li>全美綜合大學排名第63名</li>
             <li>公立大學排名第30名</li>
@@ -43,8 +45,11 @@ function MsRankingsAwards() {
           <h3 className="ranking-subtitle">
             商學院與管理領域（Business & Management）
           </h3>
-          <p>供應鏈管理</p>
-          <p>Supply Chain Management</p>
+          <div className="supply-chain">
+            <p>供應鏈管理</p>
+            <p>Supply Chain Management</p>
+          </div>
+
           <ul>
             <li>本科排名：全美第1名</li>
             <li>研究所排名：全美第2名</li>

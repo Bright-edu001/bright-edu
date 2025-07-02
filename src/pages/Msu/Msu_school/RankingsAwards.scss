@@ -4,12 +4,15 @@
 .rankings-awards-page {
   .ranking,
   .management {
+    margin: $spacing-md 0;
+  }
+  .ranking,
+  .management {
     h3 {
       font-size: 24px;
       font-weight: 700;
       text-align: left;
       color: $color-msu;
-      margin: $spacing-md 0;
     }
     .ranking-title {
       width: 100%;
@@ -17,6 +20,9 @@
     }
     .ranking-subtitle {
       border-bottom: 1px solid $color-msu;
+    }
+    .ranking-highlights {
+      margin-top: $spacing-sm;
     }
     p {
       font-size: 18px;
@@ -42,12 +48,15 @@
   .management {
     display: flex;
     flex-direction: column;
+    .supply-chain {
+      margin-top: $spacing-sm;
+    }
   }
   .class {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin: $spacing-sm 0;
+    margin: 0;
 
     .class-item {
       text-align: left;
@@ -75,7 +84,7 @@
   .engineering {
     display: flex;
     flex-direction: column;
-    margin-bottom: $spacing-lg;
+    margin: 0 0 $spacing-lg;
     h3 {
       font-size: 24px;
       font-weight: 700;

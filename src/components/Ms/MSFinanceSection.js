@@ -39,6 +39,9 @@ function MSFinanceSection({
   extraCoursesList,
   reasonsTitle,
   reasonsDesc,
+  coreCoursesIntroMarginBottom, // 新增 prop
+  coreCoursesListMarginBottom, // 新增 prop，用於設置 CoreCoursesListDiv 的 margin-bottom
+  coreCoursePragaphMarginBottom, // 新增 prop，用於設置 CoreCourseParagraphDiv 的 margin-bottom
 }) {
   const hasCoreCoursePragaph = Array.isArray(coreCoursePragaph)
     ? coreCoursePragaph.length > 0
@@ -158,19 +161,40 @@ function MSFinanceSection({
       {/* 核心課程範例區塊 */}
       <CoreCoursesSectionDiv>
         <CoreCoursesTitle>{coreCoursesTitle}</CoreCoursesTitle>
-        <CoreCourseParagraphDiv hasContent={hasCoreCoursePragaph}>
+        <CoreCourseParagraphDiv
+          hasContent={hasCoreCoursePragaph}
+          style={
+            coreCoursePragaphMarginBottom !== undefined
+              ? { marginBottom: coreCoursePragaphMarginBottom }
+              : {}
+          }
+        >
           {Array.isArray(coreCoursePragaph) && coreCoursePragaph.length > 0
             ? coreCoursePragaph.map((p, idx) => <p key={idx}>{p}</p>)
             : coreCoursePragaph && <p>{coreCoursePragaph}</p>}
         </CoreCourseParagraphDiv>
-        <CoreCoursesIntroDiv hasContent={hasCoreCoursesIntroList}>
+        <CoreCoursesIntroDiv
+          hasContent={hasCoreCoursesIntroList}
+          style={
+            coreCoursesIntroMarginBottom !== undefined
+              ? { marginBottom: coreCoursesIntroMarginBottom }
+              : {}
+          }
+        >
           <ul>
             {(coreCoursesIntroList || []).map((item, idx) => (
               <li key={idx}>{item}</li>
             ))}
           </ul>
         </CoreCoursesIntroDiv>
-        <CoreCoursesListDiv hasCoreCourses={hasCoreCourses}>
+        <CoreCoursesListDiv
+          hasCoreCourses={hasCoreCourses}
+          style={
+            coreCoursesListMarginBottom !== undefined
+              ? { marginBottom: coreCoursesListMarginBottom }
+              : {}
+          }
+        >
           {(coreCoursesList || []).map((col, colIdx) => (
             <CoreCoursesColDiv key={colIdx}>
               {Array.isArray(col) &&
