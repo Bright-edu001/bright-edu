@@ -39,8 +39,7 @@ export const StyledApplicationForm = styled.form`
     border: none;
     border-radius: 6px;
     padding: 8px 24px;
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 18px;
     margin: 1.5rem auto 2rem;
     cursor: pointer;
     transition: background 0.2s;
@@ -57,13 +56,12 @@ export const StyledApplicationForm = styled.form`
       width: 100%;
       max-width: 100%;
       min-width: unset;
-      font-size: 1rem;
+      font-size: 18px;
       padding: 10px 8px;
     }
     button {
-      width: 90%;
-      font-size: 1rem;
-      padding: 10px 0;
+      width: 100%;
+      font-size: 18px;
       display: block;
     }
   }
@@ -92,9 +90,7 @@ export const StyledConditionDesc = styled.div`
   margin-bottom: 1rem;
 
   @media (max-width: 700px) {
-    font-size: 0.95rem;
     margin-left: 0;
-    padding: 0 16px;
-    text-align: justify;
+    text-align: left;
   }
 `;

@@ -10,6 +10,9 @@ p {
 .home-page {
   margin-top: 3rem;
   padding: 0 2rem; // 添加左右內邊距以適應小螢幕
+  @media screen and (max-width: 500px) {
+    padding: 0 1.5rem; // 在小螢幕上減少內邊距
+  }
 
   /* 按鈕樣式 - 首先定義通用按鈕外觀 */
   .btn {
