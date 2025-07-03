@@ -315,6 +315,9 @@
     font-size: 18px;
     font-weight: 400;
     text-align: left;
+    word-break: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 }
 
@@ -359,13 +362,6 @@
 
 // 響應式設計 - 最大寬度 700px
 @media (max-width: 700px) {
-  .ms-master-intro ul,
-  .ms-master-features ul,
-  .ms-master-date ul,
-  .ms-master-fiance ul,
-  .ms-master-require ul {
-    padding-left: 1.5rem;
-  }
   .ms-master-intro {
     p {
       max-width: 100%;
@@ -389,13 +385,8 @@
 
     h4,
     h3 {
-      margin-top: $spacing-lg;
       text-align: left;
     }
-  }
-
-  .ms-master-require-plan .ms-master-require-plan-list ul {
-    padding-left: 1.5rem;
   }
 
   .ms-master-require-apply-features,
