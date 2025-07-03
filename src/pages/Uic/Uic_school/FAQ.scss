@@ -47,6 +47,7 @@
               @include body-large;
               font-size: 1.1rem;
               color: $color-nav;
+              text-align: left;
             }
 
             .toggle-icon {
@@ -85,6 +86,7 @@
               text-align: left;
               margin: $spacing-xs 0;
               line-height: 1.6;
+              color: black;
             }
 
             &.expanded {

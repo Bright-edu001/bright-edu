@@ -35,22 +35,13 @@ function Transportation() {
             <div className="transportation-subblock">
               <strong>Amtrak（藍水線 Blue Water）</strong>
               <ul>
-                <li>
-                  校園旁
-                  <span className="highlight-link">
-                    Capital Area Multimodal Gateway
-                  </span>
-                  停靠
-                </li>
+                <li>校園旁 Capital Area Multimodal Gateway 停靠</li>
               </ul>
             </div>
             <div className="transportation-subblock">
               <strong>Greyhound &amp; Indian Trails 長途巴士</strong>
               <ul>
-                <li>
-                  同樣停靠於
-                  <span className="highlight-link">Multimodal Gateway</span>
-                </li>
+                <li>同樣停靠於 Multimodal Gateway</li>
               </ul>
             </div>
           </div>

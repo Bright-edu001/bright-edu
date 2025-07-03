@@ -34,6 +34,7 @@
     text-align: left;
     margin-top: $spacing-xs;
     list-style-position: inside;
+
     li {
       color: $color-msu;
       font-size: 18px;
@@ -43,9 +44,6 @@
       gap: $spacing-xs; // 小螢幕間距調整
       flex-direction: column; // 小螢幕改為縱向排列
       align-items: flex-start; // 置中
-      li {
-        text-align: center; // 小螢幕置中
-      }
     }
   }
 }
