@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Hero.scss";
 
 const heroImages = [
@@ -42,7 +42,6 @@ const heroImages = [
 
 function Hero() {
   const [heroIndex, setHeroIndex] = useState(0);
-  const imgRef = useRef(null);
   // const [currentSrc, setCurrentSrc] = useState("");
 
   useEffect(() => {
@@ -76,14 +75,13 @@ function Hero() {
           }
         />
         <img
-          ref={imgRef}
           className="hero-img"
           src={heroImages[heroIndex].src}
           alt={heroImages[heroIndex].alt}
           width="1280"
           height="600"
           loading={isFirst ? "eager" : "lazy"}
-          fetchpriority={isFirst ? "high" : undefined}
+          fetchPriority={isFirst ? "high" : "auto"}
         />
       </picture>
 
