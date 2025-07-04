@@ -4,7 +4,7 @@ import { SearchContext } from "../../context/SearchContext";
 import PropTypes from "prop-types";
 
 // 全站搜尋輸入元件，使用 SearchContext 管理狀態與行為
-function SearchBar({ placeholder }) {
+function SearchBar({ placeholder = "搜尋..." }) {
   const { keyword, setKeyword, handleSearch, handleCategoryClick } =
     useContext(SearchContext);
   const onChange = useCallback((e) => setKeyword(e.target.value), [setKeyword]);
@@ -62,7 +62,5 @@ function SearchBar({ placeholder }) {
 SearchBar.propTypes = {
   placeholder: PropTypes.string,
 };
-SearchBar.defaultProps = {
-  placeholder: "搜尋...",
-};
+
 export default React.memo(SearchBar);

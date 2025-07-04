@@ -199,6 +199,14 @@
   color: $color-nav !important;
 }
 
+.ant-menu-item-selected .nav-link-hover {
+  color: $color-nav !important;
+}
+
+.nav-link-hover:hover {
+  color: $color-uic !important;
+}
+
 /* 漢堡選單樣式 */
 .mobile-nav-toggle {
   display: none; // 預設隱藏

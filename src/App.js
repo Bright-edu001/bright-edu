@@ -1,7 +1,6 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { BlogProvider } from "./context/BlogContext";
 import { SearchProvider } from "./context/SearchContext";
-import { NavProvider } from "./context/NavContext";
 import "./App.css";
 
 // components
@@ -119,192 +118,190 @@ function App() {
   }, []);
   return (
     <Router>
-      <NavProvider>
-        <BlogProvider>
-          <SearchProvider>
-            <ErrorBoundary>
-              <div className="App">
-                <Header />
-                <main className="main-content">
-                  {/* 修改：使用 Suspense 包裹 Routes */}
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route
-                        path="/uic-business-school/uic/about-uic"
-                        element={<AboutUic />}
-                      />
-                      <Route
-                        path="/uic-business-school/uic/career-resources"
-                        element={<CareerResources />}
-                      />
-                      <Route
-                        path="/uic-business-school/mba/areas"
-                        element={<Areas />}
-                      />
-                      <Route
-                        path="/uic-business-school/mba/advantages"
-                        element={<Advantages />}
-                      />
-                      <Route
-                        path="/uic-business-school/mba/core-courses"
-                        element={<CoreCourses />}
-                      />
-                      <Route
-                        path="/uic-business-school/uic/chicago/food-attractions"
-                        element={<FoodAttractions />}
-                      />
-                      <Route
-                        path="/uic-business-school/uic/faq"
-                        element={<FAQ />}
-                      />
-                      <Route
-                        path="/uic-business-school/uic/rankings-awards"
-                        element={<RankingsAwards />}
-                      />
-                      <Route
-                        path="/uic-business-school/uic/uic_school/ranking/aacsb"
-                        element={<AacsbPage />}
-                      />
-                      <Route
-                        path="/uic-business-school/uic/uic_school/ranking/heed"
-                        element={<HeedPage />}
-                      />
-                      <Route
-                        path="/uic-business-school/uic/uic_school/ranking/ranking"
-                        element={<RankingPage />}
-                      />
-                      <Route
-                        path="/uic-business-school/mba/areas/management"
-                        element={<Management />}
-                      />
-                      <Route
-                        path="/uic-business-school/mba/areas/finance"
-                        element={<Finance />}
-                      />
-                      <Route
-                        path="/uic-business-school/mba/areas/analytics"
-                        element={<Analytics />}
-                      />
-                      <Route
-                        path="/uic-business-school/mba/areas/marketing"
-                        element={<Marketing />}
-                      />
-                      <Route
-                        path="/uic-business-school/mba/areas/human-resource"
-                        element={<HRManagement />}
-                      />
-                      <Route
-                        path="/uic-business-school/uic/chicago"
-                        element={<Chicago />}
-                      />
-                      <Route
-                        path="/uic-business-school/uic/chicago/economy"
-                        element={<Economy />}
-                      />
-                      <Route
-                        path="/uic-business-school/mba/dual-degree"
-                        element={<DualDegree />}
-                      />
-                      <Route
-                        path="/uic-business-school/mba/application"
-                        element={<Application />}
-                      />
-                      <Route
-                        path="/uic-business-school/ms/finance"
-                        element={<MSFinance />}
-                      />
-                      <Route
-                        path="/uic-business-school/ms/marketing"
-                        element={<MsMarketing />}
-                      />
-                      <Route
-                        path="/uic-business-school/ms/supply-chain-operation-management"
-                        element={<MsManagement />}
-                      />
-                      <Route
-                        path="/uic-business-school/ms/business-analytics"
-                        element={<MsAnalttics />}
-                      />
-                      <Route
-                        path="/uic-business-school/ms/application"
-                        element={<MsApplication />}
-                      />
-                      <Route
-                        path="/uic-business-school/ms/management-information-systems"
-                        element={<MsInformation />}
-                      />
-                      <Route
-                        path="/uic-business-school/ms/accounting"
-                        element={<MsAccounting />}
-                      />
-                      <Route
-                        path="/msu-business-school/msf/application"
-                        element={<MsfApplication />}
-                      />
-                      <Route
-                        path="/msu-business-school/msf/master"
-                        element={<MsuMaster />}
-                      />
-                      <Route
-                        path="/msu-business-school/msu/about-msu"
-                        element={<AboutMsu />}
-                      />
-                      <Route
-                        path="/msu-business-school/msu/rankings-awards"
-                        element={<MsRankingsAwards />}
-                      />
-                      <Route
-                        path="/msu-business-school/msu/career-resources"
-                        element={<MsCareerResources />}
-                      />
-                      <Route
-                        path="/msu-business-school/msu/east-lansing"
-                        element={<Michigan />}
-                      />
-                      <Route
-                        path="/msu-business-school/msu/east-lansing/transportation"
-                        element={<Transportation />}
-                      />
-                      <Route
-                        path="/msu-business-school/msu/east-lansing/east-lansing-food-attractions"
-                        element={<MicFoodAttractions />}
-                      />
-                      <Route
-                        path="/uic-business-school"
-                        element={
-                          <Navigate
-                            to="/uic-business-school/uic/about-uic"
-                            replace
-                          />
-                        }
-                      />
-                      <Route
-                        path="/msu-business-school"
-                        element={
-                          <Navigate
-                            to="/msu-business-school/msu/about-msu"
-                            replace
-                          />
-                        }
-                      />
-                      <Route path="/contact" element={<Contact />} />
-                      <Route path="/blog" element={<Blog />} />
-                      <Route path="/blog/:id" element={<BlogDetail />} />
-                      <Route
-                        path="/blog/search/:keyword"
-                        element={<BlogSearch />}
-                      />{" "}
-                    </Routes>
-                  </Suspense>
-                </main>
-                <Footer />
-              </div>
-            </ErrorBoundary>
-            <FloatingButtons />
-          </SearchProvider>
-        </BlogProvider>
-      </NavProvider>
+      <BlogProvider>
+        <SearchProvider>
+          <ErrorBoundary>
+            <div className="App">
+              <Header />
+              <main className="main-content">
+                {/* 修改：使用 Suspense 包裹 Routes */}
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route
+                      path="/uic-business-school/uic/about-uic"
+                      element={<AboutUic />}
+                    />
+                    <Route
+                      path="/uic-business-school/uic/career-resources"
+                      element={<CareerResources />}
+                    />
+                    <Route
+                      path="/uic-business-school/mba/areas"
+                      element={<Areas />}
+                    />
+                    <Route
+                      path="/uic-business-school/mba/advantages"
+                      element={<Advantages />}
+                    />
+                    <Route
+                      path="/uic-business-school/mba/core-courses"
+                      element={<CoreCourses />}
+                    />
+                    <Route
+                      path="/uic-business-school/uic/chicago/food-attractions"
+                      element={<FoodAttractions />}
+                    />
+                    <Route
+                      path="/uic-business-school/uic/faq"
+                      element={<FAQ />}
+                    />
+                    <Route
+                      path="/uic-business-school/uic/rankings-awards"
+                      element={<RankingsAwards />}
+                    />
+                    <Route
+                      path="/uic-business-school/uic/uic_school/ranking/aacsb"
+                      element={<AacsbPage />}
+                    />
+                    <Route
+                      path="/uic-business-school/uic/uic_school/ranking/heed"
+                      element={<HeedPage />}
+                    />
+                    <Route
+                      path="/uic-business-school/uic/uic_school/ranking/ranking"
+                      element={<RankingPage />}
+                    />
+                    <Route
+                      path="/uic-business-school/mba/areas/management"
+                      element={<Management />}
+                    />
+                    <Route
+                      path="/uic-business-school/mba/areas/finance"
+                      element={<Finance />}
+                    />
+                    <Route
+                      path="/uic-business-school/mba/areas/analytics"
+                      element={<Analytics />}
+                    />
+                    <Route
+                      path="/uic-business-school/mba/areas/marketing"
+                      element={<Marketing />}
+                    />
+                    <Route
+                      path="/uic-business-school/mba/areas/human-resource"
+                      element={<HRManagement />}
+                    />
+                    <Route
+                      path="/uic-business-school/uic/chicago"
+                      element={<Chicago />}
+                    />
+                    <Route
+                      path="/uic-business-school/uic/chicago/economy"
+                      element={<Economy />}
+                    />
+                    <Route
+                      path="/uic-business-school/mba/dual-degree"
+                      element={<DualDegree />}
+                    />
+                    <Route
+                      path="/uic-business-school/mba/application"
+                      element={<Application />}
+                    />
+                    <Route
+                      path="/uic-business-school/ms/finance"
+                      element={<MSFinance />}
+                    />
+                    <Route
+                      path="/uic-business-school/ms/marketing"
+                      element={<MsMarketing />}
+                    />
+                    <Route
+                      path="/uic-business-school/ms/supply-chain-operation-management"
+                      element={<MsManagement />}
+                    />
+                    <Route
+                      path="/uic-business-school/ms/business-analytics"
+                      element={<MsAnalttics />}
+                    />
+                    <Route
+                      path="/uic-business-school/ms/application"
+                      element={<MsApplication />}
+                    />
+                    <Route
+                      path="/uic-business-school/ms/management-information-systems"
+                      element={<MsInformation />}
+                    />
+                    <Route
+                      path="/uic-business-school/ms/accounting"
+                      element={<MsAccounting />}
+                    />
+                    <Route
+                      path="/msu-business-school/msf/application"
+                      element={<MsfApplication />}
+                    />
+                    <Route
+                      path="/msu-business-school/msf/master"
+                      element={<MsuMaster />}
+                    />
+                    <Route
+                      path="/msu-business-school/msu/about-msu"
+                      element={<AboutMsu />}
+                    />
+                    <Route
+                      path="/msu-business-school/msu/rankings-awards"
+                      element={<MsRankingsAwards />}
+                    />
+                    <Route
+                      path="/msu-business-school/msu/career-resources"
+                      element={<MsCareerResources />}
+                    />
+                    <Route
+                      path="/msu-business-school/msu/east-lansing"
+                      element={<Michigan />}
+                    />
+                    <Route
+                      path="/msu-business-school/msu/east-lansing/transportation"
+                      element={<Transportation />}
+                    />
+                    <Route
+                      path="/msu-business-school/msu/east-lansing/east-lansing-food-attractions"
+                      element={<MicFoodAttractions />}
+                    />
+                    <Route
+                      path="/uic-business-school"
+                      element={
+                        <Navigate
+                          to="/uic-business-school/uic/about-uic"
+                          replace
+                        />
+                      }
+                    />
+                    <Route
+                      path="/msu-business-school"
+                      element={
+                        <Navigate
+                          to="/msu-business-school/msu/about-msu"
+                          replace
+                        />
+                      }
+                    />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:id" element={<BlogDetail />} />
+                    <Route
+                      path="/blog/search/:keyword"
+                      element={<BlogSearch />}
+                    />{" "}
+                  </Routes>
+                </Suspense>
+              </main>
+              <Footer />
+            </div>
+          </ErrorBoundary>
+          <FloatingButtons />
+        </SearchProvider>
+      </BlogProvider>
     </Router>
   );
 }

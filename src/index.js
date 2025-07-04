@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "antd/dist/reset.css";
 
 // 引入性能監控
 import performanceMonitor from "./utils/performanceMonitor";
