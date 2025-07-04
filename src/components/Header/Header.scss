@@ -4,7 +4,7 @@
 /* 頁首基本樣式 */
 .header {
   background: $color-gray-ultralight;
-  height: 150px;
+  height: 120px;
   opacity: 100%;
   box-shadow: $shadow-sm;
   padding: 0;
@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: space-between;
     margin: 0;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
   }
 
   /* 網站標誌樣式 */
@@ -54,594 +54,130 @@
     }
   }
 
-  /* 主要導航樣式 */
+  /* 主要導航樣式 (Ant Design Menu Wrapper) */
   .header-nav {
-    div {
-      color: $color-nav;
-      font-weight: 700;
-      font-size: 16px;
-    }
-    ul {
-      display: flex;
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    flex-grow: 1; // Allow the nav to take up available space
+    display: flex;
+    justify-content: flex-end; // Align menu items to the right
 
-      li {
-        margin: 0 $spacing-sm;
-        display: flex;
-        align-items: center; /* 確認項目垂直置中 */
-      }
-
-      a {
-        text-decoration: none;
-        color: $color-nav;
-        font-weight: 700;
-        font-size: 16px;
-        transition: color 0.3s ease;
-      }
-    } // End of ul (general nav list styles)
-
-    // 特定規則：MSU密西根州立大學 子選單 (MSU金融碩士 > MSU密西根州立大學) - 預設寬度
-    // 路徑：.header .header-nav > ul.nav-links > li.dropdown-container (MSU金融碩士) > ul.dropdown-menu > li.dropdown-container (MSU密西根州立大學) > ul.dropdown-menu
-    > ul.nav-links
-      > li.dropdown-container:nth-child(3) // MSU金融碩士
-      > ul.dropdown-menu // Dropdown of MSU金融碩士
-      > li.dropdown-container:nth-child(1) // MSU密西根州立大學 (li container)
-      > ul.dropdown-menu {
-      // Submenu of MSU密西根州立大學
-      width: 140px;
-      min-width: 140px; // Explicitly set min-width
-      max-width: 140px;
-      box-sizing: border-box;
-    }
-
-    // 特定規則：MS Programs 子選單 (UIC商學院碩士 > MS Programs) - 預設寬度
-    // 路徑：.header .header-nav > ul.nav-links > li.dropdown-container (UIC商學院碩士) > ul.dropdown-menu > li.dropdown-container (MS Programs) > ul.dropdown-menu
-    > ul.nav-links
-      > li.dropdown-container:nth-child(2) // UIC商學院碩士
-      > ul.dropdown-menu // Dropdown of UIC商學院碩士
-      > li.dropdown-container:nth-child(3) // MS Programs (li container)
-      > ul.dropdown-menu {
-      // Submenu of MS Programs
-      width: 250px;
-      min-width: 250px;
-      max-width: 250px;
-      box-sizing: border-box;
-    }
-
-    // 特定規則：五大領域 子選單 (UIC商學院碩士 > MBA Programs > 五大領域) - 預設寬度
-    // 路徑：.header .header-nav > ul.nav-links > li.dropdown-container (UIC商學院碩士) > ul.dropdown-menu > li.dropdown-container (MBA Programs) > ul.dropdown-menu > li.dropdown-container (五大領域) > ul.dropdown-menu
-    > ul.nav-links
-      > li.dropdown-container:nth-child(2) // UIC商學院碩士
-      > ul.dropdown-menu // Dropdown of UIC商學院碩士
-      > li.dropdown-container:nth-child(2) // MBA Programs (li container)
-      > ul.dropdown-menu // Dropdown of MBA Programs
-      > li.dropdown-container:nth-child(1) // 五大領域 (li container)
-      > ul.dropdown-menu {
-      // Submenu of 五大領域
-      width: 190px;
-      min-width: 190px;
-      max-width: 190px;
-      box-sizing: border-box;
-    }
-
-    // UIC商學院碩士子選單寬度單獨調整
-    // 路徑：.header .header-nav > ul.nav-links > li.dropdown-container:nth-child(2) > ul.dropdown-menu
-    > ul.nav-links
-      > li.dropdown-container:nth-child(2) // UIC商學院碩士
-      > ul.dropdown-menu {
-      width: 200px;
-      min-width: 200px;
-      max-width: 200px;
-      box-sizing: border-box;
-    }
-
-    // MSU金融碩士子選單寬度單獨調整
-    // 路徑：.header .header-nav > ul.nav-links > li.dropdown-container:nth-child(3) > ul.dropdown-menu
-    > ul.nav-links
-      > li.dropdown-container:nth-child(3) // MSU金融碩士
-      > ul.dropdown-menu {
-      width: 160px;
-      min-width: 160px;
-      max-width: 160px;
-      box-sizing: border-box;
-    }
-
-    /* 下拉選單樣式 - 基本 */
-    .dropdown-container {
-      position: relative;
-
-      .dropdown-toggle {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        text-align: left;
-
-        .dropdown-arrow {
-          margin-left: 5px;
-          font-size: 0.8rem;
-          transition: $transition-normal;
-        }
-
-        &.open .dropdown-arrow {
-          transform: rotate(180deg);
-        }
-      }
-
-      .dropdown-menu {
-        position: absolute;
-        top: 150%;
-        left: -0.8rem;
-        background: $color-gray-ultralight;
-        box-shadow: $shadow-sm;
-        min-width: 140px;
-        display: none;
-        flex-direction: column;
-        border-radius: 4px;
-        overflow: visible;
-        z-index: 10;
-        padding: 0;
-
-        &.show {
-          display: flex;
-          flex-direction: column;
-        }
-
-        // 統一列表項目樣式
-        li {
-          margin: 0;
-          width: 100%;
-          padding: $spacing-xs 0; // 統一上下間距
-
-          &:first-child {
-            padding-top: 0; // 第一個項目不要上間距
-          }
-
-          &:last-child {
-            padding-bottom: 0; // 最後一個項目不要下間距
-          }
-
-          a {
-            display: block;
-            width: 100%;
-            color: $color-nav;
-            text-decoration: none;
-            padding: $spacing-xs $spacing-xs;
-            transition: $transition-normal;
-          }
-        }
-
-        // 巢狀下拉選單容器
-        .dropdown-container {
-          position: relative;
-          padding: 0; // 統一上下間距
-
-          .dropdown-toggle {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            text-align: left;
-            padding: $spacing-xs $spacing-sm;
-            border-radius: 3px;
-            transition: $transition-normal;
-
-            a {
-              flex: 1;
-              padding: 0; // 移除內部 a 標籤的 padding，避免衝突
-            }
-
-            .dropdown-arrow {
-              padding-left: 1rem;
-            }
-          } // 二級下拉選單
-          .dropdown-menu {
-            position: absolute;
-            top: 0;
-            left: 100%;
-            min-width: max-content;
-
-            &.show {
-              display: flex;
-              flex-direction: column;
-              padding: 0;
-            }
-
-            // 確認二級選單項目也是統一設定
-            li {
-              padding: 0;
-
-              a {
-                text-align: left;
-                white-space: wrap;
-              }
-            }
-
-            // 三級之後選單特殊位置調整
-            .dropdown-container .dropdown-menu {
-              // 這適用於如 .east-lansing-menu 這類的第三層或更深層的選單
-              top: -15%;
-              left: 100%; // 預設向右移動一些
-              width: 100px;
-              &.submenu-below {
-                // 當 JavaScript 偵測到遮擋時添加此 class
-                top: 100%; // 定位到其父項目下方
-                left: 0; // 與其父項目左側對齊
-                margin-left: -7px; // 重設左邊距
-                width: 140px;
-              }
-            }
-          }
-        } // 特定選單類別的樣式調整
-        &.areas-menu {
-          min-width: 190px;
-          left: 89%;
-          top: 0;
-
-          // 五大領域的第3級選單調整
-          .dropdown-container .dropdown-menu {
-            top: 1rem; // 向上移動一些
-            left: calc(100% + $spacing-md); // 向右移動
-          }
-        }
-
-        &.rankings-menu,
-        &.chicago-menu,
-        &.east-lansing-menu {
-          min-width: 140px;
-
-          // 東蘭辛選單第三級選單調整
-          .dropdown-container .dropdown-menu {
-            top: -$spacing-md; // 向上移動
-            left: calc(100% + $spacing-sm); // 向右移動
-          }
-        }
-
-        &.ms-programs-menu {
-          min-width: 320px;
-        }
-      } // Closes .dropdown-menu general rules for specific menus like .rankings-menu
-
-      // 五大領域標題樣式
-      .areas-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-        text-align: left;
-        border-radius: 3px;
-        transition: $transition-normal;
-
-        .areas-link {
-          flex: 1;
-          text-align: left;
-        }
-
-        .dropdown-arrow {
-          transition: $transition-normal;
-          transform: rotate(0deg);
-          margin-left: auto;
-
-          &.open {
-            transform: rotate(180deg);
-          }
-        }
-      }
-    }
-
-    // 通用下拉選單切換連結樣式
-    .dropdown-toggle-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      text-align: left;
-      padding: $spacing-xs $spacing-sm;
-      border-radius: 3px;
-      transition: $transition-normal;
-
-      .dropdown-arrow {
-        font-size: 0.8rem;
-        transition: $transition-normal;
-        padding-left: 1rem;
-
-        &.open {
-          transform: rotate(180deg);
-        }
-      }
-    }
-  }
-
-  /* 漢堡選單圖示 */
-  .hamburger-menu {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 20px;
-    cursor: pointer;
-
-    span {
-      height: 3px;
+    // Force the Ant Design menu to take full width and align items
+    .ant-menu-horizontal {
       width: 100%;
-      background-color: $color-black;
-      border-radius: 3px;
-      transition: all 0.3s ease;
+      justify-content: flex-end;
     }
 
-    &.active {
-      span:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-      }
-
-      span:nth-child(2) {
-        opacity: 0;
-      }
-
-      span:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
-      }
-    }
-  }
-}
-
-/* 響應式布局 - 1024px 中等螢幕調整 */
-@media (max-width: 1024px) {
-  .header .header-nav .dropdown-container .dropdown-menu li a {
-    padding: $spacing-xs $spacing-xs; // 調整中等螢幕下的選單項目間距
-  }
-  .header {
-    .header-nav {
-      // 通用規則：針對所有第二層及更深層的子選單
-      .dropdown-container
-        .dropdown-menu
-        .dropdown-container
-        .dropdown-menu.show {
-        min-width: 220px; // 其他子選單的最小寬度
-        padding: 0.5rem;
-        li {
-          a {
-            white-space: normal; /* 確保長文字可以正常換行 (修正自 wrap) */
-          }
-        }
-      }
-
-      // 特定規則：UIC 伊利諾大學芝加哥分校 子選單
-      // 路徑：.header .header-nav > ul.nav-links > li.dropdown-container (UIC商學院碩士) > ul.dropdown-menu > li.dropdown-container (UIC伊利諾) > ul.dropdown-menu
-      > ul.nav-links
-        > li.dropdown-container:nth-child(2)
-        > ul.dropdown-menu
-        > li.dropdown-container:nth-child(1)
-        > ul.dropdown-menu {
-        width: 165px;
-        min-width: auto; // 覆蓋通用的 min-width
-      }
-
-      // 特定規則：MBA Programs 子選單
-      // 路徑：.header .header-nav > ul.nav-links > li.dropdown-container (UIC商學院碩士) > ul.dropdown-menu > li.dropdown-container (MBA Programs) > ul.dropdown-menu
-      > ul.nav-links
-        > li.dropdown-container:nth-child(2)
-        > ul.dropdown-menu
-        > li.dropdown-container:nth-child(2)
-        > ul.dropdown-menu {
-        width: 160px;
-        min-width: auto; // 覆蓋通用的 min-width
-      }
-
-      // 特定規則：排名與獎項 子選單 (UIC > UIC伊利諾 > 排名與獎項)
-      > ul.nav-links
-        > li.dropdown-container:nth-child(2) // UIC商學院碩士
-        > ul.dropdown-menu
-        > li.dropdown-container:nth-child(1) // UIC 伊利諾大學芝加哥分校
-        > ul.dropdown-menu
-        > li.dropdown-container:nth-child(2) // 排名與獎項 (li container)
-        > ul.dropdown-menu.rankings-menu {
-        // 排名與獎項的實際 ul 選單
-        width: 165px;
-        min-width: auto;
-      }
-
-      // 特定規則：芝加哥城市 子選單 (UIC > UIC伊利諾 > 芝加哥城市)
-      > ul.nav-links
-        > li.dropdown-container:nth-child(2) // UIC商學院碩士
-        > ul.dropdown-menu
-        > li.dropdown-container:nth-child(1) // UIC 伊利諾大學芝加哥分校
-        > ul.dropdown-menu
-        > li.dropdown-container:nth-child(4) // 芝加哥城市 (li container)
-        > ul.dropdown-menu.chicago-menu {
-        // 芝加哥城市的實際 ul 選單
-        width: 165px;
-        min-width: auto;
-      }
-
-      // 特定規則：五大領域 子選單 (UIC > MBA Programs > 五大領域)
-      > ul.nav-links
-        > li.dropdown-container:nth-child(2) // UIC商學院碩士
-        > ul.dropdown-menu
-        > li.dropdown-container:nth-child(2) // MBA Programs
-        > ul.dropdown-menu
-        > li.dropdown-container:nth-child(1) // 五大領域 (li container)
-        > ul.dropdown-menu {
-        // 五大領域的實際 ul 選單
-        width: 165px;
-        min-width: auto;
-      }
-
-      // 特定規則：MSU密西根州立大學 子選單 (MSU金融碩士 > MSU密西根州立大學)
-      > ul.nav-links
-        > li.dropdown-container:nth-child(3) // MSU金融碩士
-        > ul.dropdown-menu
-        > li.dropdown-container:nth-child(1) // MSU密西根州立大學 (li container)
-        > ul.dropdown-menu {
-        width: 165px;
-        min-width: auto;
-      }
-
-      // 特定規則：MSF Programs 子選單 (MSU金融碩士 > MSF Programs)
-      > ul.nav-links
-        > li.dropdown-container:nth-child(3) // MSU金融碩士
-        > ul.dropdown-menu
-        > li.dropdown-container:nth-child(2) // MSF Programs (li container)
-        > ul.dropdown-menu {
-        width: 160px;
-        min-width: auto;
-      }
-
-      // 特定規則：密西根州-東蘭辛市(大學城) 子選單 (MSU金融碩士 > MSU密西根州立大學 > 密西根州-東蘭辛市(大學城))
-      > ul.nav-links // .header-nav > ul.nav-links
-        > li.dropdown-container:nth-child(3) // MSU金融碩士
-        > ul.dropdown-menu // Dropdown of MSU金融碩士
-        > li.dropdown-container:nth-child(1) // MSU密西根州立大學 (li container)
-        > ul.dropdown-menu // Submenu of MSU密西根州立大學
-        > li.dropdown-container:nth-child(4) // 密西根州-東蘭辛市(大學城) (li container)
-        > ul.dropdown-menu.east-lansing-menu {
-        // The actual ul for East Lansing
-        width: 140px;
-        min-width: 140px;
-        max-width: 140px;
-        box-sizing: border-box;
-      }
-    }
-  }
-}
-
-/* 響應式布局 - 基本 */
-@media (max-width: 820px) {
-  .header {
-    .hamburger-menu {
-      display: flex; /* 小螢幕下顯示漢堡選單 */
-    }
-
-    .header-nav {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background: $color-gray-ultralight;
+    @media (max-width: 992px) {
       display: none;
-      padding: $spacing-sm;
-      box-shadow: $shadow-sm;
+    }
+  }
 
-      &.mobile-active {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch; /* 讓列表元素填滿寬度 */
-      }
-      .nav-links {
-        flex-direction: column;
-        align-items: center; /* 讓導航項目置中 */
-        text-align: center; /* 文字居中 */
-        width: 100%;
+  // Ant Design Overrides for Header
+  .ant-menu {
+    background-color: transparent;
+    border-bottom: none;
+  }
 
-        li {
-          margin: 0;
-          padding: $spacing-xs 0; /* 統一上下間距 */
-          width: 100%;
+  .ant-menu-horizontal {
+    border-bottom: none;
+    line-height: 60px; // Match your existing header height
+  }
 
-          &:first-child {
-            padding-top: 0;
-          }
+  .ant-menu-item,
+  .ant-menu-submenu-title {
+    color: $color-nav; // Using variable from _variables.scss
+    font-size: 16px !important;
+    font-weight: 700 !important;
 
-          &:last-child {
-            padding-bottom: 0;
-          }
+    &:hover {
+      color: $color-uic; // Using variable from _variables.scss
+    }
+  }
 
-          a {
-            text-align: center; /* 文字居中顯示 */
-            padding: $spacing-sm;
-            display: block;
-            width: 100%;
-          }
-        }
-        .dropdown-container {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center; /* 讓內容置中 */
+  .ant-menu-submenu {
+    &:hover {
+      border-bottom: none !important;
+    }
+  }
 
-          .dropdown-toggle {
-            justify-content: center; /* 文字與箭頭都居中 */
-            text-align: center;
-            padding: $spacing-sm;
-            width: 100%;
+  .ant-menu-item-selected {
+    color: $color-uic !important;
+    border-bottom: none !important;
+  }
 
-            .dropdown-arrow {
-              margin-left: $spacing-xs; /* 箭頭與文字的間距 */
-            }
-          }
+  .ant-menu-submenu-title {
+    &:hover {
+      color: $color-uic !important;
+    }
+  }
 
-          .dropdown-menu {
-            position: static; /* 移除絕對定位使其自然展開 */
-            box-shadow: none;
-            width: 100%;
-            padding: 0;
-            background: transparent;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            max-height: 0;
+  .ant-menu-submenu-arrow {
+    color: $color-nav;
+  }
+}
 
-            &.show {
-              max-height: 800px;
-              padding: $spacing-sm 0;
-            }
+.ant-menu-light .ant-menu-item-selected {
+  background-color: transparent !important;
+}
 
-            li {
-              padding: $spacing-xs 0;
+.ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title {
+  color: $color-nav !important;
+}
 
-              a {
-                text-align: center; /* 子選單文字置中對齊 */
-                padding: $spacing-sm;
-                border-radius: 3px;
-                display: block;
-                width: 100%;
-              }
-            }
+.ant-menu-light.ant-menu-horizontal > .ant-menu-item:hover::after,
+.ant-menu-light.ant-menu-horizontal > .ant-menu-item-active::after,
+.ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected::after,
+.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu:hover::after,
+.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-active::after,
+.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-selected::after {
+  border-bottom: none !important;
+}
 
-            // 巢狀下拉選單樣式 - 手機版展開
-            .dropdown-container {
-              .dropdown-toggle {
-                padding: $spacing-sm; /* 統一文字間距 */
+.ant-menu-light.ant-menu-horizontal > .ant-menu-item::after,
+.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu::after {
+  display: none !important;
+}
 
-                border-radius: 3px;
-                text-align: center;
-                justify-content: center;
-              }
+// Submenu styles - Placed outside .header to apply globally to the popups
+.ant-menu-submenu-popup {
+  .ant-menu-item,
+  .ant-menu-submenu-title {
+    font-size: 16px !important;
+    color: $color-nav !important;
+    font-weight: 700 !important;
+  }
+}
 
-              .dropdown-menu {
-                position: static; /* 確認堆疊展開 */
-                margin: 0;
-                width: 100%;
-                li a {
-                  padding: 0.5rem; /* 三級選單同樣居中 */
-                  text-align: center;
-                }
-              }
-            }
-          } // 五大領域手機版樣式
-          .areas-header {
-            justify-content: center; /* 居中顯示 */
-            text-align: center;
-            border-radius: 3px;
-            .areas-link {
-              text-align: center;
-              flex: 1;
-            }
-          }
+// Mobile Drawer Styles - Placed outside .header to apply globally to the portal
+.mobile-drawer {
+  .ant-drawer-body {
+    padding: 0;
+  }
 
-          // 統一手機版下拉選單切換連結樣式
-          .dropdown-toggle-link {
-            justify-content: center; /* 居中顯示 */
-            text-align: center;
-            padding: $spacing-sm;
-            border-radius: 3px;
-            .dropdown-arrow {
-              padding-left: 0.5rem; /* 箭頭與文字的間距 */
-              margin-right: -1rem;
-            }
-          }
-        }
-      }
+  .ant-menu-item,
+  .ant-menu-submenu-title {
+    font-size: 16px !important;
+    color: $color-nav !important;
+    font-weight: 700 !important;
+    -webkit-tap-highlight-color: transparent; // Remove tap highlight on mobile
+
+    &:active {
+      background-color: transparent !important;
+    }
+  }
+
+  .ant-menu-item-selected,
+  .ant-menu-item-active:not(.ant-menu-item-selected),
+  .ant-menu-submenu-title:active {
+    background-color: transparent !important;
+  }
+
+  .ant-menu-vertical {
+    border-right: none;
+  }
+
+  @media (max-width: 500px) {
+    .ant-drawer-content-wrapper {
+      width: 100% !important;
     }
   }
 }
@@ -655,6 +191,46 @@
   height: 100%;
 }
 
-.mba-management-sub {
-  font-size: 14px;
+.ant-menu-sub.ant-menu-inline {
+  background: $color-gray-ultralight !important;
+}
+
+.nav-link-color {
+  color: $color-nav !important;
+}
+
+/* 漢堡選單樣式 */
+.mobile-nav-toggle {
+  display: none; // 預設隱藏
+
+  @media (max-width: 992px) {
+    display: flex; // 在行動裝置上顯示
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  span {
+    height: 3px;
+    width: 100%;
+    background-color: $color-black;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  &.active {
+    span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+  }
 }
