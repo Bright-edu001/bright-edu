@@ -8,8 +8,8 @@
     margin-top: $spacing-md;
   }
   h3 {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
     color: $color-nav;
     text-align: left;
     margin-bottom: $spacing-xs;
@@ -25,8 +25,8 @@
 .ms-application-requirements {
   h4 {
     color: $color-uic;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
     margin-top: $spacing-sm;
     text-align: left;
     @media screen and (max-width: 700px) {
@@ -36,7 +36,7 @@
 
   p {
     margin-bottom: $spacing-sm;
-    font-size: 18px;
+    font-size: $font-size-lg;
     color: $color-black;
     text-align: left;
     @media screen and (max-width: 700px) {
@@ -49,7 +49,7 @@
     list-style-position: inside;
 
     li {
-      font-size: 18px;
+      font-size: $font-size-lg;
       color: $color-black;
       text-align: left;
     }
@@ -65,7 +65,7 @@
 
     li {
       list-style: disc;
-      font-size: 18px;
+      font-size: $font-size-lg;
       color: $color-black;
       margin-top: $spacing-sm; // 與上方間距
     }
@@ -76,8 +76,8 @@
     div {
       margin-bottom: $spacing-sm;
       strong {
-        font-size: 18px;
-        font-weight: 500;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-medium;
         color: $color-black;
       }
     }

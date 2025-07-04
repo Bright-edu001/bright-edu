@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import { RouterProvider } from "react-router-dom";
+import router from "./router"; // 引入新的路由設定
 
 // 引入性能監控
 import performanceMonitor from "./utils/performanceMonitor";
@@ -26,4 +27,4 @@ if ("serviceWorker" in navigator) {
 performanceMonitor.init();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(<RouterProvider router={router} />);

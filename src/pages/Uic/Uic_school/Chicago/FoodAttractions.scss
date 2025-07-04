@@ -10,12 +10,12 @@
 
   .food-attractions-description,
   .food-attractions-text {
-    font-size: 18px;
+    font-size: $font-size-lg;
     text-align: left;
   }
   .food-attractions-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
     margin: $spacing-md 0 $spacing-xs;
     color: $color-nav;
     text-align: left;
@@ -23,14 +23,14 @@
   .food-attractions-intro {
     margin-top: $spacing-lg;
     h3 {
-      font-size: 24px;
-      font-weight: 700;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
       margin-bottom: $spacing-xs;
       color: $color-nav;
       text-align: left;
     }
     p {
-      font-size: 18px;
+      font-size: $font-size-lg;
       text-align: left;
       margin-bottom: $spacing-md;
     }
@@ -86,8 +86,8 @@
     }
   }
   .title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
     margin-bottom: $spacing-xs;
     margin-top: $spacing-lg;
     @media screen and (max-width: 500px) {

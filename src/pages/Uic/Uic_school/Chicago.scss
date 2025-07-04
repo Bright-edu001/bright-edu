@@ -4,14 +4,14 @@
   .chicago-intro {
     margin: $spacing-md 0;
     .intro-title {
-      font-size: 24px;
-      font-weight: 700;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
       color: $color-nav;
       text-align: left;
       margin-bottom: $spacing-sm;
     }
     .intro-text {
-      font-size: 18px;
+      font-size: $font-size-lg;
       color: $color-black;
       text-align: left;
     }
@@ -24,8 +24,8 @@
     align-items: center;
     margin-bottom: $spacing-md;
     h2 {
-      font-size: 24px;
-      font-weight: 700;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
       color: $color-black;
     }
   }
@@ -45,7 +45,7 @@
       .transport-text {
         text-align: left;
         p {
-          font-size: 18px;
+          font-size: $font-size-lg;
           color: $color-black;
           text-align: left;
         }

@@ -14,7 +14,7 @@
       margin-bottom: $spacing-md;
       .section-title {
         font-size: 24px;
-        font-weight: 700;
+        font-weight: $font-weight-bold;
         border-bottom: 2px solid $color-nav;
         color: $color-uic;
         padding-bottom: $spacing-sm;
@@ -81,12 +81,12 @@
             padding: 0 1rem;
 
             p {
-              font-size: 18px;
-              font-weight: 500;
+              font-size: $font-size-lg;
+              font-weight: $font-weight-medium;
               text-align: left;
               margin: $spacing-xs 0;
               line-height: 1.6;
-              color: black;
+              color: $color-black;
             }
 
             &.expanded {

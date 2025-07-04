@@ -4,8 +4,8 @@
 
 .mba-areas-hero {
   height: 80px;
-  background-color: #c71432;
-  color: #fff;
+  background-color: $color-uic;
+  color: $color-white;
   text-align: center;
   display: flex;
   align-items: center;
@@ -16,7 +16,7 @@
   max-width: 1440px;
   margin: 0 auto 2rem;
   padding: 2rem 0 0;
-  color: #3a2c13;
+  color: $color-text-dark-brown;
   font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
   .mba-areas-desc-wrapper {
     margin-bottom: $spacing-md;
@@ -32,14 +32,14 @@
 
 .mba-areas-desc {
   text-align: left;
-  font-size: 18px;
+  font-size: $font-size-lg;
   color: $color-black;
 }
 
 .mba-areas-why {
   .mba-areas-why-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
     color: $color-nav;
     text-align: left;
     margin-bottom: $spacing-xs;
@@ -52,12 +52,12 @@
     text-align: left;
     li {
       margin-bottom: 0.5rem;
-      font-size: 1rem;
+      font-size: $font-size-sm;
       color: $color-black;
       .highlight {
         color: $color-uic;
-        font-size: 18px;
-        font-weight: 700;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
       }
     }
   }
@@ -65,9 +65,9 @@
 
 .mba-areas-advantage {
   .mba-areas-advantage-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1c184a;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-nav;
     text-align: left;
     margin-bottom: $spacing-xs;
     border-bottom: 1px solid $color-uic;
@@ -78,13 +78,13 @@
     margin: $spacing-sm auto;
     text-align: left;
     li {
-      font-size: 1rem;
+      font-size: $font-size-sm;
       line-height: 1.7;
       color: $color-uic;
       .highlight {
         color: $color-uic;
-        font-size: 18px;
-        font-weight: 700;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
       }
     }
   }
@@ -94,8 +94,8 @@
   margin: $spacing-sm 0 0;
   .mba-areas-concentrations-title {
     text-align: left;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
     color: $color-nav;
     margin-bottom: $spacing-md;
     border-bottom: 1px solid $color-uic;
@@ -106,8 +106,8 @@
     gap: 2rem;
     justify-items: start;
     .mba-areas-concentration-card {
-      background: #ebebeb;
-      border: 1px solid #ebebeb;
+      background: $color-gray-card-bg;
+      border: 1px solid $color-gray-card-bg;
       border-radius: 10px;
       padding: 1.5rem 1.5rem;
       width: 400px;
@@ -121,22 +121,22 @@
 
       &:hover,
       &:focus {
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-        background: #f8f9fa;
+        box-shadow: $shadow-lg;
+        background: $color-gray-lighter;
         transform: translateY(-4px) scale(1.03);
         text-decoration: none;
       }
 
       .concentration-title {
         color: $color-nav;
-        font-size: 24px;
-        font-weight: 700;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
         margin-bottom: 0.5rem;
         text-align: left;
       }
       .concentration-desc {
         color: $color-black;
-        font-size: 18px;
+        font-size: $font-size-lg;
         text-align: left;
       }
     }
@@ -159,8 +159,8 @@
     gap: 2rem;
     justify-items: center;
     .mba-areas-concentration-card {
-      background: #ebebeb;
-      border: 1px solid #ebebeb;
+      background: $color-gray-card-bg;
+      border: 1px solid $color-gray-card-bg;
       border-radius: 10px;
       padding: 1.5rem 1.5rem;
       width: 300px;
@@ -174,8 +174,8 @@
 
       &:hover,
       &:focus {
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-        background: #f8f9fa;
+        box-shadow: $shadow-lg;
+        background: $color-gray-lighter;
         transform: translateY(-4px) scale(1.03);
         text-decoration: none;
       }

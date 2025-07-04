@@ -6,8 +6,8 @@
   .section {
     margin-bottom: $spacing-md;
     .section-title {
-      font-size: 24px;
-      font-weight: 700;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
       margin-top: $spacing-md;
       color: $color-nav;
       text-align: left;
@@ -18,8 +18,8 @@
       }
     }
     .section-subtitle {
-      font-size: 24px;
-      font-weight: 700;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
       text-align: left;
       color: $color-uic;
       margin-bottom: $spacing-sm;
@@ -27,7 +27,7 @@
     }
     .section-content {
       p {
-        font-size: 18px;
+        font-size: $font-size-lg;
         color: $color-black;
         margin-bottom: $spacing-xs;
         text-align: left;
@@ -40,10 +40,10 @@
 
   .intro {
     text-align: center;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
     margin-bottom: 30px;
-    color: #444;
+    color: $color-gray-dark;
   }
 
   .course-list {
@@ -51,7 +51,7 @@
       margin-bottom: $spacing-sm;
       list-style-position: inside;
       li {
-        font-size: 18px;
+        font-size: $font-size-lg;
         text-align: left;
         color: $color-black;
       }
@@ -59,8 +59,8 @@
   }
   .conclusion {
     text-align: left;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
     color: $color-black;
     margin-bottom: $spacing-lg;
   }

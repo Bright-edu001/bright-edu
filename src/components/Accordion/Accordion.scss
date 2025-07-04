@@ -1,15 +1,12 @@
 @import "../../styles/_variables.scss";
 
-// 臨時變數定義（如果導入失敗）
-$color-gray-light: #e0e0e0 !default;
-
 .accordion {
   display: flex;
   flex-direction: column;
 }
 
 .faq-item {
-  margin-bottom: 1rem;
+  margin-bottom: $spacing-sm;
   border-bottom: 1px solid $color-gray-light;
 }
 
@@ -17,18 +14,18 @@ $color-gray-light: #e0e0e0 !default;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0;
+  padding: $spacing-sm 0;
   cursor: pointer;
-  font-size: 1.1rem;
-  color: #333;
+  font-size: $font-size-md;
+  color: $color-text-primary;
 }
 
 .question.expanded {
-  font-weight: 600;
+  font-weight: $font-weight-semibold;
 }
 
 .toggle-icon {
-  font-size: 1.25rem;
+  font-size: $font-size-lg;
   line-height: 1;
 }
 
@@ -45,5 +42,5 @@ $color-gray-light: #e0e0e0 !default;
 
 .answer.expanded {
   transform: scaleY(1);
-  padding-bottom: 0.75rem;
+  padding-bottom: $spacing-sm;
 }

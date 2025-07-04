@@ -19,7 +19,7 @@
     }
     p {
       color: $color-text-primary;
-      font-size: 18px;
+      font-size: $font-size-lg;
       margin-bottom: $spacing-xs;
       max-width: 1400px;
     }
@@ -34,8 +34,8 @@
       margin-bottom: 2rem;
 
       h3 {
-        font-size: 24px;
-        font-weight: 900;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-black;
         color: $color-uic;
         text-align: left; // 標題靠左對齊
         margin-bottom: $spacing-xs;
@@ -56,7 +56,7 @@
           margin-bottom: 10px; // 區塊下方間距
 
           .label {
-            font-size: 18px;
+            font-size: $font-size-lg;
             color: $color-black;
           }
 
@@ -66,9 +66,9 @@
           }
 
           .stats-value-detail {
-            font-size: 16px;
-            font-weight: 400;
-            color: #c71432; // UIC red
+            font-size: $font-size-sm;
+            font-weight: $font-weight-normal;
+            color: $color-uic; // UIC red
           }
         }
       }
@@ -80,8 +80,8 @@
       position: relative;
       margin-bottom: 0;
       h3 {
-        font-size: 24px;
-        font-weight: 900;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-black;
         margin-bottom: $spacing-xs;
         color: $color-uic;
         text-align: left; // 標題靠左對齊

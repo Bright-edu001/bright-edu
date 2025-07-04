@@ -29,14 +29,14 @@
 
       .rankings-title {
         h2 {
-          font-size: 24px;
-          font-weight: 700;
+          font-size: $font-size-xl;
+          font-weight: $font-weight-bold;
           color: $color-black;
         }
       }
     }
     .rankings-intro {
-      font-size: 18px;
+      font-size: $font-size-md;
       color: $color-black;
       text-align: left;
     }
@@ -62,8 +62,8 @@
           width: 100%;
 
           .top-label {
-            font-size: 32px;
-            font-weight: 600;
+            font-size: $font-size-xxl;
+            font-weight: $font-weight-semibold;
             color: $color-uic;
             margin: 0;
             padding: 0;
@@ -71,14 +71,14 @@
           }
 
           .rank-number {
-            font-weight: 700;
-            font-size: 48px;
+            font-weight: $font-weight-bold;
+            font-size: $font-size-number;
             color: $color-uic;
           }
         }
         .rank-description,
         .rank-sub-description {
-          font-size: 18px;
+          font-size: $font-size-md;
           color: $color-black;
           text-align: left;
         }
@@ -91,8 +91,8 @@
 .content-section {
   margin: $spacing-xl auto;
   .intro-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
     color: $color-nav;
     text-align: left;
     margin-bottom: $spacing-xs;

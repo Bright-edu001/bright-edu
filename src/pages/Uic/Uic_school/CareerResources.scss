@@ -7,25 +7,25 @@ html {
   overflow-x: hidden;
 }
 .intro-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
   color: $color-nav;
   margin-bottom: $spacing-xs;
 }
 .career-list-item {
-  font-weight: 700;
+  font-weight: $font-weight-bold;
   font-size: $font-size-xl;
   line-height: 40px;
 }
 .career-resources-intro-list {
-  font-size: 20px;
+  font-size: $font-size-xl;
   margin-top: $spacing-sm;
   list-style: none;
 }
 .career-resources {
   overflow-x: hidden;
   h3 {
-    font-size: 24px;
+    font-size: $font-size-xl;
     margin-bottom: $spacing-xs;
     color: $color-uic;
     text-align: left;
@@ -37,7 +37,7 @@ html {
     margin-top: $spacing-lg;
 
     p {
-      font-size: 18px;
+      font-size: $font-size-lg;
       color: $color-text-primary;
     }
 
@@ -45,11 +45,11 @@ html {
       list-style: disc;
       padding-left: $spacing-md;
       li {
-        font-size: 18px;
+        font-size: $font-size-lg;
         margin-top: $spacing-sm;
         color: $color-nav;
         div {
-          font-size: 16px;
+          font-size: $font-size-sm;
           color: $color-gray-medium;
         }
       }
@@ -76,7 +76,7 @@ html {
         padding-left: $spacing-md;
         margin-bottom: $spacing-lg;
         li {
-          font-size: 18px;
+          font-size: $font-size-lg;
           list-style-type: decimal;
           color: $color-black;
         }

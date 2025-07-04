@@ -3,8 +3,8 @@
 @import "./mba-common";
 
 .mba-application-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
   color: $color-nav;
   text-align: left;
   margin-top: $spacing-md;
@@ -13,7 +13,7 @@
 .mba-application-desc {
   margin-top: $spacing-xs;
   p {
-    font-size: 18px;
+    font-size: $font-size-lg;
     color: $color-black;
     text-align: left;
   }
@@ -25,15 +25,15 @@
   text-align: left;
   margin: $spacing-md 0;
   .mba-info-section-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
     color: $color-black;
     text-align: left;
   }
   .mba-info-list {
     padding: 0 $spacing-md;
     li {
-      font-size: 18px;
+      font-size: $font-size-lg;
       color: $color-black;
       margin-top: $spacing-sm;
     }

@@ -7,18 +7,37 @@ $color-gray: #ddd; // 原 $gray
 $color-gray-light: #e0e0e0; // 輕灰色背景
 $color-gray-lighter: #f9f9f9; // 更輕的灰色背景
 $color-gray-lightest: #f0f0f0; // 最輕的灰色背景
+$color-gray-card-bg: #ebebeb; // 卡片背景灰色
 $color-gray-ultralight: #f6f6f9; // 超輕灰色背景
 $color-gray-medium: #9c9c9c; // 中灰色文字
 $color-gray-dark: #717185; // 深灰色文字
+$color-text-dark: #333; // 深色文字
 $color-brown-text: #3a2c13; // 棕色文字（特殊用途）
 $color-background-main: #fbefe2; // 原 $main
+$color-gray-input-bg: #f2f3f5; // 輸入框背景灰色
+$color-gray-sidebar-bg: #fafbfc; // 側邊欄背景灰色
+
+/* 背景遮罩 */
+$color-bg-mask: rgba(231, 227, 227, 0.4); // 圖片遮罩
+$color-bg-text-content: rgba(0, 0, 0, 0.7); // 文字區塊背景遮罩
 
 /* 主題顏色變數 - 從其他檔案整合而來 */
 $color-msu: #19453c; // MSU 專用顏色（文字/邊框通用）
 $color-uic: #c71432; // UIC 專用顏色（文字/邊框通用）
+$color-react-link: #61dafb; // React 預設連結顏色
 
 /* 字體變數 - 網站字體設定 */
 $font-family-base: "Inter", sans-serif;
+
+/* 字體粗細 */
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+/* 文字顏色 */
+$color-text-dark-brown: #3a2c13; // 深棕色文字
 
 /* 常用字體大小 */
 $font-size-xs: 14px;
@@ -33,7 +52,7 @@ $font-size-number: 48px;
 @mixin paragraph-style {
   font-family: "Inter";
   font-style: normal;
-  font-weight: 700;
+  font-weight: $font-weight-bold;
   font-size: $font-size-xl;
   line-height: 40px;
 }
@@ -41,32 +60,32 @@ $font-size-number: 48px;
 /* 標題樣式混合器 */
 @mixin heading-large {
   font-size: $font-size-xxl;
-  font-weight: 900;
+  font-weight: $font-weight-black;
   line-height: 39px;
 }
 
 @mixin heading-medium {
   font-size: 1.8rem;
-  font-weight: 900;
+  font-weight: $font-weight-black;
   margin-bottom: 1.5rem;
 }
 
 /* 正文樣式混合器 */
 @mixin body-large {
   font-size: $font-size-xl;
-  font-weight: 700;
+  font-weight: $font-weight-bold;
   line-height: 40px;
 }
 
 @mixin label-style {
   font-size: $font-size-lg;
-  font-weight: 400;
+  font-weight: $font-weight-normal;
   line-height: 26px;
 }
 
 @mixin value-style {
   font-size: $font-size-xl;
-  font-weight: 700;
+  font-weight: $font-weight-bold;
   line-height: 40px;
 }
 
@@ -96,6 +115,9 @@ $breakpoint-xl: 1920px; /* 大螢幕螢幕 */
 /* 陰影變數 - 卡片陰影效果 */
 $shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
 $shadow-md: 0 5px 15px rgba(0, 0, 0, 0.05);
+$shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
+$shadow-input: 0 1px 2px rgba(0, 0, 0, 0.03);
+$shadow-sidebar: 0 2px 8px rgba(0, 0, 0, 0.04);
 
 /* 動畫變數 - 過渡與動畫效果 */
 $transition-normal: all 0.3s ease;

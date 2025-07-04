@@ -4,13 +4,13 @@
 
 .mba-courses-page {
   .intro {
-    font-size: 18px;
+    font-size: $font-size-lg;
     margin: $spacing-xs 0 $spacing-sm;
     text-align: left;
   }
   .intro-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
     color: $color-nav;
     text-align: left;
   }
@@ -43,14 +43,14 @@
         text-align: left;
         color: $color-uic;
         h4 {
-          font-size: 24px;
-          font-weight: 700;
+          font-size: $font-size-xl;
+          font-weight: $font-weight-bold;
           margin-bottom: 0.5rem;
           text-align: left;
         }
         h3 {
-          font-size: 18px;
-          font-weight: 700;
+          font-size: $font-size-lg;
+          font-weight: $font-weight-bold;
         }
       }
 
@@ -58,7 +58,7 @@
       .course-desc {
         flex: 1;
         p {
-          font-size: 18px;
+          font-size: $font-size-lg;
           color: $color-black;
           text-align: left;
         }
@@ -74,8 +74,8 @@
       width: 100%; // 保持寬度最大化
       border-top: 1px solid $color-uic;
       h3 {
-        font-size: 24px;
-        font-weight: 700;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
         text-align: left;
         margin: $spacing-md 0 $spacing-xs;
         color: $color-uic;
@@ -83,7 +83,7 @@
       ul {
         padding-left: 1rem;
         li {
-          font-size: 18px;
+          font-size: $font-size-lg;
           color: $color-black;
           text-align: left;
         }

@@ -18,13 +18,13 @@
     width: 50%;
 
     .text-content {
-      background: rgba(0, 0, 0, 0.7);
+      background: $color-bg-text-content;
       width: 100%;
 
       h2,
       h3 {
         @include value-style; // 使用 mixin 定義標題樣式
-        font-weight: 900;
+        font-weight: $font-weight-black;
         color: $color-white; // 設置標題顏色
         margin-bottom: $spacing-xs; // 設置標題下方間距
       }
@@ -32,7 +32,7 @@
       p {
         @include value-style; // 使用 mixin 定義段落樣式
         font-size: $font-size-lg;
-        font-weight: 900;
+        font-weight: $font-weight-black;
         color: $color-white; // 設置文字顏色
         text-align: center;
       }
@@ -59,7 +59,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(231, 227, 227, 0.4); // hero背景遮罩
+  background: $color-bg-mask; // hero背景遮罩
   z-index: 0;
   pointer-events: none;
 }

@@ -34,7 +34,7 @@
       font-size: 3rem;
       margin-top: $spacing-md;
       line-height: 1.2;
-      font-weight: 700;
+      font-weight: $font-weight-bold;
       display: flex;
       flex-direction: column;
       span {
@@ -73,7 +73,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(231, 227, 227, 0.404);
+  background: $color-bg-mask;
   z-index: 0;
   pointer-events: none;
 }

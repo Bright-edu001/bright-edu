@@ -37,8 +37,8 @@
         .section-title {
           margin-bottom: $spacing-sm;
           color: $color-nav;
-          font-size: 18px;
-          font-weight: bold;
+          font-size: $font-size-md;
+          font-weight: $font-weight-bold;
           width: 180px;
           height: 24px; /* 設定標題高度以確保對齊 */
           display: flex;
@@ -62,7 +62,7 @@
 
             a {
               color: $color-gray-dark;
-              font-size: 16px;
+              font-size: $font-size-sm;
               text-decoration: none;
 
               &:hover {
@@ -83,8 +83,8 @@
 
           .contact-title {
             color: $color-nav;
-            font-size: 18px;
-            font-weight: 700;
+            font-size: $font-size-md;
+            font-weight: $font-weight-bold;
             text-align: left;
             min-height: 24px; /* 新增：確保標題有最小高度 */
             display: flex; /* 新增：使其可以設定 align-items */
@@ -95,7 +95,7 @@
           .contact-phone {
             width: 100%;
             color: $color-gray-dark;
-            font-size: 16px;
+            font-size: $font-size-sm;
             font-style: normal;
             text-align: left;
             margin-left: 0;
