@@ -16,7 +16,6 @@
     "react-router-dom": "^6.18.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.10.1",
-    "rsuite": "^5.79.1",
     "styled-components": "^6.1.18",
     "web-vitals": "^2.1.4"
   },
@@ -28,9 +27,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "set \"GENERATE_SOURCEMAP=true\" && react-scripts build",
     "build:prod": "set GENERATE_SOURCEMAP=false && react-scripts build",
-    "analyze": "npx source-map-explorer 'build/static/js/*.js'",
+    "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'",
     "analyze:performance": "node scripts/analyze-performance.js",
     "heroku-postbuild": "npm run build:prod",
     "test": "react-scripts test",

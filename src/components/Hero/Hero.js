@@ -81,7 +81,7 @@ function Hero() {
           width="1280"
           height="600"
           loading={isFirst ? "eager" : "lazy"}
-          fetchPriority={isFirst ? "high" : "auto"}
+          fetchpriority={isFirst ? "high" : "auto"}
         />
       </picture>
 
