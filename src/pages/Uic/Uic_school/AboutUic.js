@@ -113,7 +113,10 @@ function AboutUic() {
                   <span className="text">TOP</span>
                   <span className="number">39</span>
                 </span>
-                <span className="value">2025 全美公立大學 U.S.NEWS.</span>
+                <span className="value">
+                  2025 全美公立大學
+                  <br /> U.S.NEWS.
+                </span>
               </li>
               <li>
                 <span className="label">
@@ -130,7 +133,11 @@ function AboutUic() {
                   <span className="text">TOP</span>
                   <span className="number">80</span>
                 </span>
-                <span className="value">2025 全美大學排行 U.S.NEWS</span>
+                <span className="value">
+                  2025 全美大學排行
+                  <br />
+                  U.S.NEWS
+                </span>
               </li>
               <li>
                 <span className="label">
