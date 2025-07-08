@@ -28,7 +28,8 @@
         }
       });
     </script>
-    <link rel="preconnect" href="https://bright-edu-backend.onrender.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <style id="critical-css">
       /* Critical CSS - 關鍵樣式優先載入 */
 
@@ -301,5 +302,18 @@
   <body>
     <noscript>您需要啟用JavaScript才能運行此應用。</noscript>
     <div id="root"></div>
+    <script>
+      const css = document.querySelector('link[rel="stylesheet"]');
+      if (css) {
+        css.rel = "preload";
+        css.as = "style";
+        css.onload = () => {
+          css.rel = "stylesheet";
+        };
+      }
+    </script>
+    <noscript>
+      <link rel="stylesheet" href="/static/css/main.css" />
+    </noscript>
   </body>
 </html>
