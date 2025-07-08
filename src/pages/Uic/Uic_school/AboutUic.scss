@@ -12,7 +12,7 @@
   }
 
   .intro {
-    padding: $spacing-md;
+    padding: 4rem $spacing-md $spacing-md;
     text-align: left;
     @media screen and (max-width: 500px) {
       padding: $spacing-sm;
