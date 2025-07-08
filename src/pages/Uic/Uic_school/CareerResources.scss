@@ -7,18 +7,18 @@ html {
   overflow-x: hidden;
 }
 .intro-title {
-  font-size: $font-size-xl;
+  font-size: $font-size-md;
   font-weight: $font-weight-bold;
   color: $color-nav;
   margin-bottom: $spacing-xs;
 }
 .career-list-item {
   font-weight: $font-weight-bold;
-  font-size: $font-size-xl;
+  font-size: $font-size-md;
   line-height: 40px;
 }
 .career-resources-intro-list {
-  font-size: $font-size-xl;
+  font-size: $font-size-md;
   margin-top: $spacing-sm;
   list-style: none;
 }
@@ -37,7 +37,7 @@ html {
     margin-top: $spacing-lg;
 
     p {
-      font-size: $font-size-lg;
+      font-size: $font-size-md;
       color: $color-text-primary;
     }
 
@@ -45,11 +45,11 @@ html {
       list-style: disc;
       padding-left: $spacing-md;
       li {
-        font-size: $font-size-lg;
+        font-size: $font-size-md;
         margin-top: $spacing-sm;
         color: $color-nav;
         div {
-          font-size: $font-size-sm;
+          font-size: $font-size-md;
           color: $color-gray-medium;
         }
       }
@@ -76,7 +76,7 @@ html {
         padding-left: $spacing-md;
         margin-bottom: $spacing-lg;
         li {
-          font-size: $font-size-lg;
+          font-size: $font-size-md;
           list-style-type: decimal;
           color: $color-black;
         }

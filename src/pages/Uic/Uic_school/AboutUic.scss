@@ -19,7 +19,7 @@
     }
     p {
       color: $color-text-primary;
-      font-size: $font-size-lg;
+      font-size: $font-size-md;
       margin-bottom: $spacing-xs;
       max-width: 1400px;
     }
@@ -56,7 +56,7 @@
           margin-bottom: 10px; // 區塊下方間距
 
           .label {
-            font-size: $font-size-lg;
+            font-size: $font-size-md;
             color: $color-black;
           }
 
