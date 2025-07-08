@@ -12,7 +12,7 @@
   }
 
   .intro {
-    padding: 4rem $spacing-md $spacing-md;
+    padding: 0 $spacing-md;
     text-align: left;
     @media screen and (max-width: 500px) {
       padding: $spacing-sm;
@@ -29,9 +29,8 @@
     .stats-card-school {
       background: $color-white;
       @include card-border;
-      border: 2px solid $color-uic;
       position: relative;
-      margin-bottom: 2rem;
+      margin-bottom: $spacing-xl;
 
       h3 {
         font-size: $font-size-xl;
@@ -138,7 +137,6 @@
   }
 
   .business-school {
-    padding: $spacing-lg 0;
     h3 {
       font-size: 24px;
       margin-bottom: $spacing-xs;

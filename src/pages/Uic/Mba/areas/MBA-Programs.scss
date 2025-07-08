@@ -27,7 +27,7 @@
     }
     .section-content {
       p {
-        font-size: $font-size-lg;
+        font-size: $font-size-md;
         color: $color-black;
         margin-bottom: $spacing-xs;
         text-align: left;
@@ -51,7 +51,7 @@
       margin-bottom: $spacing-sm;
       list-style-position: inside;
       li {
-        font-size: $font-size-lg;
+        font-size: $font-size-md;
         text-align: left;
         color: $color-black;
       }

@@ -1,9 +1,12 @@
 @import "../../../../styles/variables"; // 引入變數
 @import "../../../../styles/mixins"; // 引入 mixins
 
+.sectionBlock {
+  margin: 2rem 0;
+}
+
 .aacsbContainer {
   .contentSection {
-    margin: $spacing-xl 0;
     h2 {
       font-size: 24px;
       font-weight: 700;
@@ -16,9 +19,7 @@
       font-size: 18px;
       text-align: left;
     }
-    p:last-child {
-      margin-bottom: $spacing-lg;
-    }
+
     ul {
       list-style: disc;
       list-style-position: inside;
