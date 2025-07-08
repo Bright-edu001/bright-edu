@@ -59,14 +59,21 @@
             display: flex;
             align-items: center;
             margin-bottom: 8px;
+            transition: color 0.3s ease; /* 新增過渡效果 */
+            &:hover {
+              text-decoration: none; /* 移除 hover 時的下劃線 */
+              color: $color-uic; /* 新增 hover 顏色 */
+            }
 
             a {
               color: $color-gray-dark;
               font-size: $font-size-sm;
               text-decoration: none;
+              transition: color 0.3s ease; /* 新增過渡效果 */
 
               &:hover {
                 text-decoration: none;
+                color: $color-uic; /* 新增 hover 顏色 */
               }
             }
           }

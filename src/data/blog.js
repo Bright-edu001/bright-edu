@@ -1,4 +1,5 @@
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+import { db } from "../config/firebaseConfig";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 
 // Function to process and add the public URL to image paths
 const processBlogData = (data) => {
@@ -23,14 +24,14 @@ const processBlogData = (data) => {
 };
 
 export const getAllBlogPosts = async () => {
-  // This function now correctly fetches both endpoints and merges them.
   try {
     const [enrollmentEvents, news] = await Promise.all([
       getEnrollmentEvents(),
       getNews(),
     ]);
     const allPosts = [...enrollmentEvents, ...news];
-    return processBlogData(allPosts);
+    // The processing logic is already applied in getEnrollmentEvents and getNews
+    return allPosts;
   } catch (error) {
     console.error("Failed to fetch all blog posts:", error);
     throw error; // Re-throw the error to be handled by the caller
@@ -38,28 +39,57 @@ export const getAllBlogPosts = async () => {
 };
 
 export const getEnrollmentEvents = async () => {
-  const response = await fetch(`${API_URL}/api/enrollmentEvents`);
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+  try {
+    const querySnapshot = await getDocs(collection(db, "enrollmentEvents"));
+    const events = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return processBlogData(events);
+  } catch (error) {
+    console.error("Failed to fetch enrollment events:", error);
+    throw error;
   }
-  const data = await response.json();
-  return processBlogData(data);
 };
 
 export const getNews = async () => {
-  const response = await fetch(`${API_URL}/api/news`);
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+  try {
+    const querySnapshot = await getDocs(collection(db, "news"));
+    const newsItems = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return processBlogData(newsItems);
+  } catch (error) {
+    console.error("Failed to fetch news:", error);
+    throw error;
   }
-  const data = await response.json();
-  return processBlogData(data);
 };
 
 export const getBlogPost = async (id) => {
-  // Note: This is inefficient. It's better to have a dedicated API endpoint
-  // like /api/blog/:id, but for now, we'll work with what we have.
-  const allPosts = await getAllBlogPosts();
-  return allPosts.find((post) => post.id === parseInt(id));
+  try {
+    // Try fetching from enrollmentEvents first
+    let docRef = doc(db, "enrollmentEvents", id);
+    let docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return processBlogData({ id: docSnap.id, ...docSnap.data() });
+    }
+
+    // If not found, try fetching from news
+    docRef = doc(db, "news", id);
+    docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return processBlogData({ id: docSnap.id, ...docSnap.data() });
+    }
+
+    console.log("No such document!");
+    return null;
+  } catch (error) {
+    console.error("Error getting document:", error);
+    throw error;
+  }
 };
 
 // The 'all' export is now a function that fetches the data
