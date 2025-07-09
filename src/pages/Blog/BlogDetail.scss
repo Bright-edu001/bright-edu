@@ -5,7 +5,8 @@
 .blog-detail-mainrow {
   display: flex;
   gap: 2rem;
-  margin-top: $spacing-md;
+  margin-top: 4rem;
+  margin-bottom: 7rem;
   padding: 0;
   justify-content: center;
   @media screen and (max-width: 1025px) {
@@ -113,15 +114,22 @@
 }
 
 .blog-detail-back {
-  display: flex;
-  justify-content: center;
-  font-size: $font-size-xl;
-  color: $color-nav;
-
-  &:hover {
-    color: $color-uic;
-    transform: scale(1.05);
-    transition: all 0.1s ease-in-out;
+  .blog-back-btn {
+    margin: 3rem auto;
+    display: block;
+    padding: 10px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    color: $color-black;
+    &:hover {
+      background: $color-nav;
+      color: $color-white;
+      border-color: $color-nav;
+    }
   }
 }
 

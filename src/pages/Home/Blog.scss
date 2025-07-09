@@ -7,6 +7,9 @@
   text-align: left;
   margin: 1rem 0;
 }
+.blog-section:nth-child(2) {
+  margin-top: $spacing-xl;
+}
 
 .blog-grid {
   display: grid;
@@ -78,7 +81,7 @@
 }
 
 .blog-back-btn {
-  margin: 0 auto;
+  margin: $spacing-xl auto;
   display: block;
   padding: 10px 24px;
   font-size: 1rem;
@@ -87,7 +90,7 @@
   background: #fff;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border 0.2s;
-
+  color: #000000;
   &:hover,
   &:focus {
     background: $color-nav;
@@ -105,9 +108,12 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: $spacing-md $spacing-md $spacing-lg; // 增加內邊距
+  padding: 4rem $spacing-xl 7rem; // 增加內邊距
   width: 100%; // 避免容器寬度超出
   overflow: hidden;
+  @media screen and (max-width: 500px) {
+    padding: 4rem $spacing-sm 7rem;
+  }
   .blog-detail-main {
     padding: 0 2rem;
     @media screen and (max-width: 500px) {

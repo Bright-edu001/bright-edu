@@ -96,7 +96,7 @@ function BlogDetail() {
               ? renderDetails(blog.content.details)
               : null}
           </div>
-          <Link to="/blog" className="blog-detail-back">
+          <Link to="/blog" className="blog-back-btn blog-detail-back">
             ← 返回部落格
           </Link>
           {/* 這裡可根據需求擴充更多內容 */}
