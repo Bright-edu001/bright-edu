@@ -4,14 +4,13 @@
 .management-container {
   margin: 0 auto;
   .section {
-    margin-bottom: $spacing-md;
+    margin-top: 3rem;
     .section-title {
       font-size: $font-size-xl;
       font-weight: $font-weight-bold;
-      margin-top: $spacing-md;
       color: $color-nav;
       text-align: left;
-      margin-bottom: $spacing-sm;
+      margin-bottom: $spacing-xs;
       position: relative;
       @media screen and (max-width: 500px) {
         margin-bottom: $spacing-xs;
@@ -29,13 +28,15 @@
       p {
         font-size: $font-size-md;
         color: $color-black;
-        margin-bottom: $spacing-xs;
         text-align: left;
         @media screen and (max-width: 500px) {
           margin-bottom: $spacing-sm;
         }
       }
     }
+  }
+  .section:nth-child(1) {
+    margin-top: 4rem;
   }
 
   .intro {
@@ -48,7 +49,7 @@
 
   .course-list {
     .course-item {
-      margin-bottom: $spacing-sm;
+      margin: $spacing-sm 0;
       list-style-position: inside;
       li {
         font-size: $font-size-md;
@@ -62,7 +63,7 @@
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
     color: $color-black;
-    margin-bottom: $spacing-lg;
+    margin-bottom: 7rem;
   }
 }
 

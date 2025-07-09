@@ -3,16 +3,22 @@
 
 .heedContainer {
   margin-bottom: $spacing-lg;
-  padding: 0 $spacing-md; // 增加左右內邊距
-  .introSection {
-    margin-top: $spacing-md; // 為 introSection 增加上邊距
+
+  .rankingSection,
+  .admissionSection,
+  .programSection,
+  .programSection,
+  .conclusionSection {
+    margin: $spacing-xl 0; // 統一的區塊間距
+  }
+  .conclusionSection {
+    margin-bottom: 7rem;
   }
 
   // 統一的區塊標題樣式
   .sectionTitle {
     font-size: 24px;
     color: $color-uic; // 使用 UIC 主題色
-    margin: $spacing-xs 0; // 標題和內容間距
     font-weight: 700;
     text-align: left;
   }
@@ -23,6 +29,9 @@
     line-height: 1.6; // 增加行高以提升可讀性
     text-align: left;
   }
+  .sectionParagraph:nth-child(1) {
+    margin-top: 4rem; // 第一個段落增加上邊距
+  }
 
   // 統一的列表樣式
   .sectionList {
@@ -31,7 +40,7 @@
     display: flex;
     flex-direction: column; // 列表項目垂直排列
     gap: $spacing-xs; // 列表項目之間的間距
-    margin: $spacing-sm 0; // 列表的上下邊距
+    margin: 0 0 $spacing-sm; // 列表的上下邊距
   }
 
   // 統一的列表項目樣式

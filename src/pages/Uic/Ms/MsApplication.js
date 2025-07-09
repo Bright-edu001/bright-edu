@@ -40,7 +40,7 @@ function MsApplication() {
           <h4>英語語言能力要求</h4>
           <PageP>申請者必須滿足以下任一英語能力考試的最低標準:</PageP>
           <div className="english-requirements">
-            <div>
+            <div style={{ marginTop: "-3rem" }}>
               <strong>TOEFL iBT：總分 80，各部分最低分數：</strong>
               <ul className="horizontal-list">
                 <li>閱讀 (Reading) ≥ 19</li>
@@ -63,7 +63,7 @@ function MsApplication() {
             </div>
           </div>
 
-          <h4>推薦信</h4>
+          <h4 style={{ marginTop: "3rem" }}>推薦信</h4>
           <PageP>需提交2封推薦信</PageP>
 
           <h4>文件要求</h4>

@@ -7,6 +7,13 @@
   .food-section {
     margin: 0 auto;
   }
+  .food-attractions-header {
+    margin-top: 4rem;
+  }
+  .food-section {
+    margin-top: $spacing-xxl;
+    margin-bottom: 7rem;
+  }
 
   .food-attractions-description,
   .food-attractions-text {
@@ -16,12 +23,11 @@
   .food-attractions-title {
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
-    margin: $spacing-md 0 $spacing-xs;
     color: $color-nav;
     text-align: left;
   }
   .food-attractions-intro {
-    margin-top: $spacing-lg;
+    margin-top: $spacing-xl;
     h3 {
       font-size: $font-size-xl;
       font-weight: $font-weight-bold;
@@ -33,9 +39,6 @@
       font-size: $font-size-md;
       text-align: left;
       margin-bottom: $spacing-md;
-    }
-    img {
-      margin-bottom: $spacing-lg;
     }
   }
 
@@ -88,8 +91,7 @@
   .title {
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
-    margin-bottom: $spacing-xs;
-    margin-top: $spacing-lg;
+    margin-top: $spacing-xl;
     @media screen and (max-width: 500px) {
       text-align: left;
       margin-bottom: $spacing-xs;

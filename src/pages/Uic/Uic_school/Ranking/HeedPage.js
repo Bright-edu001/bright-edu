@@ -12,8 +12,7 @@ function HeedPage() {
           <p className={styles.sectionParagraph}>
             HEED（Higher Education Excellence in Diversity）獎項，中文譯作
             高等教育卓越多樣性獎，是由 《INSIGHT Into Diversity》
-            雜誌頒發的一個重要獎項，旨在表彰那些在
-            促進多元化、包容性和公平性
+            雜誌頒發的一個重要獎項，旨在表彰那些在 促進多元化、包容性和公平性
             方面取得卓越成就的美國高等教育機構。
           </p>
         </div>
@@ -63,7 +62,9 @@ function HeedPage() {
               持續推動多元性和包容性政策的發展
             </li>
           </ul>
-
+        </div>
+        {/* --- 區塊 4: 評選標準與認可過程 --- */}
+        <div className={styles.programSection}>
           <h2 className={styles.sectionTitle}>評選標準與認可過程</h2>
           <p className={styles.sectionParagraph}>
             HEED 獎項的評選過程非常嚴格，需要參選學校提供關於
@@ -88,14 +89,14 @@ function HeedPage() {
           </ul>
         </div>
 
-        {/* --- 區塊 4: UIC 與 HEED --- */}
+        {/* --- 區塊 5: UIC 與 HEED --- */}
         <div className={styles.programSection}>
           <h2 className={styles.sectionTitle}>
             伊利諾大學芝加哥分校 (UIC) 與 HEED
           </h2>
           <p className={styles.sectionParagraph}>
-            伊利諾大學芝加哥分校（University of Illinois Chicago, UIC） 是
-            HEED 獎項的常勝軍，近年來多次榮獲此殊榮。
+            伊利諾大學芝加哥分校（University of Illinois Chicago, UIC） 是 HEED
+            獎項的常勝軍，近年來多次榮獲此殊榮。
           </p>
           <p className={styles.sectionParagraph}>
             UIC 在提升校園多元性、包容性和公平性方面的努力，包括：
@@ -116,7 +117,7 @@ function HeedPage() {
           </ul>
         </div>
 
-        {/* --- 區塊 5: 獎項意義 --- */}
+        {/* --- 區塊 6: 獎項意義 --- */}
         <div className={styles.conclusionSection}>
           <h2 className={styles.sectionTitle}>獎項的意義</h2>
           <p className={styles.sectionParagraph}>

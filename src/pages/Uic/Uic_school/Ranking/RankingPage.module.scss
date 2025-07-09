@@ -4,11 +4,11 @@
   margin: 0 auto $spacing-lg;
 
   .introSection {
-    margin: $spacing-md 0;
     text-align: left;
     width: 100%;
     p {
       font-size: 18px;
+      margin-top: 4rem;
     }
   }
 
@@ -16,6 +16,8 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: $spacing-xs;
+    margin-top: $spacing-xl;
+    margin-bottom: 7rem;
 
     .rankingItem {
       padding: $spacing-sm 0;

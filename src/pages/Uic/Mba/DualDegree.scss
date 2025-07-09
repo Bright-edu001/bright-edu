@@ -8,7 +8,6 @@
   }
   .avantages,
   .application {
-    margin: $spacing-md 0 $spacing-lg;
     ul {
       text-align: left;
       list-style-position: inside;
@@ -33,7 +32,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: $spacing-md;
+    margin-top: $spacing-xl;
     h3 {
       font-size: $font-size-xl;
       font-weight: $font-weight-bold;
@@ -42,6 +41,11 @@
     p {
       font-size: $font-size-md;
       text-align: left;
+    }
+  }
+  .application {
+    .container {
+      margin-bottom: 7rem;
     }
   }
 }

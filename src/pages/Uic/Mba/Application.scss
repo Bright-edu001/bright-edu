@@ -7,11 +7,10 @@
   font-weight: $font-weight-bold;
   color: $color-nav;
   text-align: left;
-  margin-top: $spacing-md;
+  margin-top: 4rem;
 }
 
 .mba-application-desc {
-  margin-top: $spacing-xs;
   p {
     font-size: $font-size-md;
     color: $color-black;
@@ -23,7 +22,7 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  margin: $spacing-md 0;
+  margin: $spacing-xl 0 $spacing-xxl;
   .mba-info-section-title {
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;

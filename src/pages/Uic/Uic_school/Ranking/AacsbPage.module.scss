@@ -2,7 +2,10 @@
 @import "../../../../styles/mixins"; // 引入 mixins
 
 .sectionBlock {
-  margin: 2rem 0;
+  margin: 3rem 0;
+}
+.sectionBlock:last-child {
+  margin-bottom: 7rem; // 最後一個區塊不需要底部間距
 }
 
 .aacsbContainer {
@@ -18,6 +21,9 @@
     p {
       font-size: 18px;
       text-align: left;
+    }
+    p:nth-child(1) {
+      margin-top: 4rem;
     }
 
     ul {

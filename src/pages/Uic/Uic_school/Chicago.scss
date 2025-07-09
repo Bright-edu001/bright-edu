@@ -2,13 +2,12 @@
 
 .chicago-container {
   .chicago-intro {
-    margin: $spacing-md 0;
     .intro-title {
       font-size: $font-size-xl;
       font-weight: $font-weight-bold;
       color: $color-nav;
       text-align: left;
-      margin-bottom: $spacing-sm;
+      margin-top: 4rem;
     }
     .intro-text {
       font-size: $font-size-md;
@@ -52,10 +51,18 @@
       }
     }
   }
+  .transport-section {
+    .container {
+      margin-bottom: 7rem;
+    }
+  }
 
   .history-section {
     position: relative;
     padding-bottom: $spacing-sm;
+    .container {
+      margin-bottom: $spacing-lg;
+    }
 
     &::after {
       content: "";

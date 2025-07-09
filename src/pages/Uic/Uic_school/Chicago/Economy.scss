@@ -5,10 +5,8 @@
   h2 {
     font-size: 24px;
     font-weight: 700;
-    color: $color-black;
+    color: $color-nav;
     text-align: left;
-    margin-top: $spacing-md; // Space above the heading
-    margin-bottom: $spacing-xs; // Space below the heading
     @media screen and (max-width: 500px) {
       margin-bottom: $spacing-xs; // Adjust space for smaller screens
     }
@@ -23,7 +21,8 @@
   .financial-center-section,
   .economy-section {
     margin: 0 auto; // Center the section
-    margin-bottom: $spacing-lg; // Space below each section
+    margin-bottom: $spacing-xl; // Space below each section
+    margin-top: 4rem;
   }
 
   .cme-section {
@@ -54,17 +53,13 @@
         font-weight: 700;
       }
     }
-
-    .cme-description {
-      margin-top: 0.5rem;
-      p {
-        margin-bottom: 0.5rem;
-      }
-    }
   }
   .economy-section {
     border-top: 1px solid $color-uic;
-
+    margin-bottom: 7rem;
+    h2 {
+      margin-top: $spacing-lg; // Space above the section title
+    }
     p {
       font-size: 18px;
       color: $color-black;

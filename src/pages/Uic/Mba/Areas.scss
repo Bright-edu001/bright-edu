@@ -15,11 +15,17 @@
 .mba-areas-content {
   max-width: 1440px;
   margin: 0 auto 2rem;
-  padding: 2rem 0 0;
+  padding: 1rem 0 0;
   color: $color-text-dark-brown;
   font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
   .mba-areas-desc-wrapper {
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-xl;
+  }
+  .mba-areas-why {
+    margin-bottom: $spacing-xl;
+  }
+  .mba-areas-advantage {
+    margin-bottom: $spacing-xxl;
   }
 }
 
@@ -91,7 +97,7 @@
 }
 
 .mba-areas-concentrations {
-  margin: $spacing-sm 0 0;
+  margin-bottom: 7rem;
   .mba-areas-concentrations-title {
     text-align: left;
     font-size: $font-size-xl;

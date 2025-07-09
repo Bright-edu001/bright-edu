@@ -38,7 +38,7 @@ export const PageH2 = styled.h2`
   font-weight: 700;
   color: ${theme.colors.navy};
   text-align: left;
-  margin: ${theme.spacing.md} 0 ${theme.spacing.xs};
+  margin: 4rem 0 0;
 `;
 
 export const PageP = styled.p`

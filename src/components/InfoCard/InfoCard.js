@@ -15,13 +15,13 @@ import {
  * @param {string} [props.imageAlt] - 圖片替代文字，預設為 title
  * @param {'left'|'right'} [props.imagePosition='left'] - 圖片顯示位置
  */
-const InfoCard = ({
-  title,
-  content,
+function InfoCard({
+  title = "",
+  content = "",
   imageSrc,
-  imageAlt,
+  imageAlt = "",
   imagePosition = "left",
-}) => {
+}) {
   // 記憶化 content 節點，避免重複渲染
   const contentNodes = useMemo(() => {
     if (isValidElement(content)) {
@@ -59,19 +59,15 @@ const InfoCard = ({
       />
     </InfoCardWrapper>
   );
-};
+}
 
-// PropTypes 驗證與預設值
+// PropTypes 驗證
 InfoCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.node.isRequired,
+  title: PropTypes.string,
+  content: PropTypes.node,
   imageSrc: PropTypes.string.isRequired,
   imageAlt: PropTypes.string,
   imagePosition: PropTypes.oneOf(["left", "right"]),
-};
-InfoCard.defaultProps = {
-  imageAlt: "",
-  imagePosition: "left",
 };
 
 export default memo(InfoCard);

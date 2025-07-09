@@ -3,7 +3,7 @@
 
 .rankings-awards-container {
   .content-section {
-    margin: 3rem 10rem;
+    margin: 4rem 10rem;
     @media screen and (max-width: 1024px) {
       margin: 2rem 5rem;
     }
@@ -72,8 +72,9 @@
 
           .rank-number {
             font-weight: $font-weight-bold;
-            font-size: $font-size-number;
+            font-size: 40px;
             color: $color-uic;
+            padding: 0.1rem 0.5rem;
           }
         }
         .rank-description,
@@ -105,7 +106,7 @@
 
   // AACSB 認證相關
   .aacsb-section {
-    margin: $spacing-lg auto;
+    margin: $spacing-xl auto;
     border-bottom: 1px solid $color-uic;
 
     .aacsb-header {
@@ -296,9 +297,10 @@
 }
 .diversity-excellence-section {
   border-bottom: 1px solid $color-uic;
+  margin: $spacing-xl 0;
 }
 .uic-rankings-section {
-  margin: $spacing-lg 0;
+  margin: $spacing-xl 0 7rem;
 }
 
 @media screen and (max-width: 700px) {

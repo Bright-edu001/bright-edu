@@ -137,8 +137,12 @@
   }
 
   .business-school {
+    .container {
+      margin-top: 5rem;
+    }
     h3 {
       font-size: 24px;
+
       margin-bottom: $spacing-xs;
       color: $color-black;
       text-align: left;

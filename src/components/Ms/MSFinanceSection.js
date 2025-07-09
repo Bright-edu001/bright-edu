@@ -18,6 +18,7 @@ import {
   CoreCourseItemDiv,
   CoreCourseFootParagraph,
   ResponsiveImg,
+  ReasonsToChooseBlock, // 新增匯入
 } from "./MSFinanceSection.styled";
 
 function MSFinanceSection({
@@ -48,10 +49,6 @@ function MSFinanceSection({
     : !!coreCoursePragaph;
   const hasCoreCoursesIntroList =
     coreCoursesIntroList && coreCoursesIntroList.length > 0;
-  const hasCoreCourses =
-    coreCoursesList &&
-    coreCoursesList.length > 0 &&
-    coreCoursesList.some((col) => col && col.length > 0);
 
   return (
     <ProgramDetailsSection>
@@ -188,7 +185,7 @@ function MSFinanceSection({
           </ul>
         </CoreCoursesIntroDiv>
         <CoreCoursesListDiv
-          hasCoreCourses={hasCoreCourses}
+          /* hasCoreCourses={hasCoreCourses} 移除，避免傳遞到 DOM */
           style={
             coreCoursesListMarginBottom !== undefined
               ? { marginBottom: coreCoursesListMarginBottom }
@@ -211,12 +208,11 @@ function MSFinanceSection({
         <CoreCourseFootParagraph>{coreCourseFoot}</CoreCourseFootParagraph>
       </CoreCoursesSectionDiv>
       {/* end 核心課程範例區塊 */}
-      <div>
-        {" "}
+      <ReasonsToChooseBlock>
         {/* Changed from reasons-to-choose to a generic div with styled components below */}
         <ReasonsToChooseTitle>{reasonsTitle}</ReasonsToChooseTitle>
         <ReasonsToChooseParagraph>{reasonsDesc}</ReasonsToChooseParagraph>
-      </div>
+      </ReasonsToChooseBlock>
     </ProgramDetailsSection>
   );
 }

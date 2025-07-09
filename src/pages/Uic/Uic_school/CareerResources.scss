@@ -7,7 +7,7 @@ html {
   overflow-x: hidden;
 }
 .intro-title {
-  font-size: $font-size-md;
+  font-size: $font-size-xl;
   font-weight: $font-weight-bold;
   color: $color-nav;
   margin-bottom: $spacing-xs;
@@ -34,7 +34,7 @@ html {
   .intro {
     position: relative;
     text-align: left;
-    margin-top: $spacing-lg;
+    margin-top: 4rem;
 
     p {
       font-size: $font-size-md;
@@ -68,13 +68,14 @@ html {
 
   .career-process {
     display: flex;
+    margin-top: -3rem;
 
     .container {
       text-align: left;
 
       .career-process-list {
         padding-left: $spacing-md;
-        margin-bottom: $spacing-lg;
+        margin-bottom: 4rem;
         li {
           font-size: $font-size-md;
           list-style-type: decimal;
@@ -85,7 +86,7 @@ html {
       img {
         width: 100%;
         margin: 0 auto; // 置中
-        margin-bottom: $spacing-md; // 下方間距
+        margin-bottom: $spacing-xl; // 下方間距
       }
     }
   }

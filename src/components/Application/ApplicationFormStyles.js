@@ -6,6 +6,8 @@ export const StyledApplicationForm = styled.form`
   flex-direction: column;
   gap: 12px;
   padding: 0 5rem;
+  margin-top: 4rem;
+  margin-bottom: 7rem;
   @media (max-width: 850px) {
     padding: 0;
   }

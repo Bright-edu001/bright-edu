@@ -4,6 +4,7 @@ import {
   spacingSm,
   spacingMd,
   spacingLg,
+  spacingXl,
   colorNav,
   colorUic,
   colorBlack,
@@ -13,7 +14,7 @@ import {
 export const ProgramDetailsSection = styled.section`
   display: flex;
   flex-direction: column;
-  margin-top: ${spacingMd};
+  margin-top: ${spacingXl};
 `;
 
 export const OutcomesParagraph = styled.p`
@@ -47,7 +48,7 @@ export const ReasonsToChooseTitle = styled(SectionTitle)`
 
 export const WhyUicMsfDiv = styled.div`
   // from .why-uic-msf
-  margin-bottom: ${spacingMd};
+  margin-bottom: ${spacingXl};
   ul {
     list-style: none;
     padding-left: 0; // Reset default padding
@@ -78,7 +79,7 @@ export const WhyUicMsfDiv = styled.div`
 
 export const MsfOutcomesDiv = styled.div`
   // from .msf-outcomes
-  margin-bottom: ${spacingMd};
+  margin-bottom: ${spacingXl};
   ul {
     list-style: disc; // Assuming outcomes list should have discs
     list-style-position: inside; // Keep list style inside
@@ -93,7 +94,7 @@ export const MsfOutcomesDiv = styled.div`
 
 export const CompanyCoursesDiv = styled.div`
   // from .company-courses
-  margin-bottom: ${spacingMd};
+  margin-bottom: ${spacingXl};
   .company-logos {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -105,7 +106,7 @@ export const CompanyCoursesDiv = styled.div`
 
 export const CourseArrangementDiv = styled.div`
   // from .course-arrangement
-  margin-bottom: ${spacingMd};
+  margin-bottom: ${spacingXl};
   ul {
     list-style: disc;
     list-style-position: inside;
@@ -120,6 +121,7 @@ export const CourseArrangementDiv = styled.div`
 
 export const CoreCoursesSectionDiv = styled.div`
   // from .core-courses-section
+  margin-bottom: ${spacingXl};
 `;
 
 export const CoreCoursesTitle = styled(SectionTitle)`
@@ -156,19 +158,19 @@ export const CoreCoursesIntroDiv = styled.div`
   }
 `;
 
-export const CoreCoursesListDiv = styled.div`
+export const CoreCoursesListDiv = styled.div.attrs((props) => ({
+  // 移除 hasCoreCourses 屬性，避免傳遞到 DOM
+}))`
   // from .core-courses-list
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-bottom: ${spacingMd};
   gap: 0 ${spacingMd};
   align-items: stretch; // Added to make columns in a row have the same height
 
   @media (max-width: 768px) {
     display: flex; // Explicitly set display to flex for mobile
     flex-direction: column;
-    gap: ${(props) =>
-      props.hasCoreCourses ? 0 : "0"}; // Keep gap if has courses, else 0
+    gap: 0;
   }
 `;
 
@@ -224,4 +226,8 @@ export const ResponsiveImg = styled.img`
   max-width: 100%;
   height: auto;
   display: block; // or inline-block depending on layout needs
+`;
+
+export const ReasonsToChooseBlock = styled.div`
+  margin-bottom: 7rem;
 `;

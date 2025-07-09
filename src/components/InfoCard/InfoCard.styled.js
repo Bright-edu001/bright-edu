@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 const colorNav = "#1c184a";
 const spacingSm = "1rem";
 const spacingMd = "1.5rem";
-const spacingLg = "2rem";
+const spacingXl = "3rem";
 const fontSizeLg = "18px";
 
 // mixins
@@ -21,7 +21,7 @@ const labelStyle = css`
 export const InfoCardWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin: ${spacingLg} auto;
+  margin: ${spacingXl} auto;
   overflow: hidden;
 
   &.info-card-right {
