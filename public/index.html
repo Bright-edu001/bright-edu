@@ -151,11 +151,26 @@
     <!-- Preload hero banner image for LCP optimization -->
     <!-- Removed incorrect preload link: href="%PUBLIC_URL%/images/banner/banner1.webp" -->
     <!-- Prefetch subsequent hero banners during idle to reduce rotation delays -->
-    <link rel="prefetch" as="image" href="/images/banner/banner2.webp" />
-    <link rel="prefetch" as="image" href="/images/banner/banner3.webp" />
-    <link rel="prefetch" as="image" href="/images/banner/banner4.webp" />
+    <link
+      rel="prefetch"
+      as="image"
+      href="%PUBLIC_URL%/images/banner/banner2.webp"
+    />
+    <link
+      rel="prefetch"
+      as="image"
+      href="%PUBLIC_URL%/images/banner/banner3.webp"
+    />
+    <link
+      rel="prefetch"
+      as="image"
+      href="%PUBLIC_URL%/images/banner/banner4.webp"
+    />
     <!-- Preload LCP hero banner with srcset for最佳化 LCP -->
-    <link rel="preload" as="image" href="/images/banner/banner1-1280.webp"
+    <link
+      rel="preload"
+      as="image"
+      href="/images/banner/banner1-1280.webp"
       imagesrcset="/images/banner/banner1-480.webp 480w, /images/banner/banner1-768.webp 768w, /images/banner/banner1-1280.webp 1280w"
       imagesizes="(max-width: 600px) 480px, (max-width: 900px) 768px, 1280px"
     />
@@ -280,15 +295,12 @@
       }
     </script>
     <!-- PWA 設定 -->
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <meta name="theme-color" content="#c71432" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Bright Education" />
-    <!-- Preload main CSS，減少 render-blocking -->
-    <link rel="preload" href="/static/css/main.css" as="style" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/static/css/main.css" /></noscript>
   </head>
   <body>
     <noscript>您需要啟用JavaScript才能運行此應用。</noscript>
