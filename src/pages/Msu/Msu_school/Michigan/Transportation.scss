@@ -1,6 +1,11 @@
 @import "../../../../styles/variables";
 @import "../../../../styles/mixins";
 
+.msf-hero {
+  background-color: #19453c;
+  // 其他自訂樣式
+}
+
 .transportation-section {
   color: $color-black;
   margin: 4rem 0 7rem;
