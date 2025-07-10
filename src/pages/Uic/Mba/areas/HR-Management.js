@@ -36,7 +36,8 @@ const HR_Management = () => {
         {/* UIC MBA 管理專業簡介 */}
         <div className="section">
           <h2 className="section-title">
-            UIC MBA人力資源管理專業領域 – 銜接員工與企業之間的溝通橋樑
+            UIC MBA 人力資源管理（Human Resource Management）–
+            銜接員工與企業之間的溝通橋樑
           </h2>
           <div className="section-content">
             <p>

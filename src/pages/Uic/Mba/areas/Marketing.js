@@ -35,7 +35,8 @@ const Marketing = () => {
         {/* UIC MBA 管理專業簡介 */}
         <div className="section">
           <h2 className="section-title">
-            加速你的職涯發展，選擇UIC的行銷專業MBA學位
+            UIC MBA
+            行銷專業領域（Marketing）－了解整個行銷過程，從研究和產品開發到溝通規劃和品質，加速你的職涯發展
           </h2>
           <div className="section-content">
             <p style={{ marginBottom: "3rem" }}>

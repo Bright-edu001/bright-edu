@@ -1,10 +1,10 @@
 import React from "react";
 import { HeroWrapper, HeroTitle } from "./MbaAreasHero.styled";
 
-const MbaAreasHero = () => {
+const MbaAreasHero = ({ title = "UIC Business", className }) => {
   return (
-    <HeroWrapper>
-      <HeroTitle>UIC Business</HeroTitle>
+    <HeroWrapper className={className}>
+      <HeroTitle>{title}</HeroTitle>
     </HeroWrapper>
   );
 };

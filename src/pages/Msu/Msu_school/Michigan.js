@@ -5,7 +5,7 @@ import SectionContainer from "../../../components/SectionContainer/SectionContai
 function Michigan() {
   return (
     <div className="michigan-page">
-      <MbaAreasHero />
+      <MbaAreasHero title="MSU MSF" className="msf-hero" />
       <SectionContainer>
         <h3 className="section-title">密西根州立大學</h3>
         <section className="michigan-intro">

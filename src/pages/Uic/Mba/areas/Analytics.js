@@ -35,7 +35,7 @@ const Analytics = () => {
         {/* UIC MBA 管理專業簡介 */}
         <div className="section">
           <h2 className="section-title">
-            提升你的職涯，邁向
+            UIC MBA 商業分析領域（Business Analytics）– 提升你的職涯，邁向
             企業財務、經濟學、供應鏈分析、數據庫管理和企業諮詢 等領導角色
           </h2>
           <div className="section-content">

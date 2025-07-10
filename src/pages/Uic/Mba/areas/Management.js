@@ -37,7 +37,7 @@ const Management = () => {
       <SectionContainer>
         <div className="section">
           <h2 className="section-title">
-            UIC MBA 管理專業領域– 培養全方位的管理與領導能力
+            UIC MBA 管理專業領域（Management）– 培養全方位的管理與領導能力
           </h2>
           <div className="section-content">
             <p>
