@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-TW" prefix="og: https://ogp.me/ns#">
   <head>
+    <link
+      rel="preconnect"
+      href="https://firestore.googleapis.com"
+      crossorigin
+    />
     <!-- 提前覆寫並攔截 Safari 結構化資料 extractor 的唯讀屬性錯誤 -->
     <script>
       try {
@@ -28,11 +33,6 @@
         }
       });
     </script>
-    <link
-      rel="preconnect"
-      href="https://firestore.googleapis.com"
-      crossorigin
-    />
     <style id="critical-css">
       /* Critical CSS - 關鍵樣式優先載入 */
 
