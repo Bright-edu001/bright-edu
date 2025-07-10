@@ -7,9 +7,10 @@
     font-weight: 700;
     color: $color-msu;
     text-align: left;
-    margin: $spacing-md 0 0;
+    margin: 4rem 0 0;
   }
   .career-resources {
+    margin-bottom: $spacing-xl;
     h3 {
       font-size: 24px;
       font-weight: 700;
@@ -29,7 +30,7 @@
     }
   }
   .career-services {
-    margin: $spacing-md 0;
+    margin-bottom: $spacing-xxl;
     h3 {
       font-size: 24px;
       font-weight: 700;
@@ -57,7 +58,7 @@
       display: flex;
       flex-direction: column;
       gap: $spacing-xs;
-      margin: $spacing-sm 0;
+      margin: $spacing-sm 0 $spacing-xl;
     }
   }
   .employer-engagement {
@@ -80,9 +81,12 @@
     p {
       font-size: 18px;
       text-align: left;
-      margin-top: $spacing-sm;
+      margin-top: $spacing-xs;
+      margin-bottom: $spacing-xl;
     }
     .interview-list {
+      margin-top: -$spacing-xl;
+      margin-bottom: $spacing-xxl;
       p {
         margin-top: $spacing-xs;
       }
@@ -92,7 +96,7 @@
         justify-content: flex-start;
         list-style-position: inside;
         gap: $spacing-md;
-        margin-top: $spacing-xs;
+        margin-top: -$spacing-xl;
       }
     }
   }
@@ -113,8 +117,8 @@
     .virtual-resource-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      margin: $spacing-md 0;
-      gap: $spacing-md;
+      margin: $spacing-md 0 7rem;
+      gap: $spacing-xl;
       h5 {
         font-size: 24px;
         font-weight: 700;

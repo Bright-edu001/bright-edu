@@ -1,6 +1,12 @@
 @import "../../../styles/variables";
 @import "../../../styles/mixins";
 
+.msf-application {
+  .container {
+    margin-bottom: 7rem;
+  }
+}
+
 .msf-application-list {
   display: flex;
   flex-direction: column;
@@ -10,7 +16,7 @@
     color: $color-msu;
     text-align: left;
     margin-bottom: $spacing-xs;
-    margin-top: $spacing-md;
+    margin-top: $spacing-sm;
   }
   ul {
     list-style: disc;
@@ -36,14 +42,14 @@
     font-size: 18px;
     text-align: left;
     color: $color-black;
-    margin: $spacing-md 0;
+    margin: $spacing-xl 0 0;
   }
   span {
     font-size: 16px;
     text-align: left;
     color: $color-black;
     position: static;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-xxl;
   }
 }
 

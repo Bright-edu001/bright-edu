@@ -15,15 +15,21 @@
   color: $color-msu;
   font-size: 24px;
   font-weight: 700;
-  margin: $spacing-md 0;
+  margin: 4rem 0 $spacing-xl;
+}
+.attractions-title:nth-child(2) {
+  margin-top: $spacing-lg;
 }
 
 .attractions-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: start;
-  gap: $spacing-md;
-  margin-bottom: $spacing-lg;
+  gap: $spacing-xl;
+  margin-bottom: $spacing-xl;
+}
+.attractions-list:nth-child(2) {
+  margin-bottom: 7rem;
 }
 // 平板瀏覽調整為兩欄
 @media (max-width: 1024px) {

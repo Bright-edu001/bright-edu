@@ -34,6 +34,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 4rem;
+  margin-bottom: $spacing-xl;
   .ms-master-title {
     font-size: 24px;
     font-weight: 700;
@@ -62,6 +64,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: $spacing-xl;
   h3 {
     @include gold-heading;
   }
@@ -81,7 +84,7 @@
   display: flex; // Added
   flex-direction: column; // Added
   align-items: flex-start; // Added
-
+  margin-bottom: $spacing-xl;
   h3 {
     @include gold-heading;
   }
@@ -110,12 +113,11 @@
 
   h4 {
     @include footer-heading;
-    margin-top: $spacing-md;
-    margin-bottom: $spacing-xs;
+    margin-top: $spacing-lg;
   }
   h3 {
     @include gold-heading;
-    margin-top: $spacing-md;
+    margin-top: $spacing-xl;
   }
   p {
     font-size: 18px;
@@ -123,7 +125,7 @@
   }
   ul {
     @include standard-list; // text-align: left
-    margin: 1rem 0;
+    margin: 1rem 0 $spacing-xl;
     display: flex;
     flex-direction: column; // Changed to column for better stacking
     gap: $spacing-xs;
@@ -143,6 +145,7 @@
   flex-direction: column; // Added
   .ms-master-require-intro {
     margin-top: $spacing-sm;
+    margin-bottom: $spacing-xl;
     p {
       font-size: 18px;
       text-align: left;
@@ -152,6 +155,7 @@
     @include body-large;
     color: $color-black;
     text-align: left;
+    margin-top: $spacing-xs;
   }
   h3 {
     @include gold-heading;
@@ -165,7 +169,7 @@
     @include standard-list; // text-align: left
     list-style-position: inside;
     padding-left: 0; // 新增
-
+    margin-bottom: $spacing-xl;
     li {
       font-size: 18px;
       color: $color-msu;
@@ -182,21 +186,21 @@
 }
 
 .ms-master-require-select {
-  margin: 0 0 $spacing-sm;
   display: flex; // Added
   flex-direction: column; // Added
   align-items: flex-start; // Added
 
   h3 {
     @include gold-heading;
-    margin: $spacing-md 0 0;
     // text-align: center; // If this h3's text lines should be centered
   }
   p {
     font-size: 18px;
     text-align: left;
+    margin-bottom: $spacing-xl;
   }
   .ms-master-require-select-list {
+    margin-bottom: $spacing-xl;
     h3 {
       color: $color-msu;
       text-align: left;
@@ -242,7 +246,7 @@
   .feature-block {
     box-sizing: border-box;
     width: 100%;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $spacing-xl;
     display: flex; // Added
     flex-direction: column; // Added
     align-items: flex-start; // Added
@@ -321,6 +325,10 @@
   }
 }
 
+.ms-master-network {
+  margin-bottom: 4rem;
+}
+
 .ms-master-cfa,
 .ms-master-network {
   border-top: 1px solid $color-msu;
@@ -329,7 +337,7 @@
     font-size: 24px;
     font-weight: 700;
     text-align: left;
-    margin: $spacing-md 0 $spacing-xs;
+    margin: $spacing-lg 0 $spacing-xs;
   }
 
   &-intro {
@@ -338,7 +346,8 @@
   }
 
   &-recognition {
-    margin-top: $spacing-md;
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-xl;
     display: flex; // Added
     flex-direction: column; // Added
     align-items: flex-start; // Added
@@ -415,11 +424,11 @@
   padding-left: 0; // 新增
 }
 .ms-master-require-apply {
-  margin-top: $spacing-md;
+  margin-top: $spacing-lg;
   border-bottom: 1px solid $color-msu;
 }
 .ms-master-require-career {
-  margin-top: $spacing-sm;
+  margin-top: $spacing-lg;
 
   h3 {
     text-align: left; // If this h3's text lines should be centered, change to center

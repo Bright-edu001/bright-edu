@@ -13,6 +13,7 @@
 
   .intro {
     text-align: left;
+    margin-top: 4rem;
     p {
       font-size: 18px;
       color: $color-text-primary;
@@ -101,16 +102,16 @@
   .details {
     .michigan-contribution {
       padding: 0 2rem;
+      margin-bottom: $spacing-xl;
       .contribution-content {
         font-size: 18px;
         font-weight: 400;
-        margin-bottom: $spacing-md;
         margin-top: $spacing-sm;
       }
     }
     .reasearch {
       background: $color-white;
-
+      margin-bottom: $spacing-xl;
       padding: 0 2rem;
 
       h3 {
@@ -127,7 +128,6 @@
         flex-direction: column;
         align-items: flex-start;
         text-align: center;
-        margin-bottom: $spacing-md;
         margin-top: $spacing-sm;
         h4 {
           font-size: 18px;
@@ -189,9 +189,9 @@
   }
   .global-impact {
     padding: 0 2rem;
+    margin-bottom: 7rem;
     .global-impact-content {
       margin-top: $spacing-sm;
-      margin-bottom: $spacing-lg;
     }
   }
   .michigan-contribution,

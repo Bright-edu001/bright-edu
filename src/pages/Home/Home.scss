@@ -8,7 +8,7 @@ p {
 
 /* 首頁整體樣式 */
 .home-page {
-  margin-top: 3rem;
+  margin-top: 4rem;
   padding: 0 2rem; // 添加左右內邊距以適應小螢幕
   @media screen and (max-width: 500px) {
     padding: 0 1.5rem; // 在小螢幕上減少內邊距
@@ -54,7 +54,7 @@ p {
   /* 關於我們區塊樣式 - 用於介紹公司或服務 */
   .about {
     margin: 0 auto; // 使區塊水平居中
-    padding: 2rem 0;
+    padding: 3rem 0;
     @media screen and (max-width: 500px) {
       padding: 1rem 0; // 在小螢幕上減少內邊距
     }
@@ -308,7 +308,7 @@ p {
 
 /* 文章Blog區塊樣式 */
 .blog-area {
-  padding: 2rem 0;
+  padding: 3rem 0 7rem;
   @media screen and (max-width: 500px) {
     padding: 1.5rem 0; // 在小螢幕上減少內邊距
   }

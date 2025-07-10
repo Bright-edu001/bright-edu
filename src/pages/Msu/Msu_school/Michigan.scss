@@ -7,28 +7,27 @@
     font-weight: 700;
     color: $color-msu; // MSU 主色調
     text-align: left;
-    margin: $spacing-md 0 0 0;
+    margin-top: 4rem;
   }
   .michigan-intro {
-    margin: 0 0 $spacing-md 0;
     border-bottom: 1px solid $color-msu;
     p {
       text-align: left;
       color: $color-black;
       font-size: 18px;
+      margin-bottom: $spacing-xxl; // 與下方間距
     }
     h3 {
       font-size: 24px;
       font-weight: 700;
       text-align: left;
-      margin-top: $spacing-md;
       color: $color-msu; // MSU 主色調
     }
     .intro-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem; // 行間距 3rem，欄間距 2rem
-      margin: $spacing-sm 0;
+      gap: 3rem;
+      margin: $spacing-sm 0 $spacing-xl; // 上下間距
 
       .intro-col {
         // 欄位設定
@@ -61,14 +60,15 @@
       font-size: 24px;
       font-weight: 700;
       color: $color-msu; // MSU 主色調
+      margin-top: $spacing-lg; // 上方間距
       margin-bottom: $spacing-xs; // 與下方間距
     }
 
     .activities-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); // 設定為兩欄網格
-      gap: 40px; // 間距 40px
-      margin-bottom: $spacing-sm; // 與下方間距
+      grid-template-columns: repeat(3, 1fr); // 設定為兩欄網格
+      gap: 3rem; // 間距 40px
+      margin-bottom: $spacing-xl; // 與下方間距
       // justify-items: center; // 水平置中網格項目 (此處未使用)
     }
 
@@ -110,7 +110,7 @@
       font-size: 24px;
       font-weight: 700;
       color: $color-msu; // 黑色文字
-      margin: $spacing-md 0;
+      margin: $spacing-lg 0;
       margin-bottom: 0;
     }
     ul {
@@ -118,7 +118,7 @@
       text-align: left;
       font-size: 18px;
       font-weight: 400;
-      margin-bottom: 1rem;
+      margin-bottom: $spacing-xl; // 與下方間距
       list-style-position: inside;
       padding-left: 0; // 移除預設的左邊距
       li {
@@ -135,19 +135,20 @@
       font-weight: 700;
       text-align: left;
       color: $color-msu; // 黑色文字
-      margin: $spacing-md 0;
+      margin: $spacing-lg 0 $spacing-sm; // 上下間距
     }
     ul {
       display: grid;
       grid-template-columns: repeat(3, 1fr); // 三欄網格
       justify-items: start;
-      gap: $spacing-md; // 間距 $spacing-md
+      gap: $spacing-xl; // 間距 $spacing-xl
       color: $color-msu; // MSU 主色調
       font-size: 18px;
       font-weight: 400;
       text-align: left;
       list-style-position: inside; // 項目符號在文字內部
       padding-left: 0; // 移除預設的左邊距
+      margin-bottom: 7rem;
     }
   }
 }
