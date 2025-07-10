@@ -6,7 +6,7 @@ import SectionContainer from "../../../components/SectionContainer/SectionContai
 function MsMaster() {
   return (
     <div className="ms-master">
-      <MbaAreasHero title="MSU MSF" className="msf-hero" />
+      <MbaAreasHero title="MSU MSF" className="msf-hero" bgColor="#19453c" />
       <SectionContainer>
         {" "}
         <div className="ms-master-intro">

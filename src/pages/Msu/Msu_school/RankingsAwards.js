@@ -6,7 +6,7 @@ import SectionContainer from "../../../components/SectionContainer/SectionContai
 function MsRankingsAwards() {
   return (
     <div className="rankings-awards-page">
-      <MbaAreasHero title="MSU MSF" className="msf-hero" />
+      <MbaAreasHero title="MSU MSF" className="msf-hero" bgColor="#19453c" />
       <SectionContainer>
         <section className="ranking">
           <h3 className="ranking-title">排名與獎項</h3>

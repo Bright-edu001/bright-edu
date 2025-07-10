@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeroWrapper = styled.div`
   height: 80px;
-  background-color: #c71432;
+  background-color: ${({ bgColor }) => bgColor || "#c71432"};
   color: #fff;
   text-align: center;
   display: flex;

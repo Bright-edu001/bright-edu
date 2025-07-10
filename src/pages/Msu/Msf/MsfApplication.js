@@ -8,7 +8,7 @@ import * as MsfStyles from "../../../components/Application/MsfApplicationFormSt
 function MsfApplication() {
   return (
     <div className="msf-application">
-      <MbaAreasHero title="MSU MSF" className="msf-hero" />
+      <MbaAreasHero title="MSU MSF" className="msf-hero" bgColor="#19453c" />
       <SectionContainer>
         <div className="msf-application-list">
           <h3 className="msf-application-title">申請資訊</h3>

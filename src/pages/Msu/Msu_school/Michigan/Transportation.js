@@ -6,7 +6,7 @@ import SectionContainer from "../../../../components/SectionContainer/SectionCon
 function Transportation() {
   return (
     <div className="transportation-page">
-      <MbaAreasHero title="MSU MSF" className="msf-hero" />
+      <MbaAreasHero title="MSU MSF" className="msf-hero" bgColor="#19453c" />
       <SectionContainer>
         {/* 設計稿內容開始 */}
         <div className="transportation-section">

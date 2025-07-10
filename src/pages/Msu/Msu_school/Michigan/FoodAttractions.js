@@ -40,7 +40,7 @@ function MicFoodAttractions() {
   ];
   return (
     <div className="food-attractions-page">
-      <MbaAreasHero title="MSU MSF" className="msf-hero" />
+      <MbaAreasHero title="MSU MSF" className="msf-hero" bgColor="#19453c" />
       <SectionContainer>
         {/* 景點區塊開始 */}
         <div className="attractions-section">

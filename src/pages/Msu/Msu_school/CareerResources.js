@@ -6,7 +6,7 @@ import SectionContainer from "../../../components/SectionContainer/SectionContai
 function MsCareerResources() {
   return (
     <div className="career-resources-page">
-      <MbaAreasHero title="MSU MSF" className="msf-hero" />
+      <MbaAreasHero title="MSU MSF" className="msf-hero" bgColor="#19453c" />
       <SectionContainer>
         <h3 className="section-title">職涯資源</h3>
         <section className="career-resources">
