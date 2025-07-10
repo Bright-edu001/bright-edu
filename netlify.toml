@@ -1,0 +1,16 @@
+# Netlify 設定檔：啟用 Brotli 壓縮與最佳化 header
+[build]
+  publish = "public"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Encoding = "br"
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+
+[[edge_functions]]
+path = "/hello"
+function = "hello"
