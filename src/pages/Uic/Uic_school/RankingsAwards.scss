@@ -189,7 +189,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
-      margin-bottom: $spacing-md;
+      margin-bottom: $spacing-lg;
 
       .advantage-item {
         flex: 0 0 45%;
@@ -260,9 +260,6 @@
       }
     }
   }
-}
-.advantage-list {
-  margin-bottom: $spacing-xs;
 }
 
 .advantage-list,
