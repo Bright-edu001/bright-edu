@@ -11,7 +11,7 @@
     padding: 4rem 1.5rem 7rem;
 
     .faq-section {
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-xxl;
       .section-title {
         font-size: 24px;
         font-weight: $font-weight-bold;
@@ -91,6 +91,8 @@
 
             &.expanded {
               max-height: 1400px;
+              display: flex;
+              align-items: flex-start;
               padding: 1rem;
               background-color: $color-white;
             }
