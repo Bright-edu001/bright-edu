@@ -73,7 +73,7 @@ function CoreCourses() {
           dataSource={coreCoursesData}
           pagination={false}
           bordered
-          style={{ background: "transparent", marginBottom: "2rem" }}
+          style={{ background: "transparent" }}
         />
       </SectionContainer>
       <SectionContainer className="courses-class">

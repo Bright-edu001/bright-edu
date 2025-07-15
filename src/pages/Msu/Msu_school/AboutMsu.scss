@@ -145,7 +145,7 @@
 
         .funding-amount {
           font-size: 18px;
-          font-weight: 400;
+          font-weight: 500;
           color: $color-msu;
         }
 
@@ -156,21 +156,23 @@
 
         .facility p {
           color: $color-msu;
-          font-weight: 400;
+          font-weight: 500;
           font-size: 18px;
           max-width: 100%;
           text-align: left;
+          margin-bottom: 0;
         }
 
         .areas-list {
           display: flex;
           flex-direction: row;
           flex-wrap: wrap; // 允許自動換行
-          margin-left: $spacing-md; // 左側間距
+          list-style-position: inside;
+          margin-bottom: 0;
 
           li {
             color: $color-msu;
-            font-weight: 400;
+            font-weight: 500;
             font-size: 18px;
             position: relative;
             margin-right: $spacing-xl; // 右側間距
@@ -179,8 +181,8 @@
         }
         .research-centers p {
           color: $color-msu;
-          font-weight: 400;
-          font-size: $font-size-lg;
+          font-weight: 500;
+          font-size: $font-size-md;
           margin: 0;
           max-width: 100%;
         }
