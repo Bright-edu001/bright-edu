@@ -3,6 +3,8 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import App from "./App";
 
+const AdminApp = lazy(() => import("./admin/App"));
+
 // pages - Home & Blog
 const Home = lazy(() => import("./pages/Home/Home"));
 const Contact = lazy(() => import("./pages/Home/Contact.js"));
@@ -202,6 +204,15 @@ const router = createBrowserRouter(
         { path: "blog/:id", element: <BlogDetail /> },
         { path: "blog/search/:keyword", element: <BlogSearch /> },
       ],
+    },
+    {
+      path: "/admin/*",
+      element: (
+        <React.Suspense fallback={null}>
+          <AdminApp />
+        </React.Suspense>
+      ),
+      errorElement: <div>後台頁面不存在或載入失敗，請聯絡管理員。</div>,
     },
   ],
   {
