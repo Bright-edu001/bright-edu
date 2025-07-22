@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import "./Blog.scss";
-import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BlogContext } from "../../context/BlogContext";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
@@ -44,8 +43,6 @@ function Blog() {
 
   return (
     <div className="blog-page">
-      <MbaAreasHero />
-
       <div className="blog-detail-mainrow">
         <div className="blog-detail-main">
           <div className="blog-content">

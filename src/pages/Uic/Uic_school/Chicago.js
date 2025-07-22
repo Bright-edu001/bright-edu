@@ -37,7 +37,10 @@ const Chicago = () => {
                   loading="lazy"
                 />
               </div>
-              <h2>歷史發展</h2>
+              <div className="history-description">
+                <h2>歷史發展</h2>
+                <h2>HISTORY</h2>
+              </div>
             </div>
             <div className="section-content">
               <div className="history-text">
@@ -60,7 +63,10 @@ const Chicago = () => {
         <section className="transport-section">
           <div className="container">
             <div className="section-header">
-              <h2>交通</h2>
+              <div>
+                <h2>交通</h2>
+                <h2>TRANSPORTATION</h2>
+              </div>
               <div className="transport-image">
                 <img
                   className="responsive-img"

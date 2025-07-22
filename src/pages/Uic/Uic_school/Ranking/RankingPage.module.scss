@@ -1,3 +1,39 @@
+// === RankingPage highlight block styles ===
+.rankingHighlightBlock {
+  border-bottom: 1px solid #c71432;
+}
+
+.rankingHighlightRow {
+  display: flex;
+}
+
+.rankingHighlightRowSpacing {
+  margin-top: 32px;
+  margin-bottom: 48px;
+}
+
+.rankingHighlightTitle {
+  font-size: 40px;
+  color: #c71432;
+}
+
+.rankingHighlightNumber {
+  font-size: 48px;
+}
+
+.rankingHighlightTextGroup {
+  display: flex;
+  margin-left: 20px;
+  font-size: 22px;
+  align-items: center;
+}
+
+.rankingHighlightText {
+  font-size: 26px;
+  font-weight: 600;
+  color: #c71432;
+  margin: 0 8px 0 0;
+}
 @import "../../../../styles/variables";
 
 .rankingContainer {
@@ -9,13 +45,14 @@
     p {
       font-size: 18px;
       margin-top: 4rem;
+      margin-bottom: $spacing-xl;
     }
   }
 
   .rankingsGrid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: $spacing-xs;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-md $spacing-xxl;
     margin-top: $spacing-xl;
     margin-bottom: 7rem;
 
@@ -40,8 +77,7 @@
       }
 
       .description {
-        font-size: $font-size-md;
-
+        font-size: $font-size-lg;
         display: flex;
         align-items: center;
         text-align: left;
@@ -55,6 +91,7 @@
     }
   }
 }
+
 @media screen and (max-width: 700px) {
   .rankingContainer {
     .rankingsGrid {

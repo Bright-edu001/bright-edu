@@ -25,8 +25,8 @@ function ApplicationForm({ showCondition = true, customStyles }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // 檢查必填
-    if (!form.name || !form.lineId || !form.email || !form.message) {
-      alert("請完整填寫所有欄位！");
+    if (!form.name || !form.email || !form.message) {
+      alert("請完整填寫所有必填欄位！");
       return;
     }
     // 新增基本驗證
@@ -77,11 +77,11 @@ function ApplicationForm({ showCondition = true, customStyles }) {
         </>
       )}
       {/* 預約諮詢標題 */}
-      <StyledSectionTitle>預約諮詢</StyledSectionTitle>
+      <StyledSectionTitle>CONTACT US</StyledSectionTitle>
       <input
         type="text"
         name="name"
-        placeholder="姓名"
+        placeholder="*姓名"
         value={form.name}
         onChange={handleChange}
         required
@@ -92,12 +92,11 @@ function ApplicationForm({ showCondition = true, customStyles }) {
         placeholder="LINE ID"
         value={form.lineId}
         onChange={handleChange}
-        required
       />
       <input
         type="email"
         name="email"
-        placeholder="E-MAIL"
+        placeholder="*E-MAIL"
         value={form.email}
         onChange={handleChange}
         required

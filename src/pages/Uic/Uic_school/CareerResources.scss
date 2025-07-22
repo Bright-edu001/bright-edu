@@ -10,7 +10,7 @@ html {
   font-size: $font-size-xl;
   font-weight: $font-weight-bold;
   color: $color-nav;
-  margin-bottom: $spacing-xs;
+  margin-bottom: $spacing-sm;
 }
 .career-list-item {
   font-weight: $font-weight-bold;
@@ -19,14 +19,17 @@ html {
 }
 .career-resources-intro-list {
   font-size: $font-size-md;
-  margin-top: $spacing-sm;
+  margin-top: $spacing-xs;
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
 }
 .career-resources {
   overflow-x: hidden;
   h3 {
     font-size: $font-size-xl;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $spacing-sm;
     color: $color-uic;
     text-align: left;
   }
@@ -46,11 +49,11 @@ html {
       padding-left: $spacing-md;
       li {
         font-size: $font-size-md;
-        margin-top: $spacing-sm;
+        margin-top: $spacing-md;
         color: $color-nav;
         div {
           font-size: $font-size-md;
-          color: $color-gray-medium;
+          color: $color-black;
         }
       }
     }
@@ -76,6 +79,9 @@ html {
       .career-process-list {
         padding-left: $spacing-md;
         margin-bottom: 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
         li {
           font-size: $font-size-md;
           list-style-type: decimal;

@@ -38,7 +38,7 @@ export const PageH2 = styled.h2`
   font-weight: 700;
   color: ${theme.colors.navy};
   text-align: left;
-  margin: 4rem 0 0;
+  margin: 4rem 0 0.5rem;
 `;
 
 export const PageP = styled.p`
@@ -53,6 +53,9 @@ export const PageUl = styled.ul`
 `;
 
 export const MsmUl = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.sm};
   list-style-type: disc;
   list-style-position: inside;
   text-align: left;

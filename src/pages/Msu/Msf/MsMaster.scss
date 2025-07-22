@@ -172,6 +172,7 @@
     padding-left: 0; // 新增
     li {
       font-size: 18px;
+      font-weight: 500;
       color: $color-msu;
       margin-top: $spacing-xs;
 
@@ -340,7 +341,7 @@
     font-size: 24px;
     font-weight: 700;
     text-align: left;
-    margin: $spacing-xl 0 $spacing-xs;
+    margin: $spacing-xl 0 $spacing-sm;
   }
 
   &-intro {
@@ -349,7 +350,7 @@
   }
 
   &-recognition {
-    margin-top: $spacing-xl;
+    margin-top: $spacing-lg;
     margin-bottom: $spacing-xl;
     display: flex; // Added
     flex-direction: column; // Added

@@ -75,7 +75,7 @@ function AboutMsu() {
             <h3>學術研究 Research</h3>
             <div className="research-content">
               <div className="research-funding">
-                <h4>年研究經費達到</h4>
+                <h4>年研究經費達到:</h4>
                 <div className="funding-amount">
                   約$9.32億美元{" "}
                   <span className="funding-year">(2024年資料)</span>
@@ -83,14 +83,14 @@ function AboutMsu() {
               </div>
 
               <div className="research-facilities">
-                <h4>擁有2個全美獨一無二的研究設施，包括</h4>
+                <h4>擁有2個全美獨一無二的研究設施，包括:</h4>
                 <div className="facility">
                   <p>Facility for Rare Isotope Beams (FRIB)</p>
                 </div>
               </div>
 
               <div className="research-areas">
-                <h4>主要研究領域</h4>
+                <h4>主要研究領域:</h4>
                 <ul className="areas-list">
                   <li>生命科學</li>
                   <li>健康醫療</li>
@@ -102,7 +102,7 @@ function AboutMsu() {
               </div>
 
               <div className="research-centers">
-                <h4>MSU校內擁有</h4>
+                <h4>MSU校內擁有:</h4>
                 <p>數百個活躍的研究中心與機構</p>
               </div>
             </div>
@@ -133,14 +133,9 @@ function AboutMsu() {
                 <li>在全球140個國家擁有合作夥伴與研究項目。</li>
                 <li>研究領域涵蓋全球糧食安全、氣候變遷、健康與教育創新等。</li>
                 <li>國際學生人數位居全美大學前列。</li>
+                <li>25.5% 多元族裔背景 （或 不同族裔背景/有色人種）</li>
+                <li>8.5% 國際學生</li>
               </ul>
-
-              <div className="diversity-stats">
-                <ul className="diversity-list">
-                  <li>25.5% 多元族裔背景 （或 不同族裔背景/有色人種）</li>
-                  <li>8.5% 國際學生</li>
-                </ul>
-              </div>
             </div>
           </div>
         </section>

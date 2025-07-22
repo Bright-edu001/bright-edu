@@ -2,13 +2,15 @@
 @import "../../styles/mixins";
 
 .blog-section-title {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 700;
+  color: $color-nav;
   text-align: left;
-  margin: 1rem 0;
+  margin: 1rem 0 $spacing-xl;
+  border-bottom: 1px solid $color-nav;
 }
 .blog-section:nth-child(2) {
-  margin-top: $spacing-xl;
+  margin-top: $spacing-xxl;
 }
 
 .blog-grid {

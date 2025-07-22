@@ -75,7 +75,7 @@ function Areas() {
           </div>
           <div className="mba-areas-concentrations">
             <div className="mba-areas-concentrations-title">
-              Master of Business Administration Focus Areas
+              領域選擇 Master of Business Administration Focus Areas
             </div>
             <div className="mba-areas-concentration-list">
               <a

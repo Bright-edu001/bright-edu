@@ -4,6 +4,7 @@ import "./MsApplication.scss";
 import ApplicationForm from "../../../components/Application/ApplicationForm";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 // Import styled components as needed. For now, assuming only PageP might be relevant if h3/h4/ul are styled globally or via MsApplication.scss
 import { PageP } from "./MS.styles";
@@ -41,7 +42,11 @@ function MsApplication() {
           <PageP>申請者必須滿足以下任一英語能力考試的最低標準:</PageP>
           <div className="english-requirements">
             <div style={{ marginTop: "-3rem" }}>
-              <strong>TOEFL iBT：總分 80，各部分最低分數：</strong>
+              <strong>
+                <ArrowRightOutlined />
+                TOEFL iBT：
+              </strong>
+              總分 80，各部分最低分數：
               <ul className="horizontal-list">
                 <li>閱讀 (Reading) ≥ 19</li>
                 <li>聽力 (Listening) ≥ 17</li>
@@ -50,10 +55,18 @@ function MsApplication() {
               </ul>
             </div>
             <div>
-              <strong>IELTS Academic：</strong>總分 6.5，且四個部分分數不低於6.0
+              <strong>
+                <ArrowRightOutlined />
+                IELTS Academic：
+              </strong>
+              總分 6.5，且四個部分分數不低於6.0
             </div>
             <div>
-              <strong>PTE Academic：</strong>總分 54，各部分分數低於標準：
+              <strong>
+                <ArrowRightOutlined />
+                PTE Academic：
+              </strong>
+              總分 54，各部分分數低於標準：
               <ul className="horizontal-list">
                 <li>閱讀 (Reading) ≥ 51</li>
                 <li>聽力 (Listening) ≥ 47</li>

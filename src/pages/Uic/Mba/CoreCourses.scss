@@ -5,7 +5,7 @@
 .mba-courses-page {
   .intro {
     font-size: $font-size-md;
-    margin: $spacing-xs 0 $spacing-sm;
+    margin: $spacing-xs 0 $spacing-md;
     text-align: left;
   }
   .intro-title {
@@ -39,6 +39,9 @@
       }
       ul {
         padding-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
         li {
           font-size: $font-size-md;
           color: $color-black;

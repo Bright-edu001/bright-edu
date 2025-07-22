@@ -40,6 +40,7 @@
   text-align: left;
   font-size: $font-size-md;
   color: $color-black;
+  margin-bottom: $spacing-xs;
 }
 
 .mba-areas-why {
@@ -86,7 +87,7 @@
     li {
       font-size: $font-size-md;
       line-height: 1.7;
-      color: $color-uic;
+      color: $color-black;
       .highlight {
         color: $color-uic;
         font-size: $font-size-md;

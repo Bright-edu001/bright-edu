@@ -104,12 +104,12 @@ function MsMaster() {
                 修畢至少18學分的金融系（Department of Finance）800
                 級或以上課程：
               </li>
-              <span>
+              <span style={{ paddingLeft: "1.5rem" }}>
                 這 18 學分必須包含 FI 801（Managerial Finance，管理財務）或 FI
                 980（Theory of Finance，財務理論），除非學生通過系所的免修考試。
               </span>
               <li>修畢12學分的選修課程（須經課程主任批准）：</li>
-              <span>
+              <span style={{ paddingLeft: "1.5rem" }}>
                 可選金融相關課程，或經濟學（Economics）、統計學（Statistics）、數學（Mathematics）等相關學科的課程。其中至少9學分
                 必須來自800級或更高等級的課程。
               </span>

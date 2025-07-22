@@ -85,8 +85,8 @@ export const MsfOutcomesDiv = styled.div`
     list-style-position: inside; // Keep list style inside
     li {
       font-size: 18px;
-      margin-bottom: ${spacingMd};
-      color: ${colorUic}; // Or colorBlack if preferred for this list
+      margin-bottom: ${spacingSm};
+      color: ${colorBlack}; // Or colorBlack if preferred for this list
       text-align: left;
     }
   }

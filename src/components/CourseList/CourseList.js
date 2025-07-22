@@ -1,7 +1,7 @@
 import React, { memo } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-const CourseList = ({ items }) => (
+const CourseList = ({ items = [] }) => (
   <div className="course-list">
     <ul className="course-item">
       {items.map((item, idx) => (
@@ -13,10 +13,6 @@ const CourseList = ({ items }) => (
 
 CourseList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.string),
-};
-
-CourseList.defaultProps = {
-  items: [],
 };
 
 export default memo(CourseList);

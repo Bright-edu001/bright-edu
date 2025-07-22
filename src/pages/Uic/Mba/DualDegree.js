@@ -9,7 +9,9 @@ function DualDegree() {
       <MbaAreasHero />
 
       <SectionContainer className="intro" ariaLabel="雙學位課程">
-        <h3 className="intro-title">雙碩士學位銜接課程</h3>
+        <h3 className="intro-title" style={{ marginBottom: "1rem" }}>
+          雙碩士學位銜接課程
+        </h3>
         <p>
           這是針對選擇不同領域然後想持續進修的學生，特別設計的雙碩士學位銜接計畫。
         </p>
@@ -23,6 +25,16 @@ function DualDegree() {
         <p>
           此外，因為MS課程隸屬於STEM學位，學生畢業後可取得3年OPT的工作資格。
         </p>
+        <div className="photo-gallery">
+          <img
+            src="/images/Uic/Mba/photo_6334573812795951537_y.webp"
+            alt="UIC MBA 學生合照 1"
+          />
+          <img
+            src="/images/Uic/Mba/photo_6334573812795951536_y.webp"
+            alt="UIC MBA 學生合照 2"
+          />
+        </div>
       </SectionContainer>
       <SectionContainer className="avantages" ariaLabel="課程優勢">
         <h3>優勢Advantages</h3>

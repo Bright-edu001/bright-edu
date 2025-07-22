@@ -44,6 +44,7 @@
     .rankings-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+      gap: $spacing-md $spacing-xl;
       @media screen and (max-width: 850px) {
         gap: 0.5rem;
         grid-template-columns: repeat(3, 1fr);
@@ -102,6 +103,7 @@
   .intro-text {
     font-size: 18px;
     text-align: left;
+    margin-bottom: $spacing-xs;
   }
 
   // AACSB 認證相關
@@ -238,6 +240,7 @@
       font-size: 18px;
       font-weight: 500;
       text-align: left;
+      margin-bottom: $spacing-xs;
     }
 
     .diversity-items {
@@ -284,7 +287,6 @@
   flex-direction: column;
   gap: 0.5rem;
   text-align: left;
-  margin: 0.5rem 0;
   list-style-position: inside;
   li {
     font-size: 18px;

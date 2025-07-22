@@ -14,8 +14,8 @@ export const StyledApplicationForm = styled.form`
 
   input,
   textarea {
-    width: 700px;
-    max-width: 700px;
+    width: 900px;
+    max-width: 900px;
     min-width: 260px;
     align-self: center;
     border: 1px solid #c71432;
@@ -71,8 +71,8 @@ export const StyledApplicationForm = styled.form`
 
 // 申請條件與標題
 export const StyledSectionTitle = styled.h2`
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 900;
   line-height: 40px;
   margin-bottom: 1rem;
   color: #c71432;

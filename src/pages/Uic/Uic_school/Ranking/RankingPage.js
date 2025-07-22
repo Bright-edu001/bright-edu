@@ -11,18 +11,7 @@ function RankingPage() {
       description: "全美地區最大醫藥研究型大學",
       source: "Largest research university in Chicago",
     },
-    {
-      rankPrefix: "TOP",
-      rankNumber: "39",
-      description: "全美公立大學 U.S.NEWS.",
-      source: "Top Public Schools",
-    },
-    {
-      rankPrefix: "TOP",
-      rankNumber: "80",
-      description: "全美大學排行 U.S.NEWS",
-      source: "National Universities 2025",
-    },
+
     {
       rankPrefix: "TOP",
       rankNumber: "81",
@@ -67,6 +56,40 @@ function RankingPage() {
             UIC
             屬於美國公立大學，擁有商學院及醫學院等科系，優異的師資及教學品質，使不管在公立大學排名中或者是美國大學排名中榮獲許多優異的成績。
           </p>
+        </div>
+        <div className={styles.rankingHighlightBlock}>
+          <div className={styles.rankingHighlightRow}>
+            <h2 className={styles.rankingHighlightTitle}>
+              TOP <span className={styles.rankingHighlightNumber}>39</span>
+            </h2>
+            <div className={styles.rankingHighlightTextGroup}>
+              <p className={styles.rankingHighlightText}>
+                全美公立大學 U.S.NEWS.
+              </p>
+              <p className={styles.rankingHighlightText}>
+                Top Public Schools 2025
+              </p>
+            </div>
+          </div>
+          <div
+            className={
+              styles.rankingHighlightRow +
+              " " +
+              styles.rankingHighlightRowSpacing
+            }
+          >
+            <h2 className={styles.rankingHighlightTitle}>
+              TOP <span className={styles.rankingHighlightNumber}>80</span>
+            </h2>
+            <div className={styles.rankingHighlightTextGroup}>
+              <p className={styles.rankingHighlightText}>
+                全美大學排行 U.S.NEWS
+              </p>
+              <p className={styles.rankingHighlightText}>
+                National Universities 2025
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className={styles.rankingsGrid}>

@@ -12,8 +12,8 @@ export const StyledApplicationForm = styled.form`
 
   input,
   textarea {
-    width: 700px;
-    max-width: 700px;
+    width: 900px;
+    max-width: 900px;
     min-width: 260px;
     align-self: center;
     border: 1px solid #19453c;

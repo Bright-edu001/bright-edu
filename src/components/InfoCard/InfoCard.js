@@ -23,22 +23,23 @@ function InfoCard({
   imagePosition = "left",
 }) {
   // 記憶化 content 節點，避免重複渲染
+  // 遞迴展開巢狀內容，並自動包 <p>，但 ReactNode 不包 <p>
   const contentNodes = useMemo(() => {
-    if (isValidElement(content)) {
-      return content;
-    }
-    if (Array.isArray(content)) {
-      return content.map((paragraph, idx) => <p key={idx}>{paragraph}</p>);
-    }
-    if (typeof content === "string") {
-      return <p>{content}</p>;
-    }
-    if (content && typeof content === "object") {
-      return Object.values(content).map(
-        (paragraph, idx) => paragraph && <p key={idx}>{paragraph}</p>
-      );
-    }
-    return null;
+    const renderContent = (val, keyPrefix = "") => {
+      if (isValidElement(val)) return val;
+      if (typeof val === "string" || typeof val === "number")
+        return <p key={keyPrefix}>{val}</p>;
+      if (Array.isArray(val)) {
+        return val.map((item, idx) => renderContent(item, keyPrefix + idx));
+      }
+      if (val && typeof val === "object") {
+        return Object.values(val).map((item, idx) =>
+          renderContent(item, keyPrefix + idx)
+        );
+      }
+      return null;
+    };
+    return renderContent(content);
   }, [content]);
 
   return (
@@ -64,7 +65,7 @@ function InfoCard({
 // PropTypes 驗證
 InfoCard.propTypes = {
   title: PropTypes.string,
-  content: PropTypes.node,
+  content: PropTypes.any,
   imageSrc: PropTypes.string.isRequired,
   imageAlt: PropTypes.string,
   imagePosition: PropTypes.oneOf(["left", "right"]),

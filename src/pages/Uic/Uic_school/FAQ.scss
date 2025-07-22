@@ -45,7 +45,7 @@
             h3 {
               margin: 0;
               @include body-large;
-              font-size: 1.1rem;
+              font-size: 20px;
               color: $color-nav;
               text-align: left;
             }
@@ -81,7 +81,7 @@
             padding: 0 1rem;
 
             p {
-              font-size: $font-size-lg;
+              font-size: $font-size-md;
               font-weight: $font-weight-medium;
               text-align: left;
               margin: $spacing-xs 0;

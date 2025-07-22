@@ -8,6 +8,7 @@
   color: $color-nav;
   text-align: left;
   margin-top: 4rem;
+  margin-bottom: $spacing-sm;
 }
 
 .mba-application-desc {
@@ -15,6 +16,7 @@
     font-size: $font-size-md;
     color: $color-black;
     text-align: left;
+    margin-bottom: $spacing-xs;
   }
 }
 .mba-info-section {
@@ -31,10 +33,11 @@
   }
   .mba-info-list {
     padding: 0 $spacing-md;
+    margin-top: $spacing-sm;
     li {
       font-size: $font-size-md;
       color: $color-black;
-      margin-top: $spacing-sm;
+      margin-top: $spacing-xs;
     }
   }
 }

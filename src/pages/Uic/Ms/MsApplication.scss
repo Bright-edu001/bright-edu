@@ -36,7 +36,7 @@
 
   p {
     margin-bottom: $spacing-xl;
-    font-size: $font-size-lg;
+    font-size: $font-size-md;
     color: $color-black;
     text-align: left;
     @media screen and (max-width: 700px) {
@@ -47,10 +47,14 @@
   ul {
     text-align: left;
     list-style-position: inside;
+    margin-top: $spacing-xs;
     margin-bottom: $spacing-xl;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
 
     li {
-      font-size: $font-size-lg;
+      font-size: $font-size-md;
       color: $color-black;
       text-align: left;
     }
@@ -59,17 +63,18 @@
   // 申請所需文件 ul
   .horizontal-list {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 24px;
+    justify-content: flex-start;
+    gap: 48px;
     padding: 0 $spacing-sm;
+
     margin-bottom: 0;
 
     li {
       list-style: disc;
-      font-size: $font-size-lg;
+      font-size: $font-size-md;
       color: $color-black;
-      margin-top: $spacing-sm; // 與上方間距
     }
   }
 
@@ -77,8 +82,10 @@
     text-align: left;
     div {
       margin-bottom: $spacing-sm;
+      color: $color-black;
+      font-size: $font-size-md;
       strong {
-        font-size: $font-size-lg;
+        font-size: $font-size-md;
         font-weight: $font-weight-medium;
         color: $color-black;
       }

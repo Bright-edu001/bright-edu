@@ -62,7 +62,11 @@ function MSFinanceSection({
               <li key={idx}>
                 {/* 若有title則加粗，否則只顯示desc */}
                 {item.title && <strong>{item.title}</strong>}
-                {item.desc && <div>{item.desc}</div>}
+                {item.desc && (
+                  <div style={{ color: "#222", marginTop: "0.5rem" }}>
+                    {item.desc}
+                  </div>
+                )}
                 {/* 新增：若有 extraList，則渲染黑色小圓點 */}
                 {item.extraList && Array.isArray(item.extraList) && (
                   <ul>
@@ -159,7 +163,7 @@ function MSFinanceSection({
       <CoreCoursesSectionDiv>
         <CoreCoursesTitle>{coreCoursesTitle}</CoreCoursesTitle>
         <CoreCourseParagraphDiv
-          hasContent={hasCoreCoursePragaph}
+          $hascontent={hasCoreCoursePragaph}
           style={
             coreCoursePragaphMarginBottom !== undefined
               ? { marginBottom: coreCoursePragaphMarginBottom }
@@ -171,7 +175,7 @@ function MSFinanceSection({
             : coreCoursePragaph && <p>{coreCoursePragaph}</p>}
         </CoreCourseParagraphDiv>
         <CoreCoursesIntroDiv
-          hasContent={hasCoreCoursesIntroList}
+          $hascontent={hasCoreCoursesIntroList}
           style={
             coreCoursesIntroMarginBottom !== undefined
               ? { marginBottom: coreCoursesIntroMarginBottom }

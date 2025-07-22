@@ -51,6 +51,9 @@
     .course-item {
       margin: $spacing-sm 0;
       list-style-position: inside;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
       li {
         font-size: $font-size-md;
         text-align: left;
