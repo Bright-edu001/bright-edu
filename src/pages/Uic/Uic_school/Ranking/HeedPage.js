@@ -9,16 +9,8 @@ function HeedPage() {
       <SectionContainer>
         {/* --- 區塊 1: 簡介 --- */}
         <div className={styles.introSection}>
-          <div
-            className="diversity-header"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-            }}
-          >
-            <div className="diversity-logo">
+          <div className={styles.diversityHeader}>
+            <div className={styles.diversityLogo}>
               <img
                 className="responsive-img"
                 src={`/images/Uic/ranking/2023-INSIGHT-Into-Diversity-HEED-Award-Logo-1024x1024.webp`}
@@ -26,19 +18,9 @@ function HeedPage() {
                 loading="lazy"
               />
             </div>
-            <div className="diversity-title">
-              <h2
-                style={{
-                  marginBottom: "0.5rem",
-                  color: "#000000",
-                  fontWeight: 700,
-                }}
-              >
-                HEED -Higher Education Excellent in Diversity
-              </h2>
-              <p style={{ fontSize: "24px", textAlign: "left" }}>
-                高等教育多元性卓越獎
-              </p>
+            <div className={styles.diversityTitle}>
+              <h2>HEED -Higher Education Excellent in Diversity</h2>
+              <p>高等教育多元性卓越獎</p>
             </div>
           </div>
           <p className={styles.sectionParagraph}>

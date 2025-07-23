@@ -52,16 +52,8 @@ function RankingPage() {
       <MbaAreasHero />
       <SectionContainer>
         <div className={styles.introSection}>
-          <div
-            className="rankings-header"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-            }}
-          >
-            <div className="rankings-logo">
+          <div className={styles.rankingsHeader}>
+            <div className={styles.rankingsLogo}>
               <img
                 className="responsive-img"
                 src={`/images/Uic/ranking/Ranking.webp`}
@@ -69,7 +61,7 @@ function RankingPage() {
                 loading="lazy"
               />
             </div>
-            <div className="rankings-title">
+            <div className={styles.rankingsTitle}>
               <h2>UIC RANKINGS</h2>
             </div>
           </div>

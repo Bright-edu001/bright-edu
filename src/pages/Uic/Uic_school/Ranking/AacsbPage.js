@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./AacsbPage.module.css"; // 引入 SCSS 模組
+import styles from "./AacsbPage.module.scss"; // 修正副檔名為 .scss
 import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
 function AacsbPage() {
@@ -8,16 +8,8 @@ function AacsbPage() {
       <MbaAreasHero />
       <SectionContainer>
         <div className={styles.contentSection}>
-          <div
-            className="aacsb-header"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-            }}
-          >
-            <div className="aacsb-logo">
+          <div className={styles.aacsbHeader}>
+            <div className={styles.aacsbLogo}>
               <img
                 className="responsive-img"
                 src={`/images/Uic/ranking/Aacsb.webp`}
@@ -25,7 +17,7 @@ function AacsbPage() {
                 loading="lazy"
               />
             </div>
-            <div className="aacsb-title">
+            <div className={styles.aacsbTitle}>
               <h2>AACSB商業及會計雙項認證</h2>
               <p>不超過200間學校獲得此商業&會計的雙項認證</p>
             </div>

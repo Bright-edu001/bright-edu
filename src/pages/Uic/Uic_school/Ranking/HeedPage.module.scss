@@ -29,6 +29,7 @@
     font-size: 18px;
     line-height: 1.6; // 增加行高以提升可讀性
     text-align: left;
+    margin-bottom: $spacing-xs; // 統一的段落間距
   }
   .sectionParagraph:nth-child(1) {
     margin-top: 4rem; // 第一個段落增加上邊距
@@ -86,5 +87,27 @@
     .sectionListItem {
       font-size: 16px;
     }
+  }
+}
+
+.diversityHeader {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.diversityTitle {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  h2 {
+    margin-bottom: 0.5rem;
+    color: #000000;
+    font-weight: 700;
+  }
+  p {
+    font-size: 24px;
+    text-align: left;
   }
 }
