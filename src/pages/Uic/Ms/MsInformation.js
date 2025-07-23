@@ -45,7 +45,16 @@ function MsInformation() {
           <li>
             接著，你可以根據個人興趣選擇技術方向、管理方向，或結合兩者的混合專業，課程涵蓋以下三大領域：
           </li>
-          <li style={{ listStyle: "none", paddingLeft: 0, marginTop: "0.5em" }}>
+          <li
+            style={{
+              listStyle: "none",
+              paddingLeft: 0,
+              marginTop: "0.5em",
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.5em",
+            }}
+          >
             <div>
               <strong style={{ fontWeight: "400" }}>
                 服務運營與供應鏈管理（Service Operations and Supply Chain

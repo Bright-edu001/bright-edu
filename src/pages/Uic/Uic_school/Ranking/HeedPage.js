@@ -9,6 +9,38 @@ function HeedPage() {
       <SectionContainer>
         {/* --- 區塊 1: 簡介 --- */}
         <div className={styles.introSection}>
+          <div
+            className="diversity-header"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+            }}
+          >
+            <div className="diversity-logo">
+              <img
+                className="responsive-img"
+                src={`/images/Uic/ranking/2023-INSIGHT-Into-Diversity-HEED-Award-Logo-1024x1024.webp`}
+                alt="HEED Excellence Award"
+                loading="lazy"
+              />
+            </div>
+            <div className="diversity-title">
+              <h2
+                style={{
+                  marginBottom: "0.5rem",
+                  color: "#000000",
+                  fontWeight: 700,
+                }}
+              >
+                HEED -Higher Education Excellent in Diversity
+              </h2>
+              <p style={{ fontSize: "24px", textAlign: "left" }}>
+                高等教育多元性卓越獎
+              </p>
+            </div>
+          </div>
           <p className={styles.sectionParagraph}>
             HEED（Higher Education Excellence in Diversity）獎項，中文譯作
             高等教育卓越多樣性獎，是由 《INSIGHT Into Diversity》

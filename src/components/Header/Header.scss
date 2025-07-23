@@ -242,3 +242,11 @@
     }
   }
 }
+
+// 覆蓋 antd dropdown 的收起動畫時間
+.ant-dropdown {
+  .ant-dropdown-menu {
+    transition: opacity 0.5s cubic-bezier(0.7, 0.3, 0.1, 1),
+      transform 0.5s cubic-bezier(0.7, 0.3, 0.1, 1) !important;
+  }
+}

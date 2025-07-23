@@ -8,6 +8,28 @@ function AacsbPage() {
       <MbaAreasHero />
       <SectionContainer>
         <div className={styles.contentSection}>
+          <div
+            className="aacsb-header"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+            }}
+          >
+            <div className="aacsb-logo">
+              <img
+                className="responsive-img"
+                src={`/images/Uic/ranking/Aacsb.webp`}
+                alt="AACSB Logo"
+                loading="lazy"
+              />
+            </div>
+            <div className="aacsb-title">
+              <h2>AACSB商業及會計雙項認證</h2>
+              <p>不超過200間學校獲得此商業&會計的雙項認證</p>
+            </div>
+          </div>
           <p>
             AACSB (Association to Advance Collegiate Schools of
             Business)，中文譯作國際商學院促進協會，是全球最具權威的商學教育認證機構。獲得

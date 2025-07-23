@@ -149,7 +149,10 @@ export const CoreCoursesIntroDiv = styled.div`
   ul {
     list-style: none;
     padding-left: 0;
-    margin-bottom: ${spacingSm}; // Default margin for the list
+    margin: ${spacingXs} 0; // Default margin for the list
+    display: flex;
+    flex-direction: column;
+    gap: ${spacingXs};
     li {
       font-size: 18px;
       color: ${colorBlack};

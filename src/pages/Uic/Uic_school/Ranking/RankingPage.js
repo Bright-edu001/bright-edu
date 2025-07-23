@@ -52,6 +52,27 @@ function RankingPage() {
       <MbaAreasHero />
       <SectionContainer>
         <div className={styles.introSection}>
+          <div
+            className="rankings-header"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+            }}
+          >
+            <div className="rankings-logo">
+              <img
+                className="responsive-img"
+                src={`/images/Uic/ranking/Ranking.webp`}
+                alt="UIC Rankings"
+                loading="lazy"
+              />
+            </div>
+            <div className="rankings-title">
+              <h2>UIC RANKINGS</h2>
+            </div>
+          </div>
           <p>
             UIC
             屬於美國公立大學，擁有商學院及醫學院等科系，優異的師資及教學品質，使不管在公立大學排名中或者是美國大學排名中榮獲許多優異的成績。

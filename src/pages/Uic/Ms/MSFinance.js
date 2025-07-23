@@ -94,8 +94,8 @@ function MSFinance() {
       <MbaAreasHero />
       <SectionContainer>
         <PageH2>
-          UIC 會計碩士學位（Master of Science in Accounting,
-          MSA）——邁向專業會計職涯的關鍵一步
+          UIC 金融碩士學位（Master of Science in Finance,
+          MSF）——讓你邁向金融領域的高階職位
         </PageH2>
         <PageP>
           伊利諾大學芝加哥分校（University of Illinois Chicago, UIC）

@@ -1,6 +1,5 @@
 @import "../../../../styles/variables"; // 引入變數
 @import "../../../../styles/mixins"; // 引入 mixins
-
 .sectionBlock {
   margin: 3rem 0;
 }
@@ -36,6 +35,34 @@
         margin-bottom: $spacing-xs;
         text-align: left;
       }
+    }
+  }
+}
+
+.aacsb-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .aacsb-logo {
+    @media screen and (max-width: 700px) {
+      width: 50%;
+    }
+  }
+
+  .aacsb-title {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      margin-bottom: 0.5rem;
+      color: $color-black;
+      font-weight: 700;
+    }
+    p {
+      font-size: 24px;
     }
   }
 }
