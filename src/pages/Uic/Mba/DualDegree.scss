@@ -7,7 +7,12 @@
     .photo-gallery {
       display: flex;
       flex-direction: column;
+      align-items: center;
       margin: $spacing-lg 0;
+      gap: $spacing-xl;
+      img {
+        max-width: 95%;
+      }
     }
   }
   .intro-title {
