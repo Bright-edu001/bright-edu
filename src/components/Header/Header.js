@@ -1,4 +1,3 @@
-// src/components/Header/Header.jsx
 import React, { useState, useEffect, useMemo } from "react";
 import { Menu, Drawer, ConfigProvider } from "antd";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ const Header = () => {
   const [drawerWidth, setDrawerWidth] = useState(
     window.innerWidth <= 500 ? "100%" : 500
   );
+  const [animationDuration, setAnimationDuration] = useState("0.2s");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,6 +18,37 @@ const Header = () => {
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // 監聽滑鼠事件來控制動畫時間
+  useEffect(() => {
+    const handleMouseEnter = (e) => {
+      // 檢查是否是選單項目的 mouseenter
+      if (e.target.closest(".ant-menu-submenu")) {
+        setAnimationDuration("0.2s"); // 展開時間
+      }
+    };
+
+    const handleMouseLeave = (e) => {
+      // 檢查是否是選單項目的 mouseleave
+      if (e.target.closest(".ant-menu-submenu")) {
+        setAnimationDuration("0.6s"); // 關閉時間
+      }
+    };
+
+    // 添加事件監聽器到 header-nav
+    const headerNav = document.querySelector(".header-nav");
+    if (headerNav) {
+      headerNav.addEventListener("mouseenter", handleMouseEnter, true);
+      headerNav.addEventListener("mouseleave", handleMouseLeave, true);
+    }
+
+    return () => {
+      if (headerNav) {
+        headerNav.removeEventListener("mouseenter", handleMouseEnter, true);
+        headerNav.removeEventListener("mouseleave", handleMouseLeave, true);
+      }
+    };
   }, []);
 
   const toggleMobileMenu = () => {
@@ -66,7 +97,7 @@ const Header = () => {
     <ConfigProvider
       theme={{
         token: {
-          motionDurationMid: "0.4s", // 下拉選單動畫時長（預設 0.3s），此處設更快
+          motionDurationMid: animationDuration, // 動態控制展開(0.2s)和關閉(0.5s)時間
         },
       }}
     >
