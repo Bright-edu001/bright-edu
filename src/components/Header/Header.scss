@@ -1,6 +1,11 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
+.ant-menu-slide-up-leave-active {
+  animation-duration: 12s !important; /* 你想要的收起时长 */
+  animation-timing-function: cubic-bezier(0.7, 0.3, 0.1, 1) !important;
+}
+
 /* 頁首基本樣式 */
 .header {
   background: $color-gray-ultralight;
@@ -240,13 +245,5 @@
     span:nth-child(3) {
       transform: translateY(-9px) rotate(-45deg);
     }
-  }
-}
-
-// 覆蓋 antd dropdown 的收起動畫時間
-.ant-dropdown {
-  .ant-dropdown-menu {
-    transition: opacity 0.5s cubic-bezier(0.7, 0.3, 0.1, 1),
-      transform 0.5s cubic-bezier(0.7, 0.3, 0.1, 1) !important;
   }
 }

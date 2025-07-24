@@ -25,6 +25,7 @@
     font-weight: $font-weight-bold;
     color: $color-nav;
     text-align: left;
+    margin-bottom: $spacing-xs;
   }
   .food-attractions-intro {
     margin-top: $spacing-xl;
@@ -92,6 +93,7 @@
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
     margin-top: $spacing-xl;
+    margin-bottom: $spacing-xs;
     @media screen and (max-width: 500px) {
       text-align: left;
       margin-bottom: $spacing-xs;
