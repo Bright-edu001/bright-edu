@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
-import { getEnrollmentEvents, getNews } from "../data/blog";
+import { getEnrollmentEvents, getNews } from "../services/blogService";
 
 // 建立 BlogContext，用於全域分享部落格資料與操作方法
 export const BlogContext = createContext();

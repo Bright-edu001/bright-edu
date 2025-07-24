@@ -15,6 +15,8 @@ Bright Edu 是一個現代化的線上教育平台，旨在提供高品質的課
 - React.js 前端框架
 - 響應式設計
 - 現代化 UI/UX
+- 路由模組化管理，提升擴充性
+- Firebase 服務存取集中於 `src/services`
 
 ## 開始使用
 
