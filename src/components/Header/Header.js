@@ -3,6 +3,7 @@ import { Menu, Drawer, ConfigProvider } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { menuItems } from "../../config/menuConfig";
 import "./Header.scss";
+import getAssetUrl from "../../utils/getAssetUrl";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -107,7 +108,7 @@ const Header = () => {
             <div className="logo">
               <Link to="/" title="Bright Education 首頁">
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/header/logo.webp`}
+                  src={getAssetUrl("/images/header/logo.webp")}
                   className="logo-img responsive-img"
                   alt="Bright Education Logo"
                   width="150"

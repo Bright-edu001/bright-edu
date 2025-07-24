@@ -1,69 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import * as defaultStyles from "./ApplicationFormStyles";
+import useFormSubmit from "../../hooks/useFormSubmit";
 
 function ApplicationForm({ showCondition = true, customStyles }) {
   const { StyledApplicationForm, StyledSectionTitle, StyledConditionDesc } =
     customStyles || defaultStyles;
 
-  const [form, setForm] = useState({
-    name: "",
-    lineId: "",
-    email: "",
-    message: "",
-  });
-
-  const [submitting, setSubmitting] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // 檢查必填
-    if (!form.name || !form.email || !form.message) {
-      alert("請完整填寫所有必填欄位！");
-      return;
-    }
-    // 新增基本驗證
-    if (form.name.trim().length < 2) {
-      alert("姓名需大於2個字！");
-      return;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(form.email)) {
-      alert("請輸入正確的 E-MAIL 格式！");
-      return;
-    }
-    if (form.message.trim().length < 10) {
-      alert("備註內容需大於10個字！");
-      return;
-    }
-    setSubmitting(true);
-    try {
-      // 將此處 URL 換成你的 Google Apps Script Web App URL
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbwlPwvgxx7g-t1uy76JB09OFrGlVrlBDdEXVahMzvICKbxW2HvLcVpM-C35NoLSNUDS/exec",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-          mode: "no-cors",
-        }
-      );
-      // 因為 no-cors，res.ok/res.status 都無法用，只能假設送出
-      alert("送出成功，我們會盡快與您聯絡！");
-      setForm({ name: "", lineId: "", email: "", message: "" });
-      // 如果要嚴謹判斷成功與否，必須後端支援 CORS
-    } catch (err) {
-      alert("送出失敗，請檢查網路連線。");
-    }
-    setSubmitting(false);
-  };
+  const { form, handleChange, handleSubmit, submitting } = useFormSubmit();
 
   return (
     <StyledApplicationForm onSubmit={handleSubmit}>

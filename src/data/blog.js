@@ -1,5 +1,6 @@
 import { db } from "../config/firebaseConfig";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import getAssetUrl from "../utils/getAssetUrl";
 
 // Function to process and add the public URL to image paths
 const processBlogData = (data) => {
@@ -7,10 +8,10 @@ const processBlogData = (data) => {
 
   const updateImagePaths = (item) => {
     if (item.thumbnail) {
-      item.thumbnail = `${process.env.PUBLIC_URL}${item.thumbnail}`;
+      item.thumbnail = getAssetUrl(item.thumbnail);
     }
     if (item.image) {
-      item.image = `${process.env.PUBLIC_URL}${item.image}`;
+      item.image = getAssetUrl(item.image);
     }
     return item;
   };

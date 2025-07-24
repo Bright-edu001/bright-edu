@@ -3,43 +3,16 @@ import Hero from "../../components/Hero/Hero";
 import ActionButton from "../../components/ActionButton/ActionButton";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import RankingNumberFlip from "../../components/RankingNumberFlip/RankingNumberFlip";
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useContext } from "react";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import { BlogContext } from "../../context/BlogContext";
 
 function Home() {
   const { enrollmentEvents, news, loading, error } = useContext(BlogContext);
   const [animateRanking, setAnimateRanking] = useState(false);
-  const featuresRef = useRef(null);
-
-  useEffect(() => {
-    const currentFeaturesRef = featuresRef.current; // 將 ref.current 賦值給本地變數
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setAnimateRanking(true);
-          if (currentFeaturesRef) {
-            // 檢查 currentFeaturesRef 是否存在
-            observer.unobserve(currentFeaturesRef);
-          }
-        }
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-      }
-    );
-
-    if (currentFeaturesRef) {
-      observer.observe(currentFeaturesRef);
-    }
-
-    return () => {
-      if (currentFeaturesRef) {
-        observer.unobserve(currentFeaturesRef);
-      }
-    };
-  }, []); // 空依賴陣列，effect 只在掛載和卸載時執行
+  const featuresRef = useIntersectionObserver(() => setAnimateRanking(true), {
+    threshold: 0.1,
+  });
 
   return (
     <div className="home-page">

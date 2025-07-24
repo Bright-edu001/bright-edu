@@ -41,6 +41,13 @@ Bright Edu 是一個現代化的線上教育平台，旨在提供高品質的課
 構建被壓縮，文件名包含哈希值。\
 您的應用程序已準備好部署！
 
+## 環境變數
+
+應用程式使用下列環境變數進行設定：
+
+- `REACT_APP_FORM_ENDPOINT`：表單送出的 Google Apps Script 端點。
+  若使用 Netlify 部署，可在 **Site settings → Environment variables** 新增此變數。
+
 ## 學習更多
 
 如需了解更多關於專案的信息，請聯繫我們的開發團隊。

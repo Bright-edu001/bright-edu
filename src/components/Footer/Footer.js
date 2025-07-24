@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import getAssetUrl from "../../utils/getAssetUrl";
 
 function Footer() {
   return (
@@ -16,7 +17,7 @@ function Footer() {
                   target="_blank"
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/footer/ICEF.webp`}
+                    src={getAssetUrl("/images/footer/ICEF.webp")}
                     alt="ICEF認證徽章 - Bright Education"
                     width="120"
                     height="120"
