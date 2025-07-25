@@ -1,14 +1,22 @@
 import React from "react";
-import "./Footer.css";
+import { Layout } from "antd";
 import getAssetUrl from "../../utils/getAssetUrl";
+import {
+  FooterWrapper,
+  FooterContent,
+  FooterSection,
+  FooterBottom,
+} from "./FooterStyles";
+
+const { Footer: AntFooter } = Layout;
 
 function Footer() {
   return (
     <>
-      <footer className="footer" role="contentinfo">
+      <FooterWrapper as={AntFooter} role="contentinfo">
         <div className="container">
-          <div className="footer-content">
-            <div className="footer-section brand">
+          <FooterContent>
+            <FooterSection className="brand">
               <div className="footer-brand">
                 <a
                   href="https://www.icef.com/agency/001bG00000EAMX3QAP"
@@ -25,9 +33,9 @@ function Footer() {
                   />
                 </a>
               </div>
-            </div>
+            </FooterSection>
 
-            <div className="footer-section footer-links-uic">
+            <FooterSection className="footer-links-uic">
               <p className="section-title">UIC商學院碩士</p>
               <ul>
                 <li>
@@ -55,8 +63,8 @@ function Footer() {
                   </a>
                 </li>
               </ul>
-            </div>
-            <div className="footer-section footer-links-msu">
+            </FooterSection>
+            <FooterSection className="footer-links-msu">
               <p className="section-title">MSU金融碩士</p>
               <ul>
                 <li>
@@ -84,14 +92,14 @@ function Footer() {
                   </a>
                 </li>
               </ul>
-            </div>
+            </FooterSection>
 
-            <div className="footer-section articles">
+            <FooterSection className="articles">
               <a href="/blog" title="瀏覽所有活動與文章">
                 活動與文章
               </a>
-            </div>
-            <div className="footer-section about">
+            </FooterSection>
+            <FooterSection className="about">
               <div
                 className="contact"
                 itemScope
@@ -142,15 +150,15 @@ function Footer() {
                   />
                 </a>
               </div>
-            </div>
-          </div>
-          <div className="footer-bottom">
+            </FooterSection>
+          </FooterContent>
+          <FooterBottom>
             <p>
               &copy; BRIGHT EDUCATION CORPORATION © 2025 ALL RIGHTS RESERVED
             </p>
-          </div>
+          </FooterBottom>
         </div>
-      </footer>
+      </FooterWrapper>
     </>
   );
 }

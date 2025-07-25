@@ -2,10 +2,11 @@ import { db } from "../config/firebaseConfig";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import getAssetUrl from "../utils/getAssetUrl";
 
-// Function to process and add the public URL to image paths
+// 處理部落格資料，將圖片路徑轉為公開 URL
 const processBlogData = (data) => {
-  const processedData = JSON.parse(JSON.stringify(data)); // Deep copy
+  const processedData = JSON.parse(JSON.stringify(data)); // 深拷貝
 
+  // 更新圖片路徑
   const updateImagePaths = (item) => {
     if (item.thumbnail) {
       item.thumbnail = getAssetUrl(item.thumbnail);
@@ -24,21 +25,24 @@ const processBlogData = (data) => {
   return processedData;
 };
 
+// 取得所有部落格文章（包含招生活動與新聞）
 export const getAllBlogPosts = async () => {
   try {
+    // 同時取得招生活動與新聞
     const [enrollmentEvents, news] = await Promise.all([
       getEnrollmentEvents(),
       getNews(),
     ]);
     const allPosts = [...enrollmentEvents, ...news];
-    // The processing logic is already applied in getEnrollmentEvents and getNews
+    // 招生活動與新聞已經處理過圖片路徑
     return allPosts;
   } catch (error) {
     console.error("Failed to fetch all blog posts:", error);
-    throw error; // Re-throw the error to be handled by the caller
+    throw error; // 錯誤拋出給呼叫端處理
   }
 };
 
+// 取得所有招生活動
 export const getEnrollmentEvents = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "enrollmentEvents"));
@@ -53,6 +57,7 @@ export const getEnrollmentEvents = async () => {
   }
 };
 
+// 取得所有新聞
 export const getNews = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "news"));
@@ -67,9 +72,10 @@ export const getNews = async () => {
   }
 };
 
+// 依據 id 取得單一部落格文章（先查招生活動，再查新聞）
 export const getBlogPost = async (id) => {
   try {
-    // Try fetching from enrollmentEvents first
+    // 先查詢 enrollmentEvents
     let docRef = doc(db, "enrollmentEvents", id);
     let docSnap = await getDoc(docRef);
 
@@ -77,7 +83,7 @@ export const getBlogPost = async (id) => {
       return processBlogData({ id: docSnap.id, ...docSnap.data() });
     }
 
-    // If not found, try fetching from news
+    // 若未找到，再查詢 news
     docRef = doc(db, "news", id);
     docSnap = await getDoc(docRef);
 
@@ -93,6 +99,5 @@ export const getBlogPost = async (id) => {
   }
 };
 
-// The 'all' export is now a function that fetches the data
-// It's essentially the same as getAllBlogPosts now.
+// all 函數等同於 getAllBlogPosts
 export const all = getAllBlogPosts;

@@ -85,7 +85,7 @@
       margin-bottom: $spacing-lg;
     }
     .interview-list {
-      margin-top: -$spacing-xl;
+      margin-top: -$spacing-md;
       margin-bottom: $spacing-xxl;
       p {
         margin-top: $spacing-xs;
@@ -96,7 +96,7 @@
         justify-content: flex-start;
         list-style-position: inside;
         gap: $spacing-md;
-        margin-top: -$spacing-xl;
+        margin-top: -$spacing-md;
       }
     }
   }

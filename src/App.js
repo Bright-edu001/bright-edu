@@ -3,42 +3,26 @@ import { BlogProvider } from "./context/BlogContext";
 import { SearchProvider } from "./context/SearchContext";
 import "./App.css";
 
-// components
+// 組件引入
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import FloatingButtons from "./components/FloatingButtons/FloatingButtons";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
-// react-router
+// react-router 用於路由嵌套
 import { Outlet } from "react-router-dom";
 
-// 載入指示器組件
+// 載入指示器組件，顯示「載入中...」
 const LoadingSpinner = () => (
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "50vh",
-      fontSize: "1.2rem",
-      color: "#c71432",
-    }}
-  >
-    <div
-      className="loading-skeleton"
-      style={{
-        width: "200px",
-        height: "20px",
-        borderRadius: "4px",
-      }}
-    >
-      載入中...
-    </div>
+  <div className="loading-spinner">
+    <div className="loading-skeleton">載入中...</div>
   </div>
 );
 
+// App 主組件
 function App() {
   useEffect(() => {
+    // 監聽網址參數，若有 redirect 則導向指定路徑
     const params = new URLSearchParams(window.location.search);
     const redirect = params.get("redirect");
     if (redirect) {
@@ -46,20 +30,25 @@ function App() {
     }
   }, []);
   return (
+    // 提供部落格與搜尋的 context
     <BlogProvider>
       <SearchProvider>
+        {/* 錯誤邊界，捕捉子組件錯誤 */}
         <ErrorBoundary>
           <div className="App">
+            {/* 頁首 */}
             <Header />
             <main className="main-content">
-              {/* 修改：使用 Suspense 包裹 Outlet */}
+              {/* 使用 Suspense 包裹 Outlet，顯示載入指示器 */}
               <Suspense fallback={<LoadingSpinner />}>
                 <Outlet />
               </Suspense>
             </main>
+            {/* 頁尾 */}
             <Footer />
           </div>
         </ErrorBoundary>
+        {/* 浮動按鈕 */}
         <FloatingButtons />
       </SearchProvider>
     </BlogProvider>

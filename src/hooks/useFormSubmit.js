@@ -1,17 +1,33 @@
 import { useState } from "react";
 
+/**
+ * useFormSubmit
+ * 這是一個自訂 React Hook，提供表單資料管理、驗證與送出功能。
+ * 用法：回傳 form 狀態、handleChange、handleSubmit 及 submitting 狀態。
+ */
+
 const DEFAULT_FORM = { name: "", lineId: "", email: "", message: "" };
 const API_URL = process.env.REACT_APP_FORM_ENDPOINT;
 
 function useFormSubmit(initialState = DEFAULT_FORM) {
+  // 表單資料狀態
   const [form, setForm] = useState(initialState);
+  // 送出狀態（避免重複送出）
   const [submitting, setSubmitting] = useState(false);
 
+  /**
+   * 處理表單欄位變更
+   * @param {Event} e - input 的 onChange 事件
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * 驗證表單資料
+   * @returns {boolean} 是否通過驗證
+   */
   const validate = () => {
     if (!form.name || !form.email || !form.message) {
       alert("請完整填寫所有必填欄位！");
@@ -33,6 +49,10 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
     return true;
   };
 
+  /**
+   * 處理表單送出
+   * @param {Event} e - form 的 onSubmit 事件
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -53,6 +73,7 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
     setSubmitting(false);
   };
 
+  // 回傳表單狀態與操作方法
   return { form, handleChange, handleSubmit, submitting };
 }
 
