@@ -67,6 +67,34 @@
   }
 }
 
+.hero-images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-img.fade-in {
+  opacity: 1;
+}
+
+.hero-img.fade-out {
+  opacity: 0;
+}
+
 .hero-bg-mask {
   position: absolute;
   top: 0;
@@ -78,15 +106,6 @@
   pointer-events: none;
 }
 
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
 @media screen and (max-width: 1024px) {
   .hero {
     height: 400px;

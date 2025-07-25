@@ -13,13 +13,26 @@ function Home() {
   const featuresRef = useIntersectionObserver(() => setAnimateRanking(true), {
     threshold: 0.1,
   });
+  const [aboutInView, setAboutInView] = useState(false);
+  const [blogInView, setBlogInView] = useState(false);
+  const aboutRef = useIntersectionObserver(() => setAboutInView(true), {
+    threshold: 0.1,
+  });
+  const blogRef = useIntersectionObserver(() => setBlogInView(true), {
+    threshold: 0.1,
+  });
 
   return (
     <div className="home-page">
       {/* Hero Section */}
       <Hero />
 
-      <section className="about" id="about-us" aria-label="關於我們">
+      <section
+        className={`about fade-in-on-scroll${aboutInView ? " in-view" : ""}`}
+        id="about-us"
+        aria-label="關於我們"
+        ref={aboutRef}
+      >
         <div className="container">
           <div className="about-content">
             <div className="about-text">
@@ -173,7 +186,12 @@ function Home() {
         </div>
       </section>
 
-      <section className="blog-area" id="blog-articles" aria-label="部落格文章">
+      <section
+        className={`blog-area fade-in-on-scroll${blogInView ? " in-view" : ""}`}
+        id="blog-articles"
+        aria-label="部落格文章"
+        ref={blogRef}
+      >
         <div className="container">
           <div className="blog-header">
             <h2 className="section-title">文章Blog</h2>

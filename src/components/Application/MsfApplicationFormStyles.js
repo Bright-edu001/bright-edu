@@ -22,10 +22,11 @@ export const StyledApplicationForm = styled.form`
     font-size: 18px;
     font-weight: 700;
     outline: none;
-    transition: border 0.2s;
+    transition: border 0.2s, transform 0.2s;
     resize: none;
     &:focus {
       border-color: #1c184a;
+      transform: scale(1.02);
     }
   }
 
@@ -42,11 +43,12 @@ export const StyledApplicationForm = styled.form`
     font-size: 18px;
     margin: 1.5rem auto 2rem;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
 
     &:hover {
       background: #1c184a;
       color: #ffffff;
+      transform: scale(1.05);
     }
   }
 
@@ -67,21 +69,6 @@ export const StyledApplicationForm = styled.form`
   }
 `;
 
-// 申請條件與標題
-export const StyledSectionTitle = styled.h2`
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 40px;
-  margin-bottom: 1rem;
-  color: #19453c;
-  text-align: center;
-
-  @media (max-width: 700px) {
-    font-size: 32px;
-    margin-bottom: 0rem;
-  }
-`;
-
 // 條件描述文字
 export const StyledConditionDesc = styled.div`
   color: #211700;
@@ -93,5 +80,19 @@ export const StyledConditionDesc = styled.div`
     font-size: 18px;
     margin-left: 0;
     text-align: left;
+  }
+`;
+
+export const StyledSectionTitle = styled.h2`
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 40px;
+  margin-bottom: 1rem;
+  color: #19453c;
+  text-align: center;
+
+  @media (max-width: 700px) {
+    font-size: 32px;
+    margin-bottom: 0rem;
   }
 `;

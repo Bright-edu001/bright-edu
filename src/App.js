@@ -10,7 +10,8 @@ import FloatingButtons from "./components/FloatingButtons/FloatingButtons";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 // react-router 用於路由嵌套
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 
 // 載入指示器組件，顯示「載入中...」
 const LoadingSpinner = () => (
@@ -21,6 +22,7 @@ const LoadingSpinner = () => (
 
 // App 主組件
 function App() {
+  const location = useLocation();
   useEffect(() => {
     // 監聽網址參數，若有 redirect 則導向指定路徑
     const params = new URLSearchParams(window.location.search);
@@ -41,7 +43,16 @@ function App() {
             <main className="main-content">
               {/* 使用 Suspense 包裹 Outlet，顯示載入指示器 */}
               <Suspense fallback={<LoadingSpinner />}>
-                <Outlet />
+                <SwitchTransition>
+                  <CSSTransition
+                    key={location.pathname}
+                    classNames="fade"
+                    timeout={300}
+                    unmountOnExit
+                  >
+                    <Outlet />
+                  </CSSTransition>
+                </SwitchTransition>
               </Suspense>
             </main>
             {/* 頁尾 */}

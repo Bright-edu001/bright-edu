@@ -24,10 +24,11 @@ export const StyledApplicationForm = styled.form`
     font-size: 18px;
     font-weight: 700;
     outline: none;
-    transition: border 0.2s;
+    transition: border 0.2s, transform 0.2s;
     resize: none;
     &:focus {
       border-color: #1c184a;
+      transform: scale(1.02);
     }
   }
 
@@ -44,11 +45,12 @@ export const StyledApplicationForm = styled.form`
     font-size: 18px;
     margin: 1.5rem auto 2rem;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
 
     &:hover {
       background: #1c184a;
       color: #ffffff;
+      transform: scale(1.05);
     }
   }
 
