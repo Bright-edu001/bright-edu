@@ -1,11 +1,9 @@
 import React from "react";
-// import "./MS.scss"; // Commented out
 import "./MsApplication.scss";
 import ApplicationForm from "../../../components/Application/ApplicationForm";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import { ArrowRightOutlined } from "@ant-design/icons";
-
 // Import styled components as needed. For now, assuming only PageP might be relevant if h3/h4/ul are styled globally or via MsApplication.scss
 import { PageP } from "./MS.styles";
 
@@ -43,7 +41,7 @@ function MsApplication() {
           <div className="english-requirements">
             <div style={{ marginTop: "-3rem" }}>
               <strong>
-                <ArrowRightOutlined />
+                <ArrowRightOutlined className="arrow-right-pulse" />
                 TOEFL iBT：
               </strong>
               總分 80，各部分最低分數：
@@ -56,14 +54,14 @@ function MsApplication() {
             </div>
             <div>
               <strong>
-                <ArrowRightOutlined />
+                <ArrowRightOutlined className="arrow-right-pulse" />
                 IELTS Academic：
               </strong>
               總分 6.5，且四個部分分數不低於6.0
             </div>
             <div>
               <strong>
-                <ArrowRightOutlined />
+                <ArrowRightOutlined className="arrow-right-pulse" />
                 PTE Academic：
               </strong>
               總分 54，各部分分數低於標準：

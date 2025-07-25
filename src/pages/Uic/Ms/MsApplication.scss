@@ -1,6 +1,25 @@
 @import "../../../styles/variables";
 @import "../../../styles/mixins";
 
+.arrow-right-pulse {
+  display: inline-block;
+  animation: rightPulse 1.5s infinite ease-in-out;
+  margin-right: 8px;
+  color: $color-uic;
+}
+
+@keyframes rightPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
 .ms-application-page {
   .ms-application-intro {
     display: flex;
@@ -68,7 +87,7 @@
     justify-content: flex-start;
     gap: 48px;
     padding: 0 $spacing-sm;
-
+    padding-left: $spacing-md;
     margin-bottom: 0;
 
     li {
