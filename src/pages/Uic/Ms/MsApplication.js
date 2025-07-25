@@ -41,7 +41,7 @@ function MsApplication() {
           <div className="english-requirements">
             <div style={{ marginTop: "-3rem" }}>
               <strong>
-                <ArrowRightOutlined className="arrow-right-pulse" />
+                <ArrowRightOutlined className="arrow-right-bounce" />
                 TOEFL iBT：
               </strong>
               總分 80，各部分最低分數：
@@ -54,14 +54,14 @@ function MsApplication() {
             </div>
             <div>
               <strong>
-                <ArrowRightOutlined className="arrow-right-pulse" />
+                <ArrowRightOutlined className="arrow-right-bounce" />
                 IELTS Academic：
               </strong>
               總分 6.5，且四個部分分數不低於6.0
             </div>
             <div>
               <strong>
-                <ArrowRightOutlined className="arrow-right-pulse" />
+                <ArrowRightOutlined className="arrow-right-bounce" />
                 PTE Academic：
               </strong>
               總分 54，各部分分數低於標準：
