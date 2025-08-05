@@ -48,18 +48,40 @@ export const BlogProvider = ({ children }) => {
     [enrollmentEvents, news]
   );
 
+  // 將巢狀內容中的文字展平為單一字串，支援陣列與物件
+  // 將巢狀內容中的文字展平為單一字串，支援陣列與物件
+  const flattenContent = useCallback(
+    (content) => {
+      if (!content) return "";
+      if (typeof content === "string") return content;
+      if (Array.isArray(content))
+        return content.map((item) => flattenContent(item)).join(" ");
+      if (typeof content === "object")
+        return Object.values(content)
+          .map((value) => flattenContent(value))
+          .join(" ");
+      return "";
+    },
+    [] // 空依賴陣列，確保 flattenContent 函式穩定
+  );
+
   // 根據關鍵字搜尋文章，回傳符合標題或內容包含關鍵字的清單
   const searchByKeyword = useCallback(
     (keyword) => {
       const kw = (keyword || "").trim().toLowerCase();
       if (!kw) return [];
-      return all.filter(
-        (item) =>
-          item.title.toLowerCase().includes(kw) ||
-          (item.content && item.content.toLowerCase().includes(kw))
-      );
+      return all.filter((item) => {
+        const titleMatch = item.title.toLowerCase().includes(kw);
+        let contentText = "";
+        if (typeof item.content === "string") {
+          contentText = item.content.toLowerCase();
+        } else if (item.content) {
+          contentText = flattenContent(item.content).toLowerCase();
+        }
+        return titleMatch || contentText.includes(kw);
+      });
     },
-    [all]
+    [all, flattenContent]
   );
 
   // 根據分類參數過濾文章，支援 "enrollment"、"news" 或回傳全部

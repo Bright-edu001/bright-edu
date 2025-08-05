@@ -1,80 +1,125 @@
 import { useState } from "react";
-
-/**
- * useFormSubmit
- * 這是一個自訂 React Hook，提供表單資料管理、驗證與送出功能。
- * 用法：回傳 form 狀態、handleChange、handleSubmit 及 submitting 狀態。
- */
+import { App } from "antd";
 
 const DEFAULT_FORM = { name: "", lineId: "", email: "", message: "" };
 const API_URL = process.env.REACT_APP_FORM_ENDPOINT;
 
 function useFormSubmit(initialState = DEFAULT_FORM) {
-  // 表單資料狀態
-  const [form, setForm] = useState(initialState);
-  // 送出狀態（避免重複送出）
-  const [submitting, setSubmitting] = useState(false);
+  const { message } = App.useApp();
 
-  /**
-   * 處理表單欄位變更
-   * @param {Event} e - input 的 onChange 事件
-   */
+  const [form, setForm] = useState(initialState);
+  const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  /**
-   * 驗證表單資料
-   * @returns {boolean} 是否通過驗證
-   */
   const validate = () => {
     if (!form.name || !form.email || !form.message) {
-      alert("請完整填寫所有必填欄位！");
+      message.error("請完整填寫所有必填欄位！");
       return false;
     }
     if (form.name.trim().length < 2) {
-      alert("姓名需大於2個字！");
+      message.error("姓名需大於2個字！");
       return false;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
-      alert("請輸入正確的 E-MAIL 格式！");
+      message.error("請輸入正確的 E-MAIL 格式！");
       return false;
     }
     if (form.message.trim().length < 10) {
-      alert("備註內容需大於10個字！");
+      message.error("詢問內容需大於10個字！");
       return false;
     }
     return true;
   };
 
-  /**
-   * 處理表單送出
-   * @param {Event} e - form 的 onSubmit 事件
-   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
     setSubmitting(true);
+    setResult(null);
+
+    console.log("=== 開始送出表單 ===");
+    console.log("表單資料:", form);
+    console.log("API URL:", API_URL);
+
     try {
-      await fetch(API_URL, {
+      // 方法 1: 先嘗試 JSON 格式 (使用 cors 模式)
+      const jsonResponse = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
+        mode: "cors",
+      });
+      console.log("JSON 請求回應:", jsonResponse);
+      if (jsonResponse.ok) {
+        const responseData = await jsonResponse.json();
+        console.log("JSON 回應資料:", responseData);
+        if (responseData.result === "success") {
+          message.success("送出成功，我們會盡快與您聯絡！");
+          setForm(initialState);
+          setResult({ success: true, data: responseData });
+          return;
+        }
+      }
+
+      // 方法 2: 如果 JSON 失敗，嘗試 FormData (使用 no-cors 模式)
+      console.log("嘗試 FormData 方式...");
+      const formData = new FormData();
+      Object.keys(form).forEach((key) => formData.append(key, form[key]));
+      const formResponse = await fetch(API_URL, {
+        method: "POST",
+        body: formData,
         mode: "no-cors",
       });
-      alert("送出成功，我們會盡快與您聯絡！");
-      setForm(initialState);
-    } catch (err) {
-      alert("送出失敗，請檢查網路連線。");
+      console.log("FormData 請求回應:", formResponse);
+      if (formResponse.type === "opaque") {
+        console.log("FormData 請求完成 (no-cors mode)");
+        message.success("送出成功，我們會盡快與您聯絡！");
+        setForm(initialState);
+        setResult({ success: true, method: "formdata" });
+        return;
+      }
+
+      // 方法 3: 最後嘗試 URL 編碼格式
+      console.log("嘗試 URL 編碼方式...");
+      const urlParams = new URLSearchParams();
+      Object.keys(form).forEach((key) => urlParams.append(key, form[key]));
+      console.log("URL 編碼資料:", urlParams.toString());
+      const urlResponse = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: urlParams,
+        mode: "no-cors",
+      });
+      console.log("URL 編碼請求回應:", urlResponse);
+      if (urlResponse.type === "opaque") {
+        console.log("URL 編碼請求完成 (no-cors mode)");
+        message.success("送出成功，我們會盡快與您聯絡！");
+        setForm(initialState);
+        setResult({ success: true, method: "urlencoded" });
+        return;
+      }
+
+      // 如果所有方法都沒有返回成功
+      message.error("送出失敗，請稍後再試或聯絡管理員");
+      setResult({ success: false, error: "所有提交方法都失敗" });
+    } catch (error) {
+      console.error("提交過程中發生錯誤:", error);
+      message.error("送出失敗，請稍後再試或聯絡管理員");
+      setResult({ success: false, error: error.message });
+    } finally {
+      setSubmitting(false);
+      console.log("=== 表單送出完成 ===");
     }
-    setSubmitting(false);
   };
 
-  // 回傳表單狀態與操作方法
-  return { form, handleChange, handleSubmit, submitting };
+  return { form, handleChange, handleSubmit, submitting, result };
 }
 
 export default useFormSubmit;
