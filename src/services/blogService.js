@@ -1,5 +1,5 @@
 import { db } from "../config/firebaseConfig";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
 import getAssetUrl from "../utils/getAssetUrl";
 
 // 處理部落格資料，將圖片路徑轉為公開 URL
@@ -100,3 +100,37 @@ export const getBlogPost = async (id) => {
 
 // all 函數等同於 getAllBlogPosts
 export const all = getAllBlogPosts;
+
+/**
+ * 更新指定 id 的招生活動文章
+ * @param {string|number} id - 文章 id
+ * @param {object} data - 要更新的文章內容
+ * @returns {Promise<void>}
+ */
+export const updateEnrollmentEvent = async (id, data) => {
+  try {
+    const docRef = doc(db, "enrollmentEvents", String(id));
+    await setDoc(docRef, data, { merge: true }); // merge:true 可只更新部分欄位
+    console.log(`文章 ${id} 已更新`);
+  } catch (error) {
+    console.error("更新文章失敗:", error);
+    throw error;
+  }
+};
+
+/**
+ * 更新指定 id 的新聞文章
+ * @param {string|number} id - 文章 id
+ * @param {object} data - 要更新的文章內容
+ * @returns {Promise<void>}
+ */
+export const updateNews = async (id, data) => {
+  try {
+    const docRef = doc(db, "news", String(id));
+    await setDoc(docRef, data, { merge: true }); // merge:true 可只更新部分欄位
+    console.log(`news 文章 ${id} 已更新`);
+  } catch (error) {
+    console.error("更新 news 文章失敗:", error);
+    throw error;
+  }
+};

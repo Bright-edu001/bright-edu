@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { BlogContext } from "../../context/BlogContext";
 import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import "../../styles/critical.css";
 
 function BlogDetail() {
   const { id } = useParams();
@@ -81,7 +82,7 @@ function BlogDetail() {
             src={blog.image}
             alt={blog.title}
           />
-          <h1 className="blog-detail-title">{blog.title}</h1>
+          <h1 className="blog-detail-title emoji-support">{blog.title}</h1>
           {/* 分類標籤：改用Link以提供href */}
           <Link
             className="blog-detail-category-label"
@@ -100,7 +101,12 @@ function BlogDetail() {
               : blog.type === "enrollment"
               ? blog.content.map((semesterInfo, index) => (
                   <div key={index} className="semester-section">
-                    <h2>{semesterInfo.title}</h2>
+                    <h2
+                      className="emoji-support"
+                      dangerouslySetInnerHTML={{
+                        __html: semesterInfo.title,
+                      }}
+                    />
                     {renderDetails(semesterInfo.details)}
                   </div>
                 ))

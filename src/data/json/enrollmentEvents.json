@@ -12,7 +12,7 @@
     "content": [
       {
         "semester": "Fall 2026",
-        "title": "Spring 2026 春季班資訊",
+        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Spring 2026 春季班資訊",
         "details": [
           {
             "icon": "✅",
@@ -65,19 +65,19 @@
             "subDetails": [
               {
                 "icon": "▶️",
-                "text": "Nov/1/2025 (目前最新公布截止日、若有更新則以更新為準)"
+                "text": "Nov/1/2026 (目前最新公布截止日、若有更新則以更新為準)"
               }
             ]
           }
         ]
       },
       {
-        "semester": "Spring 2026",
-        "title": "🇺🇸Spring 2026 春季班資訊",
+        "semester": "Fall 2026",
+        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Fall 2026 秋季班資訊",
         "details": [
           {
             "icon": "✅",
-            "text": "開放申請時間:目前已經開放申請"
+            "text": "開放申請時間:N/A"
           },
           {
             "icon": "✅",
@@ -85,22 +85,24 @@
             "subDetails": [
               {
                 "icon": "▶️",
-                "text": "MBA：Jan/2025",
+                "text": "Aug/24/2026",
                 "subDetails": [
                   {
                     "icon": "📕",
                     "text": "MBA開課領域:",
                     "list": [
-                      "Strategic and International Business Management (SIM) 國際策略管理",
-                      "Business Analytics (BA) 商業分析",
-                      "Financial Markets and Asset Management (FMAM) 金融與資產管理"
+                      "Management 管理學領域",
+                      "Business Analytics 商業分析領域",
+                      "Finance 金融財經領域",
+                      "Marketing 行銷領域",
+                      "Human Resource Management 人力資源管理領領域"
                     ]
                   }
                 ]
               },
               {
                 "icon": "▶️",
-                "text": "MS：Jan/2025",
+                "text": "MS：Aug/24/2026",
                 "subDetails": [
                   {
                     "icon": "📕",
@@ -124,11 +126,7 @@
             "subDetails": [
               {
                 "icon": "▶️",
-                "text": "International students requiring a visa: Nov/2025 (目前最新公布截止日、若有更新則以更新為準)"
-              },
-              {
-                "icon": "▶️",
-                "text": "Student with either an F1 student visa or legal status in the U.S.: Nov/2025 (目前最新公布截止日、若有更新則以更新為準)"
+                "text": "Jun/2026 (目前最新公布截止日、若有更新則以更新為準)"
               }
             ]
           }
@@ -149,7 +147,7 @@
     "content": [
       {
         "semester": "Spring 2025",
-        "title": "🇺🇸Spring 2025 春季班資訊",
+        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Spring 2025 春季班資訊",
         "details": [
           {
             "icon": "✅",
@@ -190,7 +188,7 @@
       },
       {
         "semester": "Fall 2025",
-        "title": "🇺🇸Fall 2025 秋季班資訊",
+        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Fall 2025 秋季班資訊",
         "details": [
           {
             "icon": "✅",
@@ -244,7 +242,7 @@
     "content": [
       {
         "semester": "Fall 2024",
-        "title": "🇺🇸Fall 2024秋季班資訊",
+        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Fall 2024秋季班資訊",
         "details": [
           {
             "icon": "✅",
@@ -286,7 +284,7 @@
       },
       {
         "semester": "Spring 2025",
-        "title": "🇺🇸Spring 2025 春季班資訊",
+        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Spring 2025 春季班資訊",
         "details": [
           {
             "icon": "✅",
