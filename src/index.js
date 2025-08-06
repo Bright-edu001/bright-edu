@@ -6,6 +6,9 @@ import router from "./router"; // 引入新的路由設定
 // 引入性能監控
 import performanceMonitor from "./utils/performanceMonitor";
 
+// 引入日誌工具
+import logger from "./utils/logger";
+
 // 引入關鍵 CSS
 import "./styles/critical.css";
 
@@ -19,7 +22,7 @@ if ("serviceWorker" in navigator) {
       }
     })
     .catch(function (err) {
-      console.log("Service Worker unregistration failed: ", err);
+      logger.error("Service Worker unregistration failed: ", err);
     });
 }
 
