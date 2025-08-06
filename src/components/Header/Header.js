@@ -33,7 +33,7 @@ const Header = () => {
     const handleMouseLeave = (e) => {
       // 檢查是否是選單項目的 mouseleave
       if (e.target.closest(".ant-menu-submenu")) {
-        setAnimationDuration("0.6s"); // 關閉時間
+        setAnimationDuration("0.5s"); // 關閉時間
       }
     };
 

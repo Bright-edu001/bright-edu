@@ -23,4 +23,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# compiled styles
+*.css
+*.css.map
+!src/styles/critical.css
+
 

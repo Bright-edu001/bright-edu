@@ -2,7 +2,7 @@ import React, { useEffect, Suspense, useRef } from "react";
 import { App as AntdApp, ConfigProvider } from "antd"; // 引入 Antd 的 App 組件
 import { BlogProvider } from "./context/BlogContext";
 import { SearchProvider } from "./context/SearchContext";
-import "./App.css";
+import "./App.scss";
 
 // 組件引入
 import Header from "./components/Header/Header";

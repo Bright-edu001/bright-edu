@@ -2,8 +2,61 @@
 class PerformanceMonitor {
   constructor() {
     this.metrics = {};
+    this.metricBuffer = [];
+    this.metricListeners = [];
     this.observers = {};
+    this.debug = false;
     this.isMonitoring = process.env.NODE_ENV === "production";
+    if (typeof window !== "undefined") {
+      window.addEventListener("beforeunload", () => this.flushMetrics());
+      window.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+          this.flushMetrics();
+        }
+      });
+    }
+  }
+
+  setDebug(flag = true) {
+    this.debug = flag;
+    this.isMonitoring = this.debug || process.env.NODE_ENV === "production";
+  }
+
+  onMetric(callback) {
+    if (typeof callback === "function") {
+      this.metricListeners.push(callback);
+    }
+  }
+
+  recordMetric(name, value) {
+    this.metrics[name] = value;
+    this.metricBuffer.push({ name, value });
+    this.metricListeners.forEach((cb) => cb({ name, value }));
+    if (this.debug) {
+      // eslint-disable-next-line no-console
+      console.log(`${name.toUpperCase()}:`, value);
+    }
+  }
+
+  flushMetrics() {
+    if (
+      this.metricBuffer.length === 0 ||
+      typeof navigator === "undefined" ||
+      typeof navigator.sendBeacon !== "function"
+    ) {
+      return;
+    }
+
+    try {
+      const data = JSON.stringify(this.metricBuffer);
+      navigator.sendBeacon("/performance-metrics", data);
+      this.metricBuffer = [];
+    } catch (err) {
+      if (this.debug) {
+        // eslint-disable-next-line no-console
+        console.warn("Failed to send performance metrics", err);
+      }
+    }
   }
 
   // 監控 LCP (Largest Contentful Paint)
@@ -14,8 +67,7 @@ class PerformanceMonitor {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
-        this.metrics.lcp = lastEntry.startTime;
-        console.log("LCP:", lastEntry.startTime);
+        this.recordMetric("lcp", lastEntry.startTime);
       });
 
       observer.observe({ entryTypes: ["largest-contentful-paint"] });
@@ -33,8 +85,7 @@ class PerformanceMonitor {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         entries.forEach((entry) => {
-          this.metrics.fid = entry.processingStart - entry.startTime;
-          console.log("FID:", entry.processingStart - entry.startTime);
+          this.recordMetric("fid", entry.processingStart - entry.startTime);
         });
       });
 
@@ -58,8 +109,7 @@ class PerformanceMonitor {
             clsValue += entry.value;
           }
         });
-        this.metrics.cls = clsValue;
-        console.log("CLS:", clsValue);
+        this.recordMetric("cls", clsValue);
       });
 
       observer.observe({ entryTypes: ["layout-shift"] });

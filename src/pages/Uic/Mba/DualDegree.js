@@ -1,5 +1,5 @@
 import React from "react";
-import "./DualDegree.css";
+import "./DualDegree.scss";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero"; // 引入新的組件
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 

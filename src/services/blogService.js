@@ -3,9 +3,7 @@ import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import getAssetUrl from "../utils/getAssetUrl";
 
 // 處理部落格資料，將圖片路徑轉為公開 URL
-const processBlogData = (data) => {
-  const processedData = JSON.parse(JSON.stringify(data)); // 深拷貝
-
+export const processBlogData = (data) => {
   // 更新圖片路徑
   const updateImagePaths = (item) => {
     if (item.thumbnail) {
@@ -17,12 +15,13 @@ const processBlogData = (data) => {
     return item;
   };
 
-  if (Array.isArray(processedData)) {
-    return processedData.map(updateImagePaths);
-  } else if (typeof processedData === "object" && processedData !== null) {
-    return updateImagePaths(processedData);
+  if (Array.isArray(data)) {
+    data.forEach(updateImagePaths);
+    return data;
+  } else if (typeof data === "object" && data !== null) {
+    return updateImagePaths(data);
   }
-  return processedData;
+  return data;
 };
 
 // 取得所有部落格文章（包含招生活動與新聞）

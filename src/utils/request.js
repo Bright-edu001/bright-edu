@@ -1,5 +1,4 @@
-const Url =
-  "https://script.google.com/macros/s/AKfycbz-9eNEd9HbnVTAx_oP3xHb07Tr5OFrj3qlY_cMP2nLHNSPfTSq_3anpXyjBVvWZbZW/exec";
+const Url = process.env.REACT_APP_FORM_ENDPOINT;
 
 // REQUEST (GET, POST) value --擇一
 export const request = async (method, data) => {

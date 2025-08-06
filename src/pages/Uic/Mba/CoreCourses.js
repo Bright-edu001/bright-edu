@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 import "antd/dist/reset.css";
-import "./CoreCourses.css";
+import "./CoreCourses.scss";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 

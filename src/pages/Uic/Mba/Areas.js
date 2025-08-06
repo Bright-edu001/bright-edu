@@ -1,5 +1,4 @@
 import React from "react";
-import "./Areas.css";
 import "./mba-common.scss";
 import "./Areas.scss";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
