@@ -3,7 +3,6 @@ import { App } from "antd";
 import { request } from "../utils/request";
 
 const DEFAULT_FORM = { name: "", lineId: "", email: "", message: "" };
-const API_URL = process.env.REACT_APP_FORM_ENDPOINT;
 
 function useFormSubmit(initialState = DEFAULT_FORM) {
   const { message } = App.useApp();
@@ -38,93 +37,104 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
   };
 
   const handleSubmit = async (e) => {
-    const result = await request("GET", {
-      name: "test",
-      lineId: "123",
-      email: "test@example.com",
-      message: "Hello world ++",
-    });
-    console.log(result);
-    //   e.preventDefault();
-    //   if (!validate()) return;
+    e.preventDefault();
+    if (!validate()) return;
 
-    //   setSubmitting(true);
-    //   setResult(null);
+    setSubmitting(true);
+    setResult(null);
 
-    //   console.log("=== 開始送出表單 ===");
-    //   console.log("表單資料:", form);
-    //   console.log("API URL:", API_URL);
+    console.log("=== 開始送出表單 ===");
+    console.log("表單資料:", form);
 
-    //   try {
-    //     // 方法 1: 先嘗試 JSON 格式 (使用 cors 模式)
-    //     const jsonResponse = await fetch(API_URL, {
-    //       method: "GET",
-    //       headers: { "Content-Type": "application/json" },
-    //     });
-    //     console.log("JSON 請求回應:", jsonResponse);
-    //     if (jsonResponse.ok) {
-    //       const responseData = await jsonResponse.json();
-    //       console.log("JSON 回應資料:", responseData);
-    //       if (responseData.result === "success") {
-    //         message.success("送出成功，我們會盡快與您聯絡！");
-    //         setForm(initialState);
-    //         setResult({ success: true, data: responseData });
-    //         return;
-    //       }
-    //     }
+    try {
+      let response;
+      let success = false;
 
-    //     // 方法 2: 如果 JSON 失敗，嘗試 FormData (使用 no-cors 模式)
-    //     console.log("嘗試 FormData 方式...");
-    //     const formData = new FormData();
-    //     Object.keys(form).forEach((key) => formData.append(key, form[key]));
-    //     const formResponse = await fetch(API_URL, {
-    //       method: "POST",
-    //       body: formData,
-    //       mode: "no-cors",
-    //     });
-    //     console.log("FormData 請求回應:", formResponse);
-    //     if (formResponse.type === "opaque") {
-    //       console.log("FormData 請求完成 (no-cors mode)");
-    //       message.success("送出成功，我們會盡快與您聯絡！");
-    //       setForm(initialState);
-    //       setResult({ success: true, method: "formdata" });
-    //       return;
-    //     }
+      // 先嘗試 POST 請求
+      try {
+        console.log("嘗試 POST 請求...");
+        response = await request("POST", form);
+        console.log("POST 請求回應:", response);
 
-    //     // 方法 3: 最後嘗試 URL 編碼格式
-    //     console.log("嘗試 URL 編碼方式...");
-    //     const urlParams = new URLSearchParams();
-    //     Object.keys(form).forEach((key) => urlParams.append(key, form[key]));
-    //     console.log("URL 編碼資料:", urlParams.toString());
-    //     const urlResponse = await fetch(API_URL, {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    //       body: urlParams,
-    //       mode: "no-cors",
-    //     });
-    //     console.log("URL 編碼請求回應:", urlResponse);
-    //     if (urlResponse.type === "opaque") {
-    //       console.log("URL 編碼請求完成 (no-cors mode)");
-    //       message.success("送出成功，我們會盡快與您聯絡！");
-    //       setForm(initialState);
-    //       setResult({ success: true, method: "urlencoded" });
-    //       return;
-    //     }
+        if (response && response.result === "success") {
+          success = true;
+        }
+      } catch (postError) {
+        console.log("POST 請求失敗:", postError);
+      }
 
-    //     // 如果所有方法都沒有返回成功
-    //     message.error("送出失敗，請稍後再試或聯絡管理員");
-    //     setResult({ success: false, error: "所有提交方法都失敗" });
-    //   } catch (error) {
-    //     console.error("提交過程中發生錯誤:", error);
-    //     message.error("送出失敗，請稍後再試或聯絡管理員");
-    //     setResult({ success: false, error: error.message });
-    //   } finally {
-    //     setSubmitting(false);
-    //     console.log("=== 表單送出完成 ===");
-    //   }
+      // 如果 POST 失敗，嘗試 GET 請求
+      if (!success) {
+        try {
+          console.log("POST 失敗，嘗試 GET 請求...");
+          response = await request("GET", form);
+          console.log("GET 請求回應:", response);
+
+          if (response && response.result === "success") {
+            success = true;
+          }
+        } catch (getError) {
+          console.log("GET 請求也失敗:", getError);
+        }
+      }
+
+      // 由於使用 no-cors 模式，我們無法確定伺服器是否真的成功處理了請求
+      // 但如果沒有拋出錯誤，通常表示請求已發送
+      if (success || response) {
+        message.success("表單已送出，我們會盡快與您聯絡！");
+        setForm(initialState);
+        setResult({
+          success: true,
+          data: response,
+          note: "由於技術限制，無法確認伺服器處理狀態，但請求已發送",
+        });
+      } else {
+        throw new Error("請求發送失敗");
+      }
+    } catch (error) {
+      console.error("提交表單時發生錯誤:", error);
+      message.error(`送出失敗：${error.message}`);
+      setResult({
+        success: false,
+        error: error.message,
+      });
+    } finally {
+      setSubmitting(false);
+      console.log("=== 表單送出完成 ===");
+    }
   };
 
-  return { form, handleChange, handleSubmit, submitting, result };
+  // 測試連接的函數（使用 GET 方式，比較容易測試）
+  const testConnection = async () => {
+    try {
+      const testData = {
+        name: "連接測試",
+        lineId: "test123",
+        email: "test@example.com",
+        message: "這是一個測試連接的訊息，請忽略",
+      };
+
+      console.log("開始連接測試...");
+      const response = await request("GET", testData);
+      console.log("連接測試回應:", response);
+
+      message.success("連接測試完成！請檢查 Google Sheets 是否有測試資料");
+      return response;
+    } catch (error) {
+      console.error("連接測試失敗:", error);
+      message.warning("連接測試無法確定結果，請檢查 Google Sheets");
+      return { result: "unknown", message: "測試完成但無法確定結果" };
+    }
+  };
+
+  return {
+    form,
+    handleChange,
+    handleSubmit,
+    submitting,
+    result,
+    testConnection,
+  };
 }
 
 export default useFormSubmit;
