@@ -55,6 +55,7 @@ Bright Edu 是一個現代化的線上教育平台，旨在提供高品質的課
 
 - `REACT_APP_FORM_ENDPOINT`：表單送出的 Google Apps Script 端點。
   若使用 Netlify 部署，可在 **Site settings → Environment variables** 新增此變數。
+  `REACT_APP_SENTRY_DSN`：Sentry 用來接收錯誤回報的 DSN，僅在 `NODE_ENV=production` 時會啟用錯誤追蹤。
 
 ## 學習更多
 

@@ -8,22 +8,37 @@ import { getEnrollmentEvents, getNews } from "../services/blogService";
 jest.mock("../services/blogService");
 
 // 測試 searchByKeyword 函式
-describe("searchByKeyword", () => {
-  // 測試用的假資料
-  const arrayItem = {
-    title: "Array Item",
-    content: ["First part", "Second part"],
-  };
-  const objectItem = {
-    title: "Object Item",
-    content: { excerpt: "Short desc", details: "Longer text" },
-  };
-  const stringItem = { title: "String Item", content: "Just a string" };
+describe("BlogContext", () => {
+  const enrollmentData = [
+    {
+      title: "Enrollment Fair",
+      content: "Join the enrollment event",
+    },
+  ];
+
+  const newsData = [
+    {
+      title: "School News",
+      content: "Breaking updates from campus",
+    },
+  ];
 
   // 每次測試前重設 mock 回傳值
   beforeEach(() => {
-    getEnrollmentEvents.mockResolvedValue([arrayItem, objectItem, stringItem]);
-    getNews.mockResolvedValue([]);
+    getEnrollmentEvents.mockResolvedValue(enrollmentData);
+    getNews.mockResolvedValue(newsData);
+  });
+
+  it("filterByCategory returns posts in each category", async () => {
+    const wrapper = ({ children }) => <BlogProvider>{children}</BlogProvider>;
+    const { result } = renderHook(() => useContext(BlogContext), { wrapper });
+
+    await waitFor(() => expect(result.current.loading).toBe(false));
+
+    expect(result.current.searchByKeyword("enrollment")).toEqual(
+      enrollmentData
+    );
+    expect(result.current.searchByKeyword("breaking")).toEqual(newsData);
   });
 
   // 驗證 searchByKeyword 能正確搜尋不同型態的 content
@@ -37,8 +52,13 @@ describe("searchByKeyword", () => {
     await waitFor(() => expect(result.current.loading).toBe(false));
 
     // 驗證搜尋結果
-    expect(result.current.searchByKeyword("second")).toEqual([arrayItem]);
-    expect(result.current.searchByKeyword("longer")).toEqual([objectItem]);
-    expect(result.current.searchByKeyword("just")).toEqual([stringItem]);
+    expect(result.current.filterByCategory("enrollment")).toEqual(
+      enrollmentData
+    );
+    expect(result.current.filterByCategory("news")).toEqual(newsData);
+    expect(result.current.filterByCategory()).toEqual([
+      ...enrollmentData,
+      ...newsData,
+    ]);
   });
 });

@@ -12,6 +12,17 @@ import logger from "./utils/logger";
 // 引入關鍵 CSS
 import "./styles/critical.css";
 
+// 初始化 Sentry（僅在生產環境）
+if (process.env.NODE_ENV === "production") {
+  const Sentry = require("@sentry/react");
+  const { BrowserTracing } = require("@sentry/tracing");
+  Sentry.init({
+    dsn: process.env.REACT_APP_SENTRY_DSN,
+    integrations: [new BrowserTracing()],
+    tracesSampleRate: 1.0,
+  });
+}
+
 // 移除舊的 Service Worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker

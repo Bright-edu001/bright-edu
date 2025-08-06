@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Hero.scss";
 
 const heroImages = [
@@ -114,27 +115,24 @@ function Hero() {
             <span className="title-zh">2025秋季班熱烈招生中</span>
           </h1>
           <div className="hero-buttons">
-            <a
-              href="/uic-business-school/mba/application"
+            <Link
+              to="/uic-business-school/mba/application"
               className="btn course-btn with-arrow"
-              title="申請UIC MBA項目"
             >
               UIC MBA 申請
-            </a>
-            <a
-              href="/uic-business-school/ms/application"
+            </Link>
+            <Link
+              to="/uic-business-school/ms/application"
               className="btn course-btn with-arrow"
-              title="申請UIC MS項目"
             >
               UIC MS 申請
-            </a>
-            <a
-              href="/msu-business-school/msf/application"
+            </Link>
+            <Link
+              to="/msu-business-school/msf/application"
               className="btn course-btn with-arrow"
-              title="申請MSU MSF項目"
             >
               MSU MSF 申請
-            </a>
+            </Link>
           </div>
         </div>
       </div>

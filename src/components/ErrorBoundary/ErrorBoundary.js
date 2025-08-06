@@ -16,10 +16,10 @@ class ErrorBoundary extends React.Component {
       errorInfo: errorInfo,
     });
 
-    // 在生產環境中，可以將錯誤發送到錯誤追蹤服務
+    // 在生產環境中，將錯誤傳送到 Sentry
     if (process.env.NODE_ENV === "production") {
-      console.error("Error Boundary caught an error:", error, errorInfo);
-      // 這裡可以集成 Sentry 或其他錯誤追蹤服務
+      const Sentry = require("@sentry/react");
+      Sentry.captureException(error);
     }
   }
 
