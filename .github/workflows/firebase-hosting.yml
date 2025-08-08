@@ -1,0 +1,53 @@
+name: Deploy to Firebase Hosting (OIDC)
+
+on:
+  push:
+    branches: [prod]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Verify GCP_PROJECT_NUMBER secret exists
+        run: |
+          if [ -z "${{ secrets.GCP_PROJECT_NUMBER }}" ]; then
+            echo "::error::Secret GCP_PROJECT_NUMBER is NOT set."
+            exit 1
+          fi
+          echo "GCP_PROJECT_NUMBER looks set."
+
+      - name: Auth to Google Cloud (OIDC)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider-2
+          service_account: firebase-github-deploy@bright-edu-data.iam.gserviceaccount.com
+
+      - name: Print provider path (sanity)
+        run: |
+          echo "WIF: projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider-2"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Firebase whoami (optional debug)
+        run: |
+          npx firebase-tools --version
+          npx firebase-tools projects:list --json || true
+
+      - name: Deploy to Firebase Hosting
+        run: npx firebase-tools deploy --only hosting --project bright-edu-data
