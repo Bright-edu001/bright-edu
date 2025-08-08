@@ -27,10 +27,10 @@ function AboutUic() {
       <ImageTextSection
         title="UIC 伊利諾大學芝加哥分校"
         subtitle="學校介紹"
-        imageUrl={getAssetUrl("/images/UIC/UIC - 網站LOGO - 03.webp")}
+        imageUrl={getAssetUrl("/images/Uic/UIC - 網站LOGO - 03.webp")}
         imageAlt="UIC 美國商學院"
         bgImageUrl={getAssetUrl(
-          "/images/UIC/banner/photo_6177208882540169915_y.webp"
+          "/images/Uic/banner/photo_6177208882540169915_y.webp"
         )}
       />
 
