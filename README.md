@@ -1,6 +1,6 @@
 # Bright Edu - 智慧教育平台
 
-Bright Edu 是一個現代化的線上教育平台，旨在提供高品質的課程內容，幫助學習者提升專業能力。
+Bright Edu 是一個現代化的線上教育平台，提供高品質的課程內容，協助學習者提升專業能力。
 
 ## 功能特色
 
@@ -12,51 +12,88 @@ Bright Edu 是一個現代化的線上教育平台，旨在提供高品質的課
 
 ## 技術架構
 
-- React.js 前端框架
-- 響應式設計
-- 現代化 UI/UX
-- 路由模組化管理，提升擴充性
-- Firebase 服務存取集中於 `src/services`
+- React 18 與 React Router 6
+- Ant Design 與 styled-components
+- SCSS 樣式編寫與自動編譯
+- Firebase 服務與 Sentry 錯誤追蹤
+- Express 與 compression 提供簡易伺服器支援
 
-## 開始使用
+## 系統需求
 
-在專案目錄下，可以執行：
+- Node.js 18 或以上版本
+- npm 9 或以上版本
 
-### `npm start`
+## 專案結構
 
-在開發模式下運行應用程序。\
-打開 [http://localhost:3000](http://localhost:3000) 在瀏覽器中查看。
+```
+.
+├─ public/                # 靜態資源與 HTML 樣板
+├─ src/
+│  ├─ components/         # 可重用 UI 元件
+│  ├─ pages/              # 頁面模組
+│  ├─ routes/             # 路由配置
+│  ├─ services/           # Firebase 與其他服務
+│  ├─ styles/             # SCSS/CSS 樣式
+│  ├─ hooks/              # 自訂 React Hooks
+│  ├─ utils/              # 工具函式
+│  ├─ context/            # React Context
+│  └─ index.js            # 程式進入點
+└─ scripts/               # 建置與分析腳本
+```
 
-當您進行更改時，頁面將重新加載。\
-您還可能在控制台中看到任何 lint 錯誤。
+## 快速開始
 
-### `npm test`
+1. 取得專案
+   ```bash
+   git clone <repo-url>
+   cd bright-edu
+   ```
+2. 安裝依賴
+   ```bash
+   npm install
+   ```
+3. 啟動開發伺服器
+   ```bash
+   npm start
+   ```
+   預設於 <http://localhost:3000> 提供服務，程式碼變更會自動重新載入。
 
-在互動式監視模式下啟動測試運行器。\
-有關更多信息，請參閱[運行測試](https://facebook.github.io/create-react-app/docs/running-tests)部分。
+## 可用腳本
 
-### `npm run build`
-
-將應用程序構建到`build`文件夾中以進行生產。\
-它在生產模式下正確捆綁 React 並優化構建以獲得最佳性能。
-
-構建被壓縮，文件名包含哈希值。\
-您的應用程序已準備好部署！
-
-## 樣式編譯
-
-專案使用 SCSS 撰寫樣式，並在建置流程中自動編譯為 CSS。
-編譯後的 `.css` 與 `.css.map` 檔案不應納入版本控制，
-僅保留必要的例外（例如 `src/styles/critical.css`）。
+| 指令                          | 說明                              |
+| ----------------------------- | --------------------------------- |
+| `npm start`                   | 啟動開發伺服器                    |
+| `npm test`                    | 以互動式監看模式執行測試          |
+| `npm run build`               | 建置 production 版本於 `build/`   |
+| `npm run build:prod`          | 建置 production 並關閉 Source Map |
+| `npm run analyze`             | 打包完成後分析 bundle 大小        |
+| `npm run analyze:performance` | 執行性能分析腳本                  |
+| `npm run deploy`              | 透過 GitHub Pages 部署            |
 
 ## 環境變數
 
-應用程式使用下列環境變數進行設定：
+| 變數                      | 說明                                     |
+| ------------------------- | ---------------------------------------- |
+| `REACT_APP_FORM_ENDPOINT` | 表單送出的 Google Apps Script 端點       |
+| `REACT_APP_SENTRY_DSN`    | Sentry 用來接收錯誤回報的 DSN            |
+| `NODE_ENV`                | 設為 `production` 時啟用錯誤追蹤與最佳化 |
 
-- `REACT_APP_FORM_ENDPOINT`：表單送出的 Google Apps Script 端點。
-  若使用 Netlify 部署，可在 **Site settings → Environment variables** 新增此變數。
-  `REACT_APP_SENTRY_DSN`：Sentry 用來接收錯誤回報的 DSN，僅在 `NODE_ENV=production` 時會啟用錯誤追蹤。
+可以在 `.env` 檔案或部署平台的環境設定中加入上述變數。
 
-## 學習更多
+## 部署
 
-如需了解更多關於專案的信息，請聯繫我們的開發團隊。
+專案預設使用 GitHub Pages 部署靜態檔案：
+
+```bash
+npm run deploy
+```
+
+在 Heroku 等平台部署時，建置流程會觸發 `heroku-postbuild` 腳本。
+
+## 性能與測試
+
+關於性能優化與測試流程，請參考 `PERFORMANCE_OPTIMIZATION_SUMMARY.md` 與 `PERFORMANCE_TEST_GUIDE.md`。
+
+## 授權
+
+此專案目前尚未指定授權條款。
