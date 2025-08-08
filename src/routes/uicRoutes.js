@@ -35,6 +35,7 @@ const Economy = lazy(() =>
 );
 const DualDegree = lazy(() => import("../pages/Uic/Mba/DualDegree.js"));
 const Application = lazy(() => import("../pages/Uic/Mba/Application.js"));
+const MbaPrograms = lazy(() => import("../pages/Uic/Mba/MbaPrograms.js"));
 const MSFinance = lazy(() => import("../pages/Uic/Ms/MSFinance.js"));
 const MsMarketing = lazy(() => import("../pages/Uic/Ms/MsMarketing.js"));
 const MsManagement = lazy(() => import("../pages/Uic/Ms/MsManagement.js"));
@@ -85,6 +86,7 @@ const uicRoutes = [
   { path: "uic-business-school/uic/chicago/economy", element: <Economy /> },
   { path: "uic-business-school/mba/dual-degree", element: <DualDegree /> },
   { path: "uic-business-school/mba/application", element: <Application /> },
+  { path: "uic-business-school/mba", element: <MbaPrograms /> },
   { path: "uic-business-school/ms/finance", element: <MSFinance /> },
   { path: "uic-business-school/ms/marketing", element: <MsMarketing /> },
   {

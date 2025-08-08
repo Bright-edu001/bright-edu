@@ -1,0 +1,104 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+@import "./mba-common.scss";
+
+.mba-programs {
+  .programs {
+    h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: $spacing-sm;
+      color: $color-nav;
+      text-align: left;
+      border-bottom: 1px solid $color-uic;
+      width: 100%;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: $spacing-xs;
+      text-align: left;
+    }
+  }
+  .programs-img {
+    margin: $spacing-xxl 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    @media screen and (max-width: 1024px) {
+      gap: $spacing-sm;
+    }
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+      align-items: center;
+    }
+    .img-left {
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .img-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: $spacing-xs;
+    }
+  }
+}
+
+.mba-areas-concentration-list {
+  display: grid;
+  // 使用 auto-fit 和 minmax 實現響應式佈局
+  // - auto-fit: 自動計算一行能容納多少欄
+  // - minmax(320px, 1fr): 卡片最小寬度為 320px，最大會自動填滿剩餘空間
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  justify-items: center; // 水平置中卡片
+  margin-bottom: 7rem;
+
+  .mba-areas-concentration-card {
+    background: $color-gray-card-bg;
+    border: 1px solid $color-gray-card-bg;
+    border-radius: 10px;
+    padding: 1.5rem;
+    // 移除固定寬度，讓網格系統控制
+    width: 100%;
+    max-width: 400px; // 可以設定一個最大寬度防止卡片過度拉伸
+    min-height: 120px;
+    box-shadow: 0 2px 8px rgba(212, 160, 23, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      box-shadow: $shadow-lg;
+      background: $color-gray-lighter;
+      transform: translateY(-4px);
+      text-decoration: none;
+      .concentration-title {
+        color: $color-uic;
+      }
+    }
+
+    .concentration-title {
+      color: $color-nav;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      margin-bottom: 0.5rem;
+      text-align: left;
+    }
+    .concentration-desc {
+      color: $color-black;
+      font-size: $font-size-md;
+      text-align: left;
+    }
+  }
+}

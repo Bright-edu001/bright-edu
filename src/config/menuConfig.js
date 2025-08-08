@@ -106,7 +106,11 @@ export const menuItems = [
       },
       {
         key: "mba",
-        label: "MBA Programs",
+        label: (
+          <Link to="/uic-business-school/mba" className="nav-link-color">
+            MBA Programs
+          </Link>
+        ),
         children: [
           {
             key: "areas",

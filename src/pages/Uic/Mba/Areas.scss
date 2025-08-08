@@ -109,15 +109,17 @@
   }
   .mba-areas-concentration-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
-    justify-items: start;
+    justify-items: center; // 水平置中卡片
     .mba-areas-concentration-card {
       background: $color-gray-card-bg;
       border: 1px solid $color-gray-card-bg;
       border-radius: 10px;
-      padding: 1.5rem 1.5rem;
-      width: 400px;
+      padding: 1.5rem;
+      // 移除固定寬度，讓網格系統控制
+      width: 100%;
+      max-width: 400px; // 可以設定一個最大寬度防止卡片過度拉伸
       min-height: 120px;
       box-shadow: 0 2px 8px rgba(212, 160, 23, 0.06);
       display: flex;
@@ -130,8 +132,11 @@
       &:focus {
         box-shadow: $shadow-lg;
         background: $color-gray-lighter;
-        transform: translateY(-4px) scale(1.03);
+        transform: translateY(-4px);
         text-decoration: none;
+        .concentration-title {
+          color: $color-uic;
+        }
       }
 
       .concentration-title {
@@ -146,60 +151,6 @@
         font-size: $font-size-md;
         text-align: left;
       }
-    }
-  }
-}
-@media screen and (max-width: 1024px) {
-  .mba-areas-concentrations .mba-areas-concentration-list {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    .mba-areas-concentration-card {
-      width: 400px;
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  .mba-areas-concentrations .mba-areas-concentration-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    justify-items: center;
-    .mba-areas-concentration-card {
-      background: $color-gray-card-bg;
-      border: 1px solid $color-gray-card-bg;
-      border-radius: 10px;
-      padding: 1.5rem 1.5rem;
-      width: 300px;
-      min-height: 120px;
-      box-shadow: 0 2px 8px rgba(212, 160, 23, 0.06);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
-      cursor: pointer;
-
-      &:hover,
-      &:focus {
-        box-shadow: $shadow-lg;
-        background: $color-gray-lighter;
-        transform: translateY(-4px) scale(1.03);
-        text-decoration: none;
-      }
-
-      .concentration-title {
-        margin-bottom: 0.5rem;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .mba-areas-concentrations .mba-areas-concentration-list {
-    grid-template-columns: repeat(1, 1fr);
-
-    .mba-areas-concentration-card {
-      width: 350px;
     }
   }
 }
