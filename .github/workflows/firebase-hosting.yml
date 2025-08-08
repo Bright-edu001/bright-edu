@@ -2,7 +2,7 @@ name: Deploy to Firebase Hosting (OIDC)
 
 on:
   push:
-    branches: [prod] # 只在 prod 觸發
+    branches: [prod]
 
 jobs:
   deploy:
