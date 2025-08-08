@@ -1,13 +1,13 @@
 // Mock firebaseConfig，避免實際連線到 Firebase
 jest.mock("../config/firebaseConfig", () => ({ db: {} }));
 
-// 建立 firebase/firestore 及 getAssetUrl 的 mock function
+// 建立 firebase/firestore 及 getImageUrl 的 mock function
 const mockGetDocs = jest.fn();
 const mockGetDoc = jest.fn();
 const mockSetDoc = jest.fn();
 const mockCollection = jest.fn();
 const mockDoc = jest.fn();
-const mockGetAssetUrl = jest.fn((p) => (process.env.PUBLIC_URL || "") + p);
+const mockGetImageUrl = jest.fn((p) => (process.env.PUBLIC_URL || "") + p);
 
 // Mock firebase/firestore 所有用到的方法
 jest.mock("firebase/firestore", () => ({
@@ -18,8 +18,8 @@ jest.mock("firebase/firestore", () => ({
   setDoc: mockSetDoc,
 }));
 
-// Mock getAssetUrl，避免實際路徑處理
-jest.mock("../utils/getAssetUrl", () => mockGetAssetUrl);
+// Mock getImageUrl，避免實際路徑處理
+jest.mock("../utils/getImageUrl", () => mockGetImageUrl);
 
 // 匯入要測試的所有 service function
 const {
@@ -34,7 +34,7 @@ const {
 // 每個測試前重置所有 mock 狀態
 beforeEach(() => {
   jest.clearAllMocks();
-  mockGetAssetUrl.mockImplementation((p) => (process.env.PUBLIC_URL || "") + p);
+  mockGetImageUrl.mockImplementation((p) => (process.env.PUBLIC_URL || "") + p);
 });
 
 describe("processBlogData", () => {
@@ -93,7 +93,7 @@ describe("getEnrollmentEvents", () => {
     const result = await getEnrollmentEvents();
 
     expect(mockGetDocs).toHaveBeenCalledTimes(1);
-    expect(mockGetAssetUrl).toHaveBeenCalledTimes(2);
+    expect(mockGetImageUrl).toHaveBeenCalledTimes(2);
     expect(result).toEqual([
       { id: "1", image: "/a.jpg" },
       { id: "2", thumbnail: "/b.jpg" },
@@ -106,7 +106,7 @@ describe("getEnrollmentEvents", () => {
     mockGetDocs.mockRejectedValue(error);
 
     await expect(getEnrollmentEvents()).rejects.toThrow("boom");
-    expect(mockGetAssetUrl).not.toHaveBeenCalled();
+    expect(mockGetImageUrl).not.toHaveBeenCalled();
   });
 });
 
@@ -118,7 +118,7 @@ describe("getNews", () => {
     const result = await getNews();
 
     expect(mockGetDocs).toHaveBeenCalledTimes(1);
-    expect(mockGetAssetUrl).toHaveBeenCalledWith("/n.jpg");
+    expect(mockGetImageUrl).toHaveBeenCalledWith("/n.jpg");
     expect(result).toEqual([{ id: "1", image: "/n.jpg" }]);
   });
 
@@ -128,7 +128,7 @@ describe("getNews", () => {
     mockGetDocs.mockRejectedValue(error);
 
     await expect(getNews()).rejects.toThrow("fail");
-    expect(mockGetAssetUrl).not.toHaveBeenCalled();
+    expect(mockGetImageUrl).not.toHaveBeenCalled();
   });
 });
 
@@ -149,7 +149,7 @@ describe("getBlogPost", () => {
     expect(mockDoc.mock.calls[0][1]).toBe("enrollmentEvents");
     expect(mockDoc.mock.calls[1][1]).toBe("news");
     expect(mockGetDoc).toHaveBeenCalledTimes(2);
-    expect(mockGetAssetUrl).not.toHaveBeenCalled();
+    expect(mockGetImageUrl).not.toHaveBeenCalled();
     expect(result).toEqual({ id: "1", title: "from news" });
   });
 });

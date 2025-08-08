@@ -1,16 +1,16 @@
 import { db } from "../config/firebaseConfig";
 import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
-import getAssetUrl from "../utils/getAssetUrl";
+import getImageUrl from "../utils/getImageUrl";
 
 // 處理部落格資料，將圖片路徑轉為公開 URL
 export const processBlogData = (data) => {
   // 更新圖片路徑
   const updateImagePaths = (item) => {
     if (item.thumbnail) {
-      item.thumbnail = getAssetUrl(item.thumbnail);
+      item.thumbnail = getImageUrl(item.thumbnail);
     }
     if (item.image) {
-      item.image = getAssetUrl(item.image);
+      item.image = getImageUrl(item.image);
     }
     return item;
   };

@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./HeedPage.module.scss"; // 引入 SCSS 模組
 import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
+import getImageUrl from "../../../../utils/getImageUrl";
 function HeedPage() {
   return (
     <div className={styles.heedContainer}>
@@ -13,7 +14,9 @@ function HeedPage() {
             <div className={styles.diversityLogo}>
               <img
                 className="responsive-img"
-                src={`/images/Uic/ranking/2023-INSIGHT-Into-Diversity-HEED-Award-Logo-1024x1024.webp`}
+                src={getImageUrl(
+                  `/images/Uic/ranking/2023-INSIGHT-Into-Diversity-HEED-Award-Logo-1024x1024.webp`
+                )}
                 alt="HEED Excellence Award"
                 loading="lazy"
               />

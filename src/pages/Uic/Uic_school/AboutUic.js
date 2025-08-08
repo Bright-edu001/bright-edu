@@ -3,21 +3,21 @@ import "./AboutUic.scss";
 import GallerySection from "../../../components/GallerySection/GallerySection";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import ActionButton from "../../../components/ActionButton/ActionButton";
-import getAssetUrl from "../../../utils/getAssetUrl";
+import getImageUrl from "../../../utils/getImageUrl";
 
 function AboutUic() {
   // 校園圖片數據
   const campusImages = [
     {
-      src: getAssetUrl("/images/GallerySection/gallery1.webp"),
+      src: getImageUrl("/images/GallerySection/gallery1.webp"),
       alt: "UIC 校園圖片 1",
     },
     {
-      src: getAssetUrl("/images/GallerySection/gallery2.webp"),
+      src: getImageUrl("/images/GallerySection/gallery2.webp"),
       alt: "UIC 校園圖片 2",
     },
     {
-      src: getAssetUrl("/images/GallerySection/gallery3.webp"),
+      src: getImageUrl("/images/GallerySection/gallery3.webp"),
       alt: "UIC 校園圖片 3",
     },
   ];
@@ -27,9 +27,9 @@ function AboutUic() {
       <ImageTextSection
         title="UIC 伊利諾大學芝加哥分校"
         subtitle="學校介紹"
-        imageUrl={getAssetUrl("/images/Uic/UIC - 網站LOGO - 03.webp")}
+        imageUrl={getImageUrl("/images/Uic/UIC - 網站LOGO - 03.webp")}
         imageAlt="UIC 美國商學院"
-        bgImageUrl={getAssetUrl(
+        bgImageUrl={getImageUrl(
           "/images/Uic/banner/photo_6177208882540169915_y.webp"
         )}
       />

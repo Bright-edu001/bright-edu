@@ -120,7 +120,9 @@ function Home() {
             <div className="feature-card-outside">
               <img
                 className="feature-logo-img-msu"
-                src="/images/home/Michigan State University_01.webp"
+                src={getImageUrl(
+                  "/images/home/Michigan State University_01.webp"
+                )}
                 alt="MSU Logo"
                 width="500"
                 height="58"
@@ -128,7 +130,9 @@ function Home() {
               <div className="feature-card msu">
                 <img
                   className="feature-bg-img"
-                  src={`/images/home/網站 - Rankings (透明框)_02.webp`}
+                  src={getImageUrl(
+                    "/images/home/網站 - Rankings (透明框)_02.webp"
+                  )}
                   alt="MSU背景圖"
                   style={{
                     opacity: 0.55,

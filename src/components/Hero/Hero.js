@@ -1,42 +1,43 @@
 import React, { useState, useEffect } from "react";
+import getImageUrl from "../../utils/getImageUrl";
 import { Link } from "react-router-dom";
 import "./Hero.scss";
 
 const heroImages = [
   {
     srcSet: [
-      `/images/banner/banner1-480.webp 480w`,
-      `/images/banner/banner1-768.webp 768w`,
-      `/images/banner/banner1-1280.webp 1280w`,
+      `${getImageUrl("/images/banner/banner1-480.webp")} 480w`,
+      `${getImageUrl("/images/banner/banner1-768.webp")} 768w`,
+      `${getImageUrl("/images/banner/banner1-1280.webp")} 1280w`,
     ].join(", "),
-    src: `/images/banner/banner1-1280.webp`,
+    src: getImageUrl(`/images/banner/banner1-1280.webp`),
     alt: "Banner 1",
   },
   {
     srcSet: [
-      `/images/banner/banner2-480.webp 480w`,
-      `/images/banner/banner2-768.webp 768w`,
-      `/images/banner/banner2-1280.webp 1280w`,
+      `${getImageUrl("/images/banner/banner2-480.webp")} 480w`,
+      `${getImageUrl("/images/banner/banner2-768.webp")} 768w`,
+      `${getImageUrl("/images/banner/banner2-1280.webp")} 1280w`,
     ].join(", "),
-    src: `/images/banner/banner2-1280.webp`,
+    src: getImageUrl(`/images/banner/banner2-1280.webp`),
     alt: "Banner 2",
   },
   {
     srcSet: [
-      `/images/banner/banner3-480.webp 480w`,
-      `/images/banner/banner3-768.webp 768w`,
-      `/images/banner/banner3-1280.webp 1280w`,
+      `${getImageUrl("/images/banner/banner3-480.webp")} 480w`,
+      `${getImageUrl("/images/banner/banner3-768.webp")} 768w`,
+      `${getImageUrl("/images/banner/banner3-1280.webp")} 1280w`,
     ].join(", "),
-    src: `/images/banner/banner3-1280.webp`,
+    src: getImageUrl(`/images/banner/banner3-1280.webp`),
     alt: "Banner 3",
   },
   {
     srcSet: [
-      `/images/banner/banner4-480.webp 480w`,
-      `/images/banner/banner4-768.webp 768w`,
-      `/images/banner/banner4-1280.webp 1280w`,
+      `${getImageUrl("/images/banner/banner4-480.webp")} 480w`,
+      `${getImageUrl("/images/banner/banner4-768.webp")} 768w`,
+      `${getImageUrl("/images/banner/banner4-1280.webp")} 1280w`,
     ].join(", "),
-    src: `/images/banner/banner4-1280.webp`,
+    src: getImageUrl(`/images/banner/banner4-1280.webp`),
     alt: "Banner 4",
   },
 ];

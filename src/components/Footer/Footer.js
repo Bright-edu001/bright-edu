@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "antd";
-import getAssetUrl from "../../utils/getAssetUrl";
+import getImageUrl from "../../utils/getImageUrl";
 import {
   FooterWrapper,
   FooterContent,
@@ -25,7 +25,7 @@ function Footer() {
                   target="_blank"
                 >
                   <img
-                    src={getAssetUrl("/images/footer/ICEF.webp")}
+                    src={getImageUrl("/images/footer/ICEF.webp")}
                     alt="ICEF認證徽章 - Bright Education"
                     width="120"
                     height="120"
@@ -128,7 +128,7 @@ function Footer() {
                 >
                   <img
                     className="phone-icon"
-                    src={`/images/footer/phone.webp`}
+                    src={getImageUrl(`/images/footer/phone.webp`)}
                     alt="電話圖示"
                     width="24"
                     height="24"
@@ -142,7 +142,7 @@ function Footer() {
                 >
                   <img
                     className="line-icon"
-                    src={`/images/footer/line.webp`}
+                    src={getImageUrl(`/images/footer/line.webp`)}
                     alt="line 圖示"
                     width="30"
                     height="30"

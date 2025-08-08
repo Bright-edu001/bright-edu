@@ -3,6 +3,7 @@ import "./MbaPrograms.scss";
 import "./mba-common.scss";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
+import getImageUrl from "../../../utils/getImageUrl";
 
 function MbaPrograms() {
   return (
@@ -35,17 +36,17 @@ function MbaPrograms() {
         <div className="programs-img">
           <div className="img-left">
             <img
-              src="/images/Uic/Mba/52193187_l-1024x683-1.webp"
+              src={getImageUrl(`/images/Uic/Mba/52193187_l-1024x683-1.webp`)}
               alt="Program Highlight"
             />
           </div>
           <div className="img-right">
             <img
-              src="/images/Uic/Mba/39703687_l-1024x684-1.webp"
+              src={getImageUrl(`/images/Uic/Mba/39703687_l-1024x684-1.webp`)}
               alt="Program Highlight"
             />
             <img
-              src="/images/Uic/Mba/70791790_l-1024x684-1.webp"
+              src={getImageUrl(`/images/Uic/Mba/70791790_l-1024x684-1.webp`)}
               alt="Program Highlight"
             />
           </div>
