@@ -6,6 +6,7 @@ import RankingNumberFlip from "../../components/RankingNumberFlip/RankingNumberF
 import React, { useState, useContext } from "react";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import { BlogContext } from "../../context/BlogContext";
+import getImageUrl from "../../utils/getImageUrl";
 
 function Home() {
   const { enrollmentEvents, news, loading, error } = useContext(BlogContext);
@@ -62,7 +63,7 @@ function Home() {
             <div className="feature-card-outside">
               <img
                 className="feature-logo-img-uic"
-                src="/images/home/UIC - 網站LOGO - 03.webp"
+                src={getImageUrl("/images/home/UIC - 網站LOGO - 03.webp")}
                 alt="UIC Logo"
                 width="500"
                 height="58"
@@ -70,7 +71,9 @@ function Home() {
               <div className="feature-card uic">
                 <img
                   className="feature-bg-img"
-                  src="/images/home/網站 - Rankings (透明框)_01.webp"
+                  src={getImageUrl(
+                    "/images/home/網站 - Rankings (透明框)_01.webp"
+                  )}
                   alt="UIC背景圖"
                 />
                 <h3>UIC Rankings</h3>
