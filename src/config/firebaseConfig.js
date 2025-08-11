@@ -1,12 +1,11 @@
-// ===== Firebase 相關功能匯入 =====
-// 匯入初始化 Firebase 應用程式的函式
+// ===== 所有 import 必須放最上方 =====
 import { initializeApp } from "firebase/app";
-// 匯入 Firestore 資料庫功能
 import { getFirestore } from "firebase/firestore";
-// 匯入 Google Analytics 分析功能
 import { getAnalytics } from "firebase/analytics";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 // 如需其他 Firebase 產品，請在此引入對應 SDK
 // 參考官方文件：https://firebase.google.com/docs/web/setup#available-libraries
+// ===== Firebase 設定區塊 =====
 
 // ===== Firebase 設定區塊 =====
 // 使用環境變數設定金鑰資訊，避免敏感資料外洩
@@ -29,6 +28,14 @@ const db = getFirestore(app);
 // 取得 Google Analytics 實例（用於網站流量分析）
 const analytics = getAnalytics(app);
 
+// ===== App Check（reCAPTCHA v3）初始化 =====
+// 初始化 App Check，防止未授權存取 Firebase 服務
+// 請確保此 site key 已在 Google reCAPTCHA 註冊並加到 Firebase App Check
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider("6Ldx4aErAAAAACXAX0jz7DtlCP4_Z01gJ0Mvrnrh"),
+  isTokenAutoRefreshEnabled: true, // 建議開啟自動刷新
+});
+
 // ===== 效能監控（Performance Monitoring）初始化 =====
 // 僅在瀏覽器端動態載入 Performance SDK，避免 SSR 報錯
 let perf;
@@ -47,5 +54,5 @@ if (typeof window !== "undefined") {
 }
 
 // ===== 匯出區塊 =====
-// 匯出 Firestore、效能監控、Analytics 實例，供其他模組使用
-export { db, perf, analytics };
+// 匯出 Firestore、效能監控、Analytics、App Check 實例，供其他模組使用
+export { db, perf, analytics, appCheck };

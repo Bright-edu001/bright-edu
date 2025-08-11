@@ -29,6 +29,8 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+// （已刪除開發期大量偵錯補丁：HookOutsideRender / Promise null tracing / 全域 unhandledrejection 攔截）
+
 // ===== 移除舊的 Service Worker（避免快取干擾） =====
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
