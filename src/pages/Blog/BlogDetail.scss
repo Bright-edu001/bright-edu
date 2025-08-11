@@ -137,9 +137,14 @@
   padding: 2rem;
 }
 
-.blog-detail-content p {
-  margin-top: 1.2em;
-  margin-bottom: 1.2em;
+.blog-detail-content {
+  h2 {
+    font-size: 24px;
+    margin-top: 1rem;
+  }
+  p {
+    margin: 1rem 0;
+  }
 }
 
 // 響應式設計：寬度850px以下
