@@ -150,30 +150,20 @@
     <link rel="canonical" href="https://bright-edu.com/" />
     <!-- Preload hero banner image for LCP optimization -->
     <!-- Removed incorrect preload link: href="%PUBLIC_URL%/images/banner/banner1.webp" -->
-    <!-- Prefetch subsequent hero banners during idle to reduce rotation delays -->
+    <!-- Performance: preconnect / dns-prefetch to Firebase Storage (images) -->
     <link
-      rel="prefetch"
-      as="image"
-      href="%PUBLIC_URL%/images/banner/banner2.webp"
+      rel="preconnect"
+      href="https://firebasestorage.googleapis.com"
+      crossorigin
     />
-    <link
-      rel="prefetch"
-      as="image"
-      href="%PUBLIC_URL%/images/banner/banner3.webp"
-    />
-    <link
-      rel="prefetch"
-      as="image"
-      href="%PUBLIC_URL%/images/banner/banner4.webp"
-    />
-    <!-- Preload LCP hero banner with srcset for最佳化 LCP -->
+    <link rel="dns-prefetch" href="//firebasestorage.googleapis.com" />
+    <!-- Preload LCP hero banner (remote Firebase Storage URL) -->
     <link
       rel="preload"
       as="image"
-      href="/images/banner/banner1-1280.webp"
-      imagesrcset="/images/banner/banner1-480.webp 480w, /images/banner/banner1-768.webp 768w, /images/banner/banner1-1280.webp 1280w"
+      href="https://firebasestorage.googleapis.com/v0/b/bright-edu-data.firebasestorage.app/o/banner%2Fbanner1-1280.webp?alt=media"
+      imagesrcset="https://firebasestorage.googleapis.com/v0/b/bright-edu-data.firebasestorage.app/o/banner%2Fbanner1-480.webp?alt=media 480w, https://firebasestorage.googleapis.com/v0/b/bright-edu-data.firebasestorage.app/o/banner%2Fbanner1-768.webp?alt=media 768w, https://firebasestorage.googleapis.com/v0/b/bright-edu-data.firebasestorage.app/o/banner%2Fbanner1-1280.webp?alt=media 1280w"
       imagesizes="(max-width: 600px) 480px, (max-width: 900px) 768px, 1280px"
-      alt="主視覺"
     />
     <meta property="og:locale" content="zh_TW" />
     <meta property="og:type" content="website" />
@@ -190,10 +180,7 @@
       property="og:site_name"
       content="UIC 申請資訊｜美國商科碩士留學｜美國一年MBA｜MS prgrams｜MSU-MSF"
     />
-    <meta
-      property="og:image"
-      content="https://bright-edu.com/wp-content/uploads/2020/03/B-logo-16-RGB_01-1.png"
-    />
+    <meta property="og:image" content="https://bright-edu.com/B-logo.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:updated_time" content="2025-03-05T17:03:09+08:00" />
@@ -206,10 +193,7 @@
       name="twitter:description"
       content="Bright Education : 美國商科碩士 UIC Business School，UIC伊利諾大學芝加哥分校是你最佳的選擇，想要出國留學又想節省經費， 伊利諾大學芝加哥分校MBA &amp; MS Programs Michigan State University(MSU)-Master of Science in Finance(MSF)"
     />
-    <meta
-      name="twitter:image"
-      content="https://bright-edu.com/wp-content/uploads/2020/03/B-logo-16-RGB_01-1.png"
-    />
+    <meta name="twitter:image" content="https://bright-edu.com/B-logo.webp" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Jim" />
     <meta name="twitter:label2" content="Time to read" />
@@ -229,20 +213,9 @@
       title="訂閱《UIC 申請資訊｜美國商科碩士留學｜美國一年MBA｜MS prgrams｜MSU-MSF》&raquo; 留言的資訊提供"
       href="https://bright-edu.com/comments/feed/"
     />
-    <link
-      rel="icon"
-      href="https://bright-edu.com/wp-content/uploads/2020/04/B-logo-01-圓白底-CYMK_01.png"
-      sizes="32x32"
-    />
-    <link
-      rel="icon"
-      href="https://bright-edu.com/wp-content/uploads/2020/04/B-logo-01-圓白底-CYMK_01.png"
-      sizes="192x192"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="https://bright-edu.com/wp-content/uploads/2020/04/B-logo-01-圓白底-CYMK_01.png"
-    />
+    <link rel="icon" href="/B-logo-01-圓白底-CYMK_01.png" sizes="32x32" />
+    <link rel="icon" href="/B-logo-01-圓白底-CYMK_01.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/B-logo-01-圓白底-CYMK_01.png" />
     <title>
       UIC｜MSU商學碩士申請資訊｜美國留學｜UIC MS Programs &
       一年MBA｜美國碩士｜MSF
@@ -315,6 +288,123 @@
           css.rel = "stylesheet";
         };
       }
+    </script>
+    <!--  A/B LCP 測試腳本：比較「保留 Hero Preload」與「移除 Hero Preload」對 LCP 的影響  -->
+    <script>
+      (function () {
+        /* ==========================================================
+         * A/B 測試目的：
+         *   量測 Largest Contentful Paint (LCP) 在兩種策略下的差異：
+         *   A: 保留 head 中既有的 hero 第一張 banner preload (baseline)
+         *   B: 移除該 preload，改由瀏覽器自然載入，觀察是否實際 LCP 無明顯變差 (或是否改善因為省去預取競爭)
+         * ----------------------------------------------------------
+         * 實作方式：
+         *   1. 以 localStorage 持久化訪客的 variant（避免同一使用者跨刷新混用）。
+         *   2. Variant B 會在 DOM Ready 後移除對應的 <link rel="preload" as="image">。
+         *   3. 觀察 LCP：使用 PerformanceObserver 監聽 'largest-contentful-paint'。
+         *   4. 當頁面 visibilitychange -> hidden 或 load 後短暫延遲，送出最後一次 LCP。
+         *   5. 目前預設只 console.log；如需回傳後端，可啟用 sendBeacon 區塊。
+         * ----------------------------------------------------------
+         * 擴充：
+         *   - 可再加入 Variant C：保留 preload 並額外延遲注入剩餘 banner 的 prefetch。
+         *   - 可串接 GA：若已載入 gtag，可直接送 event。
+         * ========================================================== */
+
+        var TEST_KEY = "heroLcpVariant";
+        var VARIANTS = ["A_preload", "B_no_preload"];
+
+        // 取得或指派使用者的實驗組別
+        var variant = (function assignVariant() {
+          try {
+            var stored = localStorage.getItem(TEST_KEY);
+            if (stored && VARIANTS.indexOf(stored) !== -1) return stored;
+            var pick = VARIANTS[Math.random() < 0.5 ? 0 : 1];
+            localStorage.setItem(TEST_KEY, pick);
+            return pick;
+          } catch (e) {
+            // localStorage 失敗時 fallback 隨機
+            return VARIANTS[Math.random() < 0.5 ? 0 : 1];
+          }
+        })();
+
+        // 將 variant 標記在 <html data-ab-hero-lcp="...">
+        try {
+          document.documentElement.setAttribute("data-ab-hero-lcp", variant);
+        } catch (e) {}
+
+        // 若是 B_no_preload：移除對應 preload link
+        function maybeRemovePreload() {
+          if (variant !== "B_no_preload") return;
+          var preload = document.querySelector(
+            'link[rel="preload"][as="image"][href*="banner1-1280"]'
+          );
+          if (preload) {
+            preload.parentNode.removeChild(preload);
+            // 可選：改成在 idle 時用 Image() 暖機
+            // requestIdleCallback(() => { var img = new Image(); img.src = HERO_URL; });
+          }
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", maybeRemovePreload);
+        } else {
+          maybeRemovePreload();
+        }
+
+        // LCP 監聽
+        var lcpValue = null;
+        try {
+          var po = new PerformanceObserver(function (entryList) {
+            var entries = entryList.getEntries();
+            var last = entries[entries.length - 1];
+            if (last) {
+              lcpValue = last.renderTime || last.loadTime || last.startTime;
+            }
+          });
+          po.observe({ type: "largest-contentful-paint", buffered: true });
+        } catch (e) {
+          // 某些舊瀏覽器不支援
+        }
+
+        function reportLCP() {
+          if (lcpValue == null) return;
+          var payload = {
+            metric: "LCP",
+            value: lcpValue,
+            variant: variant,
+            url: location.pathname,
+            ts: Date.now(),
+          };
+          // Console 調試
+          console.log("[AB-LCP]", payload);
+
+          // (可選) 傳送到後端收集：請自行建立 /lcp-collect endpoint
+          // try {
+          //   if (navigator.sendBeacon) {
+          //     navigator.sendBeacon('/lcp-collect', JSON.stringify(payload));
+          //   } else {
+          //     fetch('/lcp-collect', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+          //   }
+          // } catch (e) {}
+
+          // (可選) 傳送到 GA (需已載入 gtag.js)
+          // if (window.gtag) {
+          //   window.gtag('event', 'LCP', {
+          //     value: Math.round(lcpValue),
+          //     event_category: 'Performance',
+          //     event_label: variant
+          //   });
+          // }
+        }
+
+        // 在頁面隱藏或 load 後稍候上報
+        document.addEventListener("visibilitychange", function () {
+          if (document.visibilityState === "hidden") reportLCP();
+        });
+        window.addEventListener("pagehide", reportLCP);
+        window.addEventListener("load", function () {
+          setTimeout(reportLCP, 300);
+        });
+      })();
     </script>
     <noscript>
       <link rel="stylesheet" href="/static/css/main.css" />

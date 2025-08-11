@@ -3,6 +3,7 @@ import SectionContainer from "../../../components/SectionContainer/SectionContai
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
 import { PageH2, PageP } from "./MS.styles";
+import getImageUrl from "../../../utils/getImageUrl";
 
 function MsInformation() {
   useEffect(() => {}, []);
@@ -90,19 +91,22 @@ function MsInformation() {
 
   const companyTitle = "主要聘用 UIC 商學院 MSMIS 畢業生的頂尖企業";
   const companyLogos = [
-    { src: "https://imgur.com/yAYnv8c.png", alt: "Blur Cross BlueShield" },
     {
-      src: "https://imgur.com/8UuFArA.png",
+      src: getImageUrl("/images/Uic/Ms/BlueCrossBlueShield.webp"),
+      alt: "Blur Cross BlueShield",
+    },
+    {
+      src: getImageUrl("/images/Uic/Ms/Discover Financial Services.webp"),
       alt: "Discover Financial Services",
     },
-    { src: "https://imgur.com/uB2jd6a.png", alt: "Accenture" },
-    { src: "https://imgur.com/CTHOqZy.png", alt: "Zurich" },
-    { src: "https://imgur.com/pTbhLJz.png", alt: "SAP" },
-    { src: "https://imgur.com/2kTLBWN.png", alt: "United" },
-    { src: "https://imgur.com/6pG7vED.png", alt: "CDW" },
-    { src: "https://imgur.com/bkTWA3F.png", alt: "PWC" },
-    { src: "https://imgur.com/71PlcUk.png", alt: "RSM" },
-    { src: "https://imgur.com/PwZyl8u.png", alt: "Deloitte" },
+    { src: getImageUrl("/images/Uic/Ms/Accenture.webp"), alt: "Accenture" },
+    { src: getImageUrl("/images/Uic/Ms/Zurich.webp"), alt: "Zurich" },
+    { src: getImageUrl("/images/Uic/Ms/SAP.webp"), alt: "SAP" },
+    { src: getImageUrl("/images/Uic/Ms/United.webp"), alt: "United" },
+    { src: getImageUrl("/images/Uic/Ms/CWD.webp"), alt: "CWD" },
+    { src: getImageUrl("/images/Uic/Ms/PWC.webp"), alt: "PWC" },
+    { src: getImageUrl("/images/Uic/Ms/RSM.webp"), alt: "RSM" },
+    { src: getImageUrl("/images/Uic/Ms/Deloitte.webp"), alt: "Deloitte" },
   ];
 
   const courseArrangementTitle = "學位要求與課程安排";

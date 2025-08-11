@@ -2,6 +2,7 @@ import SectionContainer from "../../../components/SectionContainer/SectionContai
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
 import { PageH2, PageP } from "./MS.styles";
+import getImageUrl from "../../../utils/getImageUrl";
 
 function MsAccounting() {
   const whyTitle = "為什麼選擇在 UIC 商學院攻讀會計碩士？";
@@ -27,16 +28,25 @@ function MsAccounting() {
 
   const companyTitle = "主要聘用 UIC 商學院 MSA 畢業生的頂尖企業";
   const companyLogos = [
-    { src: "https://imgur.com/71PlcUk.png", alt: "RSM" },
-    { src: "https://imgur.com/F6xQe3p.png", alt: "Deloitte" },
-    { src: "https://imgur.com/bkTWA3F.png", alt: "PWC" },
-    { src: "https://imgur.com/68hhxLe.png", alt: "Grant Thornton" },
-    { src: "https://imgur.com/PjZgA8X.png", alt: "EY" },
-    { src: "https://imgur.com/mrP1kpY.png", alt: "Michael Sliver" },
-    { src: "https://imgur.com/YZ4ZMLw.png", alt: "Andersen" },
-    { src: "https://imgur.com/eVXr82m.png", alt: "Bakertilly" },
-    { src: "https://imgur.com/8nrAHBl.png", alt: "KMPG" },
-    { src: "https://imgur.com/cF6aKzR.png", alt: "Plante Moran" },
+    { src: getImageUrl("/images/Uic/Ms/RSM.webp"), alt: "RSM" },
+    { src: getImageUrl("/images/Uic/Ms/Deloitte.webp"), alt: "Deloitte" },
+    { src: getImageUrl("/images/Uic/Ms/PWC.webp"), alt: "PWC" },
+    {
+      src: getImageUrl("/images/Uic/Ms/Grant Thornton.webp"),
+      alt: "Grant Thornton",
+    },
+    { src: getImageUrl("/images/Uic/Ms/EY.webp"), alt: "EY" },
+    {
+      src: getImageUrl("/images/Uic/Ms/Michael Sliver.webp"),
+      alt: "Michael Sliver",
+    },
+    { src: getImageUrl("/images/Uic/Ms/Andersen.webp"), alt: "Andersen" },
+    { src: getImageUrl("/images/Uic/Ms/Bakertilly.webp"), alt: "Bakertilly" },
+    { src: getImageUrl("/images/Uic/Ms/KMPG.webp"), alt: "KMPG" },
+    {
+      src: getImageUrl("/images/Uic/Ms/Plante Moran.webp"),
+      alt: "Plante Moran",
+    },
   ];
 
   const courseArrangementTitle = "學分與課程安排";
