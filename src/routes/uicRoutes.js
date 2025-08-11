@@ -43,6 +43,7 @@ const MsAnalttics = lazy(() => import("../pages/Uic/Ms/MsAnalytics.js"));
 const MsApplication = lazy(() => import("../pages/Uic/Ms/MsApplication.js"));
 const MsInformation = lazy(() => import("../pages/Uic/Ms/MsInformation.js"));
 const MsAccounting = lazy(() => import("../pages/Uic/Ms/MsAccounting.js"));
+const MsPrograms = lazy(() => import("../pages/Uic/Ms/MsPrograms.js"));
 
 const uicRoutes = [
   { path: "uic-business-school/uic/about-uic", element: <AboutUic /> },
@@ -103,6 +104,18 @@ const uicRoutes = [
     element: <MsInformation />,
   },
   { path: "uic-business-school/ms/accounting", element: <MsAccounting /> },
+  {
+    path: "uic-business-school/ms/msprograms",
+    element: <MsPrograms />,
+  },
+  {
+    path: "uic-business-school/ms/programs",
+    element: <Navigate to="/uic-business-school/ms/msprograms" replace />,
+  },
+  {
+    path: "uic-business-school/ms",
+    element: <Navigate to="/uic-business-school/ms/msprograms" replace />,
+  },
   {
     path: "uic-business-school",
     element: <Navigate to="/uic-business-school/uic/about-uic" replace />,
