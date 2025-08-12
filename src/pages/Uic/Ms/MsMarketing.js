@@ -3,6 +3,7 @@ import SectionContainer from "../../../components/SectionContainer/SectionContai
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
 import { PageH2, PageP, MsmUl } from "./MS.styles";
+import getImageUrl from "../../../utils/getImageUrl";
 
 function MsMarketing() {
   useEffect(() => {}, []);
@@ -36,8 +37,11 @@ function MsMarketing() {
 
   const companyTitle = "主要聘用 UIC 商學院 MSM 畢業生的頂尖企業";
   const companyLogos = [
-    { src: "https://imgur.com/J7cu9zS.png", alt: "Publicis Media" },
-    { src: "https://imgur.com/JP2WPWz.png", alt: "Circana" },
+    {
+      src: getImageUrl("/images/Uic/Ms/Publicis Media.webp"),
+      alt: "Publicis Media",
+    },
+    { src: getImageUrl("/images/Uic/Ms/Circana.webp"), alt: "Circana" },
   ];
 
   const courseArrangementTitle = "學位要求與課程安排";

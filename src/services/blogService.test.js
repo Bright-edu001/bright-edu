@@ -1,13 +1,13 @@
 // Mock firebaseConfig，避免實際連線到 Firebase
 jest.mock("../config/firebaseConfig", () => ({ db: {} }));
 
-// 建立 firebase/firestore 及 getAssetUrl 的 mock function
+// 建立 firebase/firestore 及 getImageUrl 的 mock function
 const mockGetDocs = jest.fn();
 const mockGetDoc = jest.fn();
 const mockSetDoc = jest.fn();
 const mockCollection = jest.fn();
 const mockDoc = jest.fn();
-const mockGetAssetUrl = jest.fn((p) => (process.env.PUBLIC_URL || "") + p);
+const mockGetImageUrl = jest.fn((p) => (process.env.PUBLIC_URL || "") + p);
 
 // Mock firebase/firestore 所有用到的方法
 jest.mock("firebase/firestore", () => ({
@@ -18,8 +18,8 @@ jest.mock("firebase/firestore", () => ({
   setDoc: mockSetDoc,
 }));
 
-// Mock getAssetUrl，避免實際路徑處理
-jest.mock("../utils/getAssetUrl", () => mockGetAssetUrl);
+// Mock getImageUrl，避免實際路徑處理
+jest.mock("../utils/getImageUrl", () => mockGetImageUrl);
 
 // 匯入要測試的所有 service function
 const {
@@ -34,7 +34,7 @@ const {
 // 每個測試前重置所有 mock 狀態
 beforeEach(() => {
   jest.clearAllMocks();
-  mockGetAssetUrl.mockImplementation((p) => (process.env.PUBLIC_URL || "") + p);
+  mockGetImageUrl.mockImplementation((p) => (process.env.PUBLIC_URL || "") + p);
 });
 
 describe("processBlogData", () => {
@@ -50,9 +50,9 @@ describe("processBlogData", () => {
   // 測試：陣列每個物件的圖片路徑都會被更新
   it("updates image paths for each item in an array", () => {
     const data = [
-      { thumbnail: "/a.jpg", image: "/b.jpg" },
-      { image: "/c.jpg" },
-      { thumbnail: "/d.jpg" },
+      { thumbnail: "/images/a.jpg", image: "/images/b.jpg" },
+      { image: "/images/c.jpg" },
+      { thumbnail: "/images/d.jpg" },
     ];
 
     const result = processBlogData(data);
@@ -60,25 +60,37 @@ describe("processBlogData", () => {
     expect(result).toBe(data);
     expect(result).toEqual([
       {
-        thumbnail: "https://example.com/a.jpg",
-        image: "https://example.com/b.jpg",
+        thumbnail: "https://example.com/images/a.jpg",
+        image: "https://example.com/images/b.jpg",
       },
-      { image: "https://example.com/c.jpg" },
-      { thumbnail: "https://example.com/d.jpg" },
+      { image: "https://example.com/images/c.jpg" },
+      { thumbnail: "https://example.com/images/d.jpg" },
     ]);
   });
 
   // 測試：單一物件的圖片路徑會被更新
   it("updates image paths for a single object", () => {
-    const obj = { thumbnail: "/thumb.jpg", image: "/img.jpg" };
+    const obj = { thumbnail: "/images/thumb.jpg", image: "/images/img.jpg" };
 
     const result = processBlogData(obj);
 
     expect(result).toBe(obj);
     expect(result).toEqual({
-      thumbnail: "https://example.com/thumb.jpg",
-      image: "https://example.com/img.jpg",
+      thumbnail: "https://example.com/images/thumb.jpg",
+      image: "https://example.com/images/img.jpg",
     });
+  });
+
+  // 測試：title 內的 inline <img src='/images/...'> 會被替換
+  it("replaces inline img src in title", () => {
+    const obj = {
+      title: "<img src='/images/flags/us-flag.webp' alt='US' /> Fall 2026",
+    };
+    const result = processBlogData(obj);
+    expect(mockGetImageUrl).toHaveBeenCalledWith("/images/flags/us-flag.webp");
+    expect(result.title).toContain(
+      "https://example.com/images/flags/us-flag.webp"
+    );
   });
 });
 
@@ -86,17 +98,17 @@ describe("getEnrollmentEvents", () => {
   // 測試：能正確取得並處理招生活動資料
   it("calls processBlogData with fetched events", async () => {
     const docs = [
-      { id: "1", data: () => ({ image: "/a.jpg" }) },
-      { id: "2", data: () => ({ thumbnail: "/b.jpg" }) },
+      { id: "1", data: () => ({ image: "/images/a.jpg" }) },
+      { id: "2", data: () => ({ thumbnail: "/images/b.jpg" }) },
     ];
     mockGetDocs.mockResolvedValue({ docs });
     const result = await getEnrollmentEvents();
 
     expect(mockGetDocs).toHaveBeenCalledTimes(1);
-    expect(mockGetAssetUrl).toHaveBeenCalledTimes(2);
+    expect(mockGetImageUrl).toHaveBeenCalledTimes(2);
     expect(result).toEqual([
-      { id: "1", image: "/a.jpg" },
-      { id: "2", thumbnail: "/b.jpg" },
+      { id: "1", image: "/images/a.jpg" },
+      { id: "2", thumbnail: "/images/b.jpg" },
     ]);
   });
 
@@ -106,20 +118,20 @@ describe("getEnrollmentEvents", () => {
     mockGetDocs.mockRejectedValue(error);
 
     await expect(getEnrollmentEvents()).rejects.toThrow("boom");
-    expect(mockGetAssetUrl).not.toHaveBeenCalled();
+    expect(mockGetImageUrl).not.toHaveBeenCalled();
   });
 });
 
 describe("getNews", () => {
   // 測試：能正確取得並處理新聞資料
   it("calls processBlogData with fetched news", async () => {
-    const docs = [{ id: "1", data: () => ({ image: "/n.jpg" }) }];
+    const docs = [{ id: "1", data: () => ({ image: "/images/n.jpg" }) }];
     mockGetDocs.mockResolvedValue({ docs });
     const result = await getNews();
 
     expect(mockGetDocs).toHaveBeenCalledTimes(1);
-    expect(mockGetAssetUrl).toHaveBeenCalledWith("/n.jpg");
-    expect(result).toEqual([{ id: "1", image: "/n.jpg" }]);
+    expect(mockGetImageUrl).toHaveBeenCalledWith("/images/n.jpg");
+    expect(result).toEqual([{ id: "1", image: "/images/n.jpg" }]);
   });
 
   // 測試：getDocs 發生錯誤時會拋出例外
@@ -128,7 +140,7 @@ describe("getNews", () => {
     mockGetDocs.mockRejectedValue(error);
 
     await expect(getNews()).rejects.toThrow("fail");
-    expect(mockGetAssetUrl).not.toHaveBeenCalled();
+    expect(mockGetImageUrl).not.toHaveBeenCalled();
   });
 });
 
@@ -149,7 +161,7 @@ describe("getBlogPost", () => {
     expect(mockDoc.mock.calls[0][1]).toBe("enrollmentEvents");
     expect(mockDoc.mock.calls[1][1]).toBe("news");
     expect(mockGetDoc).toHaveBeenCalledTimes(2);
-    expect(mockGetAssetUrl).not.toHaveBeenCalled();
+    expect(mockGetImageUrl).not.toHaveBeenCalled();
     expect(result).toEqual({ id: "1", title: "from news" });
   });
 });

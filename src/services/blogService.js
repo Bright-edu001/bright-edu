@@ -1,20 +1,44 @@
 import { db } from "../config/firebaseConfig";
 import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
-import getAssetUrl from "../utils/getAssetUrl";
+import getImageUrl from "../utils/getImageUrl";
 
 // 處理部落格資料，將圖片路徑轉為公開 URL
 export const processBlogData = (data) => {
-  // 更新圖片路徑
+  // 將 title 內的 <img src='/images/...'> 轉成 Storage URL
+  const replaceInlineImg = (html) => {
+    if (typeof html !== "string" || html.indexOf("<img") === -1) return html;
+    return html.replace(
+      /(<img[^>]*src=['"])(\/images\/[^'" >]+)(['"][^>]*>)/gi,
+      (m, p1, path, p3) => {
+        try {
+          return p1 + getImageUrl(path) + p3;
+        } catch (e) {
+          return m; // 失敗則保留原字串
+        }
+      }
+    );
+  };
+
   const updateImagePaths = (item) => {
-    if (item.thumbnail) {
-      item.thumbnail = getAssetUrl(item.thumbnail);
+    if (!item || typeof item !== "object") return item;
+    if (item.thumbnail && item.thumbnail.startsWith("/images/")) {
+      item.thumbnail = getImageUrl(item.thumbnail);
     }
-    if (item.image) {
-      item.image = getAssetUrl(item.image);
+    if (item.image && item.image.startsWith("/images/")) {
+      item.image = getImageUrl(item.image);
     }
+    if (item.title) {
+      item.title = replaceInlineImg(item.title);
+    }
+    // 處理巢狀 content 陣列 (如 enrollmentEvents 裡的 content)
+    if (Array.isArray(item.content)) {
+      item.content.forEach((c) => updateImagePaths(c));
+    }
+    // 其他可能的巢狀陣列欄位可在此擴充
     return item;
   };
 
+  // 處理陣列或單一物件
   if (Array.isArray(data)) {
     data.forEach(updateImagePaths);
     return data;

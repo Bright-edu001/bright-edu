@@ -6,7 +6,26 @@
     {
       "src": "images/header/logo.webp",
       "type": "image/webp",
-      "sizes": "500x97"
+      "sizes": "500x97",
+      "purpose": "any"
+    },
+    {
+      "src": "/B-logo-01-圓白底-CYMK_01.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/B-logo-01-圓白底-CYMK_01.png",
+      "type": "image/png",
+      "sizes": "256x256",
+      "purpose": "any"
+    },
+    {
+      "src": "/B-logo-01-圓白底-CYMK_01.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": "/",

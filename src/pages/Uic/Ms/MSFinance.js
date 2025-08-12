@@ -3,6 +3,7 @@ import MSFinanceSection from "../../../components/Ms/MSFinanceSection";
 import { PageH2, PageP } from "./MS.styles";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
+import getImageUrl from "../../../utils/getImageUrl";
 
 function MSFinance() {
   useEffect(() => {}, []);
@@ -37,10 +38,19 @@ function MSFinance() {
 
   const companyTitle = "主要聘用 UIC 商學院 MSF 畢業生的頂尖企業";
   const companyLogos = [
-    { src: "https://imgur.com/3cavVX8.png", alt: "JP Morgan Chase & Co" },
-    { src: "https://imgur.com/i5NAuDo.png", alt: "bofa-og-logo" },
-    { src: "https://imgur.com/yo7s6Vg.png", alt: "US Bank" },
-    { src: "https://imgur.com/M9D29br.png", alt: "BMO Financial Group" },
+    {
+      src: getImageUrl("/images/Uic/Ms/JP Morgan Chase & Co.webp"),
+      alt: "JP Morgan Chase & Co",
+    },
+    {
+      src: getImageUrl("/images/Uic/Ms/bofa-og-logo.webp"),
+      alt: "bofa-og-logo",
+    },
+    { src: getImageUrl("/images/Uic/Ms/US Bank.webp"), alt: "US Bank" },
+    {
+      src: getImageUrl("/images/Uic/Ms/BMO Financial Group.webp"),
+      alt: "BMO Financial Group",
+    },
   ];
 
   const courseArrangementTitle = "學分與課程安排";
