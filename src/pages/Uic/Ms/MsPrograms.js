@@ -1,6 +1,7 @@
 import AreaCards from "../../../components/AreaCards/AreaCards";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import "./MsPrograms.scss";
 
 const MsAreas = [
   {
@@ -41,6 +42,7 @@ function MsPrograms() {
     <div className="ms-programs">
       <MbaAreasHero />
       <SectionContainer className="programs" ariaLabel="MS Programs">
+        <h3>MS Programs</h3>
         <AreaCards areas={MsAreas} />
       </SectionContainer>
     </div>

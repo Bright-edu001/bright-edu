@@ -98,3 +98,7 @@ npm run deploy
 ## 授權
 
 此專案目前尚未指定授權條款。
+
+## 測試環境網址:https://super-caramel-093673.netlify.app/
+
+## 正式環境網址:https://bright-edu-data.web.app/
