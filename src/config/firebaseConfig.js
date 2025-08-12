@@ -36,12 +36,24 @@ const analytics = getAnalytics(app);
 // 初始化 App Check，防止未授權存取 Firebase 服務
 // 請確保此 site key 已在 Google reCAPTCHA 註冊並加到 Firebase App Check
 const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider("6Ldx4aErAAAAACXAX0jz7DtlCP4_Z01gJ0Mvrnrh"),
+  provider: new ReCaptchaV3Provider(process.env.REACT_APP_RECAPTCHA_SITE_KEY),
   isTokenAutoRefreshEnabled: true, // 建議開啟自動刷新
 });
-getToken(appCheck).catch((err) => {
-  console.error("App Check token fetch failed:", err);
-});
+// 若需要手動取得 App Check token，可呼叫此函式
+const fetchAppCheckToken = async (retries = 1) => {
+  try {
+    await getToken(appCheck);
+  } catch (err) {
+    if (retries > 0) {
+      setTimeout(() => fetchAppCheckToken(retries - 1), 1000);
+    } else {
+      console.error("App Check token fetch failed:", err);
+      if (typeof window !== "undefined") {
+        alert("驗證服務暫時不可用，請稍後再試。");
+      }
+    }
+  }
+};
 
 // ===== 效能監控（Performance Monitoring）初始化 =====
 // 僅在瀏覽器端動態載入 Performance SDK，避免 SSR 報錯
@@ -62,4 +74,4 @@ if (typeof window !== "undefined") {
 
 // ===== 匯出區塊 =====
 // 匯出 Firestore、效能監控、Analytics、App Check 實例，供其他模組使用
-export { db, perf, analytics, appCheck };
+export { db, perf, analytics, appCheck, fetchAppCheckToken };
