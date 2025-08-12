@@ -12,8 +12,8 @@ const buttonData = [
     title: "加入LINE",
     aria: "加入LINE",
     imgSrc: getImageUrl("/images/social_icon/line.webp"),
+    imgAlt: "LINE",
     external: true,
-    alt: "LINE",
   },
   {
     href: "tel:077227407",
@@ -22,7 +22,6 @@ const buttonData = [
     imgSrc: getImageUrl("/images/social_icon/phone.webp"),
     imgAlt: "電話",
     external: false,
-    alt: "phone",
   },
 ];
 
