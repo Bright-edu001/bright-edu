@@ -25,6 +25,7 @@ import {
   deleteArticle,
 } from "../data/blogApi";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import logger from "../../utils/logger";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -284,7 +285,7 @@ const ProductsPage = () => {
         }
       } catch (err) {
         // 刪除失敗不影響主流程
-        console.warn("刪除舊檔案失敗", err);
+        logger.warn("刪除舊檔案失敗", err);
       }
     }
   };

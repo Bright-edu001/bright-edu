@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { App } from "antd";
 import { request } from "../utils/request";
+import logger from "../utils/logger";
 
 const DEFAULT_FORM = { name: "", lineId: "", email: "", message: "" };
 
@@ -43,8 +44,8 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
     setSubmitting(true);
     setResult(null);
 
-    console.log("=== 開始送出表單 ===");
-    console.log("表單資料:", form);
+    logger.log("=== 開始送出表單 ===");
+    logger.log("表單資料:", form);
 
     try {
       let response;
@@ -52,29 +53,29 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
 
       // 先嘗試 POST 請求
       try {
-        console.log("嘗試 POST 請求...");
+        logger.log("嘗試 POST 請求...");
         response = await request("POST", form);
-        console.log("POST 請求回應:", response);
+        logger.log("POST 請求回應:", response);
 
         if (response && response.result === "success") {
           success = true;
         }
       } catch (postError) {
-        console.log("POST 請求失敗:", postError);
+        logger.log("POST 請求失敗:", postError);
       }
 
       // 如果 POST 失敗，嘗試 GET 請求
       if (!success) {
         try {
-          console.log("POST 失敗，嘗試 GET 請求...");
+          logger.log("POST 失敗，嘗試 GET 請求...");
           response = await request("GET", form);
-          console.log("GET 請求回應:", response);
+          logger.log("GET 請求回應:", response);
 
           if (response && response.result === "success") {
             success = true;
           }
         } catch (getError) {
-          console.log("GET 請求也失敗:", getError);
+          logger.log("GET 請求也失敗:", getError);
         }
       }
 
@@ -92,7 +93,7 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
         throw new Error("請求發送失敗");
       }
     } catch (error) {
-      console.error("提交表單時發生錯誤:", error);
+      logger.error("提交表單時發生錯誤:", error);
       message.error(`送出失敗：${error.message}`);
       setResult({
         success: false,
@@ -100,7 +101,7 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
       });
     } finally {
       setSubmitting(false);
-      console.log("=== 表單送出完成 ===");
+      logger.log("=== 表單送出完成 ===");
     }
   };
 
@@ -114,14 +115,14 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
         message: "這是一個測試連接的訊息，請忽略",
       };
 
-      console.log("開始連接測試...");
+      logger.log("開始連接測試...");
       const response = await request("GET", testData);
-      console.log("連接測試回應:", response);
+      logger.log("連接測試回應:", response);
 
       message.success("連接測試完成！請檢查 Google Sheets 是否有測試資料");
       return response;
     } catch (error) {
-      console.error("連接測試失敗:", error);
+      logger.error("連接測試失敗:", error);
       message.warning("連接測試無法確定結果，請檢查 Google Sheets");
       return { result: "unknown", message: "測試完成但無法確定結果" };
     }

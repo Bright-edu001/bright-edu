@@ -1,3 +1,4 @@
+import logger from "./logger";
 // 前端效能監控工具類別
 class PerformanceMonitor {
   constructor() {
@@ -9,6 +10,8 @@ class PerformanceMonitor {
     this.metricListeners = [];
     // 各種 PerformanceObserver 實例
     this.observers = {};
+    // 記憶體使用量輪詢的 ID
+    this.memoryIntervalId = null;
     // 除錯模式
     this.debug = false;
     // 是否啟用監控（預設僅 production）
@@ -44,7 +47,7 @@ class PerformanceMonitor {
     this.metricListeners.forEach((cb) => cb({ name, value }));
     if (this.debug) {
       // eslint-disable-next-line no-console
-      console.log(`${name.toUpperCase()}:`, value);
+      logger.log(`${name.toUpperCase()}:`, value);
     }
     // 傳送自訂指標到 Firebase Performance Monitoring
     if (typeof window !== "undefined") {
@@ -59,14 +62,14 @@ class PerformanceMonitor {
           } catch (err) {
             if (this.debug) {
               // eslint-disable-next-line no-console
-              console.warn("Failed to record Firebase metric", err);
+              logger.warn("Failed to record Firebase metric", err);
             }
           }
         })
         .catch((err) => {
           if (this.debug) {
             // eslint-disable-next-line no-console
-            console.warn("Failed to load Firebase Performance", err);
+            logger.warn("Failed to load Firebase Performance", err);
           }
         });
     }
@@ -89,7 +92,7 @@ class PerformanceMonitor {
     } catch (err) {
       if (this.debug) {
         // eslint-disable-next-line no-console
-        console.warn("送出效能指標失敗", err);
+        logger.warn("送出效能指標失敗", err);
       }
     }
   }
@@ -108,7 +111,7 @@ class PerformanceMonitor {
       observer.observe({ entryTypes: ["largest-contentful-paint"] });
       this.observers.lcp = observer;
     } catch (error) {
-      console.warn("瀏覽器不支援 LCP 監控:", error);
+      logger.warn("瀏覽器不支援 LCP 監控:", error);
     }
   }
 
@@ -127,7 +130,7 @@ class PerformanceMonitor {
       observer.observe({ entryTypes: ["first-input"] });
       this.observers.fid = observer;
     } catch (error) {
-      console.warn("瀏覽器不支援 FID 監控:", error);
+      logger.warn("瀏覽器不支援 FID 監控:", error);
     }
   }
 
@@ -150,7 +153,7 @@ class PerformanceMonitor {
       observer.observe({ entryTypes: ["layout-shift"] });
       this.observers.cls = observer;
     } catch (error) {
-      console.warn("瀏覽器不支援 CLS 監控:", error);
+      logger.warn("瀏覽器不支援 CLS 監控:", error);
     }
   }
 
@@ -165,7 +168,7 @@ class PerformanceMonitor {
       );
 
       if (slowResources.length > 0) {
-        console.warn("偵測到載入較慢的資源:", slowResources);
+        logger.warn("偵測到載入較慢的資源:", slowResources);
         this.metrics.slowResources = slowResources;
       }
     });
@@ -175,7 +178,7 @@ class PerformanceMonitor {
   monitorMemoryUsage() {
     if (!this.isMonitoring || !performance.memory) return;
 
-    setInterval(() => {
+    this.memoryIntervalId = setInterval(() => {
       const memInfo = {
         used: performance.memory.usedJSHeapSize, // 已用記憶體
         total: performance.memory.totalJSHeapSize, // 總分配記憶體
@@ -186,7 +189,7 @@ class PerformanceMonitor {
 
       // 當記憶體使用超過 80% 時警告
       if (memInfo.used / memInfo.limit > 0.8) {
-        console.warn("偵測到高記憶體使用率:", memInfo);
+        logger.warn("偵測到高記憶體使用率:", memInfo);
       }
     }, 10000); // 每 10 秒檢查一次
   }
@@ -212,6 +215,10 @@ class PerformanceMonitor {
         observer.disconnect();
       }
     });
+    if (this.memoryIntervalId) {
+      clearInterval(this.memoryIntervalId);
+      this.memoryIntervalId = null;
+    }
   }
 }
 

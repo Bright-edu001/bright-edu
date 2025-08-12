@@ -7,6 +7,7 @@ import {
   ReCaptchaV3Provider,
   getToken,
 } from "firebase/app-check";
+import logger from "../utils/logger";
 // 如需其他 Firebase 產品，請在此引入對應 SDK
 // 參考官方文件：https://firebase.google.com/docs/web/setup#available-libraries
 // ===== Firebase 設定區塊 =====
@@ -47,7 +48,7 @@ const fetchAppCheckToken = async (retries = 1) => {
     if (retries > 0) {
       setTimeout(() => fetchAppCheckToken(retries - 1), 1000);
     } else {
-      console.error("App Check token fetch failed:", err);
+      logger.error("App Check token fetch failed:", err);
       if (typeof window !== "undefined") {
         alert("驗證服務暫時不可用，請稍後再試。");
       }

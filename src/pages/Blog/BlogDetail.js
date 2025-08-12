@@ -5,6 +5,39 @@ import { BlogContext } from "../../context/BlogContext";
 import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "../../styles/critical.css";
+import sanitizeHtml from "../../utils/sanitizeHtml";
+
+const hashText = (text = "") => {
+  let hash = 0;
+  for (let i = 0; i < text.length; i++) {
+    hash = (hash << 5) - hash + text.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash.toString();
+};
+
+// 遞迴渲染詳細資訊的函式
+const renderDetails = (details, isNested = false) => {
+  return details.map((detail) => {
+    const key = detail.id || hashText(detail.text || JSON.stringify(detail));
+    return (
+      <div key={key} className={`detail-item ${isNested ? "nested" : ""}`}>
+        <p>
+          {detail.icon && <span className="detail-icon">{detail.icon}</span>}
+          {detail.text}
+        </p>
+        {detail.list && (
+          <ul>
+            {detail.list.map((item) => (
+              <li key={hashText(item)}>{item}</li>
+            ))}
+          </ul>
+        )}
+        {detail.subDetails && renderDetails(detail.subDetails, true)}
+      </div>
+    );
+  });
+};
 
 function BlogDetail() {
   const { id } = useParams();
@@ -40,38 +73,6 @@ function BlogDetail() {
     return <div>找不到文章</div>;
   }
 
-  const hashText = (text = "") => {
-    let hash = 0;
-    for (let i = 0; i < text.length; i++) {
-      hash = (hash << 5) - hash + text.charCodeAt(i);
-      hash |= 0;
-    }
-    return hash.toString();
-  };
-
-  // 遞迴渲染詳細資訊的函式
-  const renderDetails = (details, isNested = false) => {
-    return details.map((detail) => {
-      const key = detail.id || hashText(detail.text || JSON.stringify(detail));
-      return (
-        <div key={key} className={`detail-item ${isNested ? "nested" : ""}`}>
-          <p>
-            {detail.icon && <span className="detail-icon">{detail.icon}</span>}
-            {detail.text}
-          </p>
-          {detail.list && (
-            <ul>
-              {detail.list.map((item) => (
-                <li key={hashText(item)}>{item}</li>
-              ))}
-            </ul>
-          )}
-          {detail.subDetails && renderDetails(detail.subDetails, true)}
-        </div>
-      );
-    });
-  };
-
   return (
     <div>
       <MbaAreasHero />
@@ -104,7 +105,7 @@ function BlogDetail() {
                     <h2
                       className="emoji-support"
                       dangerouslySetInnerHTML={{
-                        __html: semesterInfo.title,
+                        __html: sanitizeHtml(semesterInfo.title),
                       }}
                     />
                     {renderDetails(semesterInfo.details)}
