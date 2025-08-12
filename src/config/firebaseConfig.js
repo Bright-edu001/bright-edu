@@ -2,7 +2,11 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
-import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import {
+  initializeAppCheck,
+  ReCaptchaV3Provider,
+  getToken,
+} from "firebase/app-check";
 // 如需其他 Firebase 產品，請在此引入對應 SDK
 // 參考官方文件：https://firebase.google.com/docs/web/setup#available-libraries
 // ===== Firebase 設定區塊 =====
@@ -34,6 +38,9 @@ const analytics = getAnalytics(app);
 const appCheck = initializeAppCheck(app, {
   provider: new ReCaptchaV3Provider("6Ldx4aErAAAAACXAX0jz7DtlCP4_Z01gJ0Mvrnrh"),
   isTokenAutoRefreshEnabled: true, // 建議開啟自動刷新
+});
+getToken(appCheck).catch((err) => {
+  console.error("App Check token fetch failed:", err);
 });
 
 // ===== 效能監控（Performance Monitoring）初始化 =====
