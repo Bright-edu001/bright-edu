@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { App } from "antd";
+import { App, Button } from "antd";
 import { request } from "../utils/request";
 import logger from "../utils/logger";
 
@@ -44,6 +44,14 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
     setSubmitting(true);
     setResult(null);
 
+    const key = "formSubmit";
+    // 一開始即顯示送出訊息，不需等待完整回應
+    message.loading({
+      content: "已送出，我們將盡快回覆",
+      key,
+      duration: 0,
+    });
+
     logger.log("=== 開始送出表單 ===");
     logger.log("表單資料:", form);
 
@@ -82,7 +90,10 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
       // 由於使用 no-cors 模式，我們無法確定伺服器是否真的成功處理了請求
       // 但如果沒有拋出錯誤，通常表示請求已發送
       if (success || response) {
-        message.success("表單已送出，我們會盡快與您聯絡！");
+        message.success({
+          content: "表單已送出，我們會盡快與您聯絡！",
+          key,
+        });
         setForm(initialState);
         setResult({
           success: true,
@@ -94,10 +105,26 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
       }
     } catch (error) {
       logger.error("提交表單時發生錯誤:", error);
-      message.error(`送出失敗：${error.message}`);
+      message.error({
+        content: (
+          <>
+            送出失敗：{error.message}
+            <Button
+              type="link"
+              size="small"
+              onClick={() => handleSubmit({ preventDefault: () => {} })}
+            >
+              重新送出
+            </Button>
+          </>
+        ),
+        key,
+        duration: 0,
+      });
       setResult({
         success: false,
         error: error.message,
+        retry: true,
       });
     } finally {
       setSubmitting(false);

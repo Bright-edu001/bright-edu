@@ -9,6 +9,8 @@ jest.mock("antd", () => ({
   App: {
     useApp: jest.fn(),
   },
+  // Mock Button component used in hook's error message
+  Button: () => null,
 }));
 
 // Mock request 工具，避免實際發送 API 請求
@@ -23,6 +25,7 @@ describe("useFormSubmit", () => {
     error: jest.fn(),
     success: jest.fn(),
     warning: jest.fn(),
+    loading: jest.fn(),
   };
 
   // 每次測試前重置 mock 狀態，並讓 useApp 回傳 message mock
