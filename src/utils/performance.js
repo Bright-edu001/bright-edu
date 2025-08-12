@@ -1,3 +1,5 @@
+import logger from "./logger";
+
 // CSS 動態載入優化工具
 const loadedStyles = new Set();
 
@@ -14,6 +16,9 @@ export const loadStylesheet = (stylePath) => {
         loadedStyles.add(stylePath);
         resolve();
       })
-      .catch(reject);
+      .catch((err) => {
+        logger.error("Failed to load style", err);
+        reject(err || new Error("Failed to load style"));
+      });
   });
 };

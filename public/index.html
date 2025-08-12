@@ -25,11 +25,15 @@
         }
       };
       window.addEventListener("unhandledrejection", function (e) {
-        if (
-          e.reason &&
-          e.reason.message &&
-          e.reason.message.includes("readonly property")
-        ) {
+        if (e.reason != null) {
+          console.error(e.reason);
+          if (
+            e.reason.message &&
+            e.reason.message.includes("readonly property")
+          ) {
+            e.preventDefault();
+          }
+        } else {
           e.preventDefault();
         }
       });
