@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { App, Button } from "antd";
+import { App } from "antd";
 import { request } from "../utils/request";
 import logger from "../utils/logger";
 
@@ -10,6 +10,8 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
   const [form, setForm] = useState(initialState);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState(null);
+
+  // 使用 utils/request 的封裝，這裡不直接讀取環境變數端點
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,95 +42,53 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
-
     setSubmitting(true);
     setResult(null);
 
-    const key = "formSubmit";
-    // 一開始即顯示送出訊息，不需等待完整回應
+    const payload = { ...form };
+    logger.log("開始送出表單:", payload);
+
+    // 立即顯示處理中提示（使用同一個 key，後續更新為成功/失敗）
+    const messageKey = "contact-form-submit";
     message.loading({
-      content: "已送出，我們將盡快回覆",
-      key,
+      content: "已收到，正在處理…",
+      key: messageKey,
       duration: 0,
     });
-
-    logger.log("=== 開始送出表單 ===");
-    logger.log("表單資料:", form);
-
     try {
-      let response;
-      let success = false;
-
-      // 先嘗試 POST 請求
+      // 先嘗試以 POST 送出
+      const postRes = await request("POST", payload);
+      logger.log("POST 成功:", postRes);
+      setForm(initialState);
+      setResult({ success: true, method: "POST", response: postRes });
+      message.success({
+        content: "表單已送出，我們會盡快與您聯絡！",
+        key: messageKey,
+        duration: 2,
+      });
+    } catch (postErr) {
+      logger.error("POST 失敗，改以 GET 重試:", postErr);
       try {
-        logger.log("嘗試 POST 請求...");
-        response = await request("POST", form);
-        logger.log("POST 請求回應:", response);
-
-        if (response && response.result === "success") {
-          success = true;
-        }
-      } catch (postError) {
-        logger.log("POST 請求失敗:", postError);
-      }
-
-      // 如果 POST 失敗，嘗試 GET 請求
-      if (!success) {
-        try {
-          logger.log("POST 失敗，嘗試 GET 請求...");
-          response = await request("GET", form);
-          logger.log("GET 請求回應:", response);
-
-          if (response && response.result === "success") {
-            success = true;
-          }
-        } catch (getError) {
-          logger.log("GET 請求也失敗:", getError);
-        }
-      }
-
-      // 由於使用 no-cors 模式，我們無法確定伺服器是否真的成功處理了請求
-      // 但如果沒有拋出錯誤，通常表示請求已發送
-      if (success || response) {
+        const getRes = await request("GET", payload);
+        logger.log("GET 重試成功:", getRes);
+        setForm(initialState);
+        setResult({ success: true, method: "GET", response: getRes });
         message.success({
           content: "表單已送出，我們會盡快與您聯絡！",
-          key,
+          key: messageKey,
+          duration: 2,
         });
-        setForm(initialState);
-        setResult({
-          success: true,
-          data: response,
-          note: "由於技術限制，無法確認伺服器處理狀態，但請求已發送",
+      } catch (getErr) {
+        logger.error("GET 重試也失敗:", getErr);
+        setResult({ success: false, error: getErr?.message });
+        message.error({
+          content: "送出失敗，請稍後再試或改用其他聯絡方式。",
+          key: messageKey,
+          duration: 3,
         });
-      } else {
-        throw new Error("請求發送失敗");
       }
-    } catch (error) {
-      logger.error("提交表單時發生錯誤:", error);
-      message.error({
-        content: (
-          <>
-            送出失敗：{error.message}
-            <Button
-              type="link"
-              size="small"
-              onClick={() => handleSubmit({ preventDefault: () => {} })}
-            >
-              重新送出
-            </Button>
-          </>
-        ),
-        key,
-        duration: 0,
-      });
-      setResult({
-        success: false,
-        error: error.message,
-        retry: true,
-      });
     } finally {
       setSubmitting(false);
-      logger.log("=== 表單送出完成 ===");
     }
   };
 

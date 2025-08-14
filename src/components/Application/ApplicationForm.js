@@ -51,7 +51,13 @@ function ApplicationForm({ showCondition = true, customStyles }) {
         onChange={handleChange}
         required
       ></textarea>
-      <button type="submit" disabled={submitting}>
+      <button
+        type="submit"
+        disabled={submitting}
+        aria-busy={submitting}
+        aria-disabled={submitting}
+      >
+        {submitting && <span className="spinner" aria-hidden="true" />}
         {submitting ? "送出中..." : "確定送出"}
       </button>
     </StyledApplicationForm>
