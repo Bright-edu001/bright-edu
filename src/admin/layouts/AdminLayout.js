@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import {
   DesktopOutlined,
-  FileOutlined,
   PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme, Button } from "antd";
@@ -21,16 +18,6 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem(<Link to=".">儀表板</Link>, "1", <PieChartOutlined />),
   getItem(<Link to="products">文章管理</Link>, "2", <DesktopOutlined />),
-  getItem("用戶", "sub1", <UserOutlined />, [
-    getItem(<span>Tom</span>, "3"),
-    getItem(<span>Bill</span>, "4"),
-    getItem(<span>Alex</span>, "5"),
-  ]),
-  getItem("團隊", "sub2", <TeamOutlined />, [
-    getItem(<span>Team 1</span>, "6"),
-    getItem(<span>Team 2</span>, "8"),
-  ]),
-  getItem("檔案", "9", <FileOutlined />),
 ];
 
 const AdminLayout = () => {
@@ -89,7 +76,7 @@ const AdminLayout = () => {
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb
             style={{ margin: "16px 0" }}
-            items={[{ title: "User" }, { title: "Bill" }]}
+            items={[{ title: "User" }]}
           />
           <div
             style={{

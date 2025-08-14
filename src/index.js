@@ -14,7 +14,8 @@ import logger from "./utils/logger";
 import { analytics } from "./config/firebaseConfig";
 import { logEvent } from "firebase/analytics";
 
-// ===== 匯入關鍵 CSS（首屏優化） =====
+// ===== 全域字體與關鍵 CSS =====
+import "./styles/fonts.css";
 import "./styles/critical.css";
 
 // ===== 初始化 Sentry（僅限生產環境） =====

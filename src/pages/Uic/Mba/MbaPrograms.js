@@ -39,16 +39,22 @@ function MbaPrograms() {
             <img
               src={getImageUrl(`/images/Uic/Mba/52193187_l-1024x683-1.webp`)}
               alt="Program Highlight"
+              width="800"
+              height="542"
             />
           </div>
           <div className="img-right">
             <img
               src={getImageUrl(`/images/Uic/Mba/39703687_l-1024x684-1.webp`)}
               alt="Program Highlight"
+              width="400"
+              height="267"
             />
             <img
               src={getImageUrl(`/images/Uic/Mba/70791790_l-1024x684-1.webp`)}
               alt="Program Highlight"
+              width="400"
+              height="267"
             />
           </div>
         </div>

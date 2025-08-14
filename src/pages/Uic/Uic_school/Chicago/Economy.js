@@ -27,6 +27,8 @@ const Economy = () => {
                 <img
                   src={getImageUrl("/images/Uic/Chicago/CME.webp")}
                   alt="芝加哥商業交易所集團"
+                  width="721"
+                  height="430"
                 />
               </div>
               <div className="cme-title-container">

@@ -16,6 +16,8 @@ function AacsbPage() {
                 src={getImageUrl(`/images/Uic/ranking/Aacsb.webp`)}
                 alt="AACSB Logo"
                 loading="lazy"
+                width="180"
+                height="181"
               />
             </div>
             <div className={styles.aacsbTitle}>

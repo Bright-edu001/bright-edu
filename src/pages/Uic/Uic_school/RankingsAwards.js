@@ -31,6 +31,8 @@ const RankingsAwards = () => {
                 src={getImageUrl(`/images/Uic/ranking/Aacsb.webp`)}
                 alt="AACSB Logo"
                 loading="lazy"
+                width="180"
+                height="181"
               />
             </div>
             <div className="aacsb-title">
@@ -81,6 +83,8 @@ const RankingsAwards = () => {
                 )}
                 alt="HEED Excellence Award"
                 loading="lazy"
+                width="180"
+                height="180"
               />
             </div>
             <div className="diversity-title">
@@ -119,6 +123,8 @@ const RankingsAwards = () => {
                 src={getImageUrl(`/images/Uic/ranking/Ranking.webp`)}
                 alt="UIC Rankings"
                 loading="lazy"
+                width="350"
+                height="103"
               />
             </div>
             <div className="rankings-title">

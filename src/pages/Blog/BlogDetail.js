@@ -82,6 +82,8 @@ function BlogDetail() {
             className="blog-detail-image"
             src={blog.image}
             alt={blog.title}
+            width="1000"
+            height="571"
           />
           <h1 className="blog-detail-title emoji-support">{blog.title}</h1>
           {/* 分類標籤：改用Link以提供href */}

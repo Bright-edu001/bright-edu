@@ -60,6 +60,8 @@ function RankingPage() {
                 src={getImageUrl(`/images/Uic/ranking/Ranking.webp`)}
                 alt="UIC Rankings"
                 loading="lazy"
+                width="350"
+                height="103"
               />
             </div>
             <div className={styles.rankingsTitle}>

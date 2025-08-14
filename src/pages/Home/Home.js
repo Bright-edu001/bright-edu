@@ -75,6 +75,8 @@ function Home() {
                     "/images/home/網站 - Rankings (透明框)_01.webp"
                   )}
                   alt="UIC背景圖"
+                  width="657"
+                  height="407"
                 />
                 <h3>UIC Rankings</h3>
                 <ul>
@@ -134,16 +136,8 @@ function Home() {
                     "/images/home/網站 - Rankings (透明框)_02.webp"
                   )}
                   alt="MSU背景圖"
-                  style={{
-                    opacity: 0.55,
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    width: "100%",
-                    height: "100%",
-                    zIndex: 0,
-                    pointerEvents: "none",
-                  }}
+                  width="657"
+                  height="407"
                 />
                 <h3>MSU Rankings</h3>
                 <ul>

@@ -25,6 +25,8 @@
       border-bottom: 1px solid $color-uic;
     }
     .section-content {
+      min-height: 5rem;
+      position: relative;
       p {
         font-size: $font-size-md;
         color: $color-black;
@@ -67,6 +69,25 @@
     font-weight: $font-weight-bold;
     color: $color-black;
     margin-bottom: 7rem;
+    margin-top: $spacing-xl;
+  }
+  .skeleton-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: $color-gray-lightest;
+    animation: skeleton-loading 1.2s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.6;
+    }
   }
 }
 
