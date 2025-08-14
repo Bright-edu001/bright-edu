@@ -24,14 +24,21 @@ import {
   updateArticle,
   deleteArticle,
 } from "../data/blogApi";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import { app } from "../../config/firebaseConfig";
 import logger from "../../utils/logger";
 
 const { Title } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
 
-const storage = getStorage();
+const storage = getStorage(app);
 
 const ProductsPage = () => {
   const [articles, setArticles] = useState([]);
@@ -281,7 +288,7 @@ const ProductsPage = () => {
         }
         if (filePath) {
           const oldRef = ref(storage, filePath);
-          await oldRef.delete();
+          await deleteObject(oldRef);
         }
       } catch (err) {
         // 刪除失敗不影響主流程

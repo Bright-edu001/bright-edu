@@ -2,6 +2,7 @@ import React from "react";
 import "./Chicago.scss";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import getImageUrl from "../../../utils/getImageUrl";
 
 const Chicago = () => {
   return (
@@ -32,7 +33,7 @@ const Chicago = () => {
               <div className="history-image">
                 <img
                   className="responsive-img"
-                  src="https://imgur.com/GPs7TSN.png"
+                  src={getImageUrl("/images/Uic/History.webp")}
                   alt="芝加哥歷史發展"
                   loading="lazy"
                 />
@@ -85,7 +86,7 @@ const Chicago = () => {
               <div className="transport-image">
                 <img
                   className="responsive-img"
-                  src="https://imgur.com/Xbnfhxb.png"
+                  src={getImageUrl("/images/Uic/Transportation.webp")}
                   alt="芝加哥交通"
                   loading="lazy"
                 />

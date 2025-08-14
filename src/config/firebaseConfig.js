@@ -28,22 +28,38 @@ const firebaseConfig = {
 // ===== Firebase 初始化區塊 =====
 // 初始化 Firebase 應用程式
 const app = initializeApp(firebaseConfig);
-// 取得 Firestore 資料庫實例，供全站資料存取
+// ===== App Check（reCAPTCHA v3）初始化 =====
+// 初始化 App Check，防止未授權存取 Firebase 服務
+// 請確保此 site key 來自 Firebase Console > App Check 的 Web reCAPTCHA v3 提供者
+let appCheck;
+try {
+  const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+  if (!siteKey) {
+    // 若未設定，會導致所有請求為「未驗證」。
+    logger.warn(
+      "[AppCheck] 缺少 REACT_APP_RECAPTCHA_SITE_KEY，App Check 未啟用。"
+    );
+  } else if (typeof window !== "undefined") {
+    appCheck = initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(siteKey),
+      isTokenAutoRefreshEnabled: true,
+    });
+  }
+} catch (e) {
+  // 初始化失敗時記錄，但不阻擋應用啟動
+  logger.error("[AppCheck] 初始化失敗: ", e);
+}
+
+// 取得 Firestore 資料庫實例，供全站資料存取（須在 App Check 設定之後）
 const db = getFirestore(app);
 // 取得 Google Analytics 實例（用於網站流量分析）
 const analytics = getAnalytics(app);
-
-// ===== App Check（reCAPTCHA v3）初始化 =====
-// 初始化 App Check，防止未授權存取 Firebase 服務
-// 請確保此 site key 已在 Google reCAPTCHA 註冊並加到 Firebase App Check
-const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider(process.env.REACT_APP_RECAPTCHA_SITE_KEY),
-  isTokenAutoRefreshEnabled: true, // 建議開啟自動刷新
-});
 // 若需要手動取得 App Check token，可呼叫此函式
 const fetchAppCheckToken = async (retries = 1) => {
   try {
-    await getToken(appCheck);
+    if (appCheck) {
+      await getToken(appCheck, /* forceRefresh */ false);
+    }
   } catch (err) {
     if (retries > 0) {
       setTimeout(() => fetchAppCheckToken(retries - 1), 1000);
@@ -75,4 +91,4 @@ if (typeof window !== "undefined") {
 
 // ===== 匯出區塊 =====
 // 匯出 Firestore、效能監控、Analytics、App Check 實例，供其他模組使用
-export { db, perf, analytics, appCheck, fetchAppCheckToken };
+export { app, db, perf, analytics, appCheck, fetchAppCheckToken };

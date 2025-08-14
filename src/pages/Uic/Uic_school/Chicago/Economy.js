@@ -2,6 +2,7 @@ import React from "react";
 import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
 import "./Economy.scss";
+import getImageUrl from "../../../../utils/getImageUrl";
 
 const Economy = () => {
   return (
@@ -24,7 +25,7 @@ const Economy = () => {
             <div className="cme-header-row">
               <div className="cme-image-container">
                 <img
-                  src="https://imgur.com/JDSZDDs.png"
+                  src={getImageUrl("/images/Uic/Chicago/CME.webp")}
                   alt="芝加哥商業交易所集團"
                 />
               </div>
