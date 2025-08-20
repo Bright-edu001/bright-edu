@@ -8,6 +8,28 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import getImageUrl from "../../utils/getImageUrl";
+
+// Helper: convert local /images/... paths to public Firebase Storage URLs
+const convertItemPaths = (item) => {
+  if (!item || typeof item !== "object") return item;
+  const copy = { ...item };
+  if (
+    copy.thumbnail &&
+    typeof copy.thumbnail === "string" &&
+    copy.thumbnail.startsWith("/images/")
+  ) {
+    copy.thumbnail = getImageUrl(copy.thumbnail);
+  }
+  if (
+    copy.image &&
+    typeof copy.image === "string" &&
+    copy.image.startsWith("/images/")
+  ) {
+    copy.image = getImageUrl(copy.image);
+  }
+  return copy;
+};
 
 export async function getAllArticles() {
   const [enrollmentSnap, newsSnap] = await Promise.all([
@@ -24,7 +46,12 @@ export async function getAllArticles() {
     docId: doc.id,
     collection: "news",
   }));
-  return [...enrollmentEvents, ...news].sort((a, b) => a.id - b.id);
+  // Convert any local paths to public URLs so admin UI shows images correctly
+  const all = [
+    ...enrollmentEvents.map(convertItemPaths),
+    ...news.map(convertItemPaths),
+  ];
+  return all.sort((a, b) => a.id - b.id);
 }
 
 export async function getArticle(type, id) {
@@ -32,7 +59,11 @@ export async function getArticle(type, id) {
   const docRef = doc(db, col, id);
   const docSnap = await getDoc(docRef);
   return docSnap.exists()
-    ? { ...docSnap.data(), docId: docSnap.id, collection: col }
+    ? convertItemPaths({
+        ...docSnap.data(),
+        docId: docSnap.id,
+        collection: col,
+      })
     : null;
 }
 

@@ -122,6 +122,19 @@ const ProductsPage = () => {
             borderRadius: 4,
             cursor: "pointer",
           }}
+          onError={(e) => {
+            try {
+              // log the failed URL to help debugging
+              // eslint-disable-next-line no-console
+              console.warn("Thumbnail failed to load:", e?.target?.src);
+              // avoid infinite loop if fallback also fails
+              e.target.onerror = null;
+              // use a fallback image from public/
+              e.target.src = "/B-logo.webp";
+            } catch (err) {
+              // ignore
+            }
+          }}
           onClick={() => window.open(thumbnail, "_blank")}
         />
       ),
@@ -342,7 +355,6 @@ const ProductsPage = () => {
         width={900}
         okText="確認"
         cancelText="取消"
-        destroyOnHidden
       >
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
           <Form.Item
