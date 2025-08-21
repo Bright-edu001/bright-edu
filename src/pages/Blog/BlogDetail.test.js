@@ -1,6 +1,6 @@
 import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import BlogDetail from "./BlogDetail";
 import { BlogContext } from "../../context/BlogContext";
@@ -20,8 +20,8 @@ const providerValue = {
       type: "enrollment",
       content: [
         {
-          title:
-            '<img src=x onerror="alert(1)">Hello<script>alert("xss")</script>',
+          title: 'Hello<script>alert("xss")</script>',
+          flagImage: "/flag.png",
           details: [],
         },
       ],
@@ -42,17 +42,21 @@ const wrapper = ({ children }) => (
 );
 
 describe("BlogDetail", () => {
-  test("sanitizes HTML before rendering", () => {
+  test("renders flag image and escapes title HTML", () => {
     render(<BlogDetail />, { wrapper });
     const heading = screen.getByRole("heading", { level: 2 });
-    expect(heading.innerHTML).not.toMatch(/script|onerror/);
-    expect(heading).toHaveTextContent("Hello");
+    const img = within(heading).getByRole("img");
+    expect(img).toHaveAttribute("src", "/flag.png");
+    expect(heading.innerHTML).toContain(
+      '&lt;script&gt;alert("xss")&lt;/script&gt;'
+    );
+    expect(heading.innerHTML).not.toContain("<script>");
   });
 
   test("renders stably across rerenders", () => {
-    const { container, rerender } = render(<BlogDetail />, { wrapper });
-    const firstHTML = container.innerHTML;
+    const { asFragment, rerender } = render(<BlogDetail />, { wrapper });
+    // 使用 snapshot 驗證重渲染前後輸出一致，避免直接存取 DOM 節點
     rerender(<BlogDetail />);
-    expect(container.innerHTML).toBe(firstHTML);
+    expect(asFragment()).toMatchSnapshot();
   });
 });

@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlogDetail renders stably across rerenders 1`] = `
+<DocumentFragment>
+  <div>
+    <div />
+    <div
+      class="blog-detail-mainrow"
+    >
+      <div
+        class="blog-detail-main"
+      >
+        <img
+          alt="Sample"
+          class="blog-detail-image"
+          height="571"
+          src="img.jpg"
+          width="1000"
+        />
+        <h1
+          class="blog-detail-title emoji-support"
+        >
+          Sample
+        </h1>
+        <a
+          class="blog-detail-category-label"
+          href="/blog?category=enrollment"
+          title="查看招生活動分類"
+        >
+          招生活動
+        </a>
+        <p
+          class="blog-detail-excerpt"
+        >
+          excerpt
+        </p>
+        <div
+          class="blog-detail-content"
+        >
+          <div
+            class="semester-section"
+          >
+            <h2
+              class="emoji-support"
+            >
+              <img
+                alt="flag"
+                class="flag-icon"
+                loading="lazy"
+                src="/flag.png"
+              />
+              Hello&lt;script&gt;alert("xss")&lt;/script&gt;
+            </h2>
+          </div>
+        </div>
+        <a
+          class="blog-back-btn blog-detail-back"
+          href="/blog"
+        >
+          ← 返回部落格
+        </a>
+      </div>
+      <aside
+        class="blog-detail-sidebar"
+      >
+        <div />
+      </aside>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -33,6 +33,7 @@ import {
 } from "firebase/storage";
 import { app } from "../../config/firebaseConfig";
 import logger from "../../utils/logger";
+import IconSelect from "../components/IconSelect";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -223,23 +224,24 @@ const ProductsPage = () => {
   };
 
   const handleSubmit = async (values) => {
-    let processedContent = values.content;
+    const { icon, ...rest } = values;
+    let processedContent = rest.content;
     try {
       if (
-        typeof values.content === "string" &&
-        (values.content.trim().startsWith("{") ||
-          values.content.trim().startsWith("["))
+        typeof rest.content === "string" &&
+        (rest.content.trim().startsWith("{") ||
+          rest.content.trim().startsWith("["))
       ) {
-        processedContent = JSON.parse(values.content);
+        processedContent = JSON.parse(rest.content);
       }
     } catch (e) {
-      processedContent = values.content;
+      processedContent = rest.content;
     }
     const processedValues = {
-      ...values,
+      ...rest,
       content: processedContent,
-      imageWidth: parseInt(values.imageWidth) || 450,
-      imageHeight: parseInt(values.imageHeight) || 300,
+      imageWidth: parseInt(rest.imageWidth) || 450,
+      imageHeight: parseInt(rest.imageHeight) || 300,
     };
     if (editingArticle) {
       const type =
@@ -466,6 +468,10 @@ const ProductsPage = () => {
               <Input type="number" placeholder="300" />
             </Form.Item>
           </Space>
+
+          <Form.Item name="icon" label="Icon">
+            <IconSelect />
+          </Form.Item>
 
           <Form.Item
             name="content"

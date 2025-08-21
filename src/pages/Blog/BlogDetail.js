@@ -5,7 +5,7 @@ import { BlogContext } from "../../context/BlogContext";
 import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "../../styles/critical.css";
-import sanitizeHtml from "../../utils/sanitizeHtml";
+import icons from "../../data/json/icons.json";
 
 const hashText = (text = "") => {
   let hash = 0;
@@ -16,24 +16,28 @@ const hashText = (text = "") => {
   return hash.toString();
 };
 
-// 遞迴渲染詳細資訊的函式
-const renderDetails = (details, isNested = false) => {
-  return details.map((detail) => {
-    const key = detail.id || hashText(detail.text || JSON.stringify(detail));
+// 遞迴渲染內容區塊的函式
+const renderSections = (sections, isNested = false) => {
+  if (!Array.isArray(sections)) return null;
+  return sections.map((item) => {
+    const key = item.id || hashText(item.text || JSON.stringify(item));
     return (
       <div key={key} className={`detail-item ${isNested ? "nested" : ""}`}>
         <p>
-          {detail.icon && <span className="detail-icon">{detail.icon}</span>}
-          {detail.text}
+          {item.icon && (
+            <span className="detail-icon">{icons[item.icon] || item.icon}</span>
+          )}
+          {item.text}
         </p>
-        {detail.list && (
+        {item.list && (
           <ul>
-            {detail.list.map((item) => (
-              <li key={hashText(item)}>{item}</li>
+            {item.list.map((listItem) => (
+              <li key={hashText(listItem)}>{listItem}</li>
             ))}
           </ul>
         )}
-        {detail.subDetails && renderDetails(detail.subDetails, true)}
+        {(item.items && renderSections(item.items, true)) ||
+          (item.subItems && renderSections(item.subItems, true))}
       </div>
     );
   });
@@ -104,17 +108,30 @@ function BlogDetail() {
               : blog.type === "enrollment"
               ? blog.content.map((semesterInfo, index) => (
                   <div key={index} className="semester-section">
-                    <h2
-                      className="emoji-support"
-                      dangerouslySetInnerHTML={{
-                        __html: sanitizeHtml(semesterInfo.title),
-                      }}
-                    />
-                    {renderDetails(semesterInfo.details)}
+                    <h2 className="emoji-support">
+                      {semesterInfo.flagImage && (
+                        <img
+                          src={semesterInfo.flagImage}
+                          alt="flag"
+                          className="flag-icon"
+                          loading="lazy"
+                        />
+                      )}
+                      {semesterInfo.title}
+                    </h2>
+                    {renderSections(
+                      semesterInfo.sections ||
+                        semesterInfo.details ||
+                        semesterInfo.items
+                    )}
                   </div>
                 ))
               : blog.type === "article" && typeof blog.content === "object"
-              ? renderDetails(blog.content.details)
+              ? renderSections(
+                  blog.content.sections ||
+                    blog.content.details ||
+                    blog.content.items
+                )
               : null}
           </div>
           <Link to="/blog" className="blog-back-btn blog-detail-back">

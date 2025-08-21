@@ -4,10 +4,12 @@ import {
   DesktopOutlined,
   PieChartOutlined,
   LogoutOutlined,
+  ContainerOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme, Button } from "antd";
 import DashboardPage from "../pages/DashboardPage";
 import ProductsPage from "../pages/ProductsPage";
+import EnrollmentNewsPage from "../pages/EnrollmentNewsPage";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -18,6 +20,11 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem(<Link to=".">儀表板</Link>, "1", <PieChartOutlined />),
   getItem(<Link to="products">文章管理</Link>, "2", <DesktopOutlined />),
+  getItem(
+    <Link to="enrollment-news">招生活動/最新消息</Link>,
+    "3",
+    <ContainerOutlined />
+  ),
 ];
 
 const AdminLayout = () => {
@@ -89,6 +96,7 @@ const AdminLayout = () => {
             <Routes>
               <Route path="/" element={<DashboardPage />} />
               <Route path="/products" element={<ProductsPage />} />
+              <Route path="/enrollment-news" element={<EnrollmentNewsPage />} />
               {/* 在這裡新增更多後台頁面的路由 */}
             </Routes>
           </div>

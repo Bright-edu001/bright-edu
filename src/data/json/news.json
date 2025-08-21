@@ -10,38 +10,38 @@
     "link": "/blog/5",
     "type": "article",
     "content": {
-      "details": [
+      "sections": [
         {
           "text": "University of Illinois Chicago (UIC)"
         },
         {
-          "icon": "⭐️",
+          "icon": "star",
           "text": "TOP 80",
-          "subDetails": [
+          "items": [
             {
               "text": "2025 Best National University Rankings"
             },
             {
-              "icon": "🎊",
+              "icon": "party",
               "text": "全美百大大學，再次往前挺進2名"
             }
           ]
         },
         {
-          "icon": "⭐️",
+          "icon": "star",
           "text": "TOP 39",
-          "subDetails": [
+          "items": [
             {
               "text": "2025 Top Public Schools"
             },
             {
-              "icon": "🎊",
+              "icon": "party",
               "text": "頂尖公立大學名次再次上升1名"
             }
           ]
         },
         {
-          "icon": "👉",
+          "icon": "point",
           "text": "想了解UIC一年制MBA課程的同學，歡迎聯繫我們或合作顧問機構喔"
         },
         {
@@ -61,7 +61,7 @@
     "link": "/blog/6",
     "type": "article",
     "content": {
-      "details": [
+      "sections": [
         {
           "text": "U.S. News & World Report 公布排名"
         },
@@ -69,9 +69,9 @@
           "text": "University of Illinois Chicago (UIC)"
         },
         {
-          "icon": "⭐️",
+          "icon": "star",
           "text": "TOP 97",
-          "subDetails": [
+          "items": [
             {
               "text": "2023 Top Public Schools"
             },
@@ -79,26 +79,26 @@
               "text": "2023 Best National University Rankings"
             },
             {
-              "icon": "🎊",
+              "icon": "party",
               "text": "全美百大大學"
             }
           ]
         },
         {
-          "icon": "⭐️",
+          "icon": "star",
           "text": "TOP 42",
-          "subDetails": [
+          "items": [
             {
               "text": "2023 Top Public Schools"
             },
             {
-              "icon": "🎊",
+              "icon": "party",
               "text": "頂尖公立大學名次再次挺進4名"
             }
           ]
         },
         {
-          "icon": "👉",
+          "icon": "point",
           "text": "想了解UIC一年制MBA課程的同學，歡迎來電或來信聯繫我們!"
         }
       ]

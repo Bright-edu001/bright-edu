@@ -28,6 +28,9 @@ export const processBlogData = (data) => {
     if (item.image && item.image.startsWith("/images/")) {
       item.image = getImageUrl(item.image);
     }
+    if (item.flagImage && item.flagImage.startsWith("/images/")) {
+      item.flagImage = getImageUrl(item.flagImage);
+    }
     if (item.title) {
       item.title = replaceInlineImg(item.title);
     }
