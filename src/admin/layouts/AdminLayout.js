@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import {
   DesktopOutlined,
   PieChartOutlined,
   LogoutOutlined,
-  ContainerOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme, Button } from "antd";
 import DashboardPage from "../pages/DashboardPage";
-import ProductsPage from "../pages/ProductsPage";
-import EnrollmentNewsPage from "../pages/EnrollmentNewsPage";
+import ArticlesPage from "../pages/ArticlesPage";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -18,17 +22,14 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem(<Link to=".">儀表板</Link>, "1", <PieChartOutlined />),
-  getItem(<Link to="products">文章管理</Link>, "2", <DesktopOutlined />),
-  getItem(
-    <Link to="enrollment-news">招生活動/最新消息</Link>,
-    "3",
-    <ContainerOutlined />
-  ),
+  getItem(<Link to=".">儀表板</Link>, "dashboard", <PieChartOutlined />),
+  getItem(<Link to="articles">文章管理</Link>, "articles", <DesktopOutlined />),
+  // 依需求暫時移除「招生活動/最新消息」
 ];
 
 const AdminLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -57,7 +58,11 @@ const AdminLayout = () => {
         />
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
+          selectedKeys={
+            location.pathname.includes("/articles")
+              ? ["articles"]
+              : ["dashboard"]
+          }
           mode="inline"
           items={items}
         />
@@ -83,7 +88,14 @@ const AdminLayout = () => {
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb
             style={{ margin: "16px 0" }}
-            items={[{ title: "User" }]}
+            items={[
+              { title: "後台" },
+              {
+                title: location.pathname.includes("/articles")
+                  ? "文章管理"
+                  : "儀表板",
+              },
+            ]}
           />
           <div
             style={{
@@ -95,8 +107,7 @@ const AdminLayout = () => {
           >
             <Routes>
               <Route path="/" element={<DashboardPage />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/enrollment-news" element={<EnrollmentNewsPage />} />
+              <Route path="/articles" element={<ArticlesPage />} />
               {/* 在這裡新增更多後台頁面的路由 */}
             </Routes>
           </div>

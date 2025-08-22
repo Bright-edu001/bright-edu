@@ -41,7 +41,7 @@ const { Option } = Select;
 
 const storage = getStorage(app);
 
-const ProductsPage = () => {
+const ArticlesPage = () => {
   const [articles, setArticles] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isViewModalVisible, setIsViewModalVisible] = useState(false);
@@ -125,16 +125,11 @@ const ProductsPage = () => {
           }}
           onError={(e) => {
             try {
-              // log the failed URL to help debugging
               // eslint-disable-next-line no-console
               console.warn("Thumbnail failed to load:", e?.target?.src);
-              // avoid infinite loop if fallback also fails
               e.target.onerror = null;
-              // use a fallback image from public/
               e.target.src = "/B-logo.webp";
-            } catch (err) {
-              // ignore
-            }
+            } catch (err) {}
           }}
           onClick={() => window.open(thumbnail, "_blank")}
         />
@@ -165,7 +160,7 @@ const ProductsPage = () => {
           <Popconfirm
             title="確認刪除"
             description="您確定要刪除這篇文章嗎？"
-            onConfirm={() => handleDelete(record.id)}
+            onConfirm={() => handleDelete(record.docId ?? record.id)}
             okText="確認"
             cancelText="取消"
           >
@@ -187,7 +182,6 @@ const ProductsPage = () => {
   const handleEdit = (article) => {
     setEditingArticle(article);
 
-    // 處理不同類型的 content 格式
     let contentValue = article.content;
     if (typeof article.content === "object") {
       contentValue = JSON.stringify(article.content, null, 2);
@@ -214,12 +208,12 @@ const ProductsPage = () => {
     setIsViewModalVisible(true);
   };
 
-  const handleDelete = async (id) => {
-    const article = articles.find((a) => a.id === id);
+  const handleDelete = async (key) => {
+    const article = articles.find((a) => a.docId === key || a.id === key);
     if (!article) return;
-    const type = article.type === "article" ? "news" : "enrollmentEvents";
+    const type = article.type === "article" ? "article" : "enrollment";
     await deleteArticle(type, article.docId);
-    setArticles((prev) => prev.filter((a) => a.id !== id));
+    setArticles((prev) => prev.filter((a) => a.docId !== article.docId));
     message.success("文章已刪除");
   };
 
@@ -244,8 +238,7 @@ const ProductsPage = () => {
       imageHeight: parseInt(rest.imageHeight) || 300,
     };
     if (editingArticle) {
-      const type =
-        editingArticle.type === "article" ? "news" : "enrollmentEvents";
+      const type = editingArticle.type === "article" ? "article" : "enrollment";
       await updateArticle(type, editingArticle.docId, processedValues);
       setArticles((prev) =>
         prev.map((a) =>
@@ -255,7 +248,7 @@ const ProductsPage = () => {
       message.success("文章已更新");
     } else {
       const type =
-        processedValues.type === "article" ? "news" : "enrollmentEvents";
+        processedValues.type === "article" ? "article" : "enrollment";
       const newArticle = await createArticle(type, processedValues);
       setArticles((prev) => [...prev, newArticle]);
       message.success("文章已新增");
@@ -274,30 +267,23 @@ const ProductsPage = () => {
     setViewingArticle(null);
   };
 
-  // 新增上傳檔案的處理函式
   const handleFileUpload = async (file, field) => {
-    // 取得舊檔案網址
     const oldUrl = form.getFieldValue(field);
-    // 上傳新檔案
     const storageRef = ref(storage, `blog/${Date.now()}_${file.name}`);
     await uploadBytes(storageRef, file);
     const url = await getDownloadURL(storageRef);
     form.setFieldsValue({ [field]: url });
     message.success(`${field === "thumbnail" ? "縮圖" : "大圖"}上傳成功`);
 
-    // 刪除舊檔案（如果有）
     if (oldUrl) {
       try {
-        // 取得 Firebase Storage 路徑
         const matches = oldUrl.match(/\/o\/([^?]+)\?/);
         let filePath = null;
         if (matches && matches[1]) {
           filePath = decodeURIComponent(matches[1]);
         } else {
-          // 兼容新版 Firebase Storage 下載網址
           const urlObj = new URL(oldUrl);
           const pathname = urlObj.pathname;
-          // /v0/b/{bucket}/o/{path}
           const parts = pathname.split("/o/");
           if (parts.length === 2) filePath = decodeURIComponent(parts[1]);
         }
@@ -306,7 +292,6 @@ const ProductsPage = () => {
           await deleteObject(oldRef);
         }
       } catch (err) {
-        // 刪除失敗不影響主流程
         logger.warn("刪除舊檔案失敗", err);
       }
     }
@@ -338,7 +323,7 @@ const ProductsPage = () => {
       <Table
         columns={columns}
         dataSource={articles}
-        rowKey="id"
+        rowKey={(record) => record.id ?? record.docId}
         pagination={{
           pageSize: 10,
           showSizeChanger: true,
@@ -348,7 +333,6 @@ const ProductsPage = () => {
         scroll={{ x: 1000 }}
       />
 
-      {/* 新增/編輯文章 Modal */}
       <Modal
         title={editingArticle ? "編輯文章" : "新增文章"}
         open={isModalVisible}
@@ -416,7 +400,6 @@ const ProductsPage = () => {
               }}
             />
           </Form.Item>
-          {/* 隱藏欄位讓 Form 拿到值 */}
           <Form.Item
             name="thumbnail"
             style={{ display: "none" }}
@@ -442,7 +425,6 @@ const ProductsPage = () => {
               }}
             />
           </Form.Item>
-          {/* 隱藏欄位讓 Form 拿到值 */}
           <Form.Item
             name="image"
             style={{ display: "none" }}
@@ -483,7 +465,6 @@ const ProductsPage = () => {
         </Form>
       </Modal>
 
-      {/* 查看文章 Modal */}
       <Modal
         title="文章內容"
         open={isViewModalVisible}
@@ -555,4 +536,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default ArticlesPage;

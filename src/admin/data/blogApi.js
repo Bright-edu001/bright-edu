@@ -36,22 +36,28 @@ export async function getAllArticles() {
     getDocs(collection(db, "enrollmentEvents")),
     getDocs(collection(db, "news")),
   ]);
-  const enrollmentEvents = enrollmentSnap.docs.map((doc) => ({
-    ...doc.data(),
-    docId: doc.id,
-    collection: "enrollmentEvents",
-  }));
-  const news = newsSnap.docs.map((doc) => ({
-    ...doc.data(),
-    docId: doc.id,
-    collection: "news",
-  }));
+  const enrollmentEvents = enrollmentSnap.docs.map((d) =>
+    convertItemPaths({
+      ...d.data(),
+      // 確保基本欄位存在
+      type: d.data()?.type || "enrollment",
+      category: d.data()?.category || "enrollment",
+      docId: d.id,
+      collection: "enrollmentEvents",
+    })
+  );
+  const news = newsSnap.docs.map((d) =>
+    convertItemPaths({
+      ...d.data(),
+      type: d.data()?.type || "article",
+      category: d.data()?.category || "news",
+      docId: d.id,
+      collection: "news",
+    })
+  );
   // Convert any local paths to public URLs so admin UI shows images correctly
-  const all = [
-    ...enrollmentEvents.map(convertItemPaths),
-    ...news.map(convertItemPaths),
-  ];
-  return all.sort((a, b) => a.id - b.id);
+  const all = [...enrollmentEvents, ...news];
+  return all.sort((a, b) => (Number(a?.id) || 0) - (Number(b?.id) || 0));
 }
 
 export async function getArticle(type, id) {
@@ -68,12 +74,14 @@ export async function getArticle(type, id) {
 }
 
 export async function createArticle(type, data) {
+  // type 應為 'enrollment' 或 'article'
   const col = type === "enrollment" ? "enrollmentEvents" : "news";
   const docRef = await addDoc(collection(db, col), data);
   return { ...data, docId: docRef.id, collection: col };
 }
 
 export async function updateArticle(type, docId, data) {
+  // type 應為 'enrollment' 或 'article'
   const col = type === "enrollment" ? "enrollmentEvents" : "news";
   const ref = doc(db, col, docId);
   await updateDoc(ref, data);
@@ -81,6 +89,7 @@ export async function updateArticle(type, docId, data) {
 }
 
 export async function deleteArticle(type, docId) {
+  // type 應為 'enrollment' 或 'article'
   const col = type === "enrollment" ? "enrollmentEvents" : "news";
   const ref = doc(db, col, docId);
   await deleteDoc(ref);
