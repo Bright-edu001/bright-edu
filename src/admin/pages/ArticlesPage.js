@@ -33,7 +33,10 @@ import {
 } from "firebase/storage";
 import { app } from "../../config/firebaseConfig";
 import logger from "../../utils/logger";
-import IconSelect from "../components/IconSelect";
+import StructuredContentEditor from "../components/StructuredContentEditor";
+import StructuredContentViewer from "../components/StructuredContentViewer";
+import NewsContentEditor from "../components/NewsContentEditor";
+import NewsContentViewer from "../components/NewsContentViewer";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -182,11 +185,17 @@ const ArticlesPage = () => {
   const handleEdit = (article) => {
     setEditingArticle(article);
 
+    // 根據分類決定內容格式處理
     let contentValue = article.content;
-    if (typeof article.content === "object") {
-      contentValue = JSON.stringify(article.content, null, 2);
-    } else if (Array.isArray(article.content)) {
-      contentValue = JSON.stringify(article.content, null, 2);
+
+    // 對於結構化內容（招生活動和新聞），保持原始對象格式
+    // 對於一般文章，如果是對象則轉換為 JSON 字串
+    if (article.category !== "enrollment" && article.category !== "news") {
+      if (typeof article.content === "object") {
+        contentValue = JSON.stringify(article.content, null, 2);
+      } else if (Array.isArray(article.content)) {
+        contentValue = JSON.stringify(article.content, null, 2);
+      }
     }
 
     form.setFieldsValue({
@@ -218,24 +227,23 @@ const ArticlesPage = () => {
   };
 
   const handleSubmit = async (values) => {
-    const { icon, ...rest } = values;
-    let processedContent = rest.content;
+    let processedContent = values.content;
     try {
       if (
-        typeof rest.content === "string" &&
-        (rest.content.trim().startsWith("{") ||
-          rest.content.trim().startsWith("["))
+        typeof values.content === "string" &&
+        (values.content.trim().startsWith("{") ||
+          values.content.trim().startsWith("["))
       ) {
-        processedContent = JSON.parse(rest.content);
+        processedContent = JSON.parse(values.content);
       }
     } catch (e) {
-      processedContent = rest.content;
+      processedContent = values.content;
     }
     const processedValues = {
-      ...rest,
+      ...values,
       content: processedContent,
-      imageWidth: parseInt(rest.imageWidth) || 450,
-      imageHeight: parseInt(rest.imageHeight) || 300,
+      imageWidth: parseInt(values.imageWidth) || 450,
+      imageHeight: parseInt(values.imageHeight) || 300,
     };
     if (editingArticle) {
       const type = editingArticle.type === "article" ? "article" : "enrollment";
@@ -451,16 +459,49 @@ const ArticlesPage = () => {
             </Form.Item>
           </Space>
 
-          <Form.Item name="icon" label="Icon">
-            <IconSelect />
-          </Form.Item>
-
           <Form.Item
             name="content"
             label="內容"
             rules={[{ required: true, message: "請輸入文章內容" }]}
           >
-            <TextArea rows={10} placeholder="請輸入文章內容" />
+            <Form.Item
+              noStyle
+              shouldUpdate={(prevValues, currentValues) =>
+                prevValues.type !== currentValues.type ||
+                prevValues.category !== currentValues.category
+              }
+            >
+              {({ getFieldValue, setFieldValue }) => {
+                const articleCategory = getFieldValue("category");
+                const currentContent = getFieldValue("content");
+
+                // 根據分類決定使用哪個編輯器
+                if (articleCategory === "enrollment") {
+                  // 招生活動使用招生活動的結構化編輯器
+                  return (
+                    <StructuredContentEditor
+                      value={currentContent}
+                      onChange={(newContent) => {
+                        setFieldValue("content", newContent);
+                      }}
+                    />
+                  );
+                } else if (articleCategory === "news") {
+                  // 新聞使用新聞的結構化編輯器
+                  return (
+                    <NewsContentEditor
+                      value={currentContent}
+                      onChange={(newContent) => {
+                        setFieldValue("content", newContent);
+                      }}
+                    />
+                  );
+                } else {
+                  // 預設使用一般文字編輯器
+                  return <TextArea rows={10} placeholder="請輸入文章內容" />;
+                }
+              }}
+            </Form.Item>
           </Form.Item>
         </Form>
       </Modal>
@@ -513,21 +554,27 @@ const ArticlesPage = () => {
             </div>
             <div>
               <strong>內容：</strong>
-              <div
-                style={{
-                  whiteSpace: "pre-wrap",
-                  backgroundColor: "#f5f5f5",
-                  padding: "16px",
-                  borderRadius: "4px",
-                  marginTop: "8px",
-                  maxHeight: "400px",
-                  overflow: "auto",
-                }}
-              >
-                {typeof viewingArticle.content === "object"
-                  ? JSON.stringify(viewingArticle.content, null, 2)
-                  : viewingArticle.content}
-              </div>
+              {viewingArticle.category === "enrollment" ? (
+                <StructuredContentViewer content={viewingArticle.content} />
+              ) : viewingArticle.category === "news" ? (
+                <NewsContentViewer content={viewingArticle.content} />
+              ) : (
+                <div
+                  style={{
+                    whiteSpace: "pre-wrap",
+                    backgroundColor: "#f5f5f5",
+                    padding: "16px",
+                    borderRadius: "4px",
+                    marginTop: "8px",
+                    maxHeight: "400px",
+                    overflow: "auto",
+                  }}
+                >
+                  {typeof viewingArticle.content === "object"
+                    ? JSON.stringify(viewingArticle.content, null, 2)
+                    : viewingArticle.content}
+                </div>
+              )}
             </div>
           </div>
         )}
