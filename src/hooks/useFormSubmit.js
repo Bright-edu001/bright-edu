@@ -74,7 +74,7 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
           message: "表單已成功儲存到所有系統",
         });
         message.success({
-          content: "表單已送出並備份完成，我們會盡快與您聯絡！",
+          content: "表單已送出完成，我們會盡快與您聯絡！",
           key: messageKey,
           duration: 2,
         });
