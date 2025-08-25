@@ -106,12 +106,17 @@ export const menuItems = [
       },
       {
         key: "mba",
-        label: (
-          <Link to="/uic-business-school/mba" className="nav-link-color">
-            MBA Programs
-          </Link>
-        ),
+        label: "MBA Programs",
+        path: "/uic-business-school/mba",
         children: [
+          {
+            key: "mba-main",
+            label: (
+              <Link to="/uic-business-school/mba" className="nav-link-color">
+                MBA Programs 主頁
+              </Link>
+            ),
+          },
           {
             key: "areas",
             label: (
@@ -211,7 +216,19 @@ export const menuItems = [
       {
         key: "ms",
         label: "MS Programs",
+        path: "/uic-business-school/ms/msprograms",
         children: [
+          {
+            key: "ms-main",
+            label: (
+              <Link
+                to="/uic-business-school/ms/msprograms"
+                className="nav-link-color"
+              >
+                MS Programs 主頁
+              </Link>
+            ),
+          },
           {
             key: "ms-finance",
             label: (

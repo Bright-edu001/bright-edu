@@ -87,6 +87,7 @@
     color: $color-nav; // Using variable from _variables.scss
     font-size: 18px !important;
     font-weight: 700 !important;
+    cursor: pointer;
 
     &:hover {
       color: $color-uic; // Using variable from _variables.scss
@@ -96,6 +97,11 @@
   .ant-menu-submenu {
     &:hover {
       border-bottom: none !important;
+    }
+
+    // 確保有子選單的項目可以點擊
+    .ant-menu-submenu-title {
+      cursor: pointer;
     }
   }
 

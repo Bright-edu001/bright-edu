@@ -11,6 +11,7 @@ const Header = () => {
     window.innerWidth <= 500 ? "100%" : 500
   );
   const [animationDuration, setAnimationDuration] = useState("0.2s");
+  const [openKeys, setOpenKeys] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -75,6 +76,49 @@ const Header = () => {
     }
   };
 
+  // 處理桌面版子選單的點擊和開關
+  const handleSubMenuClick = ({ key }) => {
+    if (openKeys.includes(key)) {
+      setOpenKeys(openKeys.filter((k) => k !== key));
+    } else {
+      setOpenKeys([...openKeys, key]);
+    }
+  };
+
+  // 處理桌面版選單項目點擊 - 需要區分是否有子選單
+  const handleDesktopMenuClick = ({ key, domEvent }) => {
+    const findItem = (items, key) => {
+      for (const item of items) {
+        if (item.key === key) return item;
+        if (item.children) {
+          const found = findItem(item.children, key);
+          if (found) return found;
+        }
+      }
+      return null;
+    };
+
+    const clicked = findItem(menuItems, key);
+
+    // 如果有子選單，則切換開關狀態
+    if (clicked?.children && clicked.children.length > 0) {
+      // 如果點擊的項目有路徑，導航到該頁面
+      if (clicked.path) {
+        navigate(clicked.path);
+      } else {
+        // 否則只是切換子選單開關
+        domEvent.preventDefault();
+        handleSubMenuClick({ key });
+      }
+      return;
+    }
+
+    // 如果沒有子選單但有路徑，直接導航
+    if (clicked?.path) {
+      navigate(clicked.path);
+    }
+  };
+
   // --- 新增：在 Drawer 裡的 Menu，所有 <Link> 點擊都自動關閉 drawer ---
   const mobileMenuItems = useMemo(() => {
     const wrapClose = (items) =>
@@ -119,7 +163,15 @@ const Header = () => {
             </div>
 
             <div className="header-nav">
-              <Menu mode="horizontal" theme="light" items={menuItems} />
+              <Menu
+                mode="horizontal"
+                theme="light"
+                items={menuItems}
+                triggerSubMenuAction="click"
+                openKeys={openKeys}
+                onOpenChange={setOpenKeys}
+                onClick={handleDesktopMenuClick}
+              />
             </div>
 
             <div className="hamburger-menu">
