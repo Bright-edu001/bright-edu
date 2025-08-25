@@ -10,10 +10,12 @@ import {
   DesktopOutlined,
   PieChartOutlined,
   LogoutOutlined,
+  FormOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme, Button } from "antd";
 import DashboardPage from "../pages/DashboardPage";
 import ArticlesPage from "../pages/ArticlesPage";
+import ContactFormsPage from "../pages/ContactFormsPage";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -24,6 +26,11 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem(<Link to=".">儀表板</Link>, "dashboard", <PieChartOutlined />),
   getItem(<Link to="articles">文章管理</Link>, "articles", <DesktopOutlined />),
+  getItem(
+    <Link to="contact-forms">聯絡表單</Link>,
+    "contact-forms",
+    <FormOutlined />
+  ),
   // 依需求暫時移除「招生活動/最新消息」
 ];
 
@@ -61,6 +68,8 @@ const AdminLayout = () => {
           selectedKeys={
             location.pathname.includes("/articles")
               ? ["articles"]
+              : location.pathname.includes("/contact-forms")
+              ? ["contact-forms"]
               : ["dashboard"]
           }
           mode="inline"
@@ -93,6 +102,8 @@ const AdminLayout = () => {
               {
                 title: location.pathname.includes("/articles")
                   ? "文章管理"
+                  : location.pathname.includes("/contact-forms")
+                  ? "聯絡表單"
                   : "儀表板",
               },
             ]}
@@ -108,6 +119,7 @@ const AdminLayout = () => {
             <Routes>
               <Route path="/" element={<DashboardPage />} />
               <Route path="/articles" element={<ArticlesPage />} />
+              <Route path="/contact-forms" element={<ContactFormsPage />} />
               {/* 在這裡新增更多後台頁面的路由 */}
             </Routes>
           </div>

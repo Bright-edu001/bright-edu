@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { App } from "antd";
 import { request } from "../utils/request";
+import { contactService } from "../services/contactService";
 import logger from "../utils/logger";
 
 const DEFAULT_FORM = { name: "", lineId: "", email: "", message: "" };
@@ -55,38 +56,50 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
       key: messageKey,
       duration: 0,
     });
+
     try {
-      // 先嘗試以 POST 送出
-      const postRes = await request("POST", payload);
-      logger.log("POST 成功:", postRes);
+      // 使用新的聯絡服務，同時儲存到 Google Sheets 和 Firestore
+      const results = await contactService.saveToBoth(payload, request);
+
+      logger.log("表單儲存結果:", results);
+
+      // 重置表單
       setForm(initialState);
-      setResult({ success: true, method: "POST", response: postRes });
-      message.success({
-        content: "表單已送出，我們會盡快與您聯絡！",
-        key: messageKey,
-        duration: 2,
-      });
-    } catch (postErr) {
-      logger.error("POST 失敗，改以 GET 重試:", postErr);
-      try {
-        const getRes = await request("GET", payload);
-        logger.log("GET 重試成功:", getRes);
-        setForm(initialState);
-        setResult({ success: true, method: "GET", response: getRes });
+
+      // 根據儲存結果顯示不同訊息
+      if (results.googleSheets.success && results.firestore.success) {
+        setResult({
+          success: true,
+          results,
+          message: "表單已成功儲存到所有系統",
+        });
+        message.success({
+          content: "表單已送出並備份完成，我們會盡快與您聯絡！",
+          key: messageKey,
+          duration: 2,
+        });
+      } else if (results.googleSheets.success || results.firestore.success) {
+        setResult({
+          success: true,
+          results,
+          message: "表單已部分儲存成功",
+        });
         message.success({
           content: "表單已送出，我們會盡快與您聯絡！",
           key: messageKey,
           duration: 2,
         });
-      } catch (getErr) {
-        logger.error("GET 重試也失敗:", getErr);
-        setResult({ success: false, error: getErr?.message });
-        message.error({
-          content: "送出失敗，請稍後再試或改用其他聯絡方式。",
-          key: messageKey,
-          duration: 3,
-        });
+      } else {
+        throw new Error("所有儲存方式都失敗了");
       }
+    } catch (error) {
+      logger.error("表單送出失敗:", error);
+      setResult({ success: false, error: error?.message });
+      message.error({
+        content: "送出失敗，請稍後再試或改用其他聯絡方式。",
+        key: messageKey,
+        duration: 3,
+      });
     } finally {
       setSubmitting(false);
     }

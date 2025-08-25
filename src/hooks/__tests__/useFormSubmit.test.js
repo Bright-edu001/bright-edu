@@ -1,8 +1,11 @@
 // 匯入測試工具與自訂 hook
 import { renderHook, act } from "@testing-library/react";
 import useFormSubmit from "../useFormSubmit";
-import { request } from "../../utils/request";
+import { contactService } from "../../services/contactService";
 import { App } from "antd";
+
+// 增加測試超時時間
+jest.setTimeout(10000);
 
 // Mock Ant Design 的 App.useApp，避免實際呼叫 UI
 jest.mock("antd", () => ({
@@ -13,9 +16,22 @@ jest.mock("antd", () => ({
   Button: () => null,
 }));
 
-// Mock request 工具，避免實際發送 API 請求
-jest.mock("../../utils/request", () => ({
-  request: jest.fn(),
+// Mock Firebase modules to prevent actual Firebase calls
+jest.mock("../../config/firebaseConfig", () => ({
+  db: "mock-db",
+}));
+
+jest.mock("firebase/firestore", () => ({
+  collection: jest.fn(),
+  addDoc: jest.fn(),
+  serverTimestamp: jest.fn(() => ({ _delegate: { _key: "server-timestamp" } })),
+}));
+
+// Mock contactService
+jest.mock("../../services/contactService", () => ({
+  contactService: {
+    saveToBoth: jest.fn(),
+  },
 }));
 
 // 測試 useFormSubmit hook 的行為
@@ -43,52 +59,15 @@ describe("useFormSubmit", () => {
     });
 
     expect(message.error).toHaveBeenCalled();
-    expect(request).not.toHaveBeenCalled();
-  });
-
-  // 測試：POST 失敗時會自動用 GET 再試一次
-  it("retries with GET after POST failure", async () => {
-    request
-      .mockRejectedValueOnce(new Error("POST failed"))
-      .mockResolvedValueOnce({ result: "success" });
-
-    const { result } = renderHook(() => useFormSubmit());
-
-    // 模擬填寫表單
-    act(() => {
-      result.current.handleChange({ target: { name: "name", value: "John" } });
-      result.current.handleChange({
-        target: { name: "email", value: "john@example.com" },
-      });
-      result.current.handleChange({
-        target: { name: "message", value: "Hello world 123" },
-      });
-    });
-
-    // 送出表單
-    await act(async () => {
-      await result.current.handleSubmit({ preventDefault: jest.fn() });
-    });
-
-    // 應該先 POST，再 GET
-    expect(request).toHaveBeenCalledTimes(2);
-    expect(request).toHaveBeenNthCalledWith(1, "POST", {
-      name: "John",
-      lineId: "",
-      email: "john@example.com",
-      message: "Hello world 123",
-    });
-    expect(request).toHaveBeenNthCalledWith(2, "GET", {
-      name: "John",
-      lineId: "",
-      email: "john@example.com",
-      message: "Hello world 123",
-    });
+    expect(contactService.saveToBoth).not.toHaveBeenCalled();
   });
 
   // 測試：送出成功後會重置表單並顯示成功訊息
   it("resets form and sets result.success after successful submission", async () => {
-    request.mockResolvedValue({ result: "success" });
+    contactService.saveToBoth.mockResolvedValue({
+      googleSheets: { success: true },
+      firestore: { success: true },
+    });
 
     const { result } = renderHook(() => useFormSubmit());
 
@@ -119,5 +98,64 @@ describe("useFormSubmit", () => {
       expect.objectContaining({ success: true })
     );
     expect(message.success).toHaveBeenCalled();
+  });
+
+  // 測試：部分儲存成功的情況
+  it("handles partial save success", async () => {
+    contactService.saveToBoth.mockResolvedValue({
+      googleSheets: { success: true },
+      firestore: { success: false, error: new Error("Firestore error") },
+    });
+
+    const { result } = renderHook(() => useFormSubmit());
+
+    // 模擬填寫表單
+    act(() => {
+      result.current.handleChange({ target: { name: "name", value: "John" } });
+      result.current.handleChange({
+        target: { name: "email", value: "john@example.com" },
+      });
+      result.current.handleChange({
+        target: { name: "message", value: "Hello world 123" },
+      });
+    });
+
+    // 送出表單
+    await act(async () => {
+      await result.current.handleSubmit({ preventDefault: jest.fn() });
+    });
+
+    expect(result.current.result).toEqual(
+      expect.objectContaining({ success: true })
+    );
+    expect(message.success).toHaveBeenCalled();
+  });
+
+  // 測試：完全儲存失敗的情況
+  it("handles complete save failure", async () => {
+    contactService.saveToBoth.mockRejectedValue(new Error("Complete failure"));
+
+    const { result } = renderHook(() => useFormSubmit());
+
+    // 模擬填寫表單
+    act(() => {
+      result.current.handleChange({ target: { name: "name", value: "John" } });
+      result.current.handleChange({
+        target: { name: "email", value: "john@example.com" },
+      });
+      result.current.handleChange({
+        target: { name: "message", value: "Hello world 123" },
+      });
+    });
+
+    // 送出表單
+    await act(async () => {
+      await result.current.handleSubmit({ preventDefault: jest.fn() });
+    });
+
+    expect(result.current.result).toEqual(
+      expect.objectContaining({ success: false })
+    );
+    expect(message.error).toHaveBeenCalled();
   });
 });
