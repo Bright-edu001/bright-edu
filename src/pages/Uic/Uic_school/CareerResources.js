@@ -2,6 +2,7 @@ import React from "react";
 import "./CareerResources.scss";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import getImageUrl from "../../../utils/getImageUrl";
 
 function CareerResources() {
   return (
@@ -63,8 +64,10 @@ function CareerResources() {
         <section className="career-process" aria-label="職涯規劃所標準流程">
           <div className="container">
             <img
-              src="https://imgur.com/mKlo3T6.png"
+              src={getImageUrl("/images/Uic/careerprocess.webp")}
               alt="職業發展相關圖片"
+              width="1272"
+              height="320"
             ></img>
             <h3>職涯規劃所標準流程</h3>
             <ul className="career-process-list">

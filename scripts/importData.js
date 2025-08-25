@@ -1,6 +1,8 @@
 const admin = require("firebase-admin");
 const fs = require("fs");
 const path = require("path");
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+const logger = require("../src/utils/logger");
 
 // ---- 請根據您的設定修改以下路徑 ----
 // 您的 JSON 檔案路徑
@@ -24,7 +26,7 @@ const readJsonFile = (filePath) => {
     const data = fs.readFileSync(filePath, "utf8");
     return JSON.parse(data);
   } catch (error) {
-    console.error(`Error reading or parsing file at ${filePath}:`, error);
+    logger.error(`Error reading or parsing file at ${filePath}:`, error);
     return null;
   }
 };
@@ -32,7 +34,7 @@ const readJsonFile = (filePath) => {
 // 將資料上傳到 Firestore 的函式
 const uploadCollection = async (collectionName, data) => {
   if (!data || !Array.isArray(data)) {
-    console.log(`No valid data to upload for ${collectionName}.`);
+    logger.log(`No valid data to upload for ${collectionName}.`);
     return;
   }
 
@@ -49,11 +51,11 @@ const uploadCollection = async (collectionName, data) => {
 
   try {
     await batch.commit();
-    console.log(
+    logger.log(
       `Successfully uploaded ${data.length} documents to ${collectionName} collection!`
     );
   } catch (error) {
-    console.error(`Error uploading data to ${collectionName}:`, error);
+    logger.error(`Error uploading data to ${collectionName}:`, error);
   }
 };
 
@@ -65,4 +67,4 @@ const main = async () => {
   await uploadCollection("news", newsData);
 };
 
-main().catch((error) => console.error("An unexpected error occurred:", error));
+main().catch((error) => logger.error("An unexpected error occurred:", error));

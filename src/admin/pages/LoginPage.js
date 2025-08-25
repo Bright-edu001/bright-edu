@@ -2,13 +2,24 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Card, message } from "antd";
+import CryptoJS from "crypto-js"; // 新增：用於計算 SHA-256
+
+const EXPECTED_USERNAME = "admin";
+// 0000 的 SHA-256 雜湊（開發測試用；正式請改由後端比對）
+const EXPECTED_PASSWORD_HASH =
+  "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0";
 
 const LoginPage = () => {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    // 模擬登入，實際應用應串接 API
-    if (values.username === "admin" && values.password === "0000") {
+    // 前端模擬：用 SHA-256 將使用者輸入的密碼雜湊後比對
+    const inputHash = CryptoJS.SHA256(values.password).toString();
+
+    if (
+      values.username === EXPECTED_USERNAME &&
+      inputHash === EXPECTED_PASSWORD_HASH
+    ) {
       localStorage.setItem("isAuthenticated", "true");
       message.success("登入成功！");
       navigate("/");
@@ -40,7 +51,7 @@ const LoginPage = () => {
           >
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="使用者名稱 (admin)"
+              placeholder="使用者名稱"
             />
           </Form.Item>
           <Form.Item
@@ -50,7 +61,7 @@ const LoginPage = () => {
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
-              placeholder="密碼 (0000)"
+              placeholder="密碼 "
             />
           </Form.Item>
           <Form.Item>

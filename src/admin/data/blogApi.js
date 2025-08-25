@@ -1,6 +1,5 @@
-import { initializeApp } from "firebase/app";
+import { db } from "../../config/firebaseConfig";
 import {
-  getFirestore,
   collection,
   getDocs,
   doc,
@@ -9,36 +8,56 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import getImageUrl from "../../utils/getImageUrl";
 
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+// Helper: convert local /images/... paths to public Firebase Storage URLs
+const convertItemPaths = (item) => {
+  if (!item || typeof item !== "object") return item;
+  const copy = { ...item };
+  if (
+    copy.thumbnail &&
+    typeof copy.thumbnail === "string" &&
+    copy.thumbnail.startsWith("/images/")
+  ) {
+    copy.thumbnail = getImageUrl(copy.thumbnail);
+  }
+  if (
+    copy.image &&
+    typeof copy.image === "string" &&
+    copy.image.startsWith("/images/")
+  ) {
+    copy.image = getImageUrl(copy.image);
+  }
+  return copy;
 };
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 export async function getAllArticles() {
   const [enrollmentSnap, newsSnap] = await Promise.all([
     getDocs(collection(db, "enrollmentEvents")),
     getDocs(collection(db, "news")),
   ]);
-  const enrollmentEvents = enrollmentSnap.docs.map((doc) => ({
-    ...doc.data(),
-    docId: doc.id,
-    collection: "enrollmentEvents",
-  }));
-  const news = newsSnap.docs.map((doc) => ({
-    ...doc.data(),
-    docId: doc.id,
-    collection: "news",
-  }));
-  return [...enrollmentEvents, ...news].sort((a, b) => a.id - b.id);
+  const enrollmentEvents = enrollmentSnap.docs.map((d) =>
+    convertItemPaths({
+      ...d.data(),
+      // 確保基本欄位存在
+      type: d.data()?.type || "enrollment",
+      category: d.data()?.category || "enrollment",
+      docId: d.id,
+      collection: "enrollmentEvents",
+    })
+  );
+  const news = newsSnap.docs.map((d) =>
+    convertItemPaths({
+      ...d.data(),
+      type: d.data()?.type || "article",
+      category: d.data()?.category || "news",
+      docId: d.id,
+      collection: "news",
+    })
+  );
+  // Convert any local paths to public URLs so admin UI shows images correctly
+  const all = [...enrollmentEvents, ...news];
+  return all.sort((a, b) => (Number(a?.id) || 0) - (Number(b?.id) || 0));
 }
 
 export async function getArticle(type, id) {
@@ -46,17 +65,23 @@ export async function getArticle(type, id) {
   const docRef = doc(db, col, id);
   const docSnap = await getDoc(docRef);
   return docSnap.exists()
-    ? { ...docSnap.data(), docId: docSnap.id, collection: col }
+    ? convertItemPaths({
+        ...docSnap.data(),
+        docId: docSnap.id,
+        collection: col,
+      })
     : null;
 }
 
 export async function createArticle(type, data) {
+  // type 應為 'enrollment' 或 'article'
   const col = type === "enrollment" ? "enrollmentEvents" : "news";
   const docRef = await addDoc(collection(db, col), data);
   return { ...data, docId: docRef.id, collection: col };
 }
 
 export async function updateArticle(type, docId, data) {
+  // type 應為 'enrollment' 或 'article'
   const col = type === "enrollment" ? "enrollmentEvents" : "news";
   const ref = doc(db, col, docId);
   await updateDoc(ref, data);
@@ -64,6 +89,7 @@ export async function updateArticle(type, docId, data) {
 }
 
 export async function deleteArticle(type, docId) {
+  // type 應為 'enrollment' 或 'article'
   const col = type === "enrollment" ? "enrollmentEvents" : "news";
   const ref = doc(db, col, docId);
   await deleteDoc(ref);

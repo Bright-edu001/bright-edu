@@ -12,6 +12,7 @@ const buttonData = [
     title: "加入LINE",
     aria: "加入LINE",
     imgSrc: getImageUrl("/images/social_icon/line.webp"),
+    imgAlt: "LINE",
     external: true,
   },
   {

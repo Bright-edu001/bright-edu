@@ -19,6 +19,8 @@ function HeedPage() {
                 )}
                 alt="HEED Excellence Award"
                 loading="lazy"
+                width="180"
+                height="180"
               />
             </div>
             <div className={styles.diversityTitle}>

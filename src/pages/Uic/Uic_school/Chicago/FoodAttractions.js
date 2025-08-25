@@ -2,6 +2,7 @@ import "./FoodAttractions.scss";
 import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
 import InfoCard from "../../../../components/InfoCard/InfoCard";
+import getImageUrl from "../../../../utils/getImageUrl";
 
 function FoodAttractions() {
   return (
@@ -33,7 +34,7 @@ function FoodAttractions() {
               third:
                 "因其上有緊鄰的雙眼和外露的鼻孔，有些人也認為雕塑表現的是一隻狒狒。而畢卡索當年製作此雕塑模型時，也確實稱它為「狒狒頭」。其他人認為雕塑的線條和角度都充滿強烈的畢卡索立體派風格，是一種抽象的表達。也因為這座雕塑是如此妙不可言，它擁有著畢卡索慣有的幽默，任由你自由想像並為它命名。",
             }}
-            imageSrc="https://imgur.com/J3oMA6B.png"
+            imageSrc={getImageUrl("/images/Uic/Chicago/Picasso.webp")}
             imageAlt="畢卡索雕像"
             imagePosition="left"
           />
@@ -48,7 +49,7 @@ function FoodAttractions() {
               third:
                 "在館內，也有透過大量的多媒體影音互動，來詮釋生命的演化，十分具有教育意義。",
             }}
-            imageSrc="https://imgur.com/RexHI7g.png"
+            imageSrc={getImageUrl("/images/Uic/Chicago/FieldMuseum.webp")}
             imageAlt="菲爾德自然史博物館"
             imagePosition="right"
           />
@@ -61,7 +62,7 @@ function FoodAttractions() {
               second:
                 "芝加哥美術館 (The Art Institute of Chicago) 收藏豐富的印象派作品，是除了巴黎羅浮宮之外，在全世界蒐集最多印象派畫家作品的博物館 。",
             }}
-            imageSrc="https://imgur.com/aZ5oFWx.png"
+            imageSrc={getImageUrl("/images/Uic/Chicago/ArtInstitute.webp")}
             imageAlt="芝加哥美術館"
             imagePosition="left"
           />
@@ -71,7 +72,7 @@ function FoodAttractions() {
           <InfoCard
             title="人臉噴泉"
             content="坐落於格蘭特公園內的千禧公園是芝加哥著名且具城市特色的公園。千禧公園原先只是一片停車場，改建好後深受大家喜愛，便有了芝加哥前院之稱。公園共有四大經典區域，在公園內最具特色的則是皇冠噴泉，俗稱人臉噴泉，在噴泉兩側豎立兩座布滿液晶螢幕的牆面，上面有著會不時變換表情的人臉，這些人臉是取自芝加哥市民的真人臉像，也會配合表情吐出水柱，十分逗趣，也非常生動且奇特。"
-            imageSrc="https://imgur.com/i5iBVis.png"
+            imageSrc={getImageUrl("/images/Uic/Chicago/MillenniumPark.webp")}
             imageAlt="千禧公園的人臉噴泉"
             imagePosition="right"
           />
@@ -79,7 +80,7 @@ function FoodAttractions() {
           <InfoCard
             title="雲門"
             content="「雲門」（Cloud Gate）是這顆大豆子的原名，現在大多數人都叫他「The Bean」。大豆子的位置是在芝加哥千禧公園西北角的AT&T廣場上，這件作品也是英國的Anish Kapoor在美國的第一件戶外公共藝術作品。 此作品是用不銹鋼打造，表面採鏡面的處理，將芝加哥獨特的天際線和藍天白雲表現的一覽無遺。遊客們不管從那個角度來觀看這件作品都可以看到三分之二的天空，代表著人們對於自然的嚮往；不僅如此，作者把天上的雲移到了地面，讓人覺得雲朵就在伸手可得的地方。而大豆子的下方向上凹成一個拱門的形狀，讓遊客走進大豆子裡，並且看到鏡中自己的影像和四周的建築融合為一，讓人體驗到和土地的親密感。"
-            imageSrc="https://imgur.com/ZPWcWfX.png"
+            imageSrc={getImageUrl("/images/Uic/Chicago/CloudGate.webp")}
             imageAlt="大豆子"
             imagePosition="left"
           />
@@ -108,7 +109,7 @@ function FoodAttractions() {
               second:
                 "Lou Malnati在1971年開設第一間店，截至2016年已經開設45間分店。他的第一家店開在猶太人區，而開幕日三月十七日為愛爾蘭人的節慶San Patrick's Day。Pizza是典型芝加哥風格，用厚厚的乳酪片以及滿滿的料，使他們的Pizza成為芝加哥地區最出名的披薩店之一 Lou Malnati從小跟著父親在一家披薩店幫忙，也因此得到父親對手工披薩的真傳。在成年之後，決定自己到芝加哥郊區開第一家店，在開幕日成功打響了在芝加哥厚片披薩第一人不敗的名聲。簡單的披薩，對材料不馬虎，麵皮手工打造，看似容易的披薩，其實有著Lou Malnati的堅持。這也是這間家庭餐廳在多年後，仍然維持義大利人家庭的傳統，並成功的移交給他的兒子，繼續在芝加哥地區發展。",
             }}
-            imageSrc="https://imgur.com/y7G2iJb.png"
+            imageSrc={getImageUrl("/images/Uic/Chicago/LouMalnati.webp")}
             imageAlt="Lou Malnati's Pizzeria"
             imagePosition="right"
           />
@@ -127,7 +128,7 @@ function FoodAttractions() {
           <InfoCard
             title="推薦店家：Portillo’s Hot Dog"
             content="Portillo’s Hot Dogs 創立於1963年，從一個小攤販到連鎖店，以多元化的方式來經營, 在美國各地設立不同類型的餐廳。如: 義大利餐廳Luigi House或是專賣早餐和午餐的Honey-Jam Cafe等等。"
-            imageSrc="https://imgur.com/5wjIAah.png"
+            imageSrc={getImageUrl("/images/Uic/Chicago/PortillosHotDog.webp")}
             imageAlt="Portillo’s Hot Dog"
             imagePosition="left"
           />
@@ -135,7 +136,7 @@ function FoodAttractions() {
           <InfoCard
             title="Garrett Popcorn"
             content="於1949年發跡於芝加哥，是芝加哥最具有傳統特色的小吃，在芝加哥有10多家分店，大部分的店都位於Magnificent Mile附近不怕找不到。"
-            imageSrc="https://imgur.com/kF7jNkS.png"
+            imageSrc={getImageUrl("/images/Uic/Chicago/GarrettPopcorn.webp")}
             imageAlt="Garrett Popcorn"
             imagePosition="right"
           />

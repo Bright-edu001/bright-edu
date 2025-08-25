@@ -1,6 +1,7 @@
 import { db } from "../config/firebaseConfig";
 import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
 import getImageUrl from "../utils/getImageUrl";
+import logger from "../utils/logger";
 
 // 處理部落格資料，將圖片路徑轉為公開 URL
 export const processBlogData = (data) => {
@@ -26,6 +27,9 @@ export const processBlogData = (data) => {
     }
     if (item.image && item.image.startsWith("/images/")) {
       item.image = getImageUrl(item.image);
+    }
+    if (item.flagImage && item.flagImage.startsWith("/images/")) {
+      item.flagImage = getImageUrl(item.flagImage);
     }
     if (item.title) {
       item.title = replaceInlineImg(item.title);
@@ -60,7 +64,7 @@ export const getAllBlogPosts = async () => {
     // 招生活動與新聞已經處理過圖片路徑
     return allPosts;
   } catch (error) {
-    console.error("Failed to fetch all blog posts:", error);
+    logger.error("Failed to fetch all blog posts:", error);
     throw error; // 錯誤拋出給呼叫端處理
   }
 };
@@ -75,7 +79,7 @@ export const getEnrollmentEvents = async () => {
     }));
     return processBlogData(events);
   } catch (error) {
-    console.error("Failed to fetch enrollment events:", error);
+    logger.error("Failed to fetch enrollment events:", error);
     throw error;
   }
 };
@@ -90,7 +94,7 @@ export const getNews = async () => {
     }));
     return processBlogData(newsItems);
   } catch (error) {
-    console.error("Failed to fetch news:", error);
+    logger.error("Failed to fetch news:", error);
     throw error;
   }
 };
@@ -114,10 +118,10 @@ export const getBlogPost = async (id) => {
       return processBlogData({ id: docSnap.id, ...docSnap.data() });
     }
 
-    console.log("No such document!");
+    logger.log("No such document!");
     return null;
   } catch (error) {
-    console.error("Error getting document:", error);
+    logger.error("Error getting document:", error);
     throw error;
   }
 };
@@ -135,9 +139,9 @@ export const updateEnrollmentEvent = async (id, data) => {
   try {
     const docRef = doc(db, "enrollmentEvents", String(id));
     await setDoc(docRef, data, { merge: true }); // merge:true 可只更新部分欄位
-    console.log(`文章 ${id} 已更新`);
+    logger.log(`文章 ${id} 已更新`);
   } catch (error) {
-    console.error("更新文章失敗:", error);
+    logger.error("更新文章失敗:", error);
     throw error;
   }
 };
@@ -152,9 +156,9 @@ export const updateNews = async (id, data) => {
   try {
     const docRef = doc(db, "news", String(id));
     await setDoc(docRef, data, { merge: true }); // merge:true 可只更新部分欄位
-    console.log(`news 文章 ${id} 已更新`);
+    logger.log(`news 文章 ${id} 已更新`);
   } catch (error) {
-    console.error("更新 news 文章失敗:", error);
+    logger.error("更新 news 文章失敗:", error);
     throw error;
   }
 };

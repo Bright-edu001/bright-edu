@@ -32,12 +32,16 @@ function DualDegree() {
               "/images/Uic/Mba/photo_6334573812795951537_y.webp"
             )}
             alt="UIC MBA 學生合照 1"
+            width="1200"
+            height="329"
           />
           <img
             src={getImageUrl(
               "/images/Uic/Mba/photo_6334573812795951536_y.webp"
             )}
             alt="UIC MBA 學生合照 2"
+            width="1200"
+            height="329"
           />
         </div>
       </SectionContainer>

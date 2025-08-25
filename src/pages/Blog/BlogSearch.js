@@ -15,7 +15,13 @@ function BlogSection({ items }) {
       <div className="blog-grid">
         {items.map((item) => (
           <Link to={`/blog/${item.id}`} className="blog-card" key={item.id}>
-            <img src={item.image} alt={item.title} className="blog-card-img" />
+            <img
+              src={item.image}
+              alt={item.title}
+              className="blog-card-img"
+              width="473"
+              height="253"
+            />
             <div className="blog-card-content">
               <h3 className="blog-card-title">{item.title}</h3>
               <p className="blog-card-excerpt">{item.excerpt}</p>

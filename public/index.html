@@ -6,7 +6,7 @@
       href="https://firestore.googleapis.com"
       crossorigin
     />
-    <script src="https://www.google.com/recaptcha/api.js?render=6Ldx4aErAAAAACXAX0jz7DtlCP4_Z01gJ0Mvrnrh"></script>
+
     <!-- 提前覆寫並攔截 Safari 結構化資料 extractor 的唯讀屬性錯誤 -->
     <script>
       try {
@@ -130,6 +130,156 @@
       @media (max-width: 768px) {
         .container {
           padding: 0 1rem;
+        }
+      }
+      /* Footer critical layout */
+      .ant-layout-footer {
+        background: #f6f6f9;
+        padding: 1rem 0;
+        transform: translateZ(0);
+      }
+
+      .ant-layout-footer .container {
+        width: 100%;
+        padding: 0;
+      }
+
+      @media screen and (max-width: 1024px) {
+        .ant-layout-footer .container {
+          margin-left: 0;
+          padding: 0 2rem;
+        }
+      }
+
+      @media (max-width: 850px) {
+        .ant-layout-footer {
+          padding: 20px 0;
+        }
+
+        .ant-layout-footer .container {
+          margin: 0 auto;
+          padding: 0 15px;
+        }
+      }
+
+      .ant-layout-footer .ant-row {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin: 2rem 0 1rem;
+        text-align: left;
+        min-height: 140px;
+      }
+
+      @media (max-width: 850px) {
+        .ant-layout-footer .ant-row {
+          flex-direction: column;
+          align-items: center;
+          min-height: 290px;
+        }
+      }
+
+      .ant-layout-footer .ant-row .ant-col {
+        min-height: 120px;
+      }
+
+      .ant-layout-footer .ant-row .footer-links-uic,
+      .ant-layout-footer .ant-row .footer-links-msu {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        width: 150px;
+      }
+
+      .ant-layout-footer .ant-row .articles {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-right: 0;
+        width: 150px;
+        min-height: 24px;
+      }
+
+      .ant-layout-footer .ant-row .about {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .ant-layout-footer .ant-row .brand {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .ant-layout-footer .ant-row .brand .footer-brand img {
+        width: 120px;
+        height: 120px;
+        max-width: 120px;
+        min-width: 120px;
+        min-height: 120px;
+        object-fit: contain;
+      }
+
+      .ant-layout-footer .container > div:last-child {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @media (max-width: 850px) {
+        .ant-layout-footer .ant-row .ant-col {
+          flex: none;
+          width: 100%;
+          text-align: center;
+        }
+
+        .ant-layout-footer .ant-row .footer-links-uic,
+        .ant-layout-footer .ant-row .footer-links-msu,
+        .ant-layout-footer .ant-row .articles {
+          display: none;
+          height: 0;
+          min-height: 0;
+          padding: 0;
+          margin: 0;
+          border: none;
+          overflow: hidden;
+          visibility: hidden;
+        }
+
+        .ant-layout-footer .ant-row .about {
+          order: 1;
+          align-items: center;
+          padding-bottom: 0;
+        }
+
+        .ant-layout-footer .ant-row .brand {
+          order: 2;
+          margin: 0;
+          justify-content: center;
+        }
+
+        .ant-layout-footer .ant-row .about .contact {
+          margin-bottom: 0.2rem;
+          text-align: center;
+        }
+
+        .ant-layout-footer .ant-row .about .contact .contact-title,
+        .ant-layout-footer .ant-row .about .contact .contact-address,
+        .ant-layout-footer .ant-row .about .contact .contact-phone {
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: none;
+          justify-content: center;
+        }
+
+        .ant-layout-footer .ant-row .about .social-icons {
+          margin-top: 0.1rem;
+          align-self: center;
+          justify-content: center;
+          width: 100%;
         }
       }
     </style>

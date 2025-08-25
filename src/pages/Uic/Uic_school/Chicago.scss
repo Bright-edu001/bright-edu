@@ -59,6 +59,10 @@
     .container {
       margin-bottom: 7rem;
     }
+    .section-content {
+      min-height: 10rem;
+      position: relative;
+    }
   }
 
   .history-section {
@@ -66,6 +70,10 @@
     padding-bottom: $spacing-sm;
     .container {
       margin-bottom: $spacing-lg;
+    }
+    .section-content {
+      min-height: 10rem;
+      position: relative;
     }
 
     &::after {
@@ -77,6 +85,24 @@
       width: 100%;
       border-bottom: 1px solid $color-uic;
       margin: 0 auto;
+    }
+  }
+  .skeleton-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: $color-gray-lightest;
+    animation: skeleton-loading 1.2s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.6;
     }
   }
 }

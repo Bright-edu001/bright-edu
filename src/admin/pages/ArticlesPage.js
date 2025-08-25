@@ -24,15 +24,27 @@ import {
   updateArticle,
   deleteArticle,
 } from "../data/blogApi";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import { app } from "../../config/firebaseConfig";
+import logger from "../../utils/logger";
+import StructuredContentEditor from "../components/StructuredContentEditor";
+import StructuredContentViewer from "../components/StructuredContentViewer";
+import NewsContentEditor from "../components/NewsContentEditor";
+import NewsContentViewer from "../components/NewsContentViewer";
 
 const { Title } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
 
-const storage = getStorage();
+const storage = getStorage(app);
 
-const ProductsPage = () => {
+const ArticlesPage = () => {
   const [articles, setArticles] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isViewModalVisible, setIsViewModalVisible] = useState(false);
@@ -114,6 +126,14 @@ const ProductsPage = () => {
             borderRadius: 4,
             cursor: "pointer",
           }}
+          onError={(e) => {
+            try {
+              // eslint-disable-next-line no-console
+              console.warn("Thumbnail failed to load:", e?.target?.src);
+              e.target.onerror = null;
+              e.target.src = "/B-logo.webp";
+            } catch (err) {}
+          }}
           onClick={() => window.open(thumbnail, "_blank")}
         />
       ),
@@ -143,7 +163,7 @@ const ProductsPage = () => {
           <Popconfirm
             title="確認刪除"
             description="您確定要刪除這篇文章嗎？"
-            onConfirm={() => handleDelete(record.id)}
+            onConfirm={() => handleDelete(record.docId ?? record.id)}
             okText="確認"
             cancelText="取消"
           >
@@ -165,12 +185,17 @@ const ProductsPage = () => {
   const handleEdit = (article) => {
     setEditingArticle(article);
 
-    // 處理不同類型的 content 格式
+    // 根據分類決定內容格式處理
     let contentValue = article.content;
-    if (typeof article.content === "object") {
-      contentValue = JSON.stringify(article.content, null, 2);
-    } else if (Array.isArray(article.content)) {
-      contentValue = JSON.stringify(article.content, null, 2);
+
+    // 對於結構化內容（招生活動和新聞），保持原始對象格式
+    // 對於一般文章，如果是對象則轉換為 JSON 字串
+    if (article.category !== "enrollment" && article.category !== "news") {
+      if (typeof article.content === "object") {
+        contentValue = JSON.stringify(article.content, null, 2);
+      } else if (Array.isArray(article.content)) {
+        contentValue = JSON.stringify(article.content, null, 2);
+      }
     }
 
     form.setFieldsValue({
@@ -192,12 +217,12 @@ const ProductsPage = () => {
     setIsViewModalVisible(true);
   };
 
-  const handleDelete = async (id) => {
-    const article = articles.find((a) => a.id === id);
+  const handleDelete = async (key) => {
+    const article = articles.find((a) => a.docId === key || a.id === key);
     if (!article) return;
-    const type = article.type === "article" ? "news" : "enrollmentEvents";
+    const type = article.type === "article" ? "article" : "enrollment";
     await deleteArticle(type, article.docId);
-    setArticles((prev) => prev.filter((a) => a.id !== id));
+    setArticles((prev) => prev.filter((a) => a.docId !== article.docId));
     message.success("文章已刪除");
   };
 
@@ -221,8 +246,7 @@ const ProductsPage = () => {
       imageHeight: parseInt(values.imageHeight) || 300,
     };
     if (editingArticle) {
-      const type =
-        editingArticle.type === "article" ? "news" : "enrollmentEvents";
+      const type = editingArticle.type === "article" ? "article" : "enrollment";
       await updateArticle(type, editingArticle.docId, processedValues);
       setArticles((prev) =>
         prev.map((a) =>
@@ -232,7 +256,7 @@ const ProductsPage = () => {
       message.success("文章已更新");
     } else {
       const type =
-        processedValues.type === "article" ? "news" : "enrollmentEvents";
+        processedValues.type === "article" ? "article" : "enrollment";
       const newArticle = await createArticle(type, processedValues);
       setArticles((prev) => [...prev, newArticle]);
       message.success("文章已新增");
@@ -251,40 +275,32 @@ const ProductsPage = () => {
     setViewingArticle(null);
   };
 
-  // 新增上傳檔案的處理函式
   const handleFileUpload = async (file, field) => {
-    // 取得舊檔案網址
     const oldUrl = form.getFieldValue(field);
-    // 上傳新檔案
     const storageRef = ref(storage, `blog/${Date.now()}_${file.name}`);
     await uploadBytes(storageRef, file);
     const url = await getDownloadURL(storageRef);
     form.setFieldsValue({ [field]: url });
     message.success(`${field === "thumbnail" ? "縮圖" : "大圖"}上傳成功`);
 
-    // 刪除舊檔案（如果有）
     if (oldUrl) {
       try {
-        // 取得 Firebase Storage 路徑
         const matches = oldUrl.match(/\/o\/([^?]+)\?/);
         let filePath = null;
         if (matches && matches[1]) {
           filePath = decodeURIComponent(matches[1]);
         } else {
-          // 兼容新版 Firebase Storage 下載網址
           const urlObj = new URL(oldUrl);
           const pathname = urlObj.pathname;
-          // /v0/b/{bucket}/o/{path}
           const parts = pathname.split("/o/");
           if (parts.length === 2) filePath = decodeURIComponent(parts[1]);
         }
         if (filePath) {
           const oldRef = ref(storage, filePath);
-          await oldRef.delete();
+          await deleteObject(oldRef);
         }
       } catch (err) {
-        // 刪除失敗不影響主流程
-        console.warn("刪除舊檔案失敗", err);
+        logger.warn("刪除舊檔案失敗", err);
       }
     }
   };
@@ -315,7 +331,7 @@ const ProductsPage = () => {
       <Table
         columns={columns}
         dataSource={articles}
-        rowKey="id"
+        rowKey={(record) => record.id ?? record.docId}
         pagination={{
           pageSize: 10,
           showSizeChanger: true,
@@ -325,7 +341,6 @@ const ProductsPage = () => {
         scroll={{ x: 1000 }}
       />
 
-      {/* 新增/編輯文章 Modal */}
       <Modal
         title={editingArticle ? "編輯文章" : "新增文章"}
         open={isModalVisible}
@@ -334,7 +349,6 @@ const ProductsPage = () => {
         width={900}
         okText="確認"
         cancelText="取消"
-        destroyOnHidden
       >
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
           <Form.Item
@@ -394,7 +408,6 @@ const ProductsPage = () => {
               }}
             />
           </Form.Item>
-          {/* 隱藏欄位讓 Form 拿到值 */}
           <Form.Item
             name="thumbnail"
             style={{ display: "none" }}
@@ -420,7 +433,6 @@ const ProductsPage = () => {
               }}
             />
           </Form.Item>
-          {/* 隱藏欄位讓 Form 拿到值 */}
           <Form.Item
             name="image"
             style={{ display: "none" }}
@@ -452,12 +464,48 @@ const ProductsPage = () => {
             label="內容"
             rules={[{ required: true, message: "請輸入文章內容" }]}
           >
-            <TextArea rows={10} placeholder="請輸入文章內容" />
+            <Form.Item
+              noStyle
+              shouldUpdate={(prevValues, currentValues) =>
+                prevValues.type !== currentValues.type ||
+                prevValues.category !== currentValues.category
+              }
+            >
+              {({ getFieldValue, setFieldValue }) => {
+                const articleCategory = getFieldValue("category");
+                const currentContent = getFieldValue("content");
+
+                // 根據分類決定使用哪個編輯器
+                if (articleCategory === "enrollment") {
+                  // 招生活動使用招生活動的結構化編輯器
+                  return (
+                    <StructuredContentEditor
+                      value={currentContent}
+                      onChange={(newContent) => {
+                        setFieldValue("content", newContent);
+                      }}
+                    />
+                  );
+                } else if (articleCategory === "news") {
+                  // 新聞使用新聞的結構化編輯器
+                  return (
+                    <NewsContentEditor
+                      value={currentContent}
+                      onChange={(newContent) => {
+                        setFieldValue("content", newContent);
+                      }}
+                    />
+                  );
+                } else {
+                  // 預設使用一般文字編輯器
+                  return <TextArea rows={10} placeholder="請輸入文章內容" />;
+                }
+              }}
+            </Form.Item>
           </Form.Item>
         </Form>
       </Modal>
 
-      {/* 查看文章 Modal */}
       <Modal
         title="文章內容"
         open={isViewModalVisible}
@@ -506,21 +554,27 @@ const ProductsPage = () => {
             </div>
             <div>
               <strong>內容：</strong>
-              <div
-                style={{
-                  whiteSpace: "pre-wrap",
-                  backgroundColor: "#f5f5f5",
-                  padding: "16px",
-                  borderRadius: "4px",
-                  marginTop: "8px",
-                  maxHeight: "400px",
-                  overflow: "auto",
-                }}
-              >
-                {typeof viewingArticle.content === "object"
-                  ? JSON.stringify(viewingArticle.content, null, 2)
-                  : viewingArticle.content}
-              </div>
+              {viewingArticle.category === "enrollment" ? (
+                <StructuredContentViewer content={viewingArticle.content} />
+              ) : viewingArticle.category === "news" ? (
+                <NewsContentViewer content={viewingArticle.content} />
+              ) : (
+                <div
+                  style={{
+                    whiteSpace: "pre-wrap",
+                    backgroundColor: "#f5f5f5",
+                    padding: "16px",
+                    borderRadius: "4px",
+                    marginTop: "8px",
+                    maxHeight: "400px",
+                    overflow: "auto",
+                  }}
+                >
+                  {typeof viewingArticle.content === "object"
+                    ? JSON.stringify(viewingArticle.content, null, 2)
+                    : viewingArticle.content}
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -529,4 +583,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default ArticlesPage;

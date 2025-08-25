@@ -92,6 +92,15 @@ describe("processBlogData", () => {
       "https://example.com/images/flags/us-flag.webp"
     );
   });
+  // 測試：flagImage 路徑會被更新
+  it("updates flagImage paths", () => {
+    const obj = { flagImage: "/images/flags/us-flag.webp" };
+    const result = processBlogData(obj);
+    expect(mockGetImageUrl).toHaveBeenCalledWith("/images/flags/us-flag.webp");
+    expect(result.flagImage).toBe(
+      "https://example.com/images/flags/us-flag.webp"
+    );
+  });
 });
 
 describe("getEnrollmentEvents", () => {

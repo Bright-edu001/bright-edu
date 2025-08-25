@@ -12,22 +12,23 @@
     "content": [
       {
         "semester": "Fall 2026",
-        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Spring 2026 春季班資訊",
-        "details": [
+        "title": "Spring 2026 春季班資訊",
+        "flagImage": "/images/flags/us-flag.webp",
+        "sections": [
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "目前已經開放申請"
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開課日期",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "MBA：Jan/12/2026",
-                "subDetails": [
+                "subItems": [
                   {
-                    "icon": "📕",
+                    "icon": "book",
                     "text": "MBA開課領域:",
                     "list": [
                       "Management 管理學領域",
@@ -40,11 +41,11 @@
                 ]
               },
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "MS：Jan/12/2026",
-                "subDetails": [
+                "subItems": [
                   {
-                    "icon": "📕",
+                    "icon": "book",
                     "text": "MS開課領域:",
                     "list": [
                       "MS in Supply Chain and Operations Management",
@@ -60,11 +61,11 @@
             ]
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "Deadline",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "Nov/1/2025 (目前最新公布截止日、若有更新則以更新為準)"
               }
             ]
@@ -73,22 +74,23 @@
       },
       {
         "semester": "Fall 2026",
-        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Fall 2026 秋季班資訊",
-        "details": [
+        "title": "Fall 2026 秋季班資訊",
+        "flagImage": "/images/flags/us-flag.webp",
+        "sections": [
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開放申請時間:N/A"
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開課日期",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "Aug/24/2026",
-                "subDetails": [
+                "subItems": [
                   {
-                    "icon": "📕",
+                    "icon": "book",
                     "text": "MBA開課領域:",
                     "list": [
                       "Management 管理學領域",
@@ -101,11 +103,11 @@
                 ]
               },
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "MS：Aug/24/2026",
-                "subDetails": [
+                "subItems": [
                   {
-                    "icon": "📕",
+                    "icon": "book",
                     "text": "MS開課領域:",
                     "list": [
                       "MS in Supply Chain and Operations Management",
@@ -121,11 +123,11 @@
             ]
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "Deadline",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "Jun/2026 (目前最新公布截止日、若有更新則以更新為準)"
               }
             ]
@@ -147,22 +149,23 @@
     "content": [
       {
         "semester": "Spring 2025",
-        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Spring 2025 春季班資訊",
-        "details": [
+        "title": "Spring 2025 春季班資訊",
+        "flagImage": "/images/flags/us-flag.webp",
+        "sections": [
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開放申請時間:目前已經開放申請!!"
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開課日期",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "MBA：Jan/13/2025",
-                "subDetails": [
+                "subItems": [
                   {
-                    "icon": "📕",
+                    "icon": "book",
                     "text": "MBA開課領域:",
                     "list": [
                       "Strategic and International Business Management (SIM) 國際策略管理",
@@ -175,11 +178,11 @@
             ]
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "Deadline",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "All students: Nov/15/2024 (目前最新公布截止日、若有更新則以更新為準)"
               }
             ]
@@ -188,22 +191,23 @@
       },
       {
         "semester": "Fall 2025",
-        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Fall 2025 秋季班資訊",
-        "details": [
+        "title": "Fall 2025 秋季班資訊",
+        "flagImage": "/images/flags/us-flag.webp",
+        "sections": [
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開放申請時間: Aug/1/2024"
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開課日期",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "MBA：Aug/25/2025",
-                "subDetails": [
+                "subItems": [
                   {
-                    "icon": "📕",
+                    "icon": "book",
                     "text": "MBA開課領域:",
                     "list": [
                       "Strategic and International Business Management (SIM) 國際策略管理",
@@ -216,11 +220,11 @@
             ]
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "Deadline",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "All students: N/A (目前最新公布截止日、若有更新則以更新為準)"
               }
             ]
@@ -242,22 +246,23 @@
     "content": [
       {
         "semester": "Fall 2024",
-        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Fall 2024秋季班資訊",
-        "details": [
+        "title": "Fall 2024秋季班資訊",
+        "flagImage": "/images/flags/us-flag.webp",
+        "sections": [
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開放申請時間: 已開放"
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開課日期",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "MBA：Aug/26/2024",
-                "subDetails": [
+                "subItems": [
                   {
-                    "icon": "📕",
+                    "icon": "book",
                     "text": "MBA開課領域:",
                     "list": [
                       "Strategic and International Business Management (SIM) 國際策略管理",
@@ -271,11 +276,11 @@
             ]
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "Deadline",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "All students: Jun/30/2023 (目前最新公布截止日、若有更新則以更新為準)"
               }
             ]
@@ -284,22 +289,23 @@
       },
       {
         "semester": "Spring 2025",
-        "title": "<img src='/images/flags/us-flag.webp' alt='美國' className='flag-icon' /> Spring 2025 春季班資訊",
-        "details": [
+        "title": "Spring 2025 春季班資訊",
+        "flagImage": "/images/flags/us-flag.webp",
+        "sections": [
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開放申請時間: 已開放"
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "開課日期",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "MBA：Jan/13/2025",
-                "subDetails": [
+                "subItems": [
                   {
-                    "icon": "📕",
+                    "icon": "book",
                     "text": "MBA開課領域:",
                     "list": [
                       "Strategic and International Business Management (SIM) 國際策略管理",
@@ -312,11 +318,11 @@
             ]
           },
           {
-            "icon": "✅",
+            "icon": "check",
             "text": "Deadline",
-            "subDetails": [
+            "items": [
               {
-                "icon": "▶️",
+                "icon": "arrow",
                 "text": "All students: Sep/30/2024 (目前最新公布截止日、若有更新則以更新為準)"
               }
             ]

@@ -1,4 +1,5 @@
 // src/utils/getImageUrl.js
+import logger from "./logger";
 
 const BUCKET_NAME = "bright-edu-data.firebasestorage.app";
 
@@ -10,7 +11,7 @@ const BUCKET_NAME = "bright-edu-data.firebasestorage.app";
 const getImageUrl = (localPath) => {
   // 檢查路徑是否有效
   if (!localPath || !localPath.startsWith("/images/")) {
-    console.warn(`傳遞給 getImageUrl 的路徑無效: ${localPath}`);
+    logger.warn(`傳遞給 getImageUrl 的路徑無效: ${localPath}`);
     return localPath; // 如果路徑無效，返回原路徑以避免錯誤
   }
 
