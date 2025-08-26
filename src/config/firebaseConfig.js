@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
+import { getFunctions } from "firebase/functions";
 import {
   initializeAppCheck,
   ReCaptchaV3Provider,
@@ -54,6 +55,8 @@ try {
 const db = getFirestore(app);
 // 取得 Google Analytics 實例（用於網站流量分析）
 const analytics = getAnalytics(app);
+// 取得 Cloud Functions 實例 (設定為 asia-east1 區域)
+const functions = getFunctions(app, "asia-east1");
 // 若需要手動取得 App Check token，可呼叫此函式
 const fetchAppCheckToken = async (retries = 1) => {
   try {
@@ -90,5 +93,5 @@ if (typeof window !== "undefined") {
 }
 
 // ===== 匯出區塊 =====
-// 匯出 Firestore、效能監控、Analytics、App Check 實例，供其他模組使用
-export { app, db, perf, analytics, appCheck, fetchAppCheckToken };
+// 匯出 Firestore、效能監控、Analytics、App Check、Functions 實例，供其他模組使用
+export { app, db, perf, analytics, appCheck, functions, fetchAppCheckToken };

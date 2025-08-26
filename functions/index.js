@@ -35,25 +35,32 @@ exports.batchAddUsers = onCall(
       return { success: false, error: "TOO_MANY_USERS", max: MAX_BATCH };
     }
 
-    // 清理資料：
-    // 1. 過濾無 id 或 id 非字串
-    // 2. 去除重複 id（保留第一筆）
-    const seen = new Set();
+    // 資料驗證與清理
     const users = [];
-    for (const u of rawUsers) {
-      if (!u || typeof u !== "object") continue;
-      const id = u.id;
-      if (typeof id !== "string" || !id.trim()) continue;
-      if (seen.has(id)) continue;
-      seen.add(id);
-      // 可在此做欄位白名單過濾（示範：只取特定欄位）
-      const { id: userId, email, name, ...rest } = u;
-      users.push({
-        id: userId.trim(),
-        email: email || null,
-        name: name || null,
-        ...rest,
-      });
+    for (let i = 0; i < rawUsers.length; i++) {
+      const raw = rawUsers[i];
+      if (!raw || typeof raw !== "object") {
+        logger.warn("Invalid user object", { index: i, raw });
+        continue;
+      }
+      // 基本欄位驗證
+      if (!raw.id || typeof raw.id !== "string") {
+        logger.warn("Missing or invalid user ID", { index: i, id: raw.id });
+        continue;
+      }
+      if (!raw.email || typeof raw.email !== "string") {
+        logger.warn("Missing or invalid email", { index: i, email: raw.email });
+        continue;
+      }
+      // 清理並規範化資料
+      const user = {
+        id: raw.id.trim(),
+        email: raw.email.trim().toLowerCase(),
+        name: raw.name ? String(raw.name).trim() : "",
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      };
+      users.push(user);
     }
 
     if (!users.length) {
@@ -123,4 +130,5 @@ exports.validateNewUserOnCreate = onDocumentCreated(
   }
 );
 
-// (已移除 notifyFileUpload 與舊版 validateNewUser，不再需要 Storage 觸發與舊 HTTPS 函式)
+// 注意：Google Sheets 同步功能現在使用本地 Express 服務器
+// 請參考 scripts/localSyncServer.js

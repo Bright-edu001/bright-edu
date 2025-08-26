@@ -19,6 +19,7 @@ import {
   DeleteOutlined,
   ReloadOutlined,
   ExportOutlined,
+  SyncOutlined,
 } from "@ant-design/icons";
 import {
   collection,
@@ -47,6 +48,7 @@ function ContactFormsPage() {
   const [filters, setFilters] = useState({
     status: "all",
   });
+  const [syncLoading, setSyncLoading] = useState(false);
 
   // 即時監聽 Firestore 資料
   useEffect(() => {
@@ -198,6 +200,64 @@ function ContactFormsPage() {
     link.click();
   };
 
+  // 同步 Google Sheets 資料
+  const handleSync = async () => {
+    setSyncLoading(true);
+    try {
+      message.loading({
+        content: "正在從 Google Sheets 同步資料...",
+        key: "sync",
+        duration: 0,
+      });
+
+      // 檢查管理員身份驗證（基於 localStorage）
+      const isAuthenticated = localStorage.getItem("isAuthenticated");
+      if (!isAuthenticated) {
+        throw new Error("請先登入管理後台");
+      }
+
+      // 調用本地同步服務器
+      const response = await fetch(
+        "http://localhost:3002/api/sync-google-sheets",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        message.success({
+          content: result.message || `同步完成！新增 ${result.count} 筆資料`,
+          key: "sync",
+          duration: 4,
+        });
+      } else {
+        message.error({
+          content: result.message || "同步失敗",
+          key: "sync",
+          duration: 4,
+        });
+      }
+    } catch (error) {
+      console.error("同步 Google Sheets 失敗:", error);
+      message.error({
+        content: "同步失敗，請檢查網路連線或聯絡系統管理員",
+        key: "sync",
+        duration: 4,
+      });
+    } finally {
+      setSyncLoading(false);
+    }
+  };
+
   const columns = [
     {
       title: "姓名",
@@ -320,6 +380,14 @@ function ContactFormsPage() {
               <Option value="processing">處理中</Option>
               <Option value="completed">已完成</Option>
             </Select>
+            <Button
+              icon={<SyncOutlined />}
+              onClick={handleSync}
+              loading={syncLoading}
+              type="primary"
+            >
+              同步 Google Sheets
+            </Button>
             <Button
               icon={<ExportOutlined />}
               onClick={handleExport}
