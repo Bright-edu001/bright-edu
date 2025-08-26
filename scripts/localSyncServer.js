@@ -60,7 +60,7 @@ app.post("/api/sync-google-sheets", async (req, res) => {
     const rows = response.data.values;
     if (!rows || rows.length < 2) {
       console.log("從 Google Sheets 沒有找到資料或只有標題行");
-      
+
       // 檢查 Firestore 中是否有來自 Google Sheets 同步的資料需要清除
       const collectionRef = db.collection("contact_forms");
       const existingQuery = await collectionRef
@@ -68,8 +68,10 @@ app.post("/api/sync-google-sheets", async (req, res) => {
         .get();
 
       if (!existingQuery.empty) {
-        console.log(`發現 Firestore 中有 ${existingQuery.size} 筆來自 Google Sheets 的資料，因為 Google Sheets 已清空，將清除這些資料...`);
-        
+        console.log(
+          `發現 Firestore 中有 ${existingQuery.size} 筆來自 Google Sheets 的資料，因為 Google Sheets 已清空，將清除這些資料...`
+        );
+
         const batch = db.batch();
         let deleteCount = 0;
 
@@ -80,7 +82,9 @@ app.post("/api/sync-google-sheets", async (req, res) => {
 
         if (deleteCount > 0) {
           await batch.commit();
-          console.log(`成功清除 ${deleteCount} 筆過時的 Google Sheets 同步資料`);
+          console.log(
+            `成功清除 ${deleteCount} 筆過時的 Google Sheets 同步資料`
+          );
         }
 
         return res.json({
@@ -248,17 +252,17 @@ app.post("/api/clear-contact-forms", async (req, res) => {
     console.log("開始清除 Firestore 中的聯絡表單資料...");
 
     const collectionRef = db.collection("contact_forms");
-    
+
     // 獲取所有文檔
     const snapshot = await collectionRef.get();
-    
+
     if (snapshot.empty) {
       console.log("Firestore 中沒有聯絡表單資料需要清除");
       return res.json({
         success: true,
         count: 0,
         message: "Firestore 中沒有資料需要清除",
-        durationMs: Date.now() - start
+        durationMs: Date.now() - start,
       });
     }
 
@@ -288,7 +292,6 @@ app.post("/api/clear-contact-forms", async (req, res) => {
       message: `成功清除 ${deleteCount} 筆聯絡表單資料`,
       durationMs,
     });
-
   } catch (error) {
     console.error("清除 Firestore 資料失敗:", error);
     res.status(500).json({

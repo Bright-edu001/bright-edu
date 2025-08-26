@@ -12,8 +12,7 @@ const { initializeApp } = require("firebase/app");
 
 // Firebase 設定
 const firebaseConfig = {
-  apiKey:
-    process.env.REACT_APP_API_KEY || "AIzaSyBKy3x_2QcZCyQX1TrZEcuG4X_3LZZOtss",
+  apiKey: process.env.REACT_APP_API_KEY, // 請設定環境變數
   authDomain:
     process.env.REACT_APP_AUTH_DOMAIN || "bright-edu-data.firebaseapp.com",
   projectId: process.env.REACT_APP_PROJECT_ID || "bright-edu-data",
