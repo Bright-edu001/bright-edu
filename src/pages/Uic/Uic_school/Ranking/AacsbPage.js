@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./AacsbPage.module.scss"; // 修正副檔名為 .scss
 import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
+import getImageUrl from "../../../../utils/getImageUrl";
 function AacsbPage() {
   return (
     <div className={styles.aacsbContainer}>
@@ -12,9 +13,11 @@ function AacsbPage() {
             <div className={styles.aacsbLogo}>
               <img
                 className="responsive-img"
-                src={`/images/Uic/ranking/Aacsb.webp`}
+                src={getImageUrl(`/images/Uic/ranking/Aacsb.webp`)}
                 alt="AACSB Logo"
                 loading="lazy"
+                width="180"
+                height="181"
               />
             </div>
             <div className={styles.aacsbTitle}>

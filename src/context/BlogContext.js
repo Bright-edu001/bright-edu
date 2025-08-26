@@ -6,6 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import { getEnrollmentEvents, getNews } from "../services/blogService";
+import logger from "../utils/logger";
 
 // 建立 BlogContext，用於全域分享部落格資料與操作方法
 export const BlogContext = createContext();
@@ -33,7 +34,7 @@ export const BlogProvider = ({ children }) => {
         setError(null); // 成功後清除錯誤
       } catch (err) {
         setError(err.message);
-        console.error("Failed to fetch blog data:", err);
+        logger.error("Failed to fetch blog data:", err);
       } finally {
         setLoading(false); // 完成後設定為非載入狀態
       }

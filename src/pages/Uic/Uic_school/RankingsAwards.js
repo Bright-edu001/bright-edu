@@ -1,6 +1,7 @@
 import React from "react";
 import "./RankingsAwards.scss";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
+import getImageUrl from "../../../utils/getImageUrl";
 
 const RankingsAwards = () => {
   return (
@@ -27,9 +28,11 @@ const RankingsAwards = () => {
             <div className="aacsb-logo">
               <img
                 className="responsive-img"
-                src={`/images/Uic/ranking/Aacsb.webp`}
+                src={getImageUrl(`/images/Uic/ranking/Aacsb.webp`)}
                 alt="AACSB Logo"
                 loading="lazy"
+                width="180"
+                height="181"
               />
             </div>
             <div className="aacsb-title">
@@ -75,9 +78,13 @@ const RankingsAwards = () => {
             <div className="diversity-logo">
               <img
                 className="responsive-img"
-                src={`/images/Uic/ranking/2023-INSIGHT-Into-Diversity-HEED-Award-Logo-1024x1024.webp`}
+                src={getImageUrl(
+                  `/images/Uic/ranking/2023-INSIGHT-Into-Diversity-HEED-Award-Logo-1024x1024.webp`
+                )}
                 alt="HEED Excellence Award"
                 loading="lazy"
+                width="180"
+                height="180"
               />
             </div>
             <div className="diversity-title">
@@ -113,9 +120,11 @@ const RankingsAwards = () => {
             <div className="rankings-logo">
               <img
                 className="responsive-img"
-                src={`/images/Uic/ranking/Ranking.webp`}
+                src={getImageUrl(`/images/Uic/ranking/Ranking.webp`)}
                 alt="UIC Rankings"
                 loading="lazy"
+                width="350"
+                height="103"
               />
             </div>
             <div className="rankings-title">

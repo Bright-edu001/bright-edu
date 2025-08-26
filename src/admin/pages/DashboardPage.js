@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Typography, Button, Card, Space, message } from "antd";
 import { SyncOutlined, DatabaseOutlined } from "@ant-design/icons";
 import { syncEnrollmentEvents, syncNews } from "../../utils/updateBlog";
+import logger from "../../utils/logger";
 
 const { Title } = Typography;
 
@@ -18,7 +19,7 @@ const DashboardPage = () => {
       message.success("招生活動資料同步完成！");
     } catch (err) {
       message.error("同步失敗：" + err.message);
-      console.error("同步招生活動失敗：", err);
+      logger.error("同步招生活動失敗：", err);
     } finally {
       setLoading({ ...loading, enrollment: false });
     }
@@ -31,7 +32,7 @@ const DashboardPage = () => {
       message.success("新聞資料同步完成！");
     } catch (err) {
       message.error("同步失敗：" + err.message);
-      console.error("同步新聞失敗：", err);
+      logger.error("同步新聞失敗：", err);
     } finally {
       setLoading({ ...loading, news: false });
     }
@@ -44,7 +45,7 @@ const DashboardPage = () => {
       message.success("所有資料同步完成！");
     } catch (err) {
       message.error("同步失敗：" + err.message);
-      console.error("同步失敗：", err);
+      logger.error("同步失敗：", err);
     } finally {
       setLoading({ enrollment: false, news: false });
     }

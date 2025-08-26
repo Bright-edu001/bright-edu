@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import {
   DesktopOutlined,
-  FileOutlined,
   PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
   LogoutOutlined,
+  FormOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme, Button } from "antd";
 import DashboardPage from "../pages/DashboardPage";
-import ProductsPage from "../pages/ProductsPage";
+import ArticlesPage from "../pages/ArticlesPage";
+import ContactFormsPage from "../pages/ContactFormsPage";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -19,22 +24,19 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem(<Link to=".">儀表板</Link>, "1", <PieChartOutlined />),
-  getItem(<Link to="products">文章管理</Link>, "2", <DesktopOutlined />),
-  getItem("用戶", "sub1", <UserOutlined />, [
-    getItem(<span>Tom</span>, "3"),
-    getItem(<span>Bill</span>, "4"),
-    getItem(<span>Alex</span>, "5"),
-  ]),
-  getItem("團隊", "sub2", <TeamOutlined />, [
-    getItem(<span>Team 1</span>, "6"),
-    getItem(<span>Team 2</span>, "8"),
-  ]),
-  getItem("檔案", "9", <FileOutlined />),
+  getItem(<Link to=".">儀表板</Link>, "dashboard", <PieChartOutlined />),
+  getItem(<Link to="articles">文章管理</Link>, "articles", <DesktopOutlined />),
+  getItem(
+    <Link to="contact-forms">聯絡表單</Link>,
+    "contact-forms",
+    <FormOutlined />
+  ),
+  // 依需求暫時移除「招生活動/最新消息」
 ];
 
 const AdminLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -63,7 +65,13 @@ const AdminLayout = () => {
         />
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
+          selectedKeys={
+            location.pathname.includes("/articles")
+              ? ["articles"]
+              : location.pathname.includes("/contact-forms")
+              ? ["contact-forms"]
+              : ["dashboard"]
+          }
           mode="inline"
           items={items}
         />
@@ -89,7 +97,16 @@ const AdminLayout = () => {
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb
             style={{ margin: "16px 0" }}
-            items={[{ title: "User" }, { title: "Bill" }]}
+            items={[
+              { title: "後台" },
+              {
+                title: location.pathname.includes("/articles")
+                  ? "文章管理"
+                  : location.pathname.includes("/contact-forms")
+                  ? "聯絡表單"
+                  : "儀表板",
+              },
+            ]}
           />
           <div
             style={{
@@ -101,7 +118,8 @@ const AdminLayout = () => {
           >
             <Routes>
               <Route path="/" element={<DashboardPage />} />
-              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/articles" element={<ArticlesPage />} />
+              <Route path="/contact-forms" element={<ContactFormsPage />} />
               {/* 在這裡新增更多後台頁面的路由 */}
             </Routes>
           </div>

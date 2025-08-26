@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
+import logger from "../utils/logger";
 
 // 防止記憶體洩漏的自定義 Hook
 export const useCleanup = () => {
@@ -14,7 +15,7 @@ export const useCleanup = () => {
         try {
           cleanup();
         } catch (error) {
-          console.warn("清理函數執行失敗:", error);
+          logger.warn("清理函數執行失敗:", error);
         }
       });
       cleanupFunctions.current = [];

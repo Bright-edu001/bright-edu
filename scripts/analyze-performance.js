@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const fs = require("fs");
 const path = require("path");
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+const logger = require("../src/utils/logger");
 
 console.log("🔍 正在分析專案性能...\n");
 
@@ -8,7 +10,7 @@ console.log("🔍 正在分析專案性能...\n");
 function analyzeBuildSize() {
   const buildPath = path.join(process.cwd(), "build");
   if (!fs.existsSync(buildPath)) {
-    console.log("❌ build 資料夾不存在，請先執行 npm run build");
+    logger.log("❌ build 資料夾不存在，請先執行 npm run build");
     return;
   }
 
@@ -40,8 +42,8 @@ function analyzeBuildSize() {
 
   const totalSize = getDirectorySize(buildPath);
 
-  console.log("📦 Build 分析結果:");
-  console.log(`   總大小: ${formatBytes(totalSize)}`);
+  logger.log("📦 Build 分析結果:");
+  logger.log(`   總大小: ${formatBytes(totalSize)}`);
 
   // 分析靜態資源
   const staticPath = path.join(buildPath, "static");
@@ -51,40 +53,40 @@ function analyzeBuildSize() {
 
     if (fs.existsSync(jsPath)) {
       const jsSize = getDirectorySize(jsPath);
-      console.log(`   JS 檔案: ${formatBytes(jsSize)}`);
+      logger.log(`   JS 檔案: ${formatBytes(jsSize)}`);
     }
 
     if (fs.existsSync(cssPath)) {
       const cssSize = getDirectorySize(cssPath);
-      console.log(`   CSS 檔案: ${formatBytes(cssSize)}`);
+      logger.log(`   CSS 檔案: ${formatBytes(cssSize)}`);
     }
   }
 
-  console.log("");
+  logger.log("");
 }
 
 // 分析 node_modules 大小
 function analyzeNodeModules() {
   const nodeModulesPath = path.join(process.cwd(), "node_modules");
   if (!fs.existsSync(nodeModulesPath)) {
-    console.log("❌ node_modules 資料夾不存在");
+    logger.log("❌ node_modules 資料夾不存在");
     return;
   }
 
-  console.log("📚 依賴分析:");
+  logger.log("📚 依賴分析:");
 
   const packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"));
   const dependencies = Object.keys(packageJson.dependencies || {});
   const devDependencies = Object.keys(packageJson.devDependencies || {});
 
-  console.log(`   生產依賴: ${dependencies.length} 個`);
-  console.log(`   開發依賴: ${devDependencies.length} 個`);
-  console.log("");
+  logger.log(`   生產依賴: ${dependencies.length} 個`);
+  logger.log(`   開發依賴: ${devDependencies.length} 個`);
+  logger.log("");
 }
 
 // 檢查大型檔案
 function checkLargeFiles() {
-  console.log("🔍 檢查大型檔案 (>500KB):");
+  logger.log("🔍 檢查大型檔案 (>500KB):");
 
   const checkDirectory = (dirPath, relativePath = "") => {
     const files = fs.readdirSync(dirPath);
@@ -98,31 +100,31 @@ function checkLargeFiles() {
         checkDirectory(filePath, relativeFilePath);
       } else if (stats.isFile() && stats.size > 500 * 1024) {
         const sizeInMB = (stats.size / (1024 * 1024)).toFixed(2);
-        console.log(`   ⚠️  ${relativeFilePath} (${sizeInMB} MB)`);
+        logger.log(`   ⚠️  ${relativeFilePath} (${sizeInMB} MB)`);
       }
     });
   };
 
   checkDirectory("./src", "src");
   checkDirectory("./public", "public");
-  console.log("");
+  logger.log("");
 }
 
 // 性能建議
 function performanceRecommendations() {
-  console.log("💡 性能優化建議:");
-  console.log("   ✅ 已實施 React.lazy() 動態載入");
-  console.log("   ✅ 已實施組件 memo 化");
-  console.log("   ✅ 已實施圖片懶載入");
-  console.log("   ✅ 已實施 Service Worker 快取");
-  console.log("   ✅ 已實施錯誤邊界保護");
-  console.log("");
-  console.log("🎯 進一步優化建議:");
-  console.log("   1. 考慮使用 CDN 加速靜態資源");
-  console.log("   2. 實施關鍵 CSS 內聯");
-  console.log("   3. 優化圖片格式（使用 WebP）");
-  console.log("   4. 實施資源預載入策略");
-  console.log("   5. 監控 Core Web Vitals 指標");
+  logger.log("💡 性能優化建議:");
+  logger.log("   ✅ 已實施 React.lazy() 動態載入");
+  logger.log("   ✅ 已實施組件 memo 化");
+  logger.log("   ✅ 已實施圖片懶載入");
+  logger.log("   ✅ 已實施 Service Worker 快取");
+  logger.log("   ✅ 已實施錯誤邊界保護");
+  logger.log("");
+  logger.log("🎯 進一步優化建議:");
+  logger.log("   1. 考慮使用 CDN 加速靜態資源");
+  logger.log("   2. 實施關鍵 CSS 內聯");
+  logger.log("   3. 優化圖片格式（使用 WebP）");
+  logger.log("   4. 實施資源預載入策略");
+  logger.log("   5. 監控 Core Web Vitals 指標");
 }
 
 // 執行分析

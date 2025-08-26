@@ -3,7 +3,7 @@ import {
   StyledFloatingButtons,
   StyledFloatingBtn,
 } from "./FloatingButtonsStyles";
-import getAssetUrl from "../../utils/getAssetUrl";
+import getImageUrl from "../../utils/getImageUrl";
 
 // 按鈕資料陣列，避免重複程式碼
 const buttonData = [
@@ -11,14 +11,15 @@ const buttonData = [
     href: "https://lin.ee/1WTpxdf",
     title: "加入LINE",
     aria: "加入LINE",
-    imgSrc: getAssetUrl("/images/social_icon/line.webp"),
+    imgSrc: getImageUrl("/images/social_icon/line.webp"),
+    imgAlt: "LINE",
     external: true,
   },
   {
     href: "tel:077227407",
     title: "撥打電話",
     aria: "撥打電話",
-    imgSrc: getAssetUrl("/images/social_icon/phone.webp"),
+    imgSrc: getImageUrl("/images/social_icon/phone.webp"),
     imgAlt: "電話",
     external: false,
   },

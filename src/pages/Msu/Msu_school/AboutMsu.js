@@ -2,7 +2,7 @@ import React from "react";
 import "./AboutMsu.scss";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
-import getAssetUrl from "../../../utils/getAssetUrl";
+import getImageUrl from "../../../utils/getImageUrl";
 
 function AboutMsu() {
   return (
@@ -10,9 +10,9 @@ function AboutMsu() {
       <ImageTextSection
         title="MSU 密西根州立大學"
         subtitle="學校介紹"
-        imageUrl={getAssetUrl("/images/Msu/Michigan State University_01.webp")}
+        imageUrl={getImageUrl("/images/Msu/Michigan State University_01.webp")}
         imageAlt="Michigan State University"
-        bgImageUrl={getAssetUrl("/images/banner/banner3-768.webp")}
+        bgImageUrl={getImageUrl("/images/banner/banner3-768.webp")}
       />
       <SectionContainer>
         <section className="intro" aria-label="學校介紹">

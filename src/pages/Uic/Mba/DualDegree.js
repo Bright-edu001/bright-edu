@@ -2,6 +2,7 @@ import React from "react";
 import "./DualDegree.scss";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero"; // 引入新的組件
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import getImageUrl from "../../../utils/getImageUrl";
 
 function DualDegree() {
   return (
@@ -27,12 +28,20 @@ function DualDegree() {
         </p>
         <div className="photo-gallery">
           <img
-            src="/images/Uic/Mba/photo_6334573812795951537_y.webp"
+            src={getImageUrl(
+              "/images/Uic/Mba/photo_6334573812795951537_y.webp"
+            )}
             alt="UIC MBA 學生合照 1"
+            width="1200"
+            height="329"
           />
           <img
-            src="/images/Uic/Mba/photo_6334573812795951536_y.webp"
+            src={getImageUrl(
+              "/images/Uic/Mba/photo_6334573812795951536_y.webp"
+            )}
             alt="UIC MBA 學生合照 2"
+            width="1200"
+            height="329"
           />
         </div>
       </SectionContainer>

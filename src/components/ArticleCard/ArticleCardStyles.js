@@ -88,7 +88,7 @@ export const StyledContent = styled.div`
 `;
 
 export const StyledTitle = styled.h3`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: #1c184a;
   @media (max-width: 1024px) {

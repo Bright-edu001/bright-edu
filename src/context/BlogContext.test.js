@@ -29,7 +29,7 @@ describe("BlogContext", () => {
     getNews.mockResolvedValue(newsData);
   });
 
-  it("filterByCategory returns posts in each category", async () => {
+  it("searchByKeyword  returns posts in each category", async () => {
     const wrapper = ({ children }) => <BlogProvider>{children}</BlogProvider>;
     const { result } = renderHook(() => useContext(BlogContext), { wrapper });
 
@@ -41,8 +41,8 @@ describe("BlogContext", () => {
     expect(result.current.searchByKeyword("breaking")).toEqual(newsData);
   });
 
-  // 驗證 searchByKeyword 能正確搜尋不同型態的 content
-  it("finds keywords within array and object content structures", async () => {
+  // 驗證 filterByCategory 能正確回傳各分類的文章
+  it("filterByCategory returns posts for each category", async () => {
     // 使用 BlogProvider 包裹 context
     const wrapper = ({ children }) => <BlogProvider>{children}</BlogProvider>;
     // 取得 context

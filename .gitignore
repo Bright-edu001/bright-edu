@@ -27,5 +27,6 @@ yarn-error.log*
 *.css
 *.css.map
 !src/styles/critical.css
+!src/styles/fonts.css
 
 

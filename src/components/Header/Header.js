@@ -3,7 +3,7 @@ import { Menu, Drawer, ConfigProvider } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { menuItems } from "../../config/menuConfig";
 import "./Header.scss";
-import getAssetUrl from "../../utils/getAssetUrl";
+import getImageUrl from "../../utils/getImageUrl";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -34,7 +34,7 @@ const Header = () => {
     const handleMouseLeave = (e) => {
       // 檢查是否是選單項目的 mouseleave
       if (e.target.closest(".ant-menu-submenu")) {
-        setAnimationDuration("0.5s"); // 關閉時間
+        setAnimationDuration("0.7s"); // 關閉時間
       }
     };
 
@@ -152,7 +152,7 @@ const Header = () => {
             <div className="logo">
               <Link to="/" title="Bright Education 首頁">
                 <img
-                  src={getAssetUrl("/images/header/logo.webp")}
+                  src={getImageUrl("/images/header/logo.webp")}
                   className="logo-img responsive-img"
                   alt="Bright Education Logo"
                   width="150"

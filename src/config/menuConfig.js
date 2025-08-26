@@ -215,8 +215,14 @@ export const menuItems = [
       },
       {
         key: "ms",
-        label: "MS Programs",
-        path: "/uic-business-school/ms/msprograms",
+        label: (
+          <Link
+            to="/uic-business-school/ms/msprograms"
+            className="nav-link-color"
+          >
+            MS Programs
+          </Link>
+        ),
         children: [
           {
             key: "ms-main",

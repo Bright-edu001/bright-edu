@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./RankingPage.module.scss"; // 修正：引入 SCSS 模組
 import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
+import getImageUrl from "../../../../utils/getImageUrl";
 
 function RankingPage() {
   const rankings = [
@@ -56,9 +57,11 @@ function RankingPage() {
             <div className={styles.rankingsLogo}>
               <img
                 className="responsive-img"
-                src={`/images/Uic/ranking/Ranking.webp`}
+                src={getImageUrl(`/images/Uic/ranking/Ranking.webp`)}
                 alt="UIC Rankings"
                 loading="lazy"
+                width="350"
+                height="103"
               />
             </div>
             <div className={styles.rankingsTitle}>
