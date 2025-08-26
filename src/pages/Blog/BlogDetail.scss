@@ -133,6 +133,26 @@
   }
 }
 
+/* Also style when both classes are present on the same element (e.g. <Link class="blog-back-btn blog-detail-back">) */
+.blog-back-btn.blog-detail-back,
+.blog-detail-back.blog-back-btn {
+  margin: 3rem auto;
+  display: block;
+  padding: 10px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  color: $color-black;
+  &:hover {
+    background: $color-nav;
+    color: $color-white;
+    border-color: $color-nav;
+  }
+}
+
 .blog-detail-notfound {
   padding: 2rem;
 }
