@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+**/node_modules
 /.pnp
 .pnp.js
 
@@ -22,6 +23,24 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Firebase
+firebase-debug.log*
+
+# 測試和臨時檔案
+test-*.js
+*test.js
+*Test.js
+*.backup
+*.bak
+*.tmp
+
+# 文檔備份檔案
+*_BACKUP_*.md
+*_FIX_*.md
+*_GUIDE_*.md
+*_STATUS_*.md
+*_SUMMARY_*.md
 
 # compiled styles
 *.css
