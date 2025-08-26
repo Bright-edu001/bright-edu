@@ -64,6 +64,7 @@
     .ant-menu-horizontal {
       width: 100%;
       justify-content: flex-end;
+      align-items: center;
     }
 
     @media (max-width: 1024px) {
@@ -87,6 +88,9 @@
     color: $color-nav; // Using variable from _variables.scss
     font-size: 18px !important;
     font-weight: 700 !important;
+    display: flex !important; /* make menu titles use flex layout */
+    height: 50px !important; /* set requested height */
+    align-items: center !important; /* vertically center content */
 
     &:hover {
       color: $color-uic; // Using variable from _variables.scss
@@ -145,6 +149,26 @@
     color: $color-nav !important;
     font-weight: 700 !important;
   }
+}
+
+/* Popup (portal) submenu title override: AntD may inject rules with higher specificity
+   such as :where(.css-dev-only-do-not-override-...) .ant-menu-submenu-popup ...
+   Add matching selectors and !important to ensure our 50px height and centering apply */
+:where(.css-dev-only-do-not-override-12gvrfx).ant-menu-submenu-popup
+  .ant-menu-vertical
+  > .ant-menu-item,
+:where(.css-dev-only-do-not-override-12gvrfx).ant-menu-submenu-popup
+  .ant-menu-vertical
+  > .ant-menu-submenu
+  > .ant-menu-submenu-title,
+.ant-menu-submenu-popup .ant-menu-vertical > .ant-menu-item,
+.ant-menu-submenu-popup
+  .ant-menu-vertical
+  > .ant-menu-submenu
+  > .ant-menu-submenu-title {
+  height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
 // Mobile Drawer Styles - Placed outside .header to apply globally to the portal
