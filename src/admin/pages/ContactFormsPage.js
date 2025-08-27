@@ -33,6 +33,7 @@ import {
   limit,
 } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
+import { syncWithRetry, checkSyncServiceHealth } from "../../config/syncConfig";
 import dayjs from "dayjs";
 
 const { Option } = Select;
@@ -216,40 +217,24 @@ function ContactFormsPage() {
         throw new Error("請先登入管理後台");
       }
 
-      // 調用本地同步服務器
-      const response = await fetch(
-        "http://localhost:3002/api/sync-google-sheets",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      // 檢查服務健康狀態
+      const healthCheck = await checkSyncServiceHealth();
+      if (!healthCheck.success) {
+        throw new Error("同步服務目前無法使用，請稍後再試");
       }
 
-      const result = await response.json();
+      // 執行同步（帶重試機制）
+      const result = await syncWithRetry();
 
-      if (result.success) {
-        message.success({
-          content: result.message || `同步完成！新增 ${result.count} 筆資料`,
-          key: "sync",
-          duration: 4,
-        });
-      } else {
-        message.error({
-          content: result.message || "同步失敗",
-          key: "sync",
-          duration: 4,
-        });
-      }
+      message.success({
+        content: result.message || `同步完成！新增 ${result.count} 筆資料`,
+        key: "sync",
+        duration: 4,
+      });
     } catch (error) {
       console.error("同步 Google Sheets 失敗:", error);
       message.error({
-        content: "同步失敗，請檢查網路連線或聯絡系統管理員",
+        content: error.message || "同步失敗，請檢查網路連線或聯絡系統管理員",
         key: "sync",
         duration: 4,
       });
