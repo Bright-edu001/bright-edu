@@ -1,0 +1,21 @@
+{
+  "name": "google-sheets-sync-service",
+  "version": "1.0.0",
+  "description": "Google Sheets to Firestore sync service for Bright-Edu",
+  "main": "localSyncServer.js",
+  "scripts": {
+    "start": "node localSyncServer.js",
+    "dev": "node localSyncServer.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "firebase-admin": "^11.10.1",
+    "googleapis": "^126.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Bright-Edu",
+  "license": "ISC"
+}

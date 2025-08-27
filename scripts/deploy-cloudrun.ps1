@@ -30,8 +30,8 @@ gcloud run deploy $ServiceName `
     --memory 512Mi `
     --cpu 1 `
     --max-instances 10 `
-    --set-env-vars "NODE_ENV=production,FIREBASE_PROJECT_ID=$ProjectId" `
-    --no-allow-unauthenticated
+    --set-env-vars "NODE_ENV=production,FIREBASE_PROJECT_ID=$ProjectId,SYNC_API_KEY=bright-edu-sync-2024-secure-key" `
+    --allow-unauthenticated
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "❌ Cloud Run 部署失敗" -ForegroundColor Red
@@ -52,10 +52,11 @@ Write-Host "🌐 服務 URL: $serviceUrl" -ForegroundColor Blue
 Write-Host "💊 健康檢查: $serviceUrl/api/health" -ForegroundColor Blue
 Write-Host "🔗 同步 API: $serviceUrl/api/sync-google-sheets" -ForegroundColor Blue
 
-Write-Host "📝 注意：由於組織政策限制，需要使用身份驗證來訪問服務" -ForegroundColor Yellow
-Write-Host "🔑 使用以下命令獲取訪問令牌：" -ForegroundColor Yellow
-Write-Host "   gcloud auth print-access-token" -ForegroundColor Gray
+Write-Host "📝 注意：服務已啟用公開存取並加上 API 金鑰保護" -ForegroundColor Yellow
+Write-Host "🔑 API 金鑰：bright-edu-sync-2024-secure-key" -ForegroundColor Yellow
 
 Write-Host "🧪 測試命令：" -ForegroundColor Yellow
-Write-Host "   `$token = gcloud auth print-access-token" -ForegroundColor Gray
-Write-Host "   Invoke-RestMethod -Uri '$serviceUrl/api/health' -Headers @{ 'Authorization' = 'Bearer `$token' }" -ForegroundColor Gray
+Write-Host "   # 測試健康檢查（無需 API 金鑰）" -ForegroundColor Gray
+Write-Host "   Invoke-RestMethod -Uri '$serviceUrl/api/health'" -ForegroundColor Gray
+Write-Host "   # 測試同步（需要 API 金鑰）" -ForegroundColor Gray
+Write-Host "   Invoke-RestMethod -Uri '$serviceUrl/api/sync-google-sheets' -Method POST -Headers @{ 'x-api-key' = 'bright-edu-sync-2024-secure-key' }" -ForegroundColor Gray
