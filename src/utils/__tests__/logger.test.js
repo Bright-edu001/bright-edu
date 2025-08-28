@@ -29,4 +29,30 @@ describe("logger", () => {
     logger.log("test");
     expect(consoleSpy).not.toHaveBeenCalled();
   });
+
+  // 🔥 測試：performance 日誌在所有環境都會輸出
+  it("logs performance messages in all environments", async () => {
+    jest.resetModules();
+    process.env.NODE_ENV = "production";
+    consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+    const logger = (await import("../logger")).default;
+    logger.performance("test performance");
+    expect(consoleSpy).toHaveBeenCalledWith(
+      "🚀 [PERFORMANCE]",
+      "test performance"
+    );
+  });
+
+  // 🔥 測試：formSubmit 日誌在所有環境都會輸出
+  it("logs formSubmit messages in all environments", async () => {
+    jest.resetModules();
+    process.env.NODE_ENV = "production";
+    consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+    const logger = (await import("../logger")).default;
+    logger.formSubmit("test form submit");
+    expect(consoleSpy).toHaveBeenCalledWith(
+      "📝 [FORM_SUBMIT]",
+      "test form submit"
+    );
+  });
 });

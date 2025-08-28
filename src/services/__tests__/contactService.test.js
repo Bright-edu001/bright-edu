@@ -27,11 +27,15 @@ jest.mock("../../utils/logger", () => ({
   log: jest.fn(),
   warn: jest.fn(),
   error: jest.fn(),
+  performance: jest.fn(),
+  formSubmit: jest.fn(),
 }));
 
 describe("ContactService", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    // 🔥 清除 contactService 的快取，避免測試間相互影響
+    contactService.recentSubmissions.clear();
   });
 
   describe("saveToFirestore", () => {
@@ -58,10 +62,10 @@ describe("ContactService", () => {
           source: "website_contact_form",
           status: "pending",
           createdAt: mockServerTimestamp,
-          updatedAt: mockServerTimestamp,
-          metadata: expect.objectContaining({
-            userAgent: expect.any(String),
-          }),
+          // 🔥 測試簡化後的結構：直接欄位而非 metadata 物件
+          url: expect.any(String),
+          userAgent: expect.any(String),
+          referrer: expect.any(String),
         })
       );
       expect(result).toBe("mock-doc-id");
@@ -130,9 +134,9 @@ describe("ContactService", () => {
         .mockResolvedValue({ result: "success" });
 
       const formData = {
-        name: "測試使用者",
-        email: "test@example.com",
-        message: "這是測試訊息",
+        name: "測試使用者 全部成功",
+        email: "test-success@example.com",
+        message: "這是測試全部成功的訊息",
       };
 
       const result = await contactService.saveToBoth(
@@ -155,9 +159,9 @@ describe("ContactService", () => {
         .mockRejectedValueOnce(new Error("GET failed"));
 
       const formData = {
-        name: "測試使用者",
-        email: "test@example.com",
-        message: "這是測試訊息",
+        name: "測試使用者 Google Sheets 失敗",
+        email: "test-gs-fail@example.com",
+        message: "這是測試 Google Sheets 失敗的訊息",
       };
 
       const result = await contactService.saveToBoth(
@@ -178,9 +182,9 @@ describe("ContactService", () => {
         .mockResolvedValue({ result: "success" });
 
       const formData = {
-        name: "測試使用者",
-        email: "test@example.com",
-        message: "這是測試訊息",
+        name: "測試使用者 Firestore 失敗",
+        email: "test-firestore-fail@example.com",
+        message: "這是測試 Firestore 失敗的訊息",
       };
 
       const result = await contactService.saveToBoth(

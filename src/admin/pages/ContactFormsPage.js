@@ -20,6 +20,7 @@ import {
   ReloadOutlined,
   ExportOutlined,
   SyncOutlined,
+  ClearOutlined,
 } from "@ant-design/icons";
 import {
   collection,
@@ -201,6 +202,44 @@ function ContactFormsPage() {
     link.click();
   };
 
+  // 清除所有聯絡表單資料
+  const handleClearAll = async () => {
+    if (forms.length === 0) {
+      message.info("沒有資料需要清除");
+      return;
+    }
+
+    try {
+      message.loading({
+        content: `正在清除 ${forms.length} 筆聯絡表單資料...`,
+        key: "clear",
+        duration: 0,
+      });
+
+      // 批次刪除所有聯絡表單
+      const deletePromises = forms.map((form) =>
+        deleteDoc(doc(db, "contact_forms", form.id))
+      );
+
+      await Promise.all(deletePromises);
+
+      message.success({
+        content: `已成功清除 ${forms.length} 筆聯絡表單資料`,
+        key: "clear",
+        duration: 4,
+      });
+
+      console.log(`🗑️ 已清除 ${forms.length} 筆聯絡表單資料`);
+    } catch (error) {
+      console.error("清除資料失敗:", error);
+      message.error({
+        content: "清除資料失敗，請稍後再試",
+        key: "clear",
+        duration: 4,
+      });
+    }
+  };
+
   // 同步 Google Sheets 資料
   const handleSync = async () => {
     setSyncLoading(true);
@@ -218,19 +257,67 @@ function ContactFormsPage() {
       }
 
       // 檢查服務健康狀態
+      console.log("🔍 開始檢查同步服務健康狀態...");
       const healthCheck = await checkSyncServiceHealth();
+
       if (!healthCheck.success) {
-        throw new Error("同步服務目前無法使用，請稍後再試");
+        console.warn("⚠️ 同步服務健康檢查失敗:", healthCheck.error);
+        // 提供更具體的錯誤信息
+        let errorMessage = "同步服務目前無法使用";
+        if (healthCheck.error.includes("連接超時")) {
+          errorMessage = "連接同步服務超時，請檢查網路連線";
+        } else if (healthCheck.error.includes("ERR_CONNECTION_REFUSED")) {
+          errorMessage = "無法連接到同步服務，服務可能暫時維護中";
+        } else if (healthCheck.error) {
+          errorMessage = `同步服務錯誤: ${healthCheck.error}`;
+        }
+        throw new Error(errorMessage);
       }
+
+      console.log("✅ 同步服務健康檢查通過，開始執行同步...");
 
       // 執行同步（帶重試機制）
       const result = await syncWithRetry();
 
-      message.success({
-        content: result.message || `同步完成！新增 ${result.count} 筆資料`,
-        key: "sync",
-        duration: 4,
-      });
+      // 處理同步結果
+      if (result.count === 0) {
+        // 當 Google Sheets 為空時，檢查是否需要清除現有資料
+        if (forms.length > 0) {
+          // 如果本地有資料但 Google Sheets 為空，提示用戶可能需要清除
+          console.log("⚠️ Google Sheets 為空，但本地仍有資料");
+          message.warning({
+            content: `Google Sheets 為空，但本地仍有 ${forms.length} 筆資料。如需清除本地資料以同步空白狀態，請使用「清除所有資料」按鈕。`,
+            key: "sync",
+            duration: 8,
+          });
+        } else {
+          // 本地也沒有資料
+          console.log("� 同步完成，無資料變更");
+          message.success({
+            content: result.message || "同步完成，資料已是最新狀態",
+            key: "sync",
+            duration: 4,
+          });
+        }
+      } else if (result.count > 0) {
+        // 如果有新增資料，Firestore 監聽器會自動更新 UI
+        console.log(
+          `📝 同步完成，新增 ${result.count} 筆資料，資料將自動更新...`
+        );
+        message.success({
+          content: `同步完成！新增 ${result.count} 筆資料`,
+          key: "sync",
+          duration: 4,
+        });
+      } else {
+        // 其他情況
+        console.log("📋 同步完成，無資料變更");
+        message.success({
+          content: result.message || "同步完成，資料已是最新狀態",
+          key: "sync",
+          duration: 4,
+        });
+      }
     } catch (error) {
       console.error("同步 Google Sheets 失敗:", error);
       message.error({
@@ -373,6 +460,22 @@ function ContactFormsPage() {
             >
               同步 Google Sheets
             </Button>
+            <Popconfirm
+              title="清除所有資料"
+              description={`確定要清除所有 ${forms.length} 筆聯絡表單資料嗎？此操作無法復原。`}
+              onConfirm={handleClearAll}
+              okText="確定清除"
+              cancelText="取消"
+              okType="danger"
+            >
+              <Button
+                icon={<ClearOutlined />}
+                disabled={forms.length === 0}
+                danger
+              >
+                清除所有資料
+              </Button>
+            </Popconfirm>
             <Button
               icon={<ExportOutlined />}
               onClick={handleExport}

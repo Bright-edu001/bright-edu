@@ -30,6 +30,14 @@ const logger = {
       console.error(...args);
     }
   },
+  // 🔥 效能相關日誌，在所有環境都會記錄
+  performance: (...args) => {
+    console.log("🚀 [PERFORMANCE]", ...args);
+  },
+  // 🔥 表單送出相關的重要日誌，在所有環境都會記錄
+  formSubmit: (...args) => {
+    console.log("📝 [FORM_SUBMIT]", ...args);
+  },
 };
 
 // 將 logger 物件導出，供其他模組使用

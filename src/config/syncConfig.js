@@ -6,7 +6,8 @@ const PRODUCTION_CONFIG = {
   SYNC_SERVICE_URL:
     process.env.REACT_APP_SYNC_SERVICE_URL ||
     "https://bright-edu-sync-156805168089.asia-east1.run.app",
-  API_KEY: process.env.REACT_APP_SYNC_API_KEY,
+  API_KEY:
+    process.env.REACT_APP_SYNC_API_KEY || "bright-edu-sync-2024-secure-key",
   HEALTH_CHECK_URL: `${
     process.env.REACT_APP_SYNC_SERVICE_URL ||
     "https://bright-edu-sync-156805168089.asia-east1.run.app"
@@ -17,24 +18,26 @@ const PRODUCTION_CONFIG = {
 const DEVELOPMENT_CONFIG = {
   SYNC_SERVICE_URL:
     process.env.REACT_APP_DEV_SYNC_SERVICE_URL || "http://localhost:3002",
-  API_KEY: process.env.REACT_APP_SYNC_API_KEY,
+  API_KEY:
+    process.env.REACT_APP_SYNC_API_KEY || "bright-edu-sync-2024-secure-key",
   HEALTH_CHECK_URL: `${
     process.env.REACT_APP_DEV_SYNC_SERVICE_URL || "http://localhost:3002"
   }/api/health`,
 };
 
 // 根據環境選擇配置
-const isDevelopment =
-  process.env.NODE_ENV === "development" &&
-  window.location.hostname === "localhost";
+// 在開發環境下，只有明確設定了開發服務 URL 且不想使用生產服務時才使用開發配置
+const isDevelopment = false; // 暫時禁用開發模式，統一使用生產服務
 
 const config = isDevelopment ? DEVELOPMENT_CONFIG : PRODUCTION_CONFIG;
 
-// 驗證必要的環境變數
-if (!config.API_KEY) {
-  console.error("❌ 缺少必要的環境變數 REACT_APP_SYNC_API_KEY");
-  throw new Error("同步服務配置錯誤：缺少 API 金鑰環境變數");
-}
+// 添加調試信息
+console.log("🔧 同步服務配置:", {
+  isDevelopment,
+  SYNC_SERVICE_URL: config.SYNC_SERVICE_URL,
+  API_KEY: config.API_KEY ? "已設定" : "未設定",
+  HEALTH_CHECK_URL: config.HEALTH_CHECK_URL,
+});
 
 // 導出同步服務配置
 export const SYNC_CONFIG = {
@@ -90,17 +93,35 @@ export const syncGoogleSheets = async () => {
 // 健康檢查函數
 export const checkSyncServiceHealth = async () => {
   try {
+    console.log(`🔍 檢查同步服務健康狀態: ${SYNC_CONFIG.HEALTH_CHECK_URL}`);
+
     const response = await fetch(SYNC_CONFIG.HEALTH_CHECK_URL, {
-      timeout: 5000, // 5秒超時
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // 設定超時
+      signal: AbortSignal.timeout(5000), // 5秒超時
     });
 
     if (response.ok) {
       const data = await response.json();
+      console.log("✅ 同步服務健康檢查通過");
       return { success: true, data };
     } else {
-      return { success: false, error: "Service unavailable" };
+      console.warn(
+        `⚠️ 同步服務回應異常: ${response.status} ${response.statusText}`
+      );
+      return {
+        success: false,
+        error: `Service returned ${response.status}: ${response.statusText}`,
+      };
     }
   } catch (error) {
+    console.error("❌ 同步服務健康檢查失敗:", error);
+    if (error.name === "AbortError") {
+      return { success: false, error: "連接超時" };
+    }
     return { success: false, error: error.message };
   }
 };

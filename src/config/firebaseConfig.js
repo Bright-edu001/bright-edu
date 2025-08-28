@@ -1,6 +1,6 @@
 // ===== 所有 import 必須放最上方 =====
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, enableNetwork } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getFunctions } from "firebase/functions";
 import {
@@ -53,6 +53,20 @@ try {
 
 // 取得 Firestore 資料庫實例，供全站資料存取（須在 App Check 設定之後）
 const db = getFirestore(app);
+
+// 🔥 優化 1: 預先啟用 Firebase 網路連接以提升效能
+try {
+  enableNetwork(db)
+    .then(() => {
+      logger.performance("🚀 Firebase 網路連接已預先啟用");
+    })
+    .catch((error) => {
+      logger.warn("⚠️ Firebase 網路連接啟用失敗:", error);
+    });
+} catch (error) {
+  logger.warn("⚠️ Firebase enableNetwork 初始化失敗:", error);
+}
+
 // 取得 Google Analytics 實例（用於網站流量分析）
 const analytics = getAnalytics(app);
 // 取得 Cloud Functions 實例 (設定為 asia-east1 區域)

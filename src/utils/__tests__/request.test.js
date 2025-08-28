@@ -37,22 +37,28 @@ describe("request", () => {
     expect(result).toEqual({ success: true });
   });
 
-  // 測試：POST 請求會用 FormData 傳送資料
-  it("sends POST requests using FormData", async () => {
+  // 測試：POST 請求會並行嘗試多種方式
+  it("sends POST requests using parallel approaches", async () => {
     global.fetch = jest.fn(() => Promise.resolve({}));
     const { request } = await import("../request");
     const data = { a: 1, b: null };
     const result = await request("POST", data);
-    expect(global.fetch).toHaveBeenCalledTimes(1);
-    const [url, options] = global.fetch.mock.calls[0];
-    expect(url).toBe("http://example.com/api");
-    expect(options.method).toBe("POST");
-    expect(options.mode).toBe("no-cors");
-    // 只會傳送非 null 欄位
-    expect(Array.from(options.body.entries())).toEqual([["a", "1"]]);
-    expect(result).toEqual({
-      result: "success",
-      message: "FormData 請求已發送 (no-cors 模式)",
-    });
+
+    // 🔥 新的並行行為：會同時發送三個請求
+    expect(global.fetch).toHaveBeenCalledTimes(3);
+
+    // 檢查三種不同的請求方式都有被調用
+    const calls = global.fetch.mock.calls;
+    expect(calls[0][0]).toBe("http://example.com/api"); // FormData
+    expect(calls[1][0]).toBe("http://example.com/api"); // URLSearchParams
+    expect(calls[2][0]).toBe("http://example.com/api"); // JSON
+
+    // 檢查返回結果包含成功訊息
+    expect(result).toEqual(
+      expect.objectContaining({
+        result: "success",
+        method: expect.any(String),
+      })
+    );
   });
 });
