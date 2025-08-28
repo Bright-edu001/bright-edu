@@ -17,9 +17,6 @@ function FoodAttractions() {
             也因為芝加哥擁有600多個公園，也自詡為"花園之城(City in the
             Garden)"。
           </p>
-          <p className="food-attractions-text">
-            芝加哥擁有當地獨特美食，UIC同學或美國留學的同學及遊客一定都要去品嘗，獨特風味絕對超出想像!
-          </p>
         </section>
 
         {/* 景點部分 */}

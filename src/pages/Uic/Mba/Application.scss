@@ -41,6 +41,17 @@
     }
   }
 }
+.reminder {
+  @include paragraph-style;
+  padding: 12px 16px;
+  background: $color-gray-ultralight;
+  color: $color-nav;
+  border-left: 4px solid $color-uic;
+  border-right: 4px solid $color-uic;
+  border-radius: 6px;
+  text-align: center;
+  margin: 0 auto $spacing-xl;
+}
 
 .mba-application-section {
   display: flex;

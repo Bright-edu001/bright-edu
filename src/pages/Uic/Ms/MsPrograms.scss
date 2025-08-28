@@ -10,6 +10,28 @@
       text-align: left;
       border-bottom: 1px solid $color-uic;
       width: 100%;
+      margin-bottom: $spacing-sm;
+    }
+    h4 {
+      font-size: 20px;
+      text-align: left;
+    }
+    p {
+      font-size: 18px;
+      text-align: left;
+      margin-top: $spacing-xs;
+    }
+    .programs-reasons {
+      margin-top: $spacing-sm;
+      ul {
+        display: flex;
+        flex-direction: column;
+        margin-top: $spacing-sm;
+        text-align: left;
+        list-style: none;
+        font-size: 18px;
+        gap: $spacing-xs;
+      }
     }
   }
 }

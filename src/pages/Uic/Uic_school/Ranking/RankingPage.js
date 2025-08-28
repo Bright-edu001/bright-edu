@@ -9,7 +9,7 @@ function RankingPage() {
     {
       rankPrefix: "TOP",
       rankNumber: "1",
-      description: "全美地區最大醫藥研究型大學",
+      description: "芝加哥最大規模研究型大學",
       source: "Largest research university in Chicago",
     },
 

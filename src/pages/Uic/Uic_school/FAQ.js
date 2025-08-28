@@ -91,13 +91,11 @@ const FAQ = () => {
                 isExpanded={expandedQuestions["l1"]}
                 onToggle={toggleQuestion}
               >
-                <p>
-                  MBA學費今年是USD 39000，不包含學雜費跟生活費用。MS
-                  Programs學費是USD 38000+，不包含學雜費跟生活費用。
-                </p>
+                <p>MBA學費今年是USD 45000，不包含學雜費跟生活費用。</p>
+                <p>MS Programs學費是USD 37306+，不包含學雜費跟生活費用。</p>
                 <p>
                   學雜費部分，一年費用是大約USD
-                  7500-8500，學生入學之後，每學期進行繳交，確切學雜費由學校公布的為準。
+                  8000-9000，學生入學之後，每學期進行繳交，確切學雜費由學校公布的為準。
                 </p>
               </AccordionItem>
 
@@ -174,7 +172,7 @@ const FAQ = () => {
             <Accordion>
               <AccordionItem
                 id="o1"
-                title="預期UIC一年制MBA的校友資源，口碑獲得會不會高?"
+                title="請問UIC 一年制MBA的校方筆試、口試難度會不會高?"
                 isExpanded={expandedQuestions["o1"]}
                 onToggle={toggleQuestion}
               >
@@ -197,7 +195,7 @@ const FAQ = () => {
 
               <AccordionItem
                 id="o3"
-                title="預期UIC商學院碩士課程是否為STEM學位呢?"
+                title="請問UIC商學院碩士課程是否為STEM學位呢?"
                 isExpanded={expandedQuestions["o3"]}
                 onToggle={toggleQuestion}
               >
@@ -241,7 +239,7 @@ const FAQ = () => {
 
               <AccordionItem
                 id="o6"
-                title="被錄取的人之中，是否有多渠道是華人工作經驗豐富?"
+                title="就讀的人之中，應屆生多還是畢業有工作經驗者居多?"
                 isExpanded={expandedQuestions["o6"]}
                 onToggle={toggleQuestion}
               >

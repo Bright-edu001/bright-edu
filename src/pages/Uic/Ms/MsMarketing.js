@@ -12,7 +12,7 @@ function MsMarketing() {
   const whyList = [
     {
       title: "結合理論與實務的先進課程",
-      desc: "UIC商學院的Master of Science in Finance (MSF)提供全面的課程設計、師資指導、專業學習軌道及實務經驗，幫助你在金融領域的各個領域取得成功。",
+      desc: "UIC的Master of Science in Marketing (MSM)課程結合了行銷理論與實務應用，讓你在迅速發展的行銷領域中掌握前沿知識與技能。",
     },
     {
       title: "快速且靈活的學位選擇",
