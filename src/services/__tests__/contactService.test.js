@@ -36,6 +36,13 @@ describe("ContactService", () => {
     jest.clearAllMocks();
     // 🔥 清除 contactService 的快取，避免測試間相互影響
     contactService.recentSubmissions.clear();
+    // 設置 fetch mock
+    global.fetch = jest.fn();
+  });
+
+  afterEach(() => {
+    // 清理 global fetch mock
+    delete global.fetch;
   });
 
   describe("saveToFirestore", () => {
@@ -129,9 +136,12 @@ describe("ContactService", () => {
       const mockDocRef = { id: "mock-doc-id" };
       addDoc.mockResolvedValue(mockDocRef);
 
-      const mockGoogleSheetsRequest = jest
-        .fn()
-        .mockResolvedValue({ result: "success" });
+      // Mock the Firebase Extensions HTTP request
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
+        json: () =>
+          Promise.resolve({ success: true, message: "Data saved to sheet" }),
+      });
 
       const formData = {
         name: "測試使用者 全部成功",
@@ -139,12 +149,10 @@ describe("ContactService", () => {
         message: "這是測試全部成功的訊息",
       };
 
-      const result = await contactService.saveToBoth(
-        formData,
-        mockGoogleSheetsRequest
-      );
+      const result = await contactService.saveToBoth(formData);
 
       expect(result.googleSheets.success).toBe(true);
+      expect(result.googleSheets.message).toBe("需要手動同步到 Google Sheets");
       expect(result.firestore.success).toBe(true);
       expect(result.firestore.docId).toBe("mock-doc-id");
     });
@@ -153,23 +161,17 @@ describe("ContactService", () => {
       const mockDocRef = { id: "mock-doc-id" };
       addDoc.mockResolvedValue(mockDocRef);
 
-      const mockGoogleSheetsRequest = jest
-        .fn()
-        .mockRejectedValueOnce(new Error("POST failed"))
-        .mockRejectedValueOnce(new Error("GET failed"));
-
       const formData = {
         name: "測試使用者 Google Sheets 失敗",
         email: "test-gs-fail@example.com",
         message: "這是測試 Google Sheets 失敗的訊息",
       };
 
-      const result = await contactService.saveToBoth(
-        formData,
-        mockGoogleSheetsRequest
-      );
+      const result = await contactService.saveToBoth(formData);
 
-      expect(result.googleSheets.success).toBe(false);
+      // 現在只儲存到 Firestore，Google Sheets 標記為需要手動同步
+      expect(result.googleSheets.success).toBe(true);
+      expect(result.googleSheets.message).toBe("需要手動同步到 Google Sheets");
       expect(result.firestore.success).toBe(true);
       expect(result.firestore.docId).toBe("mock-doc-id");
     });
@@ -177,9 +179,12 @@ describe("ContactService", () => {
     it("should handle Firestore failure with Google Sheets success", async () => {
       addDoc.mockRejectedValue(new Error("Firestore error"));
 
-      const mockGoogleSheetsRequest = jest
-        .fn()
-        .mockResolvedValue({ result: "success" });
+      // Mock Firebase Extensions HTTP request success
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
+        json: () =>
+          Promise.resolve({ success: true, message: "Data saved to sheet" }),
+      });
 
       const formData = {
         name: "測試使用者 Firestore 失敗",
@@ -187,57 +192,11 @@ describe("ContactService", () => {
         message: "這是測試 Firestore 失敗的訊息",
       };
 
-      const result = await contactService.saveToBoth(
-        formData,
-        mockGoogleSheetsRequest
-      );
+      const result = await contactService.saveToBoth(formData);
 
       expect(result.googleSheets.success).toBe(true);
       expect(result.firestore.success).toBe(false);
       expect(result.firestore.error).toBeInstanceOf(Error);
-    });
-  });
-
-  describe("saveToGoogleSheets", () => {
-    it("should try POST first, then GET on failure", async () => {
-      const mockRequest = jest
-        .fn()
-        .mockRejectedValueOnce(new Error("POST failed"))
-        .mockResolvedValueOnce({ result: "success" });
-
-      const formData = {
-        name: "測試使用者",
-        email: "test@example.com",
-        message: "這是測試訊息",
-      };
-
-      const result = await contactService.saveToGoogleSheets(
-        formData,
-        mockRequest
-      );
-
-      expect(mockRequest).toHaveBeenCalledTimes(2);
-      expect(mockRequest).toHaveBeenNthCalledWith(1, "POST", formData);
-      expect(mockRequest).toHaveBeenNthCalledWith(2, "GET", formData);
-      expect(result.method).toBe("GET");
-    });
-
-    it("should return POST result when successful", async () => {
-      const mockRequest = jest.fn().mockResolvedValue({ result: "success" });
-
-      const formData = {
-        name: "測試使用者",
-        email: "test@example.com",
-        message: "這是測試訊息",
-      };
-
-      const result = await contactService.saveToGoogleSheets(
-        formData,
-        mockRequest
-      );
-
-      expect(mockRequest).toHaveBeenCalledTimes(1);
-      expect(result.method).toBe("POST");
     });
   });
 });

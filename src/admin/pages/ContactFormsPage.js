@@ -12,6 +12,10 @@ import {
   Input,
   Tooltip,
   Popconfirm,
+  Switch,
+  InputNumber,
+  Badge,
+  Descriptions,
 } from "antd";
 import {
   EyeOutlined,
@@ -21,6 +25,9 @@ import {
   ExportOutlined,
   SyncOutlined,
   ClearOutlined,
+  ClockCircleOutlined,
+  PlayCircleOutlined,
+  PauseCircleOutlined,
 } from "@ant-design/icons";
 import {
   collection,
@@ -34,7 +41,7 @@ import {
   limit,
 } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
-import { syncWithRetry, checkSyncServiceHealth } from "../../config/syncConfig";
+import firestoreToSheetsSync from "../../services/firestoreToSheetsSync";
 import dayjs from "dayjs";
 
 const { Option } = Select;
@@ -51,6 +58,11 @@ function ContactFormsPage() {
     status: "all",
   });
   const [syncLoading, setSyncLoading] = useState(false);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [batchDeleteLoading, setBatchDeleteLoading] = useState(false);
+  const [autoSyncStatus, setAutoSyncStatus] = useState(null);
+  const [isAutoSyncModalVisible, setIsAutoSyncModalVisible] = useState(false);
+  const [autoSyncForm] = Form.useForm();
 
   // 即時監聽 Firestore 資料
   useEffect(() => {
@@ -101,6 +113,24 @@ function ContactFormsPage() {
       }
     };
   }, [filters.status]);
+
+  // 載入自動同步狀態
+  useEffect(() => {
+    const loadAutoSyncStatus = () => {
+      const status = firestoreToSheetsSync.getAutoSyncStatus();
+      setAutoSyncStatus(status);
+    };
+
+    // 初次載入
+    loadAutoSyncStatus();
+
+    // 每分鐘更新一次狀態顯示
+    const statusInterval = setInterval(loadAutoSyncStatus, 60000);
+
+    return () => {
+      clearInterval(statusInterval);
+    };
+  }, []);
 
   // 狀態顏色對應
   const getStatusColor = (status) => {
@@ -174,6 +204,31 @@ function ContactFormsPage() {
     }
   };
 
+  // 批量刪除功能
+  const handleBatchDelete = async () => {
+    if (selectedRowKeys.length === 0) {
+      message.warning("請先選擇要刪除的項目");
+      return;
+    }
+
+    setBatchDeleteLoading(true);
+    try {
+      const deletePromises = selectedRowKeys.map((id) =>
+        deleteDoc(doc(db, "contact_forms", id))
+      );
+
+      await Promise.all(deletePromises);
+
+      message.success(`成功刪除 ${selectedRowKeys.length} 筆資料`);
+      setSelectedRowKeys([]); // 清空選擇
+    } catch (error) {
+      console.error("批量刪除失敗:", error);
+      message.error("批量刪除失敗");
+    } finally {
+      setBatchDeleteLoading(false);
+    }
+  };
+
   // 匯出資料
   const handleExport = () => {
     const csvData = forms.map((form) => ({
@@ -240,12 +295,12 @@ function ContactFormsPage() {
     }
   };
 
-  // 同步 Google Sheets 資料
+  // 同步 Firestore 資料到 Google Sheets
   const handleSync = async () => {
     setSyncLoading(true);
     try {
       message.loading({
-        content: "正在從 Google Sheets 同步資料...",
+        content: "正在將 Firestore 資料同步到 Google Sheets...",
         key: "sync",
         duration: 0,
       });
@@ -258,68 +313,85 @@ function ContactFormsPage() {
 
       // 檢查服務健康狀態
       console.log("🔍 開始檢查同步服務健康狀態...");
-      const healthCheck = await checkSyncServiceHealth();
+      const healthCheck = await firestoreToSheetsSync.checkHealth();
 
       if (!healthCheck.success) {
         console.warn("⚠️ 同步服務健康檢查失敗:", healthCheck.error);
-        // 提供更具體的錯誤信息
-        let errorMessage = "同步服務目前無法使用";
-        if (healthCheck.error.includes("連接超時")) {
-          errorMessage = "連接同步服務超時，請檢查網路連線";
-        } else if (healthCheck.error.includes("ERR_CONNECTION_REFUSED")) {
-          errorMessage = "無法連接到同步服務，服務可能暫時維護中";
-        } else if (healthCheck.error) {
-          errorMessage = `同步服務錯誤: ${healthCheck.error}`;
-        }
-        throw new Error(errorMessage);
-      }
 
-      console.log("✅ 同步服務健康檢查通過，開始執行同步...");
+        // 在開發環境中，如果是網路相關錯誤，給予警告但繼續執行
+        const isDevelopment =
+          process.env.NODE_ENV === "development" ||
+          window.location.hostname === "localhost";
 
-      // 執行同步（帶重試機制）
-      const result = await syncWithRetry();
-
-      // 處理同步結果
-      if (result.count === 0) {
-        // 當 Google Sheets 為空時，檢查是否需要清除現有資料
-        if (forms.length > 0) {
-          // 如果本地有資料但 Google Sheets 為空，提示用戶可能需要清除
-          console.log("⚠️ Google Sheets 為空，但本地仍有資料");
+        if (
+          isDevelopment &&
+          (healthCheck.error.includes("網路連接受限") ||
+            healthCheck.error.includes("CORS") ||
+            healthCheck.error.includes("Failed to fetch"))
+        ) {
+          console.warn(
+            "🚧 開發環境檢測到網路限制，將繼續執行同步（可能會失敗）"
+          );
           message.warning({
-            content: `Google Sheets 為空，但本地仍有 ${forms.length} 筆資料。如需清除本地資料以同步空白狀態，請使用「清除所有資料」按鈕。`,
+            content: "開發環境：跳過網路連接檢查",
             key: "sync",
-            duration: 8,
+            duration: 2,
           });
         } else {
-          // 本地也沒有資料
-          console.log("� 同步完成，無資料變更");
+          // 提供更具體的錯誤信息
+          let errorMessage = "同步服務目前無法使用";
+          if (healthCheck.error.includes("連接超時")) {
+            errorMessage = "連接同步服務超時，請檢查網路連線";
+          } else if (healthCheck.error.includes("ERR_CONNECTION_REFUSED")) {
+            errorMessage = "無法連接到同步服務，服務可能暫時維護中";
+          } else if (healthCheck.error) {
+            errorMessage = `同步服務錯誤: ${healthCheck.error}`;
+          }
+          throw new Error(errorMessage);
+        }
+      } else {
+        console.log("✅ 同步服務健康檢查通過，開始執行同步...");
+      }
+
+      // 執行從 Firestore 到 Google Sheets 的同步
+      const result = await firestoreToSheetsSync.triggerManualSync();
+
+      // 處理同步結果
+      if (result.results.total === 0) {
+        console.log("📝 Firestore 中沒有資料需要同步");
+        message.success({
+          content: "Firestore 中沒有資料需要同步",
+          key: "sync",
+          duration: 4,
+        });
+      } else if (result.results.success > 0) {
+        console.log(
+          `📤 成功同步 ${result.results.success} 筆資料到 Google Sheets`
+        );
+
+        if (result.results.failed > 0) {
+          message.warning({
+            content: `同步完成！成功 ${result.results.success} 筆，失敗 ${result.results.failed} 筆`,
+            key: "sync",
+            duration: 6,
+          });
+        } else {
           message.success({
-            content: result.message || "同步完成，資料已是最新狀態",
+            content: `同步完成！成功將 ${result.results.success} 筆資料同步到 Google Sheets`,
             key: "sync",
             duration: 4,
           });
         }
-      } else if (result.count > 0) {
-        // 如果有新增資料，Firestore 監聽器會自動更新 UI
-        console.log(
-          `📝 同步完成，新增 ${result.count} 筆資料，資料將自動更新...`
-        );
-        message.success({
-          content: `同步完成！新增 ${result.count} 筆資料`,
-          key: "sync",
-          duration: 4,
-        });
       } else {
-        // 其他情況
-        console.log("📋 同步完成，無資料變更");
-        message.success({
-          content: result.message || "同步完成，資料已是最新狀態",
+        console.log("⚠️ 同步過程中發生錯誤");
+        message.error({
+          content: result.message || "同步過程中發生錯誤",
           key: "sync",
           duration: 4,
         });
       }
     } catch (error) {
-      console.error("同步 Google Sheets 失敗:", error);
+      console.error("同步 Firestore 到 Google Sheets 失敗:", error);
       message.error({
         content: error.message || "同步失敗，請檢查網路連線或聯絡系統管理員",
         key: "sync",
@@ -328,6 +400,52 @@ function ContactFormsPage() {
     } finally {
       setSyncLoading(false);
     }
+  };
+
+  // 開啟自動同步設定對話框
+  const handleOpenAutoSync = () => {
+    const status = firestoreToSheetsSync.getAutoSyncStatus();
+    autoSyncForm.setFieldsValue({
+      enabled: status.enabled,
+      intervalHours: status.intervalHours,
+    });
+    setIsAutoSyncModalVisible(true);
+  };
+
+  // 保存自動同步設定
+  const handleSaveAutoSync = async (values) => {
+    try {
+      if (values.enabled) {
+        const success = firestoreToSheetsSync.startAutoSync(
+          values.intervalHours
+        );
+        if (success) {
+          message.success(
+            `自動同步已啟動，每 ${values.intervalHours} 小時執行一次`
+          );
+        } else {
+          message.error("啟動自動同步失敗");
+          return;
+        }
+      } else {
+        firestoreToSheetsSync.stopAutoSync();
+        message.success("自動同步已停止");
+      }
+
+      // 更新狀態
+      const newStatus = firestoreToSheetsSync.getAutoSyncStatus();
+      setAutoSyncStatus(newStatus);
+      setIsAutoSyncModalVisible(false);
+    } catch (error) {
+      console.error("設定自動同步失敗:", error);
+      message.error("設定自動同步失敗");
+    }
+  };
+
+  // 取消自動同步設定
+  const handleCancelAutoSync = () => {
+    setIsAutoSyncModalVisible(false);
+    autoSyncForm.resetFields();
   };
 
   const columns = [
@@ -458,8 +576,52 @@ function ContactFormsPage() {
               loading={syncLoading}
               type="primary"
             >
-              同步 Google Sheets
+              同步到 Google Sheets
             </Button>
+            <Tooltip
+              title={
+                autoSyncStatus?.enabled
+                  ? `自動同步已啟用，每 ${autoSyncStatus.intervalHours} 小時執行一次`
+                  : "設定自動同步功能"
+              }
+            >
+              <Badge
+                dot={autoSyncStatus?.enabled}
+                color={autoSyncStatus?.enabled ? "green" : "gray"}
+              >
+                <Button
+                  icon={
+                    autoSyncStatus?.enabled ? (
+                      <PauseCircleOutlined />
+                    ) : (
+                      <ClockCircleOutlined />
+                    )
+                  }
+                  onClick={handleOpenAutoSync}
+                  type={autoSyncStatus?.enabled ? "default" : "dashed"}
+                >
+                  自動同步
+                </Button>
+              </Badge>
+            </Tooltip>
+            <Popconfirm
+              title="批量刪除"
+              description={`確定要刪除選中的 ${selectedRowKeys.length} 筆資料嗎？此操作無法復原。`}
+              onConfirm={handleBatchDelete}
+              okText="確定刪除"
+              cancelText="取消"
+              okType="danger"
+              disabled={selectedRowKeys.length === 0}
+            >
+              <Button
+                icon={<DeleteOutlined />}
+                disabled={selectedRowKeys.length === 0}
+                loading={batchDeleteLoading}
+                danger
+              >
+                刪除選中項目 ({selectedRowKeys.length})
+              </Button>
+            </Popconfirm>
             <Popconfirm
               title="清除所有資料"
               description={`確定要清除所有 ${forms.length} 筆聯絡表單資料嗎？此操作無法復原。`}
@@ -497,6 +659,11 @@ function ContactFormsPage() {
           dataSource={forms}
           rowKey="id"
           loading={loading}
+          rowSelection={{
+            selectedRowKeys,
+            onChange: setSelectedRowKeys,
+            preserveSelectedRowKeys: true,
+          }}
           pagination={{
             pageSize: 20,
             showSizeChanger: true,
@@ -607,6 +774,136 @@ function ContactFormsPage() {
           <Form.Item name="notes" label="備註">
             <TextArea rows={4} placeholder="可以記錄處理過程或其他備註..." />
           </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* 自動同步設定 Modal */}
+      <Modal
+        title="自動同步設定"
+        open={isAutoSyncModalVisible}
+        onOk={() => autoSyncForm.submit()}
+        onCancel={handleCancelAutoSync}
+        okText="保存設定"
+        cancelText="取消"
+        width={500}
+      >
+        <Form
+          form={autoSyncForm}
+          layout="vertical"
+          onFinish={handleSaveAutoSync}
+          initialValues={{
+            enabled: false,
+            intervalHours: 3,
+          }}
+        >
+          <Form.Item
+            name="enabled"
+            valuePropName="checked"
+            label="啟用自動同步"
+          >
+            <Switch
+              checkedChildren={<PlayCircleOutlined />}
+              unCheckedChildren={<PauseCircleOutlined />}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="intervalHours"
+            label="同步間隔（小時）"
+            rules={[
+              { required: true, message: "請設定同步間隔" },
+              {
+                type: "number",
+                min: 1,
+                max: 24,
+                message: "請輸入 1-24 小時之間的數值",
+              },
+            ]}
+          >
+            <InputNumber
+              min={1}
+              max={24}
+              step={1}
+              style={{ width: "100%" }}
+              placeholder="每幾小時執行一次同步"
+            />
+          </Form.Item>
+
+          {autoSyncStatus && (
+            <div
+              style={{
+                marginTop: 16,
+                padding: 12,
+                backgroundColor: "#f5f5f5",
+                borderRadius: 6,
+              }}
+            >
+              <Descriptions title="目前狀態" size="small" column={1}>
+                <Descriptions.Item label="狀態">
+                  <Badge
+                    status={autoSyncStatus.enabled ? "processing" : "default"}
+                    text={autoSyncStatus.enabled ? "運行中" : "已停止"}
+                  />
+                </Descriptions.Item>
+                {autoSyncStatus.enabled && (
+                  <>
+                    <Descriptions.Item label="同步間隔">
+                      每 {autoSyncStatus.intervalHours} 小時
+                    </Descriptions.Item>
+                    {autoSyncStatus.lastSyncTime && (
+                      <Descriptions.Item label="上次同步">
+                        {new Date(autoSyncStatus.lastSyncTime).toLocaleString()}
+                      </Descriptions.Item>
+                    )}
+                    {autoSyncStatus.nextSyncTime && (
+                      <Descriptions.Item label="下次同步">
+                        {new Date(autoSyncStatus.nextSyncTime).toLocaleString()}
+                      </Descriptions.Item>
+                    )}
+                    {autoSyncStatus.retryCount > 0 && (
+                      <Descriptions.Item label="重試次數">
+                        <Badge
+                          count={autoSyncStatus.retryCount}
+                          color="orange"
+                          style={{ backgroundColor: "#ff7875" }}
+                        />
+                        / {autoSyncStatus.maxRetries}
+                      </Descriptions.Item>
+                    )}
+                  </>
+                )}
+              </Descriptions>
+            </div>
+          )}
+
+          <div
+            style={{
+              marginTop: 16,
+              padding: 12,
+              backgroundColor: "#e6f7ff",
+              borderRadius: 6,
+            }}
+          >
+            <h4 style={{ margin: "0 0 8px 0", color: "#1890ff" }}>
+              💡 功能說明
+            </h4>
+            <ul
+              style={{
+                margin: 0,
+                paddingLeft: 20,
+                fontSize: "14px",
+                color: "#666",
+              }}
+            >
+              <li>
+                自動同步會在設定的時間間隔內將 Firestore 資料同步到 Google
+                Sheets
+              </li>
+              <li>如果連續失敗 3 次，自動同步會暫停，需要重新啟用</li>
+              <li>建議設定 3-24 小時的間隔，避免過於頻繁的同步</li>
+              <li>即使啟用自動同步，您仍可以隨時手動執行同步</li>
+            </ul>
+          </div>
         </Form>
       </Modal>
     </div>

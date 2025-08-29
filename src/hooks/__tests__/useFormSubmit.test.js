@@ -65,8 +65,8 @@ describe("useFormSubmit", () => {
   // 測試：送出成功後會重置表單並顯示成功訊息
   it("resets form and sets result.success after successful submission", async () => {
     contactService.saveToBoth.mockResolvedValue({
-      googleSheets: { success: true },
-      firestore: { success: true },
+      firestore: { success: true, docId: "test-doc-id", error: null },
+      googleSheets: { success: true, message: "需要手動同步到 Google Sheets" },
     });
 
     const { result } = renderHook(() => useFormSubmit());
@@ -100,11 +100,15 @@ describe("useFormSubmit", () => {
     expect(message.success).toHaveBeenCalled();
   });
 
-  // 測試：部分儲存成功的情況
-  it("handles partial save success", async () => {
+  // 測試：Firestore 儲存失敗的情況
+  it("handles firestore save failure", async () => {
     contactService.saveToBoth.mockResolvedValue({
-      googleSheets: { success: true },
-      firestore: { success: false, error: new Error("Firestore error") },
+      firestore: {
+        success: false,
+        docId: null,
+        error: new Error("Firestore error"),
+      },
+      googleSheets: { success: true, message: "需要手動同步到 Google Sheets" },
     });
 
     const { result } = renderHook(() => useFormSubmit());
@@ -126,9 +130,9 @@ describe("useFormSubmit", () => {
     });
 
     expect(result.current.result).toEqual(
-      expect.objectContaining({ success: true })
+      expect.objectContaining({ success: false })
     );
-    expect(message.success).toHaveBeenCalled();
+    expect(message.error).toHaveBeenCalled();
   });
 
   // 測試：完全儲存失敗的情況

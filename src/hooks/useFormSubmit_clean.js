@@ -17,14 +17,6 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }, []);
 
-  const handleChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      updateField(name, value);
-    },
-    [updateField]
-  );
-
   const resetForm = useCallback(() => {
     setForm(DEFAULT_FORM);
     setResult(null);
@@ -143,8 +135,8 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
               duration: 6,
             });
 
-            // 重置表單但保留結果
-            setForm(DEFAULT_FORM);
+            // 重置表單
+            resetForm();
 
             logger.log("✅ 表單已成功提交並重置");
           } else {
@@ -170,7 +162,7 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
             duration: 4,
           });
 
-          return { success: false, error: error.message };
+          throw error;
         }
       })();
 
@@ -183,7 +175,7 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
         setSubmitting(false);
       }
     },
-    [form, submitPromise, message, validateForm]
+    [form, submitPromise, message, validateForm, resetForm]
   );
 
   const testConnection = useCallback(async () => {
@@ -233,7 +225,6 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
     form,
     setForm,
     updateField,
-    handleChange,
     resetForm,
     submitting,
     result,

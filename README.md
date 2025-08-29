@@ -74,7 +74,6 @@ Bright Edu 是一個現代化的線上教育平台，提供高品質的課程內
 
 | 變數                           | 說明                                       |
 | ------------------------------ | ------------------------------------------ |
-| `REACT_APP_FORM_ENDPOINT`      | 表單送出的 Google Apps Script 端點         |
 | `REACT_APP_SENTRY_DSN`         | Sentry 用來接收錯誤回報的 DSN              |
 | `REACT_APP_RECAPTCHA_SITE_KEY` | reCAPTCHA v3 的 Site Key（用於 App Check） |
 | `NODE_ENV`                     | 設為 `production` 時啟用錯誤追蹤與最佳化   |
