@@ -18,7 +18,7 @@ const LoginPage = () => {
       } else {
         await login(values.username || values.email, values.password);
       }
-      navigate("/");
+      navigate("/admin");
     } catch (error) {
       console.error("Login error:", error);
     } finally {
@@ -30,7 +30,7 @@ const LoginPage = () => {
     setGoogleLoading(true);
     try {
       await loginWithGoogle();
-      navigate("/");
+      navigate("/admin");
     } catch (error) {
       console.error("Google login error:", error);
     } finally {
