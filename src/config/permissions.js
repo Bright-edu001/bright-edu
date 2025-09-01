@@ -83,6 +83,7 @@ export const DEFAULT_USER_ROLES = {
   // 超級管理員 (可以有多個)
   "admin@bright-edu.com": USER_ROLES.SUPER_ADMIN,
   "ceo@bright-edu.com": USER_ROLES.SUPER_ADMIN,
+  "web@bright-edu.com": USER_ROLES.SUPER_ADMIN,
 
   // 一般管理員
   "manager@bright-edu.com": USER_ROLES.ADMIN,
