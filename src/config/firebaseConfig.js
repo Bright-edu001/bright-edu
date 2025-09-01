@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, enableNetwork } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getFunctions } from "firebase/functions";
+import { getAuth } from "firebase/auth";
 import {
   initializeAppCheck,
   ReCaptchaV3Provider,
@@ -53,6 +54,9 @@ try {
 
 // 取得 Firestore 資料庫實例，供全站資料存取（須在 App Check 設定之後）
 const db = getFirestore(app);
+
+// 取得 Firebase Authentication 實例
+const auth = getAuth(app);
 
 // 🔥 優化 1: 預先啟用 Firebase 網路連接以提升效能
 try {
@@ -107,5 +111,14 @@ if (typeof window !== "undefined") {
 }
 
 // ===== 匯出區塊 =====
-// 匯出 Firestore、效能監控、Analytics、App Check、Functions 實例，供其他模組使用
-export { app, db, perf, analytics, appCheck, functions, fetchAppCheckToken };
+// 匯出 Firestore、效能監控、Analytics、App Check、Functions、Auth 實例，供其他模組使用
+export {
+  app,
+  db,
+  auth,
+  perf,
+  analytics,
+  appCheck,
+  functions,
+  fetchAppCheckToken,
+};

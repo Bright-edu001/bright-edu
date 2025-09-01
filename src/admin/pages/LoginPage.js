@@ -1,30 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Card, message } from "antd";
-import CryptoJS from "crypto-js"; // 新增：用於計算 SHA-256
-
-const EXPECTED_USERNAME = "admin";
-// 0000 的 SHA-256 雜湊（開發測試用；正式請改由後端比對）
-const EXPECTED_PASSWORD_HASH =
-  "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0";
+import { LockOutlined, UserOutlined, GoogleOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Card, Divider } from "antd";
+import { useAuth } from "../../context/AuthContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { login, loginWithGoogle, isProduction } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
-  const onFinish = (values) => {
-    // 前端模擬：用 SHA-256 將使用者輸入的密碼雜湊後比對
-    const inputHash = CryptoJS.SHA256(values.password).toString();
-
-    if (
-      values.username === EXPECTED_USERNAME &&
-      inputHash === EXPECTED_PASSWORD_HASH
-    ) {
-      localStorage.setItem("isAuthenticated", "true");
-      message.success("登入成功！");
+  const onFinish = async (values) => {
+    setLoading(true);
+    try {
+      if (isProduction) {
+        await login(values.email, values.password);
+      } else {
+        await login(values.username || values.email, values.password);
+      }
       navigate("/");
-    } else {
-      message.error("帳號或密碼錯誤！");
+    } catch (error) {
+      console.error("Login error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    setGoogleLoading(true);
+    try {
+      await loginWithGoogle();
+      navigate("/");
+    } catch (error) {
+      console.error("Google login error:", error);
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
@@ -38,7 +48,10 @@ const LoginPage = () => {
         background: "#f0f2f5",
       }}
     >
-      <Card title="管理後台登入" style={{ width: 400 }}>
+      <Card
+        title={`管理後台登入 ${isProduction ? "(正式環境)" : "(開發環境)"}`}
+        style={{ width: 400 }}
+      >
         <Form
           name="normal_login"
           className="login-form"
@@ -46,12 +59,27 @@ const LoginPage = () => {
           onFinish={onFinish}
         >
           <Form.Item
-            name="username"
-            rules={[{ required: true, message: "請輸入使用者名稱!" }]}
+            name={isProduction ? "email" : "username"}
+            rules={[
+              {
+                required: true,
+                message: isProduction ? "請輸入電子郵件!" : "請輸入使用者名稱!",
+              },
+              ...(isProduction
+                ? [
+                    {
+                      type: "email",
+                      message: "請輸入有效的電子郵件格式!",
+                    },
+                  ]
+                : []),
+            ]}
           >
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="使用者名稱"
+              placeholder={
+                isProduction ? "電子郵件 (@bright-edu.com)" : "使用者名稱"
+              }
             />
           </Form.Item>
           <Form.Item
@@ -61,7 +89,7 @@ const LoginPage = () => {
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
-              placeholder="密碼 "
+              placeholder="密碼"
             />
           </Form.Item>
           <Form.Item>
@@ -70,11 +98,39 @@ const LoginPage = () => {
               htmlType="submit"
               className="login-form-button"
               style={{ width: "100%" }}
+              loading={loading}
             >
               登入
             </Button>
           </Form.Item>
         </Form>
+
+        {isProduction && (
+          <>
+            <Divider>或</Divider>
+            <Button
+              icon={<GoogleOutlined />}
+              onClick={handleGoogleLogin}
+              loading={googleLoading}
+              style={{ width: "100%" }}
+            >
+              使用 Google 帳號登入
+            </Button>
+          </>
+        )}
+
+        {!isProduction && (
+          <div
+            style={{
+              marginTop: 16,
+              fontSize: 12,
+              color: "#666",
+              textAlign: "center",
+            }}
+          >
+            開發環境：使用 admin/0000 登入
+          </div>
+        )}
       </Card>
     </div>
   );
