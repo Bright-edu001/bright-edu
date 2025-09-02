@@ -22,7 +22,7 @@ const AuthContext = createContext();
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error("useAuth 必須在 AuthProvider 內使用");
   }
   return context;
 };
@@ -164,7 +164,7 @@ export const AuthProvider = ({ children }) => {
       message.success("已登出");
     } catch (error) {
       message.error("登出失敗");
-      console.error("Logout error:", error);
+      console.error("登出錯誤:", error);
     }
   };
 
@@ -196,7 +196,7 @@ export const AuthProvider = ({ children }) => {
             setUserRole(USER_ROLES.SUPER_ADMIN);
             setUserPermissions(getRolePermissions(USER_ROLES.SUPER_ADMIN));
           } catch (error) {
-            console.error("Error parsing stored user:", error);
+            console.error("解析已儲存用戶時出錯:", error);
             localStorage.removeItem("isAuthenticated");
             localStorage.removeItem("devUser");
             setUser(null);
