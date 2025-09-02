@@ -78,23 +78,52 @@ export const ROLE_PERMISSIONS = {
   ],
 };
 
-// 預設用戶角色配置 (基於email)
-export const DEFAULT_USER_ROLES = {
-  // 超級管理員 (可以有多個)
-  "admin@bright-edu.com": USER_ROLES.SUPER_ADMIN,
-  "ceo@bright-edu.com": USER_ROLES.SUPER_ADMIN,
+// 檢查環境
+const isProduction =
+  process.env.NODE_ENV === "production" ||
+  (typeof window !== "undefined" && window.location.hostname !== "localhost");
+
+// 本地開發環境的用戶角色配置
+const DEVELOPMENT_USER_ROLES = {
+  // 開發環境超級管理員
+  "dev-admin@bright-edu.com": USER_ROLES.SUPER_ADMIN,
+  "test-admin@bright-edu.com": USER_ROLES.SUPER_ADMIN,
+  "local-admin@bright-edu.com": USER_ROLES.SUPER_ADMIN,
+
+  // 開發環境管理員
+  "dev-manager@bright-edu.com": USER_ROLES.ADMIN,
+  "test-manager@bright-edu.com": USER_ROLES.ADMIN,
+
+  // 開發環境編輯者
+  "dev-editor@bright-edu.com": USER_ROLES.EDITOR,
+  "test-editor@bright-edu.com": USER_ROLES.EDITOR,
+
+  // 開發環境檢視者
+  "dev-viewer@bright-edu.com": USER_ROLES.VIEWER,
+  "test-viewer@bright-edu.com": USER_ROLES.VIEWER,
+};
+
+// 正式環境的用戶角色配置
+const PRODUCTION_USER_ROLES = {
+  // 正式環境超級管理員
   "web@bright-edu.com": USER_ROLES.SUPER_ADMIN,
+};
 
-  // 一般管理員
-  "manager@bright-edu.com": USER_ROLES.ADMIN,
-  "operations@bright-edu.com": USER_ROLES.ADMIN,
+// 根據環境選擇對應的用戶角色配置
+export const DEFAULT_USER_ROLES = isProduction
+  ? PRODUCTION_USER_ROLES
+  : DEVELOPMENT_USER_ROLES;
 
-  // 編輯者
-  "editor@bright-edu.com": USER_ROLES.EDITOR,
-  "content@bright-edu.com": USER_ROLES.EDITOR,
-
-  // 其他 @bright-edu.com 用戶預設為檢視者
-  // 可以在後台管理中手動調整
+// 獲取當前環境資訊
+export const getEnvironmentInfo = () => {
+  return {
+    isProduction,
+    environment: isProduction ? "正式環境" : "本地開發環境",
+    userRoles: isProduction ? PRODUCTION_USER_ROLES : DEVELOPMENT_USER_ROLES,
+    availableAccounts: Object.keys(
+      isProduction ? PRODUCTION_USER_ROLES : DEVELOPMENT_USER_ROLES
+    ),
+  };
 };
 
 // 獲取用戶角色
@@ -103,7 +132,7 @@ export const getUserRole = (email) => {
     return null; // 非組織用戶無角色
   }
 
-  // 檢查是否有特定角色配置
+  // 檢查是否有特定角色配置（根據當前環境）
   if (DEFAULT_USER_ROLES[email]) {
     return DEFAULT_USER_ROLES[email];
   }

@@ -27,6 +27,7 @@ import {
   PERMISSIONS,
   DEFAULT_USER_ROLES,
   getRolePermissions,
+  getEnvironmentInfo,
 } from "../../config/permissions";
 import { useAuth } from "../../context/AuthContext";
 import PermissionGuard from "../components/PermissionGuard";
@@ -39,14 +40,36 @@ const UserManagePage = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [form] = Form.useForm();
 
+  // 獲取環境資訊
+  const environmentInfo = getEnvironmentInfo();
+
+  // 開發環境測試函數
+  const handleEnvironmentTest = () => {
+    if (process.env.NODE_ENV === "development") {
+      console.group("🔧 環境資訊測試");
+      console.log("📍 當前環境:", environmentInfo.environment);
+      console.log("🚀 是否為正式環境:", environmentInfo.isProduction);
+      console.log("👥 可用帳號數量:", environmentInfo.availableAccounts.length);
+      console.log("📧 可用帳號列表:");
+      environmentInfo.availableAccounts.forEach((account, index) => {
+        const role = environmentInfo.userRoles[account];
+        console.log(`  ${index + 1}. ${account} (${role})`);
+      });
+      console.groupEnd();
+      message.info("環境資訊已輸出到控制台，請按 F12 查看");
+    }
+  };
+
   // 初始模擬用戶數據
   const getInitialUsers = () => {
-    const saved = localStorage.getItem("bright-edu-users");
+    const saved = localStorage.getItem(
+      `bright-edu-users-${environmentInfo.environment}`
+    );
     if (saved) {
       return JSON.parse(saved);
     }
 
-    // 如果沒有保存的數據，使用默認數據
+    // 如果沒有保存的數據，使用當前環境的默認數據
     return Object.entries(DEFAULT_USER_ROLES).map(([email, role]) => ({
       id: email,
       email,
@@ -59,17 +82,19 @@ const UserManagePage = () => {
 
   const [users, setUsers] = useState(getInitialUsers);
 
-  // 當用戶數據變化時保存到 localStorage
+  // 當用戶數據變化時保存到 localStorage（按環境分別儲存）
   useEffect(() => {
-    localStorage.setItem("bright-edu-users", JSON.stringify(users));
-  }, [users]);
+    localStorage.setItem(
+      `bright-edu-users-${environmentInfo.environment}`,
+      JSON.stringify(users)
+    );
+  }, [users, environmentInfo.environment]);
 
   // 重置用戶數據到初始狀態
   const handleResetUsers = () => {
     Modal.confirm({
       title: "確認重置",
-      content:
-        "確定要重置所有用戶數據到初始狀態嗎？這將恢復所有被刪除的用戶並重置角色。",
+      content: `確定要重置所有用戶數據到初始狀態嗎？這將恢復${environmentInfo.environment}的所有被刪除的用戶並重置角色。`,
       okType: "danger",
       onOk() {
         const initialUsers = Object.entries(DEFAULT_USER_ROLES).map(
@@ -83,7 +108,9 @@ const UserManagePage = () => {
           })
         );
         setUsers(initialUsers);
-        message.success("用戶數據已重置到初始狀態");
+        message.success(
+          `${environmentInfo.environment}用戶數據已重置到初始狀態`
+        );
       },
     });
   };
@@ -294,9 +321,39 @@ const UserManagePage = () => {
                 重置數據
               </Button>
             </PermissionGuard>
+            {/* 開發環境測試按鈕 */}
+            {!environmentInfo.isProduction && (
+              <Button
+                onClick={handleEnvironmentTest}
+                type="dashed"
+                size="small"
+              >
+                測試環境
+              </Button>
+            )}
           </Space>
         }
       >
+        {/* 環境資訊顯示 */}
+        <Alert
+          message={`當前環境：${environmentInfo.environment}`}
+          description={
+            <div>
+              <p>
+                此環境共有 {environmentInfo.availableAccounts.length}{" "}
+                個可用帳號。
+              </p>
+              <p>
+                <strong>可用帳號：</strong>
+                {environmentInfo.availableAccounts.join(", ")}
+              </p>
+            </div>
+          }
+          type={environmentInfo.isProduction ? "warning" : "success"}
+          showIcon
+          style={{ marginBottom: 16 }}
+        />
+
         <Alert
           message="權限系統說明"
           description="此頁面展示基於角色的權限管理系統。不同角色擁有不同的權限，可以控制用戶對系統功能的訪問。"
@@ -325,6 +382,7 @@ const UserManagePage = () => {
         }}
         okText="保存"
         cancelText="取消"
+        destroyOnHidden={true}
       >
         <Form form={form} layout="vertical">
           <Form.Item label="電子郵件" name="email">
@@ -356,13 +414,24 @@ const UserManagePage = () => {
             </Select>
           </Form.Item>
 
-          <Alert
-            message={`${ROLE_DISPLAY_NAMES[form.getFieldValue("role")]} 擁有 ${
-              getRolePermissions(form.getFieldValue("role")).length
-            } 項權限`}
-            type="info"
-            size="small"
-          />
+          <Form.Item
+            shouldUpdate={(prevValues, currentValues) =>
+              prevValues.role !== currentValues.role
+            }
+          >
+            {({ getFieldValue }) => {
+              const selectedRole = getFieldValue("role");
+              return selectedRole ? (
+                <Alert
+                  message={`${ROLE_DISPLAY_NAMES[selectedRole]} 擁有 ${
+                    getRolePermissions(selectedRole).length
+                  } 項權限`}
+                  type="info"
+                  size="small"
+                />
+              ) : null;
+            }}
+          </Form.Item>
         </Form>
       </Modal>
     </div>
