@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LockOutlined, UserOutlined, GoogleOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Card, Divider } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Card } from "antd";
 import { useAuth } from "../../context/AuthContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { login, loginWithGoogle, isProduction } = useAuth();
+  const { login, isProduction } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -23,18 +22,6 @@ const LoginPage = () => {
       console.error("Login error:", error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    setGoogleLoading(true);
-    try {
-      await loginWithGoogle();
-      navigate("/admin");
-    } catch (error) {
-      console.error("Google login error:", error);
-    } finally {
-      setGoogleLoading(false);
     }
   };
 
@@ -104,20 +91,6 @@ const LoginPage = () => {
             </Button>
           </Form.Item>
         </Form>
-
-        {isProduction && (
-          <>
-            <Divider>或</Divider>
-            <Button
-              icon={<GoogleOutlined />}
-              onClick={handleGoogleLogin}
-              loading={googleLoading}
-              style={{ width: "100%" }}
-            >
-              使用 Google 帳號登入
-            </Button>
-          </>
-        )}
 
         {!isProduction && (
           <div
