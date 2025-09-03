@@ -37,8 +37,10 @@ const { Option } = Select;
 const UserManagePage = () => {
   const { userRole } = useAuth();
   const [editModalVisible, setEditModalVisible] = useState(false);
+  const [addModalVisible, setAddModalVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [form] = Form.useForm();
+  const [addForm] = Form.useForm();
 
   // 獲取環境資訊
   const environmentInfo = getEnvironmentInfo();
@@ -155,6 +157,44 @@ const UserManagePage = () => {
       role: user.role,
     });
     setEditModalVisible(true);
+  };
+
+  // 新增用戶
+  const handleAddUser = () => {
+    addForm.resetFields();
+    setAddModalVisible(true);
+  };
+
+  // 保存新增用戶
+  const handleSaveNewUser = async () => {
+    try {
+      const values = await addForm.validateFields();
+
+      // 檢查 email 是否已存在
+      const emailExists = users.some((user) => user.email === values.email);
+      if (emailExists) {
+        message.error("此電子郵件已存在");
+        return;
+      }
+
+      // 創建新用戶
+      const newUser = {
+        id: values.email,
+        email: values.email,
+        role: values.role,
+        displayName: values.email.split("@")[0],
+        lastLogin: new Date().toISOString(),
+        status: "active",
+      };
+
+      setUsers((prevUsers) => [...prevUsers, newUser]);
+      message.success("用戶新增成功！");
+      setAddModalVisible(false);
+      addForm.resetFields();
+    } catch (error) {
+      console.error("新增失敗:", error);
+      message.error("新增失敗，請稍後再試");
+    }
   };
 
   // 保存用戶角色變更
@@ -314,7 +354,9 @@ const UserManagePage = () => {
         extra={
           <Space>
             <PermissionGuard permission={PERMISSIONS.CREATE_USERS}>
-              <Button type="primary">新增用戶</Button>
+              <Button type="primary" onClick={handleAddUser}>
+                新增用戶
+              </Button>
             </PermissionGuard>
             <PermissionGuard permission={PERMISSIONS.MANAGE_USERS}>
               <Button onClick={handleResetUsers} danger>
@@ -383,6 +425,7 @@ const UserManagePage = () => {
         okText="保存"
         cancelText="取消"
         destroyOnHidden={true}
+        forceRender={false}
       >
         <Form form={form} layout="vertical">
           <Form.Item label="電子郵件" name="email">
@@ -393,6 +436,83 @@ const UserManagePage = () => {
             label="角色"
             name="role"
             rules={[{ required: true, message: "請選擇角色" }]}
+          >
+            <Select>
+              {Object.entries(ROLE_DISPLAY_NAMES).map(([role, displayName]) => (
+                <Option
+                  key={role}
+                  value={role}
+                  disabled={
+                    // 非超級管理員不能設定超級管理員
+                    role === USER_ROLES.SUPER_ADMIN &&
+                    userRole !== USER_ROLES.SUPER_ADMIN
+                  }
+                >
+                  <Space>
+                    {getRoleIcon(role)}
+                    {displayName}
+                  </Space>
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            shouldUpdate={(prevValues, currentValues) =>
+              prevValues.role !== currentValues.role
+            }
+          >
+            {({ getFieldValue }) => {
+              const selectedRole = getFieldValue("role");
+              return selectedRole ? (
+                <Alert
+                  message={`${ROLE_DISPLAY_NAMES[selectedRole]} 擁有 ${
+                    getRolePermissions(selectedRole).length
+                  } 項權限`}
+                  type="info"
+                  size="small"
+                />
+              ) : null;
+            }}
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* 新增用戶對話框 */}
+      <Modal
+        title="新增用戶"
+        open={addModalVisible}
+        onOk={handleSaveNewUser}
+        onCancel={() => {
+          setAddModalVisible(false);
+          addForm.resetFields();
+        }}
+        okText="新增"
+        cancelText="取消"
+        destroyOnHidden={true}
+        forceRender={false}
+      >
+        <Form form={addForm} layout="vertical">
+          <Form.Item
+            label="電子郵件"
+            name="email"
+            rules={[
+              { required: true, message: "請輸入電子郵件" },
+              { type: "email", message: "請輸入有效的電子郵件格式" },
+              {
+                pattern: /@bright-edu\.com$/,
+                message: "電子郵件必須以 @bright-edu.com 結尾",
+              },
+            ]}
+          >
+            <Input placeholder="請輸入電子郵件 (例: user@bright-edu.com)" />
+          </Form.Item>
+
+          <Form.Item
+            label="角色"
+            name="role"
+            rules={[{ required: true, message: "請選擇角色" }]}
+            initialValue={USER_ROLES.VIEWER}
           >
             <Select>
               {Object.entries(ROLE_DISPLAY_NAMES).map(([role, displayName]) => (
