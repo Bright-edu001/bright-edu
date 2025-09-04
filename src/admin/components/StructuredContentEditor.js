@@ -180,9 +180,10 @@ const StructuredContentEditor = ({ value, onChange }) => {
       courseDateSection.items[programIndex] &&
       courseDateSection.items[programIndex].subItems[0]
     ) {
+      // 保留原始輸入，包括空行，只在最終保存時才過濾
       courseDateSection.items[programIndex].subItems[0].list = newList
         .split("\n")
-        .filter((item) => item.trim());
+        .map((item) => item); // 保留所有行，包括空行
     }
 
     setSections(newSections);
@@ -362,7 +363,19 @@ const StructuredContentEditor = ({ value, onChange }) => {
                               e.target.value
                             )
                           }
+                          onPressEnter={(e) => {
+                            // 允許在 TextArea 中使用 Enter 鍵換行
+                            e.stopPropagation();
+                          }}
+                          onKeyDown={(e) => {
+                            // 支援 Ctrl+Enter 或單純 Enter 換行
+                            if (e.key === "Enter") {
+                              e.stopPropagation();
+                              // 不阻止預設行為，讓 TextArea 正常換行
+                            }
+                          }}
                           placeholder="每行輸入一個課程領域"
+                          autoSize={{ minRows: 4, maxRows: 8 }}
                         />
                       </Form.Item>
                     </Col>
@@ -384,19 +397,18 @@ const StructuredContentEditor = ({ value, onChange }) => {
                         .find((s) => s.text === "Deadline")
                         ?.items?.[0]?.text?.match(/^([^(]+)/)?.[1]
                         ?.trim(),
-                      "MMM/YYYY"
+                      "MMM/DD/YYYY"
                     )
                   : null
               }
               onChange={(date, dateString) =>
                 updateDeadline(
                   sectionIndex,
-                  date ? date.format("MMM/YYYY") : ""
+                  date ? date.format("MMM/DD/YYYY") : ""
                 )
               }
-              format="MMM/YYYY"
+              format="MMM/DD/YYYY"
               placeholder="選擇截止日期"
-              picker="month"
             />
           </Form.Item>
         </Card>
