@@ -41,4 +41,4 @@ const logger = {
 };
 
 // 將 logger 物件導出，供其他模組使用
-module.exports = logger;
+export default logger;

@@ -2,15 +2,17 @@
 describe("performanceMonitor", () => {
   let performanceMonitor;
   let originalNavigator;
-  let logger;
   let logSpy;
   let originalPerformance;
+  let originalEnv;
 
   // 每次測試前重設 module 並 mock navigator.sendBeacon
   beforeEach(async () => {
+    originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = "development"; // 確保 logger 會執行
+
     jest.resetModules();
     ({ default: performanceMonitor } = await import("../performanceMonitor"));
-    logger = require("../logger");
     originalNavigator = global.navigator;
     originalPerformance = global.performance;
     Object.defineProperty(global, "navigator", {
@@ -28,6 +30,7 @@ describe("performanceMonitor", () => {
       configurable: true,
     });
     global.performance = originalPerformance;
+    process.env.NODE_ENV = originalEnv;
     if (logSpy) logSpy.mockRestore();
   });
 
@@ -49,9 +52,14 @@ describe("performanceMonitor", () => {
 
   // 測試：debug 模式下會 log metrics
   it("logs metrics in debug mode", () => {
+    // Mock logger 的 log 方法
+    const logger = require("../logger").default;
     logSpy = jest.spyOn(logger, "log").mockImplementation(() => {});
+
     performanceMonitor.setDebug(true);
     performanceMonitor.recordMetric("dbg", 5);
+
+    // 檢查 logger.log 是否被正確呼叫
     expect(logSpy).toHaveBeenCalledWith("DBG:", 5);
   });
   // 測試：cleanup 會停止記憶體使用量輪詢

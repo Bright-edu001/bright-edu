@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
-const logger = require("../src/utils/logger");
+const logger = (await import("../src/utils/logger.js")).default;
 
 console.log("🔍 正在分析專案性能...\n");
 
