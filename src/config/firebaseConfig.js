@@ -42,14 +42,29 @@ try {
       "[AppCheck] 缺少 REACT_APP_RECAPTCHA_SITE_KEY，App Check 未啟用。"
     );
   } else if (typeof window !== "undefined") {
+    // 檢查環境是否為 localhost 或開發環境
+    const isLocalhost =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname.includes("localhost");
+
+    if (isLocalhost) {
+      logger.warn(
+        "[AppCheck] 在 localhost 環境中，App Check 可能會失敗，這是正常現象"
+      );
+    }
+
     appCheck = initializeAppCheck(app, {
       provider: new ReCaptchaV3Provider(siteKey),
       isTokenAutoRefreshEnabled: true,
     });
+
+    logger.info("[AppCheck] App Check 已成功初始化");
   }
 } catch (e) {
   // 初始化失敗時記錄，但不阻擋應用啟動
   logger.error("[AppCheck] 初始化失敗: ", e);
+  logger.info("[AppCheck] 應用程式將繼續運行，但某些功能可能受限");
 }
 
 // 取得 Firestore 資料庫實例，供全站資料存取（須在 App Check 設定之後）
@@ -76,20 +91,47 @@ const analytics = getAnalytics(app);
 // 取得 Cloud Functions 實例 (設定為 asia-east1 區域)
 const functions = getFunctions(app, "asia-east1");
 // 若需要手動取得 App Check token，可呼叫此函式
-const fetchAppCheckToken = async (retries = 1) => {
+const fetchAppCheckToken = async (retries = 3) => {
   try {
     if (appCheck) {
-      await getToken(appCheck, /* forceRefresh */ false);
+      const token = await getToken(appCheck, /* forceRefresh */ false);
+      logger.info("[AppCheck] Token 獲取成功");
+      return token;
+    } else {
+      logger.warn("[AppCheck] App Check 未初始化，跳過 token 獲取");
+      return null;
     }
   } catch (err) {
-    if (retries > 0) {
-      setTimeout(() => fetchAppCheckToken(retries - 1), 1000);
-    } else {
-      logger.error("App Check token fetch failed:", err);
-      if (typeof window !== "undefined") {
-        alert("驗證服務暫時不可用，請稍後再試。");
+    logger.error("[AppCheck] Token 獲取失敗:", err);
+
+    // 檢查是否為節流錯誤
+    if (err.code === "app-check/throttled") {
+      logger.warn("[AppCheck] 請求被節流，等待後重試");
+      if (retries > 0) {
+        const delay = Math.min(1000 * (4 - retries), 5000); // 漸進式延遲
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        return fetchAppCheckToken(retries - 1);
       }
     }
+
+    // 檢查是否為 reCAPTCHA 相關錯誤
+    if (err.code === "app-check/recaptcha-error") {
+      logger.error("[AppCheck] reCAPTCHA 配置錯誤，請檢查站點金鑰");
+    }
+
+    if (retries > 0) {
+      setTimeout(() => fetchAppCheckToken(retries - 1), 2000);
+    } else {
+      logger.error("[AppCheck] Token 獲取最終失敗，重試次數已用完");
+      if (
+        typeof window !== "undefined" &&
+        !window.location.hostname.includes("localhost")
+      ) {
+        // 只在非 localhost 環境顯示警告
+        console.warn("App Check 驗證暫時不可用，部分功能可能受限。");
+      }
+    }
+    return null;
   }
 };
 
