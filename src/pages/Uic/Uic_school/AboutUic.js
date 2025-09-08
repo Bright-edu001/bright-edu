@@ -80,14 +80,14 @@ function AboutUic() {
                 <span className="label">所在城市</span>
                 <span className="value">芝加哥</span>
                 <span className="stats-value-detail">
-                  芝加哥唯一公立研究型大學
+                  （芝加哥唯一公立研究型大學）
                 </span>
               </li>
               <li>
                 <span className="label">校園面積</span>
                 <span className="value">233英畝</span>
                 <span className="stats-value-detail">
-                  芝加哥占地最大，約132個足球場大小
+                  （芝加哥最大，約132個足球場大小）
                 </span>
               </li>
             </ul>

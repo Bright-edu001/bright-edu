@@ -195,7 +195,7 @@ const RankingsAwards = () => {
             <div className="ranking-item">
               <div className="rank-header">
                 <h3 className="top-label">TOP</h3>
-                <span className="rank-number">8</span>
+                <span className="rank-number">9</span>
               </div>
               <p className="rank-description">
                 華爾街日報/泰晤士高等教育 最具價值學校前10排行榜

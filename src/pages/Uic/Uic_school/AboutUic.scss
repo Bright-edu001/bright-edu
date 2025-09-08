@@ -68,6 +68,8 @@
             font-size: $font-size-sm;
             font-weight: $font-weight-normal;
             color: $color-uic; // UIC red
+            text-align: left;
+            margin-left: -$spacing-xs; // 向左微調對齊
           }
         }
       }

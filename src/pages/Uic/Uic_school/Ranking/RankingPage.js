@@ -10,7 +10,7 @@ function RankingPage() {
       rankPrefix: "TOP",
       rankNumber: "1",
       description: "芝加哥最大規模研究型大學",
-      source: "Largest research university in Chicago",
+      source: "The Largest Research University in Chicago",
     },
 
     {
@@ -29,7 +29,7 @@ function RankingPage() {
     },
     {
       rankPrefix: "TOP",
-      rankNumber: "8",
+      rankNumber: "9",
       description: "華爾街日報/泰晤士高等教育 最具價值學校前10排行榜",
       source:
         'Wall Street Journal/THE - Which college give you the "Best Value"',
@@ -80,7 +80,7 @@ function RankingPage() {
             </h2>
             <div className={styles.rankingHighlightTextGroup}>
               <p className={styles.rankingHighlightText}>
-                全美公立大學 U.S.NEWS.
+                全美公立大學 U.S.NEWS
               </p>
               <p className={styles.rankingHighlightText}>
                 Top Public Schools 2025

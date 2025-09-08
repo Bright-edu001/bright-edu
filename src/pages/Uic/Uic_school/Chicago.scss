@@ -39,7 +39,7 @@
     .section-content {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       margin-bottom: $spacing-lg;
 
@@ -51,6 +51,26 @@
           color: $color-black;
           text-align: left;
           margin-bottom: $spacing-xs;
+        }
+      }
+      .history-text {
+        ul {
+          display: flex;
+          flex-direction: column;
+          font-size: 18px;
+          list-style-position: inside;
+          margin-bottom: $spacing-sm;
+          gap: $spacing-xs;
+        }
+      }
+      .transport-text {
+        ul {
+          display: flex;
+          flex-direction: column;
+          font-size: 18px;
+          list-style-position: inside;
+          margin-bottom: $spacing-sm;
+          gap: $spacing-xs;
         }
       }
     }
