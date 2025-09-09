@@ -1,4 +1,4 @@
-// ===== 所有 import 必須放最上方 =====
+// Firebase Hosting 專用的 App Check 配置
 import { initializeApp } from "firebase/app";
 import { getFirestore, enableNetwork } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
@@ -10,150 +10,275 @@ import {
   getToken,
 } from "firebase/app-check";
 import logger from "../utils/logger";
-// 如需其他 Firebase 產品，請在此引入對應 SDK
-// 參考官方文件：https://firebase.google.com/docs/web/setup#available-libraries
-// ===== Firebase 設定區塊 =====
 
-// ===== Firebase 設定區塊 =====
-// 使用環境變數設定金鑰資訊，避免敏感資料外洩
-// measurementId 僅部分服務（如 Analytics）需用到，可選填
+// Firebase 配置
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY, // API 金鑰
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN, // 授權網域
-  projectId: process.env.REACT_APP_PROJECT_ID, // 專案 ID
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET, // 雲端儲存桶名稱
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID, // 訊息發送者 ID
-  appId: process.env.REACT_APP_APP_ID, // 應用程式 ID
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID, // 分析用 ID（可選）
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-// ===== Firebase 初始化區塊 =====
 // 初始化 Firebase 應用程式
 const app = initializeApp(firebaseConfig);
-// ===== App Check（reCAPTCHA v3）初始化 =====
-// 初始化 App Check，防止未授權存取 Firebase 服務
-// 請確保此 site key 來自 Firebase Console > App Check 的 Web reCAPTCHA v3 提供者
-let appCheck;
-try {
-  const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
-  if (!siteKey) {
-    // 若未設定，會導致所有請求為「未驗證」。
-    logger.warn(
-      "[AppCheck] 缺少 REACT_APP_RECAPTCHA_SITE_KEY，App Check 未啟用。"
-    );
-  } else if (typeof window !== "undefined") {
-    // 檢查環境是否為 localhost 或開發環境
-    const isLocalhost =
-      window.location.hostname === "localhost" ||
-      window.location.hostname === "127.0.0.1" ||
-      window.location.hostname.includes("localhost");
 
-    if (isLocalhost) {
-      logger.warn(
-        "[AppCheck] 在 localhost 環境中，App Check 可能會失敗，這是正常現象"
-      );
-    }
-
-    appCheck = initializeAppCheck(app, {
-      provider: new ReCaptchaV3Provider(siteKey),
-      isTokenAutoRefreshEnabled: true,
-    });
-
-    logger.info("[AppCheck] App Check 已成功初始化");
-  }
-} catch (e) {
-  // 初始化失敗時記錄，但不阻擋應用啟動
-  logger.error("[AppCheck] 初始化失敗: ", e);
-  logger.info("[AppCheck] 應用程式將繼續運行，但某些功能可能受限");
-}
-
-// 取得 Firestore 資料庫實例，供全站資料存取（須在 App Check 設定之後）
+// 其他 Firebase 服務
 const db = getFirestore(app);
-
-// 取得 Firebase Authentication 實例
 const auth = getAuth(app);
-
-// 🔥 優化 1: 預先啟用 Firebase 網路連接以提升效能
-try {
-  enableNetwork(db)
-    .then(() => {
-      logger.performance("🚀 Firebase 網路連接已預先啟用");
-    })
-    .catch((error) => {
-      logger.warn("⚠️ Firebase 網路連接啟用失敗:", error);
-    });
-} catch (error) {
-  logger.warn("⚠️ Firebase enableNetwork 初始化失敗:", error);
-}
-
-// 取得 Google Analytics 實例（用於網站流量分析）
 const analytics = getAnalytics(app);
-// 取得 Cloud Functions 實例 (設定為 asia-east1 區域)
 const functions = getFunctions(app, "asia-east1");
-// 若需要手動取得 App Check token，可呼叫此函式
-const fetchAppCheckToken = async (retries = 3) => {
+
+// Firebase Hosting 環境檢測
+const isFirebaseHosting = () => {
+  if (typeof window === "undefined") return false;
+
+  const hostname = window.location.hostname;
+  return (
+    hostname.endsWith(".web.app") ||
+    hostname.endsWith(".firebaseapp.com") ||
+    hostname === "uicedu.org" ||
+    hostname === "uic-mba.tw"
+  );
+};
+
+// 改進的 App Check 初始化 - 特別針對 Firebase Hosting
+let appCheck = null;
+
+const initializeAppCheckForHosting = async () => {
   try {
-    if (appCheck) {
-      const token = await getToken(appCheck, /* forceRefresh */ false);
-      logger.info("[AppCheck] Token 獲取成功");
-      return token;
-    } else {
-      logger.warn("[AppCheck] App Check 未初始化，跳過 token 獲取");
+    const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+
+    if (!siteKey) {
+      logger.warn("[AppCheck] 缺少 REACT_APP_RECAPTCHA_SITE_KEY");
       return null;
     }
-  } catch (err) {
-    logger.error("[AppCheck] Token 獲取失敗:", err);
 
-    // 檢查是否為節流錯誤
-    if (err.code === "app-check/throttled") {
-      logger.warn("[AppCheck] 請求被節流，等待後重試");
-      if (retries > 0) {
-        const delay = Math.min(1000 * (4 - retries), 5000); // 漸進式延遲
-        await new Promise((resolve) => setTimeout(resolve, delay));
-        return fetchAppCheckToken(retries - 1);
+    // 檢查是否在 Firebase Hosting 環境
+    if (typeof window === "undefined") {
+      logger.info("[AppCheck] 伺服器端渲染環境，跳過初始化");
+      return null;
+    }
+
+    const currentHostname = window.location.hostname;
+    logger.info(`[AppCheck] 當前域名: ${currentHostname}`);
+
+    // Firebase Hosting 環境的特殊處理
+    if (isFirebaseHosting()) {
+      logger.info("[AppCheck] 檢測到 Firebase Hosting 環境");
+
+      // 確保 DOM 完全載入
+      if (document.readyState === "loading") {
+        await new Promise((resolve) => {
+          document.addEventListener("DOMContentLoaded", resolve);
+        });
       }
-    }
 
-    // 檢查是否為 reCAPTCHA 相關錯誤
-    if (err.code === "app-check/recaptcha-error") {
-      logger.error("[AppCheck] reCAPTCHA 配置錯誤，請檢查站點金鑰");
-    }
+      // 額外等待，確保 reCAPTCHA 腳本載入
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    if (retries > 0) {
-      setTimeout(() => fetchAppCheckToken(retries - 1), 2000);
+      // 檢查 reCAPTCHA 是否可用
+      if (typeof window.grecaptcha === "undefined") {
+        logger.warn("[AppCheck] reCAPTCHA 尚未載入，稍後重試");
+
+        // 等待 reCAPTCHA 載入
+        let retries = 5;
+        while (retries > 0 && typeof window.grecaptcha === "undefined") {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          retries--;
+        }
+
+        if (typeof window.grecaptcha === "undefined") {
+          logger.error("[AppCheck] reCAPTCHA 載入失敗");
+          return null;
+        }
+      }
+
+      // 初始化 App Check
+      appCheck = initializeAppCheck(app, {
+        provider: new ReCaptchaV3Provider(siteKey),
+        isTokenAutoRefreshEnabled: true,
+      });
+
+      logger.info("[AppCheck] 在 Firebase Hosting 上成功初始化");
+
+      // 立即測試 token 獲取
+      try {
+        const token = await getToken(appCheck, false);
+        logger.info("[AppCheck] 初始 token 獲取成功");
+      } catch (tokenError) {
+        logger.error("[AppCheck] 初始 token 獲取失敗:", tokenError);
+
+        // 提供詳細的錯誤診斷
+        await diagnoseAppCheckError(tokenError);
+      }
+
+      return appCheck;
     } else {
-      logger.error("[AppCheck] Token 獲取最終失敗，重試次數已用完");
-      if (
-        typeof window !== "undefined" &&
-        !window.location.hostname.includes("localhost")
-      ) {
-        // 只在非 localhost 環境顯示警告
-        console.warn("App Check 驗證暫時不可用，部分功能可能受限。");
+      // 非 Firebase Hosting 環境 (如 localhost)
+      logger.info("[AppCheck] 非 Firebase Hosting 環境");
+
+      if (currentHostname === "localhost" || currentHostname === "127.0.0.1") {
+        // 本地開發環境使用 debug token
+        window.self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+        logger.info("[AppCheck] 本地環境啟用 debug token");
       }
+
+      appCheck = initializeAppCheck(app, {
+        provider: new ReCaptchaV3Provider(siteKey),
+        isTokenAutoRefreshEnabled: true,
+      });
+
+      logger.info("[AppCheck] 本地環境初始化完成");
+      return appCheck;
     }
+  } catch (error) {
+    logger.error("[AppCheck] 初始化失敗:", error);
+    await diagnoseAppCheckError(error);
     return null;
   }
 };
 
-// ===== 效能監控（Performance Monitoring）初始化 =====
-// 僅在瀏覽器端動態載入 Performance SDK，避免 SSR 報錯
+// App Check 錯誤診斷
+const diagnoseAppCheckError = async (error) => {
+  logger.group("[AppCheck] 錯誤診斷");
+
+  try {
+    // 基本資訊
+    logger.info("錯誤代碼:", error.code);
+    logger.info("錯誤訊息:", error.message);
+    logger.info("當前域名:", window.location.hostname);
+    logger.info(
+      "reCAPTCHA 狀態:",
+      typeof window.grecaptcha !== "undefined" ? "已載入" : "未載入"
+    );
+
+    // 根據錯誤類型提供建議
+    switch (error.code) {
+      case "app-check/recaptcha-error":
+        logger.error("🚨 reCAPTCHA 配置錯誤:");
+        logger.error("1. 檢查 Firebase Console > App Check 設定");
+        logger.error("2. 確認 reCAPTCHA site key 正確");
+        logger.error("3. 確認域名在 reCAPTCHA Console 白名單中");
+        break;
+
+      case "app-check/throttled":
+        logger.warn("⏳ App Check 請求被節流");
+        logger.info("解決方法: 等待 1-2 分鐘後重試");
+        break;
+
+      case "app-check/fetch-status-error":
+        logger.error("🌐 網路連接問題");
+        logger.info("檢查網路連接和 Firebase 服務狀態");
+        break;
+
+      default:
+        logger.error("❓ 未知錯誤，建議檢查:");
+        logger.error("1. Firebase 專案配置");
+        logger.error("2. 網路連接");
+        logger.error("3. reCAPTCHA 設定");
+    }
+
+    // 環境資訊
+    logger.info("環境資訊:", {
+      userAgent: navigator.userAgent,
+      cookieEnabled: navigator.cookieEnabled,
+      onLine: navigator.onLine,
+    });
+  } catch (diagError) {
+    logger.error("診斷過程發生錯誤:", diagError);
+  } finally {
+    logger.groupEnd();
+  }
+};
+
+// 改進的 token 獲取函數
+const fetchAppCheckToken = async (retries = 3, forceRefresh = false) => {
+  if (!appCheck) {
+    logger.warn("[AppCheck] App Check 未初始化");
+    return null;
+  }
+
+  try {
+    const token = await getToken(appCheck, forceRefresh);
+    logger.info("[AppCheck] Token 獲取成功");
+    return token;
+  } catch (error) {
+    logger.error("[AppCheck] Token 獲取失敗:", error);
+
+    if (error.code === "app-check/throttled" && retries > 0) {
+      const delay = Math.min(2000 * (4 - retries), 10000);
+      logger.info(`[AppCheck] ${delay}ms 後重試 (剩餘 ${retries} 次)`);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      return fetchAppCheckToken(retries - 1, forceRefresh);
+    }
+
+    await diagnoseAppCheckError(error);
+    return null;
+  }
+};
+
+// 網路連接優化
+const enableFirebaseNetwork = async () => {
+  try {
+    await enableNetwork(db);
+    logger.info("🚀 Firebase 網路連接已啟用");
+  } catch (error) {
+    logger.warn("⚠️ Firebase 網路連接啟用失敗:", error);
+  }
+};
+
+// 初始化所有服務
+const initializeServices = async () => {
+  try {
+    logger.info("[Firebase] 開始初始化服務...");
+
+    // 並行初始化 App Check 和網路連接
+    const [appCheckResult] = await Promise.allSettled([
+      initializeAppCheckForHosting(),
+      enableFirebaseNetwork(),
+    ]);
+
+    if (appCheckResult.status === "fulfilled") {
+      logger.info("[Firebase] App Check 初始化完成");
+    } else {
+      logger.error("[Firebase] App Check 初始化失敗:", appCheckResult.reason);
+    }
+
+    logger.info("[Firebase] 所有服務初始化完成");
+  } catch (error) {
+    logger.error("[Firebase] 服務初始化失敗:", error);
+  }
+};
+
+// 延遲初始化
+if (typeof window !== "undefined") {
+  // 使用 requestIdleCallback 或 setTimeout 延遲初始化
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(() => initializeServices(), { timeout: 2000 });
+  } else {
+    setTimeout(initializeServices, 500);
+  }
+}
+
+// Performance Monitoring
 let perf;
 if (typeof window !== "undefined") {
   import("firebase/performance")
     .then(({ getPerformance }) => {
       try {
-        perf = getPerformance(app); // 初始化效能監控
+        perf = getPerformance(app);
       } catch (err) {
-        // 效能監控為選用功能，初始化失敗可忽略
+        logger.warn("[Performance] 初始化失敗:", err);
       }
     })
     .catch(() => {
-      // 若 Performance SDK 載入失敗則忽略
+      // Performance SDK 載入失敗可忽略
     });
 }
 
-// ===== 匯出區塊 =====
-// 匯出 Firestore、效能監控、Analytics、App Check、Functions、Auth 實例，供其他模組使用
 export {
   app,
   db,
@@ -163,4 +288,5 @@ export {
   appCheck,
   functions,
   fetchAppCheckToken,
+  initializeServices,
 };
