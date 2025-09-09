@@ -59,8 +59,8 @@ function MsAccounting() {
   const coreCoursePragaph =
     "UIC 商學院的 MSA 課程為期 1 到 2 年，不僅為你提供專業會計領域的知識與技能，還能幫助你準備多項專業考試，包括：";
   const coreCoursesIntroList = [
-    "CPA（Certified Public Accountant, 註冊會計師）考試",
-    "CMA（Certificate in Management Accounting, 管理會計師證書）考試",
+    "✅ CPA（Certified Public Accountant, 註冊會計師）考試",
+    "✅ CMA（Certificate in Management Accounting, 管理會計師證書）考試",
   ];
   const coreCoursesList = [];
   const coreCourseFoot =
