@@ -106,7 +106,7 @@ const initializeAppCheckForHosting = async () => {
 
       // 立即測試 token 獲取
       try {
-        const token = await getToken(appCheck, false);
+        await getToken(appCheck, false);
         logger.info("[AppCheck] 初始 token 獲取成功");
       } catch (tokenError) {
         logger.error("[AppCheck] 初始 token 獲取失敗:", tokenError);
