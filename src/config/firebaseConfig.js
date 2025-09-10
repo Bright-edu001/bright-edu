@@ -65,6 +65,16 @@ const initializeAppCheckForHosting = async () => {
     const currentHostname = window.location.hostname;
     logger.info(`[AppCheck] 當前域名: ${currentHostname}`);
 
+    // 本地開發環境直接跳過 App Check
+    if (
+      currentHostname === "localhost" ||
+      currentHostname === "127.0.0.1" ||
+      process.env.NODE_ENV === "development"
+    ) {
+      logger.info("[AppCheck] 本地開發環境，跳過 App Check 初始化");
+      return null;
+    }
+
     // Firebase Hosting 環境的特殊處理
     if (isFirebaseHosting()) {
       logger.info("[AppCheck] 檢測到 Firebase Hosting 環境");
@@ -118,20 +128,14 @@ const initializeAppCheckForHosting = async () => {
       return appCheck;
     } else {
       // 非 Firebase Hosting 環境 (如 localhost)
-      logger.info("[AppCheck] 非 Firebase Hosting 環境");
-
-      if (currentHostname === "localhost" || currentHostname === "127.0.0.1") {
-        // 本地開發環境使用 debug token
-        window.self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
-        logger.info("[AppCheck] 本地環境啟用 debug token");
-      }
+      logger.info("[AppCheck] 非 Firebase Hosting 環境，但不是本地開發環境");
 
       appCheck = initializeAppCheck(app, {
         provider: new ReCaptchaV3Provider(siteKey),
         isTokenAutoRefreshEnabled: true,
       });
 
-      logger.info("[AppCheck] 本地環境初始化完成");
+      logger.info("[AppCheck] 生產環境初始化完成");
       return appCheck;
     }
   } catch (error) {
@@ -223,10 +227,24 @@ const fetchAppCheckToken = async (retries = 3, forceRefresh = false) => {
 // 網路連接優化
 const enableFirebaseNetwork = async () => {
   try {
+    // 本地開發環境跳過網路連接優化
+    if (
+      process.env.NODE_ENV === "development" ||
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    ) {
+      logger.info("🏠 本地開發環境，跳過網路連接優化");
+      return;
+    }
+
     await enableNetwork(db);
     logger.info("🚀 Firebase 網路連接已啟用");
   } catch (error) {
     logger.warn("⚠️ Firebase 網路連接啟用失敗:", error);
+    // 本地開發環境中，這個錯誤可以忽略
+    if (process.env.NODE_ENV === "development") {
+      logger.info("本地開發環境，此錯誤可忽略");
+    }
   }
 };
 
@@ -235,7 +253,27 @@ const initializeServices = async () => {
   try {
     logger.info("[Firebase] 開始初始化服務...");
 
-    // 並行初始化 App Check 和網路連接
+    // 檢查是否為本地開發環境
+    const isLocalDev =
+      process.env.NODE_ENV === "development" ||
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+
+    if (isLocalDev) {
+      logger.info("[Firebase] 本地開發環境，簡化初始化流程");
+
+      // 本地開發環境只初始化網路連接
+      try {
+        await enableFirebaseNetwork();
+      } catch (error) {
+        logger.info("[Firebase] 本地開發環境網路連接初始化完成（錯誤可忽略）");
+      }
+
+      logger.info("[Firebase] 本地開發環境初始化完成");
+      return;
+    }
+
+    // 生產環境才執行完整的初始化
     const [appCheckResult] = await Promise.allSettled([
       initializeAppCheckForHosting(),
       enableFirebaseNetwork(),
@@ -250,6 +288,11 @@ const initializeServices = async () => {
     logger.info("[Firebase] 所有服務初始化完成");
   } catch (error) {
     logger.error("[Firebase] 服務初始化失敗:", error);
+
+    // 本地開發環境中，某些錯誤可以忽略
+    if (process.env.NODE_ENV === "development") {
+      logger.info("[Firebase] 本地開發環境，部分錯誤可忽略");
+    }
   }
 };
 
