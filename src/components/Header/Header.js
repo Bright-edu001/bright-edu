@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Menu, Drawer, ConfigProvider } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { menuItems } from "../../config/menuConfig";
@@ -52,28 +52,36 @@ const Header = () => {
     };
   }, []);
 
-  const toggleMobileMenu = () => {
+  const toggleMobileMenu = useCallback(() => {
     setMobileMenu((prev) => !prev);
-  };
+  }, []);
 
-  const handleMenuClick = ({ key }) => {
-    // 同原本邏輯：透過 key 找到 path，navigate 並關閉 drawer
-    const findItem = (items, key) => {
-      for (const item of items) {
-        if (item.key === key) return item;
-        if (item.children) {
-          const found = findItem(item.children, key);
-          if (found) return found;
+  const handleMenuClick = useCallback(
+    ({ key }) => {
+      // 同原本邏輯：透過 key 找到 path，navigate 並關閉 drawer
+      const findItem = (items, key) => {
+        for (const item of items) {
+          if (item.key === key) return item;
+          if (item.children) {
+            const found = findItem(item.children, key);
+            if (found) return found;
+          }
         }
+        return null;
+      };
+      const clicked = findItem(menuItems, key);
+      if (clicked?.path) {
+        navigate(clicked.path);
+        setMobileMenu(false);
       }
-      return null;
-    };
-    const clicked = findItem(menuItems, key);
-    if (clicked?.path) {
-      navigate(clicked.path);
-      setMobileMenu(false);
-    }
-  };
+    },
+    [navigate]
+  ); // 依賴 navigate 函式
+
+  // 創建關閉移動選單的 callback 函式
+  const closeMobileMenu = useCallback(() => {
+    setMobileMenu(false);
+  }, []);
 
   // --- 新增：在 Drawer 裡的 Menu，所有 <Link> 點擊都自動關閉 drawer ---
   const mobileMenuItems = useMemo(() => {
@@ -83,7 +91,7 @@ const Header = () => {
         // 如果 label 是 React Element 而且 type === Link，就 clone 注入 onClick
         if (React.isValidElement(item.label) && item.label.type === Link) {
           newItem.label = React.cloneElement(item.label, {
-            onClick: () => setMobileMenu(false),
+            onClick: closeMobileMenu,
           });
         }
         if (item.children) {
@@ -92,7 +100,7 @@ const Header = () => {
         return newItem;
       });
     return wrapClose(menuItems);
-  }, []);
+  }, [closeMobileMenu]);
 
   return (
     <ConfigProvider
