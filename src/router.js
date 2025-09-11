@@ -3,7 +3,9 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import commonRoutes from "./routes/commonRoutes";
 import uicRoutes from "./routes/uicRoutes";
+import uicChineseRoutes from "./routes/uicChineseRoutes";
 import msuRoutes from "./routes/msuRoutes";
+import msuChineseRoutes from "./routes/msuChineseRoutes";
 
 // 後台主程式採用懶載入
 const AdminApp = lazy(() => import("./admin/App"));
@@ -14,8 +16,14 @@ const router = createBrowserRouter(
     {
       path: "/",
       element: <App />,
-      // 前台路由，合併三個 route 陣列
-      children: [...commonRoutes, ...uicRoutes, ...msuRoutes],
+      // 前台路由，合併所有 route 陣列，包含中文路由
+      children: [
+        ...commonRoutes,
+        ...uicRoutes,
+        ...uicChineseRoutes,
+        ...msuRoutes,
+        ...msuChineseRoutes,
+      ],
     },
     {
       path: "/admin/*",

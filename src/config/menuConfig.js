@@ -21,14 +21,16 @@ export const menuItems = [
           {
             key: "about-uic",
             label: (
-              <Link to="/uic-business-school/uic/about-uic">學校介紹</Link>
+              <Link to="/伊利諾大學芝加哥分校/UIC商學院碩士/學校介紹">
+                學校介紹
+              </Link>
             ),
           },
           {
             key: "rankings",
             label: (
               <Link
-                to="/uic-business-school/uic/rankings-awards"
+                to="/伊利諾大學芝加哥分校/UIC商學院碩士/排名與獎項"
                 className="nav-link-color"
               >
                 排名與獎項
@@ -38,7 +40,7 @@ export const menuItems = [
               {
                 key: "aacsb",
                 label: (
-                  <Link to="/uic-business-school/uic/uic_school/ranking/aacsb">
+                  <Link to="/伊利諾大學芝加哥分校/UIC商學院碩士/學校資訊/排名/AACSB認證">
                     AACSB
                   </Link>
                 ),
@@ -46,7 +48,7 @@ export const menuItems = [
               {
                 key: "heed",
                 label: (
-                  <Link to="/uic-business-school/uic/uic_school/ranking/heed">
+                  <Link to="/伊利諾大學芝加哥分校/UIC商學院碩士/學校資訊/排名/HEED獎項">
                     Heed
                   </Link>
                 ),
@@ -54,7 +56,7 @@ export const menuItems = [
               {
                 key: "ranking",
                 label: (
-                  <Link to="/uic-business-school/uic/uic_school/ranking/ranking">
+                  <Link to="/伊利諾大學芝加哥分校/UIC商學院碩士/學校資訊/排名/排名">
                     Ranking
                   </Link>
                 ),
@@ -64,7 +66,7 @@ export const menuItems = [
           {
             key: "career-resources",
             label: (
-              <Link to="/uic-business-school/uic/career-resources">
+              <Link to="/伊利諾大學芝加哥分校/UIC商學院碩士/職涯資源">
                 職涯資源
               </Link>
             ),
@@ -73,7 +75,7 @@ export const menuItems = [
             key: "chicago",
             label: (
               <Link
-                to="/uic-business-school/uic/chicago"
+                to="/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市"
                 className="nav-link-color"
               >
                 芝加哥城市
@@ -83,7 +85,7 @@ export const menuItems = [
               {
                 key: "food-attractions",
                 label: (
-                  <Link to="/uic-business-school/uic/chicago/food-attractions">
+                  <Link to="/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/景點與美食">
                     景點與美食
                   </Link>
                 ),
@@ -91,7 +93,7 @@ export const menuItems = [
               {
                 key: "economy",
                 label: (
-                  <Link to="/uic-business-school/uic/chicago/economy">
+                  <Link to="/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/芝加哥經濟">
                     芝加哥經濟
                   </Link>
                 ),
@@ -100,14 +102,21 @@ export const menuItems = [
           },
           {
             key: "faq",
-            label: <Link to="/uic-business-school/uic/faq">常見問題</Link>,
+            label: (
+              <Link to="/伊利諾大學芝加哥分校/UIC商學院碩士/常見問題">
+                常見問題
+              </Link>
+            ),
           },
         ],
       },
       {
         key: "mba",
         label: (
-          <Link to="/uic-business-school/mba" className="nav-link-color">
+          <Link
+            to="/伊利諾大學芝加哥分校/MBA-Programs"
+            className="nav-link-color"
+          >
             MBA Programs
           </Link>
         ),
@@ -116,7 +125,7 @@ export const menuItems = [
             key: "areas",
             label: (
               <Link
-                to="/uic-business-school/mba/areas"
+                to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域"
                 className="nav-link-color"
               >
                 五大領域
@@ -126,55 +135,40 @@ export const menuItems = [
               {
                 key: "management",
                 label: (
-                  <Link to="/uic-business-school/mba/areas/management">
-                    MBA-
-                    <span style={{ fontSize: "16px", fontWeight: 500 }}>
-                      Management
-                    </span>
+                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Management">
+                    Management
                   </Link>
                 ),
               },
               {
                 key: "finance",
                 label: (
-                  <Link to="/uic-business-school/mba/areas/finance">
-                    MBA-
-                    <span style={{ fontSize: "16px", fontWeight: 500 }}>
-                      Finance
-                    </span>
+                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Finance">
+                    Finance
                   </Link>
                 ),
               },
               {
                 key: "analytics",
                 label: (
-                  <Link to="/uic-business-school/mba/areas/analytics">
-                    MBA-
-                    <span style={{ fontSize: "16px", fontWeight: 500 }}>
-                      Business Analytics
-                    </span>
+                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business Analytics">
+                    Business Analytics
                   </Link>
                 ),
               },
               {
                 key: "marketing",
                 label: (
-                  <Link to="/uic-business-school/mba/areas/marketing">
-                    MBA-
-                    <span style={{ fontSize: "16px", fontWeight: 500 }}>
-                      Marketing
-                    </span>
+                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Marketing">
+                    Marketing
                   </Link>
                 ),
               },
               {
                 key: "hr",
                 label: (
-                  <Link to="/uic-business-school/mba/areas/human-resource">
-                    MBA-
-                    <span style={{ fontSize: "16px", fontWeight: 500 }}>
-                      Human Resource Management
-                    </span>
+                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human Resource Management">
+                    Human Resource Management
                   </Link>
                 ),
               },
@@ -183,19 +177,23 @@ export const menuItems = [
           {
             key: "advantages",
             label: (
-              <Link to="/uic-business-school/mba/advantages">課程優勢</Link>
+              <Link to="/伊利諾大學芝加哥分校/MBA-Programs/課程優勢">
+                課程優勢
+              </Link>
             ),
           },
           {
             key: "core-courses",
             label: (
-              <Link to="/uic-business-school/mba/core-courses">核心課程</Link>
+              <Link to="/伊利諾大學芝加哥分校/MBA-Programs/核心課程">
+                核心課程
+              </Link>
             ),
           },
           {
             key: "dual-degree",
             label: (
-              <Link to="/uic-business-school/mba/dual-degree">
+              <Link to="/伊利諾大學芝加哥分校/MBA-Programs/雙碩士銜接課程">
                 雙碩士銜接課程
               </Link>
             ),
@@ -203,7 +201,9 @@ export const menuItems = [
           {
             key: "application",
             label: (
-              <Link to="/uic-business-school/mba/application">申請資訊</Link>
+              <Link to="/伊利諾大學芝加哥分校/MBA-Programs/申請資訊">
+                申請資訊
+              </Link>
             ),
           },
         ],
@@ -212,7 +212,7 @@ export const menuItems = [
         key: "ms",
         label: (
           <Link
-            to="/uic-business-school/ms/msprograms"
+            to="/伊利諾大學芝加哥分校/MS-Programs/課程介紹"
             className="nav-link-color"
           >
             MS Programs
@@ -222,13 +222,15 @@ export const menuItems = [
           {
             key: "ms-finance",
             label: (
-              <Link to="/uic-business-school/ms/finance">MS in Finance</Link>
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/金融碩士">
+                MS in Finance
+              </Link>
             ),
           },
           {
             key: "ms-marketing",
             label: (
-              <Link to="/uic-business-school/ms/marketing">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/行銷碩士">
                 MS in Marketing
               </Link>
             ),
@@ -236,7 +238,7 @@ export const menuItems = [
           {
             key: "ms-supply-chain",
             label: (
-              <Link to="/uic-business-school/ms/supply-chain-operation-management">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/供應鏈營運管理碩士">
                 MS in Supply Chain and Operation Management
               </Link>
             ),
@@ -244,7 +246,7 @@ export const menuItems = [
           {
             key: "ms-analytics",
             label: (
-              <Link to="/uic-business-school/ms/business-analytics">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/商業分析碩士">
                 MS in Business Analytics
               </Link>
             ),
@@ -252,7 +254,7 @@ export const menuItems = [
           {
             key: "ms-mis",
             label: (
-              <Link to="/uic-business-school/ms/management-information-systems">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/管理資訊系統碩士">
                 MS in Management Information Systems
               </Link>
             ),
@@ -260,7 +262,7 @@ export const menuItems = [
           {
             key: "ms-accounting",
             label: (
-              <Link to="/uic-business-school/ms/accounting">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/會計碩士">
                 MS in Accounting
               </Link>
             ),
@@ -268,7 +270,9 @@ export const menuItems = [
           {
             key: "ms-application",
             label: (
-              <Link to="/uic-business-school/ms/application">申請資訊</Link>
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/申請資訊">
+                申請資訊
+              </Link>
             ),
           },
         ],
@@ -286,30 +290,26 @@ export const menuItems = [
           {
             key: "about-msu",
             label: (
-              <Link to="/msu-business-school/msu/about-msu">學校介紹</Link>
+              <Link to="/密西根州立大學/MSU商學院/學校介紹">學校介紹</Link>
             ),
           },
           {
             key: "msu-rankings",
             label: (
-              <Link to="/msu-business-school/msu/rankings-awards">
-                排名與獎項
-              </Link>
+              <Link to="/密西根州立大學/MSU商學院/排名與獎項">排名與獎項</Link>
             ),
           },
           {
             key: "msu-career-resources",
             label: (
-              <Link to="/msu-business-school/msu/career-resources">
-                職涯資源
-              </Link>
+              <Link to="/密西根州立大學/MSU商學院/職涯資源">職涯資源</Link>
             ),
           },
           {
             key: "east-lansing",
             label: (
               <Link
-                to="/msu-business-school/msu/east-lansing"
+                to="/密西根州立大學/MSU商學院/東蘭辛市"
                 className="nav-link-color"
               >
                 密西根州-東蘭辛市(大學城)
@@ -319,7 +319,7 @@ export const menuItems = [
               {
                 key: "east-lansing-food",
                 label: (
-                  <Link to="/msu-business-school/msu/east-lansing/east-lansing-food-attractions">
+                  <Link to="/密西根州立大學/MSU商學院/東蘭辛市/景點與美食">
                     景點與美食
                   </Link>
                 ),
@@ -327,9 +327,7 @@ export const menuItems = [
               {
                 key: "transportation",
                 label: (
-                  <Link to="/msu-business-school/msu/east-lansing/transportation">
-                    交通
-                  </Link>
+                  <Link to="/密西根州立大學/MSU商學院/東蘭辛市/交通">交通</Link>
                 ),
               },
             ],
@@ -343,13 +341,15 @@ export const menuItems = [
           {
             key: "msf-master",
             label: (
-              <Link to="/msu-business-school/msf/master">MSF 金融碩士</Link>
+              <Link to="/密西根州立大學/金融碩士課程/金融碩士">
+                MSF 金融碩士
+              </Link>
             ),
           },
           {
             key: "msf-application",
             label: (
-              <Link to="/msu-business-school/msf/application">申請資訊</Link>
+              <Link to="/密西根州立大學/金融碩士課程/申請資訊">申請資訊</Link>
             ),
           },
         ],
@@ -359,7 +359,7 @@ export const menuItems = [
   {
     key: "blog",
     label: (
-      <Link to="/blog" className="nav-link-hover">
+      <Link to="/活動與文章" className="nav-link-hover">
         活動與文章
       </Link>
     ),
@@ -367,7 +367,7 @@ export const menuItems = [
   {
     key: "contact",
     label: (
-      <Link to="/contact" className="nav-link-hover">
+      <Link to="/聯絡我們" className="nav-link-hover">
         聯絡我們
       </Link>
     ),

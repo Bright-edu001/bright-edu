@@ -15,7 +15,7 @@ export const SearchProvider = ({ children }) => {
       e.preventDefault();
       const kw = keyword.trim();
       if (kw) {
-        navigate(`/blog/search/${encodeURIComponent(kw)}`);
+        navigate(`/活動與文章/search/${encodeURIComponent(kw)}`);
         setKeyword("");
       }
     },
@@ -26,9 +26,9 @@ export const SearchProvider = ({ children }) => {
   const handleCategoryClick = useCallback(
     (category) => {
       if (category === "enrollment") {
-        navigate("/blog?category=enrollment");
+        navigate("/活動與文章?category=enrollment");
       } else if (category === "news") {
-        navigate("/blog?category=news");
+        navigate("/活動與文章?category=news");
       }
     },
     [navigate]

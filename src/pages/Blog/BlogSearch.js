@@ -63,7 +63,7 @@ function BlogSearch() {
           ) : (
             <div>查無相關文章</div>
           )}
-          <Link to="/blog" className="blog-detail-back">
+          <Link to="/活動與文章" className="blog-detail-back">
             ← 返回部落格
           </Link>
         </div>

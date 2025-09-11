@@ -40,7 +40,9 @@ describe("SearchContext", () => {
     });
 
     // 應該導向正確路徑，並清空 keyword
-    expect(mockNavigate).toHaveBeenCalledWith("/blog/search/hello%20world");
+    expect(mockNavigate).toHaveBeenCalledWith(
+      "/活動與文章/search/hello%20world"
+    );
     expect(result.current.keyword).toBe("");
   });
 
@@ -62,8 +64,11 @@ describe("SearchContext", () => {
     // 應該分別導向正確的路徑
     expect(mockNavigate).toHaveBeenNthCalledWith(
       1,
-      "/blog?category=enrollment"
+      "/活動與文章?category=enrollment"
     );
-    expect(mockNavigate).toHaveBeenNthCalledWith(2, "/blog?category=news");
+    expect(mockNavigate).toHaveBeenNthCalledWith(
+      2,
+      "/活動與文章?category=news"
+    );
   });
 });
