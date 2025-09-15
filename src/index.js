@@ -17,6 +17,9 @@ import { logEvent } from "firebase/analytics";
 // ===== 全域字體與關鍵 CSS =====
 import "./styles/critical.css";
 
+// ===== Firebase 服務初始化 =====
+import { initializeServices } from "./config/firebaseConfig";
+
 // ===== 初始化 Sentry（僅限生產環境） =====
 if (process.env.NODE_ENV === "production") {
   // Sentry 用於前端錯誤監控與追蹤
@@ -52,4 +55,20 @@ logEvent(analytics, "page_load");
 
 // ===== React 應用程式掛載入口 =====
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={router} />);
+
+// 初始化 Firebase 服務，然後渲染應用
+initializeServices()
+  .then(() => {
+    logger.info("[Bootstrap] Firebase 服務初始化成功，開始渲染應用。");
+    root.render(<RouterProvider router={router} />);
+  })
+  .catch((error) => {
+    logger.error("[Bootstrap] Firebase 服務初始化失敗:", error);
+    // 即使初始化失敗，也嘗試渲染應用，但可能會出現功能異常
+    root.render(
+      <div>
+        <h1>應用程式初始化失敗</h1>
+        <p>很抱歉，載入時發生嚴重錯誤，請稍後再試。</p>
+      </div>
+    );
+  });

@@ -296,15 +296,15 @@ const initializeServices = async () => {
   }
 };
 
-// 延遲初始化
-if (typeof window !== "undefined") {
-  // 使用 requestIdleCallback 或 setTimeout 延遲初始化
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(() => initializeServices(), { timeout: 2000 });
-  } else {
-    setTimeout(initializeServices, 500);
-  }
-}
+// 移除延遲初始化，改為手動調用
+// if (typeof window !== "undefined") {
+//   // 使用 requestIdleCallback 或 setTimeout 延遲初始化
+//   if ("requestIdleCallback" in window) {
+//     requestIdleCallback(() => initializeServices(), { timeout: 2000 });
+//   } else {
+//     setTimeout(initializeServices, 500);
+//   }
+// }
 
 // Performance Monitoring
 let perf;
