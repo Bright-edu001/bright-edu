@@ -94,7 +94,7 @@ const uicChineseRoutes = [
     element: <Finance />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business Analytics",
+    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business-Analytics",
     element: <Analytics />,
   },
   {
@@ -122,17 +122,20 @@ const uicChineseRoutes = [
     element: <Application />,
   },
   { path: "伊利諾大學芝加哥分校/MBA-Programs", element: <MbaPrograms /> },
-  { path: "伊利諾大學芝加哥分校/MS-Programs/金融碩士", element: <MSFinance /> },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/行銷碩士",
+    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Finance-MSF",
+    element: <MSFinance />,
+  },
+  {
+    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Marketing-MSM",
     element: <MsMarketing />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/供應鏈營運管理碩士",
+    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Supply-Chain-and-Operation-Management-MSSCOM",
     element: <MsManagement />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/商業分析碩士",
+    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Business-Analytics-MSBA",
     element: <MsAnalttics />,
   },
   {
@@ -140,11 +143,11 @@ const uicChineseRoutes = [
     element: <MsApplication />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/管理資訊系統碩士",
+    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Management-Information-Systems-MSMIS",
     element: <MsInformation />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/會計碩士",
+    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Accounting-MSA",
     element: <MsAccounting />,
   },
   {

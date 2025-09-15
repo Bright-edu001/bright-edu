@@ -151,7 +151,7 @@ export const menuItems = [
               {
                 key: "analytics",
                 label: (
-                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business Analytics">
+                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business-Analytics">
                     Business Analytics
                   </Link>
                 ),
@@ -167,7 +167,7 @@ export const menuItems = [
               {
                 key: "hr",
                 label: (
-                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human Resource Management">
+                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human-Resource-Management">
                     Human Resource Management
                   </Link>
                 ),
@@ -222,7 +222,7 @@ export const menuItems = [
           {
             key: "ms-finance",
             label: (
-              <Link to="/伊利諾大學芝加哥分校/MS-Programs/金融碩士">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/MS-in-Finance-MSF">
                 MS in Finance
               </Link>
             ),
@@ -230,7 +230,7 @@ export const menuItems = [
           {
             key: "ms-marketing",
             label: (
-              <Link to="/伊利諾大學芝加哥分校/MS-Programs/行銷碩士">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/MS-in-Marketing-MSM">
                 MS in Marketing
               </Link>
             ),
@@ -238,7 +238,7 @@ export const menuItems = [
           {
             key: "ms-supply-chain",
             label: (
-              <Link to="/伊利諾大學芝加哥分校/MS-Programs/供應鏈營運管理碩士">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/MS-in-Supply-Chain-and-Operation-Management-MSSCOM">
                 MS in Supply Chain and Operation Management
               </Link>
             ),
@@ -246,7 +246,7 @@ export const menuItems = [
           {
             key: "ms-analytics",
             label: (
-              <Link to="/伊利諾大學芝加哥分校/MS-Programs/商業分析碩士">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/MS-in-Business-Analytics-MSBA">
                 MS in Business Analytics
               </Link>
             ),
@@ -254,7 +254,7 @@ export const menuItems = [
           {
             key: "ms-mis",
             label: (
-              <Link to="/伊利諾大學芝加哥分校/MS-Programs/管理資訊系統碩士">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/MS-in-Management-Information-Systems-MSMIS">
                 MS in Management Information Systems
               </Link>
             ),
@@ -262,7 +262,7 @@ export const menuItems = [
           {
             key: "ms-accounting",
             label: (
-              <Link to="/伊利諾大學芝加哥分校/MS-Programs/會計碩士">
+              <Link to="/伊利諾大學芝加哥分校/MS-Programs/MS-in-Accounting-MSA">
                 MS in Accounting
               </Link>
             ),
@@ -341,7 +341,7 @@ export const menuItems = [
           {
             key: "msf-master",
             label: (
-              <Link to="/密西根州立大學/金融碩士課程/金融碩士">
+              <Link to="/密西根州立大學/金融碩士課程/MSF金融碩士">
                 MSF 金融碩士
               </Link>
             ),

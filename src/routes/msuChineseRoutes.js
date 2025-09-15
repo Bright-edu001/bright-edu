@@ -21,7 +21,7 @@ const MicFoodAttractions = lazy(() =>
 // MSU 中文路由配置
 const msuChineseRoutes = [
   { path: "密西根州立大學/金融碩士課程/申請資訊", element: <MsfApplication /> },
-  { path: "密西根州立大學/金融碩士課程/金融碩士", element: <MsuMaster /> },
+  { path: "密西根州立大學/金融碩士課程/MSF金融碩士", element: <MsuMaster /> },
   { path: "密西根州立大學/MSU商學院/學校介紹", element: <AboutMsu /> },
   {
     path: "密西根州立大學/MSU商學院/排名與獎項",
