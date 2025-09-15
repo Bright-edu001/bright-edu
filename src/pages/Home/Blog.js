@@ -57,10 +57,7 @@ function Blog() {
           </div>
           {/* 新增：分類頁面時顯示返回按鈕 */}
           {(category === "enrollment" || category === "news") && (
-            <button
-              className="blog-back-btn"
-              onClick={() => navigate("/活動與文章")}
-            >
+            <button className="blog-back-btn" onClick={() => navigate("/blog")}>
               ← 返回活動與文章
             </button>
           )}

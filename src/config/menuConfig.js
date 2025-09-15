@@ -359,7 +359,7 @@ export const menuItems = [
   {
     key: "blog",
     label: (
-      <Link to="/活動與文章" className="nav-link-hover">
+      <Link to="/blog" className="nav-link-hover">
         活動與文章
       </Link>
     ),
@@ -367,7 +367,7 @@ export const menuItems = [
   {
     key: "contact",
     label: (
-      <Link to="/聯絡我們" className="nav-link-hover">
+      <Link to="/contact" className="nav-link-hover">
         聯絡我們
       </Link>
     ),

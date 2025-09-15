@@ -93,7 +93,7 @@ function BlogDetail() {
           {/* 分類標籤：改用Link以提供href */}
           <Link
             className="blog-detail-category-label"
-            to={`/活動與文章?category=${categoryParam}`}
+            to={`/blog?category=${categoryParam}`}
             title={`查看${subtitle}分類`}
           >
             {subtitle}
@@ -134,7 +134,7 @@ function BlogDetail() {
                 )
               : null}
           </div>
-          <Link to="/活動與文章" className="blog-back-btn blog-detail-back">
+          <Link to="/blog" className="blog-back-btn blog-detail-back">
             ← 返回部落格
           </Link>
           {/* 這裡可根據需求擴充更多內容 */}

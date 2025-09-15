@@ -24,7 +24,7 @@ exports[`BlogDetail renders stably across rerenders 1`] = `
         </h1>
         <a
           class="blog-detail-category-label"
-          href="/活動與文章?category=enrollment"
+          href="/blog?category=enrollment"
           title="查看招生活動分類"
         >
           招生活動
@@ -55,7 +55,7 @@ exports[`BlogDetail renders stably across rerenders 1`] = `
         </div>
         <a
           class="blog-back-btn blog-detail-back"
-          href="/活動與文章"
+          href="/blog"
         >
           ← 返回部落格
         </a>
