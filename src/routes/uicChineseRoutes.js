@@ -29,7 +29,9 @@ const Marketing = lazy(() => import("../pages/Uic/Mba/areas/Marketing"));
 const HRManagement = lazy(() =>
   import("../pages/Uic/Mba/areas/HR-Management.js")
 );
-const Chicago = lazy(() => import("../pages/Uic/Uic_school/Chicago.js"));
+const ChicagoCity = lazy(() =>
+  import("../pages/Uic/Uic_school/Chicago/Chicago.js")
+);
 const Economy = lazy(() =>
   import("../pages/Uic/Uic_school/Chicago/Economy.js")
 );
@@ -107,7 +109,16 @@ const uicChineseRoutes = [
   },
   {
     path: "伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市",
-    element: <Chicago />,
+    element: (
+      <Navigate
+        to="/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/Chicago-city"
+        replace
+      />
+    ),
+  },
+  {
+    path: "伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/Chicago-city",
+    element: <ChicagoCity />,
   },
   {
     path: "伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/芝加哥經濟",

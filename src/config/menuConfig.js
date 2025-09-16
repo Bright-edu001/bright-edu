@@ -83,6 +83,14 @@ export const menuItems = [
             ),
             children: [
               {
+                key: "chicago-city",
+                label: (
+                  <Link to="/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/chicago-city">
+                    Chicago-city
+                  </Link>
+                ),
+              },
+              {
                 key: "food-attractions",
                 label: (
                   <Link to="/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/景點與美食">
@@ -367,7 +375,7 @@ export const menuItems = [
   {
     key: "contact",
     label: (
-      <Link to="/contact" className="nav-link-hover">
+      <Link to="/聯絡我們" className="nav-link-hover">
         聯絡我們
       </Link>
     ),

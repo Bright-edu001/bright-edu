@@ -15,6 +15,10 @@ const uicRoutes = [
     path: "uic-business-school/uic/chicago/food-attractions",
     element: <UrlRedirect />,
   },
+  {
+    path: "uic-business-school/uic/chicago/chicago-city",
+    element: <UrlRedirect />,
+  },
   { path: "uic-business-school/uic/faq", element: <UrlRedirect /> },
   {
     path: "uic-business-school/uic/rankings-awards",

@@ -1,13 +1,12 @@
-@import "../../../styles/variables";
+@import "../../../../styles/variables";
 
 .chicago-container {
   .chicago-intro {
     .intro-title {
-      font-size: $font-size-xl;
-      font-weight: $font-weight-bold;
       color: $color-nav;
       text-align: left;
       margin-top: 4rem;
+      margin-bottom: $spacing-xs;
     }
     .intro-text {
       font-size: $font-size-md;
@@ -32,9 +31,19 @@
     }
   }
 
-  .history-section,
-  .transport-section {
+  .key-facts-section,
+  .history-development-section,
+  .population-ethnicity-section,
+  .climate-topography-section,
+  .transportation-hub-section,
+  .cultural-education-section {
     margin: 0 auto;
+    position: relative;
+    padding-bottom: $spacing-sm;
+
+    .container {
+      margin-bottom: $spacing-lg;
+    }
 
     .section-content {
       display: flex;
@@ -42,6 +51,8 @@
       justify-content: flex-start;
       align-items: center;
       margin-bottom: $spacing-lg;
+      min-height: 10rem;
+      position: relative;
 
       .history-text,
       .transport-text {
@@ -68,32 +79,19 @@
           display: flex;
           flex-direction: column;
           font-size: 18px;
+          list-style: decimal;
           list-style-position: inside;
           margin-bottom: $spacing-sm;
           gap: $spacing-xs;
         }
+        ul ul {
+          font-size: 16px;
+          list-style-type: disc;
+          list-style-position: inside;
+          margin-left: 1.5em; /* 讓圓點與上層文字左側對齊 */
+          margin-top: $spacing-xs;
+        }
       }
-    }
-  }
-  .transport-section {
-    .container {
-      margin-bottom: 7rem;
-    }
-    .section-content {
-      min-height: 10rem;
-      position: relative;
-    }
-  }
-
-  .history-section {
-    position: relative;
-    padding-bottom: $spacing-sm;
-    .container {
-      margin-bottom: $spacing-lg;
-    }
-    .section-content {
-      min-height: 10rem;
-      position: relative;
     }
 
     &::after {
@@ -107,6 +105,15 @@
       margin: 0 auto;
     }
   }
+
+  .climate-topography-section,
+  .transportation-hub-section,
+  .cultural-education-section {
+    .container {
+      margin-bottom: 7rem;
+    }
+  }
+
   .skeleton-placeholder {
     width: 100%;
     height: 100%;
@@ -123,6 +130,34 @@
     }
     100% {
       opacity: 0.6;
+    }
+  }
+}
+
+.ethnicity-table-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: $color-uic;
+}
+
+.ethnicity-table-percentage,
+.ethnicity-table-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: $color-black;
+}
+
+.why-chicago-section {
+  .container {
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      text-align: left;
+    }
+    p {
+      font-size: 18px;
+      text-align: left;
+      margin-bottom: 7rem;
     }
   }
 }
