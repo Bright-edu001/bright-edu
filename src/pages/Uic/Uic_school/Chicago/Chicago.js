@@ -99,7 +99,7 @@ const Chicago = () => {
               <div className="history-image">
                 <img
                   className="responsive-img"
-                  src={getImageUrl("/images/Uic/History.webp")}
+                  src={getImageUrl("/images/Uic/Chicago/107209792_l.webp")}
                   alt="芝加哥歷史發展"
                   loading="lazy"
                   onLoad={() => setHistoryLoaded(true)}
@@ -139,7 +139,9 @@ const Chicago = () => {
               <div className="history-image">
                 <img
                   className="responsive-img"
-                  src={getImageUrl("/images/Uic/History.webp")}
+                  src={getImageUrl(
+                    "/images/Uic/Chicago/yuvraj-singh-449388-unsplash.webp"
+                  )}
                   alt="芝加哥歷史發展"
                   loading="lazy"
                   onLoad={() => setHistoryLoaded(true)}
@@ -182,7 +184,9 @@ const Chicago = () => {
               <div className="transport-image">
                 <img
                   className="responsive-img"
-                  src={getImageUrl("/images/Uic/Transportation.webp")}
+                  src={getImageUrl(
+                    "/images/Uic/Chicago/architecture-3592814.webp"
+                  )}
                   alt="芝加哥交通"
                   loading="lazy"
                   onLoad={() => setTransportLoaded(true)}
@@ -224,7 +228,7 @@ const Chicago = () => {
               <div className="transport-image">
                 <img
                   className="responsive-img"
-                  src={getImageUrl("/images/Uic/Transportation.webp")}
+                  src={getImageUrl("/images/Uic/Chicago/102589993_l.webp")}
                   alt="芝加哥交通"
                   loading="lazy"
                   onLoad={() => setTransportLoaded(true)}
@@ -313,7 +317,9 @@ const Chicago = () => {
               <div className="history-image">
                 <img
                   className="responsive-img"
-                  src={getImageUrl("/images/Uic/History.webp")}
+                  src={getImageUrl(
+                    "/images/Uic/Chicago/chicago-theatre-890350.webp"
+                  )}
                   alt="芝加哥歷史發展"
                   loading="lazy"
                   onLoad={() => setHistoryLoaded(true)}
@@ -368,7 +374,9 @@ const Chicago = () => {
               <div className="transport-image">
                 <img
                   className="responsive-img"
-                  src={getImageUrl("/images/Uic/Transportation.webp")}
+                  src={getImageUrl(
+                    "/images/Uic/Chicago/architecture-1853632.webp"
+                  )}
                   alt="芝加哥交通"
                   loading="lazy"
                   onLoad={() => setTransportLoaded(true)}
