@@ -17,6 +17,11 @@
     @media screen and (max-width: 500px) {
       padding: $spacing-sm;
     }
+    h2 {
+      font-size: 24px;
+      color: $color-uic;
+      margin-bottom: $spacing-xs;
+    }
     p {
       color: $color-text-primary;
       font-size: $font-size-md;
@@ -138,18 +143,29 @@
     }
   }
 
-  .business-school {
+  .business-school,
+  .reputation,
+  .rankings-performance {
     .container {
-      margin-top: 5rem;
+      margin-top: 3rem;
     }
-    h3 {
+    h2 {
       font-size: 24px;
-
       margin-bottom: $spacing-xs;
-      color: $color-black;
+      color: $color-uic;
       text-align: left;
     }
+    ul {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      font-size: 18px;
+      list-style-position: inside;
+      gap: $spacing-xs;
+    }
+  }
 
+  .business-school {
     p {
       font-size: 18px;
       color: $color-black;
@@ -157,6 +173,37 @@
       text-align: left;
       max-width: 1400px;
     }
+    ul {
+      list-style-type: none; // business-school has custom list style
+
+      li {
+        ul {
+          font-size: 16px;
+          list-style: none; // 移除內層列表的預設符號
+          list-style-position: outside;
+          margin-left: $spacing-md;
+          margin-top: $spacing-xs;
+          padding-left: 0;
+
+          li {
+            position: relative;
+            padding-left: 1.5em; // 為箭頭騰出空間
+
+            &::before {
+              content: "➤"; // 使用箭頭符號
+              position: absolute;
+              left: 0;
+              color: $color-uic; // 設定箭頭顏色
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .reputation ul,
+  .rankings-performance ul {
+    list-style-type: disc;
   }
 }
 
@@ -180,6 +227,7 @@
     margin: 0;
   }
 }
+
 @media screen and (max-width: 500px) {
   .about-uic-page .stats .stats-card-ranking {
     padding: 1.5rem;

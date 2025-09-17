@@ -1,6 +1,6 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
-import UrlRedirect from "../components/UrlRedirect";
+const UrlRedirect = lazy(() => import("../components/UrlRedirect"));
 
 const msuRoutes = [
   { path: "msu-business-school/msf/application", element: <UrlRedirect /> },

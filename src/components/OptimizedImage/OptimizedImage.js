@@ -77,7 +77,12 @@ const OptimizedImage = memo(
     return (
       <div
         className={`image-container ${className || ""}`}
-        style={{ position: "relative" }}
+        style={{
+          position: "relative",
+          width: width ? `${width}px` : "100%",
+          height: height ? `${height}px` : "auto",
+          aspectRatio: width && height ? `${width} / ${height}` : "auto",
+        }}
       >
         {/* 載入前顯示佔位圖 */}
         {!loaded && !error && (
@@ -113,6 +118,8 @@ const OptimizedImage = memo(
             transition: "opacity 0.3s",
             width: "100%",
             height: "auto",
+            // 確保圖片在容器內正確縮放
+            objectFit: "cover",
           }}
           {...props}
         />

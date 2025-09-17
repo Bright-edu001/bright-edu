@@ -323,7 +323,7 @@ const Chicago = () => {
               </div>
               <div className="history-description">
                 <h2>芝加哥市人口種族分布</h2>
-                <h2>CHICAGO City POPULATION & ETHNICITY</h2>
+                <h2>CHICAGO CITY POPULATION & ETHNICITY</h2>
               </div>
             </div>
             <div className="section-content">

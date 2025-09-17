@@ -233,7 +233,13 @@ function Home() {
                 news
                   .slice(0, 3)
                   .map((item) => (
-                    <ArticleCard key={item.id} item={item} imageType="news" />
+                    <ArticleCard
+                      key={item.id}
+                      item={item}
+                      imageType="news"
+                      width="400"
+                      height="250"
+                    />
                   ))}
             </div>
           </div>

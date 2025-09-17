@@ -15,6 +15,7 @@ export const FooterWrapper = styled(AntFooter)`
   background: ${colorGrayUltralight};
   padding: ${spacingSm} 0;
   transform: translateZ(0);
+  min-height: 400px; // 增加最小高度以更穩定地預留空間
 
   .container {
     width: 100%;
@@ -40,28 +41,30 @@ export const FooterWrapper = styled(AntFooter)`
 
 export const FooterContent = styled(Row)`
   display: flex;
-  justify-content: space-around;
+  justify-content: center; // 改為 center
   align-items: flex-start;
   margin: 2rem 0 1rem;
   text-align: left;
-  min-height: 140px;
+  gap: 2rem; // 增加間距
 
   @media (max-width: 850px) {
     flex-direction: column;
     align-items: center;
-    min-height: 290px;
+    // 移除 min-height，讓內容自然撐開
   }
 `;
 
 export const FooterSection = styled(Col)`
   min-height: 120px;
+  width: 180px; // 設定固定寬度
+  margin: 0 1rem; // 設定外邊距
 
   &.footer-links-uic,
   &.footer-links-msu {
     display: flex;
     flex-direction: column;
     text-align: left;
-    width: 150px;
+    width: 180px; // 明確設定寬度
 
     .section-title {
       margin-bottom: ${spacingSm};
@@ -114,6 +117,7 @@ export const FooterSection = styled(Col)`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 280px; // 為 'about' 區塊設定更寬的固定寬度
 
     .contact {
       margin-bottom: 20px;
@@ -177,6 +181,7 @@ export const FooterSection = styled(Col)`
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    width: 150px; // 為 'brand' 區塊設定固定寬度
 
     img {
       width: 120px;
@@ -220,6 +225,7 @@ export const FooterSection = styled(Col)`
     flex: none;
     width: 100%;
     text-align: center;
+    margin: 0; // 在移動版移除水平外邊距
 
     &.footer-links-uic,
     &.footer-links-msu,
@@ -238,6 +244,7 @@ export const FooterSection = styled(Col)`
       order: 1;
       align-items: center;
       padding-bottom: 0;
+      width: 100%; // 在移動版使用全寬
 
       .contact {
         margin-bottom: 0.2rem;
@@ -266,6 +273,7 @@ export const FooterSection = styled(Col)`
       order: 2;
       margin: 0;
       justify-content: center;
+      width: 100%; // 在移動版使用全寬
     }
   }
 `;

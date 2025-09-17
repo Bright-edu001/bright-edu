@@ -81,6 +81,12 @@
   .ant-menu-horizontal {
     border-bottom: none;
     line-height: 60px; // Match your existing header height
+    height: 60px; // 確保菜單欄有固定的高度
+  }
+
+  .ant-menu-overflow-item {
+    min-width: 60px; // 為 "..." 溢出項目預留最小寬度
+    text-align: center;
   }
 
   .ant-menu-item,
@@ -91,6 +97,8 @@
     display: flex !important; /* make menu titles use flex layout */
     height: 50px !important; /* set requested height */
     align-items: center !important; /* vertically center content */
+    min-width: 100px; // 為菜單項預留最小寬度
+    justify-content: center; // 水平置中
 
     &:hover {
       color: $color-uic; // Using variable from _variables.scss
