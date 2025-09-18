@@ -16,7 +16,14 @@ export const menuItems = [
     children: [
       {
         key: "uic-sub",
-        label: "UIC 伊利諾大學芝加哥分校",
+        label: (
+          <Link
+            to="/伊利諾大學芝加哥分校/UIC商學院碩士/學校介紹"
+            className="nav-link-color"
+          >
+            UIC 伊利諾大學芝加哥分校
+          </Link>
+        ),
         children: [
           {
             key: "about-uic",
