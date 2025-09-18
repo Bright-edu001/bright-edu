@@ -1,5 +1,5 @@
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../config/firebaseConfig";
+import { db } from "../config/firebaseCore";
 import logger from "../utils/logger";
 
 /**

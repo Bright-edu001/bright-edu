@@ -1,4 +1,4 @@
-import { db } from "../../config/firebaseConfig";
+import { db } from "../../config/firebaseCore";
 import { collection, addDoc } from "firebase/firestore";
 
 export async function saveEnrollmentNews(data) {

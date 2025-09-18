@@ -2,6 +2,7 @@ import React, { useEffect, Suspense } from "react";
 import { App as AntdApp, ConfigProvider, Spin } from "antd"; // 引入 Antd 的 App 與 Spin 組件
 import { BlogProvider } from "./context/BlogContext";
 import { SearchProvider } from "./context/SearchContext";
+import { useFirebaseInit } from "./context/FirebaseInitContext";
 import "./App.scss";
 
 // 組件引入
@@ -9,6 +10,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import FloatingButtons from "./components/FloatingButtons/FloatingButtons";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import AppSkeleton from "./components/AppSkeleton/AppSkeleton";
 
 // react-router 用於路由嵌套
 import { Outlet } from "react-router-dom";
@@ -34,6 +36,8 @@ const LoadingSpinner = () => (
 
 // App 主組件
 function App() {
+  const { isInitialized } = useFirebaseInit();
+
   useEffect(() => {
     // 監聽網址參數，若有 redirect 則導向指定路徑
     const params = new URLSearchParams(window.location.search);
@@ -42,6 +46,11 @@ function App() {
       window.history.replaceState({}, "", redirect);
     }
   }, []);
+
+  // 如果 Firebase 尚未初始化，顯示骨架畫面
+  if (!isInitialized) {
+    return <AppSkeleton />;
+  }
 
   return (
     // 使用 ConfigProvider 提供全域配置

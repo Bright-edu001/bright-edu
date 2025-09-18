@@ -1,17 +1,52 @@
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../config/firebaseConfig";
+import { db } from "../config/firebaseCore";
 import logger from "../utils/logger";
 
 /**
  * 聯絡表單服務 - 專注於 Firestore 儲存
+ * 現在包含 Firebase 初始化狀態檢查
  */
 class ContactService {
   constructor() {
     this.collectionName = "contact_forms";
+    this.isFirebaseReady = false;
+    this.pendingSubmissions = [];
     // 快取機制避免重複送出
     this.recentSubmissions = new Map();
     this.CACHE_DURATION = 60000; // 1分鐘快取
     this.MAX_CACHE_SIZE = 100; // 最大快取項目數
+  }
+
+  /**
+   * 設置 Firebase 就緒狀態
+   * 這個方法將被 FirebaseInitContext 調用
+   */
+  setFirebaseReady(isReady) {
+    this.isFirebaseReady = isReady;
+    if (isReady && this.pendingSubmissions.length > 0) {
+      this.processPendingSubmissions();
+    }
+  }
+
+  /**
+   * 處理待處理的提交
+   */
+  async processPendingSubmissions() {
+    logger.info(
+      `開始處理 ${this.pendingSubmissions.length} 個待處理的表單提交`
+    );
+
+    const submissions = [...this.pendingSubmissions];
+    this.pendingSubmissions = [];
+
+    for (const { formData, resolve, reject } of submissions) {
+      try {
+        const result = await this.saveToFirestore(formData);
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    }
   }
 
   /**
@@ -152,7 +187,16 @@ class ContactService {
     });
 
     try {
-      // 直接儲存到 Firestore
+      // 檢查 Firebase 是否已準備就緒
+      if (!this.isFirebaseReady) {
+        logger.info("Firebase 尚未初始化，將表單加入待處理佇列");
+
+        return new Promise((resolve, reject) => {
+          this.pendingSubmissions.push({ formData, resolve, reject });
+        });
+      }
+
+      // Firebase 已就緒，直接儲存到 Firestore
       const docId = await this.saveToFirestore(formData);
 
       const endTime = performance.now();
@@ -197,20 +241,35 @@ class ContactService {
    * @returns {Promise<Object>} 儲存結果
    */
   async saveToBoth(formData) {
-    const result = await this.submitContactForm(formData);
+    try {
+      const result = await this.submitContactForm(formData);
 
-    // 轉換為舊格式以保持相容性
-    return {
-      firestore: {
-        success: result.success,
-        docId: result.docId,
-        error: result.success ? null : new Error(result.error),
-      },
-      googleSheets: {
-        success: true,
-        message: "需要手動同步到 Google Sheets",
-      },
-    };
+      // 轉換為舊格式以保持相容性
+      return {
+        firestore: {
+          success: result.success,
+          docId: result.docId,
+          error: result.success ? null : new Error(result.error),
+        },
+        googleSheets: {
+          success: true,
+          message: "需要手動同步到 Google Sheets",
+        },
+      };
+    } catch (error) {
+      // 處理錯誤情況
+      return {
+        firestore: {
+          success: false,
+          docId: null,
+          error: error,
+        },
+        googleSheets: {
+          success: true,
+          message: "需要手動同步到 Google Sheets",
+        },
+      };
+    }
   }
 }
 

@@ -30,6 +30,12 @@ const logger = {
       console.error(...args);
     }
   },
+  // 除錯訊息，僅在開發環境輸出
+  debug: (...args) => {
+    if (isDevelopment) {
+      console.debug(...args);
+    }
+  },
   // 🔥 效能相關日誌，在所有環境都會記錄
   performance: (...args) => {
     console.log("🚀 [PERFORMANCE]", ...args);

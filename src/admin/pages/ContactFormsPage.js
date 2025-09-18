@@ -40,7 +40,7 @@ import {
   where,
   limit,
 } from "firebase/firestore";
-import { db } from "../../config/firebaseConfig";
+import { db } from "../../config/firebaseCore";
 import firestoreToSheetsSync from "../../services/firestoreToSheetsSync";
 import dayjs from "dayjs";
 

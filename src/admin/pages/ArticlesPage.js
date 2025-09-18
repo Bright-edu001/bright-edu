@@ -31,7 +31,7 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
-import { app } from "../../config/firebaseConfig";
+import { app } from "../../config/firebaseCore";
 import logger from "../../utils/logger";
 import StructuredContentEditor from "../components/StructuredContentEditor";
 import StructuredContentViewer from "../components/StructuredContentViewer";

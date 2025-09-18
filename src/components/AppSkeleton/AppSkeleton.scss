@@ -1,0 +1,260 @@
+// 骨架畫面樣式
+.app-skeleton {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+
+  // 骨架動畫
+  @keyframes skeleton-loading {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+    }
+  }
+
+  // 骨架元素基本樣式
+  .skeleton-element {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+  }
+}
+
+// Header 骨架
+.skeleton-header {
+  background: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .skeleton-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .skeleton-logo {
+      @extend .skeleton-element;
+      width: 150px;
+      height: 40px;
+    }
+
+    .skeleton-menu {
+      display: flex;
+      gap: 2rem;
+
+      .skeleton-menu-item {
+        @extend .skeleton-element;
+        width: 80px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+// 主要內容骨架
+.skeleton-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .skeleton-hero {
+    text-align: center;
+    margin-bottom: 4rem;
+
+    .skeleton-hero-title {
+      @extend .skeleton-element;
+      width: 400px;
+      height: 48px;
+      margin: 0 auto 1rem;
+    }
+
+    .skeleton-hero-subtitle {
+      @extend .skeleton-element;
+      width: 600px;
+      height: 24px;
+      margin: 0 auto 2rem;
+    }
+
+    .skeleton-hero-button {
+      @extend .skeleton-element;
+      width: 200px;
+      height: 48px;
+      margin: 0 auto;
+      border-radius: 24px;
+    }
+  }
+
+  .skeleton-sections {
+    .skeleton-section {
+      margin-bottom: 4rem;
+
+      .skeleton-section-title {
+        @extend .skeleton-element;
+        width: 300px;
+        height: 32px;
+        margin-bottom: 2rem;
+      }
+
+      .skeleton-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+
+        .skeleton-card {
+          @extend .skeleton-element;
+          height: 200px;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+}
+
+// Footer 骨架
+.skeleton-footer {
+  background: #333;
+  padding: 2rem;
+  margin-top: 4rem;
+
+  .skeleton-footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+
+    .skeleton-footer-section {
+      background: linear-gradient(90deg, #444 25%, #555 50%, #444 75%);
+      background-size: 200px 100%;
+      animation: skeleton-loading 1.5s infinite;
+      height: 120px;
+      border-radius: 4px;
+    }
+  }
+}
+
+// 載入指示器
+.loading-indicator {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+  color: #666;
+  z-index: 1000;
+
+  .loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #1890ff;
+    border-radius: 50%;
+    animation: spinner-spin 1s linear infinite;
+  }
+}
+
+@keyframes spinner-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// 初始化錯誤樣式
+.init-error {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+
+  .error-content {
+    text-align: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+
+    h2 {
+      color: #ff4d4f;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .retry-button {
+      background: #1890ff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+
+      &:hover {
+        background: #40a9ff;
+      }
+    }
+  }
+}
+
+// 響應式設計
+@media (max-width: 768px) {
+  .skeleton-header .skeleton-nav {
+    padding: 0 1rem;
+
+    .skeleton-menu {
+      gap: 1rem;
+
+      .skeleton-menu-item {
+        width: 60px;
+      }
+    }
+  }
+
+  .skeleton-content {
+    padding: 1rem;
+
+    .skeleton-hero {
+      .skeleton-hero-title {
+        width: 300px;
+      }
+
+      .skeleton-hero-subtitle {
+        width: 250px;
+      }
+    }
+
+    .skeleton-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .skeleton-footer .skeleton-footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+// 擴展骨架元素樣式類
+%skeleton-element {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}

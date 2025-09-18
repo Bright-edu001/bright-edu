@@ -1,6 +1,11 @@
 import { contactService } from "../contactService";
 import { collection, addDoc } from "firebase/firestore";
 
+// Mock firebaseCore
+jest.mock("../../config/firebaseCore", () => ({
+  db: "mock-db",
+}));
+
 // Mock Firebase Firestore
 const mockServerTimestamp = { _delegate: { _key: "server-timestamp" } };
 const mockCollectionRef = "mock-collection-ref";
@@ -18,7 +23,7 @@ beforeEach(() => {
 });
 
 // Mock Firebase config
-jest.mock("../../config/firebaseConfig", () => ({
+jest.mock("../../config/firebaseCore", () => ({
   db: "mock-db",
 }));
 
@@ -36,6 +41,8 @@ describe("ContactService", () => {
     jest.clearAllMocks();
     // 🔥 清除 contactService 的快取，避免測試間相互影響
     contactService.recentSubmissions.clear();
+    // 🔥 設置 Firebase 為已準備就緒狀態，避免待處理佇列影響測試
+    contactService.setFirebaseReady(true);
     // 設置 fetch mock
     global.fetch = jest.fn();
   });

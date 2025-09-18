@@ -7,7 +7,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { app } from "../config/firebaseConfig";
+import { app } from "../config/firebaseCore";
 import { message } from "antd";
 import {
   getUserRole,

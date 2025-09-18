@@ -1,4 +1,4 @@
-import { db } from "../config/firebaseConfig";
+import { db } from "../config/firebaseCore";
 import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
 import getImageUrl from "../utils/getImageUrl";
 import logger from "../utils/logger";
