@@ -16,11 +16,19 @@ const initializeAnalytics = async () => {
 
   if (!isBrowser()) {
     logger.info("[Analytics] 非瀏覽器環境，跳過初始化");
+    analyticsInitialized = true;
     return null;
   }
 
   if (isLocalDevelopment()) {
     logger.info("[Analytics] 本地開發環境，跳過 Analytics 初始化");
+    analyticsInitialized = true;
+    return null;
+  }
+
+  // 檢查是否有 measurementId
+  if (!process.env.REACT_APP_MEASUREMENT_ID) {
+    logger.info("[Analytics] 缺少 REACT_APP_MEASUREMENT_ID，跳過初始化");
     analyticsInitialized = true;
     return null;
   }

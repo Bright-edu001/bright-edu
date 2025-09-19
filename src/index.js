@@ -49,8 +49,18 @@ if ("serviceWorker" in navigator) {
 
 // ===== 初始化效能監控 =====
 performanceMonitor.init();
-// ===== 記錄頁面載入事件到 Firebase Analytics =====
-logAnalyticsEvent("page_load");
+
+// ===== 記錄頁面載入事件到 Firebase Analytics（安全調用）=====
+try {
+  logAnalyticsEvent("page_load").catch((error) => {
+    logger.debug(
+      "[Bootstrap] Analytics 事件記錄失敗，但不影響應用運行:",
+      error
+    );
+  });
+} catch (error) {
+  logger.debug("[Bootstrap] Analytics 事件調用失敗，但不影響應用運行:", error);
+}
 
 // ===== React 應用程式掛載入口 =====
 const root = ReactDOM.createRoot(document.getElementById("root"));

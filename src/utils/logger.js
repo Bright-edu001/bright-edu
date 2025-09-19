@@ -1,8 +1,18 @@
 /* eslint-disable no-console */
-// 簡易日誌工具：只在開發環境輸出 log，並統一不同日誌等級的寫法。
+// 簡易日誌工具：開發環境輸出 console log，正式環境將重要日誌發送到 Sentry
 
 // 判斷目前是否為開發環境
 const isDevelopment = process.env.NODE_ENV === "development";
+
+// 動態載入 Sentry（僅在正式環境）
+let Sentry = null;
+if (!isDevelopment) {
+  try {
+    Sentry = require("@sentry/react");
+  } catch (error) {
+    console.warn("Sentry not available:", error.message);
+  }
+}
 
 // logger 物件，提供 log/info/warn/error 四種日誌方法
 const logger = {
@@ -18,16 +28,38 @@ const logger = {
       console.info(...args);
     }
   },
-  // 警告訊息，僅在開發環境輸出
+  // 警告訊息，開發環境輸出 console，正式環境發送到 Sentry
   warn: (...args) => {
     if (isDevelopment) {
       console.warn(...args);
+    } else if (Sentry) {
+      // 在正式環境中將警告發送到 Sentry
+      const message = args
+        .map((arg) =>
+          typeof arg === "object" ? JSON.stringify(arg) : String(arg)
+        )
+        .join(" ");
+      Sentry.captureMessage(message, "warning");
     }
   },
-  // 錯誤訊息，僅在開發環境輸出
+  // 錯誤訊息，開發環境輸出 console，正式環境發送到 Sentry
   error: (...args) => {
     if (isDevelopment) {
       console.error(...args);
+    } else if (Sentry) {
+      // 在正式環境中將錯誤發送到 Sentry
+      const errorMessage = args
+        .map((arg) =>
+          typeof arg === "object" ? JSON.stringify(arg) : String(arg)
+        )
+        .join(" ");
+
+      // 如果第一個參數是 Error 物件，直接捕獲
+      if (args[0] instanceof Error) {
+        Sentry.captureException(args[0]);
+      } else {
+        Sentry.captureMessage(errorMessage, "error");
+      }
     }
   },
   // 除錯訊息，僅在開發環境輸出

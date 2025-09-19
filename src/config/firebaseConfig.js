@@ -28,7 +28,24 @@ const app = initializeApp(firebaseConfig);
 // 其他 Firebase 服務
 const db = getFirestore(app);
 const auth = getAuth(app);
-const analytics = getAnalytics(app);
+
+// Analytics 安全初始化（檢查環境和配置）
+let analytics = null;
+try {
+  // 檢查是否有 measurementId 且在瀏覽器環境
+  if (firebaseConfig.measurementId && typeof window !== "undefined") {
+    analytics = getAnalytics(app);
+    logger.info("[Firebase] Analytics 初始化成功");
+  } else {
+    logger.info(
+      "[Firebase] Analytics 跳過初始化（缺少 measurementId 或非瀏覽器環境）"
+    );
+  }
+} catch (error) {
+  logger.warn("[Firebase] Analytics 初始化失敗:", error);
+  analytics = null;
+}
+
 const functions = getFunctions(app, "asia-east1");
 
 // Firebase Hosting 環境檢測
