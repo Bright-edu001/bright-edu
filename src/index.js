@@ -4,72 +4,128 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import router from "./router"; // 匯入路由設定
 
-// ===== 效能監控工具匯入 =====
-import performanceMonitor from "./utils/performanceMonitor";
-
 // ===== 日誌工具匯入 =====
 import logger from "./utils/logger";
 
-// ===== Firebase Analytics 匯入（使用新模組化結構）=====
-import { logAnalyticsEvent } from "./config/analyticsClient";
-
-// ===== 全域字體與關鍵 CSS =====
+// ===== 全域字體與關鍵 CSS（優先載入）=====
 import "./styles/critical.css";
 
-// ===== Firebase 初始化 Context =====
+// ===== Firebase 初始化 Context（優化版）=====
 import { FirebaseInitProvider } from "./context/FirebaseInitContext";
 
-// ===== 初始化 Sentry（僅限生產環境） =====
-if (process.env.NODE_ENV === "production") {
-  // Sentry 用於前端錯誤監控與追蹤
-  const Sentry = require("@sentry/react");
-  const { BrowserTracing } = require("@sentry/tracing");
-  Sentry.init({
-    dsn: process.env.REACT_APP_SENTRY_DSN, // 從環境變數取得 DSN
-    integrations: [new BrowserTracing()], // 啟用瀏覽器追蹤
-    tracesSampleRate: 1.0, // 100% 追蹤率（可依需求調整）
-  });
-}
+// ===== 優化版 Sentry 初始化（非阻塞）=====
+const initializeSentryOptimized = () => {
+  if (process.env.NODE_ENV !== "production") return;
 
-// （已刪除開發期大量偵錯補丁：HookOutsideRender / Promise null tracing / 全域 unhandledrejection 攔截）
+  // 延遲載入 Sentry，避免阻塞初始渲染
+  setTimeout(async () => {
+    try {
+      const [{ default: Sentry }, { BrowserTracing }] = await Promise.all([
+        import("@sentry/react"),
+        import("@sentry/tracing"),
+      ]);
 
-// ===== 移除舊的 Service Worker（避免快取干擾） =====
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .getRegistrations()
-    .then(function (registrations) {
-      for (let registration of registrations) {
-        registration.unregister(); // 逐一註銷所有已註冊的 Service Worker
-      }
-    })
-    .catch(function (err) {
-      logger.error("Service Worker 註銷失敗: ", err);
-    });
-}
+      Sentry.init({
+        dsn: process.env.REACT_APP_SENTRY_DSN,
+        integrations: [new BrowserTracing()],
+        tracesSampleRate: 0.1, // 降低到 10% 減少性能影響
+        environment: process.env.NODE_ENV,
+        beforeSend(event) {
+          // 過濾掉不重要的錯誤
+          if (event.exception) {
+            const error = event.exception.values?.[0];
+            if (
+              error?.value?.includes("ResizeObserver") ||
+              error?.value?.includes("Non-Error promise rejection")
+            ) {
+              return null;
+            }
+          }
+          return event;
+        },
+      });
 
-// ===== 初始化效能監控 =====
-performanceMonitor.init();
+      logger.info("[Sentry] 延遲初始化完成");
+    } catch (error) {
+      logger.warn("[Sentry] 初始化失敗:", error);
+    }
+  }, 2000); // 2秒後初始化
+};
 
-// ===== 記錄頁面載入事件到 Firebase Analytics（安全調用）=====
-try {
-  logAnalyticsEvent("page_load").catch((error) => {
-    logger.debug(
-      "[Bootstrap] Analytics 事件記錄失敗，但不影響應用運行:",
-      error
-    );
-  });
-} catch (error) {
-  logger.debug("[Bootstrap] Analytics 事件調用失敗，但不影響應用運行:", error);
-}
+// ===== 優化版 Service Worker 清理（非阻塞）=====
+const cleanupServiceWorkerOptimized = () => {
+  if (!("serviceWorker" in navigator)) return;
+
+  // 非阻塞清理
+  setTimeout(() => {
+    navigator.serviceWorker
+      .getRegistrations()
+      .then(function (registrations) {
+        registrations.forEach((registration) => {
+          registration.unregister();
+        });
+      })
+      .catch(function (err) {
+        logger.debug("Service Worker 註銷失敗: ", err);
+      });
+  }, 1000);
+};
+
+// ===== 優化版效能監控（延遲載入）=====
+const initializePerformanceMonitorOptimized = () => {
+  setTimeout(async () => {
+    try {
+      const { default: performanceMonitor } = await import(
+        "./utils/performanceMonitor"
+      );
+      performanceMonitor.init();
+      logger.info("[Performance] 延遲初始化完成");
+    } catch (error) {
+      logger.debug("[Performance] 初始化失敗:", error);
+    }
+  }, 3000); // 3秒後初始化
+};
+
+// ===== 優化版 Analytics（延遲載入）=====
+const initializeAnalyticsOptimized = () => {
+  setTimeout(async () => {
+    try {
+      const { logAnalyticsEvent } = await import("./config/analyticsClient");
+      await logAnalyticsEvent("page_load");
+      logger.info("[Analytics] 延遲事件記錄完成");
+    } catch (error) {
+      logger.debug("[Analytics] 事件記錄失敗:", error);
+    }
+  }, 1500); // 1.5秒後記錄
+};
+
+// ===== 開始優化初始化 =====
+logger.info("[Bootstrap] 開始優化版應用載入");
+
+// 立即開始非關鍵服務的初始化（不阻塞渲染）
+initializeSentryOptimized();
+cleanupServiceWorkerOptimized();
+initializePerformanceMonitorOptimized();
+initializeAnalyticsOptimized();
 
 // ===== React 應用程式掛載入口 =====
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-// 立即渲染應用，Firebase 會在背景初始化
-logger.info("[Bootstrap] 開始渲染應用，Firebase 將在背景初始化。");
+// 立即渲染應用，所有 Firebase 服務都在背景初始化
+logger.info("[Bootstrap] 立即開始渲染，Firebase 在背景初始化");
 
 root.render(
   <FirebaseInitProvider>
     <RouterProvider router={router} />
   </FirebaseInitProvider>
 );
+
+// ===== 預載入關鍵資源（非阻塞）=====
+setTimeout(() => {
+  // 預載入關鍵路由組件
+  import("./pages/Home/Home").catch(() => {});
+  import("./components/Header/Header").catch(() => {});
+  import("./components/Footer/Footer").catch(() => {});
+}, 100);
+
+logger.info("[Bootstrap] 優化版應用載入完成");
