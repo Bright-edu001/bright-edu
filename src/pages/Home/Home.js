@@ -3,13 +3,18 @@ import Hero from "../../components/Hero/Hero";
 import ActionButton from "../../components/ActionButton/ActionButton";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import RankingNumberFlip from "../../components/RankingNumberFlip/RankingNumberFlip";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
-import { BlogContext } from "../../context/BlogContext";
+import { useBlogData } from "../../hooks/useBlogData";
 import getImageUrl from "../../utils/getImageUrl";
 
 function Home() {
-  const { enrollmentEvents, news, loading, error } = useContext(BlogContext);
+  const {
+    enrollmentEvents = [],
+    news = [],
+    loading,
+    error,
+  } = useBlogData(["enrollmentEvents", "news"]);
   const [animateRanking, setAnimateRanking] = useState(false);
   const featuresRef = useIntersectionObserver(() => setAnimateRanking(true), {
     threshold: 0.1,

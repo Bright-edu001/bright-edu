@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./BlogDetail.scss";
 import { useParams, Link } from "react-router-dom";
-import { BlogContext } from "../../context/BlogContext";
+import { useBlogData } from "../../hooks/useBlogData";
 import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "../../styles/critical.css";
@@ -45,8 +45,15 @@ const renderSections = (sections, isNested = false) => {
 
 function BlogDetail() {
   const { id } = useParams();
-  const { enrollmentEvents, news, all, loading, error } =
-    useContext(BlogContext);
+  const {
+    enrollmentEvents = [],
+    news = [],
+    loading,
+    error,
+  } = useBlogData(["enrollmentEvents", "news"]);
+
+  // 合併所有資料
+  const all = [...enrollmentEvents, ...news];
   const blog = all.find((item) => String(item.id) === String(id));
 
   // 新增：處理載入與錯誤狀態

@@ -3,42 +3,40 @@ import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import BlogDetail from "./BlogDetail";
-import { BlogContext } from "../../context/BlogContext";
 
 jest.mock("../../components/MbaAreasHero/MbaAreasHero", () => () => <div />);
 jest.mock("../../components/SearchBar/SearchBar", () => () => <div />);
 
-const providerValue = {
-  enrollmentEvents: [{ id: 1 }],
-  news: [],
-  all: [
-    {
-      id: 1,
-      title: "Sample",
-      image: "img.jpg",
-      excerpt: "excerpt",
-      type: "enrollment",
-      content: [
-        {
-          title: 'Hello<script>alert("xss")</script>',
-          flagImage: "/flag.png",
-          details: [],
-        },
-      ],
-    },
-  ],
-  loading: false,
-  error: null,
-};
-
+// Mock useBlogData hook
+jest.mock("../../hooks/useBlogData", () => ({
+  useBlogData: () => ({
+    enrollmentEvents: [
+      {
+        id: 1,
+        title: "Sample",
+        image: "img.jpg",
+        excerpt: "excerpt",
+        type: "enrollment",
+        content: [
+          {
+            title: 'Hello<script>alert("xss")</script>',
+            flagImage: "/flag.png",
+            details: [],
+          },
+        ],
+      },
+    ],
+    news: [],
+    loading: false,
+    error: null,
+  }),
+}));
 const wrapper = ({ children }) => (
-  <BlogContext.Provider value={providerValue}>
-    <MemoryRouter initialEntries={["/blog/1"]}>
-      <Routes>
-        <Route path="/blog/:id" element={children} />
-      </Routes>
-    </MemoryRouter>
-  </BlogContext.Provider>
+  <MemoryRouter initialEntries={["/blog/1"]}>
+    <Routes>
+      <Route path="/blog/:id" element={children} />
+    </Routes>
+  </MemoryRouter>
 );
 
 describe("BlogDetail", () => {

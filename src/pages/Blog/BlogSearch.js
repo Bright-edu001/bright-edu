@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { BlogContext } from "../../context/BlogContext";
+import { useBlogData } from "../../hooks/useBlogData";
 import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
@@ -36,13 +37,22 @@ function BlogSection({ items }) {
 function BlogSearch() {
   const { keyword } = useParams();
   const [searchResults, setSearchResults] = useState([]);
-  const { searchByKeyword, loading, error } = useContext(BlogContext);
+  const {
+    enrollmentEvents = [],
+    news = [],
+    loading,
+    error,
+  } = useBlogData(["enrollmentEvents", "news"]);
+  const { searchByKeyword } = useContext(BlogContext);
 
   useEffect(() => {
     if (!loading && !error) {
-      setSearchResults(searchByKeyword(keyword));
+      // 合併所有資料進行搜尋
+      const allData = [...enrollmentEvents, ...news];
+      const results = searchByKeyword(allData, keyword);
+      setSearchResults(results);
     }
-  }, [keyword, searchByKeyword, loading, error]);
+  }, [keyword, searchByKeyword, loading, error, enrollmentEvents, news]);
 
   if (loading) {
     return <div>載入中...</div>;

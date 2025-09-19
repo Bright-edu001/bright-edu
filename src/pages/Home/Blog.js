@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./Blog.scss";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BlogContext } from "../../context/BlogContext";
+import { useBlogData } from "../../hooks/useBlogData";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
@@ -22,7 +22,10 @@ function Blog() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const category = params.get("category");
-  const { enrollmentEvents, news } = useContext(BlogContext);
+  const { enrollmentEvents = [], news = [] } = useBlogData([
+    "enrollmentEvents",
+    "news",
+  ]);
   const navigate = useNavigate();
 
   // 根據 category 過濾顯示

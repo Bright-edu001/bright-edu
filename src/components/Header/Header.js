@@ -2,24 +2,19 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Menu, Drawer, ConfigProvider } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { menuItems } from "../../config/menuConfig";
+import { useWindowSize, calculateDrawerWidth } from "../../hooks/useWindowSize";
 import "./Header.scss";
 import getImageUrl from "../../utils/getImageUrl";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [drawerWidth, setDrawerWidth] = useState(
-    window.innerWidth <= 500 ? "100%" : 500
+  const windowSize = useWindowSize();
+  const drawerWidth = useMemo(
+    () => calculateDrawerWidth(windowSize.width),
+    [windowSize.width]
   );
   const [animationDuration, setAnimationDuration] = useState("0.2s");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleResize = () => {
-      setDrawerWidth(window.innerWidth <= 500 ? "100%" : 500);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   // 監聽滑鼠事件來控制動畫時間
   useEffect(() => {
