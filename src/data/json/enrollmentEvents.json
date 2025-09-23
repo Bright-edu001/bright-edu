@@ -1,13 +1,13 @@
 [
   {
-    "id": 1,
+    "id": 2,
     "thumbnail": "/images/blog/thumbnail/2025-02-03_UIC-申請截止日期_01.webp",
     "image": "/images/blog/2025-02-03_UIC-申請截止日期_01.webp",
     "imageWidth": 450,
     "imageHeight": 300,
     "title": "UIC MBA+MS Programs Application Deadline update",
     "excerpt": "UIC MBA+MS Programs Application Deadline update Fall 20 […]",
-    "link": "/blog/1",
+    "link": "/blog/2",
     "type": "enrollment",
     "content": [
       {
@@ -137,14 +137,14 @@
     ]
   },
   {
-    "id": 2,
+    "id": 3,
     "thumbnail": "/images/blog/thumbnail/2024-08-29_UIC-申請截止日期_01.webp",
     "image": "/images/blog/2024-08-29_UIC-申請截止日期_01.webp",
     "imageWidth": 450,
     "imageHeight": 300,
     "title": "UIC MBA Application Deadline update",
     "excerpt": "UIC MBA Application Deadline update Spring 2025 春季班資訊開放",
-    "link": "/blog/2",
+    "link": "/blog/3",
     "type": "enrollment",
     "content": [
       {
@@ -235,14 +235,14 @@
     ]
   },
   {
-    "id": 3,
+    "id": 4,
     "thumbnail": "/images/blog/thumbnail/2024-04-08_UIC-申請截止日期.webp",
     "image": "/images/blog/2024-04-08_UIC-申請截止日期.webp",
     "imageWidth": 450,
     "imageHeight": 300,
     "title": "UIC MBA Application Deadline update​​",
     "excerpt": "UIC MBA Application Deadline update​",
-    "link": "/blog/3",
+    "link": "/blog/4",
     "type": "enrollment",
     "content": [
       {
@@ -333,15 +333,27 @@
     ]
   },
   {
-    "id": 4,
+    "id": 5,
     "thumbnail": "/images/blog/thumbnail/擷取.webp",
     "image": "/images/blog/擷取.webp",
     "imageWidth": 450,
     "imageHeight": 300,
     "title": "Education USA美國小型教育展-高雄場​",
     "excerpt": "Education USA美國小型教育展-高雄場​",
-    "link": "/blog/4",
+    "link": "/blog/5",
     "type": "article",
     "content": "Education USA美國教育展高雄場來囉!🏃\n👉UIC MBA將參與此次展覽，將會由駐台招生代表現場與您諮詢申請細節及聊聊分享當地的生活喔!🧐\n屆時也會有許多美國知名大學蒞臨現場喔~歡迎大家來走走逛逛!\n🎉歡迎對前往美國留學有興趣的朋友一起來共襄盛舉!\n時間：1月14日（六）2 pm- 5 pm\n地點：高雄市立圖書館河堤分館 (高雄市三民區裕誠路1號)"
+  },
+  {
+    "id": 1,
+    "thumbnail": "/images/blog/thumbnail/2025中秋卡片UIC.webp",
+    "image": "/images/blog/2025中秋卡片UIC.webp",
+    "imageWidth": 450,
+    "imageHeight": 300,
+    "title": "🌕 中秋佳節快樂 - UIC Business School 祝福",
+    "excerpt": "花好月圓，人月兩團圓 🌸 祝福大家闔家幸福、心想事成～",
+    "link": "/blog/1",
+    "type": "article",
+    "content": "🌕 中秋佳節快樂 🌕\n花好月圓，人月兩團圓 🌸\n祝福大家闔家幸福、心想事成～\n就像滿月般圓滿，願每位努力追夢的學子，\n在未來的求學旅程中收穫圓滿與成功 🌍🎓\n\n🌕 Happy Mid-Autumn Festival 🌕\nWhen the moon is full, families are together 🌸\nWishing you happiness, harmony, and all dreams fulfilled.\nLike the bright full moon, may every hardworking dreamer\nfind fulfillment and success in their academic journey ahead 🌍🎓\n\n#中秋快樂 #MidAutumnFestival #UICBusinessSchool #DreamsComeTrue"
   }
 ]

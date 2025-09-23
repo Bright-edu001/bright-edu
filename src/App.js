@@ -13,6 +13,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import FloatingButtons from "./components/FloatingButtons/FloatingButtons";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 // react-router 用於路由嵌套
 import { Outlet } from "react-router-dom";
@@ -123,6 +124,7 @@ function App() {
         <BlogProvider>
           <SearchProvider>
             <ErrorBoundary>
+              <ScrollToTop />
               <div className="App">
                 <Header />
                 <main className="main-content">
