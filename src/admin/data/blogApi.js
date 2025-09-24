@@ -7,6 +7,7 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  writeBatch,
 } from "firebase/firestore";
 import getImageUrl from "../../utils/getImageUrl";
 
@@ -36,28 +37,33 @@ export async function getAllArticles() {
     getDocs(collection(db, "enrollmentEvents")),
     getDocs(collection(db, "news")),
   ]);
-  const enrollmentEvents = enrollmentSnap.docs.map((d) =>
+  const enrollmentEvents = enrollmentSnap.docs.map((d, idx) =>
     convertItemPaths({
       ...d.data(),
-      // 確保基本欄位存在
       type: d.data()?.type || "enrollment",
       category: d.data()?.category || "enrollment",
       docId: d.id,
       collection: "enrollmentEvents",
+      order: typeof d.data()?.order === "number" ? d.data().order : idx,
     })
   );
-  const news = newsSnap.docs.map((d) =>
+  const news = newsSnap.docs.map((d, idx) =>
     convertItemPaths({
       ...d.data(),
       type: d.data()?.type || "article",
       category: d.data()?.category || "news",
       docId: d.id,
       collection: "news",
+      order:
+        typeof d.data()?.order === "number"
+          ? d.data().order
+          : idx + enrollmentSnap.size,
     })
   );
-  // Convert any local paths to public URLs so admin UI shows images correctly
-  const all = [...enrollmentEvents, ...news];
-  return all.sort((a, b) => (Number(a?.id) || 0) - (Number(b?.id) || 0));
+  const all = [...enrollmentEvents, ...news]
+    .map((a, i) => ({ ...a, order: typeof a.order === "number" ? a.order : i }))
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  return all;
 }
 
 export async function getArticle(type, id) {
@@ -76,8 +82,13 @@ export async function getArticle(type, id) {
 export async function createArticle(type, data) {
   // type 應為 'enrollment' 或 'article'
   const col = type === "enrollment" ? "enrollmentEvents" : "news";
-  const docRef = await addDoc(collection(db, col), data);
-  return { ...data, docId: docRef.id, collection: col };
+  const payload = { ...data };
+  if (typeof payload.order !== "number") {
+    // 若未指定 order，使用當下時間戳以確保大於現有項目
+    payload.order = Date.now();
+  }
+  const docRef = await addDoc(collection(db, col), payload);
+  return { ...payload, docId: docRef.id, collection: col };
 }
 
 export async function updateArticle(type, docId, data) {
@@ -93,4 +104,15 @@ export async function deleteArticle(type, docId) {
   const col = type === "enrollment" ? "enrollmentEvents" : "news";
   const ref = doc(db, col, docId);
   await deleteDoc(ref);
+}
+
+// 批次更新文章排序
+export async function updateArticlesOrder(list) {
+  const batch = writeBatch(db);
+  list.forEach((item) => {
+    if (!item?.docId || !item?.collection) return;
+    const ref = doc(db, item.collection, item.docId);
+    batch.update(ref, { order: item.order });
+  });
+  await batch.commit();
 }

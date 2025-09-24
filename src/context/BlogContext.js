@@ -44,10 +44,16 @@ export const BlogProvider = ({ children }) => {
   }, []); // 空依賴陣列確保只在掛載時執行一次
 
   // 使用 useMemo 將招生活動與最新消息合併，避免不必要的重新計算
-  const all = useMemo(
-    () => [...enrollmentEvents, ...news],
-    [enrollmentEvents, news]
-  );
+  const all = useMemo(() => {
+    const merged = [...enrollmentEvents, ...news];
+    return merged.slice().sort((a, b) => {
+      const ao =
+        typeof a.order === "number" ? a.order : Number.MAX_SAFE_INTEGER;
+      const bo =
+        typeof b.order === "number" ? b.order : Number.MAX_SAFE_INTEGER;
+      return ao - bo;
+    });
+  }, [enrollmentEvents, news]);
 
   // 將巢狀內容中的文字展平為單一字串，支援陣列與物件
   // 將巢狀內容中的文字展平為單一字串，支援陣列與物件

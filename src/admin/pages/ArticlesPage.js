@@ -23,6 +23,7 @@ import {
   createArticle,
   updateArticle,
   deleteArticle,
+  updateArticlesOrder,
 } from "../data/blogApi";
 import {
   getStorage,
@@ -56,7 +57,49 @@ const ArticlesPage = () => {
     getAllArticles().then(setArticles);
   }, []);
 
+  const [isSavingOrder, setIsSavingOrder] = useState(false);
+  const [orderDirty, setOrderDirty] = useState(false);
+
+  const reorder = (fromIndex, toIndex) => {
+    setArticles((prev) => {
+      const next = [...prev];
+      const [moved] = next.splice(fromIndex, 1);
+      next.splice(toIndex, 0, moved);
+      // 重新給 order 序號（使用 index）
+      return next.map((a, i) => ({ ...a, order: i }));
+    });
+    setOrderDirty(true);
+  };
+
+  const handleSaveOrder = async () => {
+    try {
+      setIsSavingOrder(true);
+      await updateArticlesOrder(
+        articles.map((a, i) => ({
+          ...a,
+          order: typeof a.order === "number" ? a.order : i,
+        }))
+      );
+      message.success("排序已儲存");
+      setOrderDirty(false);
+    } catch (e) {
+      message.error("儲存排序失敗");
+    } finally {
+      setIsSavingOrder(false);
+    }
+  };
+
   const columns = [
+    {
+      title: "排序",
+      dataIndex: "order",
+      width: 70,
+      render: (_, __, index) => (
+        <span style={{ cursor: "grab", userSelect: "none" }}>
+          ☰ {index + 1}
+        </span>
+      ),
+    },
     {
       title: "ID",
       dataIndex: "id",
@@ -328,17 +371,66 @@ const ArticlesPage = () => {
         </Button>
       </div>
 
+      <div style={{ marginBottom: 12 }}>
+        <Space>
+          <Button
+            disabled={!orderDirty || isSavingOrder}
+            loading={isSavingOrder}
+            onClick={handleSaveOrder}
+            type="primary"
+          >
+            儲存排序
+          </Button>
+          {orderDirty && (
+            <span style={{ color: "#fa8c16" }}>尚未儲存的排序變更</span>
+          )}
+        </Space>
+      </div>
       <Table
         columns={columns}
         dataSource={articles}
-        rowKey={(record) => record.id ?? record.docId}
-        pagination={{
-          pageSize: 10,
-          showSizeChanger: true,
-          showTotal: (total, range) =>
-            `共 ${total} 筆資料，顯示第 ${range[0]}-${range[1]} 筆`,
+        rowKey={(record) =>
+          record.docId
+            ? `${record.collection || "col"}:${record.docId}`
+            : `${record.collection || "col"}:${record.id}`
+        }
+        pagination={false}
+        onRow={(record, index) => {
+          return {
+            draggable: true,
+            style: { cursor: "grab" },
+            onDragStart: (e) => {
+              e.dataTransfer.effectAllowed = "move";
+              e.dataTransfer.setData("text/plain", String(index));
+            },
+            onDragOver: (e) => {
+              e.preventDefault();
+              if (e.currentTarget) {
+                e.currentTarget.style.outline = "2px dashed #1890ff";
+                e.currentTarget.style.background = "#fafafa";
+              }
+            },
+            onDragLeave: (e) => {
+              if (e.currentTarget) {
+                e.currentTarget.style.outline = "";
+                e.currentTarget.style.background = "";
+              }
+            },
+            onDrop: (e) => {
+              e.preventDefault();
+              if (e.currentTarget) {
+                e.currentTarget.style.outline = "";
+                e.currentTarget.style.background = "";
+              }
+              const from = Number(e.dataTransfer.getData("text/plain"));
+              const to = index;
+              if (!Number.isNaN(from) && !Number.isNaN(to) && from !== to) {
+                reorder(from, to);
+              }
+            },
+          };
         }}
-        scroll={{ x: 1000 }}
+        scroll={{ x: 1100, y: 600 }}
       />
 
       <Modal

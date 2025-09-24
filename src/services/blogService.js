@@ -77,7 +77,14 @@ export const getEnrollmentEvents = async () => {
       id: doc.id,
       ...doc.data(),
     }));
-    return processBlogData(events);
+    const sorted = events.sort((a, b) => {
+      const ao =
+        typeof a.order === "number" ? a.order : Number.MAX_SAFE_INTEGER;
+      const bo =
+        typeof b.order === "number" ? b.order : Number.MAX_SAFE_INTEGER;
+      return ao - bo;
+    });
+    return processBlogData(sorted);
   } catch (error) {
     logger.error("Failed to fetch enrollment events:", error);
     throw error;
@@ -92,7 +99,14 @@ export const getNews = async () => {
       id: doc.id,
       ...doc.data(),
     }));
-    return processBlogData(newsItems);
+    const sorted = newsItems.sort((a, b) => {
+      const ao =
+        typeof a.order === "number" ? a.order : Number.MAX_SAFE_INTEGER;
+      const bo =
+        typeof b.order === "number" ? b.order : Number.MAX_SAFE_INTEGER;
+      return ao - bo;
+    });
+    return processBlogData(sorted);
   } catch (error) {
     logger.error("Failed to fetch news:", error);
     throw error;
