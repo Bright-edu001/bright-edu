@@ -39,38 +39,54 @@ import StructuredContentViewer from "../components/StructuredContentViewer";
 import NewsContentEditor from "../components/NewsContentEditor";
 import NewsContentViewer from "../components/NewsContentViewer";
 
+// 解構 Ant Design 組件
 const { Title } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
 
+// 初始化 Firebase Storage
 const storage = getStorage(app);
 
+// 文章管理頁面組件
 const ArticlesPage = () => {
+  // 文章列表狀態
   const [articles, setArticles] = useState([]);
+  // 新增/編輯模態框顯示狀態
   const [isModalVisible, setIsModalVisible] = useState(false);
+  // 查看模態框顯示狀態
   const [isViewModalVisible, setIsViewModalVisible] = useState(false);
+  // 當前編輯的文章
   const [editingArticle, setEditingArticle] = useState(null);
+  // 當前查看的文章
   const [viewingArticle, setViewingArticle] = useState(null);
+  // 表單實例
   const [form] = Form.useForm();
 
+  // 組件掛載時獲取所有文章
   useEffect(() => {
     getAllArticles().then(setArticles);
   }, []);
 
+  // 排序相關狀態
   const [isSavingOrder, setIsSavingOrder] = useState(false);
   const [orderDirty, setOrderDirty] = useState(false);
 
+  // 重新排序文章列表
   const reorder = (fromIndex, toIndex) => {
     setArticles((prev) => {
       const next = [...prev];
+      // 從原位置移除項目
       const [moved] = next.splice(fromIndex, 1);
+      // 插入到新位置
       next.splice(toIndex, 0, moved);
       // 重新給 order 序號（使用 index）
       return next.map((a, i) => ({ ...a, order: i }));
     });
+    // 標記排序已變更
     setOrderDirty(true);
   };
 
+  // 儲存排序到後端
   const handleSaveOrder = async () => {
     try {
       setIsSavingOrder(true);
@@ -89,6 +105,7 @@ const ArticlesPage = () => {
     }
   };
 
+  // 表格欄位定義
   const columns = [
     {
       title: "排序",
@@ -219,12 +236,14 @@ const ArticlesPage = () => {
     },
   ];
 
+  // 處理新增文章按鈕點擊
   const handleAdd = () => {
     setEditingArticle(null);
     form.resetFields();
     setIsModalVisible(true);
   };
 
+  // 處理編輯文章按鈕點擊
   const handleEdit = (article) => {
     setEditingArticle(article);
 
@@ -255,11 +274,13 @@ const ArticlesPage = () => {
     setIsModalVisible(true);
   };
 
+  // 處理查看文章按鈕點擊
   const handleView = (article) => {
     setViewingArticle(article);
     setIsViewModalVisible(true);
   };
 
+  // 處理刪除文章
   const handleDelete = async (key) => {
     const article = articles.find((a) => a.docId === key || a.id === key);
     if (!article) return;
@@ -269,9 +290,11 @@ const ArticlesPage = () => {
     message.success("文章已刪除");
   };
 
+  // 處理表單提交（新增或更新文章）
   const handleSubmit = async (values) => {
     let processedContent = values.content;
     try {
+      // 如果內容是 JSON 字串，解析為物件
       if (
         typeof values.content === "string" &&
         (values.content.trim().startsWith("{") ||
@@ -282,6 +305,7 @@ const ArticlesPage = () => {
     } catch (e) {
       processedContent = values.content;
     }
+    // 處理表單值，設置預設圖片尺寸
     const processedValues = {
       ...values,
       content: processedContent,
@@ -289,6 +313,7 @@ const ArticlesPage = () => {
       imageHeight: parseInt(values.imageHeight) || 300,
     };
     if (editingArticle) {
+      // 更新現有文章
       const type = editingArticle.type === "article" ? "article" : "enrollment";
       await updateArticle(type, editingArticle.docId, processedValues);
       setArticles((prev) =>
@@ -298,6 +323,7 @@ const ArticlesPage = () => {
       );
       message.success("文章已更新");
     } else {
+      // 新增文章
       const type =
         processedValues.type === "article" ? "article" : "enrollment";
       const newArticle = await createArticle(type, processedValues);
@@ -308,24 +334,32 @@ const ArticlesPage = () => {
     form.resetFields();
   };
 
+  // 處理取消編輯
   const handleCancel = () => {
     setIsModalVisible(false);
     form.resetFields();
   };
 
+  // 處理取消查看
   const handleViewCancel = () => {
     setIsViewModalVisible(false);
     setViewingArticle(null);
   };
 
+  // 處理檔案上傳
   const handleFileUpload = async (file, field) => {
     const oldUrl = form.getFieldValue(field);
+    // 建立 Storage 參考
     const storageRef = ref(storage, `blog/${Date.now()}_${file.name}`);
+    // 上傳檔案
     await uploadBytes(storageRef, file);
+    // 取得下載 URL
     const url = await getDownloadURL(storageRef);
+    // 更新表單值
     form.setFieldsValue({ [field]: url });
     message.success(`${field === "thumbnail" ? "縮圖" : "大圖"}上傳成功`);
 
+    // 刪除舊檔案
     if (oldUrl) {
       try {
         const matches = oldUrl.match(/\/o\/([^?]+)\?/);
@@ -350,6 +384,7 @@ const ArticlesPage = () => {
 
   return (
     <div style={{ padding: "24px" }}>
+      {/* 頁面標題和新增按鈕 */}
       <div
         style={{
           marginBottom: "24px",
@@ -371,6 +406,7 @@ const ArticlesPage = () => {
         </Button>
       </div>
 
+      {/* 排序儲存控制區 */}
       <div style={{ marginBottom: 12 }}>
         <Space>
           <Button
@@ -386,6 +422,8 @@ const ArticlesPage = () => {
           )}
         </Space>
       </div>
+
+      {/* 文章列表表格 */}
       <Table
         columns={columns}
         dataSource={articles}
@@ -433,6 +471,7 @@ const ArticlesPage = () => {
         scroll={{ x: 1100, y: 600 }}
       />
 
+      {/* 新增/編輯文章模態框 */}
       <Modal
         title={editingArticle ? "編輯文章" : "新增文章"}
         open={isModalVisible}
@@ -598,6 +637,7 @@ const ArticlesPage = () => {
         </Form>
       </Modal>
 
+      {/* 查看文章模態框 */}
       <Modal
         title="文章內容"
         open={isViewModalVisible}
