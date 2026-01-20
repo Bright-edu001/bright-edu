@@ -52,22 +52,31 @@ const uicRoutes = [
   { path: "uic-business-school/mba/dual-degree", element: <UrlRedirect /> },
   { path: "uic-business-school/mba/application", element: <UrlRedirect /> },
   { path: "uic-business-school/mba", element: <UrlRedirect /> },
-  { path: "uic-business-school/ms/finance", element: <UrlRedirect /> },
-  { path: "uic-business-school/ms/marketing", element: <UrlRedirect /> },
   {
-    path: "uic-business-school/ms/supply-chain-operation-management",
+    path: "uic-business-school/ms/MS-in-Finance-MSF",
     element: <UrlRedirect />,
   },
   {
-    path: "uic-business-school/ms/business-analytics",
+    path: "uic-business-school/ms/MS-in-Marketing-MSM",
+    element: <UrlRedirect />,
+  },
+  {
+    path: "uic-business-school/ms/MS-in-Supply-Chain-and-Operation-Management-MSSCOM",
+    element: <UrlRedirect />,
+  },
+  {
+    path: "uic-business-school/ms/MS-in-Business-Analytics-MSBA",
     element: <UrlRedirect />,
   },
   { path: "uic-business-school/ms/application", element: <UrlRedirect /> },
   {
-    path: "uic-business-school/ms/management-information-systems",
+    path: "uic-business-school/ms/MS-in-Management-Information-Systems-MSMIS",
     element: <UrlRedirect />,
   },
-  { path: "uic-business-school/ms/accounting", element: <UrlRedirect /> },
+  {
+    path: "uic-business-school/ms/MS-in-Accounting-MSA",
+    element: <UrlRedirect />,
+  },
   {
     path: "uic-business-school/ms/msprograms",
     element: <UrlRedirect />,

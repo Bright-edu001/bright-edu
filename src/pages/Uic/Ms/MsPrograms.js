@@ -15,7 +15,7 @@ const MsAreas = [
     desc: "加強你的行銷專業，開啟更多職涯機會。",
   },
   {
-    href: "/uic-business-school/ms/MS-in-Supply-Chain-and-Operations-Management-MSSCOM",
+    href: "/uic-business-school/ms/MS-in-Supply-Chain-and-Operation-Management-MSSCOM",
     title:
       "供應鏈與營運管理 Master of Science in Supply Chain and Operations Management(MSSCOM)",
     desc: "掌握供應鏈與營運領域的專業知識。",
