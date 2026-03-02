@@ -4,6 +4,8 @@ import { BlogContext } from "../../context/BlogContext";
 import { useBlogData } from "../../hooks/useBlogData";
 import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import AppSkeleton from "../../components/AppSkeleton/AppSkeleton";
+import ProgressiveImage from "../../components/ProgressiveImage/ProgressiveImage";
 
 import "./BlogDetail.scss";
 import "./BlogSearch.scss"; // 新增：引入樣式
@@ -16,12 +18,12 @@ function BlogSection({ items }) {
       <div className="blog-grid">
         {items.map((item) => (
           <Link to={`/blog/${item.id}`} className="blog-card" key={item.id}>
-            <img
-              src={item.image}
+            <ProgressiveImage
+              src={item.image || item.thumbnail}
+              placeholderSrc={item.thumbnail}
               alt={item.title}
               className="blog-card-img"
-              width="473"
-              height="253"
+              style={{ width: "100%", height: "253px", objectFit: "cover" }}
             />
             <div className="blog-card-content">
               <h3 className="blog-card-title">{item.title}</h3>
@@ -55,7 +57,16 @@ function BlogSearch() {
   }, [keyword, searchByKeyword, loading, error, enrollmentEvents, news]);
 
   if (loading) {
-    return <div>載入中...</div>;
+    return (
+      <div>
+        <MbaAreasHero />
+        <div className="blog-detail-mainrow">
+          <div className="blog-detail-main">
+            <AppSkeleton />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (error) {

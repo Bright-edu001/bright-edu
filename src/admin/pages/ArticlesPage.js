@@ -94,7 +94,7 @@ const ArticlesPage = () => {
         articles.map((a, i) => ({
           ...a,
           order: typeof a.order === "number" ? a.order : i,
-        }))
+        })),
       );
       message.success("排序已儲存");
       setOrderDirty(false);
@@ -318,8 +318,8 @@ const ArticlesPage = () => {
       await updateArticle(type, editingArticle.docId, processedValues);
       setArticles((prev) =>
         prev.map((a) =>
-          a.id === editingArticle.id ? { ...a, ...processedValues } : a
-        )
+          a.id === editingArticle.id ? { ...a, ...processedValues } : a,
+        ),
       );
       message.success("文章已更新");
     } else {
@@ -351,8 +351,14 @@ const ArticlesPage = () => {
     const oldUrl = form.getFieldValue(field);
     // 建立 Storage 參考
     const storageRef = ref(storage, `blog/${Date.now()}_${file.name}`);
-    // 上傳檔案
-    await uploadBytes(storageRef, file);
+
+    // 設定 Cache-Control 標頭，讓圖片可以被瀏覽器快取一年
+    const metadata = {
+      cacheControl: "public, max-age=31536000",
+    };
+
+    // 上傳檔案並附帶 metadata
+    await uploadBytes(storageRef, file, metadata);
     // 取得下載 URL
     const url = await getDownloadURL(storageRef);
     // 更新表單值
@@ -542,7 +548,10 @@ const ArticlesPage = () => {
           <Form.Item
             name="thumbnail"
             style={{ display: "none" }}
-            rules={[{ required: true, message: "請上傳縮圖" }]}
+            rules={[
+              { required: true, message: "請上傳縮圖" },
+              { type: "url", message: "縮圖必須是有效的網址格式" },
+            ]}
           >
             <Input type="hidden" />
           </Form.Item>
@@ -567,7 +576,10 @@ const ArticlesPage = () => {
           <Form.Item
             name="image"
             style={{ display: "none" }}
-            rules={[{ required: true, message: "請上傳大圖" }]}
+            rules={[
+              { required: true, message: "請上傳大圖" },
+              { type: "url", message: "大圖必須是有效的網址格式" },
+            ]}
           >
             <Input type="hidden" />
           </Form.Item>

@@ -6,6 +6,7 @@ import {
   StyledContainer,
   StyledGalleryItem,
 } from "./GallerySectionStyles";
+import ProgressiveImage from "../ProgressiveImage/ProgressiveImage";
 
 function GallerySection({ images, ariaLabel = "圖片畫廊", title = null }) {
   return (
@@ -15,11 +16,12 @@ function GallerySection({ images, ariaLabel = "圖片畫廊", title = null }) {
           {title && <StyledGalleryTitle>{title}</StyledGalleryTitle>}
           {images.map((image, index) => (
             <StyledGalleryItem key={image.src || index}>
-              <img
+              <ProgressiveImage
                 className="responsive-img"
                 src={image.src}
+                placeholderSrc={image.thumbnail || image.src}
                 alt={image.alt}
-                loading="lazy"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </StyledGalleryItem>
           ))}

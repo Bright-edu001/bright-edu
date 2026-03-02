@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useBlogData } from "../../hooks/useBlogData";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import AppSkeleton from "../../components/AppSkeleton/AppSkeleton";
 
 function BlogSection({ title, items, imageType }) {
   return (
@@ -22,10 +23,11 @@ function Blog() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const category = params.get("category");
-  const { enrollmentEvents = [], news = [] } = useBlogData([
-    "enrollmentEvents",
-    "news",
-  ]);
+  const {
+    enrollmentEvents = [],
+    news = [],
+    loading,
+  } = useBlogData(["enrollmentEvents", "news"]);
   const navigate = useNavigate();
 
   // 根據 category 過濾顯示
@@ -49,14 +51,18 @@ function Blog() {
       <div className="blog-detail-mainrow">
         <div className="blog-detail-main">
           <div className="blog-content">
-            {sections.map((section) => (
-              <BlogSection
-                key={section.title}
-                title={section.title}
-                items={section.items}
-                imageType={section.imageType}
-              />
-            ))}
+            {loading ? (
+              <AppSkeleton />
+            ) : (
+              sections.map((section) => (
+                <BlogSection
+                  key={section.title}
+                  title={section.title}
+                  items={section.items}
+                  imageType={section.imageType}
+                />
+              ))
+            )}
           </div>
           {/* 新增：分類頁面時顯示返回按鈕 */}
           {(category === "enrollment" || category === "news") && (

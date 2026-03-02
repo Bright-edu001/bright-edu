@@ -3,12 +3,12 @@ import {
   StyledArticleCard,
   StyledLink,
   StyledAnchor,
-  StyledImage,
   StyledPlaceholder,
   StyledContent,
   StyledTitle,
   StyledExcerpt,
 } from "./ArticleCardStyles";
+import ProgressiveImage from "../ProgressiveImage/ProgressiveImage";
 
 /**
  * 通用文章卡片元件
@@ -32,13 +32,18 @@ function ArticleCard({ item, imageType, layout = "vertical" }) {
       <Wrapper $layout={layout} $imageType={imageType} {...wrapperProps}>
         {/* 圖片區塊：優先使用 thumbnail，無則 fallback image */}
         {item.thumbnail || item.image ? (
-          <StyledImage
-            src={item.thumbnail || item.image}
+          <ProgressiveImage
+            src={item.image || item.thumbnail}
+            placeholderSrc={item.thumbnail}
             alt={item.title}
-            $layout={layout}
-            loading="lazy"
-            width={item.imageWidth}
-            height={item.imageHeight}
+            className={`article-card-image ${layout === "horizontal" ? "horizontal" : ""}`}
+            style={{
+              width: layout === "horizontal" ? "40%" : "100%",
+              height: layout === "horizontal" ? "auto" : "200px",
+              marginRight: layout === "horizontal" ? "1rem" : "0",
+              borderRadius: "8px",
+              objectFit: "contain",
+            }}
           />
         ) : (
           <StyledPlaceholder

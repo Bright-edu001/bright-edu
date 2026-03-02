@@ -1,0 +1,38 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 預設拒絕所有讀寫
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // 招生活動 (enrollmentEvents)
+    // 允許所有人讀取，僅允許已登入的管理者寫入
+    match /enrollmentEvents/{eventId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // 最新消息 (news)
+    // 允許所有人讀取，僅允許已登入的管理者寫入
+    match /news/{newsId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // 聯絡表單 (contact_forms)
+    // 允許任何人建立（提交表單），但只有管理者可以讀取、更新或刪除
+    match /contact_forms/{formId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // 使用者權限 (users / roles)
+    // 僅允許管理者讀寫
+    match /users/{userId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

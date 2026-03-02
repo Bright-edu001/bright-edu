@@ -10,7 +10,9 @@ export const StyledArticleCard = styled.div`
 const sharedLinkStyles = css`
   text-decoration: none;
   display: flex;
-  transition: transform 0.1s ease, opacity 0.1s ease;
+  transition:
+    transform 0.1s ease,
+    opacity 0.1s ease;
   &:hover {
     opacity: 0.9;
     transform: scale(1.02);
@@ -36,7 +38,6 @@ export const StyledAnchor = styled.a`
 // 圖片樣式
 export const StyledImage = styled.img`
   width: 100%;
-  object-fit: contain;
   border-radius: 8px;
   background-size: contain;
   background-position: center;

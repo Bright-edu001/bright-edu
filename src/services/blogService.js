@@ -1,5 +1,15 @@
 import { db } from "../config/firebaseCore";
-import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  setDoc,
+  query,
+  orderBy,
+  limit,
+  startAfter,
+} from "firebase/firestore";
 import getImageUrl from "../utils/getImageUrl";
 import logger from "../utils/logger";
 
@@ -16,7 +26,7 @@ export const processBlogData = (data) => {
         } catch (e) {
           return m; // 失敗則保留原字串
         }
-      }
+      },
     );
   };
 
@@ -69,44 +79,63 @@ export const getAllBlogPosts = async () => {
   }
 };
 
-// 取得所有招生活動
-export const getEnrollmentEvents = async () => {
+// 取得所有招生活動 (支援分頁)
+export const getEnrollmentEvents = async (
+  lastVisible = null,
+  pageSize = 10,
+) => {
   try {
-    const querySnapshot = await getDocs(collection(db, "enrollmentEvents"));
+    let q = query(
+      collection(db, "enrollmentEvents"),
+      orderBy("order", "asc"),
+      limit(pageSize),
+    );
+
+    if (lastVisible) {
+      q = query(q, startAfter(lastVisible));
+    }
+
+    const querySnapshot = await getDocs(q);
     const events = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
-    const sorted = events.sort((a, b) => {
-      const ao =
-        typeof a.order === "number" ? a.order : Number.MAX_SAFE_INTEGER;
-      const bo =
-        typeof b.order === "number" ? b.order : Number.MAX_SAFE_INTEGER;
-      return ao - bo;
-    });
-    return processBlogData(sorted);
+
+    return {
+      data: processBlogData(events),
+      lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1] || null,
+      hasMore: querySnapshot.docs.length === pageSize,
+    };
   } catch (error) {
     logger.error("Failed to fetch enrollment events:", error);
     throw error;
   }
 };
 
-// 取得所有新聞
-export const getNews = async () => {
+// 取得所有新聞 (支援分頁)
+export const getNews = async (lastVisible = null, pageSize = 10) => {
   try {
-    const querySnapshot = await getDocs(collection(db, "news"));
+    let q = query(
+      collection(db, "news"),
+      orderBy("order", "asc"),
+      limit(pageSize),
+    );
+
+    if (lastVisible) {
+      q = query(q, startAfter(lastVisible));
+    }
+
+    const querySnapshot = await getDocs(q);
     const newsItems = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
-    const sorted = newsItems.sort((a, b) => {
-      const ao =
-        typeof a.order === "number" ? a.order : Number.MAX_SAFE_INTEGER;
-      const bo =
-        typeof b.order === "number" ? b.order : Number.MAX_SAFE_INTEGER;
-      return ao - bo;
-    });
-    return processBlogData(sorted);
+
+    return {
+      data: processBlogData(newsItems),
+      lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1] || null,
+      hasMore: querySnapshot.docs.length === pageSize,
+    };
   } catch (error) {
     logger.error("Failed to fetch news:", error);
     throw error;

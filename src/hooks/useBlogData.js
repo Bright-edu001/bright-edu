@@ -80,13 +80,16 @@ export const useBlogData = (dataTypes = []) => {
     try {
       logger.info(`[useBlogData] 開始載入: ${type}`);
 
-      let data;
+      let result;
+      let data; // 宣告 data 變數
       switch (type) {
         case "enrollmentEvents":
-          data = await getEnrollmentEvents();
+          result = await getEnrollmentEvents(null, 100); // 為了相容舊版，先抓取較多資料，後續可再優化為真正的無限捲動
+          data = result.data;
           break;
         case "news":
-          data = await getNews();
+          result = await getNews(null, 100);
+          data = result.data;
           break;
         default:
           throw new Error(`Unknown data type: ${type}`);
@@ -115,7 +118,7 @@ export const useBlogData = (dataTypes = []) => {
       try {
         // 並行載入所有資料類型
         const results = await Promise.allSettled(
-          types.map((type) => fetchDataType(type))
+          types.map((type) => fetchDataType(type)),
         );
 
         if (!mountedRef.current) return;
@@ -149,7 +152,7 @@ export const useBlogData = (dataTypes = []) => {
         }
       }
     },
-    [fetchDataType]
+    [fetchDataType],
   );
 
   // 初始載入效果 - 使用 useRef 避免依賴循環
@@ -181,7 +184,7 @@ export const useBlogData = (dataTypes = []) => {
       types.forEach((type) => cache.delete(type));
       loadData(types);
     },
-    [dataTypes, loadData]
+    [dataTypes, loadData],
   );
 
   // 便利方法
