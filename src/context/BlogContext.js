@@ -24,13 +24,14 @@ export const BlogProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // 同時獲取招生活動與最新消息
+        // 同時獲取招生活動與最新消息（載入 100 筆資料，相容舊版全域功能）
         const [enrollmentData, newsData] = await Promise.all([
-          getEnrollmentEvents(),
-          getNews(),
+          getEnrollmentEvents(null, 100),
+          getNews(null, 100),
         ]);
-        setEnrollmentEvents(enrollmentData);
-        setNews(newsData);
+        // 提取實際陣列資料，若格式改變也可向下相容
+        setEnrollmentEvents(enrollmentData?.data || enrollmentData || []);
+        setNews(newsData?.data || newsData || []);
         setError(null); // 成功後清除錯誤
       } catch (err) {
         setError(err.message);
@@ -69,7 +70,7 @@ export const BlogProvider = ({ children }) => {
           .join(" ");
       return "";
     },
-    [] // 空依賴陣列，確保 flattenContent 函式穩定
+    [], // 空依賴陣列，確保 flattenContent 函式穩定
   );
 
   // 根據關鍵字搜尋文章，回傳符合標題或內容包含關鍵字的清單
@@ -88,7 +89,7 @@ export const BlogProvider = ({ children }) => {
         return titleMatch || contentText.includes(kw);
       });
     },
-    [all, flattenContent]
+    [all, flattenContent],
   );
 
   // 根據分類參數過濾文章，支援 "enrollment"、"news" 或回傳全部
@@ -98,7 +99,7 @@ export const BlogProvider = ({ children }) => {
       if (category === "news") return news;
       return all;
     },
-    [enrollmentEvents, news, all]
+    [enrollmentEvents, news, all],
   );
 
   // 使用 useMemo 穩定 context value，只在相關數據改變時重新計算
@@ -120,7 +121,7 @@ export const BlogProvider = ({ children }) => {
       error,
       searchByKeyword,
       filterByCategory,
-    ]
+    ],
   );
 
   // 提供全域資料與操作函式給子元件

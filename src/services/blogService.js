@@ -65,12 +65,16 @@ export const processBlogData = (data) => {
 // 取得所有部落格文章（包含招生活動與新聞）
 export const getAllBlogPosts = async () => {
   try {
-    // 同時取得招生活動與新聞
+    // 同時取得招生活動與新聞（載入 100 筆資料，兼容舊版全域功能）
     const [enrollmentEvents, news] = await Promise.all([
-      getEnrollmentEvents(),
-      getNews(),
+      getEnrollmentEvents(null, 100),
+      getNews(null, 100),
     ]);
-    const allPosts = [...enrollmentEvents, ...news];
+    // 從物件中提取實際資料，避免因分頁造成無法迭代的問題
+    const allPosts = [
+      ...(enrollmentEvents?.data || enrollmentEvents || []),
+      ...(news?.data || news || []),
+    ];
     // 招生活動與新聞已經處理過圖片路徑
     return allPosts;
   } catch (error) {
