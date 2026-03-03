@@ -1,10 +1,6 @@
 import React, { memo, useMemo, isValidElement } from "react";
 import PropTypes from "prop-types";
-import {
-  InfoCardWrapper,
-  InfoCardContent,
-  InfoCardImg,
-} from "./InfoCard.styled";
+import "./InfoCard.scss";
 
 /**
  * 可重用的資訊卡片組件
@@ -34,7 +30,7 @@ function InfoCard({
       }
       if (val && typeof val === "object") {
         return Object.values(val).map((item, idx) =>
-          renderContent(item, keyPrefix + idx)
+          renderContent(item, keyPrefix + idx),
         );
       }
       return null;
@@ -42,23 +38,23 @@ function InfoCard({
     return renderContent(content);
   }, [content]);
 
+  // 根據 imagePosition 決定 flex-direction 的類名
+  const positionClass =
+    imagePosition === "right" ? "info-card--right" : "info-card--left";
+
   return (
-    <InfoCardWrapper
-      className={
-        imagePosition === "right" ? "info-card-right" : "info-card-left"
-      }
-    >
-      <InfoCardContent className="info-card-content">
+    <div className={`info-card ${positionClass}`}>
+      <div className="info-card__content">
         {title && <h4>{title}</h4>}
         {contentNodes}
-      </InfoCardContent>
-      <InfoCardImg
-        className="info-card-img"
+      </div>
+      <img
+        className="info-card__img"
         src={imageSrc}
         alt={imageAlt || title}
         loading="lazy"
       />
-    </InfoCardWrapper>
+    </div>
   );
 }
 

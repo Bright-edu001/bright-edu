@@ -1,0 +1,85 @@
+@import "../../styles/variables";
+
+.info-card {
+  // 卡片容器
+  display: flex;
+  align-items: center;
+  margin: $spacing-xl auto;
+  overflow: hidden;
+  background-color: $color-white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // 初始陰影
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  // 滑鼠懸停效果
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  // 圖片位置修飾類名
+  &--right {
+    flex-direction: row;
+  }
+
+  &--left {
+    flex-direction: row-reverse;
+  }
+
+  // 內容區域
+  &__content {
+    padding: $spacing-sm $spacing-lg;
+
+    h4 {
+      font-size: 22px; // headingMedium mixin
+      font-weight: $font-weight-bold;
+      margin-bottom: $spacing-sm;
+      color: $color-nav;
+      text-align: left;
+    }
+
+    p {
+      font-size: $font-size-md; // labelStyle mixin (18px)
+      font-weight: $font-weight-normal;
+      margin: 0 auto;
+      text-align: left;
+    }
+  }
+
+  // 圖片樣式
+  &__img {
+    width: 100%;
+    max-width: 40%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+
+    @media (max-width: 700px) {
+      order: -1;
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 12px;
+    }
+  }
+
+  // 響應式佈局 (Mobile)
+  @media (max-width: 700px) {
+    flex-direction: column !important;
+    align-items: center;
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    .info-card__content {
+      width: 100%;
+      padding: 0;
+
+      h4 {
+        margin-top: $spacing-md;
+        margin-bottom: 0.5rem;
+        text-align: left;
+      }
+    }
+  }
+}

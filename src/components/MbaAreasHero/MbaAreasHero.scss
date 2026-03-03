@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+
+.mba-hero {
+  // 英雄區塊容器
+  height: 80px;
+  // background-color 由內聯樣式控制
+  color: $color-white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__title {
+    // 標題樣式
+    font-size: 28px;
+    font-weight: $font-weight-semibold; // 600
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

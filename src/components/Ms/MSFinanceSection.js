@@ -1,25 +1,21 @@
 import React from "react";
-import {
-  ProgramDetailsSection,
-  OutcomesParagraph,
-  ReasonsToChooseParagraph,
-  SectionTitle,
-  ReasonsToChooseTitle,
-  WhyUicMsfDiv,
-  MsfOutcomesDiv,
-  CompanyCoursesDiv,
-  CourseArrangementDiv,
-  CoreCoursesSectionDiv,
-  CoreCoursesTitle,
-  CoreCourseParagraphDiv,
-  CoreCoursesIntroDiv,
-  CoreCoursesListDiv,
-  CoreCoursesColDiv,
-  CoreCourseItemDiv,
-  CoreCourseFootParagraph,
-  ResponsiveImg,
-  ReasonsToChooseBlock, // 新增匯入
-} from "./MSFinanceSection.styled";
+import "./MSFinanceSection.scss";
+
+// 內部組件與樣式映射 (因為 styled-components 移除了，這裡需要一些簡單的適配器如果需要)
+// 因為 <ResponsiveImg> 在原本的 styled-components 中可能包含樣式，但這裡只有一個 class
+// 我們直接用 <img className="responsive-img" ... />
+const ResponsiveImg = (props) => (
+  <img
+    {...props}
+    style={{
+      maxWidth: "100%",
+      height: "auto",
+      display: "block",
+      ...props.style,
+    }}
+    className={`responsive-img ${props.className || ""}`}
+  />
+);
 
 function MSFinanceSection({
   whyTitle,
@@ -35,14 +31,13 @@ function MSFinanceSection({
   coreCoursesList,
   coreCoursesIntroList,
   coreCourseFoot,
-  // 新增：可選的 extraCoursesTitle, extraCoursesList
   extraCoursesTitle,
   extraCoursesList,
   reasonsTitle,
   reasonsDesc,
-  coreCoursesIntroMarginBottom, // 新增 prop
-  coreCoursesListMarginBottom, // 新增 prop，用於設置 CoreCoursesListDiv 的 margin-bottom
-  coreCoursePragaphMarginBottom, // 新增 prop，用於設置 CoreCourseParagraphDiv 的 margin-bottom
+  coreCoursesIntroMarginBottom,
+  coreCoursesListMarginBottom,
+  coreCoursePragaphMarginBottom,
 }) {
   const hasCoreCoursePragaph = Array.isArray(coreCoursePragaph)
     ? coreCoursePragaph.length > 0
@@ -51,23 +46,20 @@ function MSFinanceSection({
     coreCoursesIntroList && coreCoursesIntroList.length > 0;
 
   return (
-    <ProgramDetailsSection>
+    <section className="msf-program-details">
       {/* 為什麼選擇UIC MSF */}
-      <WhyUicMsfDiv>
-        <SectionTitle>{whyTitle}</SectionTitle>
-        {/* 支援條列式或多段落 */}
+      <div className="msf-why">
+        <h3 className="msf-section-title">{whyTitle}</h3>
         {Array.isArray(whyList) ? (
           <ul>
             {whyList.map((item, idx) => (
               <li key={idx}>
-                {/* 若有title則加粗，否則只顯示desc */}
                 {item.title && <strong>{item.title}</strong>}
                 {item.desc && (
                   <div style={{ color: "#222", marginTop: "0.5rem" }}>
                     {item.desc}
                   </div>
                 )}
-                {/* 新增：若有 extraList，則渲染黑色小圓點 */}
                 {item.extraList && Array.isArray(item.extraList) && (
                   <ul>
                     {item.extraList.map((txt, i) => (
@@ -82,14 +74,14 @@ function MSFinanceSection({
         ) : (
           <div>{whyList}</div>
         )}
-      </WhyUicMsfDiv>
+      </div>
 
-      {/* 職涯發展與成果區塊，支援段落或條列 */}
-      <MsfOutcomesDiv>
-        <SectionTitle>{outcomesTitle}</SectionTitle>
+      {/* 職涯發展與成果區塊 */}
+      <div className="msf-outcomes">
+        <h3 className="msf-section-title">{outcomesTitle}</h3>
         {typeof outcomesDesc === "object" && outcomesDesc !== null ? (
           <>
-            <OutcomesParagraph>{outcomesDesc.desc}</OutcomesParagraph>
+            <p className="msf-paragraph">{outcomesDesc.desc}</p>
             <ul>
               {outcomesDesc.list &&
                 outcomesDesc.list.map((item, idx) => <li key={idx}>{item}</li>)}
@@ -102,21 +94,19 @@ function MSFinanceSection({
             ))}
           </ul>
         ) : (
-          <OutcomesParagraph>{outcomesDesc}</OutcomesParagraph>
+          <p className="msf-paragraph">{outcomesDesc}</p>
         )}
-      </MsfOutcomesDiv>
+      </div>
 
+      {/* 企業合作 */}
       {(companyTitle || (companyLogos && companyLogos.length > 0)) && (
-        <CompanyCoursesDiv>
-          <SectionTitle>{companyTitle}</SectionTitle>
+        <div className="msf-company">
+          <h3 className="msf-section-title">{companyTitle}</h3>
           {companyLogos && companyLogos.length > 0 && (
             <div className="company-logos">
-              {" "}
-              {/* Keep class or create sub-component */}
               {companyLogos.map((logo, idx) => (
                 <ResponsiveImg
                   key={idx}
-                  // className="responsive-img" // Handled by styled component
                   src={logo.src}
                   alt={logo.alt}
                   loading="lazy"
@@ -124,62 +114,60 @@ function MSFinanceSection({
               ))}
             </div>
           )}
-        </CompanyCoursesDiv>
+        </div>
       )}
 
-      {/* 新增區域：額外課程範例區塊 */}
+      {/* 額外課程範例區塊 */}
       {extraCoursesTitle &&
         extraCoursesList &&
         Array.isArray(extraCoursesList) && (
-          // Assuming similar structure to CoreCoursesSectionDiv, or create a new one
-          <CoreCoursesSectionDiv>
-            <CoreCoursesTitle>{extraCoursesTitle}</CoreCoursesTitle>
-            {/* Assuming similar structure to CoreCoursesListDiv, or create a new one */}
-            <CoreCoursesListDiv>
+          <div className="msf-core-courses">
+            <h3 className="msf-section-title">{extraCoursesTitle}</h3>
+            <div className="msf-core-courses__list">
               {extraCoursesList.map((col, colIdx) => (
-                <CoreCoursesColDiv key={colIdx}>
+                <div className="msf-core-courses__col" key={colIdx}>
                   {col.map((course, idx) => (
-                    // Assuming similar structure to CoreCourseItemDiv, or create a new one
-                    <CoreCourseItemDiv key={idx}>
+                    <div className="msf-core-courses__item" key={idx}>
                       <div className="core-course-zh">{course.zh}</div>
-                    </CoreCourseItemDiv>
+                    </div>
                   ))}
-                </CoreCoursesColDiv>
+                </div>
               ))}
-            </CoreCoursesListDiv>
-          </CoreCoursesSectionDiv>
+            </div>
+          </div>
         )}
-      {/* end 額外課程範例區塊 */}
 
-      <CourseArrangementDiv>
-        <SectionTitle>{courseArrangementTitle}</SectionTitle>
+      {/* 課程安排 */}
+      <div className="msf-arrangement">
+        <h3 className="msf-section-title">{courseArrangementTitle}</h3>
         <ul>
           {courseArrangementList.map((item, idx) => (
             <li key={idx}>{item}</li>
           ))}
         </ul>
-      </CourseArrangementDiv>
+      </div>
+
       {/* 核心課程範例區塊 */}
-      <CoreCoursesSectionDiv>
-        <CoreCoursesTitle>{coreCoursesTitle}</CoreCoursesTitle>
-        <CoreCourseParagraphDiv
-          $hascontent={hasCoreCoursePragaph}
+      <div className="msf-core-courses">
+        <h3 className="msf-section-title">{coreCoursesTitle}</h3>
+        <div
+          className="msf-core-courses__paragraph"
           style={
             coreCoursePragaphMarginBottom !== undefined
               ? { marginBottom: coreCoursePragaphMarginBottom }
-              : {}
+              : { marginBottom: hasCoreCoursePragaph ? "1.5rem" : "0" }
           }
         >
           {Array.isArray(coreCoursePragaph) && coreCoursePragaph.length > 0
             ? coreCoursePragaph.map((p, idx) => <p key={idx}>{p}</p>)
             : coreCoursePragaph && <p>{coreCoursePragaph}</p>}
-        </CoreCourseParagraphDiv>
-        <CoreCoursesIntroDiv
-          $hascontent={hasCoreCoursesIntroList}
+        </div>
+        <div
+          className="msf-core-courses__intro"
           style={
             coreCoursesIntroMarginBottom !== undefined
               ? { marginBottom: coreCoursesIntroMarginBottom }
-              : {}
+              : { marginBottom: hasCoreCoursesIntroList ? "1.5rem" : "0" }
           }
         >
           <ul>
@@ -187,9 +175,9 @@ function MSFinanceSection({
               <li key={idx}>{item}</li>
             ))}
           </ul>
-        </CoreCoursesIntroDiv>
-        <CoreCoursesListDiv
-          /* hasCoreCourses={hasCoreCourses} 移除，避免傳遞到 DOM */
+        </div>
+        <div
+          className="msf-core-courses__list"
           style={
             coreCoursesListMarginBottom !== undefined
               ? { marginBottom: coreCoursesListMarginBottom }
@@ -197,27 +185,33 @@ function MSFinanceSection({
           }
         >
           {(coreCoursesList || []).map((col, colIdx) => (
-            <CoreCoursesColDiv key={colIdx}>
+            <div className="msf-core-courses__col" key={colIdx}>
               {Array.isArray(col) &&
                 col.map((course, idx) => (
-                  <CoreCourseItemDiv key={idx}>
+                  <div className="msf-core-courses__item" key={idx}>
                     <div className="core-course-zh">{course.zh}</div>
-                    <div className="core-course-en">{course.en}</div>
-                    <div className="core-course-desc">{course.desc}</div>
-                  </CoreCourseItemDiv>
+                    {course.en && (
+                      <div className="core-course-en">{course.en}</div>
+                    )}
+                    {course.desc && (
+                      <div className="core-course-desc">{course.desc}</div>
+                    )}
+                  </div>
                 ))}
-            </CoreCoursesColDiv>
+            </div>
           ))}
-        </CoreCoursesListDiv>
-        <CoreCourseFootParagraph>{coreCourseFoot}</CoreCourseFootParagraph>
-      </CoreCoursesSectionDiv>
-      {/* end 核心課程範例區塊 */}
-      <ReasonsToChooseBlock>
-        {/* Changed from reasons-to-choose to a generic div with styled components below */}
-        <ReasonsToChooseTitle>{reasonsTitle}</ReasonsToChooseTitle>
-        <ReasonsToChooseParagraph>{reasonsDesc}</ReasonsToChooseParagraph>
-      </ReasonsToChooseBlock>
-    </ProgramDetailsSection>
+        </div>
+        {coreCourseFoot && <p className="msf-paragraph">{coreCourseFoot}</p>}
+      </div>
+
+      {/* Why Reasons Block */}
+      {reasonsTitle && (
+        <div className="reasons-to-choose">
+          <h3 className="msf-section-title">{reasonsTitle}</h3>
+          {reasonsDesc && <p className="msf-paragraph">{reasonsDesc}</p>}
+        </div>
+      )}
+    </section>
   );
 }
 

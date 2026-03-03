@@ -5,7 +5,7 @@ import SectionContainer from "../../../components/SectionContainer/SectionContai
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import { ArrowRightOutlined } from "@ant-design/icons";
 // Import styled components as needed. For now, assuming only PageP might be relevant if h3/h4/ul are styled globally or via MsApplication.scss
-import { PageP } from "./MS.styles";
+import "./MS.scss";
 
 function MsApplication() {
   return (
@@ -15,16 +15,16 @@ function MsApplication() {
         <div className="ms-application-intro">
           {/* Assuming h3 is styled by MsApplication.scss or globally */}
           <h3>申請資訊</h3>
-          <PageP>
+          <p className="ms-page-p">
             {" "}
             {/* Using PageP for the paragraph */}
             申請者將根據個別情況進行審核。除了研究生學院的基本要求之外，申請者還必須滿足以下課程要求：
-          </PageP>
+          </p>
         </div>
         <section className="ms-application-requirements">
           {/* Assuming h4 and ul are styled by MsApplication.scss or globally */}
           <h4>最低學歷要求</h4>
-          <PageP>需具備學士學位（Bachelor's degree）</PageP>
+          <p className="ms-page-p">需具備學士學位（Bachelor's degree）</p>
 
           <h4>平均成績要求（GPA）</h4>
           <ul>
@@ -37,7 +37,9 @@ function MsApplication() {
           </ul>
 
           <h4>英語語言能力要求</h4>
-          <PageP>申請者必須滿足以下任一英語能力考試的最低標準:</PageP>
+          <p className="ms-page-p">
+            申請者必須滿足以下任一英語能力考試的最低標準:
+          </p>
           <div className="english-requirements">
             <div style={{ marginTop: "-3rem" }}>
               <strong>
@@ -75,7 +77,7 @@ function MsApplication() {
           </div>
 
           <h4 style={{ marginTop: "3rem" }}>推薦信</h4>
-          <PageP>需提交2封推薦信</PageP>
+          <p className="ms-page-p">需提交2封推薦信</p>
 
           <h4>文件要求</h4>
           <ul>

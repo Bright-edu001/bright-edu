@@ -1,14 +1,7 @@
 import React, { memo } from "react";
-import {
-  StyledArticleCard,
-  StyledLink,
-  StyledAnchor,
-  StyledPlaceholder,
-  StyledContent,
-  StyledTitle,
-  StyledExcerpt,
-} from "./ArticleCardStyles";
+import { Link } from "react-router-dom";
 import ProgressiveImage from "../ProgressiveImage/ProgressiveImage";
+import "./ArticleCard.scss";
 
 /**
  * 通用文章卡片元件
@@ -20,44 +13,41 @@ import ProgressiveImage from "../ProgressiveImage/ProgressiveImage";
 function ArticleCard({ item, imageType, layout = "vertical" }) {
   // 提取內外部連結判斷
   const isInternal = item.link?.startsWith("/");
-  const Wrapper = isInternal ? StyledLink : StyledAnchor;
+  const Wrapper = isInternal ? Link : "a";
+
   // 構建 Wrapper 屬性：內部路由使用 to，外部連結使用 href 並加上安全屬性
   const wrapperProps = item.link
     ? isInternal
       ? { to: item.link }
       : { href: item.link, target: "_blank", rel: "noopener noreferrer" }
     : {};
+
   return (
-    <StyledArticleCard title={item.title}>
-      <Wrapper $layout={layout} $imageType={imageType} {...wrapperProps}>
+    <div className="article-card" title={item.title}>
+      <Wrapper
+        className={`article-card__link article-card__link--${layout}`}
+        {...wrapperProps}
+      >
         {/* 圖片區塊：優先使用 thumbnail，無則 fallback image */}
         {item.thumbnail || item.image ? (
           <ProgressiveImage
             src={item.image || item.thumbnail}
             placeholderSrc={item.thumbnail}
             alt={item.title}
-            className={`article-card-image ${layout === "horizontal" ? "horizontal" : ""}`}
-            style={{
-              width: layout === "horizontal" ? "40%" : "100%",
-              height: layout === "horizontal" ? "auto" : "200px",
-              marginRight: layout === "horizontal" ? "1rem" : "0",
-              borderRadius: "8px",
-              objectFit: "contain",
-            }}
+            className={`article-card__image ${layout === "horizontal" ? "article-card__image--horizontal" : ""}`}
           />
         ) : (
-          <StyledPlaceholder
-            $layout={layout}
-            $imageType={imageType || "default"}
+          <div
+            className={`article-card__placeholder article-card__placeholder--${layout} article-card__placeholder--${imageType || "default"}`}
           />
         )}
         {/* 內容區塊：標題與摘要 */}
-        <StyledContent>
-          <StyledTitle>{item.title}</StyledTitle>
-          <StyledExcerpt>{item.excerpt}</StyledExcerpt>
-        </StyledContent>
+        <div className="article-card__content">
+          <h3 className="article-card__title">{item.title}</h3>
+          <p className="article-card__excerpt">{item.excerpt}</p>
+        </div>
       </Wrapper>
-    </StyledArticleCard>
+    </div>
   );
 }
 

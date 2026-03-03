@@ -1,22 +1,17 @@
 import React from "react";
-import { Layout } from "antd";
+import { Layout, Row, Col } from "antd";
 import getImageUrl from "../../utils/getImageUrl";
-import {
-  FooterWrapper,
-  FooterContent,
-  FooterSection,
-  FooterBottom,
-} from "./FooterStyles";
+import "./Footer.scss";
 
 const { Footer: AntFooter } = Layout;
 
 function Footer() {
   return (
     <>
-      <FooterWrapper as={AntFooter} role="contentinfo">
+      <AntFooter className="footer-wrapper" role="contentinfo">
         <div className="container">
-          <FooterContent>
-            <FooterSection className="brand">
+          <Row className="footer-content">
+            <Col className="footer-section brand">
               <div className="footer-brand">
                 <a
                   href="https://www.icef.com/agency/001bG00000EAMX3QAP"
@@ -33,9 +28,9 @@ function Footer() {
                   />
                 </a>
               </div>
-            </FooterSection>
+            </Col>
 
-            <FooterSection className="footer-links-uic">
+            <Col className="footer-section footer-links-uic">
               <p className="section-title">UIC商學院碩士</p>
               <ul>
                 <li>
@@ -63,8 +58,8 @@ function Footer() {
                   </a>
                 </li>
               </ul>
-            </FooterSection>
-            <FooterSection className="footer-links-msu">
+            </Col>
+            <Col className="footer-section footer-links-msu">
               <p className="section-title">MSU金融碩士</p>
               <ul>
                 <li>
@@ -92,14 +87,14 @@ function Footer() {
                   </a>
                 </li>
               </ul>
-            </FooterSection>
+            </Col>
 
-            <FooterSection className="articles">
+            <Col className="footer-section articles">
               <a href="/blog" title="瀏覽所有活動與文章">
                 活動與文章
               </a>
-            </FooterSection>
-            <FooterSection className="about">
+            </Col>
+            <Col className="footer-section about">
               <div
                 className="contact"
                 itemScope
@@ -150,15 +145,15 @@ function Footer() {
                   />
                 </a>
               </div>
-            </FooterSection>
-          </FooterContent>
-          <FooterBottom>
+            </Col>
+          </Row>
+          <div className="footer-bottom">
             <p>
               &copy; BRIGHT EDUCATION CORPORATION © 2025 ALL RIGHTS RESERVED
             </p>
-          </FooterBottom>
+          </div>
         </div>
-      </FooterWrapper>
+      </AntFooter>
     </>
   );
 }

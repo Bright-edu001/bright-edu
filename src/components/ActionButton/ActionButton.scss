@@ -1,0 +1,23 @@
+@import "../../styles/variables";
+
+.action-button {
+  color: $color-white;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition: $transition-normal;
+  background: $color-nav;
+  max-width: 120px;
+  max-height: 36px;
+  text-decoration: none; // It's an anchor tag
+
+  &:hover {
+    background: $color-white;
+    color: $color-nav;
+    border: 1px solid $color-nav;
+  }
+}

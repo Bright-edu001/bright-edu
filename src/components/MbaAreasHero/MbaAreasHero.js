@@ -1,10 +1,10 @@
-import React from "react";
-import { HeroWrapper, HeroTitle } from "./MbaAreasHero.styled";
+import React, { memo } from "react";
+import "./MbaAreasHero.scss";
 
 const MbaAreasHero = ({
   title = "UIC Business",
   className,
-  bgColor,
+  bgColor = "#c71432",
   ...props
 }) => {
   // 確保 title 是字串且不為空
@@ -12,10 +12,14 @@ const MbaAreasHero = ({
     typeof title === "string" && title.trim() ? title.trim() : "UIC Business";
 
   return (
-    <HeroWrapper className={className} $bgColor={bgColor} {...props}>
-      <HeroTitle>{displayTitle}</HeroTitle>
-    </HeroWrapper>
+    <div
+      className={`mba-hero ${className || ""}`}
+      style={{ backgroundColor: bgColor }}
+      {...props}
+    >
+      <h1 className="mba-hero__title">{displayTitle}</h1>
+    </div>
   );
 };
 
-export default MbaAreasHero;
+export default memo(MbaAreasHero);

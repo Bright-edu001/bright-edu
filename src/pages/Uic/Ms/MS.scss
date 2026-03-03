@@ -1,0 +1,68 @@
+@import "../../../styles/variables";
+
+.ms-page-h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1c184a; // Navy color
+  text-align: left;
+  margin: 4rem 0 0.5rem;
+}
+
+.ms-page-p {
+  font-size: 18px;
+  text-align: left;
+  color: #000000; // Dark
+}
+
+.ms-page-ul {
+  margin-top: $spacing-lg;
+  list-style-position: inside;
+}
+
+.msm-ul {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  list-style-type: disc;
+  list-style-position: inside;
+  text-align: left;
+  margin-top: $spacing-xs;
+
+  li {
+    color: #000000; // Dark
+    font-size: 18px;
+  }
+}
+
+.ms-outcomes-list {
+  font-size: 1.25rem; // lg
+  color: #000000; // Dark
+  list-style-position: inside;
+}
+
+.ms-core-courses-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.ms-core-courses-col {
+  flex: 1;
+  margin: 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.ms-general-core-courses-item {
+  margin-bottom: 0.5em;
+}
+
+.ms-accounting-features {
+  margin-top: 2rem;
+
+  h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+}

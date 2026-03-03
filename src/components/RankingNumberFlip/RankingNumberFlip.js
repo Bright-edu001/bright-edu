@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState, memo, useCallback } from "react";
-import {
-  RankingNumberFlipWrapper,
-  FlipInner,
-} from "./RankingNumberFlip.styled";
+import "./RankingNumberFlip.scss";
 
 function RankingNumberFlip({
   number,
@@ -11,6 +8,7 @@ function RankingNumberFlip({
   startAnimation,
   msu = false, // 若有 feature-card.msu 需求，可傳入 msu props
 }) {
+  // ... state and logic unchanged
   const [displayNumber, setDisplayNumber] = useState(start);
   const [flipping, setFlipping] = useState(false);
   const prevNumber = useRef(start);
@@ -35,7 +33,7 @@ function RankingNumberFlip({
           const progress = frame / totalFrames;
           animationRef.current = setTimeout(
             animateFrame,
-            getFrameDuration(progress)
+            getFrameDuration(progress),
           );
         } else {
           setFlipping(false);
@@ -46,7 +44,7 @@ function RankingNumberFlip({
 
       animateFrame();
     },
-    [duration]
+    [duration],
   );
 
   useEffect(() => {
@@ -73,13 +71,15 @@ function RankingNumberFlip({
   }, [number, animate, startAnimation]); // 將 startAnimation 加入依賴項
 
   return (
-    <RankingNumberFlipWrapper
-      className={`ranking-number-flip${flipping ? " flipping" : ""}`}
+    <span
+      className={`ranking-number-flip ${flipping ? "ranking-number-flip--flipping" : ""}`}
     >
-      <FlipInner className={`flip-inner${msu ? " msu" : ""}`} $msu={msu}>
+      <span
+        className={`ranking-number-flip__inner ${msu ? "ranking-number-flip__inner--msu" : ""}`}
+      >
         {displayNumber}
-      </FlipInner>
-    </RankingNumberFlipWrapper>
+      </span>
+    </span>
   );
 }
 

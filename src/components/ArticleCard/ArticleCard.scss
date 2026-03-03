@@ -1,0 +1,99 @@
+@import "../../styles/variables";
+
+.article-card {
+  text-align: left;
+
+  &__link {
+    text-decoration: none;
+    display: flex;
+    transition:
+      transform 0.1s ease,
+      opacity 0.1s ease;
+
+    &:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+
+    &--vertical {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &--horizontal {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    background-size: contain;
+    background-position: center;
+    object-fit: contain;
+    margin-right: 0;
+
+    &--horizontal {
+      width: 40%;
+      height: auto;
+      margin-right: $spacing-sm;
+    }
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 20rem;
+    border-radius: 8px;
+    background-size: contain;
+    background-position: center;
+    background: $color-gray-light;
+    margin-right: 0;
+
+    &--horizontal {
+      width: 40%;
+      height: auto;
+      margin-right: $spacing-sm;
+    }
+
+    &--enrollment {
+      background-image: url("https://imgur.com/6n3nCHp.png");
+    }
+
+    &--news {
+      background-image: url("https://imgur.com/1EoFLTI.png");
+    }
+
+    // Default fallback type is handled by base styles or additional classes if needed
+  }
+
+  &__content {
+    margin-top: $spacing-sm;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-nav;
+    margin: 0; // Reset default h3 margin if needed, though original didn't explicitly remove it but styled-components usually isolates.
+
+    @media (max-width: $breakpoint-lg) {
+      text-align: left;
+    }
+  }
+
+  &__excerpt {
+    font-size: $font-size-md;
+    color: $color-text-dark-brown; // Mapping #211700 to nearest variable
+    margin: 0;
+
+    @media (max-width: $breakpoint-lg) {
+      text-align: left;
+    }
+  }
+}

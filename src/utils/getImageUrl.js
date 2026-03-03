@@ -9,16 +9,22 @@ const BUCKET_NAME = "bright-edu-data.firebasestorage.app";
  * @returns {string} - 對應的 Firebase Storage 完整 URL。
  */
 const getImageUrl = (localPath) => {
-  // 檢查路徑是否有效
-  if (!localPath || !localPath.startsWith("/images/")) {
-    logger.warn(`傳遞給 getImageUrl 的路徑無效: ${localPath}`);
-    return localPath; // 如果路徑無效，返回原路徑以避免錯誤
+  // 檢查路徑是否有效，支援 /images/ 或 images/ 開頭
+  if (!localPath) return localPath;
+
+  let storagePath = "";
+  if (localPath.startsWith("/images/")) {
+    storagePath = localPath.substring("/images/".length);
+  } else if (localPath.startsWith("images/")) {
+    storagePath = localPath.substring("images/".length);
+  } else {
+    logger.warn(
+      `傳遞給 getImageUrl 的路徑無效 (需以 /images/ 或 images/ 開頭): ${localPath}`,
+    );
+    return localPath;
   }
 
-  // 移除開頭的 '/images/'，得到在 Storage 中的實際路徑
-  const storagePath = localPath.substring("/images/".length);
-
-  // 對路徑進行 URL 編碼，以處理特殊字元或資料夾結構
+  // 對路徑進行 URL 編碼
   const encodedPath = encodeURIComponent(storagePath);
 
   // 組合最終的 URL

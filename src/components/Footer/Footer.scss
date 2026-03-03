@@ -1,0 +1,219 @@
+@import "../../styles/variables";
+
+.footer-wrapper {
+  // 頁腳容器
+  background: $color-gray-ultralight;
+  padding: $spacing-sm 0;
+  transform: translateZ(0);
+  min-height: 400px; // 增加最小高度
+
+  .container {
+    width: 100%;
+    padding: 0;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .container {
+      margin-left: 0;
+      padding: 0 2rem;
+    }
+  }
+
+  @media (max-width: 850px) {
+    padding: 20px 0;
+
+    .container {
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+  }
+}
+
+.footer-content {
+  // 頁腳內容區塊 (Flex/Grid 佈局)
+  display: flex !important; // 覆寫 Ant Design Row 預設樣式
+  justify-content: center !important;
+  align-items: flex-start !important;
+  margin: 2rem 0 1rem;
+  text-align: left;
+  gap: 2rem;
+
+  @media (max-width: 850px) {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+}
+
+.footer-section {
+  // 頁腳個別區塊
+  min-height: 120px;
+  width: 180px;
+  margin: 0 1rem;
+
+  // 品牌區塊
+  &.brand {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 150px;
+
+    img {
+      width: 120px;
+      height: 120px;
+      aspect-ratio: 1 / 1;
+    }
+
+    .footer-brand img {
+      width: 120px;
+      height: 120px;
+      max-width: 120px;
+      min-width: 120px;
+      min-height: 120px;
+      object-fit: contain;
+    }
+  }
+
+  // 連結列表區塊 (UIC & MSU)
+  &.footer-links-uic,
+  &.footer-links-msu {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 180px;
+
+    .section-title {
+      margin-bottom: $spacing-sm;
+      color: $color-nav;
+      font-size: $font-size-md; // 18px
+      font-weight: 700;
+      width: 180px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      margin-left: 0;
+      margin-right: 0;
+      text-align: left;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      min-height: 96px;
+
+      li {
+        height: 24px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        transition: color 0.3s ease;
+
+        &:hover {
+          text-decoration: none;
+          color: $color-uic;
+        }
+
+        a {
+          color: $color-gray-dark;
+          font-size: $font-size-sm; // 16px
+          text-decoration: none;
+          transition: color 0.3s ease;
+
+          &:hover {
+            text-decoration: none;
+            color: $color-uic;
+          }
+        }
+      }
+    }
+  }
+
+  // 關於與聯絡資訊區塊
+  &.about {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 280px;
+
+    .contact {
+      margin-bottom: 20px;
+
+      .contact-title {
+        color: $color-nav;
+        font-size: $font-size-md;
+        font-weight: 700;
+        text-align: left;
+        min-height: 24px;
+        display: flex;
+        align-items: center;
+      }
+
+      .contact-address,
+      .contact-phone {
+        width: 100%;
+        color: $color-gray-dark;
+        font-size: $font-size-sm;
+        font-style: normal;
+        text-align: left;
+        margin-left: 0;
+        margin-right: 0;
+        min-height: 20px;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    // 社群圖示
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      align-self: flex-start;
+      margin-top: -1rem;
+      transform: translateZ(0);
+
+      a {
+        .phone-icon {
+          width: 24px;
+          height: 24px;
+          min-width: 24px;
+          min-height: 24px;
+          object-fit: contain;
+          aspect-ratio: 1 / 1;
+        }
+
+        .line-icon {
+          width: 30px;
+          height: 30px;
+          min-width: 30px;
+          min-height: 30px;
+          object-fit: contain;
+          margin-top: -3px;
+          aspect-ratio: 1 / 1;
+        }
+      }
+    }
+  }
+
+  // 活動與文章區塊 (簡單連結)
+  &.articles {
+    a {
+      color: $color-nav;
+      font-weight: 700;
+      text-decoration: none;
+    }
+  }
+}
+
+.footer-bottom {
+  // 版權資訊
+  text-align: center;
+  margin-top: $spacing-xl;
+  padding-top: $spacing-md;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: $color-gray-dark;
+  font-size: $font-size-xs;
+
+  p {
+    margin: 0;
+  }
+}

@@ -1,8 +1,5 @@
 import React, { memo } from "react";
-import {
-  StyledFloatingButtons,
-  StyledFloatingBtn,
-} from "./FloatingButtonsStyles";
+import "./FloatingButtons.scss";
 import getImageUrl from "../../utils/getImageUrl";
 
 // 按鈕資料陣列，避免重複程式碼
@@ -26,19 +23,20 @@ const buttonData = [
 ];
 
 const FloatingButtons = () => (
-  <StyledFloatingButtons>
+  <div className="floating-buttons">
     {buttonData.map(({ href, title, aria, imgSrc, imgAlt, external }) => (
-      <StyledFloatingBtn
+      <a
         key={href}
         href={href}
         title={title}
         aria-label={aria}
+        className="floating-buttons__btn"
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         <img src={imgSrc} alt={imgAlt} loading="lazy" />
-      </StyledFloatingBtn>
+      </a>
     ))}
-  </StyledFloatingButtons>
+  </div>
 );
 
 export default memo(FloatingButtons);

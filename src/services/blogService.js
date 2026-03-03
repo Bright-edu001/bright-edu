@@ -32,13 +32,24 @@ export const processBlogData = (data) => {
 
   const updateImagePaths = (item) => {
     if (!item || typeof item !== "object") return item;
-    if (item.thumbnail && item.thumbnail.startsWith("/images/")) {
+    if (
+      item.thumbnail &&
+      (item.thumbnail.startsWith("/images/") ||
+        item.thumbnail.startsWith("images/"))
+    ) {
       item.thumbnail = getImageUrl(item.thumbnail);
     }
-    if (item.image && item.image.startsWith("/images/")) {
+    if (
+      item.image &&
+      (item.image.startsWith("/images/") || item.image.startsWith("images/"))
+    ) {
       item.image = getImageUrl(item.image);
     }
-    if (item.flagImage && item.flagImage.startsWith("/images/")) {
+    if (
+      item.flagImage &&
+      (item.flagImage.startsWith("/images/") ||
+        item.flagImage.startsWith("images/"))
+    ) {
       item.flagImage = getImageUrl(item.flagImage);
     }
     if (item.title) {

@@ -1,0 +1,204 @@
+@import "../../styles/variables";
+
+.msf-program-details {
+  display: flex;
+  flex-direction: column;
+  margin-top: $spacing-xl;
+
+  // 共用區塊標題
+  .msf-section-title {
+    color: $color-nav;
+    font-size: 24px;
+    font-weight: $font-weight-bold; // 700
+    text-align: left;
+    margin-bottom: $spacing-xs;
+  }
+
+  // 共用段落樣式
+  .msf-paragraph {
+    margin-bottom: $spacing-md;
+    font-size: 18px;
+    text-align: left;
+    color: $color-black;
+  }
+
+  // 為什麼選擇 UIC MSF 區塊
+  .msf-why {
+    margin-bottom: $spacing-xl;
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+
+      li {
+        font-size: 18px;
+        margin-bottom: $spacing-xs;
+        color: $color-uic;
+        text-align: left;
+
+        strong {
+          font-weight: bold;
+        }
+
+        &.label-style {
+          font-size: 16px;
+          color: $color-black;
+          margin-top: $spacing-lg;
+        }
+
+        // 巢狀列表
+        ul {
+          padding-left: $spacing-md;
+
+          li {
+            font-size: $font-size-md; // 18px
+            color: $color-black;
+            margin-top: $spacing-xs;
+            margin-bottom: 0;
+            list-style-type: disc;
+          }
+        }
+      }
+    }
+  }
+
+  // 職涯發展與成果區塊
+  .msf-outcomes {
+    margin-bottom: $spacing-xl;
+
+    ul {
+      list-style: disc;
+      list-style-position: inside;
+
+      li {
+        font-size: 18px;
+        margin-bottom: $spacing-sm;
+        color: $color-black;
+        text-align: left;
+      }
+    }
+  }
+
+  // 選擇理由區塊 (覆寫 margin)
+  .reasons-to-choose {
+    .msf-paragraph {
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  // 企業合作與課程區塊
+  .msf-company {
+    margin-bottom: $spacing-xl;
+
+    .company-logos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+      gap: $spacing-md;
+      margin: $spacing-md 0;
+    }
+  }
+
+  // 課程安排區塊
+  .msf-arrangement {
+    margin-bottom: $spacing-xl;
+
+    ul {
+      list-style: disc;
+      list-style-position: inside;
+      li {
+        font-size: 18px;
+        color: $color-black;
+        text-align: left;
+        margin-bottom: $spacing-sm;
+      }
+    }
+  }
+
+  // 核心課程區塊
+  .msf-core-courses {
+    margin-bottom: $spacing-xl;
+
+    &__paragraph {
+      p {
+        font-size: 18px;
+        color: $color-black;
+        text-align: left;
+        margin-bottom: $spacing-md;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &__intro {
+      ul {
+        list-style: none;
+        padding-left: 0;
+        margin: $spacing-xs 0;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+
+        li {
+          font-size: 18px;
+          color: $color-black;
+          text-align: left;
+        }
+      }
+    }
+
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 $spacing-md;
+      align-items: stretch;
+
+      @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+
+    &__col {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+    }
+
+    &__item {
+      margin-bottom: $spacing-md;
+      border: 1px solid $color-nav;
+      padding: $spacing-sm;
+      border-radius: 4px;
+      width: 100%;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      .core-course-zh {
+        /* 原本 styled component 內可能有更深層的樣式，但這裡只有一個 div */
+        /* 根據原始 styled-components，這裡似乎沒有特殊樣式，除了可能的繼承 */
+        font-size: 18px;
+        font-weight: 700;
+        color: $color-uic;
+        text-align: left;
+      }
+      .core-course-en {
+        font-size: 18px;
+        color: $color-uic;
+        margin-bottom: 0.5rem;
+        text-align: left;
+        font-style: italic;
+      }
+      .core-course-desc {
+        font-size: 18px;
+        color: $color-black;
+        text-align: left;
+      }
+    }
+  }
+}

@@ -1,0 +1,150 @@
+@import "../../styles/variables";
+
+.application-form {
+  // 表單容器樣式
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 5rem;
+  margin-top: 4rem;
+  margin-bottom: 7rem;
+
+  @media (max-width: 850px) {
+    padding: 0;
+  }
+
+  // 區塊標題樣式
+  &__title {
+    font-size: 30px;
+    font-weight: $font-weight-black;
+    line-height: 40px;
+    margin-bottom: $spacing-sm;
+    color: $color-uic;
+    text-align: center;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 32px;
+      margin-bottom: 0px;
+    }
+  }
+
+  // 輸入框共用樣式
+  &__input,
+  &__textarea {
+    width: 900px;
+    max-width: 900px;
+    min-width: 260px;
+    align-self: center;
+    border: 1px solid $color-uic;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 18px;
+    font-weight: $font-weight-bold;
+    outline: none;
+    transition:
+      border 0.2s,
+      transform 0.2s;
+    resize: none;
+
+    &:focus {
+      border-color: $color-nav;
+      transform: scale(1.02);
+    }
+
+    @media (max-width: $breakpoint-md) {
+      width: 100%;
+      max-width: 100%;
+      min-width: unset;
+      font-size: 18px; // 原始樣式在手機也是 18px
+      padding: 10px 8px;
+    }
+  }
+
+  // 文字區域特定樣式
+  &__textarea {
+    min-height: 150px;
+  }
+
+  // 按鈕樣式
+  &__button {
+    background: $color-uic;
+    color: $color-white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 24px;
+    font-size: 18px;
+    margin: 1.5rem auto 2rem;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      transform 0.2s;
+
+    &:hover {
+      background: $color-nav;
+      color: $color-white;
+      transform: scale(1.05);
+    }
+
+    // 禁用狀態
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+      background: $color-uic;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      width: 100%;
+      display: block; // 手機版滿版按鈕
+    }
+  }
+
+  // 載入中動畫圖示
+  &__spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-top-color: $color-white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: -2px;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // MSF 變體樣式 (覆寫顏色)
+  &--msf {
+    .application-form__title {
+      color: $color-msu;
+    }
+
+    .application-form__input,
+    .application-form__textarea {
+      border-color: $color-msu;
+
+      &:focus {
+        border-color: $color-nav;
+      }
+    }
+
+    .application-form__button {
+      background: $color-msu;
+
+      &:hover {
+        background: $color-nav;
+      }
+
+      &:disabled,
+      &[aria-disabled="true"] {
+        background: $color-msu;
+      }
+    }
+  }
+}
