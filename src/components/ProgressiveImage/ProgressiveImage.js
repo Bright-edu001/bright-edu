@@ -45,16 +45,22 @@ const ProgressiveImage = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPlaceholderLoaded, setIsPlaceholderLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   // 使用 Intersection Observer 偵測圖片是否進入視窗
   const handleIntersect = useCallback(() => {
     setIsVisible(true);
   }, []);
 
-  const imgRef = useIntersectionObserver(handleIntersect, {
-    threshold: 0.1,
-    rootMargin: "50px",
-  });
+  const options = React.useMemo(
+    () => ({
+      threshold: 0.1,
+      rootMargin: "50px",
+    }),
+    [],
+  );
+
+  const imgRef = useIntersectionObserver(handleIntersect, options);
 
   // 當原圖載入完成時觸發
   const handleLoad = () => {
@@ -64,6 +70,12 @@ const ProgressiveImage = ({
   // 當縮圖載入完成時觸發
   const handlePlaceholderLoad = () => {
     setIsPlaceholderLoaded(true);
+  };
+
+  // 當圖片載入失敗時觸發
+  const handleError = () => {
+    setHasError(true);
+    setIsLoaded(false);
   };
 
   // 如果沒有提供 src，或者 src 為空，則不渲染
@@ -76,7 +88,7 @@ const ProgressiveImage = ({
       style={{ objectFit: "cover", ...props.style }}
     >
       {/* 1. 渲染縮圖 (Placeholder) - 帶有模糊效果 */}
-      {placeholderSrc && (
+      {placeholderSrc && !hasError && (
         <StyledImg
           src={placeholderSrc}
           alt={alt}
@@ -88,13 +100,14 @@ const ProgressiveImage = ({
       )}
 
       {/* 2. 渲染原圖 - 只有在進入視窗時才開始載入 (Lazy Load) */}
-      {isVisible && src && (
+      {isVisible && src && !hasError && (
         <StyledImg
           src={src}
           alt={alt}
           $isLoaded={isLoaded}
           $isBlurry={false}
           onLoad={handleLoad}
+          onError={handleError}
           style={{ zIndex: 2 }}
         />
       )}

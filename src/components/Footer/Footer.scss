@@ -1,8 +1,8 @@
-@import "../../styles/variables";
+@import "../../styles/index";
 
 .footer-wrapper {
   // 頁腳容器
-  background: $color-gray-ultralight;
+  background: $color-gray-lighter;
   padding: $spacing-sm 0;
   transform: translateZ(0);
   min-height: 400px; // 增加最小高度
@@ -140,7 +140,7 @@
 
       .contact-title {
         color: $color-nav;
-        font-size: $font-size-md;
+        font-size: $font-size-md; // 18px
         font-weight: 700;
         text-align: left;
         min-height: 24px;
@@ -152,7 +152,7 @@
       .contact-phone {
         width: 100%;
         color: $color-gray-dark;
-        font-size: $font-size-sm;
+        font-size: $font-size-sm; // 16px
         font-style: normal;
         text-align: left;
         margin-left: 0;
@@ -215,5 +215,154 @@
 
   p {
     margin: 0;
+  }
+}
+
+/* Footer critical layout - Migrated from index.html */
+.ant-layout-footer {
+  background: $color-gray-lighter;
+  padding: 1rem 0;
+  transform: translateZ(0);
+
+  .container {
+    width: 100%;
+    padding: 0;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .container {
+      margin-left: 0;
+      padding: 0 2rem;
+    }
+  }
+
+  @media (max-width: 850px) {
+    padding: 20px 0;
+
+    .container {
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+  }
+
+  .ant-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin: 2rem 0 1rem;
+    text-align: left;
+    min-height: 140px;
+
+    @media (max-width: 850px) {
+      flex-direction: column;
+      align-items: center;
+      min-height: 290px;
+    }
+
+    .ant-col {
+      min-height: 120px;
+    }
+
+    .footer-links-uic,
+    .footer-links-msu {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      width: 150px;
+    }
+
+    .articles {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-right: 0;
+      width: 150px;
+      min-height: 24px;
+    }
+
+    .about {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .brand {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .footer-brand img {
+        width: 120px;
+        height: 120px;
+        max-width: 120px;
+        min-width: 120px;
+        min-height: 120px;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .container > div:last-child {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 850px) {
+    .ant-row {
+      .ant-col {
+        flex: none;
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-links-uic,
+      .footer-links-msu,
+      .articles {
+        display: none;
+        height: 0;
+        min-height: 0;
+        padding: 0;
+        margin: 0;
+        border: none;
+        overflow: hidden;
+        visibility: hidden;
+      }
+
+      .about {
+        order: 1;
+        align-items: center;
+        padding-bottom: 0;
+
+        .contact {
+          margin-bottom: 0.2rem;
+          text-align: center;
+
+          .contact-title,
+          .contact-address,
+          .contact-phone {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: none;
+            justify-content: center;
+          }
+        }
+
+        .social-icons {
+          margin-top: 0.1rem;
+          align-self: center;
+          justify-content: center;
+          width: 100%;
+        }
+      }
+
+      .brand {
+        order: 2;
+        margin: 0;
+        justify-content: center;
+      }
+    }
   }
 }

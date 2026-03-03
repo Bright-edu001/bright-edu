@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import "../../styles/index";
 
 .article-card {
   text-align: left;
@@ -28,7 +28,7 @@
 
   &__image {
     width: 100%;
-    height: 200px;
+    height: 200px !important;
     border-radius: 8px;
     background-size: contain;
     background-position: center;
@@ -37,7 +37,7 @@
 
     &--horizontal {
       width: 40%;
-      height: auto;
+      height: auto !important;
       margin-right: $spacing-sm;
     }
   }

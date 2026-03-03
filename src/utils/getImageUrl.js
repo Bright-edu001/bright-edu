@@ -1,7 +1,8 @@
 // src/utils/getImageUrl.js
 import logger from "./logger";
 
-const BUCKET_NAME = "bright-edu-data.firebasestorage.app";
+const BUCKET_NAME =
+  process.env.REACT_APP_STORAGE_BUCKET || "bright-edu-data.firebasestorage.app";
 
 /**
  * 根據本地路徑生成 Firebase Storage 的公開 URL。
@@ -9,7 +10,7 @@ const BUCKET_NAME = "bright-edu-data.firebasestorage.app";
  * @returns {string} - 對應的 Firebase Storage 完整 URL。
  */
 const getImageUrl = (localPath) => {
-  // 檢查路徑是否有效，支援 /images/ 或 images/ 開頭
+  // 檢查路徑是否有效
   if (!localPath) return localPath;
 
   let storagePath = "";

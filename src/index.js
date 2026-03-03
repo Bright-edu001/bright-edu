@@ -8,7 +8,7 @@ import router from "./router"; // 匯入路由設定
 import logger from "./utils/logger";
 
 // ===== 全域字體與關鍵 CSS（優先載入）=====
-import "./styles/critical.css";
+// import "./styles/critical.css";
 
 // ===== Firebase 初始化 Context（優化版）=====
 import { FirebaseInitProvider } from "./context/FirebaseInitContext";
@@ -75,9 +75,8 @@ const cleanupServiceWorkerOptimized = () => {
 const initializePerformanceMonitorOptimized = () => {
   setTimeout(async () => {
     try {
-      const { default: performanceMonitor } = await import(
-        "./utils/performanceMonitor"
-      );
+      const { default: performanceMonitor } =
+        await import("./utils/performanceMonitor");
       performanceMonitor.init();
       logger.info("[Performance] 延遲初始化完成");
     } catch (error) {
@@ -117,7 +116,7 @@ logger.info("[Bootstrap] 立即開始渲染，Firebase 在背景初始化");
 root.render(
   <FirebaseInitProvider>
     <RouterProvider router={router} />
-  </FirebaseInitProvider>
+  </FirebaseInitProvider>,
 );
 
 // ===== 預載入關鍵資源（非阻塞）=====

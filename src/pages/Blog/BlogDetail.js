@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { useBlogData } from "../../hooks/useBlogData";
 import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import "../../styles/critical.css";
+// import "../../styles/critical.css";
 import icons from "../../data/json/icons.json";
 
 const hashText = (text = "") => {
@@ -113,33 +113,33 @@ function BlogDetail() {
                   .filter((line) => line.trim() !== "")
                   .map((line, idx) => <p key={idx}>{line}</p>)
               : blog.type === "enrollment"
-              ? blog.content.map((semesterInfo, index) => (
-                  <div key={index} className="semester-section">
-                    <h2 className="emoji-support">
-                      {semesterInfo.flagImage && (
-                        <img
-                          src={semesterInfo.flagImage}
-                          alt="flag"
-                          className="flag-icon"
-                          loading="lazy"
-                        />
+                ? blog.content.map((semesterInfo, index) => (
+                    <div key={index} className="semester-section">
+                      <h2 className="emoji-support">
+                        {semesterInfo.flagImage && (
+                          <img
+                            src={semesterInfo.flagImage}
+                            alt="flag"
+                            className="flag-icon"
+                            loading="lazy"
+                          />
+                        )}
+                        {semesterInfo.title}
+                      </h2>
+                      {renderSections(
+                        semesterInfo.sections ||
+                          semesterInfo.details ||
+                          semesterInfo.items,
                       )}
-                      {semesterInfo.title}
-                    </h2>
-                    {renderSections(
-                      semesterInfo.sections ||
-                        semesterInfo.details ||
-                        semesterInfo.items
-                    )}
-                  </div>
-                ))
-              : blog.type === "article" && typeof blog.content === "object"
-              ? renderSections(
-                  blog.content.sections ||
-                    blog.content.details ||
-                    blog.content.items
-                )
-              : null}
+                    </div>
+                  ))
+                : blog.type === "article" && typeof blog.content === "object"
+                  ? renderSections(
+                      blog.content.sections ||
+                        blog.content.details ||
+                        blog.content.items,
+                    )
+                  : null}
           </div>
           <Link to="/blog" className="blog-back-btn blog-detail-back">
             ← 返回部落格

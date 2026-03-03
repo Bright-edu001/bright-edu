@@ -1,53 +1,68 @@
-@import "variables";
+// src/styles/_mixins.scss
+@use "variables" as *;
 
-/* 居中對齊混和器 - 用於垂直與水平居中內容 */
+// Typography Mixins
+@mixin paragraph-style {
+  font-family: $font-family-paragraph;
+  font-style: normal;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-xl;
+  line-height: 40px;
+}
+
+@mixin heading-large {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-black;
+  line-height: 39px;
+}
+
+@mixin heading-medium {
+  font-size: 28px;
+  font-weight: $font-weight-black;
+  margin-bottom: 1.5rem;
+}
+
+@mixin body-large {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  line-height: 40px;
+}
+
+@mixin label-style {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-normal;
+  line-height: 26px;
+}
+
+@mixin value-style {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  line-height: 40px;
+}
+
+// Layout & Utilities
 @mixin flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* 兩端對齊混和器 - 用於水平分散內容並垂直居中 */
 @mixin flex-between {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* 容器混和器 - 設定標準內容容器寬度 */
 @mixin container {
   max-width: $container-max-width;
   margin: 0 auto;
-  padding: 0 $spacing-sm;
-  overflow-x: visible; // 防止橫向滾動條出現
-}
+  padding: 0 $spacing-lg;
 
-/* 懸停提升混和器 - 為元素添加懸停時上移動畫 */
-@mixin hover-lift {
-  transition: $transition-normal;
-  &:hover {
-    transform: translateY(-5px);
+  @media (max-width: 768px) {
+    padding: 0 $spacing-sm;
   }
 }
 
-/* 卡片基礎混和器 - 設定卡片元素的基本樣式 */
-@mixin card-base {
-  background: $color-white;
-  border-radius: 8px;
-  box-shadow: $shadow-md;
-}
-
-/* 按鈕基礎樣式 */
-@mixin button-base {
-  padding: 0.8rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: $transition-normal;
-  border: none;
-}
-
-/* 網格列表樣式 */
 @mixin grid-list($columns: 3) {
   display: grid;
   grid-template-columns: repeat($columns, 1fr);
@@ -56,8 +71,34 @@
   padding: 0;
 }
 
-.responsive-img {
-  width: 100%;
-  object-fit: contain;
-  display: block;
+// Interaction
+@mixin hover-lift {
+  transition: $transition-normal;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// Components
+@mixin card-base {
+  background: $color-white;
+  border-radius: 8px;
+  box-shadow: $shadow-sm;
+}
+
+@mixin card-border {
+  border: 2px solid $color-uic;
+  border-radius: 20px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+}
+
+@mixin button-base {
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition: $transition-normal;
+  border: none;
 }

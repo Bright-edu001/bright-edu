@@ -1,45 +1,59 @@
-/* 顏色變數 - 網站配色方案 */
-$color-black: #000000; // 原 $primary-color
-$color-nav: #1c184a; // 原 $nav-link-color
-$color-text-primary: #252322; // 原 $text-color
-$color-white: #ffffff; // 原 $white
-$color-gray: #ddd; // 原 $gray
-$color-gray-light: #e0e0e0; // 輕灰色背景
-$color-gray-lighter: #f9f9f9; // 更輕的灰色背景
-$color-gray-lightest: #f0f0f0; // 最輕的灰色背景
-$color-gray-card-bg: #ebebeb; // 卡片背景灰色
-$color-gray-ultralight: #f6f6f9; // 超輕灰色背景
-$color-gray-medium: #9c9c9c; // 中灰色文字
-$color-gray-dark: #717185; // 深灰色文字
-$color-text-dark: #333; // 深色文字
-$color-brown-text: #3a2c13; // 棕色文字（特殊用途）
-$color-background-main: #fbefe2; // 原 $main
-$color-gray-input-bg: #f2f3f5; // 輸入框背景灰色
-$color-gray-sidebar-bg: #fafbfc; // 側邊欄背景灰色
+// src/styles/_variables.scss
 
-/* 背景遮罩 */
-$color-bg-mask: rgba(231, 227, 227, 0.4); // 圖片遮罩
-$color-bg-text-content: rgba(0, 0, 0, 0.7); // 文字區塊背景遮罩
+// Colors - Brand
+$color-uic: #c71432;
+$color-msu: #19453c;
+$color-nav: #1c184a;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-brown-text: #3a2c13;
 
-/* 主題顏色變數 - 從其他檔案整合而來 */
-$color-msu: #19453c; // MSU 專用顏色（文字/邊框通用）
-$color-uic: #c71432; // UIC 專用顏色（文字/邊框通用）
-$color-react-link: #61dafb; // React 預設連結顏色
+// Grays - Consolidated Standard (Dark -> Light)
+$color-gray-dark: #717185; // Dark Text
+$color-gray-medium: #9c9c9c; // Medium Text / Icons
+$color-gray-light: #e0e0e0; // Borders / Dividers
+$color-gray-lighter: #f3f4f6; // Backgrounds, Cards
 
-/* 字體變數 - 網站字體設定 */
-$font-family-base: "Noto Sans TC", sans-serif;
+// Aliases for Backward Compatibility
+$color-gray: $color-gray-light;
+$color-gray-lightest: $color-gray-lighter;
+$color-gray-card-bg: $color-gray-lighter;
+$color-gray-ultralight: $color-gray-lighter;
+$color-gray-input-bg: $color-gray-lighter;
+$color-gray-sidebar-bg: $color-gray-lighter;
+$color-text-dark: #333333; // Specific dark shade
+$color-text-primary: #252322;
+$color-background-main: #fbefe2;
+$color-react-link: #61dafb;
+$color-text-dark-brown: $color-brown-text;
 
-/* 字體粗細 */
+// Background Masks
+$color-bg-mask: rgba(231, 227, 227, 0.4);
+$color-bg-text-content: rgba(0, 0, 0, 0.7);
+
+// Fonts
+$font-family-base:
+  "Noto Sans TC",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  "Roboto",
+  "Oxygen",
+  "Ubuntu",
+  "Cantarell",
+  "Open Sans",
+  "Helvetica Neue",
+  sans-serif;
+$font-family-paragraph: "Inter", sans-serif;
+
+// Font Weights
 $font-weight-normal: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-black: 900;
 
-/* 文字顏色 */
-$color-text-dark-brown: #3a2c13; // 深棕色文字
-
-/* 常用字體大小 */
+// Font Sizes
 $font-size-xs: 14px;
 $font-size-sm: 16px;
 $font-size-md: 18px;
@@ -48,57 +62,7 @@ $font-size-xl: 24px;
 $font-size-xxl: 32px;
 $font-size-number: 48px;
 
-/* 段落文字樣式設定 */
-@mixin paragraph-style {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: $font-weight-bold;
-  font-size: $font-size-xl;
-  line-height: 40px;
-}
-
-/* 標題樣式混合器 */
-@mixin heading-large {
-  font-size: $font-size-xxl;
-  font-weight: $font-weight-black;
-  line-height: 39px;
-}
-
-@mixin heading-medium {
-  font-size: 28px;
-  font-weight: $font-weight-black;
-  margin-bottom: 1.5rem;
-}
-
-/* 正文樣式混合器 */
-@mixin body-large {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-bold;
-  line-height: 40px;
-}
-
-@mixin label-style {
-  font-size: $font-size-lg;
-  font-weight: $font-weight-normal;
-  line-height: 26px;
-}
-
-@mixin value-style {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-bold;
-  line-height: 40px;
-}
-
-/* 卡片樣式混合器 */
-@mixin card-border {
-  border: 2px solid $color-uic;
-  border-radius: 20px;
-  padding: 3rem;
-  margin-bottom: 2rem;
-}
-
-/* 布局變數 - 容器寬度與間距大小 */
-$container-max-width: 1400px;
+// Spacing
 $spacing-xs: 0.5rem;
 $spacing-sm: 1rem;
 $spacing-md: 1.5rem;
@@ -106,18 +70,24 @@ $spacing-lg: 2rem;
 $spacing-xl: 3rem;
 $spacing-xxl: 5rem;
 
-/* 斷點變數 - 響應式設計網站螢幕大小斷點 */
-$breakpoint-sm: 300px; /* 小螢幕最小螢幕 (300px-699px) */
-$breakpoint-md: 700px; /* 中等最小螢幕 (700px-1439px) */
-$breakpoint-lg: 1025px; /* 大螢幕最小螢幕 (1440px以上) */
-$breakpoint-xl: 1920px; /* 大螢幕螢幕 */
-
-/* 陰影變數 - 卡片陰影效果 */
+// Shadows
 $shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
 $shadow-md: 0 5px 15px rgba(0, 0, 0, 0.05);
-$shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
-$shadow-input: 0 1px 2px rgba(0, 0, 0, 0.03);
-$shadow-sidebar: 0 2px 8px rgba(0, 0, 0, 0.04);
+$shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+$shadow-input: 0 1px 5px rgba(0, 0, 0, 0.05);
+$shadow-sidebar: 5px 0 15px rgba(0, 0, 0, 0.05);
 
-/* 動畫變數 - 過渡與動畫效果 */
+// Transitions
 $transition-normal: all 0.3s ease;
+
+// Container
+$container-max-width: 1400px;
+
+// Breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;

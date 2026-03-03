@@ -6,6 +6,7 @@ import RankingNumberFlip from "../../components/RankingNumberFlip/RankingNumberF
 import React, { useState } from "react";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import { useBlogData } from "../../hooks/useBlogData";
+import { HOME_IMAGES } from "../../constants/imagePaths";
 import getImageUrl from "../../utils/getImageUrl";
 
 function Home() {
@@ -68,7 +69,7 @@ function Home() {
             <div className="feature-card-outside">
               <img
                 className="feature-logo-img-uic"
-                src={getImageUrl("/images/home/UIC - 網站LOGO - 03.webp")}
+                src={getImageUrl(HOME_IMAGES.UIC_LOGO)}
                 alt="UIC Logo"
                 width="500"
                 height="58"
@@ -76,9 +77,7 @@ function Home() {
               <div className="feature-card uic">
                 <img
                   className="feature-bg-img"
-                  src={getImageUrl(
-                    "/images/home/網站 - Rankings (透明框)_01.webp"
-                  )}
+                  src={getImageUrl(HOME_IMAGES.UIC_RANKINGS_BG)}
                   alt="UIC背景圖"
                   width="657"
                   height="407"
@@ -127,9 +126,7 @@ function Home() {
             <div className="feature-card-outside">
               <img
                 className="feature-logo-img-msu"
-                src={getImageUrl(
-                  "/images/home/Michigan State University_01.webp"
-                )}
+                src={getImageUrl(HOME_IMAGES.MSU_LOGO)}
                 alt="MSU Logo"
                 width="500"
                 height="58"
@@ -137,9 +134,7 @@ function Home() {
               <div className="feature-card msu">
                 <img
                   className="feature-bg-img"
-                  src={getImageUrl(
-                    "/images/home/網站 - Rankings (透明框)_02.webp"
-                  )}
+                  src={getImageUrl(HOME_IMAGES.MSU_RANKINGS_BG)}
                   alt="MSU背景圖"
                   width="657"
                   height="407"

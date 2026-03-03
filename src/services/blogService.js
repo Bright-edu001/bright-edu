@@ -19,7 +19,7 @@ export const processBlogData = (data) => {
   const replaceInlineImg = (html) => {
     if (typeof html !== "string" || html.indexOf("<img") === -1) return html;
     return html.replace(
-      /(<img[^>]*src=['"])(\/images\/[^'" >]+)(['"][^>]*>)/gi,
+      /(<img[^>]*src=['"])(\/images\/[^'"]+)(['"][^>]*>)/gi,
       (m, p1, path, p3) => {
         try {
           return p1 + getImageUrl(path) + p3;
