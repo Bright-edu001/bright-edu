@@ -17,7 +17,7 @@ import {
   EditOutlined,
   EyeOutlined,
 } from "@ant-design/icons";
-import { syncEnrollmentEvents, syncNews } from "../../utils/updateBlog";
+import { syncEnrollmentEvents, syncNews } from "../../services/dataSyncService";
 import logger from "../../utils/logger";
 import { useAuth } from "../../context/AuthContext";
 import { USER_ROLES, ROLE_DISPLAY_NAMES } from "../../config/permissions";

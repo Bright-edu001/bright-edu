@@ -1,7 +1,7 @@
 import enrollmentEvents from "../data/json/enrollmentEvents.json";
 import news from "../data/json/news.json";
-import { updateEnrollmentEvent, updateNews } from "../services/blogService";
-import logger from "./logger";
+import { updateEnrollmentEvent, updateNews } from "./blogService";
+import logger from "../utils/logger";
 
 // 批次更新 enrollmentEvents
 export async function syncEnrollmentEvents() {
