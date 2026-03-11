@@ -1,4 +1,6 @@
 import logger from "./logger";
+import { getPerformance } from "../config/firebaseServices";
+
 // 前端效能監控工具類別
 class PerformanceMonitor {
   constructor() {
@@ -14,6 +16,8 @@ class PerformanceMonitor {
     this.memoryIntervalId = null;
     // 除錯模式
     this.debug = false;
+    // Firebase Performance 實例
+    this.perf = null;
     // 是否啟用監控（預設僅 production）
     this.isMonitoring = process.env.NODE_ENV === "production";
     // 註冊頁面關閉/隱藏時自動送出指標
@@ -24,6 +28,18 @@ class PerformanceMonitor {
           this.flushMetrics();
         }
       });
+    }
+  }
+
+  // 初始化 Firebase Performance
+  async initFirebasePerformance() {
+    try {
+      this.perf = await getPerformance();
+      if (this.perf) {
+        logger.info("[PerformanceMonitor] Firebase Performance 已掛載");
+      }
+    } catch (err) {
+      logger.warn("[PerformanceMonitor] 無法獲取 Firebase Performance:", err);
     }
   }
 
@@ -45,33 +61,44 @@ class PerformanceMonitor {
     this.metrics[name] = value;
     this.metricBuffer.push({ name, value });
     this.metricListeners.forEach((cb) => cb({ name, value }));
+
     if (this.debug) {
-      // eslint-disable-next-line no-console
       logger.log(`${name.toUpperCase()}:`, value);
     }
+
     // 傳送自訂指標到 Firebase Performance Monitoring
     if (typeof window !== "undefined") {
-      import("firebase/performance")
-        .then(({ getPerformance, trace }) => {
-          try {
-            const perf = getPerformance();
-            const t = trace(perf, "custom_metrics");
-            t.start();
-            t.putMetric(name, value);
-            t.stop();
-          } catch (err) {
-            if (this.debug) {
-              // eslint-disable-next-line no-console
-              logger.warn("Failed to record Firebase metric", err);
-            }
-          }
-        })
-        .catch((err) => {
-          if (this.debug) {
-            // eslint-disable-next-line no-console
-            logger.warn("Failed to load Firebase Performance", err);
-          }
-        });
+      this.sendToFirebase(name, value);
+    }
+  }
+
+  // 內部方法：將指標發送到 Firebase
+  async sendToFirebase(name, value) {
+    try {
+      // 如果還沒初始化，先嘗試初始化一次
+      if (!this.perf) {
+        this.perf = await getPerformance();
+      }
+
+      if (this.perf) {
+        const { trace } = await import("firebase/performance");
+        // 為每個 Web Vital 或自定義指標建立單獨的 trace
+        // 或者使用統一的 custom_metrics trace
+        const t = trace(this.perf, `metric_${name}`);
+        t.start();
+        // 根據指標性質決定是 putMetric 還是 putAttribute
+        if (typeof value === "number") {
+          // 向上取整，因為 Firebase Metric 通常接收整數或特定單位
+          t.putMetric("value", Math.round(value));
+        } else {
+          t.putAttribute("value", String(value));
+        }
+        t.stop();
+      }
+    } catch (err) {
+      if (this.debug) {
+        logger.warn(`Failed to record Firebase metric [${name}]`, err);
+      }
     }
   }
 
@@ -91,7 +118,6 @@ class PerformanceMonitor {
       this.metricBuffer = [];
     } catch (err) {
       if (this.debug) {
-        // eslint-disable-next-line no-console
         logger.warn("送出效能指標失敗", err);
       }
     }
@@ -164,7 +190,7 @@ class PerformanceMonitor {
     window.addEventListener("load", () => {
       const resources = performance.getEntriesByType("resource");
       const slowResources = resources.filter(
-        (resource) => resource.duration > 1000
+        (resource) => resource.duration > 1000,
       );
 
       if (slowResources.length > 0) {
@@ -195,12 +221,17 @@ class PerformanceMonitor {
   }
 
   // 初始化所有效能監控
-  init() {
+  async init() {
     this.monitorLCP();
     this.monitorFID();
     this.monitorCLS();
     this.monitorResourceTiming();
     this.monitorMemoryUsage();
+
+    // 延遲初始化 Firebase 整合，避免競爭
+    if (this.isMonitoring) {
+      setTimeout(() => this.initFirebasePerformance(), 1000);
+    }
   }
 
   // 取得所有效能指標資料

@@ -61,15 +61,14 @@ export const initializeServices = async () => {
 
     // 生產環境才初始化 App Check（使用強健版）
     try {
-      const { initializeAppCheckRobust } = await import(
-        "./appCheckClient.robust"
-      );
+      const { initializeAppCheckRobust } =
+        await import("./appCheckClient.robust");
       await initializeAppCheckRobust();
       logger.info("[Firebase] App Check 初始化完成");
     } catch (error) {
       logger.warn(
         "[Firebase] App Check 初始化失敗，但應用可繼續運行:",
-        error.message
+        error.message,
       );
       // 不拋出錯誤，讓應用繼續運行
     }
@@ -82,6 +81,7 @@ export const initializeServices = async () => {
     }, 2000);
 
     logger.info("[Firebase] 所有服務初始化完成");
+    return { performance: performanceInstance };
   } catch (error) {
     logger.error("[Firebase] 服務初始化失敗:", error);
 
