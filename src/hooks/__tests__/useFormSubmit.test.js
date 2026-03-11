@@ -17,7 +17,7 @@ jest.mock("antd", () => ({
 }));
 
 // Mock Firebase modules to prevent actual Firebase calls
-jest.mock("../../config/firebaseConfig", () => ({
+jest.mock("../../config/firebaseCore", () => ({
   db: "mock-db",
 }));
 
@@ -95,7 +95,7 @@ describe("useFormSubmit", () => {
       message: "",
     });
     expect(result.current.result).toEqual(
-      expect.objectContaining({ success: true })
+      expect.objectContaining({ success: true }),
     );
     expect(message.success).toHaveBeenCalled();
   });
@@ -130,7 +130,7 @@ describe("useFormSubmit", () => {
     });
 
     expect(result.current.result).toEqual(
-      expect.objectContaining({ success: false })
+      expect.objectContaining({ success: false }),
     );
     expect(message.error).toHaveBeenCalled();
   });
@@ -158,7 +158,7 @@ describe("useFormSubmit", () => {
     });
 
     expect(result.current.result).toEqual(
-      expect.objectContaining({ success: false })
+      expect.objectContaining({ success: false }),
     );
     expect(message.error).toHaveBeenCalled();
   });

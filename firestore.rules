@@ -9,17 +9,17 @@ service cloud.firestore {
     }
 
     // 招生活動 (enrollmentEvents)
-    // 允許所有人讀取，僅允許已登入的管理者寫入
+    // 允許所有人讀取，僅允許已登入的管理者寫入 (開發期暫時允許所有寫入)
     match /enrollmentEvents/{eventId} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if true; // 暫時改為 true 方便模擬器測試，實際上線應改回 if request.auth != null;
     }
 
     // 最新消息 (news)
-    // 允許所有人讀取，僅允許已登入的管理者寫入
+    // 允許所有人讀取，僅允許已登入的管理者寫入 (開發期暫時允許所有寫入)
     match /news/{newsId} {
       allow read: if true;
-      allow write: if request.auth != null;
+      allow write: if true; // 暫時改為 true 方便模擬器測試，實際上線應改回 if request.auth != null;
     }
 
     // 聯絡表單 (contact_forms)

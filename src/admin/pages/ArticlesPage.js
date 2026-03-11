@@ -35,6 +35,7 @@ import {
 import { app } from "../../config/firebaseCore";
 import logger from "../../utils/logger";
 import StructuredContentEditor from "../components/StructuredContentEditor";
+import ArticleEditor from "../components/ArticleEditor";
 import StructuredContentViewer from "../components/StructuredContentViewer";
 import NewsContentEditor from "../components/NewsContentEditor";
 import NewsContentViewer from "../components/NewsContentViewer";
@@ -239,38 +240,18 @@ const ArticlesPage = () => {
   // 處理新增文章按鈕點擊
   const handleAdd = () => {
     setEditingArticle(null);
-    form.resetFields();
     setIsModalVisible(true);
   };
 
   // 處理編輯文章按鈕點擊
   const handleEdit = (article) => {
-    setEditingArticle(article);
-
-    // 根據分類決定內容格式處理
     let contentValue = article.content;
-
-    // 對於結構化內容（招生活動和新聞），保持原始對象格式
-    // 對於一般文章，如果是對象則轉換為 JSON 字串
-    if (article.category !== "enrollment" && article.category !== "news") {
-      if (typeof article.content === "object") {
-        contentValue = JSON.stringify(article.content, null, 2);
-      } else if (Array.isArray(article.content)) {
-        contentValue = JSON.stringify(article.content, null, 2);
-      }
+    if (typeof contentValue === "string") {
+      try {
+        contentValue = JSON.parse(contentValue);
+      } catch (e) {}
     }
-
-    form.setFieldsValue({
-      title: article.title,
-      excerpt: article.excerpt,
-      content: contentValue,
-      type: article.type,
-      category: article.category,
-      thumbnail: article.thumbnail,
-      image: article.image,
-      imageWidth: article.imageWidth,
-      imageHeight: article.imageHeight,
-    });
+    setEditingArticle({ ...article, content: contentValue });
     setIsModalVisible(true);
   };
 
@@ -291,53 +272,58 @@ const ArticlesPage = () => {
   };
 
   // 處理表單提交（新增或更新文章）
-  const handleSubmit = async (values) => {
-    let processedContent = values.content;
-    try {
-      // 如果內容是 JSON 字串，解析為物件
-      if (
-        typeof values.content === "string" &&
-        (values.content.trim().startsWith("{") ||
-          values.content.trim().startsWith("["))
-      ) {
-        processedContent = JSON.parse(values.content);
+
+  const cleanUndefined = (obj) => {
+    if (Array.isArray(obj)) {
+      return obj.map((v) => cleanUndefined(v)).filter((v) => v !== undefined);
+    } else if (obj !== null && typeof obj === "object") {
+      const newObj = {};
+      for (const key in obj) {
+        const val = cleanUndefined(obj[key]);
+        if (val !== undefined) {
+          newObj[key] = val;
+        }
       }
-    } catch (e) {
-      processedContent = values.content;
+      return newObj;
     }
-    // 處理表單值，設置預設圖片尺寸
-    const processedValues = {
+    return obj;
+  };
+
+  const handleSubmit = async (values) => {
+    const rawValues = {
       ...values,
-      content: processedContent,
       imageWidth: parseInt(values.imageWidth) || 450,
       imageHeight: parseInt(values.imageHeight) || 300,
     };
+    const processedValues = cleanUndefined(rawValues);
+
     if (editingArticle) {
-      // 更新現有文章
-      const type = editingArticle.type === "article" ? "article" : "enrollment";
-      await updateArticle(type, editingArticle.docId, processedValues);
+      const type =
+        processedValues.type === "article" ? "article" : "enrollment";
+      await updateArticle(
+        editingArticle.docId || editingArticle.id,
+        processedValues,
+        editingArticle.collection || type,
+      );
       setArticles((prev) =>
         prev.map((a) =>
-          a.id === editingArticle.id ? { ...a, ...processedValues } : a,
+          (a.docId || a.id) === (editingArticle.docId || editingArticle.id)
+            ? { ...a, ...processedValues }
+            : a,
         ),
       );
-      message.success("文章已更新");
     } else {
-      // 新增文章
       const type =
         processedValues.type === "article" ? "article" : "enrollment";
       const newArticle = await createArticle(type, processedValues);
       setArticles((prev) => [...prev, newArticle]);
-      message.success("文章已新增");
     }
     setIsModalVisible(false);
-    form.resetFields();
   };
 
   // 處理取消編輯
   const handleCancel = () => {
     setIsModalVisible(false);
-    form.resetFields();
   };
 
   // 處理取消查看
@@ -481,172 +467,16 @@ const ArticlesPage = () => {
       <Modal
         title={editingArticle ? "編輯文章" : "新增文章"}
         open={isModalVisible}
-        onOk={() => form.submit()}
+        footer={null}
         onCancel={handleCancel}
-        width={900}
-        okText="確認"
-        cancelText="取消"
+        width={1000}
+        destroyOnHidden
       >
-        <Form form={form} layout="vertical" onFinish={handleSubmit}>
-          <Form.Item
-            name="title"
-            label="標題"
-            rules={[{ required: true, message: "請輸入文章標題" }]}
-          >
-            <Input placeholder="請輸入文章標題" />
-          </Form.Item>
-
-          <Form.Item
-            name="excerpt"
-            label="摘要"
-            rules={[{ required: true, message: "請輸入文章摘要" }]}
-          >
-            <TextArea rows={2} placeholder="請輸入文章摘要" />
-          </Form.Item>
-
-          <Form.Item
-            name="type"
-            label="類型"
-            rules={[{ required: true, message: "請選擇文章類型" }]}
-          >
-            <Select placeholder="請選擇文章類型">
-              <Option value="enrollment">招生資訊</Option>
-              <Option value="article">最新消息</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item
-            name="category"
-            label="分類"
-            rules={[{ required: true, message: "請選擇文章分類" }]}
-          >
-            <Select placeholder="請選擇文章分類">
-              <Option value="enrollment">招生活動</Option>
-              <Option value="news">新聞</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item
-            label="縮圖上傳"
-            required
-            validateStatus={
-              form.getFieldValue("thumbnail") ? "success" : "error"
-            }
-            help={form.getFieldValue("thumbnail") ? null : "請上傳縮圖"}
-          >
-            <input
-              type="file"
-              accept="image/*"
-              style={{ width: 120 }}
-              onChange={async (e) => {
-                if (e.target.files && e.target.files[0]) {
-                  await handleFileUpload(e.target.files[0], "thumbnail");
-                }
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            name="thumbnail"
-            style={{ display: "none" }}
-            rules={[
-              { required: true, message: "請上傳縮圖" },
-              { type: "url", message: "縮圖必須是有效的網址格式" },
-            ]}
-          >
-            <Input type="hidden" />
-          </Form.Item>
-
-          <Form.Item
-            label="大圖上傳"
-            required
-            validateStatus={form.getFieldValue("image") ? "success" : "error"}
-            help={form.getFieldValue("image") ? null : "請上傳大圖"}
-          >
-            <input
-              type="file"
-              accept="image/*"
-              style={{ width: 120 }}
-              onChange={async (e) => {
-                if (e.target.files && e.target.files[0]) {
-                  await handleFileUpload(e.target.files[0], "image");
-                }
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            name="image"
-            style={{ display: "none" }}
-            rules={[
-              { required: true, message: "請上傳大圖" },
-              { type: "url", message: "大圖必須是有效的網址格式" },
-            ]}
-          >
-            <Input type="hidden" />
-          </Form.Item>
-
-          <Space>
-            <Form.Item
-              name="imageWidth"
-              label="圖片寬度"
-              style={{ width: 120 }}
-            >
-              <Input type="number" placeholder="450" />
-            </Form.Item>
-
-            <Form.Item
-              name="imageHeight"
-              label="圖片高度"
-              style={{ width: 120 }}
-            >
-              <Input type="number" placeholder="300" />
-            </Form.Item>
-          </Space>
-
-          <Form.Item
-            name="content"
-            label="內容"
-            rules={[{ required: true, message: "請輸入文章內容" }]}
-          >
-            <Form.Item
-              noStyle
-              shouldUpdate={(prevValues, currentValues) =>
-                prevValues.type !== currentValues.type ||
-                prevValues.category !== currentValues.category
-              }
-            >
-              {({ getFieldValue, setFieldValue }) => {
-                const articleCategory = getFieldValue("category");
-                const currentContent = getFieldValue("content");
-
-                // 根據分類決定使用哪個編輯器
-                if (articleCategory === "enrollment") {
-                  // 招生活動使用招生活動的結構化編輯器
-                  return (
-                    <StructuredContentEditor
-                      value={currentContent}
-                      onChange={(newContent) => {
-                        setFieldValue("content", newContent);
-                      }}
-                    />
-                  );
-                } else if (articleCategory === "news") {
-                  // 新聞使用新聞的結構化編輯器
-                  return (
-                    <NewsContentEditor
-                      value={currentContent}
-                      onChange={(newContent) => {
-                        setFieldValue("content", newContent);
-                      }}
-                    />
-                  );
-                } else {
-                  // 預設使用一般文字編輯器
-                  return <TextArea rows={10} placeholder="請輸入文章內容" />;
-                }
-              }}
-            </Form.Item>
-          </Form.Item>
-        </Form>
+        <ArticleEditor
+          initialValues={editingArticle}
+          onSave={handleSubmit}
+          onCancel={handleCancel}
+        />
       </Modal>
 
       {/* 查看文章模態框 */}

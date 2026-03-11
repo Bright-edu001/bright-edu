@@ -3,8 +3,13 @@
  * 包含基本的 App、Firestore、Auth 初始化
  */
 import { initializeApp } from "firebase/app";
-import { getFirestore, enableNetwork } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import {
+  getFirestore,
+  enableNetwork,
+  connectFirestoreEmulator,
+} from "firebase/firestore";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
+import { getStorage, connectStorageEmulator } from "firebase/storage";
 import logger from "../utils/logger";
 import { isLocalDevelopment } from "./envUtils";
 
@@ -25,6 +30,24 @@ export const app = initializeApp(firebaseConfig);
 // 基本服務（立即初始化）
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+export const storage = getStorage(app);
+
+// 判斷是否為本地環境，若是則連接到 Firebase Emulators
+if (
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+) {
+  try {
+    connectFirestoreEmulator(db, "127.0.0.1", 8080);
+    connectAuthEmulator(auth, "http://127.0.0.1:9099");
+    connectStorageEmulator(storage, "127.0.0.1", 9199);
+    logger.info(
+      "🔌 已成功連接到 Firebase 本地模擬器 (Firestore, Auth, Storage)",
+    );
+  } catch (err) {
+    logger.warn("⚠️ Firebase 模擬器連接失敗 (可能已初始化過):", err);
+  }
+}
 
 /**
  * 啟用 Firestore 網路連接
