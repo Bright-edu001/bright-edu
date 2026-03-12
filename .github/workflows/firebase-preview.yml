@@ -29,6 +29,9 @@ jobs:
       - name: Build
         run: npm run build:prod
 
+      # 注意：如果此步驟失敗，請檢查 GCP WIF 的 Attribute Condition 是否限制了分支
+      # 報錯：The given credential is rejected by the attribute condition
+      # 修復：需在 GCP Console 修改 Workload Identity Pool Provider 的條件，允許 PR 分支 (assertion.ref_type == 'branch')
       - name: Auth to Google Cloud (OIDC)
         uses: google-github-actions/auth@v2
         with:
@@ -39,7 +42,9 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "" # OIDC will be used instead since we authenticated in the previous step
+          firebaseServiceAccount: ""
           projectId: bright-edu-data
           channelId: pr-${{ github.event.number }}
           expires: 7d
+        env:
+          FIREBASE_CLI_PREFLIGHT_WIF: "true" # 強制要求 CLI 使用 WIF 認證環境變數
