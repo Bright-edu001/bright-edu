@@ -1,4 +1,4 @@
-name: Deploy PR to Firebase Hosting (Preview)
+ï»¿name: Deploy PR to Firebase Hosting (Preview)
 
 on:
   pull_request:
@@ -29,9 +29,6 @@ jobs:
       - name: Build
         run: npm run build:prod
 
-      # æ³¨æ?ï¼šå??œæ­¤æ­¥é?å¤±æ?ï¼Œè?æª¢æŸ¥ GCP WIF ??Attribute Condition ?¯å¦?åˆ¶äº†å???
-      # ?±éŒ¯ï¼šThe given credential is rejected by the attribute condition
-      # ä¿®å¾©ï¼šé???GCP Console ä¿®æ”¹ Workload Identity Pool Provider ?„æ?ä»¶ï??è¨± PR ?†æ”¯ (assertion.ref_type == 'branch')
       - name: Auth to Google Cloud (OIDC)
         uses: google-github-actions/auth@v2
         with:
@@ -42,9 +39,9 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: ""
+          firebaseServiceAccount: "" 
           projectId: bright-edu-data
           channelId: pr-${{ github.event.number }}
           expires: 7d
         env:
-          FIREBASE_CLI_PREFLIGHT_WIF: "true" # å¼·åˆ¶è¦æ? CLI ä½¿ç”¨ WIF èªè??°å?è®Šæ•¸
+          FIREBASE_CLI_PREFLIGHT_WIF: "true"
