@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
 
       - name: Verify GCP_PROJECT_NUMBER secret exists
         run: |
@@ -42,7 +43,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: npm run build:prod
 
       - name: Firebase whoami (optional debug)
         run: |
