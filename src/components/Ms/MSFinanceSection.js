@@ -3,9 +3,10 @@ import "./MSFinanceSection.scss";
 
 // 內部組件與樣式映射 (因為 styled-components 移除了，這裡需要一些簡單的適配器如果需要)
 // 因為 <ResponsiveImg> 在原本的 styled-components 中可能包含樣式，但這裡只有一個 class
-// 我們直接用 <img className="responsive-img" ... />
+// 我們直接用 <img className="responsive-img" alt="" ... />
 const ResponsiveImg = (props) => (
   <img
+    alt={props.alt || ""}
     {...props}
     style={{
       maxWidth: "100%",

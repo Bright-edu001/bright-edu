@@ -34,16 +34,12 @@ import {
 } from "firebase/storage";
 import { app } from "../../config/firebaseCore";
 import logger from "../../utils/logger";
-import StructuredContentEditor from "../components/StructuredContentEditor";
 import ArticleEditor from "../components/ArticleEditor";
 import StructuredContentViewer from "../components/StructuredContentViewer";
-import NewsContentEditor from "../components/NewsContentEditor";
 import NewsContentViewer from "../components/NewsContentViewer";
 
 // 解構 Ant Design 組件
 const { Title } = Typography;
-const { TextArea } = Input;
-const { Option } = Select;
 
 // 初始化 Firebase Storage
 const storage = getStorage(app);
