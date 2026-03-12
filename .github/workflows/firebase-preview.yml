@@ -36,12 +36,5 @@ jobs:
           service_account: firebase-github-deploy@bright-edu-data.iam.gserviceaccount.com
 
       - name: Deploy to Firebase Hosting (Preview)
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "" 
-          projectId: bright-edu-data
-          channelId: pr-${{ github.event.number }}
-          expires: 7d
-        env:
-          FIREBASE_CLI_PREFLIGHT_WIF: "true"
+        run: |
+          npx firebase-tools hosting:channel:deploy pr-${{ github.event.number }} --expires 7d --project bright-edu-data
