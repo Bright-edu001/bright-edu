@@ -9,6 +9,8 @@ import React, {
   useEffect,
   startTransition,
 } from "react";
+import { FirebaseAppProvider } from "reactfire";
+import { app } from "../config/firebaseCore";
 import logger from "../utils/logger";
 
 // Firebase 初始化狀態
@@ -38,9 +40,8 @@ export const FirebaseInitProvider = ({ children }) => {
         logger.info("[Firebase Init] 開始優化版初始化...");
 
         // 階段 1: 立即初始化核心服務（非阻塞）
-        const { initializeCoreServices } = await import(
-          "../config/firebaseCore"
-        );
+        const { initializeCoreServices } =
+          await import("../config/firebaseCore");
         await initializeCoreServices();
 
         // 立即標記基礎服務就緒，讓 UI 開始渲染
@@ -62,7 +63,7 @@ export const FirebaseInitProvider = ({ children }) => {
           } catch (error) {
             logger.warn(
               "[Firebase Init] 額外服務初始化失敗，但不影響基本功能:",
-              error
+              error,
             );
             // 即使額外服務失敗，仍標記為已初始化
             startTransition(() => {
@@ -101,7 +102,7 @@ export const FirebaseInitProvider = ({ children }) => {
 
   return (
     <FirebaseInitContext.Provider value={contextValue}>
-      {children}
+      <FirebaseAppProvider firebaseApp={app}>{children}</FirebaseAppProvider>
     </FirebaseInitContext.Provider>
   );
 };
@@ -119,9 +120,8 @@ const initializeAdditionalServices = async () => {
 
   // 優化的 App Check 初始化
   try {
-    const { initializeAppCheckOptimized } = await import(
-      "../config/appCheckClient"
-    );
+    const { initializeAppCheckOptimized } =
+      await import("../config/appCheckClient");
     await initializeAppCheckOptimized();
   } catch (error) {
     logger.warn("[Firebase Init] App Check 初始化失敗，繼續執行:", error);

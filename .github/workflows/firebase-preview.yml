@@ -36,5 +36,43 @@ jobs:
           service_account: firebase-github-deploy@bright-edu-data.iam.gserviceaccount.com
 
       - name: Deploy to Firebase Hosting (Preview)
+        id: deploy_preview
         run: |
-          npx firebase-tools hosting:channel:deploy pr-${{ github.event.number }} --expires 7d --project bright-edu-data
+          DEPLOY_OUTPUT=$(npx firebase-tools hosting:channel:deploy pr-${{ github.event.number }} --expires 7d --project bright-edu-data --json)
+          PREVIEW_URL=$(echo $DEPLOY_OUTPUT | jq -r '.result."bright-edu-data".url')
+          echo "url=$PREVIEW_URL" >> $GITHUB_OUTPUT
+          echo "✅ Deployed to: $PREVIEW_URL"
+
+      - name: Comment PR with Preview URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // 尋找是否已經有我們機器人留過的訊息，避免重複留言
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' && comment.body.includes('Firebase 預覽版部署成功')
+            );
+
+            const commentBody = '🚀 **Firebase 預覽版部署成功！**\n\n' +
+                                '🔍 **預覽網址 (Preview URL):** ${{ steps.deploy_preview.outputs.url }}\n\n' +
+                                '_(此連結將保留 7 天)_';
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }
