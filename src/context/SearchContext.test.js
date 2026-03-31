@@ -4,9 +4,9 @@ import { renderHook, act } from "@testing-library/react";
 import { SearchProvider, SearchContext } from "./SearchContext";
 
 // 建立一個 mock 的 useNavigate，攔截路由跳轉
-const mockNavigate = jest.fn();
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
+const mockNavigate = vi.fn();
+vi.mock("react-router-dom", () => ({
+  ...vi.requireActual("react-router-dom"),
   useNavigate: () => mockNavigate,
 }));
 
@@ -32,7 +32,7 @@ describe("SearchContext", () => {
     });
 
     // 建立假的 event 物件
-    const fakeEvent = { preventDefault: jest.fn() };
+    const fakeEvent = { preventDefault: vi.fn() };
 
     // 執行 handleSearch
     act(() => {

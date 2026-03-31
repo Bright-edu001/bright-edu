@@ -2,7 +2,7 @@
 import logger from "./logger";
 
 const BUCKET_NAME =
-  process.env.REACT_APP_STORAGE_BUCKET || "bright-edu-data.firebasestorage.app";
+  import.meta.env.VITE_STORAGE_BUCKET || "bright-edu-data.firebasestorage.app";
 
 /**
  * 根據本地路徑生成 Firebase Storage 的公開 URL。

@@ -2,7 +2,7 @@ import { contactService } from "../contactService";
 import { collection, addDoc } from "firebase/firestore";
 
 // Mock firebaseCore
-jest.mock("../../config/firebaseCore", () => ({
+vi.mock("../../config/firebaseCore", () => ({
   db: "mock-db",
 }));
 
@@ -10,9 +10,9 @@ jest.mock("../../config/firebaseCore", () => ({
 const mockServerTimestamp = { _delegate: { _key: "server-timestamp" } };
 const mockCollectionRef = "mock-collection-ref";
 
-jest.mock("firebase/firestore", () => ({
-  collection: jest.fn(),
-  addDoc: jest.fn(),
+vi.mock("firebase/firestore", () => ({
+  collection: vi.fn(),
+  addDoc: vi.fn(),
   serverTimestamp: () => mockServerTimestamp,
 }));
 
@@ -23,28 +23,28 @@ beforeEach(() => {
 });
 
 // Mock Firebase config
-jest.mock("../../config/firebaseCore", () => ({
+vi.mock("../../config/firebaseCore", () => ({
   db: "mock-db",
 }));
 
 // Mock logger
-jest.mock("../../utils/logger", () => ({
-  log: jest.fn(),
-  warn: jest.fn(),
-  error: jest.fn(),
-  performance: jest.fn(),
-  formSubmit: jest.fn(),
+vi.mock("../../utils/logger", () => ({
+  log: vi.fn(),
+  warn: vi.fn(),
+  error: vi.fn(),
+  performance: vi.fn(),
+  formSubmit: vi.fn(),
 }));
 
 describe("ContactService", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // 🔥 清除 contactService 的快取，避免測試間相互影響
     contactService.recentSubmissions.clear();
     // 🔥 設置 Firebase 為已準備就緒狀態，避免待處理佇列影響測試
     contactService.setFirebaseReady(true);
     // 設置 fetch mock
-    global.fetch = jest.fn();
+    global.fetch = vi.fn();
   });
 
   afterEach(() => {
@@ -144,7 +144,7 @@ describe("ContactService", () => {
       addDoc.mockResolvedValue(mockDocRef);
 
       // Mock the Firebase Extensions HTTP request
-      global.fetch = jest.fn().mockResolvedValue({
+      global.fetch = vi.fn().mockResolvedValue({
         ok: true,
         json: () =>
           Promise.resolve({ success: true, message: "Data saved to sheet" }),
@@ -187,7 +187,7 @@ describe("ContactService", () => {
       addDoc.mockRejectedValue(new Error("Firestore error"));
 
       // Mock Firebase Extensions HTTP request success
-      global.fetch = jest.fn().mockResolvedValue({
+      global.fetch = vi.fn().mockResolvedValue({
         ok: true,
         json: () =>
           Promise.resolve({ success: true, message: "Data saved to sheet" }),

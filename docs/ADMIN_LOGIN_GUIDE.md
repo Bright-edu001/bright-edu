@@ -24,7 +24,7 @@
 
 ```bash
 # 啟動開發伺服器
-npm start
+npm run start
 
 # 訪問後台
 http://localhost:3000/admin
@@ -58,8 +58,8 @@ http://localhost:3000/admin
 cp .env.example .env
 
 # 編輯.env檔案，填入Firebase設定
-REACT_APP_API_KEY=your_firebase_api_key
-REACT_APP_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_API_KEY=your_firebase_api_key
+VITE_AUTH_DOMAIN=your_project.firebaseapp.com
 # ... 其他設定
 ```
 

@@ -4,11 +4,11 @@ import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import BlogDetail from "./BlogDetail";
 
-jest.mock("../../components/MbaAreasHero/MbaAreasHero", () => () => <div />);
-jest.mock("../../components/SearchBar/SearchBar", () => () => <div />);
+vi.mock("../../components/MbaAreasHero/MbaAreasHero", () => () => <div />);
+vi.mock("../../components/SearchBar/SearchBar", () => () => <div />);
 
 // Mock useBlogData hook
-jest.mock("../../hooks/useBlogData", () => ({
+vi.mock("../../hooks/useBlogData", () => ({
   useBlogData: () => ({
     enrollmentEvents: [
       {

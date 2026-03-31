@@ -43,7 +43,7 @@ POST https://content-firebaseappcheck.googleapis.com/v1/projects/PROJECT_ID/apps
 確認 `.env.production` 中的 reCAPTCHA 站點金鑰正確：
 
 ```bash
-REACT_APP_RECAPTCHA_SITE_KEY="正確的站點金鑰"
+VITE_RECAPTCHA_SITE_KEY="正確的站點金鑰"
 ```
 
 #### 步驟 4: 檢查網路環境

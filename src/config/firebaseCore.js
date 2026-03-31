@@ -15,13 +15,13 @@ import { isLocalDevelopment } from "./envUtils";
 
 // Firebase 配置
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 // 初始化 Firebase 應用程式（立即執行）
@@ -32,10 +32,12 @@ export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 
-// 判斷是否為本地環境，若是則連接到 Firebase Emulators
+// 判斷是否為本地環境且明確啟用模擬器，若是則連接到 Firebase Emulators
+// 開發者請注意：如果沒有透過 firebase emulators:start 啟動本機服務，請將這段功能關閉或使用環境變數控制
 if (
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1"
+  (window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1") &&
+  import.meta.env.VITE_USE_FIREBASE_EMULATOR === "true"
 ) {
   try {
     connectFirestoreEmulator(db, "127.0.0.1", 8080);

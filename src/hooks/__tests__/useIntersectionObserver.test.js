@@ -13,8 +13,8 @@ describe("useIntersectionObserver", () => {
     class MockIntersectionObserver {
       constructor(callback) {
         this.callback = callback;
-        this.observe = jest.fn();
-        this.unobserve = jest.fn(() => {
+        this.observe = vi.fn();
+        this.unobserve = vi.fn(() => {
           this.isObserving = false;
         });
         this.isObserving = true;
@@ -27,7 +27,7 @@ describe("useIntersectionObserver", () => {
       }
     }
     // 將全域 IntersectionObserver 指向 mock 版本
-    global.IntersectionObserver = jest.fn((cb) => {
+    global.IntersectionObserver = vi.fn((cb) => {
       observer = new MockIntersectionObserver(cb);
       return observer;
     });
@@ -35,12 +35,12 @@ describe("useIntersectionObserver", () => {
 
   // 每次測試後清除 mock 狀態
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   // 測試：當元素進入 viewport 時只呼叫一次 callback，並自動 unobserve
   it("calls callback once and unobserves when element intersects", () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
 
     // 測試用元件，將 ref 綁定到 div
     const TestComponent = () => {

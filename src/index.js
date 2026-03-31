@@ -13,6 +13,20 @@ import logger from "./utils/logger";
 // ===== Firebase 初始化 Context（優化版）=====
 import { FirebaseInitProvider } from "./context/FirebaseInitContext";
 
+// ===== React Query =====
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 分鐘
+      cacheTime: 1000 * 60 * 30, // 30 分鐘
+      retry: 2,
+      refetchOnWindowFocus: false, // 可依需求開啟
+    },
+  },
+});
+
 // ===== 優化版 Sentry 初始化（非阻塞）=====
 const initializeSentryOptimized = () => {
   if (process.env.NODE_ENV !== "production") return;
@@ -26,7 +40,7 @@ const initializeSentryOptimized = () => {
       ]);
 
       Sentry.init({
-        dsn: process.env.REACT_APP_SENTRY_DSN,
+        dsn: import.meta.env.VITE_SENTRY_DSN,
         integrations: [new BrowserTracing()],
         tracesSampleRate: 0.1, // 降低到 10% 減少性能影響
         environment: process.env.NODE_ENV,
@@ -115,7 +129,9 @@ logger.info("[Bootstrap] 立即開始渲染，Firebase 在背景初始化");
 
 root.render(
   <FirebaseInitProvider>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </FirebaseInitProvider>,
 );
 

@@ -17,9 +17,9 @@ const diagnoseReCaptchaConfiguration = async () => {
   logger.group("[AppCheck] reCAPTCHA 配置診斷");
 
   try {
-    const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
-    const appId = process.env.REACT_APP_APP_ID;
-    const projectId = process.env.REACT_APP_PROJECT_ID;
+    const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+    const appId = import.meta.env.VITE_APP_ID;
+    const projectId = import.meta.env.VITE_PROJECT_ID;
     const currentDomain = window.location.hostname;
 
     logger.info("=== 配置檢查 ===");
@@ -176,7 +176,7 @@ const initializeWithErrorHandling = async (
   ReCaptchaV3Provider,
   app
 ) => {
-  const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+  const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
   // 確保 DOM 載入完成
   await waitForDOMReady();

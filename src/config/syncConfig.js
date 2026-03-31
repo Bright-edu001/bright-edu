@@ -4,12 +4,12 @@
 // 生產環境的 Cloud Run 服務
 const PRODUCTION_CONFIG = {
   SYNC_SERVICE_URL:
-    process.env.REACT_APP_SYNC_SERVICE_URL ||
+    import.meta.env.VITE_SYNC_SERVICE_URL ||
     "https://bright-edu-sync-156805168089.asia-east1.run.app",
   API_KEY:
-    process.env.REACT_APP_SYNC_API_KEY || "bright-edu-sync-2024-secure-key",
+    import.meta.env.VITE_SYNC_API_KEY || "bright-edu-sync-2024-secure-key",
   HEALTH_CHECK_URL: `${
-    process.env.REACT_APP_SYNC_SERVICE_URL ||
+    import.meta.env.VITE_SYNC_SERVICE_URL ||
     "https://bright-edu-sync-156805168089.asia-east1.run.app"
   }/api/health`,
 };
@@ -17,11 +17,11 @@ const PRODUCTION_CONFIG = {
 // 開發環境的本地服務（如果需要）
 const DEVELOPMENT_CONFIG = {
   SYNC_SERVICE_URL:
-    process.env.REACT_APP_DEV_SYNC_SERVICE_URL || "http://localhost:3002",
+    import.meta.env.VITE_DEV_SYNC_SERVICE_URL || "http://localhost:3002",
   API_KEY:
-    process.env.REACT_APP_SYNC_API_KEY || "bright-edu-sync-2024-secure-key",
+    import.meta.env.VITE_SYNC_API_KEY || "bright-edu-sync-2024-secure-key",
   HEALTH_CHECK_URL: `${
-    process.env.REACT_APP_DEV_SYNC_SERVICE_URL || "http://localhost:3002"
+    import.meta.env.VITE_DEV_SYNC_SERVICE_URL || "http://localhost:3002"
   }/api/health`,
 };
 

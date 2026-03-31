@@ -12,9 +12,9 @@ describe("logger", () => {
 
   // 測試：開發環境下會 log
   it("logs messages in development", async () => {
-    jest.resetModules();
+    vi.resetModules();
     process.env.NODE_ENV = "development";
-    consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+    consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     const logger = (await import("../logger")).default;
     logger.log("test");
     expect(consoleSpy).toHaveBeenCalledWith("test");
@@ -22,9 +22,9 @@ describe("logger", () => {
 
   // 測試：production 不會 log
   it("does not log messages in production", async () => {
-    jest.resetModules();
+    vi.resetModules();
     process.env.NODE_ENV = "production";
-    consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+    consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     const logger = (await import("../logger")).default;
     logger.log("test");
     expect(consoleSpy).not.toHaveBeenCalled();
@@ -32,9 +32,9 @@ describe("logger", () => {
 
   // 🔥 測試：performance 日誌在所有環境都會輸出
   it("logs performance messages in all environments", async () => {
-    jest.resetModules();
+    vi.resetModules();
     process.env.NODE_ENV = "production";
-    consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+    consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     const logger = (await import("../logger")).default;
     logger.performance("test performance");
     expect(consoleSpy).toHaveBeenCalledWith(
@@ -45,9 +45,9 @@ describe("logger", () => {
 
   // 🔥 測試：formSubmit 日誌在所有環境都會輸出
   it("logs formSubmit messages in all environments", async () => {
-    jest.resetModules();
+    vi.resetModules();
     process.env.NODE_ENV = "production";
-    consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+    consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     const logger = (await import("../logger")).default;
     logger.formSubmit("test form submit");
     expect(consoleSpy).toHaveBeenCalledWith(

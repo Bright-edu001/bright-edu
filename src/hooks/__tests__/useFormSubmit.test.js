@@ -5,32 +5,32 @@ import { contactService } from "../../services/contactService";
 import { App } from "antd";
 
 // 增加測試超時時間
-jest.setTimeout(10000);
+vi.setTimeout(10000);
 
 // Mock Ant Design 的 App.useApp，避免實際呼叫 UI
-jest.mock("antd", () => ({
+vi.mock("antd", () => ({
   App: {
-    useApp: jest.fn(),
+    useApp: vi.fn(),
   },
   // Mock Button component used in hook's error message
   Button: () => null,
 }));
 
 // Mock Firebase modules to prevent actual Firebase calls
-jest.mock("../../config/firebaseCore", () => ({
+vi.mock("../../config/firebaseCore", () => ({
   db: "mock-db",
 }));
 
-jest.mock("firebase/firestore", () => ({
-  collection: jest.fn(),
-  addDoc: jest.fn(),
-  serverTimestamp: jest.fn(() => ({ _delegate: { _key: "server-timestamp" } })),
+vi.mock("firebase/firestore", () => ({
+  collection: vi.fn(),
+  addDoc: vi.fn(),
+  serverTimestamp: vi.fn(() => ({ _delegate: { _key: "server-timestamp" } })),
 }));
 
 // Mock contactService
-jest.mock("../../services/contactService", () => ({
+vi.mock("../../services/contactService", () => ({
   contactService: {
-    saveToBoth: jest.fn(),
+    saveToBoth: vi.fn(),
   },
 }));
 
@@ -38,15 +38,15 @@ jest.mock("../../services/contactService", () => ({
 describe("useFormSubmit", () => {
   // message mock 物件，模擬 antd 的訊息提示
   const message = {
-    error: jest.fn(),
-    success: jest.fn(),
-    warning: jest.fn(),
-    loading: jest.fn(),
+    error: vi.fn(),
+    success: vi.fn(),
+    warning: vi.fn(),
+    loading: vi.fn(),
   };
 
   // 每次測試前重置 mock 狀態，並讓 useApp 回傳 message mock
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     App.useApp.mockReturnValue({ message });
   });
 
@@ -55,7 +55,7 @@ describe("useFormSubmit", () => {
     const { result } = renderHook(() => useFormSubmit());
 
     await act(async () => {
-      await result.current.handleSubmit({ preventDefault: jest.fn() });
+      await result.current.handleSubmit({ preventDefault: vi.fn() });
     });
 
     expect(message.error).toHaveBeenCalled();
@@ -84,7 +84,7 @@ describe("useFormSubmit", () => {
 
     // 送出表單
     await act(async () => {
-      await result.current.handleSubmit({ preventDefault: jest.fn() });
+      await result.current.handleSubmit({ preventDefault: vi.fn() });
     });
 
     // 表單應該被重置，result.success 應為 true，並顯示成功訊息
@@ -126,7 +126,7 @@ describe("useFormSubmit", () => {
 
     // 送出表單
     await act(async () => {
-      await result.current.handleSubmit({ preventDefault: jest.fn() });
+      await result.current.handleSubmit({ preventDefault: vi.fn() });
     });
 
     expect(result.current.result).toEqual(
@@ -154,7 +154,7 @@ describe("useFormSubmit", () => {
 
     // 送出表單
     await act(async () => {
-      await result.current.handleSubmit({ preventDefault: jest.fn() });
+      await result.current.handleSubmit({ preventDefault: vi.fn() });
     });
 
     expect(result.current.result).toEqual(

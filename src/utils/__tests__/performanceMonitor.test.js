@@ -11,12 +11,12 @@ describe("performanceMonitor", () => {
     originalEnv = process.env.NODE_ENV;
     process.env.NODE_ENV = "development"; // 確保 logger 會執行
 
-    jest.resetModules();
+    vi.resetModules();
     ({ default: performanceMonitor } = await import("../performanceMonitor"));
     originalNavigator = global.navigator;
     originalPerformance = global.performance;
     Object.defineProperty(global, "navigator", {
-      value: { sendBeacon: jest.fn() },
+      value: { sendBeacon: vi.fn() },
       writable: true,
       configurable: true,
     });
@@ -36,7 +36,7 @@ describe("performanceMonitor", () => {
 
   // 測試：能正確記錄與送出 metrics
   it("records metrics and flushes them", () => {
-    const listener = jest.fn();
+    const listener = vi.fn();
     performanceMonitor.onMetric(listener);
     performanceMonitor.recordMetric("load", 123);
     expect(performanceMonitor.metrics.load).toBe(123);
@@ -54,7 +54,7 @@ describe("performanceMonitor", () => {
   it("logs metrics in debug mode", () => {
     // Mock logger 的 log 方法
     const logger = require("../logger").default;
-    logSpy = jest.spyOn(logger, "log").mockImplementation(() => {});
+    logSpy = vi.spyOn(logger, "log").mockImplementation(() => {});
 
     performanceMonitor.setDebug(true);
     performanceMonitor.recordMetric("dbg", 5);
@@ -64,7 +64,7 @@ describe("performanceMonitor", () => {
   });
   // 測試：cleanup 會停止記憶體使用量輪詢
   it("stops memory usage polling after cleanup", () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     performanceMonitor.setDebug(true);
 
     // 模擬記憶體使用資訊
@@ -78,7 +78,7 @@ describe("performanceMonitor", () => {
 
     performanceMonitor.monitorMemoryUsage();
     // 第一次輪詢後更新 metrics
-    jest.advanceTimersByTime(10000);
+    vi.advanceTimersByTime(10000);
     expect(performanceMonitor.metrics.memory).toEqual({
       used: 10,
       total: 100,
@@ -93,7 +93,7 @@ describe("performanceMonitor", () => {
     };
 
     performanceMonitor.cleanup();
-    jest.advanceTimersByTime(10000);
+    vi.advanceTimersByTime(10000);
 
     // metrics 不應再更新
     expect(performanceMonitor.metrics.memory).toEqual({
@@ -102,6 +102,6 @@ describe("performanceMonitor", () => {
       limit: 100,
     });
 
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 });

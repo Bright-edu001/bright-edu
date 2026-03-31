@@ -1,6 +1,6 @@
 // 取得資產的公開 URL 路徑
 export default function getAssetUrl(path = "") {
-  const base = process.env.PUBLIC_URL || ""; // 取得 base 路徑
+  const base = import.meta.env.BASE_URL || ""; // 取得 base 路徑
   if (!path) return base; // 若未提供路徑則回傳 base
   if (path.startsWith("/")) {
     // 若路徑以斜線開頭，直接拼接 base

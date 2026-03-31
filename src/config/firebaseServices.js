@@ -59,17 +59,20 @@ export const initializeServices = async () => {
       return;
     }
 
-    // 生產環境才初始化 App Check（使用強健版）
+    // 生產環境非同步初始化 App Check（使用強健版），不阻塞渲染或主執行緒
     try {
-      const { initializeAppCheckRobust } =
-        await import("./appCheckClient.robust");
-      await initializeAppCheckRobust();
-      logger.info("[Firebase] App Check 初始化完成");
+      import("./appCheckClient.robust").then(({ initializeAppCheckRobust }) => {
+        initializeAppCheckRobust()
+          .then(() => logger.info("[Firebase] App Check 初始化完成"))
+          .catch((error) =>
+            logger.warn(
+              "[Firebase] App Check 初始化失敗，但應用可繼續運行:",
+              error.message,
+            ),
+          );
+      });
     } catch (error) {
-      logger.warn(
-        "[Firebase] App Check 初始化失敗，但應用可繼續運行:",
-        error.message,
-      );
+      logger.warn("[Firebase] App Check 模組載入失敗:", error.message);
       // 不拋出錯誤，讓應用繼續運行
     }
 

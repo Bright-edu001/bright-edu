@@ -27,7 +27,7 @@ const initializeAnalytics = async () => {
   }
 
   // 檢查是否有 measurementId
-  if (!process.env.REACT_APP_MEASUREMENT_ID) {
+  if (!import.meta.env.VITE_MEASUREMENT_ID) {
     logger.info("[Analytics] 缺少 REACT_APP_MEASUREMENT_ID，跳過初始化");
     analyticsInitialized = true;
     return null;

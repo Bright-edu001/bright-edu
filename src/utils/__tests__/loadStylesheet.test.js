@@ -1,6 +1,6 @@
 // 測試 loadStylesheet 工具
 let importCount = 0;
-jest.mock(
+vi.mock(
   "style-path",
   () => {
     importCount += 1;
@@ -13,7 +13,7 @@ describe("loadStylesheet", () => {
   // 每次測試前重設 importCount
   beforeEach(() => {
     importCount = 0;
-    jest.resetModules();
+    vi.resetModules();
   });
 
   // 測試：同一個樣式只會 import 一次

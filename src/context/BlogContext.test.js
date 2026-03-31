@@ -5,7 +5,7 @@ import { BlogProvider, BlogContext } from "./BlogContext";
 import { getEnrollmentEvents, getNews } from "../services/blogService";
 
 // 模擬 blogService 相關 API
-jest.mock("../services/blogService");
+vi.mock("../services/blogService");
 
 // 測試 searchByKeyword 函式
 describe("BlogContext", () => {

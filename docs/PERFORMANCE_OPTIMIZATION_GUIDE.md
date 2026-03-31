@@ -87,7 +87,7 @@ const isReady = useFirebaseBasicReady();
 1. **本地測試**：
 
 ```bash
-npm start
+npm run start
 ```
 
 檢查載入時間是否明顯改善
