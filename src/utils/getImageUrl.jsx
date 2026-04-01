@@ -1,8 +1,8 @@
 // src/utils/getImageUrl.js
-import logger from "./logger";
+import logger from "./logger.js";
 
 const BUCKET_NAME =
-  import.meta.env.VITE_STORAGE_BUCKET || "bright-edu-data.firebasestorage.app";
+  ((import.meta.env || {}).VITE_STORAGE_BUCKET) || "bright-edu-data.firebasestorage.app";
 
 /**
  * 根據本地路徑生成 Firebase Storage 的公開 URL。

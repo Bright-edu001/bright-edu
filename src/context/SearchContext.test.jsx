@@ -5,10 +5,13 @@ import { SearchProvider, SearchContext } from "./SearchContext";
 
 // 建立一個 mock 的 useNavigate，攔截路由跳轉
 const mockNavigate = vi.fn();
-vi.mock("react-router-dom", () => ({
-  ...vi.requireActual("react-router-dom"),
-  useNavigate: () => mockNavigate,
-}));
+vi.mock("react-router-dom", async () => {
+  const actual = await vi.importActual("react-router-dom");
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  };
+});
 
 describe("SearchContext", () => {
   // wrapper 用於包裹 context provider，讓 hook 能取得 context
@@ -62,7 +65,7 @@ describe("SearchContext", () => {
     // 應該分別導向正確的路徑
     expect(mockNavigate).toHaveBeenNthCalledWith(
       1,
-      "/blog?category=enrollment"
+      "/blog?category=enrollment",
     );
     expect(mockNavigate).toHaveBeenNthCalledWith(2, "/blog?category=news");
   });

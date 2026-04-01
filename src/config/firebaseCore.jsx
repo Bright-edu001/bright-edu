@@ -10,18 +10,18 @@ import {
 } from "firebase/firestore";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
-import logger from "../utils/logger";
-import { isLocalDevelopment } from "./envUtils";
+import logger from "../utils/logger.js";
+import { isLocalDevelopment } from "./envUtils.js";
 
 // Firebase 配置
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID,
-  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
+  apiKey: (import.meta.env || {}).VITE_API_KEY,
+  authDomain: (import.meta.env || {}).VITE_AUTH_DOMAIN,
+  projectId: (import.meta.env || {}).VITE_PROJECT_ID,
+  storageBucket: (import.meta.env || {}).VITE_STORAGE_BUCKET,
+  messagingSenderId: (import.meta.env || {}).VITE_MESSAGING_SENDER_ID,
+  appId: (import.meta.env || {}).VITE_APP_ID,
+  measurementId: (import.meta.env || {}).VITE_MEASUREMENT_ID,
 };
 
 // 初始化 Firebase 應用程式（立即執行）
@@ -29,7 +29,7 @@ export const app = initializeApp(firebaseConfig);
 
 // 基本服務（立即初始化）
 export const db = getFirestore(app);
-export const auth = getAuth(app);
+export const auth = process.env.NODE_ENV==='test' ? {} : getAuth(app);
 export const storage = getStorage(app);
 
 // 判斷是否為本地環境且明確啟用模擬器，若是則連接到 Firebase Emulators
@@ -37,7 +37,7 @@ export const storage = getStorage(app);
 if (
   (window.location.hostname === "localhost" ||
     window.location.hostname === "127.0.0.1") &&
-  import.meta.env.VITE_USE_FIREBASE_EMULATOR === "true"
+  (import.meta.env || {}).VITE_USE_FIREBASE_EMULATOR === "true"
 ) {
   try {
     connectFirestoreEmulator(db, "127.0.0.1", 8080);

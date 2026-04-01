@@ -4,8 +4,12 @@ import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import BlogDetail from "./BlogDetail";
 
-vi.mock("../../components/MbaAreasHero/MbaAreasHero", () => () => <div />);
-vi.mock("../../components/SearchBar/SearchBar", () => () => <div />);
+vi.mock("../../components/MbaAreasHero/MbaAreasHero", () => ({
+  default: () => <div />,
+}));
+vi.mock("../../components/SearchBar/SearchBar", () => ({
+  default: () => <div />,
+}));
 
 // Mock useBlogData hook
 vi.mock("../../hooks/useBlogData", () => ({
@@ -46,7 +50,7 @@ describe("BlogDetail", () => {
     const img = within(heading).getByRole("img");
     expect(img).toHaveAttribute("src", "/flag.png");
     expect(heading.innerHTML).toContain(
-      '&lt;script&gt;alert("xss")&lt;/script&gt;'
+      '&lt;script&gt;alert("xss")&lt;/script&gt;',
     );
     expect(heading.innerHTML).not.toContain("<script>");
   });

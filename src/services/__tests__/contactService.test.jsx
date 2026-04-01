@@ -28,13 +28,7 @@ vi.mock("../../config/firebaseCore", () => ({
 }));
 
 // Mock logger
-vi.mock("../../utils/logger", () => ({
-  log: vi.fn(),
-  warn: vi.fn(),
-  error: vi.fn(),
-  performance: vi.fn(),
-  formSubmit: vi.fn(),
-}));
+vi.mock("../../utils/logger", () => ({ default: { log: vi.fn(), warn: vi.fn(), error: vi.fn(), info: vi.fn(), performance: vi.fn(), formSubmit: vi.fn() } }));
 
 describe("ContactService", () => {
   beforeEach(() => {

@@ -1,4 +1,6 @@
 // 測試 performanceMonitor 工具
+import logger from '../logger';
+vi.mock('../logger', () => ({ default: { log: vi.fn(), info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() } }));
 describe("performanceMonitor", () => {
   let performanceMonitor;
   let originalNavigator;
@@ -53,8 +55,7 @@ describe("performanceMonitor", () => {
   // 測試：debug 模式下會 log metrics
   it("logs metrics in debug mode", () => {
     // Mock logger 的 log 方法
-    const logger = require("../logger").default;
-    logSpy = vi.spyOn(logger, "log").mockImplementation(() => {});
+    logSpy = logger.log;
 
     performanceMonitor.setDebug(true);
     performanceMonitor.recordMetric("dbg", 5);

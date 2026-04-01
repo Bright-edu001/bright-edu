@@ -4,9 +4,6 @@ import useFormSubmit from "../useFormSubmit";
 import { contactService } from "../../services/contactService";
 import { App } from "antd";
 
-// 增加測試超時時間
-vi.setTimeout(10000);
-
 // Mock Ant Design 的 App.useApp，避免實際呼叫 UI
 vi.mock("antd", () => ({
   App: {

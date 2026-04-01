@@ -27,10 +27,12 @@ describe("useIntersectionObserver", () => {
       }
     }
     // 將全域 IntersectionObserver 指向 mock 版本
-    global.IntersectionObserver = vi.fn((cb) => {
-      observer = new MockIntersectionObserver(cb);
-      return observer;
-    });
+    global.IntersectionObserver = class {
+      constructor(cb) {
+        observer = new MockIntersectionObserver(cb);
+        return observer;
+      }
+    };
   });
 
   // 每次測試後清除 mock 狀態
