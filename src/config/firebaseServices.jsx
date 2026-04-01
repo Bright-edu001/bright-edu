@@ -60,8 +60,8 @@ export const initializeServices = async () => {
     }
 
     // 生產環境非同步初始化 App Check（使用強健版），不阻塞渲染或主執行緒
-    try {
-      import("./appCheckClient.robust").then(({ initializeAppCheckRobust }) => {
+    import("./appCheckClient.robust")
+      .then(({ initializeAppCheckRobust }) => {
         initializeAppCheckRobust()
           .then(() => logger.info("[Firebase] App Check 初始化完成"))
           .catch((error) =>
@@ -70,11 +70,11 @@ export const initializeServices = async () => {
               error.message,
             ),
           );
+      })
+      .catch((error) => {
+        logger.warn("[Firebase] App Check 模組載入失敗:", error.message);
+        // 不拋出錯誤，讓應用繼續運行
       });
-    } catch (error) {
-      logger.warn("[Firebase] App Check 模組載入失敗:", error.message);
-      // 不拋出錯誤，讓應用繼續運行
-    }
 
     // 延遲載入 Performance Monitoring
     setTimeout(() => {
