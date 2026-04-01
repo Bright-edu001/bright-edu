@@ -1,4 +1,4 @@
-import { db } from "../config/firebaseCore.js";
+import { db } from "../config/firebaseCore.jsx";
 import {
   collection,
   getDocs,
@@ -10,8 +10,8 @@ import {
   limit,
   startAfter,
 } from "firebase/firestore";
-import getImageUrl from "../utils/getImageUrl.js";
-import logger from "../utils/logger.js";
+import getImageUrl from "../utils/getImageUrl.jsx";
+import logger from "../utils/logger.jsx";
 
 // 處理部落格資料，將圖片路徑轉為公開 URL
 export const processBlogData = (data) => {

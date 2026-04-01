@@ -1,8 +1,8 @@
 import React, { lazy } from "react";
 
 const Home = lazy(() => import("../pages/Home/Home"));
-const Contact = lazy(() => import("../pages/Home/Contact.js"));
-const Blog = lazy(() => import("../pages/Home/Blog.js"));
+const Contact = lazy(() => import("../pages/Home/Contact.jsx"));
+const Blog = lazy(() => import("../pages/Home/Blog.jsx"));
 const BlogDetail = lazy(() => import("../pages/Blog/BlogDetail"));
 const BlogSearch = lazy(() => import("../pages/Blog/BlogSearch"));
 

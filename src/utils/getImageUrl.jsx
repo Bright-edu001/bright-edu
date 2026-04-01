@@ -1,5 +1,5 @@
 // src/utils/getImageUrl.js
-import logger from "./logger.js";
+import logger from "./logger.jsx";
 
 const BUCKET_NAME =
   ((import.meta.env || {}).VITE_STORAGE_BUCKET) || "bright-edu-data.firebasestorage.app";

@@ -2,17 +2,29 @@
 vi.mock("../../config/firebaseCore", () => ({ db: {} }));
 
 // 建立 firebase/firestore 及 getImageUrl 的 mock function
-const mockGetDocs = vi.fn();
-const mockGetDoc = vi.fn();
-const mockSetDoc = vi.fn();
-const mockCollection = vi.fn();
-const mockDoc = vi.fn();
-const mockQuery = vi.fn();
-const mockOrderBy = vi.fn();
-const mockLimit = vi.fn();
-const mockStartAfter = vi.fn();
-const mockGetImageUrl = vi.fn((p) => (process.env.BASE_URL || "") + p);
-
+const {
+  mockGetDocs,
+  mockGetDoc,
+  mockSetDoc,
+  mockCollection,
+  mockDoc,
+  mockQuery,
+  mockOrderBy,
+  mockLimit,
+  mockStartAfter,
+  mockGetImageUrl,
+} = vi.hoisted(() => ({
+  mockGetDocs: vi.fn(),
+  mockGetDoc: vi.fn(),
+  mockSetDoc: vi.fn(),
+  mockCollection: vi.fn(),
+  mockDoc: vi.fn(),
+  mockQuery: vi.fn(),
+  mockOrderBy: vi.fn(),
+  mockLimit: vi.fn(),
+  mockStartAfter: vi.fn(),
+  mockGetImageUrl: vi.fn((p) => (process.env.BASE_URL || "") + p),
+}));
 // Mock firebase/firestore 所有用到的方法
 vi.mock("firebase/firestore", () => ({
   collection: mockCollection,
@@ -27,17 +39,17 @@ vi.mock("firebase/firestore", () => ({
 }));
 
 // Mock getImageUrl，避免實際路徑處理
-vi.mock("../../utils/getImageUrl.js", () => mockGetImageUrl);
+vi.mock("../../utils/getImageUrl.jsx", () => ({ default: mockGetImageUrl }));
 
 // 匯入要測試的所有 service function
-const {
+import {
   processBlogData,
   getEnrollmentEvents,
   getNews,
   getBlogPost,
   updateEnrollmentEvent,
   updateNews,
-} = require("../blogService.js");
+} from "../blogService.jsx";
 
 // 每個測試前重置所有 mock 狀態
 beforeEach(() => {

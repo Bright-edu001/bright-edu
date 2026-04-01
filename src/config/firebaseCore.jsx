@@ -10,8 +10,8 @@ import {
 } from "firebase/firestore";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
-import logger from "../utils/logger.js";
-import { isLocalDevelopment } from "./envUtils.js";
+import logger from "../utils/logger.jsx";
+import { isLocalDevelopment } from "./envUtils.jsx";
 
 // Firebase 配置
 const firebaseConfig = {

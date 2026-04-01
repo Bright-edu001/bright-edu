@@ -27,25 +27,25 @@ const Finance = lazy(() => import("../pages/Uic/Mba/areas/Finance"));
 const Analytics = lazy(() => import("../pages/Uic/Mba/areas/Analytics"));
 const Marketing = lazy(() => import("../pages/Uic/Mba/areas/Marketing"));
 const HRManagement = lazy(() =>
-  import("../pages/Uic/Mba/areas/HR-Management.js")
+  import("../pages/Uic/Mba/areas/HR-Management.jsx")
 );
 const ChicagoCity = lazy(() =>
-  import("../pages/Uic/Uic_school/Chicago/Chicago.js")
+  import("../pages/Uic/Uic_school/Chicago/Chicago.jsx")
 );
 const Economy = lazy(() =>
-  import("../pages/Uic/Uic_school/Chicago/Economy.js")
+  import("../pages/Uic/Uic_school/Chicago/Economy.jsx")
 );
-const DualDegree = lazy(() => import("../pages/Uic/Mba/DualDegree.js"));
-const Application = lazy(() => import("../pages/Uic/Mba/Application.js"));
-const MbaPrograms = lazy(() => import("../pages/Uic/Mba/MbaPrograms.js"));
-const MSFinance = lazy(() => import("../pages/Uic/Ms/MSFinance.js"));
-const MsMarketing = lazy(() => import("../pages/Uic/Ms/MsMarketing.js"));
-const MsManagement = lazy(() => import("../pages/Uic/Ms/MsManagement.js"));
-const MsAnalttics = lazy(() => import("../pages/Uic/Ms/MsAnalytics.js"));
-const MsApplication = lazy(() => import("../pages/Uic/Ms/MsApplication.js"));
-const MsInformation = lazy(() => import("../pages/Uic/Ms/MsInformation.js"));
-const MsAccounting = lazy(() => import("../pages/Uic/Ms/MsAccounting.js"));
-const MsPrograms = lazy(() => import("../pages/Uic/Ms/MsPrograms.js"));
+const DualDegree = lazy(() => import("../pages/Uic/Mba/DualDegree.jsx"));
+const Application = lazy(() => import("../pages/Uic/Mba/Application.jsx"));
+const MbaPrograms = lazy(() => import("../pages/Uic/Mba/MbaPrograms.jsx"));
+const MSFinance = lazy(() => import("../pages/Uic/Ms/MSFinance.jsx"));
+const MsMarketing = lazy(() => import("../pages/Uic/Ms/MsMarketing.jsx"));
+const MsManagement = lazy(() => import("../pages/Uic/Ms/MsManagement.jsx"));
+const MsAnalttics = lazy(() => import("../pages/Uic/Ms/MsAnalytics.jsx"));
+const MsApplication = lazy(() => import("../pages/Uic/Ms/MsApplication.jsx"));
+const MsInformation = lazy(() => import("../pages/Uic/Ms/MsInformation.jsx"));
+const MsAccounting = lazy(() => import("../pages/Uic/Ms/MsAccounting.jsx"));
+const MsPrograms = lazy(() => import("../pages/Uic/Ms/MsPrograms.jsx"));
 
 // 中文路由配置
 const uicChineseRoutes = [
