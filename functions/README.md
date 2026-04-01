@@ -56,10 +56,10 @@ firebase deploy --only functions
 ## 開發與部署流程
 
 1. 在本資料夾修改 `index.js`。
-2. （可選）於本機先執行模擬：目前未加入 emulator 設定，如需可新增 `firebase emulators:start --only functions,firestore`。
+2. 於本機先執行 Firebase 模擬器：利用 Vite 切換環境變數 `VITE_USE_FIREBASE_EMULATOR=true`，搭配後端啟動 `firebase emulators:start`，即可讓前端發送請求至本機的 Cloud Functions (預設本機 port 5001) 與 Firestore。
 3. 部署：
 
-```
+```bash
 firebase deploy --only functions
 ```
 

@@ -199,9 +199,9 @@ const canManageAnalytics = checkPermission(PERMISSIONS.MANAGE_ANALYTICS);
 確保 `.env` 檔案包含：
 
 ```bash
-REACT_APP_API_KEY=your_firebase_api_key
-REACT_APP_AUTH_DOMAIN=your_project.firebaseapp.com
-REACT_APP_PROJECT_ID=your_project_id
+VITE_API_KEY=your_firebase_api_key
+VITE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_PROJECT_ID=your_project_id
 # ... 其他Firebase設定
 ```
 

@@ -77,13 +77,13 @@ createUserWithEmailAndPassword(
 確保 `.env` 文件包含正確的 Firebase 設定：
 
 ```bash
-REACT_APP_API_KEY=your_firebase_api_key
-REACT_APP_AUTH_DOMAIN=your_project.firebaseapp.com
-REACT_APP_PROJECT_ID=your_project_id
-REACT_APP_STORAGE_BUCKET=your_project_id.appspot.com
-REACT_APP_MESSAGING_SENDER_ID=your_messaging_sender_id
-REACT_APP_APP_ID=your_app_id
-REACT_APP_MEASUREMENT_ID=your_measurement_id
+VITE_API_KEY=your_firebase_api_key
+VITE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_PROJECT_ID=your_project_id
+VITE_STORAGE_BUCKET=your_project_id.appspot.com
+VITE_MESSAGING_SENDER_ID=your_messaging_sender_id
+VITE_APP_ID=your_app_id
+VITE_MEASUREMENT_ID=your_measurement_id
 ```
 
 ## 功能說明
@@ -107,7 +107,7 @@ REACT_APP_MEASUREMENT_ID=your_measurement_id
 
 ### 開發環境測試
 
-1. 啟動開發伺服器：`npm start`
+1. 啟動開發伺服器：`npm run start`
 2. 前往 `http://localhost:3000/admin`
 3. 使用 admin/0000 登入
 

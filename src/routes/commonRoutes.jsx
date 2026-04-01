@@ -1,0 +1,17 @@
+import React, { lazy } from "react";
+
+const Home = lazy(() => import("../pages/Home/Home"));
+const Contact = lazy(() => import("../pages/Home/Contact.jsx"));
+const Blog = lazy(() => import("../pages/Home/Blog.jsx"));
+const BlogDetail = lazy(() => import("../pages/Blog/BlogDetail"));
+const BlogSearch = lazy(() => import("../pages/Blog/BlogSearch"));
+
+const commonRoutes = [
+  { index: true, element: <Home /> },
+  { path: "聯絡我們", element: <Contact /> },
+  { path: "blog", element: <Blog /> },
+  { path: "blog/:id", element: <BlogDetail /> },
+  { path: "blog/search/:keyword", element: <BlogSearch /> },
+];
+
+export default commonRoutes;

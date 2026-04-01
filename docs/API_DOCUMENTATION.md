@@ -303,20 +303,20 @@ const response = await post({
 
 ```bash
 # Firebase 配置
-REACT_APP_API_KEY=your-api-key
-REACT_APP_AUTH_DOMAIN=your-project.firebaseapp.com
-REACT_APP_PROJECT_ID=your-project-id
-REACT_APP_STORAGE_BUCKET=your-project.appspot.com
-REACT_APP_MESSAGING_SENDER_ID=123456789
-REACT_APP_APP_ID=1:123456789:web:abcdef
+VITE_API_KEY=your-api-key
+VITE_AUTH_DOMAIN=your-project.firebaseapp.com
+VITE_PROJECT_ID=your-project-id
+VITE_STORAGE_BUCKET=your-project.appspot.com
+VITE_MESSAGING_SENDER_ID=123456789
+VITE_APP_ID=1:123456789:web:abcdef
 
 # Google Sheets 同步
-REACT_APP_FORM_ENDPOINT=https://script.google.com/...
-REACT_APP_SYNC_SERVICE_URL=https://your-sync-service.run.app
-REACT_APP_SYNC_API_KEY=your-sync-api-key
+VITE_FORM_ENDPOINT=https://script.google.com/...
+VITE_SYNC_SERVICE_URL=https://your-sync-service.run.app
+VITE_SYNC_API_KEY=your-sync-api-key
 
 # reCAPTCHA
-REACT_APP_RECAPTCHA_SITE_KEY=your-recaptcha-key
+VITE_RECAPTCHA_SITE_KEY=your-recaptcha-key
 ```
 
 ## 📱 前端 Context API
@@ -525,7 +525,7 @@ const appCheck = initializeAppCheck(app, {
 // Google Sheets 同步服務
 const headers = {
   "Content-Type": "application/json",
-  "x-api-key": process.env.REACT_APP_SYNC_API_KEY,
+  "x-api-key": import.meta.env.VITE_SYNC_API_KEY,
 };
 ```
 

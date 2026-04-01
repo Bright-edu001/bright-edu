@@ -1,0 +1,108 @@
+// 測試 performanceMonitor 工具
+import logger from '../logger';
+vi.mock('../logger', () => ({ default: { log: vi.fn(), info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() } }));
+describe("performanceMonitor", () => {
+  let performanceMonitor;
+  let originalNavigator;
+  let logSpy;
+  let originalPerformance;
+  let originalEnv;
+
+  // 每次測試前重設 module 並 mock navigator.sendBeacon
+  beforeEach(async () => {
+    originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = "development"; // 確保 logger 會執行
+
+    vi.resetModules();
+    ({ default: performanceMonitor } = await import("../performanceMonitor"));
+    originalNavigator = global.navigator;
+    originalPerformance = global.performance;
+    Object.defineProperty(global, "navigator", {
+      value: { sendBeacon: vi.fn() },
+      writable: true,
+      configurable: true,
+    });
+  });
+
+  // 測試後還原 navigator 與 logger
+  afterEach(() => {
+    Object.defineProperty(global, "navigator", {
+      value: originalNavigator,
+      writable: true,
+      configurable: true,
+    });
+    global.performance = originalPerformance;
+    process.env.NODE_ENV = originalEnv;
+    if (logSpy) logSpy.mockRestore();
+  });
+
+  // 測試：能正確記錄與送出 metrics
+  it("records metrics and flushes them", () => {
+    const listener = vi.fn();
+    performanceMonitor.onMetric(listener);
+    performanceMonitor.recordMetric("load", 123);
+    expect(performanceMonitor.metrics.load).toBe(123);
+    expect(listener).toHaveBeenCalledWith({ name: "load", value: 123 });
+    performanceMonitor.flushMetrics();
+    expect(global.navigator.sendBeacon).toHaveBeenCalledWith(
+      "/performance-metrics",
+      JSON.stringify([{ name: "load", value: 123 }])
+    );
+    performanceMonitor.flushMetrics();
+    expect(global.navigator.sendBeacon).toHaveBeenCalledTimes(1);
+  });
+
+  // 測試：debug 模式下會 log metrics
+  it("logs metrics in debug mode", () => {
+    // Mock logger 的 log 方法
+    logSpy = logger.log;
+
+    performanceMonitor.setDebug(true);
+    performanceMonitor.recordMetric("dbg", 5);
+
+    // 檢查 logger.log 是否被正確呼叫
+    expect(logSpy).toHaveBeenCalledWith("DBG:", 5);
+  });
+  // 測試：cleanup 會停止記憶體使用量輪詢
+  it("stops memory usage polling after cleanup", () => {
+    vi.useFakeTimers();
+    performanceMonitor.setDebug(true);
+
+    // 模擬記憶體使用資訊
+    global.performance = {
+      memory: {
+        usedJSHeapSize: 10,
+        totalJSHeapSize: 100,
+        jsHeapSizeLimit: 100,
+      },
+    };
+
+    performanceMonitor.monitorMemoryUsage();
+    // 第一次輪詢後更新 metrics
+    vi.advanceTimersByTime(10000);
+    expect(performanceMonitor.metrics.memory).toEqual({
+      used: 10,
+      total: 100,
+      limit: 100,
+    });
+
+    // 修改記憶體資訊並呼叫 cleanup
+    global.performance.memory = {
+      usedJSHeapSize: 20,
+      totalJSHeapSize: 200,
+      jsHeapSizeLimit: 200,
+    };
+
+    performanceMonitor.cleanup();
+    vi.advanceTimersByTime(10000);
+
+    // metrics 不應再更新
+    expect(performanceMonitor.metrics.memory).toEqual({
+      used: 10,
+      total: 100,
+      limit: 100,
+    });
+
+    vi.useRealTimers();
+  });
+});
