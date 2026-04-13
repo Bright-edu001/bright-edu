@@ -11,7 +11,7 @@ const Header = () => {
   const windowSize = useWindowSize();
   const drawerWidth = useMemo(
     () => calculateDrawerWidth(windowSize.width),
-    [windowSize.width]
+    [windowSize.width],
   );
   const [animationDuration, setAnimationDuration] = useState("0.2s");
   const navigate = useNavigate();
@@ -70,7 +70,7 @@ const Header = () => {
         setMobileMenu(false);
       }
     },
-    [navigate]
+    [navigate],
   ); // 依賴 navigate 函式
 
   // 創建關閉移動選單的 callback 函式
@@ -114,9 +114,9 @@ const Header = () => {
                   src={getImageUrl("/images/header/logo.webp")}
                   className="logo-img responsive-img"
                   alt="Bright Education Logo"
-                  width="150"
-                  height="60"
-                  loading="lazy"
+                  width="300"
+                  height="80"
+                  fetchPriority="high"
                 />
               </Link>
             </div>

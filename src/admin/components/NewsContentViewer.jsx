@@ -2,20 +2,129 @@
 import React from "react";
 import { Card, Tag, Typography, Space } from "antd";
 import {
-  StarOutlined, // 排名段落 icon
-  TrophyOutlined, // 活動 icon
-  ExclamationCircleOutlined, // 一般重點 icon
+  StarOutlined,
+  TrophyOutlined,
+  ExclamationCircleOutlined,
 } from "@ant-design/icons";
 
 const { Text } = Typography;
 
+// ── 簡易 BlockNote 純文字渲染（後台檢視用）─────────────────────────────
+const renderBNInline = (content) => {
+  if (!content) return null;
+  if (typeof content === "string") return content;
+  if (!Array.isArray(content)) return null;
+  return content.map((item, i) => {
+    if (item.type === "text") {
+      let node = item.text;
+      if (item.styles?.bold) node = <strong key={i}>{node}</strong>;
+      if (item.styles?.italic) node = <em key={i}>{node}</em>;
+      if (typeof node === "string") return <span key={i}>{node}</span>;
+      return node;
+    }
+    if (item.type === "link")
+      return (
+        <a key={i} href={item.href}>
+          {renderBNInline(item.content)}
+        </a>
+      );
+    return null;
+  });
+};
+
+const BlockNoteViewer = ({ blocks }) => {
+  if (!Array.isArray(blocks) || blocks.length === 0) {
+    return <Text type="secondary">（無內容）</Text>;
+  }
+  const elements = [];
+  let i = 0;
+  while (i < blocks.length) {
+    const block = blocks[i];
+    if (!block) {
+      i++;
+      continue;
+    }
+    if (block.type === "paragraph") {
+      elements.push(<p key={block.id || i}>{renderBNInline(block.content)}</p>);
+      i++;
+    } else if (block.type === "heading") {
+      const level = block.props?.level || 2;
+      const Tag = `h${level}`;
+      elements.push(
+        <Tag key={block.id || i} style={{ marginTop: 12 }}>
+          {renderBNInline(block.content)}
+        </Tag>,
+      );
+      i++;
+    } else if (
+      block.type === "bulletListItem" ||
+      block.type === "numberedListItem"
+    ) {
+      const isOrdered = block.type === "numberedListItem";
+      const items = [];
+      while (i < blocks.length && blocks[i]?.type === block.type) {
+        items.push(
+          <li key={blocks[i].id || i}>{renderBNInline(blocks[i].content)}</li>,
+        );
+        i++;
+      }
+      const ListTag = isOrdered ? "ol" : "ul";
+      elements.push(<ListTag key={`list-${i}`}>{items}</ListTag>);
+    } else if (block.type === "image") {
+      elements.push(
+        <div key={block.id || i} style={{ margin: "8px 0" }}>
+          <img
+            src={block.props?.url}
+            alt={block.props?.caption || ""}
+            style={{
+              maxWidth: "100%",
+              maxHeight: 200,
+              objectFit: "contain",
+              borderRadius: 4,
+            }}
+          />
+          {block.props?.caption && (
+            <div style={{ color: "#888", fontSize: 12 }}>
+              {block.props.caption}
+            </div>
+          )}
+        </div>,
+      );
+      i++;
+    } else {
+      if (block.content)
+        elements.push(
+          <p key={block.id || i}>{renderBNInline(block.content)}</p>,
+        );
+      i++;
+    }
+  }
+  return <div style={{ lineHeight: 1.8 }}>{elements}</div>;
+};
+// ─────────────────────────────────────────────────────────────────────────
+
 /**
  * NewsContentViewer
- * @param {Object} content - 結構化新聞內容物件，包含 sections 陣列
- * @returns 段落渲染結果
+ * 支援：新版 BlockNote 格式、舊版 sections 格式、純字串
  */
 const NewsContentViewer = ({ content }) => {
-  // 若內容不存在或 sections 欄位缺失，則以原始 JSON 或字串顯示
+  // 新版 BlockNote 格式
+  if (content && content._type === "blocknote") {
+    return (
+      <div
+        style={{
+          marginTop: 8,
+          padding: "12px 16px",
+          background: "#fafafa",
+          borderRadius: 4,
+        }}
+      >
+        <BlockNoteViewer blocks={content.blocks || []} />
+      </div>
+    );
+  }
+
+  // 舊版 sections 格式或無 sections 時
   if (!content || !content.sections) {
     return (
       <div
@@ -36,21 +145,19 @@ const NewsContentViewer = ({ content }) => {
     );
   }
 
-  // 根據 iconType 回傳對應 icon 元件
   const getIcon = (iconType) => {
     switch (iconType) {
       case "star":
-        return <StarOutlined style={{ color: "#faad14" }} />; // 排名
+        return <StarOutlined style={{ color: "#faad14" }} />;
       case "party":
-        return <TrophyOutlined style={{ color: "#52c41a" }} />; // 活動
+        return <TrophyOutlined style={{ color: "#52c41a" }} />;
       case "point":
-        return <ExclamationCircleOutlined style={{ color: "#1890ff" }} />; // 一般重點
+        return <ExclamationCircleOutlined style={{ color: "#1890ff" }} />;
       default:
         return null;
     }
   };
 
-  // 根據 iconType 回傳對應標籤顏色
   const getTagColor = (iconType) => {
     switch (iconType) {
       case "star":
@@ -64,7 +171,6 @@ const NewsContentViewer = ({ content }) => {
     }
   };
 
-  // 渲染所有段落，每個 section 可能有 icon、TOP 標籤、子項目
   return (
     <div style={{ marginTop: "8px" }}>
       {content.sections.map((section, sectionIndex) => (
@@ -73,12 +179,9 @@ const NewsContentViewer = ({ content }) => {
           style={{ marginBottom: 16 }}
           bodyStyle={{ padding: "16px" }}
         >
-          {/* 段落主標題區塊，包含 icon 與文字或 TOP 標籤 */}
           <div style={{ marginBottom: 12 }}>
             <Space align="center">
-              {/* 段落 icon */}
               {section.icon && getIcon(section.icon)}
-              {/* 若為排名段落則顯示 TOP 標籤，否則顯示一般文字 */}
               {section.text.startsWith("TOP ") ? (
                 <Tag
                   color={getTagColor(section.icon)}
@@ -94,15 +197,12 @@ const NewsContentViewer = ({ content }) => {
             </Space>
           </div>
 
-          {/* 段落子項目區塊，若有 items 則逐一渲染 */}
           {section.items && section.items.length > 0 && (
             <div style={{ marginLeft: 16 }}>
               {section.items.map((item, itemIndex) => (
                 <div key={itemIndex} style={{ marginBottom: 8 }}>
                   <Space align="center">
-                    {/* 子項目 icon */}
                     {item.icon && getIcon(item.icon)}
-                    {/* 子項目文字 */}
                     <Text>{item.text}</Text>
                   </Space>
                 </div>

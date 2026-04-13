@@ -8,8 +8,8 @@ import {
   enableNetwork,
   connectFirestoreEmulator,
 } from "firebase/firestore";
-import { getAuth, connectAuthEmulator } from "firebase/auth";
-import { getStorage, connectStorageEmulator } from "firebase/storage";
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 import logger from "../utils/logger.jsx";
 import { isLocalDevelopment } from "./envUtils.jsx";
 
@@ -29,11 +29,12 @@ export const app = initializeApp(firebaseConfig);
 
 // 基本服務（立即初始化）
 export const db = getFirestore(app);
-export const auth = process.env.NODE_ENV==='test' ? {} : getAuth(app);
+export const auth = process.env.NODE_ENV === "test" ? {} : getAuth(app);
 export const storage = getStorage(app);
 
 // 判斷是否為本地環境且明確啟用模擬器，若是則連接到 Firebase Emulators
-// 開發者請注意：如果沒有透過 firebase emulators:start 啟動本機服務，請將這段功能關閉或使用環境變數控制
+// 目前僅連接 Firestore emulator（port 8080），Auth 和 Storage 仍走正式環境
+// 待 Auth / Storage emulator 啟動後可再開啟對應的 connect 行
 if (
   (window.location.hostname === "localhost" ||
     window.location.hostname === "127.0.0.1") &&
@@ -41,14 +42,14 @@ if (
 ) {
   try {
     connectFirestoreEmulator(db, "127.0.0.1", 8080);
-    connectAuthEmulator(auth, "http://127.0.0.1:9099");
-    connectStorageEmulator(storage, "127.0.0.1", 9199);
-    logger.info(
-      "🔌 已成功連接到 Firebase 本地模擬器 (Firestore, Auth, Storage)",
-    );
+    logger.info("🔌 已連接到 Firestore 本地模擬器 (port 8080)");
   } catch (err) {
-    logger.warn("⚠️ Firebase 模擬器連接失敗 (可能已初始化過):", err);
+    logger.warn("⚠️ Firestore 模擬器連接失敗 (可能已初始化過):", err);
   }
+  // Auth emulator（需先執行 firebase emulators:start 含 auth）
+  // try { connectAuthEmulator(auth, "http://127.0.0.1:9099"); } catch {}
+  // Storage emulator（需先執行 firebase emulators:start 含 storage）
+  // try { connectStorageEmulator(storage, "127.0.0.1", 9199); } catch {}
 }
 
 /**

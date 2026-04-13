@@ -40,7 +40,8 @@ import {
   where,
   limit,
 } from "firebase/firestore";
-import { db } from "../../config/firebaseCore";
+import { onAuthStateChanged } from "firebase/auth";
+import { db, auth } from "../../config/firebaseCore";
 import firestoreToSheetsSync from "../../services/firestoreToSheetsSync";
 import dayjs from "dayjs";
 
@@ -64,15 +65,16 @@ function ContactFormsPage() {
   const [isAutoSyncModalVisible, setIsAutoSyncModalVisible] = useState(false);
   const [autoSyncForm] = Form.useForm();
 
-  // 即時監聽 Firestore 資料
+  // 即時監聽 Firestore 資料（等待 Auth 狀態還原後再建立監聽器）
   useEffect(() => {
     let unsubscribe;
+    let unsubscribeAuth;
 
     const setupListener = () => {
       let q = query(
         collection(db, "contact_forms"),
         orderBy("createdAt", "desc"),
-        limit(100) // 限制最近 100 筆
+        limit(100), // 限制最近 100 筆
       );
 
       // 根據篩選條件調整查詢
@@ -81,7 +83,7 @@ function ContactFormsPage() {
           collection(db, "contact_forms"),
           where("status", "==", filters.status),
           orderBy("createdAt", "desc"),
-          limit(100)
+          limit(100),
         );
       }
 
@@ -101,16 +103,22 @@ function ContactFormsPage() {
           console.error("監聽 Firestore 資料時發生錯誤:", error);
           message.error("載入資料失敗");
           setLoading(false);
-        }
+        },
       );
     };
 
-    setupListener();
+    // 等待 Auth 狀態確認後再啟動 Firestore listener
+    unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setupListener();
+      } else {
+        setLoading(false);
+      }
+    });
 
     return () => {
-      if (unsubscribe) {
-        unsubscribe();
-      }
+      if (unsubscribeAuth) unsubscribeAuth();
+      if (unsubscribe) unsubscribe();
     };
   }, [filters.status]);
 
@@ -214,7 +222,7 @@ function ContactFormsPage() {
     setBatchDeleteLoading(true);
     try {
       const deletePromises = selectedRowKeys.map((id) =>
-        deleteDoc(doc(db, "contact_forms", id))
+        deleteDoc(doc(db, "contact_forms", id)),
       );
 
       await Promise.all(deletePromises);
@@ -246,7 +254,7 @@ function ContactFormsPage() {
       ...csvData.map((row) =>
         Object.values(row)
           .map((value) => `"${value}"`)
-          .join(",")
+          .join(","),
       ),
     ].join("\n");
 
@@ -273,7 +281,7 @@ function ContactFormsPage() {
 
       // 批次刪除所有聯絡表單
       const deletePromises = forms.map((form) =>
-        deleteDoc(doc(db, "contact_forms", form.id))
+        deleteDoc(doc(db, "contact_forms", form.id)),
       );
 
       await Promise.all(deletePromises);
@@ -330,7 +338,7 @@ function ContactFormsPage() {
             healthCheck.error.includes("Failed to fetch"))
         ) {
           console.warn(
-            "🚧 開發環境檢測到網路限制，將繼續執行同步（可能會失敗）"
+            "🚧 開發環境檢測到網路限制，將繼續執行同步（可能會失敗）",
           );
           message.warning({
             content: "開發環境：跳過網路連接檢查",
@@ -366,7 +374,7 @@ function ContactFormsPage() {
         });
       } else if (result.results.success > 0) {
         console.log(
-          `📤 成功同步 ${result.results.success} 筆資料到 Google Sheets`
+          `📤 成功同步 ${result.results.success} 筆資料到 Google Sheets`,
         );
 
         if (result.results.failed > 0) {
@@ -417,11 +425,11 @@ function ContactFormsPage() {
     try {
       if (values.enabled) {
         const success = firestoreToSheetsSync.startAutoSync(
-          values.intervalHours
+          values.intervalHours,
         );
         if (success) {
           message.success(
-            `自動同步已啟動，每 ${values.intervalHours} 小時執行一次`
+            `自動同步已啟動，每 ${values.intervalHours} 小時執行一次`,
           );
         } else {
           message.error("啟動自動同步失敗");

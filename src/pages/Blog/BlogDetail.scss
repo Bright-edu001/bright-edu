@@ -52,7 +52,38 @@
     padding: 0 1.5rem;
     color: $color-black;
 
+    // BlockNote 格式的 ul/ol：縮排讓黑點對齊上方標題文字
+    > ul,
+    > ol {
+      padding-left: 2rem;
+      margin: 0.25rem 0 0.75rem;
+
+      li {
+        margin: 0.5rem 0;
+        line-height: 1.7;
+      }
+    }
+
+    // heading 後面緊接的 ul/ol 維持同樣縮排（瀏覽器預設會重置）
+    h2 + ul,
+    h2 + ol,
+    h3 + ul,
+    h3 + ol {
+      margin-top: 0.5rem;
+    }
+
     .detail-item {
+      // list[] 子項目縮排，對齊上方 icon + 文字
+      ul {
+        padding-left: 2rem;
+        margin: 0.25rem 0 0.75rem;
+
+        li {
+          margin: 0.5rem 0;
+          line-height: 1.7;
+        }
+      }
+
       // 預設無縮排
       &.nested {
         margin-left: 20px; // 套用至巢狀項目
@@ -105,10 +136,12 @@
 }
 
 .blog-detail-image {
+  display: block;
   width: 1000px;
+  max-width: 100%;
+  height: auto; /* 讓瀏覽器依 HTML width/height 屬性正確計算高度，防止 CLS */
   padding: 0 1.5rem;
   object-fit: cover;
-  max-width: 100%;
   margin-bottom: 1rem;
 }
 
@@ -122,7 +155,10 @@
     border: 1px solid #ccc;
     background: #fff;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s, border 0.2s;
+    transition:
+      background 0.2s,
+      color 0.2s,
+      border 0.2s;
     color: $color-black;
     &:hover {
       background: $color-nav;
@@ -143,7 +179,10 @@
   border: 1px solid #ccc;
   background: #fff;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, border 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border 0.2s;
   color: $color-black;
   &:hover {
     background: $color-nav;

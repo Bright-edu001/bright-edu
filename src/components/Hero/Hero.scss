@@ -86,6 +86,12 @@
   transition: opacity 1s ease-in-out;
 }
 
+/* 初次載入：直接顯示，不播放淡入動畫，防止頁面重新整理時的閃爍 */
+.hero-img.hero-img--initial {
+  opacity: 1;
+  transition: none;
+}
+
 .hero-img.fade-in {
   opacity: 1;
 }

@@ -11,15 +11,18 @@ import "./ArticleCard.scss";
  * @param {'vertical'|'horizontal'} [props.layout='vertical'] - 卡片排版方向，預設為垂直(vertical)
  */
 function ArticleCard({ item, imageType, layout = "vertical" }) {
+  // link 優先使用 item.link，若無則 fallback 至 /blog/<id> (docId)
+  const resolvedLink = item.link || (item.id ? `/blog/${item.id}` : null);
+
   // 提取內外部連結判斷
-  const isInternal = item.link?.startsWith("/");
+  const isInternal = resolvedLink?.startsWith("/");
   const Wrapper = isInternal ? Link : "a";
 
   // 構建 Wrapper 屬性：內部路由使用 to，外部連結使用 href 並加上安全屬性
-  const wrapperProps = item.link
+  const wrapperProps = resolvedLink
     ? isInternal
-      ? { to: item.link }
-      : { href: item.link, target: "_blank", rel: "noopener noreferrer" }
+      ? { to: resolvedLink }
+      : { href: resolvedLink, target: "_blank", rel: "noopener noreferrer" }
     : {};
 
   return (
@@ -35,6 +38,8 @@ function ArticleCard({ item, imageType, layout = "vertical" }) {
             placeholderSrc={item.thumbnail}
             alt={item.title}
             className={`article-card__image ${layout === "horizontal" ? "article-card__image--horizontal" : ""}`}
+            width={item.imageWidth}
+            height={item.imageHeight}
           />
         ) : (
           <div

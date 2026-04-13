@@ -45,7 +45,13 @@ const heroImages = [
 function Hero() {
   const [heroIndex, setHeroIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(null);
-  // const [currentSrc, setCurrentSrc] = useState("");
+  // 初次掛載後才啟用 fade-in transition，避免頁面重新整理時出現淡入閃爍
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -97,13 +103,13 @@ function Hero() {
             }
           />
           <img
-            className="hero-img fade-in"
+            className={`hero-img ${isMounted ? "fade-in" : "hero-img--initial"}`}
             src={heroImages[heroIndex].src}
             alt={heroImages[heroIndex].alt}
             width="1280"
             height="600"
             loading={isFirst ? "eager" : "lazy"}
-            fetchpriority={isFirst ? "high" : "auto"}
+            fetchPriority={isFirst ? "high" : "auto"}
           />
         </picture>
       </div>

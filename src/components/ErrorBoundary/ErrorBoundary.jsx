@@ -16,10 +16,11 @@ class ErrorBoundary extends React.Component {
       errorInfo: errorInfo,
     });
 
-    // 在生產環境中，將錯誤傳送到 Sentry
+    // 在生產環境中，將錯誤傳送到 Sentry（使用 dynamic import 避免 ESM 環境的 require 錯誤）
     if (process.env.NODE_ENV === "production") {
-      const Sentry = require("@sentry/react");
-      Sentry.captureException(error);
+      import("@sentry/react")
+        .then((Sentry) => Sentry.captureException(error))
+        .catch(() => {});
     }
   }
 

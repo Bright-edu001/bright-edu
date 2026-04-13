@@ -16,6 +16,106 @@ const hashText = (text = "") => {
   return hash.toString();
 };
 
+// ─── BlockNote 格式渲染器 ───────────────────────────────────────────────
+const renderInline = (content) => {
+  if (!Array.isArray(content)) {
+    // content 也可能是字串（BlockNote 簡短格式）
+    return typeof content === "string" ? content : null;
+  }
+  return content.map((item, i) => {
+    if (item.type === "text") {
+      let node = item.text;
+      if (item.styles?.bold) node = <strong key={i}>{node}</strong>;
+      if (item.styles?.italic) node = <em key={i}>{node}</em>;
+      if (item.styles?.underline) node = <u key={i}>{node}</u>;
+      if (item.styles?.strikethrough) node = <s key={i}>{node}</s>;
+      if (item.styles?.code) node = <code key={i}>{node}</code>;
+      if (typeof node === "string") return <span key={i}>{node}</span>;
+      return node;
+    }
+    if (item.type === "link") {
+      return (
+        <a key={i} href={item.href} target="_blank" rel="noopener noreferrer">
+          {renderInline(item.content)}
+        </a>
+      );
+    }
+    return null;
+  });
+};
+
+const renderBlockNoteContent = (blocks) => {
+  if (!Array.isArray(blocks)) return null;
+  const elements = [];
+  let i = 0;
+  while (i < blocks.length) {
+    const block = blocks[i];
+    if (!block) {
+      i++;
+      continue;
+    }
+
+    if (block.type === "paragraph") {
+      elements.push(
+        <p key={block.id || i}>
+          {renderInline(block.content)}
+          {block.children?.length > 0 && renderBlockNoteContent(block.children)}
+        </p>,
+      );
+      i++;
+    } else if (block.type === "heading") {
+      const level = block.props?.level || 2;
+      const Tag = `h${level}`;
+      elements.push(
+        <Tag key={block.id || i}>{renderInline(block.content)}</Tag>,
+      );
+      i++;
+    } else if (
+      block.type === "bulletListItem" ||
+      block.type === "numberedListItem"
+    ) {
+      const isOrdered = block.type === "numberedListItem";
+      const items = [];
+      while (i < blocks.length && blocks[i]?.type === block.type) {
+        items.push(
+          <li key={blocks[i].id || i}>
+            {renderInline(blocks[i].content)}
+            {blocks[i].children?.length > 0 &&
+              renderBlockNoteContent(blocks[i].children)}
+          </li>,
+        );
+        i++;
+      }
+      const ListTag = isOrdered ? "ol" : "ul";
+      elements.push(<ListTag key={`list-${i}`}>{items}</ListTag>);
+    } else if (block.type === "image") {
+      elements.push(
+        <figure key={block.id || i} style={{ margin: "16px 0" }}>
+          <img
+            src={block.props?.url}
+            alt={block.props?.caption || ""}
+            style={{ maxWidth: "100%", borderRadius: 4 }}
+          />
+          {block.props?.caption && (
+            <figcaption style={{ color: "#888", fontSize: 13, marginTop: 4 }}>
+              {block.props.caption}
+            </figcaption>
+          )}
+        </figure>,
+      );
+      i++;
+    } else {
+      // 不支援的型別，嘗試渲染 content
+      if (block.content) {
+        elements.push(<p key={block.id || i}>{renderInline(block.content)}</p>);
+      }
+      i++;
+    }
+  }
+  return elements;
+};
+// ────────────────────────────────────────────────────────────────────────
+
 // 遞迴渲染內容區塊的函式
 const renderSections = (sections, isNested = false) => {
   if (!Array.isArray(sections)) return null;
@@ -93,8 +193,9 @@ function BlogDetail() {
             className="blog-detail-image"
             src={blog.image}
             alt={blog.title}
-            width="1000"
-            height="571"
+            width={blog.imageWidth ?? 1000}
+            height={blog.imageHeight ?? 571}
+            fetchPriority="high"
           />
           <h1 className="blog-detail-title emoji-support">{blog.title}</h1>
           {/* 分類標籤：改用Link以提供href */}
@@ -112,34 +213,36 @@ function BlogDetail() {
                   .split("\n")
                   .filter((line) => line.trim() !== "")
                   .map((line, idx) => <p key={idx}>{line}</p>)
-              : blog.type === "enrollment"
-                ? blog.content.map((semesterInfo, index) => (
-                    <div key={index} className="semester-section">
-                      <h2 className="emoji-support">
-                        {semesterInfo.flagImage && (
-                          <img
-                            src={semesterInfo.flagImage}
-                            alt="flag"
-                            className="flag-icon"
-                            loading="lazy"
-                          />
+              : blog.content?._type === "blocknote"
+                ? renderBlockNoteContent(blog.content.blocks || [])
+                : blog.type === "enrollment"
+                  ? blog.content.map((semesterInfo, index) => (
+                      <div key={index} className="semester-section">
+                        <h2 className="emoji-support">
+                          {semesterInfo.flagImage && (
+                            <img
+                              src={semesterInfo.flagImage}
+                              alt="flag"
+                              className="flag-icon"
+                              loading="lazy"
+                            />
+                          )}
+                          {semesterInfo.title}
+                        </h2>
+                        {renderSections(
+                          semesterInfo.sections ||
+                            semesterInfo.details ||
+                            semesterInfo.items,
                         )}
-                        {semesterInfo.title}
-                      </h2>
-                      {renderSections(
-                        semesterInfo.sections ||
-                          semesterInfo.details ||
-                          semesterInfo.items,
-                      )}
-                    </div>
-                  ))
-                : blog.type === "article" && typeof blog.content === "object"
-                  ? renderSections(
-                      blog.content.sections ||
-                        blog.content.details ||
-                        blog.content.items,
-                    )
-                  : null}
+                      </div>
+                    ))
+                  : blog.type === "article" && typeof blog.content === "object"
+                    ? renderSections(
+                        blog.content.sections ||
+                          blog.content.details ||
+                          blog.content.items,
+                      )
+                    : null}
           </div>
           <Link to="/blog" className="blog-back-btn blog-detail-back">
             ← 返回部落格
