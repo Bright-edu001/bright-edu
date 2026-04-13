@@ -48,7 +48,7 @@ export async function getAllArticles() {
       docId: d.id,
       collection: "enrollmentEvents",
       order: typeof d.data()?.order === "number" ? d.data().order : idx,
-    })
+    }),
   );
   // 處理新聞資料，添加必要欄位和順序
   const news = newsSnap.docs.map((d, idx) =>
@@ -62,7 +62,7 @@ export async function getAllArticles() {
         typeof d.data()?.order === "number"
           ? d.data().order
           : idx + enrollmentSnap.size,
-    })
+    }),
   );
   // 合併所有文章，確保順序欄位存在，並按順序排序
   const all = [...enrollmentEvents, ...news]
@@ -99,10 +99,13 @@ export async function createArticle(type, data) {
   if (typeof payload.order !== "number") {
     payload.order = Date.now();
   }
-  // 添加新文件到集合
+  // 添加新文件到集合（先取得 docId，再補入 link）
   const docRef = await addDoc(collection(db, col), payload);
+  // 補上 link 欄位（前台 ArticleCard 與 BlogDetail 路由皆依賴此欄位）
+  const link = `/blog/${docRef.id}`;
+  await updateDoc(doc(db, col, docRef.id), { link });
   // 返回包含文件 ID 和集合名稱的資料
-  return { ...payload, docId: docRef.id, collection: col };
+  return { ...payload, link, docId: docRef.id, collection: col };
 }
 
 // 更新指定文章

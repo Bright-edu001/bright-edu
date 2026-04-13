@@ -13,6 +13,7 @@ exports[`BlogDetail > renders stably across rerenders 1`] = `
         <img
           alt="Sample"
           class="blog-detail-image"
+          fetchpriority="high"
           height="571"
           src="img.jpg"
           width="1000"

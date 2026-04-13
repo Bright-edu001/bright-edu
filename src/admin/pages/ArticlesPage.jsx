@@ -9,6 +9,7 @@ import {
   message,
   Tag,
   Popconfirm,
+  Card,
 } from "antd";
 import {
   PlusOutlined,
@@ -32,7 +33,8 @@ import {
 } from "firebase/storage";
 import { app } from "../../config/firebaseCore";
 import logger from "../../utils/logger";
-import ArticleEditor from "../components/ArticleEditor";
+import NewsEditor from "../components/NewsEditor";
+import EnrollmentEditor from "../components/EnrollmentEditor";
 import StructuredContentViewer from "../components/StructuredContentViewer";
 import NewsContentViewer from "../components/NewsContentViewer";
 
@@ -48,6 +50,8 @@ const ArticlesPage = () => {
   const [articles, setArticles] = useState([]);
   // 新增/編輯模態框顯示狀態
   const [isModalVisible, setIsModalVisible] = useState(false);
+  // 選擇文章類型模態框（新增文章時）
+  const [isTypeModalVisible, setIsTypeModalVisible] = useState(false);
   // 查看模態框顯示狀態
   const [isViewModalVisible, setIsViewModalVisible] = useState(false);
   // 當前編輯的文章
@@ -117,7 +121,11 @@ const ArticlesPage = () => {
       dataIndex: "id",
       key: "id",
       width: 60,
-      sorter: (a, b) => a.id - b.id,
+      sorter: (a, b) =>
+        (a.id ?? a.docId ?? "")
+          .toString()
+          .localeCompare((b.id ?? b.docId ?? "").toString()),
+      render: (_, record) => record.id ?? record.docId ?? "—",
     },
     {
       title: "標題",
@@ -155,13 +163,13 @@ const ArticlesPage = () => {
       key: "category",
       width: 100,
       filters: [
-        { text: "招生活動", value: "enrollment" },
+        { text: "招生資訊", value: "enrollment" },
         { text: "新聞", value: "news" },
       ],
       onFilter: (value, record) => record.category === value,
       render: (category) => (
         <Tag color={category === "news" ? "purple" : "orange"}>
-          {category === "news" ? "新聞" : "招生活動"}
+          {category === "news" ? "新聞" : "招生資訊"}
         </Tag>
       ),
     },
@@ -231,9 +239,15 @@ const ArticlesPage = () => {
     },
   ];
 
-  // 處理新增文章按鈕點擊
+  // 處理新增文章按鈕點擊：先選類型
   const handleAdd = () => {
-    setEditingArticle(null);
+    setIsTypeModalVisible(true);
+  };
+
+  // 選擇文章類型後開啟對應編輯器
+  const handleSelectNewType = (type) => {
+    setIsTypeModalVisible(false);
+    setEditingArticle({ category: type });
     setIsModalVisible(true);
   };
 
@@ -284,20 +298,19 @@ const ArticlesPage = () => {
   };
 
   const handleSubmit = async (values) => {
-    const rawValues = {
-      ...values,
-      imageWidth: parseInt(values.imageWidth) || 450,
-      imageHeight: parseInt(values.imageHeight) || 300,
-    };
+    const rawValues = { ...values };
     const processedValues = cleanUndefined(rawValues);
 
-    if (editingArticle) {
-      const type =
-        processedValues.type === "article" ? "article" : "enrollment";
+    if (editingArticle && (editingArticle.docId || editingArticle.id)) {
+      // 修正：依原文章 category 決定 collection（type 參數須為 'enrollment' 或 'article'）
+      const articleType =
+        (editingArticle.category || processedValues.category) === "enrollment"
+          ? "enrollment"
+          : "article";
       await updateArticle(
+        articleType,
         editingArticle.docId || editingArticle.id,
         processedValues,
-        editingArticle.collection || type,
       );
       setArticles((prev) =>
         prev.map((a) =>
@@ -307,9 +320,10 @@ const ArticlesPage = () => {
         ),
       );
     } else {
-      const type =
-        processedValues.type === "article" ? "article" : "enrollment";
-      const newArticle = await createArticle(type, processedValues);
+      // 新增文章
+      const articleType =
+        processedValues.category === "enrollment" ? "enrollment" : "article";
+      const newArticle = await createArticle(articleType, processedValues);
       setArticles((prev) => [...prev, newArticle]);
     }
     setIsModalVisible(false);
@@ -458,20 +472,143 @@ const ArticlesPage = () => {
         scroll={{ x: 1100, y: 600 }}
       />
 
+      {/* 選擇文章類型 Modal（新增時） */}
+      <Modal
+        title="選擇要新增的文章類型"
+        open={isTypeModalVisible}
+        onCancel={() => setIsTypeModalVisible(false)}
+        footer={null}
+        width={520}
+        centered
+      >
+        <div style={{ padding: "16px 0 8px" }}>
+          <p style={{ color: "#666", marginBottom: 20, textAlign: "center" }}>
+            請依內容性質選擇文章類型，兩種類型使用不同的編輯介面。
+          </p>
+          <Space
+            size={20}
+            style={{
+              justifyContent: "center",
+              width: "100%",
+              display: "flex",
+              alignItems: "flex-start",
+            }}
+          >
+            <Card
+              hoverable
+              onClick={() => handleSelectNewType("news")}
+              style={{
+                width: 210,
+                cursor: "pointer",
+                borderColor: "#1890ff",
+                borderWidth: 2,
+              }}
+              styles={{ body: { padding: "20px 16px" } }}
+            >
+              <div style={{ textAlign: "center", marginBottom: 10 }}>
+                <span style={{ fontSize: 36 }}>📰</span>
+              </div>
+              <div
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 16,
+                  textAlign: "center",
+                  marginBottom: 8,
+                  color: "#1890ff",
+                }}
+              >
+                最新消息
+              </div>
+              <ul
+                style={{
+                  color: "#666",
+                  fontSize: 13,
+                  paddingLeft: 18,
+                  margin: 0,
+                  lineHeight: 2,
+                }}
+              >
+                <li>使用自由排版的富文字編輯器</li>
+                <li>適合：公告、節慶賀文、動態消息</li>
+                <li>可插入標題、條列、圖片等任意區塊</li>
+              </ul>
+            </Card>
+            <Card
+              hoverable
+              onClick={() => handleSelectNewType("enrollment")}
+              style={{
+                width: 210,
+                cursor: "pointer",
+                borderColor: "#52c41a",
+                borderWidth: 2,
+              }}
+              styles={{ body: { padding: "20px 16px" } }}
+            >
+              <div style={{ textAlign: "center", marginBottom: 10 }}>
+                <span style={{ fontSize: 36 }}>🎓</span>
+              </div>
+              <div
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 16,
+                  textAlign: "center",
+                  marginBottom: 8,
+                  color: "#52c41a",
+                }}
+              >
+                招生資訊
+              </div>
+              <ul
+                style={{
+                  color: "#666",
+                  fontSize: 13,
+                  paddingLeft: 18,
+                  margin: 0,
+                  lineHeight: 2,
+                }}
+              >
+                <li>使用結構化表格式編輯器</li>
+                <li>適合：申請截止日期、學費、開課資訊</li>
+                <li>依學期/招生批次分區塊填寫</li>
+              </ul>
+            </Card>
+          </Space>
+        </div>
+      </Modal>
+
       {/* 新增/編輯文章模態框 */}
       <Modal
-        title={editingArticle ? "編輯文章" : "新增文章"}
+        title={
+          editingArticle?.category === "enrollment"
+            ? editingArticle?.docId
+              ? "編輯招生資訊"
+              : "新增招生資訊"
+            : editingArticle?.docId
+              ? "編輯最新消息"
+              : "新增最新消息"
+        }
         open={isModalVisible}
         footer={null}
         onCancel={handleCancel}
-        width={1000}
+        width={1100}
         destroyOnHidden
+        styles={{
+          body: { maxHeight: "80vh", overflowY: "auto", padding: "16px 24px" },
+        }}
       >
-        <ArticleEditor
-          initialValues={editingArticle}
-          onSave={handleSubmit}
-          onCancel={handleCancel}
-        />
+        {editingArticle?.category === "enrollment" ? (
+          <EnrollmentEditor
+            initialValues={editingArticle?.docId ? editingArticle : null}
+            onSave={handleSubmit}
+            onCancel={handleCancel}
+          />
+        ) : (
+          <NewsEditor
+            initialValues={editingArticle?.docId ? editingArticle : null}
+            onSave={handleSubmit}
+            onCancel={handleCancel}
+          />
+        )}
       </Modal>
 
       {/* 查看文章模態框 */}
@@ -507,7 +644,7 @@ const ArticlesPage = () => {
               <Tag
                 color={viewingArticle.category === "news" ? "purple" : "orange"}
               >
-                {viewingArticle.category === "news" ? "新聞" : "招生活動"}
+                {viewingArticle.category === "news" ? "新聞" : "招生資訊"}
               </Tag>
             </Space>
             <div style={{ margin: "16px 0" }}>

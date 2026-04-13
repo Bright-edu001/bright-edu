@@ -17,10 +17,11 @@ Bright Edu 是一個現代化的線上教育平台，提供高品質的課程內
 
 ## 🛠 技術架構
 
-- **前端核心**: React 18, React Router 6
+- **前端核心**: React 19, React Router 6
 - **狀態與快取**: `@tanstack/react-query` (React Query)
 - **建置工具**: Vite 5 (極速開發啟動與模組熱更新)
 - **UI 套件**: Ant Design 5, styled-components, SCSS
+- **富文字編輯器**: BlockNote 0.47 (後台最新消息編輯器)
 - **後端服務**: Firebase (Firestore, Authentication, Storage, Functions, Hosting)
 - **效能與監控**: Sentry (錯誤追蹤), Firebase App Check (reCAPTCHA v3)
 - **測試框架**: Vitest (單元測試) & Playwright (E2E 端到端測試)
@@ -96,7 +97,7 @@ gsutil -m cp -r gs://bright-edu-data.firebasestorage.app/firestore_export ./fire
 firebase emulators:start --import=./firebase_data/firestore_export
 ```
 
-3. **在 `.env.local` 加上開關以使用本機資料庫**:
+3. **在 `.env` 加上開關以使用本機資料庫**:
 
 ```env
 VITE_USE_FIREBASE_EMULATOR=true
@@ -121,12 +122,12 @@ VITE_USE_FIREBASE_EMULATOR=true
 
 ## 🌍 環境變數列表 (Vite 規範)
 
-| 變數 (須以 `VITE_` 開頭)     | 說明                                                     |
-| ---------------------------- | -------------------------------------------------------- |
-| `VITE_SENTRY_DSN`            | Sentry 用來接收錯誤回報的唯一金鑰                        |
-| `VITE_RECAPTCHA_SITE_KEY`    | reCAPTCHA v3 的 Site Key (用於 App Check)                |
-| `VITE_API_KEY`               | Firebase API 與設定                                      |
-| `VITE_USE_FIREBASE_EMULATOR` | `true` 時，Firestore 將會預設連線到本機 `localhost:8080` |
+| 變數 (須以 `VITE_` 開頭)     | 說明                                                                                |
+| ---------------------------- | ----------------------------------------------------------------------------------- |
+| `VITE_SENTRY_DSN`            | Sentry 用來接收錯誤回報的唯一金鑰                                                   |
+| `VITE_RECAPTCHA_SITE_KEY`    | reCAPTCHA v3 的 Site Key (用於 App Check)                                           |
+| `VITE_API_KEY`               | Firebase API 與設定                                                                 |
+| `VITE_USE_FIREBASE_EMULATOR` | `true` 時，Firestore 將會預設連線到本機 `127.0.0.1:8080`；Auth/Storage 仍用正式環境 |
 
 ---
 

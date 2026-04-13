@@ -40,6 +40,8 @@ const ProgressiveImage = ({
   placeholderSrc,
   alt,
   className,
+  width, // 可選：圖片原始寬度，用於預留 aspect-ratio 空間防止 CLS
+  height, // 可選：圖片原始高度
   ...props
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -85,7 +87,13 @@ const ProgressiveImage = ({
     <ImageWrapper
       ref={imgRef}
       className={className}
-      style={{ objectFit: "cover", ...props.style }}
+      style={{
+        // 設定 aspect-ratio 讓容器在圖片載入前預留正確高度（防止 CLS）
+        // 若 className 的 CSS 已設定固定高度（如 200px），aspect-ratio 會被覆蓋而不生效
+        ...(width && height ? { aspectRatio: `${width} / ${height}` } : {}),
+        objectFit: "cover",
+        ...props.style,
+      }}
     >
       {/* 1. 渲染縮圖 (Placeholder) - 帶有模糊效果 */}
       {placeholderSrc && !hasError && (
