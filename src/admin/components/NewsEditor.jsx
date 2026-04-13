@@ -237,11 +237,10 @@ const NewsEditor = ({ initialValues, onSave, onCancel }) => {
               name="category"
               label="所屬分類"
               initialValue="news"
-              tooltip="決定此文章顯示在哪個分類頁面"
+              tooltip="最新消息類型文章固定歸屬 news 分類，影響前台篩選顯示"
             >
-              <Select>
+              <Select disabled>
                 <Select.Option value="news">📰 最新消息</Select.Option>
-                <Select.Option value="enrollment">🎓 招生資訊</Select.Option>
               </Select>
             </Form.Item>
           </Col>

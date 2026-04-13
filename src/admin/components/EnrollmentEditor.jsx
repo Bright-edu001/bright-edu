@@ -325,11 +325,10 @@ const EnrollmentEditor = ({ initialValues, onSave, onCancel }) => {
               name="category"
               label="所屬分類"
               initialValue="enrollment"
-              tooltip="決定此文章顯示在哪個分類頁面"
+              tooltip="招生資訊類型文章固定歸屬 enrollment 分類，影響前台篩選顯示"
             >
-              <Select>
+              <Select disabled>
                 <Select.Option value="enrollment">🎓 招生資訊</Select.Option>
-                <Select.Option value="news">📰 最新消息</Select.Option>
               </Select>
             </Form.Item>
           </Col>

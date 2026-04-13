@@ -304,11 +304,16 @@ const ArticlesPage = () => {
     const processedValues = cleanUndefined(rawValues);
 
     if (editingArticle && (editingArticle.docId || editingArticle.id)) {
-      // 修正：依原文章 category 決定 collection（type 參數須為 'enrollment' 或 'article'）
+      // 修正：編輯時优先從原始 record 的 collection 欄位决定集合（此欄位由 getAllArticles/blogService 從 Firestore 取得，最可信）
+      // 如果沒有 collection，則 fallback 到 type 欄位（由 editor hard-code，比 category 可信）
       const articleType =
-        (editingArticle.category || processedValues.category) === "enrollment"
+        editingArticle.collection === "enrollmentEvents"
           ? "enrollment"
-          : "article";
+          : editingArticle.collection === "news"
+            ? "article"
+            : processedValues.type === "enrollment"
+              ? "enrollment"
+              : "article";
       await updateArticle(
         articleType,
         editingArticle.docId || editingArticle.id,
@@ -324,9 +329,9 @@ const ArticlesPage = () => {
       // 清除前端 React Query 快取，讓部落格頁面下次載入時取得最新資料
       queryClient.invalidateQueries({ queryKey: ["blog"] });
     } else {
-      // 新增文章
+      // 新增文章：依據 editor hard-code 的 type 決定集合，而非使用者可修改的 category
       const articleType =
-        processedValues.category === "enrollment" ? "enrollment" : "article";
+        processedValues.type === "enrollment" ? "enrollment" : "article";
       const newArticle = await createArticle(articleType, processedValues);
       setArticles((prev) => [...prev, newArticle]);
       // 清除前端 React Query 快取，讓部落格頁面下次載入時取得最新資料
