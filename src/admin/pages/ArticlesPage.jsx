@@ -17,6 +17,7 @@ import {
   DeleteOutlined,
   EyeOutlined,
 } from "@ant-design/icons";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   getAllArticles,
   createArticle,
@@ -46,6 +47,7 @@ const storage = getStorage(app);
 
 // 文章管理頁面組件
 const ArticlesPage = () => {
+  const queryClient = useQueryClient();
   // 文章列表狀態
   const [articles, setArticles] = useState([]);
   // 新增/編輯模態框顯示狀態
@@ -319,12 +321,16 @@ const ArticlesPage = () => {
             : a,
         ),
       );
+      // 清除前端 React Query 快取，讓部落格頁面下次載入時取得最新資料
+      queryClient.invalidateQueries({ queryKey: ["blog"] });
     } else {
       // 新增文章
       const articleType =
         processedValues.category === "enrollment" ? "enrollment" : "article";
       const newArticle = await createArticle(articleType, processedValues);
       setArticles((prev) => [...prev, newArticle]);
+      // 清除前端 React Query 快取，讓部落格頁面下次載入時取得最新資料
+      queryClient.invalidateQueries({ queryKey: ["blog"] });
     }
     setIsModalVisible(false);
   };

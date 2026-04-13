@@ -4,15 +4,21 @@
 // 判斷目前是否為開發環境
 const isDevelopment = process.env.NODE_ENV === "development";
 
-// 動態載入 Sentry（僅在正式環境）
-let Sentry = null;
-if (!isDevelopment) {
-  try {
-    Sentry = require("@sentry/react");
-  } catch (error) {
-    console.warn("Sentry not available:", error.message);
-  }
-}
+// 取得已被 index.jsx 初始化的 Sentry singleton（ESM 環境不可用 require()）
+// Sentry.init() 呼叫後，@sentry/react 會將自身掛載到 module 快取；
+// 此處透過 dynamic import 延遲取得，避免在模組初始化時同步 require
+const getSentry = (() => {
+  let cached = null;
+  return async () => {
+    if (cached) return cached;
+    try {
+      cached = await import("@sentry/react");
+    } catch {
+      cached = null;
+    }
+    return cached;
+  };
+})();
 
 // logger 物件，提供 log/info/warn/error 四種日誌方法
 const logger = {
@@ -32,34 +38,36 @@ const logger = {
   warn: (...args) => {
     if (isDevelopment) {
       console.warn(...args);
-    } else if (Sentry) {
-      // 在正式環境中將警告發送到 Sentry
-      const message = args
-        .map((arg) =>
-          typeof arg === "object" ? JSON.stringify(arg) : String(arg)
-        )
-        .join(" ");
-      Sentry.captureMessage(message, "warning");
+    } else {
+      getSentry().then((Sentry) => {
+        if (!Sentry) return;
+        const message = args
+          .map((arg) =>
+            typeof arg === "object" ? JSON.stringify(arg) : String(arg),
+          )
+          .join(" ");
+        Sentry.captureMessage(message, "warning");
+      });
     }
   },
   // 錯誤訊息，開發環境輸出 console，正式環境發送到 Sentry
   error: (...args) => {
     if (isDevelopment) {
       console.error(...args);
-    } else if (Sentry) {
-      // 在正式環境中將錯誤發送到 Sentry
-      const errorMessage = args
-        .map((arg) =>
-          typeof arg === "object" ? JSON.stringify(arg) : String(arg)
-        )
-        .join(" ");
-
-      // 如果第一個參數是 Error 物件，直接捕獲
-      if (args[0] instanceof Error) {
-        Sentry.captureException(args[0]);
-      } else {
-        Sentry.captureMessage(errorMessage, "error");
-      }
+    } else {
+      getSentry().then((Sentry) => {
+        if (!Sentry) return;
+        const errorMessage = args
+          .map((arg) =>
+            typeof arg === "object" ? JSON.stringify(arg) : String(arg),
+          )
+          .join(" ");
+        if (args[0] instanceof Error) {
+          Sentry.captureException(args[0]);
+        } else {
+          Sentry.captureMessage(errorMessage, "error");
+        }
+      });
     }
   },
   // 除錯訊息，僅在開發環境輸出
