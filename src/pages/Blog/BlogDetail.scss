@@ -1,80 +1,62 @@
 @import "../../styles/index";
 
-// 主內容與側邊欄橫向排列
-.blog-detail-mainrow {
-  display: flex;
-  gap: 2rem;
-  margin-top: 4rem;
-  margin-bottom: 7rem;
-  padding: 0;
-  justify-content: center;
-  @media screen and (max-width: 1025px) {
-    align-items: normal;
-  }
-}
-
-// 主內容
-.blog-detail-main {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-
-  .blog-detail-title {
-    font-size: 24px;
-    font-weight: 700;
-    text-align: left;
-    padding: 0 1.5rem;
-  }
-  .blog-detail-excerpt {
-    font-size: 18px;
-    text-align: left;
-    padding: 0 1.5rem;
-    @media screen and (max-width: 500px) {
-      margin: 1rem 0;
+// 詳情頁專屬 wrapper，避免與列表頁 CSS 全域衝突
+.blog-detail-page {
+  // 主內容與側邊欄橫向排列
+  .blog-detail-mainrow {
+    display: flex;
+    gap: 2rem;
+    margin-top: 4rem;
+    margin-bottom: 7rem;
+    padding: 0;
+    justify-content: center;
+    @media screen and (max-width: 1025px) {
+      align-items: normal;
     }
   }
-  .blog-detail-category-label {
-    font-size: 24px;
-    font-weight: 700;
-    color: $color-nav;
-    text-align: left;
-    padding: 0 1.5rem;
-    transition: color 0.1s ease-in-out;
-    cursor: pointer;
-    &:hover {
-      color: $color-uic;
-      text-decoration: underline;
+
+  // 主內容
+  .blog-detail-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+
+    .blog-detail-title {
+      font-size: 24px;
+      font-weight: 700;
+      text-align: left;
+      padding: 0 1.5rem;
     }
-  }
-  .blog-detail-content {
-    font-size: 18px;
-    text-align: left;
-    padding: 0 1.5rem;
-    color: $color-black;
-
-    // BlockNote 格式的 ul/ol：縮排讓黑點對齊上方標題文字
-    > ul,
-    > ol {
-      padding-left: 2rem;
-      margin: 0.25rem 0 0.75rem;
-
-      li {
-        margin: 0.5rem 0;
-        line-height: 1.7;
+    .blog-detail-excerpt {
+      font-size: 18px;
+      text-align: left;
+      padding: 0 1.5rem;
+      @media screen and (max-width: 500px) {
+        margin: 1rem 0;
       }
     }
-
-    // heading 後面緊接的 ul/ol 維持同樣縮排（瀏覽器預設會重置）
-    h2 + ul,
-    h2 + ol,
-    h3 + ul,
-    h3 + ol {
-      margin-top: 0.5rem;
+    .blog-detail-category-label {
+      font-size: 24px;
+      font-weight: 700;
+      color: $color-nav;
+      text-align: left;
+      padding: 0 1.5rem;
+      transition: color 0.1s ease-in-out;
+      cursor: pointer;
+      &:hover {
+        color: $color-uic;
+        text-decoration: underline;
+      }
     }
+    .blog-detail-content {
+      font-size: 18px;
+      text-align: left;
+      padding: 0 1.5rem;
+      color: $color-black;
 
-    .detail-item {
-      // list[] 子項目縮排，對齊上方 icon + 文字
-      ul {
+      // BlockNote 格式的 ul/ol：縮排讓黑點對齊上方標題文字
+      > ul,
+      > ol {
         padding-left: 2rem;
         margin: 0.25rem 0 0.75rem;
 
@@ -84,23 +66,44 @@
         }
       }
 
-      // 預設無縮排
-      &.nested {
-        margin-left: 20px; // 套用至巢狀項目
-        @media screen and (max-width: 500px) {
-          margin-left: 0; // 手機版縮小縮排
-          ul {
-            display: flex;
-            flex-direction: column;
-            list-style-position: inside;
-            gap: $spacing-xs;
+      // heading 後面緊接的 ul/ol 維持同樣縮排（瀏覽器預設會重置）
+      h2 + ul,
+      h2 + ol,
+      h3 + ul,
+      h3 + ol {
+        margin-top: 0.5rem;
+      }
+
+      .detail-item {
+        // list[] 子項目縮排，對齊上方 icon + 文字
+        ul {
+          padding-left: 2rem;
+          margin: 0.25rem 0 0.75rem;
+
+          li {
+            margin: 0.5rem 0;
+            line-height: 1.7;
+          }
+        }
+
+        // 預設無縮排
+        &.nested {
+          margin-left: 20px; // 套用至巢狀項目
+          @media screen and (max-width: 500px) {
+            margin-left: 0; // 手機版縮小縮排
+            ul {
+              display: flex;
+              flex-direction: column;
+              list-style-position: inside;
+              gap: $spacing-xs;
+            }
           }
         }
       }
-    }
 
-    .detail-icon {
-      margin-right: 10px;
+      .detail-icon {
+        margin-right: 10px;
+      }
     }
   }
 }
@@ -206,27 +209,30 @@
 }
 
 // 響應式設計：寬度850px以下
-@media screen and (max-width: 850px) {
-  .blog-detail-mainrow {
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: $spacing-lg;
-    align-items: normal;
-  }
+.blog-detail-page {
+  @media screen and (max-width: 850px) {
+    .blog-detail-mainrow {
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: $spacing-lg;
+      align-items: normal;
+    }
 
-  .blog-detail-excerpt {
-    margin-top: 2rem;
-  }
-  .blog-detail-image {
-    width: 100%;
-    height: 200px;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    margin-left: 0;
-  }
+    .blog-detail-excerpt {
+      margin-top: 2rem;
+    }
 
-  .blog-detail-back {
-    margin-left: 0;
-    font-size: $font-size-lg;
+    .blog-detail-image {
+      width: 100%;
+      height: 200px;
+      max-width: 100%;
+      margin-bottom: 1rem;
+      margin-left: 0;
+    }
+
+    .blog-detail-back {
+      margin-left: 0;
+      font-size: $font-size-lg;
+    }
   }
 }

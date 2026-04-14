@@ -90,7 +90,10 @@
   border: 1px solid #ccc;
   background: #fff;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, border 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border 0.2s;
   color: #000000;
   &:hover,
   &:focus {
@@ -103,44 +106,45 @@
 .blog-page {
   display: flex;
   flex-direction: column;
-}
 
-.blog-detail-mainrow {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 4rem $spacing-xl 7rem; // 增加內邊距
-  width: 100%; // 避免容器寬度超出
-  overflow: hidden;
-  @media screen and (max-width: 500px) {
-    padding: 4rem $spacing-sm 7rem;
-  }
-  .blog-detail-main {
-    padding: 0 2rem;
+  .blog-detail-mainrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 4rem $spacing-xl 7rem; // 增加內邊距
+    width: 100%; // 避免容器寬度超出
+    overflow: hidden;
     @media screen and (max-width: 500px) {
-      padding: 2rem 1rem 0;
+      padding: 4rem $spacing-sm 7rem;
+    }
+    .blog-detail-main {
+      padding: 0 2rem;
+      @media screen and (max-width: 500px) {
+        padding: 2rem 1rem 0;
+      }
     }
   }
-}
 
-// 當畫面寬度小於 $breakpoint-md 時，將主內容區塊改為垂直排列
-@media screen and (max-width: $breakpoint-md) {
-  .blog-detail-mainrow {
-    flex-direction: column;
+  // 當畫面寬度小於 $breakpoint-md 時，將主內容區塊改為垂直排列
+  @media screen and (max-width: $breakpoint-md) {
+    .blog-detail-mainrow {
+      flex-direction: column;
+    }
+
+    .blog-detail-main {
+      margin-right: 0;
+      margin-bottom: $spacing-md;
+    }
   }
 
-  .blog-detail-main {
-    margin-right: 0;
-    margin-bottom: $spacing-md;
-  }
-}
-@media screen and (max-width: 1025px) {
-  .blog-detail-mainrow {
-    flex-direction: column;
-  }
+  @media screen and (max-width: 1025px) {
+    .blog-detail-mainrow {
+      flex-direction: column;
+    }
 
-  .blog-detail-sidebar {
-    order: -1;
-    margin-bottom: $spacing-md;
+    .blog-detail-sidebar {
+      order: -1;
+      margin-bottom: $spacing-md;
+    }
   }
 }
