@@ -137,6 +137,34 @@ const ArticlesPage = () => {
       ellipsis: true,
     },
     {
+      title: "Slug",
+      dataIndex: "slug",
+      key: "slug",
+      width: 180,
+      ellipsis: true,
+      render: (slug) =>
+        slug ? (
+          <span
+            style={{
+              fontFamily: "monospace",
+              fontSize: 12,
+              cursor: "pointer",
+              color: "#1677ff",
+            }}
+            title="點擊複製"
+            onClick={() => {
+              navigator.clipboard
+                .writeText(slug)
+                .then(() => message.success("Slug 已複製"));
+            }}
+          >
+            {slug}
+          </span>
+        ) : (
+          <span style={{ color: "#bbb", fontSize: 12 }}>（未設定）</span>
+        ),
+    },
+    {
       title: "摘要",
       dataIndex: "excerpt",
       key: "excerpt",

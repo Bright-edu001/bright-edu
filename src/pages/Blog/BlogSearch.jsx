@@ -18,7 +18,7 @@ function BlogSection({ items }) {
       <div className="blog-grid">
         {items.map((item) => (
           <Link
-            to={`/blog/${item.id}`}
+            to={`/blog/${item.slug || item.id}`}
             className="blog-card"
             key={`${item._collectionType || "item"}-${item.id}`}
           >

@@ -8,8 +8,12 @@ import {
   updateDoc,
   deleteDoc,
   writeBatch,
+  query,
+  where,
+  limit,
 } from "firebase/firestore";
 import getImageUrl from "../../utils/getImageUrl";
+import { generateSlug } from "../../utils/generateSlug";
 
 // 輔助函數：將本地 /images/... 路徑轉換為公開的 Firebase Storage URL
 const convertItemPaths = (item) => {
@@ -89,6 +93,28 @@ export async function getArticle(type, id) {
     : null;
 }
 
+// 檢查指定集合內 slug 是否已存在
+async function isSlugTaken(col, slug) {
+  const q = query(collection(db, col), where("slug", "==", slug), limit(1));
+  const snap = await getDocs(q);
+  return !snap.empty;
+}
+
+// 確保 slug 在集合內唯一，衝突時加數字後綴
+async function ensureUniqueSlugInCollection(baseSlug, col) {
+  let slug = baseSlug;
+  let counter = 2;
+  while (await isSlugTaken(col, slug)) {
+    slug = `${baseSlug}-${counter}`;
+    counter++;
+    if (counter > 100) {
+      slug = `${baseSlug}-${Date.now()}`;
+      break;
+    }
+  }
+  return slug;
+}
+
 // 創建新文章
 export async function createArticle(type, data) {
   // type 應為 'enrollment' 或 'article'
@@ -99,13 +125,16 @@ export async function createArticle(type, data) {
   if (typeof payload.order !== "number") {
     payload.order = Date.now();
   }
-  // 添加新文件到集合（先取得 docId，再補入 link）
+  // 添加新文件到集合（先取得 docId，再補入 link 與 slug）
   const docRef = await addDoc(collection(db, col), payload);
-  // 補上 link 欄位（前台 ArticleCard 與 BlogDetail 路由皆依賴此欄位）
-  const link = `/blog/${docRef.id}`;
-  await updateDoc(doc(db, col, docRef.id), { link });
+  // 優先使用管理員手動輸入的 slug，否則從 title 自動產生，最終 fallback 用 doc.id
+  const rawSlug = data.slug || generateSlug(data.title) || docRef.id;
+  const slug = await ensureUniqueSlugInCollection(rawSlug, col);
+  // 補上 slug 與 link 欄位
+  const link = `/blog/${slug}`;
+  await updateDoc(doc(db, col, docRef.id), { slug, link });
   // 返回包含文件 ID 和集合名稱的資料
-  return { ...payload, link, docId: docRef.id, collection: col };
+  return { ...payload, slug, link, docId: docRef.id, collection: col };
 }
 
 // 更新指定文章
@@ -114,10 +143,15 @@ export async function updateArticle(type, docId, data) {
   const col = type === "enrollment" ? "enrollmentEvents" : "news";
   // 取得文件參考
   const ref = doc(db, col, docId);
+  // 若 slug 有更新，同步寫入 link 欄位確保一致性
+  const updateData = { ...data };
+  if (updateData.slug) {
+    updateData.link = `/blog/${updateData.slug}`;
+  }
   // 更新文件資料
-  await updateDoc(ref, data);
+  await updateDoc(ref, updateData);
   // 返回更新後的資料
-  return { ...data, docId, collection: col };
+  return { ...updateData, docId, collection: col };
 }
 
 // 刪除指定文章

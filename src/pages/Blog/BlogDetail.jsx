@@ -144,7 +144,7 @@ const renderSections = (sections, isNested = false) => {
 };
 
 function BlogDetail() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const {
     enrollmentEvents = [],
     news = [],
@@ -154,7 +154,10 @@ function BlogDetail() {
 
   // 合併所有資料
   const all = [...enrollmentEvents, ...news];
-  const blog = all.find((item) => String(item.id) === String(id));
+  // 優先比對 slug，再 fallback 比對舊版數字 id（向後相容）
+  const blog =
+    all.find((item) => item.slug === slug) ||
+    all.find((item) => String(item.id) === String(slug));
 
   // 新增：處理載入與錯誤狀態
   if (loading) {
@@ -168,9 +171,9 @@ function BlogDetail() {
   // 新增：判斷分類
   let subtitle = "";
   if (blog) {
-    if (enrollmentEvents.some((item) => String(item.id) === String(blog.id))) {
+    if (enrollmentEvents.some((item) => item.id === blog.id)) {
       subtitle = "招生活動";
-    } else if (news.some((item) => String(item.id) === String(blog.id))) {
+    } else if (news.some((item) => item.id === blog.id)) {
       subtitle = "最新消息";
     }
   }

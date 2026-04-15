@@ -35,10 +35,10 @@ describe("BlogContext", () => {
 
     await waitFor(() => expect(result.current.loading).toBe(false));
 
-    expect(result.current.searchByKeyword("enrollment")).toEqual(
-      enrollmentData
+    expect(result.current.searchByKeyword("enrollment")).toMatchObject(
+      enrollmentData,
     );
-    expect(result.current.searchByKeyword("breaking")).toEqual(newsData);
+    expect(result.current.searchByKeyword("breaking")).toMatchObject(newsData);
   });
 
   // 驗證 filterByCategory 能正確回傳各分類的文章
@@ -52,11 +52,11 @@ describe("BlogContext", () => {
     await waitFor(() => expect(result.current.loading).toBe(false));
 
     // 驗證搜尋結果
-    expect(result.current.filterByCategory("enrollment")).toEqual(
-      enrollmentData
+    expect(result.current.filterByCategory("enrollment")).toMatchObject(
+      enrollmentData,
     );
-    expect(result.current.filterByCategory("news")).toEqual(newsData);
-    expect(result.current.filterByCategory()).toEqual([
+    expect(result.current.filterByCategory("news")).toMatchObject(newsData);
+    expect(result.current.filterByCategory()).toMatchObject([
       ...enrollmentData,
       ...newsData,
     ]);

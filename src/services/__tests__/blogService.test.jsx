@@ -11,6 +11,7 @@ const {
   mockQuery,
   mockOrderBy,
   mockLimit,
+  mockWhere,
   mockStartAfter,
   mockGetImageUrl,
 } = vi.hoisted(() => ({
@@ -22,6 +23,7 @@ const {
   mockQuery: vi.fn(),
   mockOrderBy: vi.fn(),
   mockLimit: vi.fn(),
+  mockWhere: vi.fn(),
   mockStartAfter: vi.fn(),
   mockGetImageUrl: vi.fn((p) => (process.env.BASE_URL || "") + p),
 }));
@@ -34,6 +36,7 @@ vi.mock("firebase/firestore", () => ({
   setDoc: mockSetDoc,
   query: mockQuery,
   orderBy: mockOrderBy,
+  where: mockWhere,
   limit: mockLimit,
   startAfter: mockStartAfter,
 }));
@@ -47,6 +50,7 @@ import {
   getEnrollmentEvents,
   getNews,
   getBlogPost,
+  getBlogPostBySlug,
   updateEnrollmentEvent,
   updateNews,
 } from "../blogService.jsx";
@@ -246,5 +250,73 @@ describe("updateNews", () => {
     mockSetDoc.mockRejectedValue(new Error("bad"));
 
     await expect(updateNews("1", { title: "b" })).rejects.toThrow("bad");
+  });
+});
+
+// ─────────────────────────────────────────────
+// getBlogPostBySlug
+// ─────────────────────────────────────────────
+describe("getBlogPostBySlug", () => {
+  const mockDoc1 = {
+    id: "abc123",
+    data: () => ({ title: "UIC MBA 2026", slug: "uic-mba-2026" }),
+  };
+
+  beforeEach(() => {
+    // query / where / limit 只是鏈式呼叫，回傳 sentinel 值供 getDocs 識別
+    mockCollection.mockReturnValue("col");
+    mockWhere.mockReturnValue("whereClause");
+    mockLimit.mockReturnValue("limitClause");
+    mockQuery.mockReturnValue("queryRef");
+  });
+
+  it("在 enrollmentEvents 找到 slug 時回傳文章", async () => {
+    mockGetDocs.mockResolvedValueOnce({ empty: false, docs: [mockDoc1] }); // enrollmentEvents 命中
+
+    const result = await getBlogPostBySlug("uic-mba-2026");
+
+    expect(result).toMatchObject({ id: "abc123", title: "UIC MBA 2026" });
+    // 第二個集合不應被查詢
+    expect(mockGetDocs).toHaveBeenCalledTimes(1);
+  });
+
+  it("enrollmentEvents 無結果時查詢 news", async () => {
+    const mockNewsDoc = {
+      id: "news99",
+      data: () => ({ title: "News Article", slug: "news-article" }),
+    };
+    mockGetDocs
+      .mockResolvedValueOnce({ empty: true, docs: [] }) // enrollmentEvents 無結果
+      .mockResolvedValueOnce({ empty: false, docs: [mockNewsDoc] }); // news 命中
+
+    const result = await getBlogPostBySlug("news-article");
+
+    expect(result).toMatchObject({ id: "news99", title: "News Article" });
+    expect(mockGetDocs).toHaveBeenCalledTimes(2);
+  });
+
+  it("兩個集合都無結果時 fallback 查詢 getBlogPost（舊 id URL 相容）", async () => {
+    mockGetDocs
+      .mockResolvedValueOnce({ empty: true, docs: [] }) // enrollmentEvents
+      .mockResolvedValueOnce({ empty: true, docs: [] }); // news
+    // getBlogPost 內部會用 getDoc
+    mockDoc.mockReturnValue("docRef");
+    mockGetDoc.mockResolvedValue({
+      exists: () => true,
+      id: "5",
+      data: () => ({ title: "Old Article" }),
+    });
+
+    const result = await getBlogPostBySlug("5");
+
+    expect(result).toMatchObject({ id: "5", title: "Old Article" });
+  });
+
+  it("發生例外時 throw error", async () => {
+    mockGetDocs.mockRejectedValue(new Error("Firestore error"));
+
+    await expect(getBlogPostBySlug("any-slug")).rejects.toThrow(
+      "Firestore error",
+    );
   });
 });

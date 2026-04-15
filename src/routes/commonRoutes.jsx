@@ -10,7 +10,7 @@ const commonRoutes = [
   { index: true, element: <Home /> },
   { path: "聯絡我們", element: <Contact /> },
   { path: "blog", element: <Blog /> },
-  { path: "blog/:id", element: <BlogDetail /> },
+  { path: "blog/:slug", element: <BlogDetail /> },
   { path: "blog/search/:keyword", element: <BlogSearch /> },
 ];
 
