@@ -46,7 +46,10 @@ export const BlogProvider = ({ children }) => {
 
   // 使用 useMemo 將招生活動與最新消息合併，避免不必要的重新計算
   const all = useMemo(() => {
-    const merged = [...enrollmentEvents, ...news];
+    const merged = [
+      ...enrollmentEvents.map((e) => ({ ...e, _collectionType: "enrollment" })),
+      ...news.map((n) => ({ ...n, _collectionType: "news" })),
+    ];
     return merged.slice().sort((a, b) => {
       const ao =
         typeof a.order === "number" ? a.order : Number.MAX_SAFE_INTEGER;
