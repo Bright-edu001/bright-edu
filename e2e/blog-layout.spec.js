@@ -11,20 +11,25 @@ async function getFirstArticleHref(page) {
   return href;
 }
 
-// 取得列表頁 .blog-detail-mainrow 的 padding
-async function getBlogMainrowPadding(page) {
-  await page.waitForSelector(".blog-page .blog-detail-mainrow", {
-    timeout: 8000,
-  });
-  return await page.$eval(".blog-page .blog-detail-mainrow", (el) => {
+// 取得 .blog-detail-mainrow 的 computed padding（接受任意前置選擇器）
+async function getMainrowPadding(page, selector = ".blog-detail-mainrow") {
+  await page.waitForSelector(selector, { timeout: 8000 });
+  return await page.$eval(selector, (el) => {
     const style = window.getComputedStyle(el);
     return {
       paddingTop: style.paddingTop,
       paddingBottom: style.paddingBottom,
       paddingLeft: style.paddingLeft,
       paddingRight: style.paddingRight,
+      display: style.display,
+      flexDirection: style.flexDirection,
     };
   });
+}
+
+// 向下相容：列表頁使用 .blog-page 範圍
+async function getBlogMainrowPadding(page) {
+  return await getMainrowPadding(page, ".blog-page .blog-detail-mainrow");
 }
 
 test.describe("活動與文章頁面跑版修復驗證", () => {
@@ -134,5 +139,50 @@ test.describe("活動與文章頁面跑版修復驗證", () => {
     const padding = await getBlogMainrowPadding(page);
     console.log("分類頁 padding:", padding);
     expect(parseInt(padding.paddingTop)).toBeGreaterThan(0);
+  });
+});
+
+test.describe("搜尋頁版型驗證（P1 Badge 修復）", () => {
+  test("情境S1：/blog/search/:keyword — .blog-detail-mainrow 具備 flex 佈局與 padding", async ({
+    page,
+  }) => {
+    await page.goto("/blog/search/mba");
+    const layout = await getMainrowPadding(page);
+    console.log("/blog/search/mba mainrow layout:", layout);
+    expect(layout.display).toBe("flex");
+    expect(parseInt(layout.paddingTop)).toBeGreaterThan(0);
+    expect(parseInt(layout.paddingBottom)).toBeGreaterThan(0);
+  });
+
+  test("情境S2：搜尋頁有側邊欄元素 .blog-detail-sidebar", async ({ page }) => {
+    await page.goto("/blog/search/mba");
+    await page.waitForSelector(".blog-detail-mainrow", { timeout: 8000 });
+    const sidebar = page.locator(".blog-detail-sidebar");
+    await expect(sidebar).toBeVisible();
+  });
+
+  test("情境S3：搜尋頁 viewport 1025px 以下 sidebar order:-1（sidebar 排在主內容前）", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1024, height: 768 });
+    await page.goto("/blog/search/mba");
+    await page.waitForSelector(".blog-detail-sidebar", { timeout: 8000 });
+    const order = await page.$eval(
+      ".blog-detail-sidebar",
+      (el) => window.getComputedStyle(el).order,
+    );
+    console.log("1024px sidebar order:", order);
+    expect(parseInt(order)).toBe(-1);
+  });
+
+  test("情境S4：從 /blog 點搜尋後到搜尋頁，版型正常", async ({ page }) => {
+    await page.goto("/blog");
+    await page.waitForSelector(".blog-page", { timeout: 8000 });
+    // 直接導航至搜尋頁（模擬搜尋行為）
+    await page.goto("/blog/search/test");
+    const layout = await getMainrowPadding(page);
+    console.log("從列表頁導航到搜尋頁 layout:", layout);
+    expect(layout.display).toBe("flex");
+    expect(parseInt(layout.paddingTop)).toBeGreaterThan(0);
   });
 });

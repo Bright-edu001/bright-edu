@@ -106,45 +106,47 @@
 .blog-page {
   display: flex;
   flex-direction: column;
+}
 
-  .blog-detail-mainrow {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 4rem $spacing-xl 7rem; // 增加內邊距
-    width: 100%; // 避免容器寬度超出
-    overflow: hidden;
+// 共用列佈局：Blog、BlogSearch、BlogDetail 共用相同 class names
+// 提升至頂層，避免依賴特定 wrapper（修正 /blog/search/:keyword 版型遺失問題）
+.blog-detail-mainrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 4rem $spacing-xl 7rem;
+  width: 100%;
+  overflow: hidden;
+  @media screen and (max-width: 500px) {
+    padding: 4rem $spacing-sm 7rem;
+  }
+  .blog-detail-main {
+    padding: 0 2rem;
     @media screen and (max-width: 500px) {
-      padding: 4rem $spacing-sm 7rem;
-    }
-    .blog-detail-main {
-      padding: 0 2rem;
-      @media screen and (max-width: 500px) {
-        padding: 2rem 1rem 0;
-      }
+      padding: 2rem 1rem 0;
     }
   }
+}
 
-  // 當畫面寬度小於 $breakpoint-md 時，將主內容區塊改為垂直排列
-  @media screen and (max-width: $breakpoint-md) {
-    .blog-detail-mainrow {
-      flex-direction: column;
-    }
-
-    .blog-detail-main {
-      margin-right: 0;
-      margin-bottom: $spacing-md;
-    }
+// 當畫面寬度小於 $breakpoint-md 時，將主內容區塊改為垂直排列
+@media screen and (max-width: $breakpoint-md) {
+  .blog-detail-mainrow {
+    flex-direction: column;
   }
 
-  @media screen and (max-width: 1025px) {
-    .blog-detail-mainrow {
-      flex-direction: column;
-    }
+  .blog-detail-main {
+    margin-right: 0;
+    margin-bottom: $spacing-md;
+  }
+}
 
-    .blog-detail-sidebar {
-      order: -1;
-      margin-bottom: $spacing-md;
-    }
+@media screen and (max-width: 1025px) {
+  .blog-detail-mainrow {
+    flex-direction: column;
+  }
+
+  .blog-detail-sidebar {
+    order: -1;
+    margin-bottom: $spacing-md;
   }
 }

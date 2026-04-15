@@ -1,0 +1,71 @@
+[     153ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:20102
+[     215ms] [INFO] 🔌 已連接到 Firestore 本地模擬器 (port 8080) @ http://localhost:3000/src/utils/logger.jsx:23
+[     224ms] [INFO] [Bootstrap] 開始優化版應用載入 @ http://localhost:3000/src/utils/logger.jsx:23
+[     225ms] [INFO] [Bootstrap] 立即開始渲染，Firebase 在背景初始化 @ http://localhost:3000/src/utils/logger.jsx:23
+[     225ms] [INFO] [Bootstrap] 優化版應用載入完成 @ http://localhost:3000/src/utils/logger.jsx:23
+[     277ms] [WARNING] ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition. @ http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=0b9389a9:4392
+[     277ms] [INFO] [Firebase Init] 開始優化版初始化... @ http://localhost:3000/src/utils/logger.jsx:23
+[     287ms] [INFO] [Firebase Core] 開始初始化核心服務... @ http://localhost:3000/src/utils/logger.jsx:23
+[     287ms] [INFO] 🏠 本地開發環境，跳過網路連接優化 @ http://localhost:3000/src/utils/logger.jsx:23
+[     287ms] [INFO] [Firebase Core] 核心服務初始化完成 @ http://localhost:3000/src/utils/logger.jsx:23
+[     287ms] [INFO] [Firebase Init] 基礎服務就緒，UI 可開始渲染 @ http://localhost:3000/src/utils/logger.jsx:23
+[     297ms] [INFO] [Firebase Init] 本地開發環境，跳過額外服務 @ http://localhost:3000/src/utils/logger.jsx:23
+[     298ms] [INFO] [Firebase Init] 完整初始化完成 @ http://localhost:3000/src/utils/logger.jsx:23
+[     654ms] [INFO] [useBlogData] 開始載入: enrollmentEvents using React Query @ http://localhost:3000/src/utils/logger.jsx:23
+[     654ms] [INFO] [useBlogData] 開始載入: news using React Query @ http://localhost:3000/src/utils/logger.jsx:23
+[     691ms] [ERROR] Error handled by React Router default ErrorBoundary: TypeError: Cannot read properties of null (reading 'componentStack')
+    at ErrorBoundary.render (http://localhost:3000/src/components/ErrorBoundary/ErrorBoundary.jsx:94:42)
+    at Object.react_stack_bottom_frame (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:18519:29)
+    at updateClassComponent (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:7799:32)
+    at beginWork (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:8536:16)
+    at runWithFiberInDEV (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:997:72)
+    at performUnitOfWork (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12561:98)
+    at workLoopSync (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12424:43)
+    at renderRootSync (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12408:13)
+    at performWorkOnRoot (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:11766:189)
+    at performSyncWorkOnRoot (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:13517:9) @ http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=0b9389a9:4029
+[     691ms] [ERROR] Error handled by React Router default ErrorBoundary: TypeError: Cannot read properties of null (reading 'componentStack')
+    at ErrorBoundary.render (http://localhost:3000/src/components/ErrorBoundary/ErrorBoundary.jsx:94:42)
+    at Object.react_stack_bottom_frame (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:18519:29)
+    at updateClassComponent (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:7799:32)
+    at beginWork (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:8536:16)
+    at runWithFiberInDEV (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:997:72)
+    at performUnitOfWork (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12561:98)
+    at workLoopSync (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12424:43)
+    at renderRootSync (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12408:13)
+    at performWorkOnRoot (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:11827:37)
+    at performSyncWorkOnRoot (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:13517:9) @ http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=0b9389a9:4029
+[     692ms] [ERROR] %o
+
+%s
+
+%s
+ TypeError: Cannot read properties of null (reading 'componentStack')
+    at ErrorBoundary.render (http://localhost:3000/src/components/ErrorBoundary/ErrorBoundary.jsx:94:42)
+    at Object.react_stack_bottom_frame (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:18519:29)
+    at updateClassComponent (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:7799:32)
+    at beginWork (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:8536:16)
+    at runWithFiberInDEV (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:997:72)
+    at performUnitOfWork (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12561:98)
+    at workLoopSync (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12424:43)
+    at renderRootSync (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12408:13)
+    at performWorkOnRoot (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:11827:37)
+    at performSyncWorkOnRoot (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:13517:9) The above error occurred in the <ErrorBoundary> component. React will try to recreate this component tree from scratch using the error boundary you provided, RenderErrorBoundary. @ http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:7000
+[     693ms] [ERROR] React Router caught the following error during render TypeError: Cannot read properties of null (reading 'componentStack')
+    at ErrorBoundary.render (http://localhost:3000/src/components/ErrorBoundary/ErrorBoundary.jsx:94:42)
+    at Object.react_stack_bottom_frame (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:18519:29)
+    at updateClassComponent (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:7799:32)
+    at beginWork (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:8536:16)
+    at runWithFiberInDEV (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:997:72)
+    at performUnitOfWork (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12561:98)
+    at workLoopSync (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12424:43)
+    at renderRootSync (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:12408:13)
+    at performWorkOnRoot (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:11827:37)
+    at performSyncWorkOnRoot (http://localhost:3000/node_modules/.vite/deps/chunk-4PDQIF46.js?v=0b9389a9:13517:9) {componentStack: 
+    at ErrorBoundary (http://localhost:3000/src/c…t:3000/src/context/FirebaseInitContext.jsx:37:40)} @ http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=0b9389a9:4074
+[    1738ms] [INFO] [Analytics] 本地開發環境，跳過 Analytics 初始化 @ http://localhost:3000/src/utils/logger.jsx:23
+[    1738ms] [INFO] [Analytics] 延遲事件記錄完成 @ http://localhost:3000/src/utils/logger.jsx:23
+[    3239ms] [INFO] [Performance] 延遲初始化完成 @ http://localhost:3000/src/utils/logger.jsx:23
+[    6242ms] [WARNING] The resource https://firebasestorage.googleapis.com/v0/b/bright-edu-data.firebasestorage.app/o/banner%2Fbanner1-1280.webp?alt=media was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/blog/search/mba:0
+[   63699ms] [WARNING] The resource https://firebasestorage.googleapis.com/v0/b/bright-edu-data.firebasestorage.app/o/banner%2Fbanner1-1280.webp?alt=media was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/blog/search/mba:0
+[  137296ms] [WARNING] The resource https://firebasestorage.googleapis.com/v0/b/bright-edu-data.firebasestorage.app/o/banner%2Fbanner1-1280.webp?alt=media was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/blog/search/mba:0

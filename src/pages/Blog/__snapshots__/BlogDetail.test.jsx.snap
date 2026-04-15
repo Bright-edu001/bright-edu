@@ -2,7 +2,9 @@
 
 exports[`BlogDetail > renders stably across rerenders 1`] = `
 <DocumentFragment>
-  <div>
+  <div
+    class="blog-detail-page"
+  >
     <div />
     <div
       class="blog-detail-mainrow"
