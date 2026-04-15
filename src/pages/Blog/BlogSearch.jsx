@@ -49,9 +49,7 @@ function BlogSearch() {
 
   useEffect(() => {
     if (!loading && !error) {
-      // 合併所有資料進行搜尋
-      const allData = [...enrollmentEvents, ...news];
-      const results = searchByKeyword(allData, keyword);
+      const results = searchByKeyword(keyword);
       setSearchResults(results);
     }
   }, [keyword, searchByKeyword, loading, error, enrollmentEvents, news]);
@@ -84,7 +82,7 @@ function BlogSearch() {
           ) : (
             <div>查無相關文章</div>
           )}
-          <Link to="/blog" className="blog-detail-back">
+          <Link to="/blog" className="blog-back-btn blog-detail-back">
             ← 返回部落格
           </Link>
         </div>

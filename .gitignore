@@ -47,4 +47,7 @@ test-*.js
 *.css.map
 !src/styles/critical.css
 
+# 工作流程檔案（不上傳 GitHub）
+.workflow/
+
 

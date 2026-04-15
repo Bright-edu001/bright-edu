@@ -185,7 +185,7 @@ function BlogDetail() {
   }
 
   return (
-    <div>
+    <div className="blog-detail-page">
       <MbaAreasHero />
       <div className="blog-detail-mainrow">
         <div className="blog-detail-main">
