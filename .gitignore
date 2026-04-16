@@ -61,6 +61,7 @@ firebase-local-data/
 
 # Playwright 測試結果
 test-results/
+test-results.json
 
 # Playwright 測試報告
 playwright-report/

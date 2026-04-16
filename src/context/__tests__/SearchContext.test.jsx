@@ -1,7 +1,7 @@
 // 匯入必要的 React 及測試工具
 import React, { useContext } from "react";
 import { renderHook, act } from "@testing-library/react";
-import { SearchProvider, SearchContext } from "./SearchContext";
+import { SearchProvider, SearchContext } from "../SearchContext";
 
 // 建立一個 mock 的 useNavigate，攔截路由跳轉
 const mockNavigate = vi.fn();

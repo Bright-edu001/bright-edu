@@ -1,11 +1,11 @@
 // 匯入必要的函式庫與元件
 import React, { useContext } from "react";
 import { renderHook, waitFor } from "@testing-library/react";
-import { BlogProvider, BlogContext } from "./BlogContext";
-import { getEnrollmentEvents, getNews } from "../services/blogService";
+import { BlogProvider, BlogContext } from "../BlogContext";
+import { getEnrollmentEvents, getNews } from "../../services/blogService";
 
 // 模擬 blogService 相關 API
-vi.mock("../services/blogService");
+vi.mock("../../services/blogService");
 
 // 測試 searchByKeyword 函式
 describe("BlogContext", () => {

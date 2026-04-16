@@ -1,8 +1,8 @@
 import React from "react";
 import { renderHook, act } from "@testing-library/react";
 import { message } from "antd";
-import * as permissions from "../config/permissions.jsx";
-import { AuthProvider, useAuth } from "./AuthContext";
+import * as permissions from "../../config/permissions.jsx";
+import { AuthProvider, useAuth } from "../AuthContext";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -24,11 +24,11 @@ vi.mock("firebase/auth", () => ({
   signInWithPopup: vi.fn(),
 }));
 
-vi.mock("../config/firebaseCore", () => ({
+vi.mock("../../config/firebaseCore", () => ({
   app: {},
 }));
 
-vi.mock("../config/permissions.jsx", () => ({
+vi.mock("../../config/permissions.jsx", () => ({
   getUserRole: vi.fn().mockReturnValue("viewer"),
   hasPermission: vi.fn(),
   hasAnyPermission: vi.fn(),
@@ -400,7 +400,6 @@ describe("AuthContext", () => {
 
   describe("權限檢查", () => {
     it("應該正確檢查單一權限", () => {
-      const { hasPermission } = require("../config/permissions.jsx");
       permissions.hasPermission.mockReturnValue(true);
 
       const { result } = renderWithProvider();
@@ -413,7 +412,6 @@ describe("AuthContext", () => {
     });
 
     it("應該正確檢查多重權限", () => {
-      const { hasAnyPermission } = require("../config/permissions.jsx");
       permissions.hasAnyPermission.mockReturnValue(true);
 
       const { result } = renderWithProvider();

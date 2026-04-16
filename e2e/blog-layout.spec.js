@@ -1,36 +1,9 @@
 import { test, expect } from "@playwright/test";
-
-// 取得第一篇文章連結
-async function getFirstArticleHref(page) {
-  await page.goto("/blog");
-  await page.waitForSelector(".blog-grid a, .blog-card a, a[href*='/blog/']", {
-    timeout: 10000,
-  });
-  const link = page.locator("a[href*='/blog/']").first();
-  const href = await link.getAttribute("href");
-  return href;
-}
-
-// 取得 .blog-detail-mainrow 的 computed padding（接受任意前置選擇器）
-async function getMainrowPadding(page, selector = ".blog-detail-mainrow") {
-  await page.waitForSelector(selector, { timeout: 8000 });
-  return await page.$eval(selector, (el) => {
-    const style = window.getComputedStyle(el);
-    return {
-      paddingTop: style.paddingTop,
-      paddingBottom: style.paddingBottom,
-      paddingLeft: style.paddingLeft,
-      paddingRight: style.paddingRight,
-      display: style.display,
-      flexDirection: style.flexDirection,
-    };
-  });
-}
-
-// 向下相容：列表頁使用 .blog-page 範圍
-async function getBlogMainrowPadding(page) {
-  return await getMainrowPadding(page, ".blog-page .blog-detail-mainrow");
-}
+import {
+  getFirstArticleHref,
+  getMainrowPadding,
+  getBlogMainrowPadding,
+} from "./fixtures.js";
 
 test.describe("活動與文章頁面跑版修復驗證", () => {
   test("情境1：直接訪問 /blog，mainrow 有 padding", async ({ page }) => {
@@ -51,7 +24,9 @@ test.describe("活動與文章頁面跑版修復驗證", () => {
 
     // 進入詳情頁
     await page.goto(href);
-    await page.waitForSelector(".blog-detail-page", { timeout: 8000 });
+    await page
+      .locator(".blog-detail-page")
+      .waitFor({ state: "visible", timeout: 8000 });
 
     // 按瀏覽器上一頁
     await page.goBack();
@@ -68,7 +43,9 @@ test.describe("活動與文章頁面跑版修復驗證", () => {
   }) => {
     const href = await getFirstArticleHref(page);
     await page.goto(href);
-    await page.waitForSelector(".blog-detail-page", { timeout: 8000 });
+    await page
+      .locator(".blog-detail-page")
+      .waitFor({ state: "visible", timeout: 8000 });
 
     // 點「返回部落格」按鈕
     const backBtn = page
@@ -89,21 +66,19 @@ test.describe("活動與文章頁面跑版修復驗證", () => {
   }) => {
     const href = await getFirstArticleHref(page);
     await page.goto(href);
-    await page.waitForSelector(".blog-detail-page .blog-detail-mainrow", {
-      timeout: 8000,
-    });
-    const padding = await page.$eval(
+    const detailMainrow = page.locator(
       ".blog-detail-page .blog-detail-mainrow",
-      (el) => {
-        const style = window.getComputedStyle(el);
-        return {
-          paddingTop: style.paddingTop,
-          paddingBottom: style.paddingBottom,
-          paddingLeft: style.paddingLeft,
-          paddingRight: style.paddingRight,
-        };
-      },
     );
+    await detailMainrow.waitFor({ state: "visible", timeout: 8000 });
+    const padding = await detailMainrow.evaluate((el) => {
+      const style = window.getComputedStyle(el);
+      return {
+        paddingTop: style.paddingTop,
+        paddingBottom: style.paddingBottom,
+        paddingLeft: style.paddingLeft,
+        paddingRight: style.paddingRight,
+      };
+    });
     console.log("詳情頁 mainrow padding:", padding);
     // 詳情頁 padding 應為 0
     expect(padding.paddingTop).toBe("0px");
@@ -120,7 +95,9 @@ test.describe("活動與文章頁面跑版修復驗證", () => {
     for (let i = 0; i < 3; i++) {
       // 進詳情
       await page.goto(href);
-      await page.waitForSelector(".blog-detail-page", { timeout: 8000 });
+      await page
+        .locator(".blog-detail-page")
+        .waitFor({ state: "visible", timeout: 8000 });
 
       // 返回列表
       await page.goBack();
@@ -156,7 +133,9 @@ test.describe("搜尋頁版型驗證（P1 Badge 修復）", () => {
 
   test("情境S2：搜尋頁有側邊欄元素 .blog-detail-sidebar", async ({ page }) => {
     await page.goto("/blog/search/mba");
-    await page.waitForSelector(".blog-detail-mainrow", { timeout: 8000 });
+    await page
+      .locator(".blog-detail-mainrow")
+      .waitFor({ state: "visible", timeout: 8000 });
     const sidebar = page.locator(".blog-detail-sidebar");
     await expect(sidebar).toBeVisible();
   });
@@ -166,9 +145,9 @@ test.describe("搜尋頁版型驗證（P1 Badge 修復）", () => {
   }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
     await page.goto("/blog/search/mba");
-    await page.waitForSelector(".blog-detail-sidebar", { timeout: 8000 });
-    const order = await page.$eval(
-      ".blog-detail-sidebar",
+    const sidebarEl = page.locator(".blog-detail-sidebar");
+    await sidebarEl.waitFor({ state: "visible", timeout: 8000 });
+    const order = await sidebarEl.evaluate(
       (el) => window.getComputedStyle(el).order,
     );
     console.log("1024px sidebar order:", order);
@@ -177,7 +156,9 @@ test.describe("搜尋頁版型驗證（P1 Badge 修復）", () => {
 
   test("情境S4：從 /blog 點搜尋後到搜尋頁，版型正常", async ({ page }) => {
     await page.goto("/blog");
-    await page.waitForSelector(".blog-page", { timeout: 8000 });
+    await page
+      .locator(".blog-page")
+      .waitFor({ state: "visible", timeout: 8000 });
     // 直接導航至搜尋頁（模擬搜尋行為）
     await page.goto("/blog/search/test");
     const layout = await getMainrowPadding(page);

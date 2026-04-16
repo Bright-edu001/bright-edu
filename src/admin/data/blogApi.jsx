@@ -93,18 +93,26 @@ export async function getArticle(type, id) {
     : null;
 }
 
-// 檢查指定集合內 slug 是否已存在
-async function isSlugTaken(col, slug) {
-  const q = query(collection(db, col), where("slug", "==", slug), limit(1));
-  const snap = await getDocs(q);
-  return !snap.empty;
+// 檢查 slug 在兩個 collection 中是否已存在（全域查重）
+async function isSlugTakenGlobally(slug) {
+  const [snapE, snapN] = await Promise.all([
+    getDocs(
+      query(
+        collection(db, "enrollmentEvents"),
+        where("slug", "==", slug),
+        limit(1),
+      ),
+    ),
+    getDocs(query(collection(db, "news"), where("slug", "==", slug), limit(1))),
+  ]);
+  return !snapE.empty || !snapN.empty;
 }
 
-// 確保 slug 在集合內唯一，衝突時加數字後綴
-async function ensureUniqueSlugInCollection(baseSlug, col) {
+// 確保 slug 在兩個 collection 中均唯一，衝突時加數字後綴
+async function ensureUniqueSlugGlobally(baseSlug) {
   let slug = baseSlug;
   let counter = 2;
-  while (await isSlugTaken(col, slug)) {
+  while (await isSlugTakenGlobally(slug)) {
     slug = `${baseSlug}-${counter}`;
     counter++;
     if (counter > 100) {
@@ -125,16 +133,24 @@ export async function createArticle(type, data) {
   if (typeof payload.order !== "number") {
     payload.order = Date.now();
   }
-  // 添加新文件到集合（先取得 docId，再補入 link 與 slug）
-  const docRef = await addDoc(collection(db, col), payload);
-  // 優先使用管理員手動輸入的 slug，否則從 title 自動產生，最終 fallback 用 doc.id
-  const rawSlug = data.slug || generateSlug(data.title) || docRef.id;
-  const slug = await ensureUniqueSlugInCollection(rawSlug, col);
-  // 補上 slug 與 link 欄位
-  const link = `/blog/${slug}`;
-  await updateDoc(doc(db, col, docRef.id), { slug, link });
-  // 返回包含文件 ID 和集合名稱的資料
-  return { ...payload, slug, link, docId: docRef.id, collection: col };
+  // 優先使用管理員手動輸入的 slug，否則從 title 自動產生
+  const rawSlug = data.slug || generateSlug(data.title);
+  if (rawSlug) {
+    // slug 可在寫入前確定：全域查重後一次寫入，避免自我衝突
+    const slug = await ensureUniqueSlugGlobally(rawSlug);
+    const link = `/blog/${slug}`;
+    payload.slug = slug;
+    payload.link = link;
+    const docRef = await addDoc(collection(db, col), payload);
+    return { ...payload, docId: docRef.id, collection: col };
+  } else {
+    // 純中文標題無法產生有意義的 slug，先建立文件再以 docId 作為 fallback
+    const docRef = await addDoc(collection(db, col), payload);
+    const slug = docRef.id;
+    const link = `/blog/${slug}`;
+    await updateDoc(doc(db, col, docRef.id), { slug, link });
+    return { ...payload, slug, link, docId: docRef.id, collection: col };
+  }
 }
 
 // 更新指定文章
