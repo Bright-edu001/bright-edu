@@ -11,8 +11,10 @@ import "./ArticleCard.scss";
  * @param {'vertical'|'horizontal'} [props.layout='vertical'] - 卡片排版方向，預設為垂直(vertical)
  */
 function ArticleCard({ item, imageType, layout = "vertical" }) {
-  // link 優先使用 item.link，若無則 fallback 至 /blog/<id> (docId)
-  const resolvedLink = item.link || (item.id ? `/blog/${item.id}` : null);
+  // link 優先使用 item.link，若無則依序 fallback：slug → id
+  const resolvedLink =
+    item.link ||
+    (item.slug ? `/blog/${item.slug}` : item.id ? `/blog/${item.id}` : null);
 
   // 提取內外部連結判斷
   const isInternal = resolvedLink?.startsWith("/");

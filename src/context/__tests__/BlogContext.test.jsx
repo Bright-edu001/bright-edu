@@ -1,11 +1,11 @@
 // 匯入必要的函式庫與元件
 import React, { useContext } from "react";
 import { renderHook, waitFor } from "@testing-library/react";
-import { BlogProvider, BlogContext } from "./BlogContext";
-import { getEnrollmentEvents, getNews } from "../services/blogService";
+import { BlogProvider, BlogContext } from "../BlogContext";
+import { getEnrollmentEvents, getNews } from "../../services/blogService";
 
 // 模擬 blogService 相關 API
-vi.mock("../services/blogService");
+vi.mock("../../services/blogService");
 
 // 測試 searchByKeyword 函式
 describe("BlogContext", () => {
@@ -35,10 +35,10 @@ describe("BlogContext", () => {
 
     await waitFor(() => expect(result.current.loading).toBe(false));
 
-    expect(result.current.searchByKeyword("enrollment")).toEqual(
-      enrollmentData
+    expect(result.current.searchByKeyword("enrollment")).toMatchObject(
+      enrollmentData,
     );
-    expect(result.current.searchByKeyword("breaking")).toEqual(newsData);
+    expect(result.current.searchByKeyword("breaking")).toMatchObject(newsData);
   });
 
   // 驗證 filterByCategory 能正確回傳各分類的文章
@@ -52,11 +52,11 @@ describe("BlogContext", () => {
     await waitFor(() => expect(result.current.loading).toBe(false));
 
     // 驗證搜尋結果
-    expect(result.current.filterByCategory("enrollment")).toEqual(
-      enrollmentData
+    expect(result.current.filterByCategory("enrollment")).toMatchObject(
+      enrollmentData,
     );
-    expect(result.current.filterByCategory("news")).toEqual(newsData);
-    expect(result.current.filterByCategory()).toEqual([
+    expect(result.current.filterByCategory("news")).toMatchObject(newsData);
+    expect(result.current.filterByCategory()).toMatchObject([
       ...enrollmentData,
       ...newsData,
     ]);

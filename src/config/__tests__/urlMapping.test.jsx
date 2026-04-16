@@ -3,7 +3,7 @@ import {
   parseChineseUrl,
   urlMapping,
   reverseUrlMapping,
-} from "../config/urlMapping";
+} from "../urlMapping";
 
 describe("URL映射測試", () => {
   test("英文URL轉中文URL", () => {
@@ -23,7 +23,7 @@ describe("URL映射測試", () => {
     expect(urlMapping["about-uic"]).toBe("學校介紹");
     expect(urlMapping["about-msu"]).toBe("MSU學校介紹");
     expect(reverseUrlMapping["伊利諾大學芝加哥分校"]).toBe(
-      "uic-business-school"
+      "uic-business-school",
     );
     expect(reverseUrlMapping["學校介紹"]).toBe("about-uic");
     expect(reverseUrlMapping["MSU學校介紹"]).toBe("about-msu");

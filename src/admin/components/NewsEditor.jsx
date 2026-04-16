@@ -231,6 +231,25 @@ const NewsEditor = ({ initialValues, onSave, onCancel }) => {
           />
         </Form.Item>
 
+        <Form.Item
+          name="slug"
+          label="網址 Slug（選填）"
+          tooltip="文章的 URL 識別碼，例如 uic-news-2026-ranking。留空系統會依標題自動產生；僅允許小寫英文、數字與連字號。"
+          rules={[
+            {
+              pattern: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+              message:
+                "Slug 僅允許小寫英文、數字與連字號（-），且不可以連字號開頭或結尾",
+            },
+          ]}
+        >
+          <Input
+            placeholder="例：uic-news-2026-ranking（留空自動產生）"
+            maxLength={80}
+            allowClear
+          />
+        </Form.Item>
+
         <Row gutter={16}>
           <Col span={8}>
             <Form.Item

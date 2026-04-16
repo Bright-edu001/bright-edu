@@ -61,6 +61,25 @@ export async function submitForm(data) {
   - `isFirebaseHosting()` — Firebase 託管
   - `isProduction()` — 生產環境
 
+## Emulator-First 開發模式
+
+任何涉及 Firestore 資料新增、修改、刪除的操作（包括執行腳本），必須先在 Firebase Emulator 虛擬環境中進行，嚴禁直接操作生產環境 Firestore。
+
+### 標準流程
+
+1. 啟動 Emulator：`firebase emulators:start`（Firestore 在 `localhost:8080`）
+2. 如需最新生產資料：`node scripts/sync-prod-to-emulator.mjs`
+3. 設定環境變數指向 Emulator：`$env:FIRESTORE_EMULATOR_HOST="localhost:8080"`
+4. 在 Emulator 中執行資料變更（腳本或服務層操作）
+5. 啟動本地前端 (`npm run start`) 驗證資料與畫面正確
+6. 驗證通過後由使用者自行決定是否同步到線上環境
+
+### 注意事項
+
+- 所有腳本（如 `migrate-slugs.mjs`）執行前必須確認 `FIRESTORE_EMULATOR_HOST` 已設定
+- 未設定該環境變數時，腳本會直接操作生產 Firestore，造成不可逆的影響
+- Agent 不可自行將 Emulator 中的變更推送到生產環境
+
 ## ⚠️ 安全規則
 
 - 修改 `firestore.rules` 或 `storage.rules` 前必須向使用者說明

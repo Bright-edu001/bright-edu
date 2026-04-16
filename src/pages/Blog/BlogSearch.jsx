@@ -17,7 +17,11 @@ function BlogSection({ items }) {
     <section className="blog-section">
       <div className="blog-grid">
         {items.map((item) => (
-          <Link to={`/blog/${item.id}`} className="blog-card" key={item.id}>
+          <Link
+            to={`/blog/${item.slug || item.id}`}
+            className="blog-card"
+            key={`${item._collectionType || "item"}-${item.id}`}
+          >
             <ProgressiveImage
               src={item.image || item.thumbnail}
               placeholderSrc={item.thumbnail}

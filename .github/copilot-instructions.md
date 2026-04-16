@@ -86,6 +86,7 @@ scripts/             # 自動化腳本（效能分析、Storage 測試）
 3. **安全規則修改**：修改 `firestore.rules` 或 `storage.rules` 前必須向使用者說明影響範圍。
 4. **環境變數**：不可在程式碼中硬編碼密鑰或敏感資訊。
 5. **生產環境**：Firestore 規則中標註為「開發用」的寬鬆規則，不可原樣部署到生產環境。
+6. **Firestore 資料操作（Emulator-First）**：任何涉及 Firestore 資料新增、修改、刪除的操作（包括執行腳本如 `migrate-slugs.mjs`），必須先在 Firebase Emulator 虛擬環境中執行並驗證。使用者在本地確認資料與前端畫面無誤後，再由使用者自行決定是否同步到線上環境。**所有 Agent 嚴禁直接對生產環境 Firestore 執行任何資料寫入操作。**
 
 ## 現有文件參考
 

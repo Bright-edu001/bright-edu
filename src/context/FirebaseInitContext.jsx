@@ -121,7 +121,7 @@ const initializeAdditionalServices = async () => {
   // 優化的 App Check 初始化
   try {
     const { initializeAppCheckOptimized } =
-      await import("../config/appCheckClient");
+      await import("../config/appCheckClient.robust");
     await initializeAppCheckOptimized();
   } catch (error) {
     logger.warn("[Firebase Init] App Check 初始化失敗，繼續執行:", error);

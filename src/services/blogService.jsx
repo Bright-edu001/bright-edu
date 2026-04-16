@@ -6,6 +6,7 @@ import {
   getDoc,
   setDoc,
   query,
+  where,
   orderBy,
   limit,
   startAfter,
@@ -186,6 +187,43 @@ export const getBlogPost = async (id) => {
 
 // all 函數等同於 getAllBlogPosts
 export const all = getAllBlogPosts;
+
+// 依據 slug 取得單一部落格文章
+// 查詢順序：enrollmentEvents → news → fallback 用 id 直接查（相容舊 URL）
+export const getBlogPostBySlug = async (slug) => {
+  try {
+    // 1. 查詢 enrollmentEvents where slug == slug
+    const enrollmentQuery = query(
+      collection(db, "enrollmentEvents"),
+      where("slug", "==", slug),
+      limit(1),
+    );
+    const enrollmentSnap = await getDocs(enrollmentQuery);
+    if (!enrollmentSnap.empty) {
+      const d = enrollmentSnap.docs[0];
+      return processBlogData({ id: d.id, ...d.data() });
+    }
+
+    // 2. 查詢 news where slug == slug
+    const newsQuery = query(
+      collection(db, "news"),
+      where("slug", "==", slug),
+      limit(1),
+    );
+    const newsSnap = await getDocs(newsQuery);
+    if (!newsSnap.empty) {
+      const d = newsSnap.docs[0];
+      return processBlogData({ id: d.id, ...d.data() });
+    }
+
+    // 3. fallback：以 slug 值當作 doc.id 直接查（相容舊 /blog/5 等數字 URL）
+    logger.log(`[getBlogPostBySlug] slug "${slug}" 無結果，嘗試以 id 查詢`);
+    return await getBlogPost(slug);
+  } catch (error) {
+    logger.error("[getBlogPostBySlug] 查詢失敗:", error);
+    throw error;
+  }
+};
 
 /**
  * 更新指定 id 的招生活動文章

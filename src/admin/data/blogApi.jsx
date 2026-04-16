@@ -8,8 +8,12 @@ import {
   updateDoc,
   deleteDoc,
   writeBatch,
+  query,
+  where,
+  limit,
 } from "firebase/firestore";
 import getImageUrl from "../../utils/getImageUrl";
+import { generateSlug } from "../../utils/generateSlug";
 
 // 輔助函數：將本地 /images/... 路徑轉換為公開的 Firebase Storage URL
 const convertItemPaths = (item) => {
@@ -89,6 +93,36 @@ export async function getArticle(type, id) {
     : null;
 }
 
+// 檢查 slug 在兩個 collection 中是否已存在（全域查重）
+async function isSlugTakenGlobally(slug) {
+  const [snapE, snapN] = await Promise.all([
+    getDocs(
+      query(
+        collection(db, "enrollmentEvents"),
+        where("slug", "==", slug),
+        limit(1),
+      ),
+    ),
+    getDocs(query(collection(db, "news"), where("slug", "==", slug), limit(1))),
+  ]);
+  return !snapE.empty || !snapN.empty;
+}
+
+// 確保 slug 在兩個 collection 中均唯一，衝突時加數字後綴
+async function ensureUniqueSlugGlobally(baseSlug) {
+  let slug = baseSlug;
+  let counter = 2;
+  while (await isSlugTakenGlobally(slug)) {
+    slug = `${baseSlug}-${counter}`;
+    counter++;
+    if (counter > 100) {
+      slug = `${baseSlug}-${Date.now()}`;
+      break;
+    }
+  }
+  return slug;
+}
+
 // 創建新文章
 export async function createArticle(type, data) {
   // type 應為 'enrollment' 或 'article'
@@ -99,13 +133,24 @@ export async function createArticle(type, data) {
   if (typeof payload.order !== "number") {
     payload.order = Date.now();
   }
-  // 添加新文件到集合（先取得 docId，再補入 link）
-  const docRef = await addDoc(collection(db, col), payload);
-  // 補上 link 欄位（前台 ArticleCard 與 BlogDetail 路由皆依賴此欄位）
-  const link = `/blog/${docRef.id}`;
-  await updateDoc(doc(db, col, docRef.id), { link });
-  // 返回包含文件 ID 和集合名稱的資料
-  return { ...payload, link, docId: docRef.id, collection: col };
+  // 優先使用管理員手動輸入的 slug，否則從 title 自動產生
+  const rawSlug = data.slug || generateSlug(data.title);
+  if (rawSlug) {
+    // slug 可在寫入前確定：全域查重後一次寫入，避免自我衝突
+    const slug = await ensureUniqueSlugGlobally(rawSlug);
+    const link = `/blog/${slug}`;
+    payload.slug = slug;
+    payload.link = link;
+    const docRef = await addDoc(collection(db, col), payload);
+    return { ...payload, docId: docRef.id, collection: col };
+  } else {
+    // 純中文標題無法產生有意義的 slug，先建立文件再以 docId 作為 fallback
+    const docRef = await addDoc(collection(db, col), payload);
+    const slug = docRef.id;
+    const link = `/blog/${slug}`;
+    await updateDoc(doc(db, col, docRef.id), { slug, link });
+    return { ...payload, slug, link, docId: docRef.id, collection: col };
+  }
 }
 
 // 更新指定文章
@@ -114,10 +159,15 @@ export async function updateArticle(type, docId, data) {
   const col = type === "enrollment" ? "enrollmentEvents" : "news";
   // 取得文件參考
   const ref = doc(db, col, docId);
+  // 若 slug 有更新，同步寫入 link 欄位確保一致性
+  const updateData = { ...data };
+  if (updateData.slug) {
+    updateData.link = `/blog/${updateData.slug}`;
+  }
   // 更新文件資料
-  await updateDoc(ref, data);
+  await updateDoc(ref, updateData);
   // 返回更新後的資料
-  return { ...data, docId, collection: col };
+  return { ...updateData, docId, collection: col };
 }
 
 // 刪除指定文章
