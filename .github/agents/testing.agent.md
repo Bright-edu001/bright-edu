@@ -102,6 +102,22 @@ await expect(page.locator("nav").first()).toBeVisible();
 - React Query：使用 `QueryClientProvider` wrapper
 - 網路請求：Mock 服務層函式，不 Mock fetch/axios
 
+## Firestore Emulator 測試環境
+
+涉及 Firestore 資料的整合測試或 E2E 測試，必須連接 Firebase Emulator，不可對生產環境 Firestore 產生任何讀寫：
+
+```powershell
+# 啟動 Emulator
+firebase emulators:start
+
+# 設定環境變數讓測試連接 Emulator
+$env:FIRESTORE_EMULATOR_HOST="localhost:8080"
+```
+
+- 確認 Emulator 運行於 `localhost:8080` 後再執行測試
+- 測試資料應在 Emulator 中準備，不可從生產環境讀取
+- 測試結束後 Emulator 資料自動清除，不影響任何環境
+
 ## Playwright MCP 工具
 
 透過 Playwright MCP 伺服器，你可以在 E2E 測試開發時直接操控瀏覽器：

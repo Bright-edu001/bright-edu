@@ -108,12 +108,12 @@ export const getPerformance = async () => {
 };
 
 // 為了向後相容，導出常用別名
-export { getAppCheckInstance as appCheck } from "./appCheckClient";
+export { getAppCheckInstance as appCheck } from "./appCheckClient.robust";
 export { getFunctionsInstance as functions } from "./functionsClient";
 export { getAnalyticsInstance as analytics } from "./analyticsClient";
 
 // 導出常用的服務方法
-export { fetchAppCheckToken } from "./appCheckClient";
+export { fetchAppCheckToken } from "./appCheckClient.robust";
 export { callCloudFunction } from "./functionsClient";
 export {
   logAnalyticsEvent,

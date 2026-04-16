@@ -71,6 +71,48 @@ Storage: port 9199
 - 不可在程式碼中硬編碼密鑰或敏感資訊。
 - 環境變數必須使用 `VITE_` 前綴。
 
+### 🔒 Firestore Emulator-First 規則
+
+**任何涉及 Firestore 資料新增、修改、刪除的操作（包括執行腳本），必須在 Firebase Emulator 虛擬環境中進行，嚴禁直接操作生產環境 Firestore。**
+
+#### 標準操作流程
+
+1. **啟動 Emulator**
+
+   ```bash
+   firebase emulators:start
+   ```
+
+   確認 Firestore Emulator 運行於 `localhost:8080`。
+
+2. **同步線上資料到 Emulator**（如需要最新的生產資料）
+
+   ```bash
+   node scripts/sync-prod-to-emulator.mjs
+   ```
+
+3. **在 Emulator 環境中執行資料變更**
+   所有腳本必須設定 `FIRESTORE_EMULATOR_HOST` 環境變數：
+
+   ```powershell
+   $env:FIRESTORE_EMULATOR_HOST="localhost:8080"
+   node scripts/migrate-slugs.mjs --dry-run   # 先預覽
+   node scripts/migrate-slugs.mjs              # 確認後執行
+   ```
+
+4. **使用者在本地前端驗證**
+   啟動開發伺服器 (`npm run start`)，在本地前端頁面確認資料變更正確、畫面顯示無誤。
+
+5. **交由使用者決定是否同步到線上環境**
+   Agent 完成 Emulator 環境的變更後，必須告知使用者變更內容，由使用者自行決定是否將變更同步到生產環境。Agent **不可**自行執行線上環境的資料寫入。
+
+#### 禁止事項
+
+- ❌ 執行腳本時未設定 `FIRESTORE_EMULATOR_HOST`，導致直接操作生產 Firestore
+- ❌ 在未啟動 Emulator 的情況下執行 `migrate-slugs.mjs` 等資料遷移腳本
+- ❌ 透過 Firebase Admin SDK 或 REST API 直接寫入生產環境 Firestore
+- ❌ 跳過本地前端驗證步驟，直接告知使用者「已完成」
+
 ## 🔄 工作流程協議
 
 ### 接收任務
