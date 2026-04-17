@@ -1,6 +1,6 @@
-@import "../../../styles/index";
+@use "../../../styles/index" as *;
 
-@import "./mba-common";
+@use "./mba-common" as *;
 
 .mba-application-title {
   font-size: $font-size-xl;

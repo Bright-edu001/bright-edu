@@ -4,6 +4,13 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+      },
+    },
+  },
   server: {
     port: 3000,
     open: true,

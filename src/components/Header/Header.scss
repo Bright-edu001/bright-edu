@@ -1,4 +1,4 @@
-@import "../../styles/index";
+@use "../../styles/index" as *;
 
 /* 頁首基本樣式 */
 .header {
@@ -17,12 +17,14 @@
   /* 頁首容器樣式 */
   .container {
     @include container;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0;
-    padding: 0 1.5rem;
+    & {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0;
+      padding: 0 1.5rem;
+    }
   }
 
   /* 網站標誌樣式 */

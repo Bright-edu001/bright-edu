@@ -1,7 +1,7 @@
-@import "../../../../styles/index";
+@use "../../../../styles/index" as *;
 
 // 導入變數
- // 導入 mixins
+// 導入 mixins
 
 .management-container {
   margin: 0 auto;

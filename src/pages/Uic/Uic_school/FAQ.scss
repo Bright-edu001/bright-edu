@@ -1,4 +1,4 @@
-@import "../../../styles/index";
+@use "../../../styles/index" as *;
 
 .faq-page {
   width: 100%;
@@ -6,8 +6,10 @@
 
   .faq-container {
     @include container;
-    max-width: 1200px;
-    padding: 4rem 1.5rem 7rem;
+    & {
+      max-width: 1200px;
+      padding: 4rem 1.5rem 7rem;
+    }
 
     .faq-section {
       margin-bottom: $spacing-xxl;
@@ -76,7 +78,9 @@
           .answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease, padding 0.5s ease;
+            transition:
+              max-height 0.5s ease,
+              padding 0.5s ease;
             padding: 0 1rem;
 
             p {
