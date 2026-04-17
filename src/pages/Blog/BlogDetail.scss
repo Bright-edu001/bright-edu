@@ -1,4 +1,4 @@
-@import "../../styles/index";
+@use "../../styles/index" as *;
 
 // 詳情頁專屬 wrapper，避免與列表頁 CSS 全域衝突
 .blog-detail-page {

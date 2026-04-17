@@ -1,6 +1,6 @@
-@import "../../../styles/index";
+@use "../../../styles/index" as *;
 
-@import "./mba-common.scss";
+@use "./mba-common" as *;
 
 .mba-areas-hero {
   height: 80px;

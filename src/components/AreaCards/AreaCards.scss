@@ -1,4 +1,4 @@
-@import "../../styles/index";
+@use "../../styles/index" as *;
 
 // 參照原 Areas / MbaPrograms 樣式
 .mba-areas-concentration-list {
@@ -21,7 +21,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+    transition:
+      box-shadow 0.2s,
+      transform 0.2s,
+      background 0.2s;
     cursor: pointer;
     text-decoration: none;
     color: inherit;

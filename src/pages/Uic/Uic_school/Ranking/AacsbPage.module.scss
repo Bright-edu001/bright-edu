@@ -1,7 +1,7 @@
-@import "../../../../styles/index";
+@use "../../../../styles/index" as *;
 
 // 引入變數
- // 引入 mixins
+// 引入 mixins
 .sectionBlock {
   margin: 3rem 0;
 }

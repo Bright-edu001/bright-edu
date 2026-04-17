@@ -1,8 +1,8 @@
-@import "../../../../styles/index";
+@use "../../../../styles/index" as *;
 
 // 引入變數
- // 引入混和
-@import "../RankingsAwards.scss";
+// 引入混和
+@use "../RankingsAwards";
 
 .heedContainer {
   margin-bottom: $spacing-lg;

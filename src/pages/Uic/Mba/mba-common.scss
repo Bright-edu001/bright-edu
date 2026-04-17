@@ -1,4 +1,4 @@
-@import "../../../styles/index";
+@use "../../../styles/index" as *;
 
 .mba-heading-large {
   @include heading-large;
