@@ -22,6 +22,32 @@ applyTo: "**/*.scss"
 4. **響應式設計** — 優先使用 `_mixins.scss` 中定義的斷點 mixin
 5. **巢狀層級** — 最多 3 層巢狀，避免過深的選擇器
 6. **避免 !important** — 除非覆蓋第三方元件庫樣式
+7. **避免 Sass mixed-decls 結構** — 若 mixin 內含 `@media`、`&:hover` 或其他巢狀規則，呼叫端不可在 `@include` 後面再接一般 declaration。這種寫法在新版本 Sass 會改變輸出順序，可能破壞 responsive 覆蓋。應改為拆分成 base mixin 與 nested-rule mixin，或讓一般 declaration 排在 `@include` 之前
+
+## Sass 巢狀規則注意事項
+
+### 不可使用的模式
+
+```scss
+.container {
+  @include container;
+  padding: 0 1.5rem;
+}
+```
+
+如果 `container` mixin 內含 `@media`，以上寫法會觸發 Sass `mixed-decls` 警告，未來版本還可能改變 CSS 輸出順序。
+
+### 建議模式
+
+```scss
+.container {
+  @include container-base;
+  padding: 0 1.5rem;
+  @include container-mobile-padding;
+}
+```
+
+或是讓所有一般 declaration 都排在含巢狀規則的 `@include` 之前。
 
 ## 模組化樣式範本
 

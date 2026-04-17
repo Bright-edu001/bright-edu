@@ -60,6 +60,7 @@ scripts/             # 自動化腳本（效能分析、Storage 測試）
 - 所有 React 檔案使用 `.jsx` 副檔名
 - 元件使用函式元件 + PropTypes 驗證
 - 樣式使用 SCSS 模組化，全域變數定義在 `src/styles/_variables.scss`
+- SCSS 若 mixin 內含 `@media`、`&:hover` 等巢狀規則，呼叫端不可在 `@include` 後繼續寫一般 declaration；應拆成 base mixin 與巢狀規則 mixin，或把 declaration 移到 `@include` 前，以避免 Sass `mixed-decls` 問題與 responsive 覆蓋順序錯誤
 - 資料取得使用 React Query，不直接在元件中呼叫 Firebase
 - 服務層需包含 Firebase 就緒狀態檢查與錯誤處理
 - 路由支援中英文雙語（如 msuRoutes + msuChineseRoutes）
