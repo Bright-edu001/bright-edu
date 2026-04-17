@@ -16,15 +16,14 @@
 
   /* 頁首容器樣式 */
   .container {
-    @include container;
-    & {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 0;
-      padding: 0 1.5rem;
-    }
+    @include container-base;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0 1.5rem;
+    @include container-mobile-padding;
   }
 
   /* 網站標誌樣式 */

@@ -53,14 +53,24 @@
   align-items: center;
 }
 
-@mixin container {
-  max-width: $container-max-width;
+@mixin container-base(
+  $max-width: $container-max-width,
+  $padding-x: $spacing-lg
+) {
+  max-width: $max-width;
   margin: 0 auto;
-  padding: 0 $spacing-lg;
+  padding: 0 $padding-x;
+}
 
-  @media (max-width: 768px) {
-    padding: 0 $spacing-sm;
+@mixin container-mobile-padding($padding: 0 $spacing-sm, $breakpoint: 768px) {
+  @media (max-width: $breakpoint) {
+    padding: $padding;
   }
+}
+
+@mixin container {
+  @include container-base;
+  @include container-mobile-padding;
 }
 
 @mixin grid-list($columns: 3) {

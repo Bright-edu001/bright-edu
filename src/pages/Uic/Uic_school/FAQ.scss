@@ -5,11 +5,9 @@
   font-family: $font-family-base;
 
   .faq-container {
-    @include container;
-    & {
-      max-width: 1200px;
-      padding: 4rem 1.5rem 7rem;
-    }
+    @include container-base;
+    max-width: 1200px;
+    padding: 4rem 1.5rem 7rem;
 
     .faq-section {
       margin-bottom: $spacing-xxl;
