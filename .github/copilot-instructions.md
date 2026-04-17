@@ -101,43 +101,58 @@ scripts/             # 自動化腳本（效能分析、Storage 測試）
 
 ## 🔄 工作流程
 
-本專案使用結構化的多 Agent 協作工作流程，所有助手必須遵守以下協議：
+本專案使用 **Director 單一入口** 架構，使用者只需與 Director 對話，所有任務編排由 Director 自動完成。
 
-### 流程概覽
+### 架構概覽
 
 ```
-使用者 → @reviewer(分析) → @pm(規格書) → @frontend/@admin/@cloud(開發) → @testing(測試) → @reviewer+@pm(審核) → 使用者(最終確認)
+使用者 ↔ Director（唯一入口）
+              ├── Reviewer（分析 / 審核）
+              ├── Planner（規格 / 文件）
+              ├── Frontend（前台開發）
+              ├── Admin（後台開發）
+              ├── Firebase（雲端 / 服務層）
+              └── Testing（測試）
 ```
 
-- **完整流程**：中大型任務經過上述所有階段
-- **簡化流程**：小修改/bug fix 由 @reviewer 快速分析後直接指派開發 Agent
+- **Director** 是唯一對外入口，負責需求理解、風險判斷、委派 worker、彙總結果、向使用者回報
+- **Worker agents**（Reviewer、Planner、Frontend、Admin、Firebase、Testing）為內部 worker，由 Director 委派
+- 使用者**不需要**手動切換 agent
+
+### 流程模式
+
+- **簡化流程**：小修改 / bug fix → Director 直接委派開發 worker → 完成回報
+- **標準流程**：中型任務 → Director 委派開發 → Testing 驗證 → 回報使用者
+- **完整流程**：大型任務 → Reviewer 分析 → Planner 規格 → 開發 workers → Testing → Reviewer + Planner 審核 → 回報使用者
+
+### Local Agent vs Copilot CLI 分層
+
+| 場景                                  | 建議執行方式               |
+| ------------------------------------- | -------------------------- |
+| 需求釐清、即時互動、畫面確認          | Local Agent                |
+| Playwright / 瀏覽器 MCP / IDE context | Local Agent                |
+| UI 驗證與截圖比對                     | Local Agent                |
+| 需求明確、可背景施工                  | Copilot CLI                |
+| 適合 worktree 隔離的批次修改          | Copilot CLI                |
+| 相對獨立的平行子任務                  | Copilot CLI（/fleet 模式） |
+
+**原則**：不要預設所有任務都用 CLI；Playwright 或需要 IDE 工具的工作必須留在 Local。
 
 ### 共享工作區
 
-任務檔案存放在 `.workflow/active/TASK-XXX/`（已加入 `.gitignore`，不上傳 GitHub）：
+大型任務使用 `.workflow/active/TASK-XXX/`（已加入 `.gitignore`）：
 
-| 檔案             | 產出者   | 說明             |
-| ---------------- | -------- | ---------------- |
-| `status.md`      | 各 Agent | 任務狀態追蹤     |
-| `analysis.md`    | reviewer | 可行性分析報告   |
-| `spec.md`        | pm       | 規格書與任務分派 |
-| `test-report.md` | testing  | 測試報告         |
-| `review.md`      | reviewer | 最終審核報告     |
-
-### 交接協議
-
-每個 Agent 完成工作後，必須輸出交接區塊：
-
-```
-### 📋 交接
-- 狀態：✅ 完成 / ❌ 有問題 / ⚠️ 需要使用者介入
-- 下一步：請呼叫 `@xxx` 並告知 [具體指示]
-- 任務檔案：`.workflow/active/TASK-XXX/xxx.md`
-```
+| 檔案             | 產出者             | 說明             |
+| ---------------- | ------------------ | ---------------- |
+| `status.md`      | Director / Planner | 任務狀態追蹤     |
+| `analysis.md`    | Reviewer           | 可行性分析報告   |
+| `spec.md`        | Planner            | 規格書與任務分派 |
+| `test-report.md` | Testing            | 測試報告         |
+| `review.md`      | Reviewer           | 最終審核報告     |
 
 ### 升級機制
 
-遇到以下情況時，必須暫停並通知使用者介入：
+遇到以下情況時，Director 必須暫停並向使用者回報：
 
 - 技術方案無法確定，需要決策
 - 任務描述模糊到無法拆解
@@ -148,9 +163,9 @@ scripts/             # 自動化腳本（效能分析、Storage 測試）
 
 以下原則為所有 `.github/agents/*.agent.md` 的共同基線；各 Agent 文件只補充角色差異，不重複定義同一套通用規則：
 
-- **安全與確認**：涉及 UI 畫面、樣式、版面佈局的修改，必須先描述具體變更並取得使用者確認；涉及部署、發版、安全規則或生產資料寫入，必須先取得使用者確認
-- **工作流程**：完整流程依本檔定義的 reviewer → pm → 開發 → testing → reviewer+pm → 使用者順序；簡化流程由 reviewer 直接交接開發 Agent
+- **Director 為唯一入口**：使用者只與 Director 對話；其餘 worker agents（Reviewer、Planner、Frontend、Admin、Firebase、Testing）由 Director 內部委派，不要求使用者手動切換
+- **安全與確認**：涉及 UI 畫面、樣式、版面佈局的修改，必須先描述具體變更並取得使用者確認；涉及部署、發版、安全規則或生產資料寫入，必須先取得使用者確認。Worker 遇到需確認事項時回報 Director，由 Director 統一向使用者溝通
+- **回報格式**：所有 worker 完成後回報 Director，使用各自的 `### 📋 [Worker名] 回報` 格式，不要求使用者手動呼叫下一個 agent
 - **任務檔案**：若存在 `.workflow/active/TASK-XXX/`，Agent 應優先讀取對應 analysis / spec / test-report / review 文件後再執行工作
-- **交接格式**：所有 Agent 完成後皆使用本檔定義的 `### 📋 交接` 格式，不在各 Agent 文件重複定義
-- **權責分工**：每個 Agent 只處理其職責範圍內的檔案；若任務跨模組，應交接給對應 Agent，而非越權修改
+- **權責分工**：每個 Agent 只處理其職責範圍內的檔案；若任務跨模組，由 Director 協調委派，而非 worker 越權修改
 - **規則優先序**：主規則檔定義共通原則；instructions 檔定義技術領域規範；agents 檔只定義角色差異與角色專屬限制
