@@ -60,9 +60,11 @@ scripts/             # 自動化腳本（效能分析、Storage 測試）
 - 所有 React 檔案使用 `.jsx` 副檔名
 - 元件使用函式元件 + PropTypes 驗證
 - 樣式使用 SCSS 模組化，全域變數定義在 `src/styles/_variables.scss`
+- `src/` 下新增或修改 SCSS 時，統一使用 `@use` / `@forward`，不可新增 `@import`
 - SCSS 若 mixin 內含 `@media`、`&:hover` 等巢狀規則，呼叫端不可在 `@include` 後繼續寫一般 declaration；應拆成 base mixin 與巢狀規則 mixin，或把 declaration 移到 `@include` 前，以避免 Sass `mixed-decls` 問題與 responsive 覆蓋順序錯誤
 - 資料取得使用 React Query，不直接在元件中呼叫 Firebase
 - 服務層需包含 Firebase 就緒狀態檢查與錯誤處理
+- 若功能使用 slug、path、link 或其他可公開引用的唯一識別碼，必須明確定義唯一性範圍，並在 create / update 兩條路徑都套用相同約束；若需跨 collection 唯一，查重不得只檢查單一 collection
 - 路由支援中英文雙語（如 msuRoutes + msuChineseRoutes）
 - 使用 `@` 路徑別名指向 `src/`
 - HTML 內容必須經過 `sanitizeHtml()` 處理以防止 XSS
@@ -141,3 +143,14 @@ scripts/             # 自動化腳本（效能分析、Storage 測試）
 - 任務描述模糊到無法拆解
 - 涉及安全規則或生產環境的重大變更
 - 多個方案各有優缺點，需要使用者選擇
+
+## Agent 共通原則
+
+以下原則為所有 `.github/agents/*.agent.md` 的共同基線；各 Agent 文件只補充角色差異，不重複定義同一套通用規則：
+
+- **安全與確認**：涉及 UI 畫面、樣式、版面佈局的修改，必須先描述具體變更並取得使用者確認；涉及部署、發版、安全規則或生產資料寫入，必須先取得使用者確認
+- **工作流程**：完整流程依本檔定義的 reviewer → pm → 開發 → testing → reviewer+pm → 使用者順序；簡化流程由 reviewer 直接交接開發 Agent
+- **任務檔案**：若存在 `.workflow/active/TASK-XXX/`，Agent 應優先讀取對應 analysis / spec / test-report / review 文件後再執行工作
+- **交接格式**：所有 Agent 完成後皆使用本檔定義的 `### 📋 交接` 格式，不在各 Agent 文件重複定義
+- **權責分工**：每個 Agent 只處理其職責範圍內的檔案；若任務跨模組，應交接給對應 Agent，而非越權修改
+- **規則優先序**：主規則檔定義共通原則；instructions 檔定義技術領域規範；agents 檔只定義角色差異與角色專屬限制

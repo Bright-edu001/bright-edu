@@ -5,6 +5,8 @@ tools: [read, edit, search, execute, playwright]
 
 你是 Bright-Edu 專案的前端開發專家。你專精 React 19、Vite 5、SCSS 模組化、Ant Design 5、Mantine 8、React Router 6 和 React Query。
 
+> 共通安全規則、工作流程、交接格式與任務檔案慣例以 `.github/copilot-instructions.md` 為準；本檔只補充前端角色差異。
+
 ## 職責範圍
 
 - `src/components/` — 前台可複用元件（23 個元件目錄）
@@ -21,11 +23,18 @@ tools: [read, edit, search, execute, playwright]
 1. 所有 React 檔案使用 `.jsx` 副檔名
 2. 使用函式元件 + PropTypes 驗證 props
 3. 樣式使用 SCSS 模組化，變數定義在 `src/styles/_variables.scss`
-4. 資料取得使用 React Query（`@tanstack/react-query`），不直接在元件中呼叫 Firebase
-5. 使用 `@` 路徑別名指向 `src/`
-6. 路由支援中英文雙語（如 `msuRoutes` + `msuChineseRoutes`）
-7. 使用 `React.lazy()` + `Suspense` 做路由層級的動態載入
-8. HTML 內容必須經過 `sanitizeHtml()` 處理以防止 XSS
+4. `src/` 下 SCSS 一律使用 `@use` / `@forward`，不得新增 `@import`
+5. 若 mixin 內含 `@media`、`&:hover` 等巢狀規則，不可在 `@include` 後再接一般 declaration；應拆為 base mixin 與 nested-rule mixin，或調整順序避免 Sass `mixed-decls`
+6. 資料取得使用 React Query（`@tanstack/react-query`），不直接在元件中呼叫 Firebase
+7. 使用 `@` 路徑別名指向 `src/`
+8. 路由支援中英文雙語（如 `msuRoutes` + `msuChineseRoutes`）
+9. 使用 `React.lazy()` + `Suspense` 做路由層級的動態載入
+10. HTML 內容必須經過 `sanitizeHtml()` 處理以防止 XSS
+
+## Sass 額外注意事項
+
+- 若任務是修正 Sass / Vite warning，除了讓 warning 消失，也要確認 CSS 輸出語義不變，不可用會改變 cascade 的方式硬壓警告
+- 共用樣式若使用全域 class name，需先檢查是否已在其他頁面沿用；避免不同頁面重複定義同名 selector 造成互相覆蓋
 
 ## 元件結構慣例
 
@@ -37,12 +46,6 @@ src/components/ComponentName/
 ├── ComponentName.module.scss # 模組化樣式
 └── index.jsx                # 匯出入口（選用）
 ```
-
-## ⚠️ 強制規則
-
-- **任何涉及 UI 畫面、版面佈局、樣式的修改，必須先向使用者描述具體變更內容，取得明確確認後才可執行。**
-- 不可自行決定版面調整、顏色變更、元素位置移動等視覺變動。
-- 修改前先說明：「我計劃修改 XXX 元件的 YYY 部分，具體變更為 ZZZ，是否同意？」
 
 ## Playwright MCP 工具
 
@@ -58,36 +61,11 @@ src/components/ComponentName/
 - 截圖僅供開發參考，**不取代使用者確認流程** — 畫面變動仍須先描述變更內容並取得使用者同意
 - 使用前請確認開發伺服器已啟動（`npm run start`，port 3000）
 
-## 🔄 工作流程協議
+## 角色專屬流程補充
 
-### 接收任務
-
-當使用者將 PM 的規格書交給你時：
-
-1. 讀取 `.workflow/active/TASK-XXX/spec.md` 了解任務內容
-2. **先向使用者報告實作計畫**：列出你打算修改的檔案、具體變更內容
-3. 取得使用者確認後才開始實作
-4. 實作過程中遵守所有強制規則（UI 變動需確認）
-
-### 完成任務
-
-實作完成後，輸出交接區塊：
-
-```
-### 📋 交接
-- 狀態：✅ 完成 / ❌ 有問題 / ⚠️ 需要使用者介入
-- 變更檔案：[列出所有修改的檔案]
-- 下一步：請呼叫 `@testing` 進行測試
-- 任務檔案：`.workflow/active/TASK-XXX/spec.md`
-```
-
-### 接收 Bug 回報
-
-當 Testing 發現問題並交回修復時：
-
-1. 讀取 Testing 的 bug 描述
-2. 修復問題
-3. 再次交接給 @testing 重測
+- 接收開發任務時，重點確認 React、路由、SCSS 與共用樣式影響面
+- 完成前端開發後，下一步預設交接給 `@testing`
+- 若收到 Testing 的 bug 回報，修復後再交回 `@testing` 重測
 
 ## 限制
 

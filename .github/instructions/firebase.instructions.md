@@ -5,6 +5,8 @@ applyTo: "src/config/**,src/services/**,functions/**"
 
 # Firebase 與服務層開發規範
 
+> 共通安全、流程與生產環境變更確認原則以 `.github/copilot-instructions.md` 為準；本檔僅補充 Firebase / 服務層技術規範。
+
 ## Firebase 設定檔
 
 | 檔案                              | 用途                                        |
@@ -24,6 +26,7 @@ applyTo: "src/config/**,src/services/**,functions/**"
 1. **Firebase 就緒狀態檢查** — 確認 Firebase 已初始化再執行操作
 2. **錯誤處理** — 捕捉並記錄所有 Firebase 錯誤
 3. **日誌記錄** — 使用 `@/utils/logger` 記錄關鍵操作
+4. **唯一識別碼一致性** — 若服務層負責產生或驗證 slug、公開 path、link 或其他唯一識別碼，必須明確定義唯一性範圍，並在 create / update 兩條路徑套用同一套查重規則；若需跨 collection 唯一，查重必須覆蓋所有相關 collection
 
 ```jsx
 // 標準服務模式（參考 contactService.jsx）
@@ -54,8 +57,7 @@ export async function submitForm(data) {
 
 ## 環境變數
 
-- 所有前端環境變數必須使用 `VITE_` 前綴
-- 不在程式碼中硬編碼密鑰或敏感資訊
+- 所有前端環境變數使用 `VITE_` 前綴
 - 使用 `src/config/envUtils.jsx` 判斷環境：
   - `isLocalDevelopment()` — 本地開發
   - `isFirebaseHosting()` — Firebase 託管
@@ -80,8 +82,7 @@ export async function submitForm(data) {
 - 未設定該環境變數時，腳本會直接操作生產 Firestore，造成不可逆的影響
 - Agent 不可自行將 Emulator 中的變更推送到生產環境
 
-## ⚠️ 安全規則
+## Firebase / 服務層專屬安全補充
 
-- 修改 `firestore.rules` 或 `storage.rules` 前必須向使用者說明
-- 「開發用」的寬鬆規則（`allow write: if true`）不可部署到生產環境
 - 所有用戶輸入必須驗證後再寫入 Firestore
+- 對外可見的唯一識別碼若允許手動輸入，在確認無衝突時應原樣保留，不可因流程順序錯誤而平白附加後綴；衍生欄位（如 `link`）需與最終識別碼同步更新

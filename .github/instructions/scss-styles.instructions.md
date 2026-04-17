@@ -5,6 +5,8 @@ applyTo: "**/*.scss"
 
 # SCSS 樣式開發規範
 
+> 共通安全、流程與畫面變動確認原則以 `.github/copilot-instructions.md` 為準；本檔僅補充 SCSS 技術規範。
+
 ## 全域樣式結構
 
 | 檔案                         | 用途                               |
@@ -22,7 +24,8 @@ applyTo: "**/*.scss"
 4. **響應式設計** — 優先使用 `_mixins.scss` 中定義的斷點 mixin
 5. **巢狀層級** — 最多 3 層巢狀，避免過深的選擇器
 6. **避免 !important** — 除非覆蓋第三方元件庫樣式
-7. **避免 Sass mixed-decls 結構** — 若 mixin 內含 `@media`、`&:hover` 或其他巢狀規則，呼叫端不可在 `@include` 後面再接一般 declaration。這種寫法在新版本 Sass 會改變輸出順序，可能破壞 responsive 覆蓋。應改為拆分成 base mixin 與 nested-rule mixin，或讓一般 declaration 排在 `@include` 之前
+7. **禁止新增 `@import`** — `src/` 下 SCSS 一律使用 `@use` / `@forward`；若需共用變數與 mixin，優先透過 `styles/index.scss` 的 `@forward` 輸出後再以 `@use ".../styles/index" as *` 引入
+8. **避免 Sass mixed-decls 結構** — 若 mixin 內含 `@media`、`&:hover` 或其他巢狀規則，呼叫端不可在 `@include` 後面再接一般 declaration。這種寫法在新版本 Sass 會改變輸出順序，可能破壞 responsive 覆蓋。應改為拆分成 base mixin 與 nested-rule mixin，或讓一般 declaration 排在 `@include` 之前
 
 ## Sass 巢狀規則注意事項
 
@@ -75,7 +78,3 @@ applyTo: "**/*.scss"
 - Ant Design：使用 `ConfigProvider` 的 `theme` 設定為主，避免直接覆蓋 CSS
 - Mantine：使用 Mantine 的 theme 系統
 - 必要時才使用 `:global()` 覆蓋特定類別
-
-## ⚠️ 注意
-
-- 任何樣式修改都屬於畫面變動，必須先向使用者描述具體變更並取得確認
