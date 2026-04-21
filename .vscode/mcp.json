@@ -16,6 +16,11 @@
       "command": "npx",
       "args": ["-y", "@upstash/context7-mcp@latest"],
       "description": "Context7 — 自動抓取最新函式庫文件注入 prompt"
+    },
+    "notion": {
+      "type": "http",
+      "url": "https://mcp.notion.com/mcp",
+      "description": "Notion MCP — 工作流任務、規格、測試與審核狀態管理"
     }
   }
 }

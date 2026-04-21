@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useEffectEvent } from "react";
 import {
   Table,
   Card,
@@ -65,6 +65,28 @@ function ContactFormsPage() {
   const [isAutoSyncModalVisible, setIsAutoSyncModalVisible] = useState(false);
   const [autoSyncForm] = Form.useForm();
 
+  const handleSnapshotData = useEffectEvent((snapshot) => {
+    const formsData = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      createdAt: doc.data().createdAt?.toDate() || new Date(),
+      updatedAt: doc.data().updatedAt?.toDate() || new Date(),
+    }));
+    setForms(formsData);
+    setLoading(false);
+  });
+
+  const handleSnapshotError = useEffectEvent((error) => {
+    console.error("監聽 Firestore 資料時發生錯誤:", error);
+    message.error("載入資料失敗");
+    setLoading(false);
+  });
+
+  const loadAutoSyncStatus = useEffectEvent(() => {
+    const status = firestoreToSheetsSync.getAutoSyncStatus();
+    setAutoSyncStatus(status);
+  });
+
   // 即時監聽 Firestore 資料（等待 Auth 狀態還原後再建立監聽器）
   useEffect(() => {
     let unsubscribe;
@@ -87,24 +109,7 @@ function ContactFormsPage() {
         );
       }
 
-      unsubscribe = onSnapshot(
-        q,
-        (snapshot) => {
-          const formsData = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-            createdAt: doc.data().createdAt?.toDate() || new Date(),
-            updatedAt: doc.data().updatedAt?.toDate() || new Date(),
-          }));
-          setForms(formsData);
-          setLoading(false);
-        },
-        (error) => {
-          console.error("監聽 Firestore 資料時發生錯誤:", error);
-          message.error("載入資料失敗");
-          setLoading(false);
-        },
-      );
+      unsubscribe = onSnapshot(q, handleSnapshotData, handleSnapshotError);
     };
 
     // 等待 Auth 狀態確認後再啟動 Firestore listener
@@ -122,13 +127,7 @@ function ContactFormsPage() {
     };
   }, [filters.status]);
 
-  // 載入自動同步狀態
   useEffect(() => {
-    const loadAutoSyncStatus = () => {
-      const status = firestoreToSheetsSync.getAutoSyncStatus();
-      setAutoSyncStatus(status);
-    };
-
     // 初次載入
     loadAutoSyncStatus();
 

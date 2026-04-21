@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffectEvent } from "react";
 
 /**
  * 自定義 hook 用於響應式處理窗口大小變化
@@ -21,23 +21,23 @@ export const useWindowSize = () => {
     };
   });
 
+  const onResize = useEffectEvent(() => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  });
+
   useLayoutEffect(() => {
     // 確保在瀏覽器環境中執行
     if (typeof window === "undefined") return;
 
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
     // 監聽窗口大小變化
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", onResize);
 
     // 清理事件監聽器
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 

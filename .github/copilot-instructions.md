@@ -103,6 +103,30 @@ scripts/             # 自動化腳本（效能分析、Storage 測試）
 
 本專案使用 **Director 單一入口** 架構，使用者只需與 Director 對話，所有任務編排由 Director 自動完成。
 
+## 🧠 Workflow Memory 原則（Notion + Repo）
+
+為了降低每次重建上下文成本，本專案採用以下分工：
+
+- **Repo = 程式碼與規範真相來源**：code / agents / instructions / hooks / skills
+- **Notion Task Database = workflow 真相來源**：task state / analysis / spec summary / test summary / review summary / decision log
+
+### Board 定位
+
+- Board 只是 Task Database 的一個 View。
+- 不可把 Board 與 Task Database 當作兩套資料來源。
+
+### Notion 優先與 fallback
+
+- 若 Notion MCP 可用：優先讀寫 Notion task page（狀態、摘要、owner、決策）。
+- 若 Notion MCP 不可用：改用 `.workflow/active/TASK-XXX/` 作為暫時 fallback。
+- Notion 恢復後由 Director 在階段切換時補同步，避免長期雙寫造成漂移。
+
+### Director 編排責任
+
+- 使用者只與 Director 對話。
+- 不要求使用者手動切換 worker。
+- Director 在階段切換時同步三項欄位：一句話摘要、Current Owner、是否需要使用者決策。
+
 ### 架構概覽
 
 ```
@@ -150,6 +174,14 @@ scripts/             # 自動化腳本（效能分析、Storage 測試）
 | `test-report.md` | Testing            | 測試報告         |
 | `review.md`      | Reviewer           | 最終審核報告     |
 
+`.workflow/active/TASK-XXX/` 在新流程中的定位：
+
+- Notion MCP 不可用時的 fallback 工作區
+- 本地快取 / 導出區
+- CLI 或無 MCP 情境下的替代結構化儲存
+
+原則上不做長期雙寫，避免 Notion 與本地資料長期漂移。
+
 ### 升級機制
 
 遇到以下情況時，Director 必須暫停並向使用者回報：
@@ -164,8 +196,10 @@ scripts/             # 自動化腳本（效能分析、Storage 測試）
 以下原則為所有 `.github/agents/*.agent.md` 的共同基線；各 Agent 文件只補充角色差異，不重複定義同一套通用規則：
 
 - **Director 為唯一入口**：使用者只與 Director 對話；其餘 worker agents（Reviewer、Planner、Frontend、Admin、Firebase、Testing）由 Director 內部委派，不要求使用者手動切換
+- **Notion 為 workflow 主來源**：Notion Task Database 優先承接任務狀態與摘要；Board 只是一個視圖，不是獨立資料源
+- **fallback 一致性**：Notion MCP 不可用時改寫 `.workflow/active/TASK-XXX/`，恢復後由 Director 補同步，不做長期雙寫
 - **安全與確認**：涉及 UI 畫面、樣式、版面佈局的修改，必須先描述具體變更並取得使用者確認；涉及部署、發版、安全規則或生產資料寫入，必須先取得使用者確認。Worker 遇到需確認事項時回報 Director，由 Director 統一向使用者溝通
 - **回報格式**：所有 worker 完成後回報 Director，使用各自的 `### 📋 [Worker名] 回報` 格式，不要求使用者手動呼叫下一個 agent
-- **任務檔案**：若存在 `.workflow/active/TASK-XXX/`，Agent 應優先讀取對應 analysis / spec / test-report / review 文件後再執行工作
+- **任務讀取優先序**：先讀 Notion task page 的規格摘要 / 限制 / 驗收標準；Notion 不可用才讀 `.workflow/active/TASK-XXX/`
 - **權責分工**：每個 Agent 只處理其職責範圍內的檔案；若任務跨模組，由 Director 協調委派，而非 worker 越權修改
 - **規則優先序**：主規則檔定義共通原則；instructions 檔定義技術領域規範；agents 檔只定義角色差異與角色專屬限制

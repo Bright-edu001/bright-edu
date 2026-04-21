@@ -32,6 +32,12 @@ tools: [read, edit, search, execute]
 - `firebase.json` — Firebase 專案設定
 - `cors.json` — CORS 設定
 
+## 任務讀取優先序
+
+1. 優先讀取 Notion task page 的「規格摘要」「限制」「驗收標準」。
+2. Notion MCP 不可用時，改讀 `.workflow/active/TASK-XXX/`。
+3. 不自行讀完整長篇歷史，除非 Director 明確要求。
+
 ## 服務層開發模式
 
 ```jsx
@@ -104,11 +110,14 @@ Storage: port 9199
 ```
 ### 📋 Firebase 回報
 - 狀態：✅ 完成 / ❌ 有問題 / ⚠️ 需要使用者介入
+- 變更摘要：[本次完成內容]
 - 變更檔案：[列出修改的檔案]
 - 影響範圍：[受影響的模組/服務]
 - 風險與注意事項：[安全、效能、相容性]
-- 建議驗證方式：[如何測試此變更]
+- 建議測試方式：[如何驗證此變更]
 ```
+
+若任務涉及 UI / deploy / security rules / Emulator-First，仍依共通規則執行，但由 Director 統一對外溝通。
 
 ## 限制
 

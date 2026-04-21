@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useEffectEvent,
+} from "react";
 import { Menu, Drawer, ConfigProvider } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { menuItems } from "../../config/menuConfig";
@@ -16,33 +22,31 @@ const Header = () => {
   const [animationDuration, setAnimationDuration] = useState("0.2s");
   const navigate = useNavigate();
 
+  const onMenuMouseEnter = useEffectEvent((e) => {
+    if (e.target.closest(".ant-menu-submenu")) {
+      setAnimationDuration("0.2s");
+    }
+  });
+
+  const onMenuMouseLeave = useEffectEvent((e) => {
+    if (e.target.closest(".ant-menu-submenu")) {
+      setAnimationDuration("0.7s");
+    }
+  });
+
   // 監聽滑鼠事件來控制動畫時間
   useEffect(() => {
-    const handleMouseEnter = (e) => {
-      // 檢查是否是選單項目的 mouseenter
-      if (e.target.closest(".ant-menu-submenu")) {
-        setAnimationDuration("0.2s"); // 展開時間
-      }
-    };
-
-    const handleMouseLeave = (e) => {
-      // 檢查是否是選單項目的 mouseleave
-      if (e.target.closest(".ant-menu-submenu")) {
-        setAnimationDuration("0.7s"); // 關閉時間
-      }
-    };
-
     // 添加事件監聽器到 header-nav
     const headerNav = document.querySelector(".header-nav");
     if (headerNav) {
-      headerNav.addEventListener("mouseenter", handleMouseEnter, true);
-      headerNav.addEventListener("mouseleave", handleMouseLeave, true);
+      headerNav.addEventListener("mouseenter", onMenuMouseEnter, true);
+      headerNav.addEventListener("mouseleave", onMenuMouseLeave, true);
     }
 
     return () => {
       if (headerNav) {
-        headerNav.removeEventListener("mouseenter", handleMouseEnter, true);
-        headerNav.removeEventListener("mouseleave", handleMouseLeave, true);
+        headerNav.removeEventListener("mouseenter", onMenuMouseEnter, true);
+        headerNav.removeEventListener("mouseleave", onMenuMouseLeave, true);
       }
     };
   }, []);

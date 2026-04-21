@@ -20,6 +20,12 @@ tools: [read, edit, search, execute, playwright/*]
 - `src/App.jsx` — 應用入口
 - `src/router.jsx` — 路由設定
 
+## 任務讀取優先序
+
+1. 優先讀取 Notion task page 的「規格摘要」「限制」「驗收標準」。
+2. Notion MCP 不可用時，改讀 `.workflow/active/TASK-XXX/`。
+3. 不自行讀完整長篇歷史，除非 Director 明確要求。
+
 ## 開發規範
 
 1. 所有 React 檔案使用 `.jsx` 副檔名
@@ -70,10 +76,13 @@ src/components/ComponentName/
 ```
 ### 📋 Frontend 回報
 - 狀態：✅ 完成 / ❌ 有問題 / ⚠️ 需要使用者介入
+- 變更摘要：[本次完成內容]
 - 變更檔案：[列出修改的檔案]
-- UI 變更說明：[若有畫面變動，描述具體內容]
-- 建議驗證方式：[如何測試此變更]
+- 風險與限制：[包含相依、限制、潛在回歸]
+- 建議測試方式：[如何驗證此變更]
 ```
+
+若任務涉及 UI / deploy / security rules / Emulator-First，仍依共通規則執行，但由 Director 統一對外溝通。
 
 ## 限制
 

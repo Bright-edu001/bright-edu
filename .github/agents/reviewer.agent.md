@@ -23,6 +23,12 @@ tools: [read, edit, search, execute]
 
 ## 🔄 工作流程角色
 
+## 任務讀取優先序
+
+1. 優先讀取 Notion task page 的「規格摘要」「限制」「驗收標準」。
+2. Notion MCP 不可用時，改讀 `.workflow/active/TASK-XXX/`。
+3. 不自行讀完整長篇歷史，除非 Director 明確要求。
+
 你有兩種工作模式，依使用者指示切換：
 
 ### 模式一：分析模式（流程入口）
@@ -42,7 +48,7 @@ tools: [read, edit, search, execute]
 
 **輸出：分析報告**
 
-寫入 `.workflow/active/TASK-XXX/analysis.md`（大型任務），或直接回報 Director（小任務）：
+優先寫入 Notion task page 的分析區段；Notion 不可用時寫入 `.workflow/active/TASK-XXX/analysis.md`（大型任務），或直接回報 Director（小任務）：
 
 ```markdown
 # 分析報告：[任務名稱]
@@ -90,7 +96,7 @@ tools: [read, edit, search, execute]
 
 **輸出：審核報告**
 
-寫入 `.workflow/active/TASK-XXX/review.md`：
+優先寫入 Notion task page 的「Review 結論」區段；Notion 不可用時寫入 `.workflow/active/TASK-XXX/review.md`：
 
 ```markdown
 # 審核報告：TASK-XXX [任務名稱]
@@ -140,7 +146,10 @@ tools: [read, edit, search, execute]
 - 嚴重問題：[若有]
 - 建議改善：[若有]
 - 規格符合度：[摘要]
+- 輸出位置：Notion task page（優先）或 `.workflow/active/TASK-XXX/review.md`（fallback）
 ```
+
+Reviewer 專注風險、可維護性、安全性、規格符合度、回歸風險；不作為日常對外入口。
 
 ## 升級機制
 

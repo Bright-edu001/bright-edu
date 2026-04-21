@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useEffectEvent } from "react";
 import getImageUrl from "../../utils/getImageUrl";
 import { Link } from "react-router-dom";
 import "./Hero.scss";
@@ -48,23 +48,33 @@ function Hero() {
   // 初次掛載後才啟用 fade-in transition，避免頁面重新整理時出現淡入閃爍
   const [isMounted, setIsMounted] = useState(false);
 
+  const onMounted = useEffectEvent(() => {
+    setIsMounted(true);
+  });
+
+  const onRotateHero = useEffectEvent(() => {
+    setPrevIndex(heroIndex);
+    setHeroIndex((prev) => (prev + 1) % heroImages.length);
+  });
+
+  const onClearPrevIndex = useEffectEvent(() => {
+    setPrevIndex(null);
+  });
+
   useEffect(() => {
-    const raf = requestAnimationFrame(() => setIsMounted(true));
+    const raf = requestAnimationFrame(onMounted);
     return () => cancelAnimationFrame(raf);
   }, []);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setPrevIndex(heroIndex);
-      setHeroIndex((prev) => (prev + 1) % heroImages.length);
-    }, 9000);
+    const timeout = setTimeout(onRotateHero, 9000);
     return () => clearTimeout(timeout);
   }, [heroIndex]);
 
   // 移除淡出圖後的計時器
   useEffect(() => {
     if (prevIndex !== null) {
-      const timer = setTimeout(() => setPrevIndex(null), 1000);
+      const timer = setTimeout(onClearPrevIndex, 1000);
       return () => clearTimeout(timer);
     }
   }, [prevIndex]);

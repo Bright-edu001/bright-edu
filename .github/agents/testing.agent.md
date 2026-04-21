@@ -18,6 +18,12 @@ tools: [read, edit, search, execute, playwright/*]
 - `src/setupTests.js` — 測試初始設定
 - `src/test-config.js` — 測試配置
 
+## 任務讀取優先序
+
+1. 優先讀取 Notion task page 的「規格摘要」「限制」「驗收標準」。
+2. Notion MCP 不可用時，改讀 `.workflow/active/TASK-XXX/`。
+3. 不自行讀完整長篇歷史，除非 Director 明確要求。
+
 ## 測試框架設定
 
 ### Vitest (單元測試)
@@ -148,6 +154,12 @@ $env:FIRESTORE_EMULATOR_HOST="localhost:8080"
    - 兩項測試皆須全數通過，才可回報 Director
    - 若有任何失敗，必須先診斷並修復或回報 Director 交回開發 worker，不可跳過
 
+## 測試結果輸出位置
+
+- Notion 可用時：優先將摘要寫入 task page 的「測試結果」區段。
+- Notion 不可用時：寫回 `.workflow/active/TASK-XXX/test-report.md`。
+- 不直接要求使用者手動切換下一個 agent，只回報 Director。
+
 ### 額外驗證原則
 
 - 若任務涉及 slug、公開 path、link 或其他唯一識別碼，測試需覆蓋 create / update 兩條路徑，以及所有受影響 collection；手動輸入且無衝突時應驗證原值保留
@@ -164,6 +176,7 @@ $env:FIRESTORE_EMULATOR_HOST="localhost:8080"
 - E2E 測試：X/X 通過
 - 失敗測試：[列出失敗的測試名稱與原因]
 - 建議下一步：[修復建議 / 可以進入審核]
+- 輸出位置：Notion task page（優先）或 `.workflow/active/TASK-XXX/test-report.md`（fallback）
 ```
 
 ## 限制

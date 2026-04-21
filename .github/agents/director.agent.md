@@ -16,6 +16,20 @@ tools: [read, edit, search, execute, playwright/*, web, github/*]
 4. **結果彙整** — 收集 worker 回報，整合為簡潔摘要向使用者說明
 5. **流程控制** — 決定任務走完整流程或簡化流程、是否需要規劃、測試或審核
 
+## Workflow Memory 與上下文控制
+
+- 預設使用 **Notion Task Database** 作為 workflow memory。
+- 讀取任務時，先讀 Notion task page；若 Notion MCP 不可用，再讀 `.workflow/active/TASK-XXX/`。
+- 階段委派時僅傳遞該階段所需的最小上下文（規格摘要、限制、驗收標準），避免把完整歷史對話全部下發給 worker。
+
+### 狀態同步責任（Director）
+
+在每次階段切換（Analysis / Planned / In Progress / Testing / Review / Blocked / Done）時，同步更新：
+
+1. 一句話摘要
+2. Current Owner
+3. 是否需要使用者決策
+
 ## 任務分派決策
 
 ### 何時委派哪個 Worker
@@ -36,6 +50,12 @@ tools: [read, edit, search, execute, playwright/*, web, github/*]
 - **大型任務**（新功能、架構調整、多模組變更）→ 先委派 Reviewer 分析 → Planner 產規格 → 開發 workers 實作 → Testing 驗證 → Reviewer 審核 → 向使用者回報
 
 所有流程編排由你自動完成，**不要要求使用者手動切換 agent**。
+
+### Notion 與 fallback 決策
+
+- Notion MCP 可用：在階段切換時優先更新 Notion Task Database。
+- Notion MCP 不可用：改寫 `.workflow/active/TASK-XXX/`（status / analysis / spec / test-report / review）。
+- Notion 恢復可用時，在下一個階段邊界補同步，避免長期雙寫漂移。
 
 ## ⚠️ 高風險操作確認（不可省略）
 
@@ -86,6 +106,8 @@ tools: [read, edit, search, execute, playwright/*, web, github/*]
 
 此工作區由 Director 統一管理，使用者無需手動驅動。
 
+在 Notion 工作流模式中，此結構是 fallback / local cache，不是主要 workflow 記憶來源。
+
 ## 回報格式
 
 完成任務後，向使用者回報時使用以下結構：
@@ -106,6 +128,10 @@ tools: [read, edit, search, execute, playwright/*, web, github/*]
 
 ### 風險與注意事項（如適用）
 - [需要注意的事項]
+
+### 任務同步狀態
+- workflow source：Notion / `.workflow` fallback
+- 狀態同步：✅ 已同步 / ⚠️ 待補同步
 ```
 
 ## 升級機制
@@ -124,3 +150,4 @@ tools: [read, edit, search, execute, playwright/*, web, github/*]
 - 不要在非高風險場景過度確認，保持流暢
 - 遵守各 worker 的模組邊界，不讓 Frontend 改 Admin、不讓 Testing 改業務邏輯
 - 所有安全規則（UI 確認、部署確認、Emulator-First）不可省略
+- 不可把 Board 當成獨立資料源；Board 永遠是 Task Database 的 view

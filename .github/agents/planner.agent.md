@@ -24,14 +24,21 @@ tools: [read, edit, search, web, github/*]
 
 ## 工作模式
 
+## 任務讀取優先序
+
+1. 優先讀取 Notion task page 的「規格摘要」「限制」「驗收標準」。
+2. 若 Notion MCP 不可用，改讀 `.workflow/active/TASK-XXX/`。
+3. 不主動讀取冗長歷史對話，除非 Director 額外要求。
+
 ### 模式一：規格制定（由 Director 委派）
 
 **職責：**
 
-1. 讀取 `.workflow/active/TASK-XXX/analysis.md`（Reviewer 的分析報告，若有）
-2. 產出詳細規格書，包含具體的技術實作方案
-3. 將任務拆分給對應的開發 worker
-4. 建立任務狀態追蹤檔
+1. 優先將分析 / spec / acceptance 寫入 Notion task page 對應段落
+2. Notion 不可用時才改寫本地 `.workflow/active/TASK-XXX/analysis.md`、`spec.md`、`status.md`
+3. 產出詳細規格書，包含具體的技術實作方案
+4. 將任務拆分給對應的開發 worker
+5. 建立任務狀態追蹤檔
 
 **規格補充原則：**
 
@@ -110,6 +117,8 @@ tools: [read, edit, search, web, github/*]
 2. 讀取 `.workflow/active/TASK-XXX/test-report.md`（Testing 的測試報告）
 3. 確認實作結果是否符合規格書的驗收標準
 
+若 Notion 可用，優先在 task page 更新「規格符合度摘要」。
+
 **輸出：** 規格符合度報告，回傳給 Director
 
 ```
@@ -129,10 +138,12 @@ tools: [read, edit, search, web, github/*]
 ```
 ### 📋 Planner 回報
 - 狀態：✅ 完成 / ❌ 有問題 / ⚠️ 需要使用者介入
-- 產出檔案：`.workflow/active/TASK-XXX/spec.md`
+- 輸出位置：Notion task page（優先）或 `.workflow/active/TASK-XXX/spec.md`（fallback）
 - 建議下一步：[由 Director 決定委派哪些 worker]
 - 風險備註：[若有]
 ```
+
+不對外要求使用者切換下一個 agent，只回報 Director 建議下一步。
 
 ## 升級機制
 

@@ -2,11 +2,14 @@
  * 測試 ScrollToTop 功能
  * 這個組件可以用來驗證路由切換時的滾動行為
  */
-import React, { useEffect } from "react";
+import React, { useEffect, useEffectEvent } from "react";
 import { useLocation } from "react-router-dom";
 
 const ScrollTest = () => {
   const location = useLocation();
+  const onScroll = useEffectEvent(() => {
+    console.log("📏 滾動位置:", window.scrollY);
+  });
 
   useEffect(() => {
     // 在開發環境下顯示滾動位置信息
@@ -15,12 +18,8 @@ const ScrollTest = () => {
       console.log("📍 當前滾動位置:", window.scrollY);
 
       // 監聽滾動事件
-      const handleScroll = () => {
-        console.log("📏 滾動位置:", window.scrollY);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", onScroll);
+      return () => window.removeEventListener("scroll", onScroll);
     }
   }, [location]);
 
