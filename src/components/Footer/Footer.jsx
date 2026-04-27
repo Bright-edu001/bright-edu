@@ -149,7 +149,8 @@ function Footer() {
           </Row>
           <div className="footer-bottom">
             <p>
-              &copy; BRIGHT EDUCATION CORPORATION © 2025 ALL RIGHTS RESERVED
+              &copy; BRIGHT EDUCATION CORPORATION © {new Date().getFullYear()}{" "}
+              ALL RIGHTS RESERVED
             </p>
           </div>
         </div>

@@ -1,70 +1,101 @@
-# Notion MCP Setup (VS Code Workspace)
+# Notion MCP Setup (Bright-Edu)
 
-## 目標
+## 先回答一個重點
 
-在 VS Code 工作區啟用 Notion MCP，讓 Director 與 workers 能在有授權時讀寫 Notion 任務資料。
+**不需要把 Notion API key 提供給我，也不要把任何 token 貼在聊天裡。**
 
-本設定適用於本地、human-in-the-loop 的協作流程，不應假設可直接套用到完全無人值守的雲端 agent。
+這個專案目前最適合的做法是：
 
-## 工作區設定檔
+- **VS Code + MCP + Notion OAuth**：給 Copilot / agent 在本地 IDE 中使用
+- 若之後你要自行寫 Notion REST API 腳本，再在你本機或 CI 的 secrets 中配置 integration token
 
-本專案使用工作區層級設定：`.vscode/mcp.json`
+## 你現在的情況
 
-最少需要的 Notion server 設定如下：
+repo 已有 `.vscode/mcp.json`，並且已放入 `notion` server。你要做的是完成本機授權，而不是把 token 寫進 repo。
+
+## 推薦做法
+
+### A. MCP（目前主方案）
+
+使用 `.vscode/mcp.json`：
 
 ```json
 {
   "servers": {
     "notion": {
       "type": "http",
-      "url": "https://mcp.notion.com/mcp"
+      "url": "https://mcp.notion.com/mcp",
+      "description": "Notion MCP — 任務與工作流資料庫"
     }
   }
 }
 ```
 
-本專案已保留既有 MCP servers，並新增 notion server。
+### B. REST API（未來選配）
 
-## 啟用步驟
+只有在以下情境才建議加：
 
-1. 開啟專案工作區。
-2. 確認 VS Code 已啟用 MCP 功能與支援的 Copilot 版本。
-3. 載入工作區的 `.vscode/mcp.json`。
-4. 在 VS Code / Copilot 介面完成 Notion OAuth 授權。
-5. 授權後測試讀取 Notion workspace（例如列出可見頁面或資料庫）。
+- 需要批次同步 Notion database
+- 需要從 scripts / CI 更新 Notion
+- 需要固定欄位 mapping 與 API 寫入
 
-## 驗證清單
+此時應把 token 放在：
 
-- 可看到 notion server 已載入。
-- 授權狀態為已連線。
-- 可讀取目標 workspace 中的 Task Database。
-- 有需要時可更新 task page 欄位（Status、Current Owner、摘要）。
+- 本機 `.env.local`
+- OS secret store
+- GitHub Actions secrets
 
-## 常見問題
+**不要**：
 
-### 1) notion server 顯示但無法讀寫
+- 貼在聊天裡
+- 寫死在 repo
+- 放到 `.vscode/mcp.json`
 
-- 多半是 OAuth 未完成，或授權 scope 不足。
-- 重新授權並確認該 workspace 已分享給整合。
+## VS Code 啟用步驟
 
-### 2) 找不到目標資料庫
+1. 開啟專案 workspace
+2. 確認 VS Code 與 Copilot 版本支援 MCP
+3. 讀取 `.vscode/mcp.json`
+4. 在 VS Code 內完成 Notion OAuth
+5. 驗證能否列出可見的 workspace 頁面或 database
 
-- 檢查資料庫是否與 Notion integration 共享。
-- 檢查目前登入帳號是否有該頁面權限。
+## Notion 端需要先準備什麼
 
-### 3) 可讀不可寫
+目前你說公司帳號下還沒有 database，所以先準備這兩件事：
 
-- 檢查 integration 權限是否為可編輯。
-- 避免將資料庫放在僅檢視頁面。
+1. 建立一個主頁，例如：`Bright-Edu Dev Workflow`
+2. 在該頁內建立 `Bright-Edu Workflow Tasks` database
 
-## 安全與責任邊界
+然後把你之後要用的整合授權到這個 workspace / page。
 
-- 不在 repo 硬編碼任何金鑰或敏感資訊。
-- Notion 僅保存 workflow 狀態與摘要，不存程式碼或敏感憑證。
-- 高風險操作（UI 變更、deploy、rules、生產資料）仍依 repo 規則先取得使用者確認。
+## 最小驗證清單
 
-## 與 fallback 的關係
+- Notion MCP server 已載入
+- VS Code 內顯示已授權
+- 可看到 `Bright-Edu Workflow Tasks`
+- 可讀寫 task 的 `Status` / `Current Owner` / 摘要欄位
 
-- Notion MCP 可用：優先在 Notion 更新任務狀態。
-- Notion MCP 不可用：改用 `.workflow/active/TASK-XXX/` 暫存。
-- MCP 恢復後由 Director 在階段邊界補同步，不做長期雙寫。
+## 常見錯誤
+
+### 找不到資料庫
+
+- database 沒建在目前授權的 workspace
+- page / database 沒分享給 integration
+- 你登入的是不同 Notion 帳號
+
+### 可讀不可寫
+
+- integration 權限是 read only
+- database 所在頁面未允許編輯
+
+### MCP 可用但 agent 不穩定
+
+- 讓 Director 只同步「狀態與摘要」
+- 不要求 worker 每一步都回寫 Notion
+- Notion 失敗時退回 `.workflow/active/TASK-XXX/`
+
+## 安全邊界
+
+- Notion 不存憑證
+- Notion 不存完整程式碼 diff
+- 高風險操作仍依 repo 規則先取你確認

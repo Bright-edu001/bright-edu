@@ -1,0 +1,7 @@
+interface:
+  display_name: "Notion Writeback Assistant"
+  short_description: "Draft Bright-Edu Notion task updates, review notes, and learning suggestions"
+  icon:
+    emoji: "📚"
+  theme:
+    primary_color: "#0F766E"
