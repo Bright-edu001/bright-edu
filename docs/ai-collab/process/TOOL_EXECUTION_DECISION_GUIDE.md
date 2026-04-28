@@ -182,3 +182,11 @@ The right operating model is:
 - bounded execution
 - human final review
 - tools selected by task type, not preference alone
+
+## Current Company Tool Policy
+
+Copilot is not used for Bright-Edu company project execution because it is tied to a personal account.
+
+Codex is the primary coworker entrypoint.
+
+Hermes is a supporting workflow and Notion context tool.

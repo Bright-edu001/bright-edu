@@ -138,3 +138,13 @@ Workflow first, automation second.
 
 Do not use Skills to compensate for unstable process design.
 Use Skills to encode process only after the process has become repeatable.
+
+## Codex-first Skill Use
+
+The first-batch skills are intended to be usable by Codex as workflow modules:
+
+- task-spec-writer
+- plan-review-checker
+- notion-writeback-assistant
+
+Hermes may provide Notion context, but Codex remains the primary user-facing tool.

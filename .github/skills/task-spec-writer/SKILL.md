@@ -146,3 +146,16 @@ Still generate the task draft, but:
 This skill standardizes task definition.
 It does not approve execution.
 Plan review and human confirmation still happen later.
+
+## Workflow reference handling
+
+Do not place workflow governance files or skill instruction files under `Reference-Only Files`.
+
+Files such as:
+
+- `docs/ai-collab/process/*.md`
+- `.github/skills/*/SKILL.md`
+
+should be treated as workflow references, not task file boundaries.
+
+If needed, list them under `Workflow References` or mention them in `Plan Notes`.

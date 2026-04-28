@@ -47,6 +47,7 @@ Use lowercase hyphenated English for the file name after the task ID.
 
 - `[path]`
 - `[path]`
+- [workflow guide or skill file, if relevant]
 
 ## Disallowed Files
 

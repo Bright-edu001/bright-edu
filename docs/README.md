@@ -315,3 +315,9 @@ When updating documentation:
 Documentation should reduce ambiguity.
 
 If a document creates uncertainty about which workflow rule is current, update the documentation structure before adding more automation.
+
+## Current Invocation Model
+
+Skills are primarily used by Codex.
+
+Hermes may read or support these skills, but Codex is the main task entrypoint.

@@ -129,3 +129,9 @@ It should route tasks based on:
 - outcome appropriateness
 
 not based on which tool seems more powerful.
+
+## Current Role Adjustment
+
+Hermes is no longer the main human-facing entrypoint.
+Codex is the single front-door coworker.
+Hermes supports Codex by reading Notion and assisting routing / outcome decisions.
