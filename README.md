@@ -1,161 +1,154 @@
-﻿# Bright Edu - ?箸?撟喳
+﻿# Bright Edu
 
-Bright Edu ?臭??隞????銝??脣像?堆???擃?鞈芰?隤脩??批捆嚗??拙飛蝧???璆剛??
+## 專案概覽
+
+Bright Edu 是一個現代化的線上教育平台，提供課程瀏覽、內容管理與學習相關功能，並整合 Firebase 與前端工具鏈支援開發與部署。
 
 ## AI Workflow Pointer
 
-Bright-Edu AI workflow uses Notion current records as the source of truth.
+Bright-Edu 的 AI 協作 workflow 以 Notion current records 為 source of truth。
 
 - Notion current records are the workflow source of truth.
 - Repo docs are bootstrap / execution references only.
 - Use `.github/copilot-instructions.md` for repo-local execution guidance.
 - Use `docs/ai-collab/` only as transitional repo-local reference or historical context when explicitly needed.
-- Use Hermes as QA / research / write-back backup when needed.
+- Use Hermes as QA / research / Notion write-back backup when needed.
 
 This README remains a product / platform overview, not the workflow policy document.
 
-## ?? 蝬脣?鞈?
+## 網址資訊
 
-- **皜祈岫?啣?蝬脣?**: [https://super-caramel-093673.netlify.app/](https://super-caramel-093673.netlify.app/)
-- **甇???啣?蝬脣?**: [https://bright-edu-data.web.app/](https://bright-edu-data.web.app/)
+- 測試環境網址: <https://super-caramel-093673.netlify.app/>
+- 正式環境網址: <https://bright-edu-data.web.app/>
 
-## ????寡
+## 功能概覽
 
-- 憭??玨蝔摰?
-- 撠平雓葦??
-- ?暑?飛蝧撘?
-- 摮貊??脣漲餈質馱
-- 摮貊?蝷曄黎鈭?
+- 多元化課程內容
+- 專業講師團隊
+- 彈性的學習方式
+- 學習進度追蹤
+- 學習社群互動
 
-## ?? ?銵瑽?
+## 技術棧
 
-- **?垢?詨?**: React 19, React Router 6
-- **???敹怠?**: `@tanstack/react-query` (React Query)
-- **撱箇蔭撌亙**: Vite 5 (璆菟??澆???璅∠??望??
-- **UI 憟辣**: Ant Design 5, styled-components, SCSS
-- **撖?摮楊頛臬**: BlockNote 0.47 (敺??唳??舐楊頛臬)
-- **敺垢??**: Firebase (Firestore, Authentication, Storage, Functions, Hosting)
-- **????*: Sentry (?航炊餈質馱), Firebase App Check (reCAPTCHA v3)
-- **皜祈岫獢**: Vitest (?桀?皜祈岫) & Playwright (E2E 蝡臬蝡舀葫閰?
+- 前端核心: React 19、React Router 6
+- 狀態與快取: `@tanstack/react-query`
+- 建置工具: Vite 5
+- UI 套件: Ant Design 5、styled-components、SCSS
+- 富文字編輯器: BlockNote 0.47
+- 後端服務: Firebase（Firestore、Authentication、Storage、Functions、Hosting）
+- 效能與監控: Sentry、Firebase App Check（reCAPTCHA v3）
+- 測試框架: Vitest、Playwright
 
-## ?? 蝟餌絞?瘙?
+## 環境需求
 
-- Node.js 20 ?誑銝???(撱箄降 LTS)
-- npm 9 ?誑銝???
+- Node.js 20 或以上版本（建議 LTS）
+- npm 9 或以上版本
 
-## ?? 撠?蝯?
+## 專案結構
 
-```
+```text
 .
-?? .github/workflows/     # CI/CD ?芸??蝵脰身摰?(GitHub Actions)
-?? e2e/                   # Playwright End-to-End 皜祈岫獢?
-?? public/                # ??鞈? (???WA manifest)
-?? src/
-?? ?? admin/              # 敺蝞∠?璅∠?
-?? ?? components/         # ?舫??函??梁?辣
-?? ?? pages/              # 撠????Ｘ芋蝯?
-?? ?? context/            # ?典????Context
-?? ?? hooks/              # ?芾? React Hooks
-?? ?? services/           # Firebase ??????API
-?? ?? config/             # ?垢??Firebase ?啣??蔭
-?? ?? utils/              # 撖衣撌亙?賢?
-?? vite.config.js         # Vite 撱箇蔭???潔撩??蔭
-?? vitest.config.js       # Vitest 皜祈岫獢?蔭
-?? playwright.config.js   # ?汗??E2E 皜祈岫?蔭
+├─ .github/
+│  ├─ workflows/          # CI/CD 自動化流程
+│  ├─ instructions/       # repo-local bootstrap / instruction files
+│  └─ copilot-instructions.md
+├─ docs/                  # 專案文件與歷史參考
+├─ e2e/                   # Playwright E2E 測試
+├─ public/                # 靜態資源
+├─ src/
+│  ├─ admin/              # 後台管理模組
+│  ├─ components/         # 可重用元件
+│  ├─ pages/              # 對外頁面
+│  ├─ context/            # 全域狀態 Context
+│  ├─ hooks/              # 自訂 Hooks
+│  ├─ services/           # Firebase 服務與外部 API
+│  ├─ config/             # 前端與 Firebase 環境設定
+│  └─ utils/              # 工具函式
+├─ vite.config.mjs        # Vite 設定
+├─ vitest.config.js       # Vitest 設定
+└─ playwright.config.js   # Playwright 設定
 ```
 
-## ?? 敹恍?憪?
+## 本機開發
 
-### 1. ??撠?銝血?鋆?鞈?
+### 1. 安裝依賴
 
 ```bash
-git clone <repo-url>
-cd bright-edu
 npm install --legacy-peer-deps
 ```
 
-### 2. ?啣?霈閮剖?
-
-銴ˊ?啣?霈蝭?瑼?撱箇?雿??祆??閮剖?嚗?
+### 2. 設定環境變數
 
 ```bash
 cp .env.example .env.local
 ```
 
-### 3. ???隡箸???(Vite)
+### 3. 啟動開發伺服器
 
 ```bash
 npm run start
 ```
 
-?身??`http://localhost:3000` ????嚗?靘扔??HMR (Hot Module Replacement) ?梢?頛?
+預設開發網址為：
 
----
-
-## ? ?砍蝡?Firebase 璅⊥?冽葫閰?(Offline 璅∪?)
-
-憒?銝敶梢?脩垢甇??鞈?嚗隞亙??脩垢鞈?銝??璈?銝血?冽?唳芋?砍???
-
-1. **?臬?脩垢鞈?銝虫?頛?* (?閬?gcloud ?啣?????:
-
-```bash
-gcloud firestore export gs://bright-edu-data.firebasestorage.app/firestore_export --project=bright-edu-data
-gsutil -m cp -r gs://bright-edu-data.firebasestorage.app/firestore_export ./firebase_data/
+```text
+http://localhost:3000
 ```
 
-2. **???祆? Firebase 璅⊥??*:
+## Firebase Emulator / 離線資料
+
+本專案包含 Firebase 相關設定。若要進行離線或本機驗證，可使用 Firebase Emulator。
 
 ```bash
-firebase emulators:start --import=./firebase_data/firestore_export
+firebase emulators:start
 ```
 
-3. **??`.env` ????隞乩蝙?冽璈??澈**:
+如需切換為本機 Firestore，設定：
 
 ```env
 VITE_USE_FIREBASE_EMULATOR=true
 ```
 
----
+如需使用匯入資料，請依團隊現行流程準備本機資料後再啟動 Emulator。
 
-## ?? ?舐?單 Scripts
+## 常用 Scripts
 
-| ?誘                  | 隤芣?                              |
-| --------------------- | --------------------------------- |
-| `npm run start`       | ?? Vite ?祆??隡箸???         |
-| `npm run build`       | 撱箇? Production ???`build/`   |
-| `npm run build:prod`  | 撱箇? Production 銝???Source Map |
-| `npm run preview`     | ?汗??敺? Production `build/`  |
-| `npm run test`        | ?瑁? Vitest ?桀?皜祈岫              |
-| `npx playwright test` | ?瑁? E2E 蝬脤?蝡臬蝡舀葫閰?          |
-| `npm run analyze`     | ??敺???bundle JS 憭批?         |
-| `npm run deploy`      | ???? GitHub Pages ?函蔡???? |
+以下 scripts 以 `package.json` 為準。
 
----
+| 指令                          | 說明                                  |
+| ----------------------------- | ------------------------------------- |
+| `npm run start`               | 啟動 Vite 開發伺服器                  |
+| `npm run build`               | 建立 production 版本                  |
+| `npm run build:prod`          | 建立 production 版本並關閉 Source Map |
+| `npm run preview`             | 預覽打包後結果                        |
+| `npm run test`                | 執行 Vitest                           |
+| `npm run test:watch`          | 以 watch 模式執行 Vitest              |
+| `npm run analyze`             | 建置後分析 bundle 大小                |
+| `npm run analyze:performance` | 執行效能分析腳本                      |
+| `npm run predeploy`           | 部署前建置                            |
+| `npm run deploy`              | 使用 gh-pages 部署靜態版              |
 
-## ?? ?啣?霈?” (Vite 閬?)
+## 環境變數
 
-| 霈 (?誑 `VITE_` ?)     | 隤芣?                                                                                |
-| ---------------------------- | ----------------------------------------------------------------------------------- |
-| `VITE_SENTRY_DSN`            | Sentry ?其??交?航炊??銝?                                                   |
-| `VITE_RECAPTCHA_SITE_KEY`    | reCAPTCHA v3 ??Site Key (?冽 App Check)                                           |
-| `VITE_API_KEY`               | Firebase API ?身摰?                                                                |
-| `VITE_USE_FIREBASE_EMULATOR` | `true` ??Firestore 撠??身????唳璈?`127.0.0.1:8080`嚗uth/Storage 隞甇???啣? |
+| 變數                         | 說明                                 |
+| ---------------------------- | ------------------------------------ |
+| `VITE_API_KEY`               | Firebase 設定所需金鑰                |
+| `VITE_SENTRY_DSN`            | Sentry 錯誤回報用 DSN                |
+| `VITE_RECAPTCHA_SITE_KEY`    | reCAPTCHA v3 / App Check 用 Site Key |
+| `VITE_USE_FIREBASE_EMULATOR` | `true` 時優先連線本機 Firestore      |
 
----
+實際是否需要上述變數，請以目前功能與 `.env.example` 為準。
 
-## ?? CI/CD ?芸????函蔡
+## CI/CD
 
-撠?撌脫??**GitHub Actions**嚗?
+專案包含 `.github/workflows/` 與 Firebase Hosting 相關設定。
 
-- **Pull Request**: ?潸絲 PR ???芸?閫貊皜祈岫????銝阡? Firebase Hosting ???冽???Preview URL嚗靘踹??炎?曹耨?寧???
-- **Merge to Main**: ?蔥??`main` ?????楊霅臭蒂?函蔡?澆???Firebase ?迤閰衣?暺?(`live` channel)??
+實際的建置、預覽與部署流程請以倉庫內對應 workflow 檔案與 Firebase 設定為準。
 
-## ?? ?扯??隞?
+## 相關文件
 
-??扯?芸??瑽??賊??湔?辣嚗???
-
-- [`docs/PERFORMANCE_OPTIMIZATION_GUIDE.md`](./docs/PERFORMANCE_OPTIMIZATION_GUIDE.md)
-
-## ?? ??
-
-甇文?獢???芣?摰?皞?甈?甈橘????撘Ⅳ?身閮?甈飛???澆?????
+- `docs/README.md`
+- `docs/NOTION_MCP_SETUP.md`
+- `.github/copilot-instructions.md`
+- `docs/ai-collab/`（僅作過渡性 repo-local 參考或歷史脈絡，若確實需要）
