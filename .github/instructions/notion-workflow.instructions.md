@@ -1,56 +1,67 @@
 ---
-description: "Notion 工作流規範。Use when: 任務分析、規格追蹤、狀態同步、測試與審核摘要、決策紀錄。"
-applyTo: ".github/agents/**,docs/NOTION*.md,.workflow/**"
+description: "Notion workflow bootstrap for Bright-Edu. Use when reading current task context, checking write-back boundaries, or preparing a draft write-back."
+applyTo: ".github/agents/*,docs/NOTION.md,.workflow/**"
 ---
 
-# Notion Workflow Instructions
+# Notion Workflow Bootstrap
 
-> 本檔補充 Notion 與本地 fallback 的工作流規範；共通安全規則仍以 `.github/copilot-instructions.md` 為準。
+> This file is a repo-local bootstrap guide.
+> Notion current records are the workflow source of truth.
 
-## 何時應使用 Notion
+## When to Use Notion
 
-以下情境優先寫入 Notion Task Database，而不是把大量內容留在對話中：
+Use Notion for:
 
-- 任務分析結論（analysis）
-- 規格摘要與驗收標準（spec / acceptance）
-- 任務狀態流轉（status）
-- 測試結果摘要（test result）
-- 審核結論摘要（review result）
-- 需追蹤的決策紀錄（decision log）
+- current task context
+- status and owner
+- scope and non-goals
+- acceptance criteria
+- decision notes
+- learning / R&D context
+- approved write-back summaries
 
-目標是讓 Director 與 workers 透過 task page 快速取得上下文，降低每次重建對話記憶成本。
+Notion is for current workflow knowledge, not for code storage.
 
-## 應寫進 Notion 的內容
+## What to Write to Notion
 
-- 一句話任務摘要
-- 階段狀態與 owner
-- 風險旗標（UI / deploy / rules / emulator）
-- 驗收標準摘要
-- 測試與審核結論摘要
-- 決策與阻塞理由
+Write only the useful workflow summary:
 
-## 不應寫進 Notion 的內容
+- one-line task summary
+- status
+- scope summary
+- validation summary
+- decision summary
+- learning follow-up when justified
 
-- 實際程式碼
-- 敏感金鑰、token、憑證
-- 低層級且冗長的原始 log
-- 可直接由 Git 取得的完整 diff
+## What Not to Write to Notion
 
-## Fallback 規範（Notion 不可用）
+Do not write:
 
-當 Notion MCP 不可用時，改用 `.workflow/active/TASK-XXX/`：
+- source code
+- full diffs
+- secrets or tokens
+- low-level raw logs
+- verbose execution transcripts
 
-- `status.md`：狀態與 owner
-- `analysis.md`：分析內容
-- `spec.md`：規格與驗收標準
-- `test-report.md`：測試摘要
-- `review.md`：審核摘要
+## Write-Back Rule
 
-MCP 恢復後，由 Director 在階段切換時回填 Notion。避免長期雙寫，避免資料漂移。
+Write-back is draft-first.
 
-## 實務原則
+1. Prepare the draft.
+2. Verify it matches the approved scope.
+3. Wait for approval.
+4. Write only the approved fields / blocks.
 
-- Notion 是 workflow memory；Repo 是 code memory。
-- Board 只是 Task Database 的一個 view。
-- 不要求使用者手動切換 agent，由 Director 編排下一步。
-- 高風險規則（UI / deploy / rules / production data）不可弱化。
+## Temporary Fallback
+
+If the relevant Notion surface is unavailable, keep the minimum temporary task context in the repo-local fallback only as long as needed for continuity.
+
+Do not treat the fallback as the source of truth.
+
+Backfill current Notion records once access returns.
+
+## Core Reminder
+
+- Notion = workflow source of truth.
+- Repo = execution surface.
+- Draft first, then approval, then write-back.

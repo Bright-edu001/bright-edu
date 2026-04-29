@@ -1,180 +1,94 @@
 # Task Execution Instructions
 
-Use these instructions when planning or implementing a repository task.
+Use this file when a task is already approved for repo work.
 
 ## Purpose
 
-Ensure that AI-assisted task execution follows a consistent, bounded, reviewable process.
+Keep implementation bounded, reviewable, and aligned with the current task context.
 
-This file applies to Plan and Agent-style execution.
+This file does not define workflow policy.
+It is a repo-local execution bootstrap.
 
----
+## Minimum Context Before Execution
 
-## Minimum Required Task Context
-
-Do not proceed directly into implementation unless the task has:
+Confirm:
 
 - Task ID
-- Summary
 - Goal
 - Scope
 - Non-goals
-- Allowed Files
-- Disallowed Files
-- Affected Module
-- Acceptance Criteria
-- Test Cases
+- Allowed files
+- Disallowed files
+- Acceptance criteria
+- Validation expectations
+- Whether worktree is needed
 
-If these are missing, incomplete, or contradictory, stop and ask for clarification or spec completion first.
+If the task is unclear, stop and resolve the ambiguity before implementation.
 
----
+## Execution Flow
 
-## Execution Phases
+1. Confirm current context.
 
-### Phase 1: Plan
+   Read the current task context and any relevant repo-local reference docs before changing files.
 
-Plan is required before implementation.
+2. Confirm boundaries.
 
-A valid Plan response should include:
+   Do not touch files outside the approved scope.
 
-- a concise implementation summary
-- files that will be modified
-- files that will not be modified
-- step-by-step execution outline
-- risks or dependencies
-- validation method
+3. Implement.
 
-Plan must not perform implementation.
+   Make the smallest correct change.
 
-If the task boundary is weak, use the planning step to tighten it.
+4. Validate.
 
----
+   Run the relevant checks and confirm the result.
 
-### Phase 2: Review
+5. Prepare write-back draft.
 
-Before implementation, the plan should be reviewed for:
+   Summarize the outcome for Notion if the task requires it.
 
-- scope correctness
-- file boundary correctness
-- shared layer impact
-- Firebase / rules / functions impact
-- validation sufficiency
-- whether worktree isolation is advisable
+6. Wait for approval before write-back.
 
-If review fails, refine the plan instead of implementing anyway.
+   Do not write back until approval is granted.
 
----
+## Boundary Rules
 
-### Phase 3: Agent Execution
+- Stay inside allowed files.
+- Do not clean up unrelated files.
+- Do not widen scope silently.
+- Do not refactor just because the code looks old.
+- Stop if the task requires extra files that were not approved.
 
-Implementation is allowed only after:
-
-- the spec exists
-- the plan exists
-- file boundaries are defined
-- the user or reviewer has accepted the plan direction
-
-During execution:
-
-- stay inside allowed files
-- respect disallowed files
-- do not expand into unrelated cleanup
-- do not perform speculative refactors
-- do not widen module scope silently
-
-If the requested change cannot be completed without extra files, surface that constraint explicitly.
-
----
-
-## Module Scope Rule
-
-Assume one primary module per task by default.
-
-Primary modules:
-
-- Frontend
-- Admin
-- Service
-- Firebase
-- Testing
-- Docs
-
-If the task crosses modules, recommend splitting it unless there is a clear reason not to.
-
----
-
-## UI Task Rule
-
-For UI-related work, require:
-
-- visible change summary
-- affected page or section
-- explicit non-goals
-
-Do not interpret vague requests like:
-
-- “make it cleaner”
-- “improve the UI”
-- “refresh the layout”
-
-without clarifying what should change.
-
----
-
-## Firebase Task Rule
-
-For Firebase-related work:
-
-- define the affected boundary explicitly
-- prefer emulator-first validation
-- do not assume production-safe behavior without validation
-- do not modify rules or Cloud Functions unless explicitly in scope
-
----
+If extra changes are required, surface that dependency instead of improvising.
 
 ## Shared Layer Rule
 
-Shared types, services, routes, config, permissions, and utilities are high-impact surfaces.
+Treat shared layers carefully.
 
-Do not modify them unless:
+Examples:
 
-- they are explicitly in scope
-- the impact is understood
-- the change is necessary to complete the task correctly
+- shared types
+- shared services
+- routing
+- config
+- permissions
+- common utilities
 
----
+If a task touches shared layers, explicitly call out the impact before proceeding.
 
-## Completion Response Requirements
+## Validation Rule
 
-After implementation, report:
+Always report:
 
 - modified files
 - what was intentionally not changed
 - validation performed
-- unresolved risks or follow-up concerns
-- whether a Learning or Rule follow-up may be appropriate
+- residual risks
+- follow-up items if any
 
-Do not present the task as “done” without stating the validation basis.
+Do not call a task done without a validation basis.
 
----
+## Reminder
 
-## Stop Conditions
-
-Stop and ask for clarification if:
-
-- the scope is too vague
-- allowed/disallowed files are missing
-- the task crosses too many modules
-- the user intent and repo constraints conflict
-- the requested change requires touching protected or high-risk files unexpectedly
-
----
-
-## Alignment References
-
-When executing tasks, align with:
-
-- `docs/ai-collab/process/AI_WORKFLOW_COMPANY.md`
-- `docs/ai-collab/process/WORKFLOW_SOP.md`
-- `docs/ai-collab/rules/`
-- `docs/ai-collab/notion/NOTION_WRITEBACK_SOP.md`
+This is a short execution pointer.
+Use current Notion records and the most specific repo instruction file as needed.

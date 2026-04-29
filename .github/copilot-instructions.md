@@ -1,262 +1,90 @@
-# Bright-Edu Copilot Instructions
+# Bright-Edu Repo Bootstrap Instructions
 
 ## Purpose
 
-This repository uses AI-assisted development under a controlled workflow.
+This file is the repo-local bootstrap layer for AI-assisted execution.
 
-The objective is to keep implementation:
+It is not the workflow source of truth.
+Notion current records are the workflow source of truth.
+Repo code and validation results are the implementation source of truth.
 
-- scoped
-- reviewable
-- safe for shared layers and Firebase-related modules
-- aligned with repo documentation and Notion records
+Use this file to keep execution short, bounded, and consistent.
 
-AI should accelerate execution, not expand task scope.
+## Current Operating Model
 
----
+- Notion is the workflow knowledge source of truth.
+- Codex is the primary coworker and single task entrypoint.
+- Codex native Notion connector is the primary workflow context path.
+- Codex custom instructions provide high-level routing and safety bootstrap.
+- Codex skills and plugins are the repeatable procedure layer.
+- Hermes is QA / research / Notion write-back backup.
+- Copilot and OpenClaw are historical or optional local tools, not workflow dependencies.
+- Git worktree is an optional isolation tool, not the default workflow for every task.
 
-## Primary Workflow Order
+## Execution Rules
 
-Use this execution order by default:
+- Keep tasks bounded.
+- Respect approved file boundaries.
+- Do not expand scope just because a nearby cleanup looks convenient.
+- Do not treat repo docs as the source of current workflow policy.
+- Do not assume implementation is required for every task.
+- Use the most specific repo instruction file for the task type.
 
-1. Create or confirm Task
-2. Write or confirm Spec
-3. Define Allowed Files / Disallowed Files
-4. Run Plan
-5. Review Plan
-6. Run Agent
-7. Verify and test
-8. Write back to Notion
-9. Record Learning or update Rule when applicable
+If scope is unclear, stop and ask for clarification or current Notion context.
 
-Do not skip directly from rough intent to code modification.
+## Task Gate
 
----
-
-## Required Task Inputs Before Planning or Implementation
-
-Before planning or implementation, confirm the task has at least:
+Before implementation, confirm:
 
 - Task ID
-- Summary
 - Goal
 - Scope
 - Non-goals
-- Allowed Files
-- Disallowed Files
-- Affected Module
-- Acceptance Criteria
-- Test Cases
+- Allowed files
+- Disallowed files
+- Acceptance criteria
+- Validation expectations
+- Whether worktree isolation is needed
 
-If these are missing or unclear, ask for clarification or direct the user to complete the task spec first.
+If any of these are missing or contradictory, do not start implementation.
 
----
+## Validation
 
-## Documentation Source Priority
+Always validate before closing a task.
 
-Use the following priority when interpreting workflow and task context:
+Choose validation that matches the change:
 
-1. repository code and current file structure
-2. `docs/ai-collab/` workflow and rule documents
-3. Notion task / rule / learning records
-4. `.workflow/active/TASK-XXX/` fallback artifacts when Notion or workflow records are unavailable
-
-Do not treat `.workflow/active/` as the primary workflow source if `docs/ai-collab/` and Notion are available.
-
----
-
-## Repository Workflow References
-
-Use these documents as the primary workflow references:
-
-- `docs/ai-collab/process/AI_WORKFLOW_COMPANY.md`
-- `docs/ai-collab/process/WORKFLOW_SOP.md`
-- `docs/ai-collab/process/GIT_WORKTREE_SOP.md`
-- `docs/ai-collab/rules/`
-- `docs/ai-collab/notion/NOTION_FIELD_GUIDE.md`
-- `docs/ai-collab/notion/TEMPLATES.md`
-- `docs/ai-collab/notion/NOTION_WRITEBACK_SOP.md`
-
-If there is ambiguity, prefer the more specific rule or instruction file over a general statement.
-
----
-
-## Module Boundary Policy
-
-By default, one task should have one primary module only.
-
-Allowed primary modules:
-
-- Frontend
-- Admin
-- Service
-- Firebase
-- Testing
-- Docs
-
-If a task crosses multiple modules, prefer splitting it into smaller tasks unless the user explicitly intends otherwise.
-
-Do not expand a small task into a multi-module refactor without approval.
-
----
-
-## File Scope Policy
-
-Every implementation task must define edit boundaries.
-
-### Required
-
-- Allowed Files
-- Disallowed Files
-
-### Default behavior
-
-- modify only files inside the allowed boundary
-- do not “clean up” unrelated files
-- do not widen scope because an adjacent improvement seems useful
-
-If implementation appears to require out-of-scope changes, stop and surface the dependency instead of silently expanding the task.
-
----
-
-## Plan Before Agent
-
-Plan mode is required before Agent-style implementation.
-
-Plan output should include:
-
-- change summary
-- files to modify
-- files not to modify
-- implementation steps
-- risks
-- validation approach
-
-Plan mode must not be treated as implicit approval to implement.
-
-Human review is still required before execution.
-
----
-
-## UI Change Policy
-
-For any UI-related task:
-
-- define what visibly changes
-- define which page or section is affected
-- define what should not change
-
-Do not turn a localized UI task into a redesign, layout rewrite, or style cleanup unless the task explicitly requests it.
-
-If a UI change is not clearly described, request clarification before implementation.
-
----
-
-## Firebase and Safety Policy
-
-This repository uses Firebase-related infrastructure. Treat data and security changes conservatively.
-
-### Rules
-
-- emulator-first for Firebase-related validation
-- do not test against production data
-- do not modify `firestore.rules`, `storage.rules`, or `functions/` unless the spec explicitly includes them
-- do not hardcode secrets or sensitive configuration
-- do not bypass established service or data access layers without justification
-
-If a task touches Firebase, auth, rules, or Cloud Functions, explicitly call out the affected boundary before proceeding.
-
----
-
-## Shared Layer Change Policy
-
-Changes to shared layers require extra caution.
-
-Shared layers include:
-
-- shared types
-- shared services
-- routing
-- config
-- permissions
-- common utilities
-
-Do not change shared layers as incidental cleanup.
-Require explicit impact awareness before modifying them.
-
----
-
-## Validation Expectations
-
-Validation should match task type and risk.
-
-Minimum expectations:
-
-- UI / Content: visual verification + smoke check
-- Shared component: affected path verification
-- Service / Data: functional verification
-- Firebase: emulator verification
-- Admin / Permission: role-path verification
+- UI / content: visual check plus smoke check
+- Shared code: affected path verification
+- Service / data: functional check
+- Firebase: emulator-first validation
 - Routing: affected route verification
 
-Do not claim a task is complete without appropriate validation.
+Do not claim completion without validation.
 
----
+## Notion Write-Back
 
-## Notion Write-Back Policy
+Write-back is draft-first.
 
-Manual Notion write-back is the current default.
+- Prepare the Notion write-back draft after verification.
+- Wait for approval before writing.
+- Keep write-back limited to the approved summary / status / outcome fields.
+- Do not write code, secrets, or full diffs into Notion.
 
-After implementation and verification:
+## Worktree
 
-- update task status
-- record branch / worktree path if used
-- record relevant outcome notes
-- record learning follow-up if created
+Use worktree only when the task benefits from isolation.
 
-Follow:
+Examples:
 
-- `docs/ai-collab/notion/NOTION_WRITEBACK_SOP.md`
+- parallel tasks
+- long-running changes
+- risky shared-surface work
+- explicit user request
 
----
+Do not use worktree as a substitute for scope control.
 
-## Worktree Policy
+## Reminder
 
-Use Git Worktree by default for:
-
-- multi-task parallel work
-- multi-agent execution
-- long-running tasks
-- risky or shared-surface work
-
-For small, isolated tasks, worktree may be optional.
-
-Follow:
-
-- `docs/ai-collab/process/GIT_WORKTREE_SOP.md`
-- `.github/instructions/worktree.instructions.md`
-
----
-
-## Existing Repository Instructions
-
-Keep following existing focused instructions under `.github/instructions/`, including areas such as:
-
-- React components
-- SCSS styling
-- Firebase behavior
-- Notion workflow integration
-
-Use the most relevant specific instruction for the task at hand.
-
----
-
-## Operating Bias
-
-Default toward:
-
-- smaller tasks
-- explicit constraints
-- reviewed plans
-- safe boundaries
-- manual knowledge capture before automation
+This file is a bootstrap pointer, not a full workflow policy document.
+Keep it short.

@@ -6,24 +6,29 @@ This directory contains project documentation for the Bright-Edu repository.
 
 The documentation is divided into two major categories:
 
-1. AI collaboration workflow documentation
-2. Product / technical reference documentation
+1. Product / technical reference documentation
+2. Repo-local bootstrap and historical workflow reference material
 
-The purpose of this README is to clarify which documents are considered the current source of truth and which documents are historical or supporting references.
+This README clarifies that current AI workflow policy lives in Notion current records.
 
 ---
 
 ## Documentation Source of Truth
 
-For AI-assisted development workflow, the current source of truth is:
+For Bright-Edu AI-assisted development, the current workflow source of truth is Notion current records.
 
-```text
-docs/ai-collab/
-```
+Repo documentation is bootstrap / execution reference material.
+It should stay aligned with Notion, but it does not override current Notion records.
 
-This directory contains the active workflow rules, process guides, task specs, Notion conventions, learnings, and R&D records used by the Bright-Edu AI collaboration process.
+`docs/ai-collab/` is transitional repo-local workflow reference and historical material.
+Do not treat `docs/ai-collab/` as canonical workflow policy.
+Current workflow policy lives in Notion current records.
 
-When there is conflict between older workflow documents and `docs/ai-collab/`, prefer `docs/ai-collab/`.
+Historical documents under `docs/legacy/` remain historical context only.
+They should not be treated as current workflow policy.
+
+When there is conflict between older workflow documents and current Notion records, prefer Notion.
+When repo-local bootstrap docs conflict with each other, prefer the most specific current file and update the mismatch later.
 
 ---
 
@@ -31,21 +36,20 @@ When there is conflict between older workflow documents and `docs/ai-collab/`, p
 
 ### 1. `docs/ai-collab/`
 
-This is the active workflow governance layer.
+This directory is transitional repo-local workflow reference and historical material.
 
-Use this directory for:
+Use this directory only when explicitly needed for:
 
-- AI development workflow SOPs
-- task specs
-- rules
-- Notion field guides and templates
-- learnings
-- R&D notes
-- tool execution decisions
-- Hermes routing rules
-- skill adoption rules
+- historical workflow context
+- migrated task/spec references
+- older rules or learning references
+- Notion migration references
+- tool adoption references that have not yet been minimized
 
-Expected structure:
+Do not treat `docs/ai-collab/` as canonical workflow policy.
+Current workflow policy lives in Notion current records.
+
+Expected structure, if still present:
 
 ```text
 docs/ai-collab/
@@ -57,132 +61,24 @@ docs/ai-collab/
   research/
 ```
 
----
-
-### 2. `docs/ai-collab/process/`
-
-Use this directory for workflow-level process documentation.
-
-Examples:
-
-```text
-AI_WORKFLOW_COMPANY.md
-WORKFLOW_SOP.md
-GIT_WORKTREE_SOP.md
-TASK_OUTCOME_DECISION_GUIDE.md
-TOOL_EXECUTION_DECISION_GUIDE.md
-HERMES_ROUTING_RULES.md
-SKILL_ADOPTION_GUIDE.md
-```
-
-These documents define how AI-assisted tasks should be created, routed, executed, reviewed, and closed.
-
----
-
-### 3. `docs/ai-collab/specs/`
-
-Use this directory for task-specific specs.
-
-Each implementation or review task should have one spec file.
-
-Naming pattern:
-
-```text
-TASK-XXX-short-task-name.md
-```
-
-Example:
-
-```text
-TASK-004-applicationform-logic-and-structure-cleanup.md
-```
-
-Task specs should define:
-
-- Summary
-- Goal
-- Scope
-- Non-goals
-- Allowed Files
-- Reference-Only Files
-- Disallowed Files
-- Acceptance Criteria
-- Test Cases
-- Risks
-- Validation Level
-- Worktree Recommendation
-
----
-
-### 4. `docs/ai-collab/rules/`
-
-Use this directory for validated workflow rules.
-
-Rules should be stable, operational, and reusable across future tasks.
-
-Do not promote a Learning to a Rule too early.
-
-A Rule should usually come from repeated observations, not a single task.
-
----
-
-### 5. `docs/ai-collab/learnings/`
-
-Use this directory for workflow learnings discovered during task execution.
-
-A Learning is appropriate when a task reveals a reusable insight, but the pattern is not yet strong enough to become a Rule.
-
-Examples:
-
-- brand-sensitive UI still needs human review
-- overlapping layout rules should trigger source-of-truth investigation
-- no-change outcomes can be valid task results
-- low-risk refactors work well when rendering contracts are frozen
-
----
-
-### 6. `docs/ai-collab/notion/`
-
-Use this directory for Notion-related workflow references.
-
-Examples:
-
-```text
-NOTION_FIELD_GUIDE.md
-TEMPLATES.md
-NOTION_WRITEBACK_SOP.md
-```
-
-These documents define how Tasks, Rules, Learnings, and R&D records should be structured and written back.
-
----
-
-### 7. `docs/ai-collab/research/`
-
-Use this directory for R&D documents.
-
-R&D should be used when implementation is premature and further investigation is needed.
-
-Examples:
-
-- Hermes adoption planning
-- Codex integration planning
-- footer layout source-of-truth investigation
-- skill candidate review
-
----
-
-### 8. `docs/legacy/`
+### 2. `docs/legacy/`
 
 Use this directory for older workflow documents that are no longer the active source of truth.
 
-Legacy documents may still be useful for historical context, but they should not override the current workflow defined under:
+Legacy documents may still be useful for historical context, but they should not override current Notion records or current repo bootstrap files.
 
-```text
-docs/ai-collab/
-```
+If a legacy document contains useful content, migrate only the useful part into the current Notion workspace instead of continuing to treat the legacy file as current policy.
 
-If a legacy document contains useful content, migrate the relevant parts into the current `docs/ai-collab/` structure instead of continuing to update the legacy version.
+### 3. Product / Technical References
+
+Use product and technical docs for repository-specific setup, implementation notes, and operational references.
+
+Current examples include:
+
+- `docs/PERFORMANCE_OPTIMIZATION_GUIDE.md`
+- `docs/NOTION_MCP_SETUP.md`
+
+These files are reference material and do not override Notion current workflow records.
 
 ---
 
@@ -190,47 +86,47 @@ If a legacy document contains useful content, migrate the relevant parts into th
 
 ### `docs/`
 
-The `docs/` directory is the governance and documentation layer.
+The `docs/` directory is the repository documentation and reference layer.
 
-It explains:
+It can explain:
 
-- what the workflow is
-- why the workflow exists
-- how tasks should be handled
-- how decisions are recorded
-- how tools should be selected
+- project setup
+- implementation notes
+- technical references
+- historical workflow context
+- repo-local bootstrap references
+
+It should not act as the current workflow policy source.
 
 ### `.github/`
 
 The `.github/` directory is the execution-facing instruction layer.
 
-It contains instructions and skills that tools such as Copilot, Codex, Hermes, or other agents may use when operating inside the repository.
+It contains short bootstrap guidance and focused instruction files for local repository execution.
 
 In short:
 
 ```text
-docs/ai-collab/ = workflow governance
-.github/ = tool-facing execution instructions
+Notion current records = workflow source of truth
+docs/ai-collab/ = transitional repo-local workflow reference and historical material
+.github/ = execution-facing bootstrap layer
 ```
-
-If the two conflict, update them so they match. Do not allow the same rule to drift in two different forms.
 
 ---
 
-## Current AI Workflow Principle
+## Current AI Workflow Pointer
 
-The current Bright-Edu AI workflow follows these principles:
+Current Bright-Edu AI workflow is Notion-first and Codex-first.
 
-1. Write the spec first
-2. Plan before execution
-3. Restrict allowed and disallowed files
-4. Prefer small bounded tasks
-5. Avoid premature automation
-6. Validate before closing
-7. Write back outcomes to Notion
-8. Record Learnings and Rules only when justified
-9. Use Hermes, Copilot, and Codex according to task type and maturity
-10. Keep the human as final reviewer
+The practical order is:
+
+1. Read current Notion task / rule / learning / R&D context.
+2. Confirm repository scope and file boundaries.
+3. Use repo-local bootstrap docs for execution guidance.
+4. Implement only inside approved boundaries.
+5. Validate before closing.
+6. Prepare draft Notion write-back if required.
+7. Wait for approval before write-back.
 
 ---
 
@@ -245,79 +141,4 @@ Valid task outcomes include:
 - Approved with No Code Change
 - Redirected to R&D
 
-See:
-
-```text
-docs/ai-collab/process/TASK_OUTCOME_DECISION_GUIDE.md
-```
-
----
-
-## Tool Routing Model
-
-Tool selection should depend on task stage and risk level.
-
-Current model:
-
-- Copilot: default collaboration, Ask, Plan, review-heavy tasks
-- Codex: bounded technical implementation
-- Hermes: future orchestration and routing layer
-- Human: final decision and validation authority
-
-See:
-
-```text
-docs/ai-collab/process/TOOL_EXECUTION_DECISION_GUIDE.md
-docs/ai-collab/process/HERMES_ROUTING_RULES.md
-```
-
----
-
-## Skill Adoption
-
-Project-level workflow skills live in:
-
-```text
-.github/skills/
-```
-
-Current first-batch skills:
-
-- task-spec-writer
-- plan-review-checker
-- notion-writeback-assistant
-
-See:
-
-```text
-docs/ai-collab/process/SKILL_ADOPTION_GUIDE.md
-.github/skills/README.md
-```
-
----
-
-## Maintenance Rules
-
-When updating documentation:
-
-1. Update the active source-of-truth document first
-2. Avoid duplicating rules across multiple files without clear purpose
-3. Move outdated workflow documents to `docs/legacy/`
-4. Keep task specs under `docs/ai-collab/specs/`
-5. Keep Learnings separate from Rules
-6. Do not promote a Learning to a Rule without enough evidence
-7. Keep `.github/` execution instructions aligned with `docs/ai-collab/`
-
----
-
-## Operating Reminder
-
-Documentation should reduce ambiguity.
-
-If a document creates uncertainty about which workflow rule is current, update the documentation structure before adding more automation.
-
-## Current Invocation Model
-
-Skills are primarily used by Codex.
-
-Hermes may read or support these skills, but Codex is the main task entrypoint.
+If a linked repo-local task outcome guide still exists, it is reference material only and should not override Notion current records.
