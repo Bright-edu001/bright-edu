@@ -1,133 +1,81 @@
 # Worktree Instructions
 
-Use these instructions when deciding whether a task should use Git Worktree isolation.
+Use this file when deciding whether Git worktree isolation is needed.
 
 ## Purpose
 
-Ensure that multi-task or multi-agent development remains isolated, traceable, and less error-prone.
+Git worktree is an optional isolation mechanism.
 
-Worktree is an execution isolation strategy, not a replacement for task definition or scope control.
+It helps with:
 
----
+- parallel tasks
+- long-running changes
+- risky shared-surface work
+- explicit human request
 
-## Use Worktree by Default When
+It is not the default for every task.
 
-Recommend or use Git Worktree when:
+## When to Use Worktree
+
+Recommend or use worktree when:
 
 - multiple tasks are active in parallel
 - multiple agents may work at the same time
 - the task is expected to span multiple sessions
 - branch switching would be frequent
 - the task affects risky or shared areas
-- the user explicitly wants isolated execution contexts
+- the user explicitly wants isolated execution
 
----
-
-## Worktree May Be Optional When
+## When Worktree Is Optional
 
 A dedicated worktree may be unnecessary when:
 
 - the task is small and localized
-- the task is a short-lived UI or content adjustment
-- the task is unlikely to overlap with other work
+- the task is read-only or review-only
+- the task is a short-lived content adjustment
 - no parallel task switching is expected
 
-Even if worktree is skipped, branch isolation still applies.
+Do not use worktree to compensate for unclear scope.
 
----
+## Pre-checks
 
-## Pre-Worktree Checks
+Before recommending worktree, confirm:
 
-Before recommending or creating a worktree, confirm:
-
-- Task exists
-- Task ID exists
+- task exists
+- task ID exists
 - scope is clear enough
 - primary module is known
-- branch naming is determined
+- branch naming is known
 - the worktree path will not conflict with existing directories
 
-If the task itself is poorly defined, fix the task first instead of compensating with more worktrees.
+If the task is vague, fix the task first.
 
----
+## Naming Convention
 
-## Naming Conventions
+Use the current branch naming convention:
 
-### Branch
-
-Use readable names tied to the task ID.
-
-Examples:
-
-- `task/TASK-001-hero-refine`
-- `task/TASK-002-navbar-rwd`
-- `fix/TASK-010-anchor-offset`
-- `refactor/TASK-015-shared-project-type`
-
-### Worktree Path
-
-Use readable paths tied to the task ID.
+```text
+task-XXX-short-task-name
+```
 
 Examples:
 
-- `../wt-task-001-hero-refine`
-- `../wt-task-002-navbar-rwd`
-- `../wt-fix-task-010-anchor-offset`
+- task-001-hero-refine
+- task-002-navbar-rwd
+- task-010-anchor-offset
+- task-015-shared-project-type
 
----
+Worktree path examples:
 
-## Notion Write-Back
+- ../wt-task-001-hero-refine
+- ../wt-task-002-navbar-rwd
+- ../wt-task-010-anchor-offset
+- ../wt-task-015-shared-project-type
 
-If worktree is used, the related task should record:
+Do not use older slash-prefixed task branch conventions.
 
-- Worktree Needed
-- Branch
-- Worktree Path
+## Core Rule
 
-This keeps execution traceable across repo, local workspace, and Notion.
+Worktree should improve isolation, not replace scope control.
 
----
-
-## Operational Rules
-
-- one worktree should map to one clear task
-- do not reuse the same worktree for unrelated tasks
-- do not use worktree as an excuse to skip spec, plan, or file scope
-- remove unused worktrees after task completion when appropriate
-
----
-
-## Recommendation Heuristic
-
-Use this simple decision rule:
-
-### Recommend worktree when:
-
-- parallel work exists
-- multi-agent work exists
-- the task is long-running
-- the task touches higher-risk surfaces
-
-### Worktree optional when:
-
-- the task is small
-- the task is isolated
-- the task is expected to finish quickly
-
----
-
-## Alignment References
-
-Keep decisions aligned with:
-
-- `docs/ai-collab/process/GIT_WORKTREE_SOP.md`
-- `docs/ai-collab/process/WORKFLOW_SOP.md`
-- `docs/ai-collab/notion/NOTION_FIELD_GUIDE.md`
-
----
-
-## Caution
-
-If a task is unclear, do not solve the problem by opening more branches or more worktrees.
-
-Refine the task definition first.
+Use it only when it adds real value.

@@ -1,60 +1,72 @@
-# Bright Edu - 智慧教育平台
+﻿# Bright Edu - ?箸?撟喳
 
-Bright Edu 是一個現代化的線上教育平台，提供高品質的課程內容，協助學習者提升專業能力。
+Bright Edu ?臭??隞????銝??脣像?堆???擃?鞈芰?隤脩??批捆嚗??拙飛蝧???璆剛??
 
-## 🌐 網址資訊
+## AI Workflow Pointer
 
-- **測試環境網址**: [https://super-caramel-093673.netlify.app/](https://super-caramel-093673.netlify.app/)
-- **正式環境網址**: [https://bright-edu-data.web.app/](https://bright-edu-data.web.app/)
+Bright-Edu AI workflow uses Notion current records as the source of truth.
 
-## ✨ 功能特色
+- Notion current records are the workflow source of truth.
+- Repo docs are bootstrap / execution references only.
+- Use `.github/copilot-instructions.md` for repo-local execution guidance.
+- Use `docs/ai-collab/` only as transitional repo-local reference or historical context when explicitly needed.
+- Use Hermes as QA / research / write-back backup when needed.
 
-- 多元化課程內容
-- 專業講師團隊
-- 靈活的學習方式
-- 學習進度追蹤
-- 學習社群互動
+This README remains a product / platform overview, not the workflow policy document.
 
-## 🛠 技術架構
+## ?? 蝬脣?鞈?
 
-- **前端核心**: React 19, React Router 6
-- **狀態與快取**: `@tanstack/react-query` (React Query)
-- **建置工具**: Vite 5 (極速開發啟動與模組熱更新)
-- **UI 套件**: Ant Design 5, styled-components, SCSS
-- **富文字編輯器**: BlockNote 0.47 (後台最新消息編輯器)
-- **後端服務**: Firebase (Firestore, Authentication, Storage, Functions, Hosting)
-- **效能與監控**: Sentry (錯誤追蹤), Firebase App Check (reCAPTCHA v3)
-- **測試框架**: Vitest (單元測試) & Playwright (E2E 端到端測試)
+- **皜祈岫?啣?蝬脣?**: [https://super-caramel-093673.netlify.app/](https://super-caramel-093673.netlify.app/)
+- **甇???啣?蝬脣?**: [https://bright-edu-data.web.app/](https://bright-edu-data.web.app/)
 
-## 📋 系統需求
+## ????寡
 
-- Node.js 20 或以上版本 (建議 LTS)
-- npm 9 或以上版本
+- 憭??玨蝔摰?
+- 撠平雓葦??
+- ?暑?飛蝧撘?
+- 摮貊??脣漲餈質馱
+- 摮貊?蝷曄黎鈭?
 
-## 📂 專案結構
+## ?? ?銵瑽?
+
+- **?垢?詨?**: React 19, React Router 6
+- **???敹怠?**: `@tanstack/react-query` (React Query)
+- **撱箇蔭撌亙**: Vite 5 (璆菟??澆???璅∠??望??
+- **UI 憟辣**: Ant Design 5, styled-components, SCSS
+- **撖?摮楊頛臬**: BlockNote 0.47 (敺??唳??舐楊頛臬)
+- **敺垢??**: Firebase (Firestore, Authentication, Storage, Functions, Hosting)
+- **????*: Sentry (?航炊餈質馱), Firebase App Check (reCAPTCHA v3)
+- **皜祈岫獢**: Vitest (?桀?皜祈岫) & Playwright (E2E 蝡臬蝡舀葫閰?
+
+## ?? 蝟餌絞?瘙?
+
+- Node.js 20 ?誑銝???(撱箄降 LTS)
+- npm 9 ?誑銝???
+
+## ?? 撠?蝯?
 
 ```
 .
-├─ .github/workflows/     # CI/CD 自動化部署設定 (GitHub Actions)
-├─ e2e/                   # Playwright End-to-End 測試案例
-├─ public/                # 靜態資源 (圖檔、PWA manifest)
-├─ src/
-│  ├─ admin/              # 後台管理模組
-│  ├─ components/         # 可重用的共用元件
-│  ├─ pages/              # 對外的頁面模組
-│  ├─ context/            # 全域狀態 Context
-│  ├─ hooks/              # 自訂 React Hooks
-│  ├─ services/           # Firebase 服務與外部 API
-│  ├─ config/             # 前端及 Firebase 環境配置
-│  └─ utils/              # 實用工具函式
-├─ vite.config.js         # Vite 建置與開發伺服器配置
-├─ vitest.config.js       # Vitest 測試框架配置
-└─ playwright.config.js   # 瀏覽器 E2E 測試配置
+?? .github/workflows/     # CI/CD ?芸??蝵脰身摰?(GitHub Actions)
+?? e2e/                   # Playwright End-to-End 皜祈岫獢?
+?? public/                # ??鞈? (???WA manifest)
+?? src/
+?? ?? admin/              # 敺蝞∠?璅∠?
+?? ?? components/         # ?舫??函??梁?辣
+?? ?? pages/              # 撠????Ｘ芋蝯?
+?? ?? context/            # ?典????Context
+?? ?? hooks/              # ?芾? React Hooks
+?? ?? services/           # Firebase ??????API
+?? ?? config/             # ?垢??Firebase ?啣??蔭
+?? ?? utils/              # 撖衣撌亙?賢?
+?? vite.config.js         # Vite 撱箇蔭???潔撩??蔭
+?? vitest.config.js       # Vitest 皜祈岫獢?蔭
+?? playwright.config.js   # ?汗??E2E 皜祈岫?蔭
 ```
 
-## 🚀 快速開始
+## ?? 敹恍?憪?
 
-### 1. 取得專案並安裝依賴
+### 1. ??撠?銝血?鋆?鞈?
 
 ```bash
 git clone <repo-url>
@@ -62,42 +74,42 @@ cd bright-edu
 npm install --legacy-peer-deps
 ```
 
-### 2. 環境變數設定
+### 2. ?啣?霈閮剖?
 
-複製環境變數範例檔來建立你的本機開發設定：
+銴ˊ?啣?霈蝭?瑼?撱箇?雿??祆??閮剖?嚗?
 
 ```bash
 cp .env.example .env.local
 ```
 
-### 3. 啟動開發伺服器 (Vite)
+### 3. ???隡箸???(Vite)
 
 ```bash
 npm run start
 ```
 
-預設於 `http://localhost:3000` 提供服務，提供極速 HMR (Hot Module Replacement) 熱重載。
+?身??`http://localhost:3000` ????嚗?靘扔??HMR (Hot Module Replacement) ?梢?頛?
 
 ---
 
-## 💻 本地端 Firebase 模擬器測試 (Offline 模式)
+## ? ?砍蝡?Firebase 璅⊥?冽葫閰?(Offline 璅∪?)
 
-如果不想影響雲端正式資料，可以將雲端資料下載回本機，並利用本地模擬器開發。
+憒?銝敶梢?脩垢甇??鞈?嚗隞亙??脩垢鞈?銝??璈?銝血?冽?唳芋?砍???
 
-1. **匯出雲端資料並下載** (需要 gcloud 環境與權限):
+1. **?臬?脩垢鞈?銝虫?頛?* (?閬?gcloud ?啣?????:
 
 ```bash
 gcloud firestore export gs://bright-edu-data.firebasestorage.app/firestore_export --project=bright-edu-data
 gsutil -m cp -r gs://bright-edu-data.firebasestorage.app/firestore_export ./firebase_data/
 ```
 
-2. **啟動本機 Firebase 模擬器**:
+2. **???祆? Firebase 璅⊥??*:
 
 ```bash
 firebase emulators:start --import=./firebase_data/firestore_export
 ```
 
-3. **在 `.env` 加上開關以使用本機資料庫**:
+3. **??`.env` ????隞乩蝙?冽璈??澈**:
 
 ```env
 VITE_USE_FIREBASE_EMULATOR=true
@@ -105,45 +117,45 @@ VITE_USE_FIREBASE_EMULATOR=true
 
 ---
 
-## 📜 可用腳本 Scripts
+## ?? ?舐?單 Scripts
 
-| 指令                  | 說明                              |
+| ?誘                  | 隤芣?                              |
 | --------------------- | --------------------------------- |
-| `npm run start`       | 啟動 Vite 本機開發伺服器          |
-| `npm run build`       | 建立 Production 版本至 `build/`   |
-| `npm run build:prod`  | 建立 Production 且關閉 Source Map |
-| `npm run preview`     | 預覽打包後的 Production `build/`  |
-| `npm run test`        | 執行 Vitest 單元測試              |
-| `npx playwright test` | 執行 E2E 網頁端到端測試           |
-| `npm run analyze`     | 打包後分析 bundle JS 大小         |
-| `npm run deploy`      | 手動透過 GitHub Pages 部署靜態版  |
+| `npm run start`       | ?? Vite ?祆??隡箸???         |
+| `npm run build`       | 撱箇? Production ???`build/`   |
+| `npm run build:prod`  | 撱箇? Production 銝???Source Map |
+| `npm run preview`     | ?汗??敺? Production `build/`  |
+| `npm run test`        | ?瑁? Vitest ?桀?皜祈岫              |
+| `npx playwright test` | ?瑁? E2E 蝬脤?蝡臬蝡舀葫閰?          |
+| `npm run analyze`     | ??敺???bundle JS 憭批?         |
+| `npm run deploy`      | ???? GitHub Pages ?函蔡???? |
 
 ---
 
-## 🌍 環境變數列表 (Vite 規範)
+## ?? ?啣?霈?” (Vite 閬?)
 
-| 變數 (須以 `VITE_` 開頭)     | 說明                                                                                |
+| 霈 (?誑 `VITE_` ?)     | 隤芣?                                                                                |
 | ---------------------------- | ----------------------------------------------------------------------------------- |
-| `VITE_SENTRY_DSN`            | Sentry 用來接收錯誤回報的唯一金鑰                                                   |
-| `VITE_RECAPTCHA_SITE_KEY`    | reCAPTCHA v3 的 Site Key (用於 App Check)                                           |
-| `VITE_API_KEY`               | Firebase API 與設定                                                                 |
-| `VITE_USE_FIREBASE_EMULATOR` | `true` 時，Firestore 將會預設連線到本機 `127.0.0.1:8080`；Auth/Storage 仍用正式環境 |
+| `VITE_SENTRY_DSN`            | Sentry ?其??交?航炊??銝?                                                   |
+| `VITE_RECAPTCHA_SITE_KEY`    | reCAPTCHA v3 ??Site Key (?冽 App Check)                                           |
+| `VITE_API_KEY`               | Firebase API ?身摰?                                                                |
+| `VITE_USE_FIREBASE_EMULATOR` | `true` ??Firestore 撠??身????唳璈?`127.0.0.1:8080`嚗uth/Storage 隞甇???啣? |
 
 ---
 
-## 🔄 CI/CD 自動化與部署
+## ?? CI/CD ?芸????函蔡
 
-專案已整合 **GitHub Actions**：
+撠?撌脫??**GitHub Actions**嚗?
 
-- **Pull Request**: 發起 PR 時會自動觸發測試與打包，並透過 Firebase Hosting 生成臨時的 Preview URL，方便團隊檢閱修改結果。
-- **Merge to Main**: 合併進 `main` 分支時，會自動編譯並部署發布到 Firebase 的正試站點 (`live` channel)。
+- **Pull Request**: ?潸絲 PR ???芸?閫貊皜祈岫????銝阡? Firebase Hosting ???冽???Preview URL嚗靘踹??炎?曹耨?寧???
+- **Merge to Main**: ?蔥??`main` ?????楊霅臭蒂?函蔡?澆???Firebase ?迤閰衣?暺?(`live` channel)??
 
-## 📈 性能與文件
+## ?? ?扯??隞?
 
-關於性能優化與架構的相關更新文件，請參考：
+??扯?芸??瑽??賊??湔?辣嚗???
 
 - [`docs/PERFORMANCE_OPTIMIZATION_GUIDE.md`](./docs/PERFORMANCE_OPTIMIZATION_GUIDE.md)
 
-## 📄 授權
+## ?? ??
 
-此專案目前尚未指定開源授權條款，所有程式碼與設計版權歸原開發團隊所有。
+甇文?獢???芣?摰?皞?甈?甈橘????撘Ⅳ?身閮?甈飛???澆?????
