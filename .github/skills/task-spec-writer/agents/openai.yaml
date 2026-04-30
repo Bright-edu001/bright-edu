@@ -1,7 +1,0 @@
-interface:
-  display_name: "Task Spec Writer"
-  short_description: "Create Bright-Edu repo specs and matching Notion task drafts"
-  icon:
-    emoji: "📝"
-  theme:
-    primary_color: "#2563EB"

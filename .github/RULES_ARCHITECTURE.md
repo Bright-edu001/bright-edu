@@ -17,7 +17,11 @@ This file explains the remaining `.github` documentation boundary for Bright-Edu
 
 ### Layer 2: Focused Technical Instructions
 
-- `.github/instructions/*.instructions.md` - focused repo execution guidance when still relevant to local work.
+- `.github/instructions/firebase.instructions.md` - Firebase-specific technical guidance.
+- `.github/instructions/react-components.instructions.md` - React component technical guidance.
+- `.github/instructions/scss-styles.instructions.md` - SCSS technical guidance.
+
+Workflow routing, task execution policy, worktree policy, write-back policy, review policy, and AI collaboration rules live in Notion current records, not in repo instruction files.
 
 ### Layer 3: Automation / CI
 
