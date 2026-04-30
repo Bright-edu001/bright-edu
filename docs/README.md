@@ -2,129 +2,61 @@
 
 ## Purpose
 
-This directory contains project documentation for the Bright-Edu repository.
+This directory contains repository documentation for Bright-Edu.
 
-The documentation is divided into two major categories:
+Current AI workflow policy lives in Notion current records. The repo keeps product usage manuals, technical references, executable setup notes, and minimal bootstrap pointers only.
 
-1. Product / technical reference documentation
-2. Repo-local bootstrap and historical workflow reference material
+## Documentation Boundary
 
-This README clarifies that current AI workflow policy lives in Notion current records.
+Keep these documentation types in the repo:
 
----
+- project usage manuals
+- Firebase / API / Admin / Permission / Performance technical docs
+- GitHub Actions / deploy / CI executable config references
+- minimal AI bootstrap pointers
 
-## Documentation Source of Truth
+Do not use repo Markdown as the current source for:
 
-For Bright-Edu AI-assisted development, current workflow policy lives in Notion current records.
+- workflow application policy
+- AI collaboration rules
+- tool roles
+- task routing rules
+- write-back / review policy
 
-Repo documentation is for product / technical reference plus repo-local bootstrap and historical context.
-It should stay aligned with Notion, but it does not override current Notion records.
+Those belong in Notion current records.
 
-`.github/` is the repo-local bootstrap / execution layer.
-`docs/ai-collab/` is transitional / historical reference only.
-`docs/legacy/` is historical context only.
+## Technical References
 
-When there is conflict between older workflow documents and current Notion records, prefer Notion.
-When repo-local bootstrap docs conflict with each other, prefer the most specific current file and update the mismatch later.
-
----
-
-## Main Documentation Areas
-
-### 1. `docs/ai-collab/`
-
-This directory is transitional / historical reference only.
-
-Use it only when explicitly needed for older workflow context, migrated task/spec references, or other historical material.
-
-Expected structure, if still present:
-
-```text
-docs/ai-collab/
-  process/
-  rules/
-  notion/
-  specs/
-  learnings/
-  research/
-```
-
-### 2. `docs/legacy/`
-
-Use this directory for older workflow documents that are no longer the active source of truth.
-
-Legacy documents may still be useful for historical context, but they should not override current Notion records or current repo bootstrap files.
-
-If a legacy document contains useful content, migrate only the useful part into the current Notion workspace instead of continuing to treat the legacy file as current policy.
-
-### 3. Product / Technical References
-
-Use product and technical docs for repository-specific setup, implementation notes, and operational references.
+Use the remaining docs in this directory for repository-specific setup, implementation notes, and operational references.
 
 Current examples include:
 
-- `docs/PERFORMANCE_OPTIMIZATION_GUIDE.md`
+- `docs/ADMIN_GUIDE.md`
+- `docs/API_DOCUMENTATION.md`
+- `docs/APP_CHECK_GUIDE.md`
+- `docs/FIREBASE_AUTH_SETUP.md`
+- `docs/FIRESTORE_SECURITY_RULES.md`
+- `docs/FORM_PERFORMANCE_GUIDE.md`
 - `docs/NOTION_MCP_SETUP.md`
+- `docs/PERFORMANCE_OPTIMIZATION_GUIDE.md`
+- `docs/PERMISSION_MANAGEMENT_GUIDE.md`
 
-These files are reference material and do not override Notion current workflow records.
+## Workflow Source of Truth
 
----
-
-## Relationship Between `docs/` and `.github/`
-
-### `docs/`
-
-The `docs/` directory is the repository documentation and reference layer.
-
-It can explain:
-
-- project setup
-- implementation notes
-- technical references
-- historical workflow context
-- repo-local bootstrap references
-
-It should not act as the current workflow policy source.
-
-### `.github/`
-
-The `.github/` directory is the execution-facing instruction layer.
-
-It contains short bootstrap guidance and focused instruction files for local repository execution.
-
-In short:
-
-```text
-Notion current records = workflow source of truth
-docs/ai-collab/ = transitional repo-local workflow reference and historical material
-.github/ = execution-facing bootstrap layer
-```
-
----
-
-## Workflow Navigation
-
-Use this index to find the right layer quickly.
+For AI-assisted development:
 
 1. Read current Notion task / rule / learning / R&D context.
-2. Confirm repository scope and file boundaries.
-3. Use `.github/` bootstrap docs for execution guidance.
-4. Implement only inside approved boundaries.
-5. Validate before closing.
-6. Prepare draft Notion write-back if required.
-7. Wait for approval before write-back.
+2. Use repo code and validation results for implementation behavior.
+3. Use `.github/copilot-instructions.md` only as a short local bootstrap pointer.
+4. Follow Notion current records when workflow docs or tool output disagree.
 
----
-
-## Task Outcome Model
+## Task Outcomes
 
 Not every task must produce code changes.
 
-Valid task outcomes include:
+Valid outcomes include:
 
 - Implemented
 - Blocked
 - Approved with No Code Change
 - Redirected to R&D
-
-If a linked repo-local task outcome guide still exists, it is reference material only and should not override Notion current records.

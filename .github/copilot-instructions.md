@@ -2,82 +2,46 @@
 
 ## Purpose
 
-This file is the repo-local bootstrap layer for AI-assisted execution.
-Notion current records are the workflow source of truth.
-Repo code and validation results are the implementation source of truth.
+This file is the minimal repo-local bootstrap pointer for AI-assisted execution.
 
-Use this file to keep execution short, bounded, and consistent.
+Notion current records are the workflow source of truth. Repository code and validation results are the implementation source of truth.
 
 ## Current Operating Model
 
-- Notion current records are the workflow knowledge source of truth.
-- Codex is the primary coworker and single task entrypoint.
-- Hermes is QA / research / Notion write-back backup.
-- Use the most specific repo instruction file for the task type.
+- Tools: Codex, Hermes, GPT Enterprise.
+- Codex is the only task input window.
+- Human only talks to Codex for task execution and workflow coordination.
+- Codex coordinates code, tests, GitHub, and deploy preparation.
+- Human performs final review and approval.
+- Hermes supports QA, research, and Notion write-back backup.
 
 ## Execution Rules
 
+- Read relevant Notion task / rule / learning / R&D context before implementation.
 - Keep tasks bounded.
 - Respect approved file boundaries.
-- Do not expand scope just because a nearby cleanup looks convenient.
-- Do not treat repo docs as the source of current workflow policy.
-- Do not assume implementation is required for every task.
+- Do not expand scope silently.
+- Do not treat repo docs as current workflow policy.
+- Do not assume every task requires code changes.
 
-If scope is unclear, stop and ask for clarification or current Notion context.
+If scope, allowed files, or acceptance criteria are unclear, stop and ask for clarification or current Notion context.
 
-## Task Gate
+## Approval Gates
 
-Before implementation, confirm:
+Wait for explicit human approval before:
 
-- Task ID
-- Goal
-- Scope
-- Non-goals
-- Allowed files
-- Disallowed files
-- Acceptance criteria
-- Validation expectations
-- Whether worktree isolation is needed
-
-If any of these are missing or contradictory, do not start implementation.
+- Notion write-back
+- merge
+- push
+- deploy
+- destructive Git
+- broad cleanup
+- out-of-scope file changes
 
 ## Validation
 
-Always validate before closing a task.
-
-Choose validation that matches the change:
-
-- UI / content: visual check plus smoke check
-- Shared code: affected path verification
-- Service / data: functional check
-- Firebase: emulator-first validation
-- Routing: affected route verification
-
-Do not claim completion without validation.
-
-## Notion Write-Back
-
-Write-back is draft-first.
-
-- Prepare the Notion write-back draft after verification.
-- Wait for approval before writing.
-- Keep write-back limited to the approved summary / status / outcome fields.
-- Do not write code, secrets, or full diffs into Notion.
-
-## Worktree
-
-Use worktree only when the task benefits from isolation.
-
-Examples:
-
-- parallel tasks
-- long-running changes
-- risky shared-surface work
-- explicit user request
-
-Do not use worktree as a substitute for scope control.
+Use validation that matches the change and exists in the repo. Report skipped validation clearly.
 
 ## Reminder
 
-This file is a bootstrap pointer, not a full workflow policy document.
-Keep it short.
+Keep this file short. Current workflow policy belongs in Notion, not in repo Markdown.
