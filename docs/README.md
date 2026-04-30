@@ -15,17 +15,14 @@ This README clarifies that current AI workflow policy lives in Notion current re
 
 ## Documentation Source of Truth
 
-For Bright-Edu AI-assisted development, the current workflow source of truth is Notion current records.
+For Bright-Edu AI-assisted development, current workflow policy lives in Notion current records.
 
-Repo documentation is bootstrap / execution reference material.
+Repo documentation is for product / technical reference plus repo-local bootstrap and historical context.
 It should stay aligned with Notion, but it does not override current Notion records.
 
-`docs/ai-collab/` is transitional repo-local workflow reference and historical material.
-Do not treat `docs/ai-collab/` as canonical workflow policy.
-Current workflow policy lives in Notion current records.
-
-Historical documents under `docs/legacy/` remain historical context only.
-They should not be treated as current workflow policy.
+`.github/` is the repo-local bootstrap / execution layer.
+`docs/ai-collab/` is transitional / historical reference only.
+`docs/legacy/` is historical context only.
 
 When there is conflict between older workflow documents and current Notion records, prefer Notion.
 When repo-local bootstrap docs conflict with each other, prefer the most specific current file and update the mismatch later.
@@ -36,18 +33,9 @@ When repo-local bootstrap docs conflict with each other, prefer the most specifi
 
 ### 1. `docs/ai-collab/`
 
-This directory is transitional repo-local workflow reference and historical material.
+This directory is transitional / historical reference only.
 
-Use this directory only when explicitly needed for:
-
-- historical workflow context
-- migrated task/spec references
-- older rules or learning references
-- Notion migration references
-- tool adoption references that have not yet been minimized
-
-Do not treat `docs/ai-collab/` as canonical workflow policy.
-Current workflow policy lives in Notion current records.
+Use it only when explicitly needed for older workflow context, migrated task/spec references, or other historical material.
 
 Expected structure, if still present:
 
@@ -114,15 +102,13 @@ docs/ai-collab/ = transitional repo-local workflow reference and historical mate
 
 ---
 
-## Current AI Workflow Pointer
+## Workflow Navigation
 
-Current Bright-Edu AI workflow is Notion-first and Codex-first.
-
-The practical order is:
+Use this index to find the right layer quickly.
 
 1. Read current Notion task / rule / learning / R&D context.
 2. Confirm repository scope and file boundaries.
-3. Use repo-local bootstrap docs for execution guidance.
+3. Use `.github/` bootstrap docs for execution guidance.
 4. Implement only inside approved boundaries.
 5. Validate before closing.
 6. Prepare draft Notion write-back if required.

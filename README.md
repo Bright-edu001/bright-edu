@@ -9,10 +9,10 @@ Bright Edu 是一個現代化的線上教育平台，提供課程瀏覽、內容
 Bright-Edu 的 AI 協作 workflow 以 Notion current records 為 source of truth。
 
 - Notion current records are the workflow source of truth.
-- Repo docs are bootstrap / execution references only.
+- `.github/` is the repo-local bootstrap / execution layer.
+- `docs/ai-collab/` is transitional / historical reference only.
+- `docs/legacy/` is historical context only.
 - Use `.github/copilot-instructions.md` for repo-local execution guidance.
-- Use `docs/ai-collab/` only as transitional repo-local reference or historical context when explicitly needed.
-- Use Hermes as QA / research / Notion write-back backup when needed.
 
 This README remains a product / platform overview, not the workflow policy document.
 
