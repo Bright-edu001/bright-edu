@@ -1,52 +1,34 @@
 # .github Rule Architecture
 
-This file explains how `.github` is layered in Bright-Edu.
-
-The goal is to keep repo-local instructions short, non-overlapping, and aligned with current Notion records.
+This file explains the remaining `.github` documentation boundary for Bright-Edu.
 
 ## Core Policy
 
 - Notion current records are the workflow source of truth.
-- Repository code and validation are the implementation source of truth.
-- `.github/` files are repo-local execution / bootstrap guidance.
-- Historical workflow language must not override current workflow policy.
+- Repository code and validation results are the implementation source of truth.
+- `.github/` is only a repo-local execution bootstrap layer.
+- Workflow application, AI collaboration rules, task routing, review policy, and write-back policy belong in Notion.
 
-## Layer Map
+## Current Layer Map
 
 ### Layer 1: Repo Bootstrap
 
-- `.github/copilot-instructions.md` — top-level bootstrap pointer.
+- `.github/copilot-instructions.md` - top-level local bootstrap pointer.
 
-### Layer 2: Focused Instructions
+### Layer 2: Focused Technical Instructions
 
-- `.github/instructions/*.instructions.md` — short, specific execution guidance.
+- `.github/instructions/*.instructions.md` - focused repo execution guidance when still relevant to local work.
 
-### Layer 3: Role / Agent Files
+### Layer 3: Automation / CI
 
-- `.github/agents/*.agent.md` — role-specific execution behavior.
-
-### Layer 4: Safety Hooks
-
-- `.github/hooks/*.json` — guardrails and reminders for risky actions.
-
-## Rule Priority Inside `.github`
-
-When several `.github` files touch the same topic:
-
-1. `.github/copilot-instructions.md`
-2. `.github/instructions/*.instructions.md`
-3. `.github/agents/*.agent.md`
-4. `.github/hooks/*.json`
-
-More specific files may add detail, but they must not contradict the higher layer.
+- `.github/workflows/*` - executable GitHub Actions configuration.
 
 ## Maintenance Rule
 
-Keep one idea in one place.
-If a rule repeats across layers, keep only the shortest useful reference in the lower layer.
-If the current workflow changes, update the bootstrap layer first and then align downstream files.
+Keep `.github` short and execution-facing.
+
+If workflow policy changes, update Notion current records first. Repo bootstrap files should only point to that policy and should not restate it in full.
 
 ## Reminder
 
-`.github` is for execution support.
-Notion is for workflow knowledge.
+Codex is the task entrypoint. Notion is the workflow knowledge source of truth. The repo is for code, executable config, technical docs, and minimal bootstrap pointers.
