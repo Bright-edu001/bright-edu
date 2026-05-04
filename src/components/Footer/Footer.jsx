@@ -112,11 +112,18 @@ function Footer() {
                   </span>
                 </p>
                 <p className="contact-phone">
-                  <span itemProp="telephone">07-7227407/02-77362190</span>
+                  <span itemProp="telephone">
+                    07-7227407
+                    <span className="desktop-phone-separator"> /</span>
+                    <span className="desktop-phone-secondary">
+                      02-77362190
+                    </span>
+                  </span>
                 </p>
               </div>
               <div className="social-icons">
                 <a
+                  className="phone-contact-link"
                   href="tel:077227407"
                   title="撥打 Bright Education 電話"
                   aria-label="撥打電話 07-7227407"
@@ -131,6 +138,7 @@ function Footer() {
                   />
                 </a>
                 <a
+                  className="line-contact-link"
                   href="https://lin.ee/1WTpxdf"
                   title="聯絡我們的LINE"
                   aria-label="聯絡我們的LINE"
