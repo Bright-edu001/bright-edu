@@ -10,8 +10,6 @@ Bright-Edu 的 AI 協作 workflow 以 Notion current records 為 source of truth
 
 - Notion current records are the workflow source of truth.
 - `.github/` is the repo-local bootstrap / execution layer.
-- `docs/ai-collab/` is transitional / historical reference only.
-- `docs/legacy/` is historical context only.
 - Use `.github/copilot-instructions.md` for repo-local execution guidance.
 
 This README remains a product / platform overview, not the workflow policy document.
@@ -53,7 +51,7 @@ This README remains a product / platform overview, not the workflow policy docum
 │  ├─ workflows/          # CI/CD 自動化流程
 │  ├─ instructions/       # repo-local bootstrap / instruction files
 │  └─ copilot-instructions.md
-├─ docs/                  # 專案文件與歷史參考
+├─ docs/                  # 專案技術文件與使用參考
 ├─ e2e/                   # Playwright E2E 測試
 ├─ public/                # 靜態資源
 ├─ src/
@@ -149,6 +147,4 @@ VITE_USE_FIREBASE_EMULATOR=true
 ## 相關文件
 
 - `docs/README.md`
-- `docs/NOTION_MCP_SETUP.md`
 - `.github/copilot-instructions.md`
-- `docs/ai-collab/`（僅作過渡性 repo-local 參考或歷史脈絡，若確實需要）

@@ -37,7 +37,6 @@ Current examples include:
 - `docs/FIREBASE_AUTH_SETUP.md`
 - `docs/FIRESTORE_SECURITY_RULES.md`
 - `docs/FORM_PERFORMANCE_GUIDE.md`
-- `docs/NOTION_MCP_SETUP.md`
 - `docs/PERFORMANCE_OPTIMIZATION_GUIDE.md`
 - `docs/PERMISSION_MANAGEMENT_GUIDE.md`
 
