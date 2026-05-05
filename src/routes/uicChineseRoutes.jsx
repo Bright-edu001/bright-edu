@@ -2,38 +2,38 @@ import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
 const AboutUic = lazy(() => import("../pages/Uic/Uic_school/AboutUic"));
-const CareerResources = lazy(() =>
-  import("../pages/Uic/Uic_school/CareerResources")
+const CareerResources = lazy(
+  () => import("../pages/Uic/Uic_school/CareerResources"),
 );
 const Areas = lazy(() => import("../pages/Uic/Mba/Areas"));
 const Advantages = lazy(() => import("../pages/Uic/Mba/Advantages"));
 const CoreCourses = lazy(() => import("../pages/Uic/Mba/CoreCourses"));
-const FoodAttractions = lazy(() =>
-  import("../pages/Uic/Uic_school/Chicago/FoodAttractions")
+const FoodAttractions = lazy(
+  () => import("../pages/Uic/Uic_school/Chicago/FoodAttractions"),
 );
 const FAQ = lazy(() => import("../pages/Uic/Uic_school/FAQ"));
-const RankingsAwards = lazy(() =>
-  import("../pages/Uic/Uic_school/RankingsAwards")
+const RankingsAwards = lazy(
+  () => import("../pages/Uic/Uic_school/RankingsAwards"),
 );
-const AacsbPage = lazy(() =>
-  import("../pages/Uic/Uic_school/Ranking/AacsbPage")
+const AacsbPage = lazy(
+  () => import("../pages/Uic/Uic_school/Ranking/AacsbPage"),
 );
 const HeedPage = lazy(() => import("../pages/Uic/Uic_school/Ranking/HeedPage"));
-const RankingPage = lazy(() =>
-  import("../pages/Uic/Uic_school/Ranking/RankingPage")
+const RankingPage = lazy(
+  () => import("../pages/Uic/Uic_school/Ranking/RankingPage"),
 );
 const Management = lazy(() => import("../pages/Uic/Mba/areas/Management"));
 const Finance = lazy(() => import("../pages/Uic/Mba/areas/Finance"));
 const Analytics = lazy(() => import("../pages/Uic/Mba/areas/Analytics"));
 const Marketing = lazy(() => import("../pages/Uic/Mba/areas/Marketing"));
-const HRManagement = lazy(() =>
-  import("../pages/Uic/Mba/areas/HR-Management.jsx")
+const HRManagement = lazy(
+  () => import("../pages/Uic/Mba/areas/HR-Management.jsx"),
 );
-const ChicagoCity = lazy(() =>
-  import("../pages/Uic/Uic_school/Chicago/Chicago.jsx")
+const ChicagoCity = lazy(
+  () => import("../pages/Uic/Uic_school/Chicago/Chicago.jsx"),
 );
-const Economy = lazy(() =>
-  import("../pages/Uic/Uic_school/Chicago/Economy.jsx")
+const Economy = lazy(
+  () => import("../pages/Uic/Uic_school/Chicago/Economy.jsx"),
 );
 const DualDegree = lazy(() => import("../pages/Uic/Mba/DualDegree.jsx"));
 const Application = lazy(() => import("../pages/Uic/Mba/Application.jsx"));
@@ -164,12 +164,6 @@ const uicChineseRoutes = [
   {
     path: "伊利諾大學芝加哥分校/MS-Programs/課程介紹",
     element: <MsPrograms />,
-  },
-  {
-    path: "伊利諾大學芝加哥分校/MS-Programs/課程介紹",
-    element: (
-      <Navigate to="/伊利諾大學芝加哥分校/MS-Programs/課程介紹" replace />
-    ),
   },
   {
     path: "伊利諾大學芝加哥分校/MS-Programs",
