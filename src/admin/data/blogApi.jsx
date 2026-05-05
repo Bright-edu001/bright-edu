@@ -13,7 +13,7 @@ import {
   limit,
 } from "firebase/firestore";
 import getImageUrl from "../../utils/getImageUrl";
-import { generateSlug } from "../../utils/generateSlug";
+import { generateSlug, ensureUniqueSlug } from "../../utils/generateSlug";
 
 // 輔助函數：將本地 /images/... 路徑轉換為公開的 Firebase Storage URL
 const convertItemPaths = (item) => {
@@ -123,6 +123,25 @@ async function ensureUniqueSlugGlobally(baseSlug) {
   return slug;
 }
 
+// 檢查 slug 在兩個 collection 中是否被其他文件使用（排除當前文件）
+async function isSlugTakenGloballyExcludingDocId(slug, excludeDocId) {
+  const [snapE, snapN] = await Promise.all([
+    getDocs(
+      query(
+        collection(db, "enrollmentEvents"),
+        where("slug", "==", slug),
+        limit(2),
+      ),
+    ),
+    getDocs(query(collection(db, "news"), where("slug", "==", slug), limit(2))),
+  ]);
+
+  const hasConflict = (snap) =>
+    (snap.docs || []).some((snapshotDoc) => snapshotDoc.id !== excludeDocId);
+
+  return hasConflict(snapE) || hasConflict(snapN);
+}
+
 // 創建新文章
 export async function createArticle(type, data) {
   // type 應為 'enrollment' 或 'article'
@@ -162,7 +181,11 @@ export async function updateArticle(type, docId, data) {
   // 若 slug 有更新，同步寫入 link 欄位確保一致性
   const updateData = { ...data };
   if (updateData.slug) {
-    updateData.link = `/blog/${updateData.slug}`;
+    const uniqueSlug = await ensureUniqueSlug(updateData.slug, (slug) =>
+      isSlugTakenGloballyExcludingDocId(slug, docId),
+    );
+    updateData.slug = uniqueSlug;
+    updateData.link = `/blog/${uniqueSlug}`;
   }
   // 更新文件資料
   await updateDoc(ref, updateData);

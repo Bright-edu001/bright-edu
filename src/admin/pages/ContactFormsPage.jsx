@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useEffectEvent } from "react";
 import {
   Table,
   Card,
@@ -48,6 +48,31 @@ import dayjs from "dayjs";
 const { Option } = Select;
 const { TextArea } = Input;
 
+const escapeCsvValue = (value) => {
+  const stringValue = value == null ? "" : String(value);
+  const escapedValue = stringValue.replace(/"/g, '""');
+
+  if (/[",\r\n]/.test(stringValue)) {
+    return `"${escapedValue}"`;
+  }
+
+  return escapedValue;
+};
+
+const buildCsvContent = (rows) => {
+  if (!rows || rows.length === 0) {
+    return "";
+  }
+
+  const headers = Object.keys(rows[0]);
+  const headerLine = headers.join(",");
+  const dataLines = rows.map((row) =>
+    headers.map((header) => escapeCsvValue(row[header])).join(","),
+  );
+
+  return [headerLine, ...dataLines].join("\n");
+};
+
 function ContactFormsPage() {
   const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,6 +89,28 @@ function ContactFormsPage() {
   const [autoSyncStatus, setAutoSyncStatus] = useState(null);
   const [isAutoSyncModalVisible, setIsAutoSyncModalVisible] = useState(false);
   const [autoSyncForm] = Form.useForm();
+
+  const handleSnapshotData = useEffectEvent((snapshot) => {
+    const formsData = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      createdAt: doc.data().createdAt?.toDate() || new Date(),
+      updatedAt: doc.data().updatedAt?.toDate() || new Date(),
+    }));
+    setForms(formsData);
+    setLoading(false);
+  });
+
+  const handleSnapshotError = useEffectEvent((error) => {
+    console.error("監聽 Firestore 資料時發生錯誤:", error);
+    message.error("載入資料失敗");
+    setLoading(false);
+  });
+
+  const loadAutoSyncStatus = useEffectEvent(() => {
+    const status = firestoreToSheetsSync.getAutoSyncStatus();
+    setAutoSyncStatus(status);
+  });
 
   // 即時監聽 Firestore 資料（等待 Auth 狀態還原後再建立監聽器）
   useEffect(() => {
@@ -87,24 +134,7 @@ function ContactFormsPage() {
         );
       }
 
-      unsubscribe = onSnapshot(
-        q,
-        (snapshot) => {
-          const formsData = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-            createdAt: doc.data().createdAt?.toDate() || new Date(),
-            updatedAt: doc.data().updatedAt?.toDate() || new Date(),
-          }));
-          setForms(formsData);
-          setLoading(false);
-        },
-        (error) => {
-          console.error("監聽 Firestore 資料時發生錯誤:", error);
-          message.error("載入資料失敗");
-          setLoading(false);
-        },
-      );
+      unsubscribe = onSnapshot(q, handleSnapshotData, handleSnapshotError);
     };
 
     // 等待 Auth 狀態確認後再啟動 Firestore listener
@@ -122,13 +152,7 @@ function ContactFormsPage() {
     };
   }, [filters.status]);
 
-  // 載入自動同步狀態
   useEffect(() => {
-    const loadAutoSyncStatus = () => {
-      const status = firestoreToSheetsSync.getAutoSyncStatus();
-      setAutoSyncStatus(status);
-    };
-
     // 初次載入
     loadAutoSyncStatus();
 
@@ -239,6 +263,11 @@ function ContactFormsPage() {
 
   // 匯出資料
   const handleExport = () => {
+    if (forms.length === 0) {
+      message.info("沒有資料可匯出");
+      return;
+    }
+
     const csvData = forms.map((form) => ({
       姓名: form.name,
       信箱: form.email,
@@ -249,14 +278,12 @@ function ContactFormsPage() {
       來源: form.source || "",
     }));
 
-    const csvContent = [
-      Object.keys(csvData[0]).join(","),
-      ...csvData.map((row) =>
-        Object.values(row)
-          .map((value) => `"${value}"`)
-          .join(","),
-      ),
-    ].join("\n");
+    const csvContent = buildCsvContent(csvData);
+
+    if (!csvContent) {
+      message.info("沒有資料可匯出");
+      return;
+    }
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");

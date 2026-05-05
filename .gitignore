@@ -29,9 +29,8 @@ yarn-error.log*
 firebase-debug.log*
 
 # 測試和臨時檔案
-test-*.js
-*test.js
-*Test.js
+/test-*.js
+/Test-*.js
 *.backup
 *.bak
 *.tmp

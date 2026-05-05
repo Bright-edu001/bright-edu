@@ -29,6 +29,224 @@
   }
 }
 
+@media screen and (min-width: 1025px) {
+  .footer-wrapper,
+  .ant-layout-footer.footer-wrapper {
+    background: #f6f6f9;
+    min-height: 217px;
+    padding: 72px 0;
+
+    .container {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .footer-content,
+  .ant-layout-footer.footer-wrapper .ant-row.footer-content {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    gap: 44px 160px;
+    min-height: 0;
+    margin: 0 !important;
+    padding: 0 80px;
+    text-align: left;
+  }
+
+  .footer-section,
+  .ant-layout-footer.footer-wrapper .ant-row.footer-content .ant-col {
+    width: 135.619px;
+    min-height: 0;
+    margin: 0;
+    flex: 0 0 auto;
+  }
+
+  .footer-section.brand,
+  .ant-layout-footer.footer-wrapper .ant-row.footer-content .brand {
+    width: 97.522px;
+    min-height: 116px;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .footer-brand,
+    a {
+      display: block;
+      width: 97.522px;
+      height: 116px;
+    }
+
+    img,
+    .footer-brand img {
+      width: 97.522px;
+      min-width: 97.522px;
+      max-width: 97.522px;
+      height: 116px;
+      min-height: 116px;
+      object-fit: contain;
+      aspect-ratio: auto;
+    }
+  }
+
+  .footer-section.footer-links-uic,
+  .footer-section.footer-links-msu,
+  .ant-layout-footer.footer-wrapper .ant-row.footer-content .footer-links-uic,
+  .ant-layout-footer.footer-wrapper .ant-row.footer-content .footer-links-msu {
+    width: 135.619px;
+
+    .section-title {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      margin: 0 0 10px;
+      color: $color-nav;
+      font-family: $font-family-paragraph;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    ul {
+      min-height: 0;
+
+      li {
+        display: block;
+        height: auto;
+        margin: 0 0 9px;
+        line-height: 1;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        a {
+          color: $color-gray-dark;
+          font-family: $font-family-paragraph;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 1;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  .footer-section.articles,
+  .ant-layout-footer.footer-wrapper .ant-row.footer-content .articles {
+    display: block;
+    width: 135.619px;
+    min-height: 0;
+
+    a {
+      color: $color-nav;
+      font-family: $font-family-paragraph;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+  }
+
+  .footer-section.about,
+  .ant-layout-footer.footer-wrapper .ant-row.footer-content .about {
+    width: 135.619px;
+    min-height: 0;
+    align-items: flex-start;
+
+    .contact {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .contact-title {
+      display: block;
+      min-height: 0;
+      margin: 0 0 16px;
+      color: $color-nav;
+      font-family: $font-family-paragraph;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .contact-address,
+    .contact-phone {
+      display: block;
+      width: 100%;
+      min-height: 0;
+      margin: 0;
+      color: $color-gray-dark;
+      font-family: $font-family-paragraph;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    .contact-address {
+      margin-bottom: 2px;
+    }
+
+    .desktop-phone-secondary {
+      display: block;
+    }
+
+    .social-icons {
+      align-self: flex-start;
+      gap: 0;
+      width: 30px;
+      margin-top: 0;
+
+      .phone-contact-link {
+        display: none;
+      }
+
+      a {
+        display: block;
+        width: 30px;
+        height: 30px;
+      }
+
+      a .line-icon {
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+        min-height: 30px;
+        margin-top: 0;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .footer-bottom,
+  .ant-layout-footer.footer-wrapper .container > .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 160px);
+    max-width: 1400px;
+    min-height: 48px;
+    margin: 64px auto 0;
+    padding-top: 28px;
+    border-top: 1px solid rgba(113, 113, 133, 0.22);
+    color: $color-gray-dark;
+    font-family: $font-family-paragraph;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
 .footer-content {
   // 頁腳內容區塊 (Flex/Grid 佈局)
   display: flex !important; // 覆寫 Ant Design Row 預設樣式

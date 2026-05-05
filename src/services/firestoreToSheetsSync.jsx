@@ -152,7 +152,7 @@ class FirestoreToSheetsSync {
 
       if (!response.ok) {
         throw new Error(
-          `HTTP Error: ${response.status} ${response.statusText}`
+          `HTTP Error: ${response.status} ${response.statusText}`,
         );
       }
 
@@ -607,7 +607,7 @@ class FirestoreToSheetsSync {
         {
           error: error.message,
           時間: new Date().toLocaleString(),
-        }
+        },
       );
 
       // 如果重試次數達到上限，停止自動同步
@@ -631,7 +631,7 @@ class FirestoreToSheetsSync {
       this.autoSync.enabled && this.autoSync.lastSyncTime
         ? new Date(
             this.autoSync.lastSyncTime.getTime() +
-              this.autoSync.intervalHours * 60 * 60 * 1000
+              this.autoSync.intervalHours * 60 * 60 * 1000,
           )
         : null;
 
@@ -736,8 +736,8 @@ class FirestoreToSheetsSync {
 // 創建並導出單例實例
 const firestoreToSheetsSync = new FirestoreToSheetsSync();
 
-// 載入自動同步設定（如果有的話）
-firestoreToSheetsSync.loadAutoSyncSettings();
+// 注意：不在 import 時自動還原 localStorage 中的自動同步設定。
+// 若需恢復自動同步，請由使用者在 UI 明確操作，或呼叫 loadAutoSyncSettings()。
 
 export default firestoreToSheetsSync;
 

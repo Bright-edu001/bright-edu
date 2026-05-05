@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useEffectEvent } from "react";
 
 /**
  * useIntersectionObserver
@@ -12,6 +12,9 @@ import { useRef, useEffect } from "react";
  */
 function useIntersectionObserver(callback, options) {
   const targetRef = useRef(null);
+  const onIntersect = useEffectEvent((entry) => {
+    callback(entry);
+  });
 
   useEffect(() => {
     const element = targetRef.current;
@@ -21,7 +24,7 @@ function useIntersectionObserver(callback, options) {
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          callback(entry); // 進入視窗時執行 callback
+          onIntersect(entry); // 進入視窗時執行 callback
           obs.unobserve(entry.target); // 只觸發一次，進入後取消監控
         }
       });
@@ -33,7 +36,7 @@ function useIntersectionObserver(callback, options) {
     return () => {
       if (element) observer.unobserve(element);
     };
-  }, [callback, options]);
+  }, [options]);
 
   return targetRef;
 }

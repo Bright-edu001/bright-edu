@@ -6,8 +6,7 @@ const PRODUCTION_CONFIG = {
   SYNC_SERVICE_URL:
     import.meta.env.VITE_SYNC_SERVICE_URL ||
     "https://bright-edu-sync-156805168089.asia-east1.run.app",
-  API_KEY:
-    import.meta.env.VITE_SYNC_API_KEY || "bright-edu-sync-2024-secure-key",
+  API_KEY: import.meta.env.VITE_SYNC_API_KEY,
   HEALTH_CHECK_URL: `${
     import.meta.env.VITE_SYNC_SERVICE_URL ||
     "https://bright-edu-sync-156805168089.asia-east1.run.app"
@@ -18,8 +17,7 @@ const PRODUCTION_CONFIG = {
 const DEVELOPMENT_CONFIG = {
   SYNC_SERVICE_URL:
     import.meta.env.VITE_DEV_SYNC_SERVICE_URL || "http://localhost:3002",
-  API_KEY:
-    import.meta.env.VITE_SYNC_API_KEY || "bright-edu-sync-2024-secure-key",
+  API_KEY: import.meta.env.VITE_SYNC_API_KEY,
   HEALTH_CHECK_URL: `${
     import.meta.env.VITE_DEV_SYNC_SERVICE_URL || "http://localhost:3002"
   }/api/health`,
@@ -47,10 +45,23 @@ export const SYNC_CONFIG = {
   RETRY_ATTEMPTS: 3,
 };
 
+const getValidatedSyncApiKey = () => {
+  const apiKey = SYNC_CONFIG.API_KEY?.trim();
+
+  if (!apiKey) {
+    throw new Error(
+      "[SYNC_CONFIG_MISSING_API_KEY] VITE_SYNC_API_KEY 未設定或為空值，已停止同步請求。",
+    );
+  }
+
+  return apiKey;
+};
+
 // 同步服務 API 呼叫函數
 export const syncGoogleSheets = async () => {
   try {
     console.log("🔄 開始同步 Google Sheets...");
+    const apiKey = getValidatedSyncApiKey();
 
     const response = await fetch(
       `${SYNC_CONFIG.SYNC_SERVICE_URL}/api/sync-google-sheets`,
@@ -58,16 +69,16 @@ export const syncGoogleSheets = async () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": SYNC_CONFIG.API_KEY,
+          "x-api-key": apiKey,
         },
         timeout: SYNC_CONFIG.TIMEOUT,
-      }
+      },
     );
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
-        errorData.message || `HTTP ${response.status}: ${response.statusText}`
+        errorData.message || `HTTP ${response.status}: ${response.statusText}`,
       );
     }
 
@@ -110,7 +121,7 @@ export const checkSyncServiceHealth = async () => {
       return { success: true, data };
     } else {
       console.warn(
-        `⚠️ 同步服務回應異常: ${response.status} ${response.statusText}`
+        `⚠️ 同步服務回應異常: ${response.status} ${response.statusText}`,
       );
       return {
         success: false,
@@ -128,7 +139,7 @@ export const checkSyncServiceHealth = async () => {
 
 // 帶重試機制的同步函數
 export const syncWithRetry = async (
-  maxRetries = SYNC_CONFIG.RETRY_ATTEMPTS
+  maxRetries = SYNC_CONFIG.RETRY_ATTEMPTS,
 ) => {
   let lastError;
 

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useEffectEvent } from "react";
 import { useLocation } from "react-router-dom";
 
 /**
@@ -11,6 +11,13 @@ import { useLocation } from "react-router-dom";
  */
 function ScrollToTop() {
   const { pathname, search, hash } = useLocation();
+  const onScrollToTop = useEffectEvent(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant", // 立即滾動，不使用動畫
+    });
+  });
 
   useEffect(() => {
     // 如果 URL 包含錨點，讓瀏覽器自然處理錨點滾動
@@ -20,11 +27,7 @@ function ScrollToTop() {
 
     // 使用 setTimeout 確保頁面完全渲染後再滾動
     const scrollTimer = setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant", // 立即滾動，不使用動畫
-      });
+      onScrollToTop();
     }, 0);
 
     // 清理 timer

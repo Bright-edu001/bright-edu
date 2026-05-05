@@ -1,52 +1,50 @@
 ---
-description: "React 元件開發規範。Use when: 建立或修改 React 元件、頁面元件、PropTypes 驗證、元件結構設計。"
+description: "React component technical guidance for components, pages, props, state, effects, rendering, accessibility, and styling integration."
 applyTo: "src/components/**,src/pages/**"
 ---
 
-# React 元件開發規範
+# React Component Technical Instructions
 
-## 元件結構
+Keep React changes focused, readable, and consistent with nearby components.
 
-每個元件為獨立資料夾，包含：
+## Component Structure
 
-- `ComponentName.jsx` — 元件主體（函式元件）
-- `ComponentName.module.scss` — SCSS 模組化樣式
-- `index.jsx` — 匯出入口（選用，用於簡化 import 路徑）
+- Prefer small components with a single clear responsibility.
+- Follow the surrounding file organization before introducing a new structure.
+- Keep component names descriptive and aligned with exported filenames.
+- Avoid broad app architecture changes from component-level tasks.
 
-## 函式元件範本
+## Props And State
 
-```jsx
-import PropTypes from "prop-types";
-import styles from "./ComponentName.module.scss";
+- Keep props explicit and pass only the data a component needs.
+- Validate assumptions at component boundaries where the surrounding code already does so.
+- Keep state local unless shared state is already part of the existing design.
+- Derive values during render when possible instead of duplicating state.
 
-function ComponentName({ title, children }) {
-  return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>{title}</h2>
-      {children}
-    </div>
-  );
-}
+## Effects And Data Flow
 
-ComponentName.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node,
-};
+- Use effects for synchronization with external systems, not for ordinary data derivation.
+- Keep dependency arrays accurate.
+- Clean up subscriptions, timers, observers, and async side effects when needed.
+- Preserve existing data fetching and routing patterns unless the task explicitly changes them.
 
-export default ComponentName;
-```
+## Rendering And Accessibility
 
-## 規則
+- Keep conditional rendering easy to follow.
+- Preserve loading, empty, and error states when touching user-facing flows.
+- Use semantic HTML where practical.
+- Keep interactive elements keyboard-accessible and provide labels for controls that need them.
 
-1. **必須使用 PropTypes** 驗證所有 props
-2. **必須使用 SCSS 模組** — `import styles from './X.module.scss'`，不使用行內樣式
-3. **路徑別名** — 使用 `@/` 引入 src 下的模組（如 `import { logger } from '@/utils/logger'`）
-4. **資料取得** — 使用 React Query hooks，不在元件中直接呼叫 Firebase
-5. **懶加載** — 頁面級元件使用 `React.lazy()` + `Suspense`
-6. **XSS 防護** — 渲染 HTML 內容前必須經過 `sanitizeHtml()` 處理
-7. **錯誤邊界** — 關鍵區塊使用 `ErrorBoundary` 包裹
-8. **效能** — 大型列表或計算密集的元件使用 `React.memo`、`useMemo`、`useCallback`
+## Styling Integration
 
-## 現有元件清單
+- Match the local styling pattern used by the component or page.
+- Use existing SCSS, SCSS modules, styled-components, or library styling conventions as found nearby.
+- Do not introduce a new styling library for a component cleanup.
+- Keep class names stable when they are used by tests, scripts, or existing styles.
 
-Accordion, ActionButton, Application, AppSkeleton, AreaCards, ArticleCard, AttractionCard, CourseList, ErrorBoundary, FloatingButtons, Footer, GallerySection, Header, Hero, ImageTextSection, InfoCard, MbaAreasHero, Ms, ProgressiveImage, RankingNumberFlip, ScrollToTop, SearchBar, SectionContainer, UrlRedirect
+## Review Checklist
+
+- Component behavior remains within the approved task scope.
+- Props, state, effects, and rendering paths are simple and maintainable.
+- Accessibility is not regressed.
+- Styling changes follow the nearby pattern.

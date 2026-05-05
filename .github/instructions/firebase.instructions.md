@@ -1,87 +1,47 @@
 ---
-description: "Firebase 與服務層開發規範。Use when: 修改 Firebase 設定、Cloud Functions、Firestore 查詢、服務層模組、環境變數。"
+description: "Firebase technical guidance for config, services, Functions, Firestore, Storage, Auth, and environment handling."
 applyTo: "src/config/**,src/services/**,functions/**"
 ---
 
-# Firebase 與服務層開發規範
+# Firebase Technical Instructions
 
-## Firebase 設定檔
+Keep Firebase changes small, explicit, and aligned with the existing client and Functions structure.
 
-| 檔案                              | 用途                                        |
-| --------------------------------- | ------------------------------------------- |
-| `src/config/firebaseCore.jsx`     | Firebase 核心初始化（App、Firestore、Auth） |
-| `src/config/firebaseServices.jsx` | Firebase 服務配置                           |
-| `src/config/appCheckClient.jsx`   | App Check 防護                              |
-| `src/config/functionsClient.jsx`  | Cloud Functions 客戶端                      |
-| `src/config/analyticsClient.jsx`  | Google Analytics                            |
-| `src/config/envUtils.jsx`         | 環境判斷工具                                |
-| `src/config/syncConfig.jsx`       | 資料同步設定                                |
+## Scope
 
-## 服務層模式
+Use this guidance for Firebase initialization, client services, Cloud Functions calls, Firestore, Storage, Auth, App Check, analytics, and environment handling.
 
-所有服務模組必須包含：
+## Configuration
 
-1. **Firebase 就緒狀態檢查** — 確認 Firebase 已初始化再執行操作
-2. **錯誤處理** — 捕捉並記錄所有 Firebase 錯誤
-3. **日誌記錄** — 使用 `@/utils/logger` 記錄關鍵操作
+- Keep Firebase app initialization in `src/config/` and service-specific wrappers in the existing config or service modules.
+- Read environment values through the existing environment utilities when available.
+- Treat every client-exposed variable as public configuration. Never add secrets, service account keys, private tokens, or admin credentials to client code or committed files.
+- Preserve emulator-aware behavior when touching local development or Firestore connection logic.
 
-```jsx
-// 標準服務模式（參考 contactService.jsx）
-import { logger } from "@/utils/logger";
+## Client Services
 
-export async function submitForm(data) {
-  try {
-    // 1. 檢查 Firebase 就緒狀態
-    // 2. 資料驗證
-    // 3. 去重檢查（防止重複提交）
-    // 4. 寫入 Firestore
-    // 5. 記錄日誌
-    return { success: true };
-  } catch (error) {
-    logger.error("表單提交失敗", error);
-    throw error;
-  }
-}
-```
+- Keep Firestore, Storage, Auth, Functions, App Check, and Analytics imports close to the modules that configure or use them.
+- Prefer small service functions with clear input validation and predictable return values.
+- Do not create new global Firebase instances when an existing configured instance can be reused.
+- Keep logging and error handling consistent with the surrounding service code.
 
-## Cloud Functions 模式
+## Firestore And Storage
 
-- 使用 Firebase Functions v6 模組化 API
-- `onCall` — 前端呼叫的函式（需驗證 `request.auth`）
-- `onDocumentCreated` — Firestore 觸發器
-- 批次操作上限 500 筆
-- Node 20 環境
+- Validate IDs, slugs, paths, and required fields before writes.
+- Keep collection and document paths explicit and easy to audit.
+- Avoid broad reads or writes when a narrower query or document update is sufficient.
+- Do not bypass security rules in client code. Client code must assume rules are enforced server-side.
 
-## 環境變數
+## Cloud Functions
 
-- 所有前端環境變數必須使用 `VITE_` 前綴
-- 不在程式碼中硬編碼密鑰或敏感資訊
-- 使用 `src/config/envUtils.jsx` 判斷環境：
-  - `isLocalDevelopment()` — 本地開發
-  - `isFirebaseHosting()` — Firebase 託管
-  - `isProduction()` — 生產環境
+- Match the existing callable or HTTPS function style in `functions/` before adding new patterns.
+- Validate request data and auth state at the function boundary.
+- Return structured results and avoid leaking implementation details in client-visible errors.
+- Keep Node runtime assumptions consistent with the existing Functions setup.
 
-## Emulator-First 開發模式
+## Review Checklist
 
-任何涉及 Firestore 資料新增、修改、刪除的操作（包括執行腳本），必須先在 Firebase Emulator 虛擬環境中進行，嚴禁直接操作生產環境 Firestore。
-
-### 標準流程
-
-1. 啟動 Emulator：`firebase emulators:start`（Firestore 在 `localhost:8080`）
-2. 如需最新生產資料：`node scripts/sync-prod-to-emulator.mjs`
-3. 設定環境變數指向 Emulator：`$env:FIRESTORE_EMULATOR_HOST="localhost:8080"`
-4. 在 Emulator 中執行資料變更（腳本或服務層操作）
-5. 啟動本地前端 (`npm run start`) 驗證資料與畫面正確
-6. 驗證通過後由使用者自行決定是否同步到線上環境
-
-### 注意事項
-
-- 所有腳本（如 `migrate-slugs.mjs`）執行前必須確認 `FIRESTORE_EMULATOR_HOST` 已設定
-- 未設定該環境變數時，腳本會直接操作生產 Firestore，造成不可逆的影響
-- Agent 不可自行將 Emulator 中的變更推送到生產環境
-
-## ⚠️ 安全規則
-
-- 修改 `firestore.rules` 或 `storage.rules` 前必須向使用者說明
-- 「開發用」的寬鬆規則（`allow write: if true`）不可部署到生產環境
-- 所有用戶輸入必須驗證後再寫入 Firestore
+- No secrets or private credentials are introduced.
+- Existing Firebase initialization and emulator behavior remain intact.
+- Firestore, Storage, Auth, and Functions changes are scoped to the requested behavior.
+- Error handling and logging match nearby code.

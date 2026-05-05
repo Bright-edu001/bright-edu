@@ -46,6 +46,12 @@
       transform 0.2s;
     resize: none;
 
+    &::placeholder {
+      color: $color-gray-dark;
+      opacity: 0.85;
+      letter-spacing: 0.5px;
+    }
+
     &:focus {
       border-color: $color-nav;
       transform: scale(1.02);
@@ -55,7 +61,7 @@
       width: 100%;
       max-width: 100%;
       min-width: unset;
-      font-size: 18px; // 原始樣式在手機也是 18px
+      font-size: 18px;
       padding: 10px 8px;
     }
   }

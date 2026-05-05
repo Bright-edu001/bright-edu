@@ -41,7 +41,7 @@
     "sass": "^1.60.0",
     "source-map-explorer": "^2.5.3",
     "vite": "^5.4.10",
-    "vitest": "^4.1.2",
+    "vitest": "^2.1.9",
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "scripts": {
@@ -53,6 +53,7 @@
     "analyze:performance": "node scripts/analyze-performance.mjs",
     "heroku-postbuild": "npm run build:prod",
     "test": "vitest",
+    "test:run": "vitest --run",
     "test:watch": "vitest --watch",
     "predeploy": "npm run build:prod",
     "deploy": "gh-pages -d build"

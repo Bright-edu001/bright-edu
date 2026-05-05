@@ -7,6 +7,7 @@ import React, {
   useContext,
   useState,
   useEffect,
+  useEffectEvent,
   startTransition,
 } from "react";
 import { FirebaseAppProvider } from "reactfire";
@@ -28,6 +29,28 @@ export const FirebaseInitProvider = ({ children }) => {
   const [isInitializing, setIsInitializing] = useState(false);
   const [initError, setInitError] = useState(null);
   const [isBasicReady, setIsBasicReady] = useState(false);
+
+  const completeAdditionalInitialization = useEffectEvent(async () => {
+    try {
+      await initializeAdditionalServices();
+
+      startTransition(() => {
+        setIsInitialized(true);
+        setIsInitializing(false);
+        logger.info("[Firebase Init] 完整初始化完成");
+      });
+    } catch (error) {
+      logger.warn(
+        "[Firebase Init] 額外服務初始化失敗，但不影響基本功能:",
+        error,
+      );
+      // 即使額外服務失敗，仍標記為已初始化
+      startTransition(() => {
+        setIsInitialized(true);
+        setIsInitializing(false);
+      });
+    }
+  });
 
   useEffect(() => {
     const performOptimizedInitialization = async () => {
@@ -52,25 +75,7 @@ export const FirebaseInitProvider = ({ children }) => {
 
         // 階段 2: 背景初始化額外服務（非阻塞）
         setTimeout(async () => {
-          try {
-            await initializeAdditionalServices();
-
-            startTransition(() => {
-              setIsInitialized(true);
-              setIsInitializing(false);
-              logger.info("[Firebase Init] 完整初始化完成");
-            });
-          } catch (error) {
-            logger.warn(
-              "[Firebase Init] 額外服務初始化失敗，但不影響基本功能:",
-              error,
-            );
-            // 即使額外服務失敗，仍標記為已初始化
-            startTransition(() => {
-              setIsInitialized(true);
-              setIsInitializing(false);
-            });
-          }
+          await completeAdditionalInitialization();
         }, 0); // 立即開始，但不阻塞
       } catch (error) {
         logger.error("[Firebase Init] 核心服務初始化失敗:", error);

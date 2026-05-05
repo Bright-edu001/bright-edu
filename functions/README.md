@@ -9,7 +9,7 @@ firebase deploy --only functions
 ## 環境與架構
 
 - Runtime: Node.js 20
-- 套件: firebase-functions v6 (模組化 API), firebase-admin v12
+- 套件: firebase-functions v7.1.0 (模組化 API), firebase-admin v12
 - 地區 (region): 目前所有函式配置 `asia-east1` (與 Firestore 同區)
 - 觸發來源: Cloud Firestore (`users` collection), HTTPS Callable
 
