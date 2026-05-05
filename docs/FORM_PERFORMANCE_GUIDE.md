@@ -4,7 +4,7 @@
 
 ### 1. 🔥 詳細的效能監控系統
 
-**位置**: `src/hooks/useFormSubmit.js`, `src/services/contactService.js`, `src/utils/request.js`
+**位置**: `src/hooks/useFormSubmit.jsx`, `src/services/contactService.jsx`, `src/utils/request.js`
 
 **改進內容**:
 
@@ -25,7 +25,7 @@
 
 ### 2. 🚫 請求去重機制
 
-**位置**: `src/hooks/useFormSubmit.js`
+**位置**: `src/hooks/useFormSubmit.jsx`
 
 **改進內容**:
 
@@ -37,7 +37,7 @@
 
 ### 3. ⚡ 簡化 Firestore 資料結構
 
-**位置**: `src/services/contactService.js`
+**位置**: `src/services/contactService.jsx`
 
 **改進內容**:
 
@@ -61,7 +61,7 @@
 
 ### 5. 📊 增強的 Logger 功能
 
-**位置**: `src/utils/logger.js`
+**位置**: `src/utils/logger.jsx`
 
 **改進內容**:
 
@@ -165,7 +165,7 @@ performanceTest(5); // 執行 5 次測試並分析結果
 
 ### 1. 詳細的效能記錄系統
 
-- ✅ 已在 `useFormSubmit.js`、`contactService.js` 和 `request.js` 中添加詳細的時間記錄
+- ✅ 已在 `useFormSubmit.jsx`、`contactService.jsx` 和 `request.js` 中添加詳細的時間記錄
 - ✅ 記錄表單送出的每個階段時間：驗證、Google Sheets 儲存、Firestore 儲存、網路請求
 - ✅ 提供毫秒級和秒級的時間測量
 - ✅ 在生產環境也會記錄重要的效能指標

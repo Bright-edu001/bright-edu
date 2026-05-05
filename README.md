@@ -123,6 +123,7 @@ VITE_USE_FIREBASE_EMULATOR=true
 | `npm run build:prod`          | 建立 production 版本並關閉 Source Map |
 | `npm run preview`             | 預覽打包後結果                        |
 | `npm run test`                | 執行 Vitest                           |
+| `npm run test:run`            | Vitest 單次執行（驗收用）             |
 | `npm run test:watch`          | 以 watch 模式執行 Vitest              |
 | `npm run analyze`             | 建置後分析 bundle 大小                |
 | `npm run analyze:performance` | 執行效能分析腳本                      |

@@ -55,9 +55,9 @@ http://localhost:3000/admin
 
 ```bash
 # 複製範例檔案
-cp .env.example .env
+cp .env.example .env.local
 
-# 編輯.env檔案，填入Firebase設定
+# 編輯 .env.local 檔案，填入Firebase設定
 VITE_API_KEY=your_firebase_api_key
 VITE_AUTH_DOMAIN=your_project.firebaseapp.com
 # ... 其他設定
@@ -84,7 +84,6 @@ VITE_AUTH_DOMAIN=your_project.firebaseapp.com
 
 1. 訪問 `/admin`
 2. **方式一**: 電子郵件登入
-
    - 輸入 `@bright-edu.com` 電子郵件
    - 輸入密碼
    - 點選「登入」
