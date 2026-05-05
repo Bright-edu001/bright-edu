@@ -29,7 +29,7 @@ const msuRedirects = [
   { from: "/msu-business-school", expectedFragment: "密西根州立大學" },
   {
     from: "/msu-business-school/msu/about-msu",
-    expectedFragment: "學校介紹",
+    expectedFragment: "MSU商學院/學校介紹",
   },
   {
     from: "/msu-business-school/msf/application",

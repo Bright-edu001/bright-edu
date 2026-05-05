@@ -41,6 +41,10 @@ const msuChineseRoutes = [
     element: <MicFoodAttractions />,
   },
   {
+    path: "密西根州立大學/MSU商學院/MSU學校介紹",
+    element: <Navigate to="/密西根州立大學/MSU商學院/學校介紹" replace />,
+  },
+  {
     path: "密西根州立大學",
     element: <Navigate to="/密西根州立大學/MSU商學院/學校介紹" replace />,
   },
