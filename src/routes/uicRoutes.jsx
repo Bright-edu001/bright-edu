@@ -83,11 +83,15 @@ const uicRoutes = [
   },
   {
     path: "uic-business-school/ms/programs",
-    element: <Navigate to="/伊利諾大學芝加哥分校/碩士課程/課程介紹" replace />,
+    element: (
+      <Navigate to="/伊利諾大學芝加哥分校/MS-Programs/課程介紹" replace />
+    ),
   },
   {
     path: "uic-business-school/ms",
-    element: <Navigate to="/伊利諾大學芝加哥分校/碩士課程/課程介紹" replace />,
+    element: (
+      <Navigate to="/伊利諾大學芝加哥分校/MS-Programs/課程介紹" replace />
+    ),
   },
   {
     path: "uic-business-school",

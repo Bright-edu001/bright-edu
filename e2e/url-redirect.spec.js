@@ -14,6 +14,14 @@ const uicRedirects = [
     from: "/uic-business-school/mba/application",
     expectedFragment: "申請資訊",
   },
+  {
+    from: "/uic-business-school/ms/programs",
+    expectedFragment: "MS-Programs",
+  },
+  {
+    from: "/uic-business-school/ms",
+    expectedFragment: "MS-Programs",
+  },
 ];
 
 // REDIR-02：MSU 舊 URL 重導向
