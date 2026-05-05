@@ -48,6 +48,31 @@ import dayjs from "dayjs";
 const { Option } = Select;
 const { TextArea } = Input;
 
+const escapeCsvValue = (value) => {
+  const stringValue = value == null ? "" : String(value);
+  const escapedValue = stringValue.replace(/"/g, '""');
+
+  if (/[",\r\n]/.test(stringValue)) {
+    return `"${escapedValue}"`;
+  }
+
+  return escapedValue;
+};
+
+const buildCsvContent = (rows) => {
+  if (!rows || rows.length === 0) {
+    return "";
+  }
+
+  const headers = Object.keys(rows[0]);
+  const headerLine = headers.join(",");
+  const dataLines = rows.map((row) =>
+    headers.map((header) => escapeCsvValue(row[header])).join(","),
+  );
+
+  return [headerLine, ...dataLines].join("\n");
+};
+
 function ContactFormsPage() {
   const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -238,6 +263,11 @@ function ContactFormsPage() {
 
   // 匯出資料
   const handleExport = () => {
+    if (forms.length === 0) {
+      message.info("沒有資料可匯出");
+      return;
+    }
+
     const csvData = forms.map((form) => ({
       姓名: form.name,
       信箱: form.email,
@@ -248,14 +278,12 @@ function ContactFormsPage() {
       來源: form.source || "",
     }));
 
-    const csvContent = [
-      Object.keys(csvData[0]).join(","),
-      ...csvData.map((row) =>
-        Object.values(row)
-          .map((value) => `"${value}"`)
-          .join(","),
-      ),
-    ].join("\n");
+    const csvContent = buildCsvContent(csvData);
+
+    if (!csvContent) {
+      message.info("沒有資料可匯出");
+      return;
+    }
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
