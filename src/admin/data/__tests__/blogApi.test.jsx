@@ -51,13 +51,29 @@ vi.mock("../../../utils/getImageUrl.jsx", () => ({
 }));
 
 // Mock generateSlug
-const { mockGenerateSlug } = vi.hoisted(() => ({
+const { mockGenerateSlug, mockEnsureUniqueSlug } = vi.hoisted(() => ({
   mockGenerateSlug: vi.fn(
     (title) => title?.toLowerCase().replace(/\s+/g, "-") || null,
   ),
+  mockEnsureUniqueSlug: vi.fn(async (baseSlug, checkExists) => {
+    let slug = baseSlug;
+    let counter = 2;
+
+    while (await checkExists(slug)) {
+      slug = `${baseSlug}-${counter}`;
+      counter++;
+      if (counter > 100) {
+        slug = `${baseSlug}-${Date.now()}`;
+        break;
+      }
+    }
+
+    return slug;
+  }),
 }));
 vi.mock("../../../utils/generateSlug", () => ({
   generateSlug: mockGenerateSlug,
+  ensureUniqueSlug: mockEnsureUniqueSlug,
 }));
 
 import {
@@ -73,6 +89,21 @@ beforeEach(() => {
   mockGenerateSlug.mockImplementation(
     (title) => title?.toLowerCase().replace(/\s+/g, "-") || null,
   );
+  mockEnsureUniqueSlug.mockImplementation(async (baseSlug, checkExists) => {
+    let slug = baseSlug;
+    let counter = 2;
+
+    while (await checkExists(slug)) {
+      slug = `${baseSlug}-${counter}`;
+      counter++;
+      if (counter > 100) {
+        slug = `${baseSlug}-${Date.now()}`;
+        break;
+      }
+    }
+
+    return slug;
+  });
   // 預設 getDocs 回傳 empty（slug 未被佔用）
   mockGetDocs.mockResolvedValue({ empty: true, docs: [] });
   // 預設 addDoc 回傳 docRef
@@ -275,11 +306,39 @@ describe("createArticle — 一般行為", () => {
 // updateArticle
 // ─────────────────────────────────────────────
 describe("updateArticle", () => {
-  it("更新 slug 時應同步更新 link", async () => {
+  it("更新 slug 且未衝突時應保留 slug 並同步更新 link", async () => {
     await updateArticle("enrollment", "doc-123", { slug: "updated-slug" });
 
     const updatePayload = mockUpdateDoc.mock.calls[0][1];
+    expect(updatePayload.slug).toBe("updated-slug");
     expect(updatePayload.link).toBe("/blog/updated-slug");
+    expect(mockGetDocs).toHaveBeenCalledTimes(2);
+  });
+
+  it("更新 slug 與其他文件衝突時應加後綴（slug-2）", async () => {
+    mockGetDocs
+      .mockResolvedValueOnce({ empty: true, docs: [] })
+      .mockResolvedValueOnce({ empty: false, docs: [{ id: "other-doc" }] })
+      .mockResolvedValueOnce({ empty: true, docs: [] })
+      .mockResolvedValueOnce({ empty: true, docs: [] });
+
+    await updateArticle("article", "doc-456", { slug: "duplicate-slug" });
+
+    const updatePayload = mockUpdateDoc.mock.calls[0][1];
+    expect(updatePayload.slug).toBe("duplicate-slug-2");
+    expect(updatePayload.link).toBe("/blog/duplicate-slug-2");
+  });
+
+  it("更新 slug 僅命中同一 docId 時不應視為衝突", async () => {
+    mockGetDocs
+      .mockResolvedValueOnce({ empty: true, docs: [] })
+      .mockResolvedValueOnce({ empty: false, docs: [{ id: "doc-self" }] });
+
+    await updateArticle("article", "doc-self", { slug: "same-slug" });
+
+    const updatePayload = mockUpdateDoc.mock.calls[0][1];
+    expect(updatePayload.slug).toBe("same-slug");
+    expect(updatePayload.link).toBe("/blog/same-slug");
   });
 
   it("未更新 slug 時不應覆蓋 link", async () => {
@@ -287,6 +346,23 @@ describe("updateArticle", () => {
 
     const updatePayload = mockUpdateDoc.mock.calls[0][1];
     expect(updatePayload.link).toBeUndefined();
+    expect(mockGetDocs).not.toHaveBeenCalled();
+  });
+
+  it("跨 collection 衝突時應處理後綴唯一化", async () => {
+    mockGetDocs
+      .mockResolvedValueOnce({ empty: false, docs: [{ id: "doc-enrollment" }] })
+      .mockResolvedValueOnce({ empty: false, docs: [{ id: "doc-news-other" }] })
+      .mockResolvedValueOnce({ empty: true, docs: [] })
+      .mockResolvedValueOnce({ empty: true, docs: [] });
+
+    await updateArticle("enrollment", "doc-enrollment", {
+      slug: "cross-collision",
+    });
+
+    const updatePayload = mockUpdateDoc.mock.calls[0][1];
+    expect(updatePayload.slug).toBe("cross-collision-2");
+    expect(updatePayload.link).toBe("/blog/cross-collision-2");
   });
 });
 
