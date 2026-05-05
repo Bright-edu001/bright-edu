@@ -15,6 +15,10 @@ const uicRedirects = [
     expectedFragment: "申請資訊",
   },
   {
+    from: "/uic-business-school/mba/areas/human-resource",
+    expectedFragment: "五大領域/Human-Resource-Management",
+  },
+  {
     from: "/uic-business-school/ms/programs",
     expectedFragment: "MS-Programs",
   },
@@ -46,7 +50,13 @@ const msuRedirects = [
 ];
 
 // REDIR-02B：通用英文 fallback URL 重導向
-const commonRedirects = [{ from: "/contact", expectedFragment: "聯絡我們" }];
+const commonRedirects = [
+  { from: "/contact", expectedFragment: "聯絡我們" },
+  {
+    from: "/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human%20Resource%20Management",
+    expectedFragment: "五大領域/Human-Resource-Management",
+  },
+];
 
 test.describe("URL Redirect — UIC 舊 URL", () => {
   for (const { from, expectedFragment } of uicRedirects) {
@@ -93,14 +103,17 @@ test.describe("URL Redirect — 通用英文 fallback URL", () => {
     }) => {
       await page.goto(from);
 
-      // 等待 SPA client-side redirect 完成
-      await page.waitForURL((url) => !url.pathname.startsWith(from), {
-        timeout: 10000,
-      });
+      await page.waitForURL(
+        (url) => decodeURIComponent(url.pathname).includes(expectedFragment),
+        {
+          timeout: 10000,
+        },
+      );
+
       await page.locator("#root").waitFor({ state: "visible", timeout: 10000 });
 
-      const finalUrl = page.url();
-      expect(urlContainsChinese(finalUrl, expectedFragment)).toBe(true);
+      const finalPath = decodeURIComponent(new URL(page.url()).pathname);
+      expect(finalPath).toContain(expectedFragment);
     });
   }
 });

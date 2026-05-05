@@ -18,7 +18,7 @@ export const urlMapping = {
   finance: "Finance",
   analytics: "Business Analytics",
   marketing: "Marketing",
-  "human-resource": "Human Resource Management",
+  "human-resource": "Human-Resource-Management",
   advantages: "課程優勢",
   "core-courses": "核心課程",
   "dual-degree": "雙碩士銜接課程",
@@ -60,7 +60,7 @@ export const urlMapping = {
 
 // 反向映射：中文路由 -> 英文路由
 export const reverseUrlMapping = Object.fromEntries(
-  Object.entries(urlMapping).map(([english, chinese]) => [chinese, english])
+  Object.entries(urlMapping).map(([english, chinese]) => [chinese, english]),
 );
 
 // 建構中文URL的函數

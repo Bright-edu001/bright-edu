@@ -44,4 +44,16 @@ describe("URL映射測試", () => {
     expect(reverseUrlMapping["聯絡我們"]).toBe("contact");
     expect(buildChineseUrl("contact")).toBe("/聯絡我們");
   });
+
+  test("human-resource 映射對齊連字號 canonical slug", () => {
+    expect(urlMapping["human-resource"]).toBe("Human-Resource-Management");
+    expect(
+      buildChineseUrl("uic-business-school/mba/areas/human-resource"),
+    ).toBe(
+      "/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human-Resource-Management",
+    );
+    expect(reverseUrlMapping["Human-Resource-Management"]).toBe(
+      "human-resource",
+    );
+  });
 });

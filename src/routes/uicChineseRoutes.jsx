@@ -104,8 +104,17 @@ const uicChineseRoutes = [
     element: <Marketing />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human Resource Management",
+    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human-Resource-Management",
     element: <HRManagement />,
+  },
+  {
+    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human Resource Management",
+    element: (
+      <Navigate
+        to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human-Resource-Management"
+        replace
+      />
+    ),
   },
   {
     path: "伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市",
