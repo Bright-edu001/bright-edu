@@ -100,6 +100,15 @@ const uicChineseRoutes = [
     element: <Analytics />,
   },
   {
+    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business Analytics",
+    element: (
+      <Navigate
+        to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business-Analytics"
+        replace
+      />
+    ),
+  },
+  {
     path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Marketing",
     element: <Marketing />,
   },

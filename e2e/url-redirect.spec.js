@@ -19,6 +19,10 @@ const uicRedirects = [
     expectedFragment: "五大領域/Human-Resource-Management",
   },
   {
+    from: "/uic-business-school/mba/areas/analytics",
+    expectedFragment: "五大領域/Business-Analytics",
+  },
+  {
     from: "/uic-business-school/ms/programs",
     expectedFragment: "MS-Programs",
   },
@@ -55,6 +59,10 @@ const commonRedirects = [
   {
     from: "/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human%20Resource%20Management",
     expectedFragment: "五大領域/Human-Resource-Management",
+  },
+  {
+    from: "/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business%20Analytics",
+    expectedFragment: "五大領域/Business-Analytics",
   },
 ];
 

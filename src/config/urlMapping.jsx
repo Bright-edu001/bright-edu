@@ -16,7 +16,7 @@ export const urlMapping = {
   areas: "五大領域",
   management: "Management",
   finance: "Finance",
-  analytics: "Business Analytics",
+  analytics: "Business-Analytics",
   marketing: "Marketing",
   "human-resource": "Human-Resource-Management",
   advantages: "課程優勢",

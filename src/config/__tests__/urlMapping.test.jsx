@@ -56,4 +56,12 @@ describe("URL映射測試", () => {
       "human-resource",
     );
   });
+
+  test("analytics 映射對齊連字號 canonical slug", () => {
+    expect(urlMapping.analytics).toBe("Business-Analytics");
+    expect(buildChineseUrl("uic-business-school/mba/areas/analytics")).toBe(
+      "/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business-Analytics",
+    );
+    expect(reverseUrlMapping["Business-Analytics"]).toBe("analytics");
+  });
 });
