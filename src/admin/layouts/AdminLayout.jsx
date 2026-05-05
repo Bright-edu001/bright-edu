@@ -209,7 +209,7 @@ const AdminLayout = () => {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          Bright EDU Admin ©{new Date().getFullYear()} Created by YourName
+          Bright Edu Admin ©{new Date().getFullYear()}
         </Footer>
       </Layout>
     </Layout>
