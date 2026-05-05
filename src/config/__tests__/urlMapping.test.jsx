@@ -38,4 +38,10 @@ describe("URL映射測試", () => {
     expect(urlMapping["about-msu"]).toBe("MSU學校介紹");
     expect(reverseUrlMapping["MSU學校介紹"]).toBe("about-msu");
   });
+
+  test("contact 映射可正確轉換到中文聯絡頁", () => {
+    expect(urlMapping.contact).toBe("聯絡我們");
+    expect(reverseUrlMapping["聯絡我們"]).toBe("contact");
+    expect(buildChineseUrl("contact")).toBe("/聯絡我們");
+  });
 });

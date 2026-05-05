@@ -45,6 +45,9 @@ const msuRedirects = [
   },
 ];
 
+// REDIR-02B：通用英文 fallback URL 重導向
+const commonRedirects = [{ from: "/contact", expectedFragment: "聯絡我們" }];
+
 test.describe("URL Redirect — UIC 舊 URL", () => {
   for (const { from, expectedFragment } of uicRedirects) {
     test(`REDIR-01：${from} → 包含「${expectedFragment}」`, async ({
@@ -67,6 +70,25 @@ test.describe("URL Redirect — UIC 舊 URL", () => {
 test.describe("URL Redirect — MSU 舊 URL", () => {
   for (const { from, expectedFragment } of msuRedirects) {
     test(`REDIR-02：${from} → 包含「${expectedFragment}」`, async ({
+      page,
+    }) => {
+      await page.goto(from);
+
+      // 等待 SPA client-side redirect 完成
+      await page.waitForURL((url) => !url.pathname.startsWith(from), {
+        timeout: 10000,
+      });
+      await page.locator("#root").waitFor({ state: "visible", timeout: 10000 });
+
+      const finalUrl = page.url();
+      expect(urlContainsChinese(finalUrl, expectedFragment)).toBe(true);
+    });
+  }
+});
+
+test.describe("URL Redirect — 通用英文 fallback URL", () => {
+  for (const { from, expectedFragment } of commonRedirects) {
+    test(`REDIR-02B：${from} → 包含「${expectedFragment}」`, async ({
       page,
     }) => {
       await page.goto(from);
