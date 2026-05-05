@@ -78,6 +78,8 @@ npm install --legacy-peer-deps
 
 ### 2. 設定環境變數
 
+本機開發請使用 `.env.local`（`.env.example` 僅作為範本）。
+
 ```bash
 cp .env.example .env.local
 ```
