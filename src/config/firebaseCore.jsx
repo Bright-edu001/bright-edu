@@ -29,7 +29,10 @@ export const app = initializeApp(firebaseConfig);
 
 // 基本服務（立即初始化）
 export const db = getFirestore(app);
-export const auth = process.env.NODE_ENV === "test" ? {} : getAuth(app);
+const isTestEnvironment =
+  (import.meta.env || {}).MODE === "test" ||
+  (import.meta.env || {}).VITEST === "true";
+export const auth = isTestEnvironment ? {} : getAuth(app);
 export const storage = getStorage(app);
 
 // 判斷是否為本地環境且明確啟用模擬器，若是則連接到 Firebase Emulators
@@ -68,7 +71,7 @@ export const enableFirebaseNetwork = async () => {
   } catch (error) {
     logger.warn("⚠️ Firebase 網路連接啟用失敗:", error);
     // 本地開發環境中，這個錯誤可以忽略
-    if (process.env.NODE_ENV === "development") {
+    if ((import.meta.env || {}).MODE === "development") {
       logger.info("本地開發環境，此錯誤可忽略");
     }
   }
