@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
@@ -12,7 +12,6 @@ import {
   Row,
   Col,
   Upload,
-  message,
   Modal,
   Spin,
   Empty,
@@ -24,14 +23,9 @@ import {
   UploadOutlined,
   PictureOutlined,
 } from "@ant-design/icons";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  listAll,
-} from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { app } from "../../config/firebaseCore";
+import useStorageImagePicker from "../hooks/useStorageImagePicker";
 
 const storage = getStorage(app);
 const { TextArea } = Input;
@@ -88,11 +82,16 @@ const NewsEditor = ({ initialValues, onSave, onCancel }) => {
   const [form] = Form.useForm();
   const [uploadingImage, setUploadingImage] = useState(false);
   const [uploadingThumbnail, setUploadingThumbnail] = useState(false);
-  const [isPickerVisible, setIsPickerVisible] = useState(false);
-  const [pickerTargetField, setPickerTargetField] = useState(null);
-  const [storageImages, setStorageImages] = useState([]);
-  const [loadingImages, setLoadingImages] = useState(false);
   const [isLegacyContent, setIsLegacyContent] = useState(false);
+  const {
+    isPickerVisible,
+    loadingImages,
+    storageImages,
+    openImagePicker,
+    handleSelectImage,
+    closePicker,
+    handleUpload,
+  } = useStorageImagePicker(form);
 
   // 計算 BlockNote 初始內容（只在元件首次掛載時執行）
   const initialBlocks = useMemo(() => {
@@ -129,58 +128,6 @@ const NewsEditor = ({ initialValues, onSave, onCancel }) => {
       form.resetFields();
     }
   }, [initialValues, form]);
-
-  // --- 圖庫選擇器 ---
-  const fetchStorageImages = useCallback(async () => {
-    setLoadingImages(true);
-    try {
-      const listRef = ref(storage, "blog/");
-      const res = await listAll(listRef);
-      const urls = await Promise.all(
-        res.items.map(async (itemRef) => {
-          const url = await getDownloadURL(itemRef);
-          return { name: itemRef.name, url };
-        }),
-      );
-      setStorageImages(urls.reverse());
-    } catch {
-      message.error("載入圖庫失敗");
-    } finally {
-      setLoadingImages(false);
-    }
-  }, []);
-
-  const openImagePicker = (fieldName) => {
-    setPickerTargetField(fieldName);
-    setIsPickerVisible(true);
-    if (storageImages.length === 0) fetchStorageImages();
-  };
-
-  const handleSelectImage = (url) => {
-    form.setFieldsValue({ [pickerTargetField]: url });
-    setIsPickerVisible(false);
-    message.success("已選取圖片");
-  };
-
-  const handleUpload = async (options, fieldName, setUploading) => {
-    const { file, onSuccess, onError } = options;
-    setUploading(true);
-    try {
-      const storageRef = ref(storage, `blog/${Date.now()}_${file.name}`);
-      const metadata = { cacheControl: "public, max-age=31536000" };
-      const snapshot = await uploadBytes(storageRef, file, metadata);
-      const downloadURL = await getDownloadURL(snapshot.ref);
-      form.setFieldsValue({ [fieldName]: downloadURL });
-      message.success(`${file.name} 上傳成功`);
-      onSuccess("ok");
-    } catch (error) {
-      message.error(`${file.name} 上傳失敗`);
-      onError(error);
-    } finally {
-      setUploading(false);
-    }
-  };
-  // ---------------------
 
   const onFinish = (values) => {
     const blocks = editor.document;
@@ -417,7 +364,7 @@ const NewsEditor = ({ initialValues, onSave, onCancel }) => {
       <Modal
         title="從圖庫選擇圖片"
         open={isPickerVisible}
-        onCancel={() => setIsPickerVisible(false)}
+        onCancel={closePicker}
         footer={null}
         width={800}
       >

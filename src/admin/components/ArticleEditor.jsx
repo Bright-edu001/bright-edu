@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   Input,
@@ -10,7 +10,6 @@ import {
   Row,
   Col,
   Upload,
-  message,
   Modal,
   Spin,
   Empty,
@@ -22,16 +21,7 @@ import {
   UploadOutlined,
   PictureOutlined,
 } from "@ant-design/icons";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  listAll,
-} from "firebase/storage";
-import { app } from "../../config/firebaseCore";
-
-const storage = getStorage(app);
+import useStorageImagePicker from "../hooks/useStorageImagePicker";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -78,73 +68,20 @@ const ArticleEditor = ({ initialValues, onSave, onCancel }) => {
   const [form] = Form.useForm();
   const [uploadingImage, setUploadingImage] = useState(false);
   const [uploadingThumbnail, setUploadingThumbnail] = useState(false);
-
-  // --- Storage 圖片庫選擇器 ---
-  const [isPickerVisible, setIsPickerVisible] = useState(false);
-  const [pickerTargetField, setPickerTargetField] = useState(null); // 'image' | 'thumbnail' | 動態 array index 欄位路徑
-  const [storageImages, setStorageImages] = useState([]);
-  const [loadingImages, setLoadingImages] = useState(false);
-
-  const fetchStorageImages = useCallback(async () => {
-    setLoadingImages(true);
-    try {
-      // 預設圖片存放在 blog/ 路徑
-      const listRef = ref(storage, "blog/");
-      const res = await listAll(listRef);
-      // 取得所有圖片下載 URL
-      const urls = await Promise.all(
-        res.items.map(async (itemRef) => {
-          const url = await getDownloadURL(itemRef);
-          return { name: itemRef.name, url };
-        }),
-      );
-      // 選用：可以將順序反轉讓最新的排在前面
-      setStorageImages(urls.reverse());
-    } catch (error) {
-      console.error("Fetch images failed:", error);
-      message.error("Error loading images.");
-    } finally {
-      setLoadingImages(false);
-    }
-  }, []);
-
-  const openImagePicker = (fieldName) => {
-    setPickerTargetField(fieldName);
-    setIsPickerVisible(true);
-    if (storageImages.length === 0) {
-      fetchStorageImages();
-    }
-  };
-
-  const handleSelectImage = (url) => {
-    form.setFieldsValue({ [pickerTargetField]: url });
-    setIsPickerVisible(false);
-    message.success("Image selected");
-  };
-  // -------------------------
-
-  // 處理圖片上傳
-  const handleUpload = async (options, fieldName, setUploading) => {
-    const { file, onSuccess, onError } = options;
-    setUploading(true);
-    try {
-      const storageRef = ref(storage, `blog/${Date.now()}_${file.name}`);
-      const metadata = { cacheControl: "public, max-age=31536000" };
-      const snapshot = await uploadBytes(storageRef, file, metadata);
-      const downloadURL = await getDownloadURL(snapshot.ref);
-
-      // 更新 Form 對應欄位的值
-      form.setFieldsValue({ [fieldName]: downloadURL });
-      message.success(`${file.name} 上傳成功`);
-      onSuccess("ok");
-    } catch (error) {
-      console.error("Upload error:", error);
-      message.error(`${file.name} 上傳失敗`);
-      onError(error);
-    } finally {
-      setUploading(false);
-    }
-  };
+  const {
+    isPickerVisible,
+    loadingImages,
+    storageImages,
+    openImagePicker,
+    handleSelectImage,
+    closePicker,
+    handleUpload,
+  } = useStorageImagePicker(form, {
+    messages: {
+      loadImagesError: "Error loading images.",
+      selectImageSuccess: "Image selected",
+    },
+  });
 
   // 用於回填初始資料
   useEffect(() => {
@@ -479,7 +416,7 @@ const ArticleEditor = ({ initialValues, onSave, onCancel }) => {
       <Modal
         title="從圖庫選擇"
         open={isPickerVisible}
-        onCancel={() => setIsPickerVisible(false)}
+        onCancel={closePicker}
         footer={null}
         width={800}
       >
