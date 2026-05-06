@@ -29,7 +29,11 @@ export const app = initializeApp(firebaseConfig);
 
 // 基本服務（立即初始化）
 export const db = getFirestore(app);
-export const auth = process.env.NODE_ENV === "test" ? {} : getAuth(app);
+const isTestEnvironment =
+  (import.meta.env || {}).MODE === "test" ||
+  (import.meta.env || {}).VITEST === "true" ||
+  process.env.NODE_ENV === "test";
+export const auth = isTestEnvironment ? {} : getAuth(app);
 export const storage = getStorage(app);
 
 // 判斷是否為本地環境且明確啟用模擬器，若是則連接到 Firebase Emulators
