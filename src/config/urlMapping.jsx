@@ -1,4 +1,8 @@
+// @ts-check
 // URL 映射配置：英文路由 -> 中文路由
+/**
+ * @type {Record<string, string>}
+ */
 export const urlMapping = {
   // UIC 相關路由
   "uic-business-school": "伊利諾大學芝加哥分校",
@@ -59,11 +63,19 @@ export const urlMapping = {
 };
 
 // 反向映射：中文路由 -> 英文路由
+/**
+ * @type {Record<string, string>}
+ */
 export const reverseUrlMapping = Object.fromEntries(
   Object.entries(urlMapping).map(([english, chinese]) => [chinese, english]),
 );
 
 // 建構中文URL的函數
+/**
+ * 將英文路由路徑轉換為中文路由路徑
+ * @param {string} englishPath - 英文路由路徑（如 "/uic/about-uic"）
+ * @returns {string} 對應的中文路由路徑
+ */
 export const buildChineseUrl = (englishPath) => {
   const segments = englishPath.split("/").filter((segment) => segment);
   const chineseSegments = segments.map((segment) => {
@@ -72,7 +84,12 @@ export const buildChineseUrl = (englishPath) => {
   return "/" + chineseSegments.join("/");
 };
 
-// 解析中文URL為英文路由的函數
+// 解析中文URL為英文路由的函数
+/**
+ * 將中文路由路徑轉換回英文路由路徑
+ * @param {string} chinesePath - 中文路由路徑
+ * @returns {string} 對應的英文路由路徑
+ */
 export const parseChineseUrl = (chinesePath) => {
   const segments = chinesePath.split("/").filter((segment) => segment);
   const englishSegments = segments.map((segment) => {
@@ -82,6 +99,19 @@ export const parseChineseUrl = (chinesePath) => {
 };
 
 // 獲取中文路由配置
+/**
+ * @typedef {{
+ *   path: string,
+ *   originalPath?: string,
+ *   [key: string]: unknown
+ * }} RouteConfig
+ */
+
+/**
+ * 將路由配置的路徑轉換為中文路由
+ * @param {Array<RouteConfig>} englishRoutes - 英文路由配置陣列
+ * @returns {Array<RouteConfig>} 中文路由配置陣列
+ */
 export const getChineseRoutes = (englishRoutes) => {
   return englishRoutes.map((route) => ({
     ...route,
