@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * 從文章標題產生 URL 安全的 slug 字串
  * - 去除 HTML 標籤（title 可能含 <img> 等）
