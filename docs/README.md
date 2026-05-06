@@ -59,3 +59,14 @@ Valid outcomes include:
 - Blocked
 - Approved with No Code Change
 - Redirected to R&D
+
+## Quality Gate Baseline
+
+Current baseline for local validation is documented in `README.md` under 「品質閘門基線（TASK-AUD-008A）」。
+
+Scope summary:
+
+- Required before task completion: `npm run test:run` and `npm run build`.
+- Not yet introduced as gates: lint and typecheck.
+- Not part of regular PR quality gates: analyze and deploy scripts.
+- Build warning triage notes are recorded as current-state references, not as resolved-by-default quality gates.
