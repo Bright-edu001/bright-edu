@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import {
   Routes,
   Route,
@@ -14,14 +14,15 @@ import {
   TeamOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme, Button } from "antd";
-import DashboardPage from "../pages/DashboardPage";
-import ArticlesPage from "../pages/ArticlesPage";
-import ContactFormsPage from "../pages/ContactFormsPage";
-import UserManagePage from "../pages/UserManagePage";
 import { useAuth } from "../../context/AuthContext";
 import UserProfile from "../components/UserProfile";
 import PermissionGuard from "../components/PermissionGuard";
 import { PERMISSIONS } from "../../config/permissions";
+
+const DashboardPage = lazy(() => import("../pages/DashboardPage"));
+const ArticlesPage = lazy(() => import("../pages/ArticlesPage"));
+const ContactFormsPage = lazy(() => import("../pages/ContactFormsPage"));
+const UserManagePage = lazy(() => import("../pages/UserManagePage"));
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -46,28 +47,28 @@ const AdminLayout = () => {
         "dashboard",
         <PieChartOutlined />,
         null,
-        PERMISSIONS.VIEW_DASHBOARD
+        PERMISSIONS.VIEW_DASHBOARD,
       ),
       getItem(
         <Link to="articles">文章管理</Link>,
         "articles",
         <DesktopOutlined />,
         null,
-        PERMISSIONS.VIEW_ARTICLES
+        PERMISSIONS.VIEW_ARTICLES,
       ),
       getItem(
         <Link to="contact-forms">聯絡表單</Link>,
         "contact-forms",
         <FormOutlined />,
         null,
-        PERMISSIONS.VIEW_CONTACT_FORMS
+        PERMISSIONS.VIEW_CONTACT_FORMS,
       ),
       getItem(
         <Link to="users">用戶管理</Link>,
         "users",
         <TeamOutlined />,
         null,
-        PERMISSIONS.VIEW_USERS
+        PERMISSIONS.VIEW_USERS,
       ),
     ];
 
@@ -105,10 +106,10 @@ const AdminLayout = () => {
             location.pathname.includes("/articles")
               ? ["articles"]
               : location.pathname.includes("/contact-forms")
-              ? ["contact-forms"]
-              : location.pathname.includes("/users")
-              ? ["users"]
-              : ["dashboard"]
+                ? ["contact-forms"]
+                : location.pathname.includes("/users")
+                  ? ["users"]
+                  : ["dashboard"]
           }
           mode="inline"
           items={getFilteredMenuItems()}
@@ -144,10 +145,10 @@ const AdminLayout = () => {
                 title: location.pathname.includes("/articles")
                   ? "文章管理"
                   : location.pathname.includes("/contact-forms")
-                  ? "聯絡表單"
-                  : location.pathname.includes("/users")
-                  ? "用戶管理"
-                  : "儀表板",
+                    ? "聯絡表單"
+                    : location.pathname.includes("/users")
+                      ? "用戶管理"
+                      : "儀表板",
               },
             ]}
           />
@@ -159,53 +160,68 @@ const AdminLayout = () => {
               borderRadius: borderRadiusLG,
             }}
           >
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <PermissionGuard
-                    permission={PERMISSIONS.VIEW_DASHBOARD}
-                    showNoPermissionMessage
-                  >
-                    <DashboardPage />
-                  </PermissionGuard>
-                }
-              />
-              <Route
-                path="/articles"
-                element={
-                  <PermissionGuard
-                    permission={PERMISSIONS.VIEW_ARTICLES}
-                    showNoPermissionMessage
-                  >
-                    <ArticlesPage />
-                  </PermissionGuard>
-                }
-              />
-              <Route
-                path="/contact-forms"
-                element={
-                  <PermissionGuard
-                    permission={PERMISSIONS.VIEW_CONTACT_FORMS}
-                    showNoPermissionMessage
-                  >
-                    <ContactFormsPage />
-                  </PermissionGuard>
-                }
-              />
-              <Route
-                path="/users"
-                element={
-                  <PermissionGuard
-                    permission={PERMISSIONS.VIEW_USERS}
-                    showNoPermissionMessage
-                  >
-                    <UserManagePage />
-                  </PermissionGuard>
-                }
-              />
-              {/* 在這裡新增更多後台頁面的路由 */}
-            </Routes>
+            <Suspense
+              fallback={
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minHeight: 240,
+                  }}
+                >
+                  <span>載入中...</span>
+                </div>
+              }
+            >
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <PermissionGuard
+                      permission={PERMISSIONS.VIEW_DASHBOARD}
+                      showNoPermissionMessage
+                    >
+                      <DashboardPage />
+                    </PermissionGuard>
+                  }
+                />
+                <Route
+                  path="/articles"
+                  element={
+                    <PermissionGuard
+                      permission={PERMISSIONS.VIEW_ARTICLES}
+                      showNoPermissionMessage
+                    >
+                      <ArticlesPage />
+                    </PermissionGuard>
+                  }
+                />
+                <Route
+                  path="/contact-forms"
+                  element={
+                    <PermissionGuard
+                      permission={PERMISSIONS.VIEW_CONTACT_FORMS}
+                      showNoPermissionMessage
+                    >
+                      <ContactFormsPage />
+                    </PermissionGuard>
+                  }
+                />
+                <Route
+                  path="/users"
+                  element={
+                    <PermissionGuard
+                      permission={PERMISSIONS.VIEW_USERS}
+                      showNoPermissionMessage
+                    >
+                      <UserManagePage />
+                    </PermissionGuard>
+                  }
+                />
+                {/* 在這裡新增更多後台頁面的路由 */}
+              </Routes>
+            </Suspense>
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>

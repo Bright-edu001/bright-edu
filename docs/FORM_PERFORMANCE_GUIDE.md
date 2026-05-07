@@ -4,7 +4,7 @@
 
 ### 1. 🔥 詳細的效能監控系統
 
-**位置**: `src/hooks/useFormSubmit.jsx`, `src/services/contactService.jsx`, `src/utils/request.js`
+**位置**: `src/hooks/useFormSubmit.jsx`, `src/services/contactService.jsx`, `src/config/syncConfig.jsx`
 
 **改進內容**:
 
@@ -47,9 +47,9 @@
 
 **效果**: 減少資料傳輸量和 Firestore 寫入時間
 
-### 4. 🚀 並行網路請求優化
+### 4. 🚀 網路請求流程優化
 
-**位置**: `src/utils/request.js`
+**位置**: `src/config/syncConfig.jsx`
 
 **改進內容**:
 
@@ -121,7 +121,7 @@
 
 ### 效能測試腳本
 
-提供了 `src/utils/performanceTest.js` 用於手動效能測試：
+可透過瀏覽器 Console 進行手動效能測試：
 
 ```javascript
 // 在瀏覽器 Console 中執行
@@ -165,7 +165,7 @@ performanceTest(5); // 執行 5 次測試並分析結果
 
 ### 1. 詳細的效能記錄系統
 
-- ✅ 已在 `useFormSubmit.jsx`、`contactService.jsx` 和 `request.js` 中添加詳細的時間記錄
+- ✅ 已在 `useFormSubmit.jsx`、`contactService.jsx` 和 `syncConfig.jsx` 中添加詳細的時間記錄
 - ✅ 記錄表單送出的每個階段時間：驗證、Google Sheets 儲存、Firestore 儲存、網路請求
 - ✅ 提供毫秒級和秒級的時間測量
 - ✅ 在生產環境也會記錄重要的效能指標
@@ -182,7 +182,7 @@ performanceTest(5); // 執行 5 次測試並分析結果
 
 ### 1. 多重網路請求重試
 
-**問題**: `request.js` 中的 POST 請求會依序嘗試三種方式
+**問題**: 請求層若採用依序重試策略，可能造成額外延遲
 
 - FormData + no-cors
 - URLSearchParams + no-cors
@@ -395,7 +395,7 @@ syncToRemote();
 ### 1. 請求去重實施
 
 ```javascript
-// 在 useFormSubmit.js 中添加
+// 在 useFormSubmit.jsx 中添加
 const [submitPromise, setSubmitPromise] = useState(null);
 
 const handleSubmit = async (e) => {
@@ -418,7 +418,7 @@ const handleSubmit = async (e) => {
 ### 2. 簡化 Firestore 資料
 
 ```javascript
-// 在 contactService.js 中簡化
+// 在 contactService.jsx 中簡化
 const contactData = {
   name: formData.name.trim(),
   email: formData.email.trim().toLowerCase(),

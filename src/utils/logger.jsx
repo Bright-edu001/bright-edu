@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 // 簡易日誌工具：開發環境輸出 console log，正式環境將重要日誌發送到 Sentry
 
 // 判斷目前是否為開發環境

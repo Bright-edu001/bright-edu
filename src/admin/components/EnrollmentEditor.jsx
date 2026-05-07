@@ -403,7 +403,7 @@ const EnrollmentEditor = ({ initialValues, onSave, onCancel }) => {
 
       {/* 招生資訊區塊 */}
       <Card
-        title="� 招生資訊區塊"
+        title="招生資訊區塊"
         style={{ marginBottom: 16 }}
         extra={
           <Text type="secondary" style={{ fontSize: 12 }}>
@@ -429,7 +429,7 @@ const EnrollmentEditor = ({ initialValues, onSave, onCancel }) => {
                   }}
                   title={
                     <span style={{ color: "#1890ff", fontWeight: "bold" }}>
-                      � 資訊區塊 {index + 1}
+                      資訊區塊 {index + 1}
                     </span>
                   }
                   extra={

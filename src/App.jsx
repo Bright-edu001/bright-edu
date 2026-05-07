@@ -1,7 +1,5 @@
-import React, { useEffect, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { App as AntdApp, ConfigProvider, Spin } from "antd";
-import { BlogProvider } from "./context/BlogContext";
-import { SearchProvider } from "./context/SearchContext";
 import {
   useFirebaseInit,
   useFirebaseBasicReady,
@@ -10,13 +8,16 @@ import "./App.scss";
 
 // 組件引入
 import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import FloatingButtons from "./components/FloatingButtons/FloatingButtons";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 // react-router 用於路由嵌套
 import { Outlet } from "react-router-dom";
+
+const Footer = lazy(() => import("./components/Footer/Footer"));
+const FloatingButtons = lazy(
+  () => import("./components/FloatingButtons/FloatingButtons"),
+);
 
 // 載入指示器組件，顯示「載入中...」
 const LoadingSpinner = () => (
@@ -121,23 +122,23 @@ function App() {
       }}
     >
       <AntdApp>
-        <BlogProvider>
-          <SearchProvider>
-            <ErrorBoundary>
-              <ScrollToTop />
-              <div className="App">
-                <Header />
-                <main className="main-content">
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Outlet />
-                  </Suspense>
-                </main>
-                <Footer />
-              </div>
-            </ErrorBoundary>
-            <FloatingButtons />
-          </SearchProvider>
-        </BlogProvider>
+        <ErrorBoundary>
+          <ScrollToTop />
+          <div className="App">
+            <Header />
+            <main className="main-content">
+              <Suspense fallback={<LoadingSpinner />}>
+                <Outlet />
+              </Suspense>
+            </main>
+            <Suspense fallback={null}>
+              <Footer />
+            </Suspense>
+          </div>
+        </ErrorBoundary>
+        <Suspense fallback={null}>
+          <FloatingButtons />
+        </Suspense>
       </AntdApp>
     </ConfigProvider>
   );

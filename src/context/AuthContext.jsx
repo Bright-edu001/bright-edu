@@ -5,8 +5,8 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  onAuthStateChanged,
 } from "firebase/auth";
-import { useUser, AuthProvider as ReactFireAuthProvider } from "reactfire";
 import { app } from "../config/firebaseCore";
 import { message } from "antd";
 import {
@@ -28,16 +28,10 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const auth = getAuth(app);
-
-  return (
-    <ReactFireAuthProvider sdk={auth}>
-      <AuthContextLogicWrapper>{children}</AuthContextLogicWrapper>
-    </ReactFireAuthProvider>
-  );
+  return <AuthContextLogicWrapper>{children}</AuthContextLogicWrapper>;
 };
 
-// 內部邏輯封裝，讓其可以使用 reactfire 的 useUser hooks
+// 內部邏輯封裝，保留 AuthContext 對外 API
 const AuthContextLogicWrapper = ({ children }) => {
   const auth = getAuth(app);
 
@@ -46,16 +40,17 @@ const AuthContextLogicWrapper = ({ children }) => {
     process.env.NODE_ENV === "production" ||
     window.location.hostname !== "localhost";
 
-  // 使用 ReactFire 監聽 Firebase 用戶狀態 (支援 Suspense)
-  // 在開發環境下，我們不依賴它來決定最終 user，但仍需調用遵守 Hook 規則
-  const { data: firebaseUser, status: authStatus } = useUser();
+  // 使用 Firebase Auth 原生 listener 監聽用戶狀態
+  const [firebaseUser, setFirebaseUser] = useState(null);
+  const [authStatus, setAuthStatus] = useState(
+    isProduction ? "loading" : "success",
+  );
 
   const [devUser, setDevUser] = useState(null);
   const [userRole, setUserRole] = useState(null);
   const [userPermissions, setUserPermissions] = useState([]);
 
-  // 在原本的設計中，loading 狀態自己維護，現在我們依賴 ReactFire 的 status
-  // 只有當本機與 Firebase 都處理完畢才算結束 Loading
+  // 生產環境等待 Firebase Auth 回報，開發環境等待 localStorage 還原
   const [devLoading, setDevLoading] = useState(!isProduction);
 
   // 檢查是否為允許的email網域 (移到前面解決 ESLint no-use-before-define 錯誤)
@@ -196,46 +191,64 @@ const AuthContextLogicWrapper = ({ children }) => {
     }
   };
 
-  // 監聽身份驗證狀態變化（依賴 ReactFire 和 localStorage）
+  // 監聽身份驗證狀態變化（依賴 Firebase Auth 和 localStorage）
   useEffect(() => {
     if (isProduction) {
-      // 生產環境：ReactFire 的 useUser 已自動處理狀態，我們只需更新權限
-      if (firebaseUser && isAllowedEmail(firebaseUser.email)) {
-        setUserRoleAndPermissions(firebaseUser.email);
-        localStorage.setItem("isAuthenticated", "true");
-      } else {
-        setUserRole(null);
-        setUserPermissions([]);
-        localStorage.removeItem("isAuthenticated");
-      }
-    } else {
-      // 開發環境：讀取本地存儲
-      const storedAuth = localStorage.getItem("isAuthenticated");
-      const storedUser = localStorage.getItem("devUser");
+      setAuthStatus("loading");
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (nextUser) => {
+          setFirebaseUser(nextUser);
+          setAuthStatus("success");
 
-      if (storedAuth === "true" && storedUser) {
-        try {
-          const parsedUser = JSON.parse(storedUser);
-          setDevUser(parsedUser);
-          // 設定開發環境權限
-          setUserRole(USER_ROLES.SUPER_ADMIN);
-          setUserPermissions(getRolePermissions(USER_ROLES.SUPER_ADMIN));
-        } catch (error) {
-          console.error("解析已儲存用戶時出錯:", error);
-          localStorage.removeItem("isAuthenticated");
-          localStorage.removeItem("devUser");
-          setDevUser(null);
+          if (nextUser && isAllowedEmail(nextUser.email)) {
+            setUserRoleAndPermissions(nextUser.email);
+            localStorage.setItem("isAuthenticated", "true");
+          } else {
+            setUserRole(null);
+            setUserPermissions([]);
+            localStorage.removeItem("isAuthenticated");
+          }
+        },
+        (error) => {
+          console.error("Firebase auth state listener error:", error);
+          setFirebaseUser(null);
+          setAuthStatus("error");
           setUserRole(null);
           setUserPermissions([]);
-        }
-      } else {
+          localStorage.removeItem("isAuthenticated");
+        },
+      );
+
+      return unsubscribe;
+    }
+
+    // 開發環境：讀取本地存儲
+    const storedAuth = localStorage.getItem("isAuthenticated");
+    const storedUser = localStorage.getItem("devUser");
+
+    if (storedAuth === "true" && storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setDevUser(parsedUser);
+        // 設定開發環境權限
+        setUserRole(USER_ROLES.SUPER_ADMIN);
+        setUserPermissions(getRolePermissions(USER_ROLES.SUPER_ADMIN));
+      } catch (error) {
+        console.error("解析已儲存用戶時出錯:", error);
+        localStorage.removeItem("isAuthenticated");
+        localStorage.removeItem("devUser");
         setDevUser(null);
         setUserRole(null);
         setUserPermissions([]);
       }
-      setDevLoading(false);
+    } else {
+      setDevUser(null);
+      setUserRole(null);
+      setUserPermissions([]);
     }
-  }, [firebaseUser, isProduction]);
+    setDevLoading(false);
+  }, [auth, isProduction]);
 
   // 檢查是否已登入
   const isAuthenticated = () => {

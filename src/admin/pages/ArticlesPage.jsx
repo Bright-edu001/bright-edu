@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import {
   Typography,
   Table,
@@ -34,10 +34,12 @@ import {
 } from "firebase/storage";
 import { app } from "../../config/firebaseCore";
 import logger from "../../utils/logger";
-import NewsEditor from "../components/NewsEditor";
-import EnrollmentEditor from "../components/EnrollmentEditor";
-import StructuredContentViewer from "../components/StructuredContentViewer";
-import NewsContentViewer from "../components/NewsContentViewer";
+const NewsEditor = lazy(() => import("../components/NewsEditor"));
+const EnrollmentEditor = lazy(() => import("../components/EnrollmentEditor"));
+const StructuredContentViewer = lazy(
+  () => import("../components/StructuredContentViewer"),
+);
+const NewsContentViewer = lazy(() => import("../components/NewsContentViewer"));
 
 // 解構 Ant Design 組件
 const { Title } = Typography;
@@ -221,11 +223,12 @@ const ArticlesPage = () => {
           }}
           onError={(e) => {
             try {
-              // eslint-disable-next-line no-console
               console.warn("Thumbnail failed to load:", e?.target?.src);
               e.target.onerror = null;
               e.target.src = "/B-logo.webp";
-            } catch (err) {}
+            } catch (err) {
+              // Keep UI resilient if the image element is no longer available.
+            }
           }}
           onClick={() => window.open(thumbnail, "_blank")}
         />
@@ -287,7 +290,9 @@ const ArticlesPage = () => {
     if (typeof contentValue === "string") {
       try {
         contentValue = JSON.parse(contentValue);
-      } catch (e) {}
+      } catch (e) {
+        // Keep original string content when legacy payload is not JSON.
+      }
     }
     setEditingArticle({ ...article, content: contentValue });
     setIsModalVisible(true);
@@ -380,7 +385,6 @@ const ArticlesPage = () => {
   };
 
   // 處理檔案上傳
-  // eslint-disable-next-line no-unused-vars
   const handleFileUpload = async (file, field) => {
     const oldUrl = form.getFieldValue(field);
     // 建立 Storage 參考
@@ -635,19 +639,23 @@ const ArticlesPage = () => {
           body: { maxHeight: "80vh", overflowY: "auto", padding: "16px 24px" },
         }}
       >
-        {editingArticle?.category === "enrollment" ? (
-          <EnrollmentEditor
-            initialValues={editingArticle?.docId ? editingArticle : null}
-            onSave={handleSubmit}
-            onCancel={handleCancel}
-          />
-        ) : (
-          <NewsEditor
-            initialValues={editingArticle?.docId ? editingArticle : null}
-            onSave={handleSubmit}
-            onCancel={handleCancel}
-          />
-        )}
+        {isModalVisible ? (
+          <Suspense fallback={<div>載入中...</div>}>
+            {editingArticle?.category === "enrollment" ? (
+              <EnrollmentEditor
+                initialValues={editingArticle?.docId ? editingArticle : null}
+                onSave={handleSubmit}
+                onCancel={handleCancel}
+              />
+            ) : (
+              <NewsEditor
+                initialValues={editingArticle?.docId ? editingArticle : null}
+                onSave={handleSubmit}
+                onCancel={handleCancel}
+              />
+            )}
+          </Suspense>
+        ) : null}
       </Modal>
 
       {/* 查看文章模態框 */}
@@ -673,56 +681,62 @@ const ArticlesPage = () => {
         width={800}
         destroyOnHidden
       >
-        {viewingArticle && (
-          <div>
-            <Title level={4}>{viewingArticle.title}</Title>
-            <Space>
-              <Tag color={viewingArticle.type === "article" ? "blue" : "green"}>
-                {viewingArticle.type === "article" ? "一般文章" : "招生資訊"}
-              </Tag>
-              <Tag
-                color={viewingArticle.category === "news" ? "purple" : "orange"}
-              >
-                {viewingArticle.category === "news" ? "新聞" : "招生資訊"}
-              </Tag>
-            </Space>
-            <div style={{ margin: "16px 0" }}>
-              <img
-                src={viewingArticle.image}
-                alt={viewingArticle.title}
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-            </div>
-            <div style={{ marginBottom: "16px" }}>
-              <strong>摘要：</strong>
-              <p>{viewingArticle.excerpt}</p>
-            </div>
+        {isViewModalVisible && viewingArticle ? (
+          <Suspense fallback={<div>載入中...</div>}>
             <div>
-              <strong>內容：</strong>
-              {viewingArticle.category === "enrollment" ? (
-                <StructuredContentViewer content={viewingArticle.content} />
-              ) : viewingArticle.category === "news" ? (
-                <NewsContentViewer content={viewingArticle.content} />
-              ) : (
-                <div
-                  style={{
-                    whiteSpace: "pre-wrap",
-                    backgroundColor: "#f5f5f5",
-                    padding: "16px",
-                    borderRadius: "4px",
-                    marginTop: "8px",
-                    maxHeight: "400px",
-                    overflow: "auto",
-                  }}
+              <Title level={4}>{viewingArticle.title}</Title>
+              <Space>
+                <Tag
+                  color={viewingArticle.type === "article" ? "blue" : "green"}
                 >
-                  {typeof viewingArticle.content === "object"
-                    ? JSON.stringify(viewingArticle.content, null, 2)
-                    : viewingArticle.content}
-                </div>
-              )}
+                  {viewingArticle.type === "article" ? "一般文章" : "招生資訊"}
+                </Tag>
+                <Tag
+                  color={
+                    viewingArticle.category === "news" ? "purple" : "orange"
+                  }
+                >
+                  {viewingArticle.category === "news" ? "新聞" : "招生資訊"}
+                </Tag>
+              </Space>
+              <div style={{ margin: "16px 0" }}>
+                <img
+                  src={viewingArticle.image}
+                  alt={viewingArticle.title}
+                  style={{ maxWidth: "100%", height: "auto" }}
+                />
+              </div>
+              <div style={{ marginBottom: "16px" }}>
+                <strong>摘要：</strong>
+                <p>{viewingArticle.excerpt}</p>
+              </div>
+              <div>
+                <strong>內容：</strong>
+                {viewingArticle.category === "enrollment" ? (
+                  <StructuredContentViewer content={viewingArticle.content} />
+                ) : viewingArticle.category === "news" ? (
+                  <NewsContentViewer content={viewingArticle.content} />
+                ) : (
+                  <div
+                    style={{
+                      whiteSpace: "pre-wrap",
+                      backgroundColor: "#f5f5f5",
+                      padding: "16px",
+                      borderRadius: "4px",
+                      marginTop: "8px",
+                      maxHeight: "400px",
+                      overflow: "auto",
+                    }}
+                  >
+                    {typeof viewingArticle.content === "object"
+                      ? JSON.stringify(viewingArticle.content, null, 2)
+                      : viewingArticle.content}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          </Suspense>
+        ) : null}
       </Modal>
     </div>
   );

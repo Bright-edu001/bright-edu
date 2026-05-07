@@ -19,10 +19,13 @@ const defaultMessages = {
 
 function useStorageImagePicker(form, options = {}) {
   const { messages = {} } = options;
-  const resolvedMessages = {
-    ...defaultMessages,
-    ...messages,
-  };
+  const resolvedMessages = useMemo(
+    () => ({
+      ...defaultMessages,
+      ...messages,
+    }),
+    [messages],
+  );
   const [isPickerVisible, setIsPickerVisible] = useState(false);
   const [pickerTargetField, setPickerTargetField] = useState(null);
   const [storageImages, setStorageImages] = useState([]);
@@ -92,7 +95,7 @@ function useStorageImagePicker(form, options = {}) {
         setUploading(false);
       }
     },
-    [form, resolvedMessages.uploadError, resolvedMessages.uploadSuccess],
+    [form, resolvedMessages],
   );
 
   return useMemo(

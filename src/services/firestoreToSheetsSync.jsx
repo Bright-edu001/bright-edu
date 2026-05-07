@@ -711,25 +711,20 @@ class FirestoreToSheetsSync {
    * 手動觸發同步並重置自動同步狀態
    */
   async triggerManualSync() {
-    try {
-      // 如果有自動同步正在運行，重置重試計數
-      if (this.autoSync.enabled) {
-        this.autoSync.retryCount = 0;
-      }
-
-      const result = await this.syncToSheets();
-
-      // 更新最後同步時間
-      if (this.autoSync.enabled) {
-        this.autoSync.lastSyncTime = new Date();
-        this.saveAutoSyncSettings();
-      }
-
-      return result;
-    } catch (error) {
-      // 手動同步失敗不影響自動同步計數
-      throw error;
+    // 如果有自動同步正在運行，重置重試計數
+    if (this.autoSync.enabled) {
+      this.autoSync.retryCount = 0;
     }
+
+    const result = await this.syncToSheets();
+
+    // 更新最後同步時間
+    if (this.autoSync.enabled) {
+      this.autoSync.lastSyncTime = new Date();
+      this.saveAutoSyncSettings();
+    }
+
+    return result;
   }
 }
 

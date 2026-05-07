@@ -33,7 +33,7 @@ function Application() {
         {/* 申請流程 */}
         <div className="mba-info-section">
           <div className="mba-info-section-title">
-            以下是完成報名需繳交的所有資料: 
+            以下是完成報名需繳交的所有資料:
           </div>
           <ol className="mba-info-list">
             <li>透過學校流程完成申請</li>
