@@ -11,7 +11,8 @@ import React, {
   startTransition,
 } from "react";
 import { FirebaseAppProvider } from "reactfire";
-import { app } from "../config/firebaseCore";
+import { app, initializeCoreServices } from "../config/firebaseCore";
+import { isLocalDevelopment } from "../config/envUtils";
 import logger from "../utils/logger";
 
 // Firebase 初始化狀態
@@ -63,8 +64,6 @@ export const FirebaseInitProvider = ({ children }) => {
         logger.info("[Firebase Init] 開始優化版初始化...");
 
         // 階段 1: 立即初始化核心服務（非阻塞）
-        const { initializeCoreServices } =
-          await import("../config/firebaseCore");
         await initializeCoreServices();
 
         // 立即標記基礎服務就緒，讓 UI 開始渲染
@@ -116,8 +115,6 @@ export const FirebaseInitProvider = ({ children }) => {
  * 初始化額外服務（App Check 等）
  */
 const initializeAdditionalServices = async () => {
-  const { isLocalDevelopment } = await import("../config/envUtils");
-
   if (isLocalDevelopment()) {
     logger.info("[Firebase Init] 本地開發環境，跳過額外服務");
     return;
@@ -136,7 +133,6 @@ const initializeAdditionalServices = async () => {
   setTimeout(async () => {
     try {
       const { getPerformance } = await import("firebase/performance");
-      const { app } = await import("../config/firebaseCore");
       getPerformance(app);
       logger.info("[Performance] 延後初始化完成");
     } catch (error) {
