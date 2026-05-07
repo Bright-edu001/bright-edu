@@ -123,6 +123,7 @@ VITE_USE_FIREBASE_EMULATOR=true
 | `npm run build:prod`          | 建立 production 版本並關閉 Source Map |
 | `npm run preview`             | 預覽打包後結果                        |
 | `npm run test`                | 執行 Vitest                           |
+| `npm run test:run`            | Vitest 單次執行（驗收用）             |
 | `npm run test:watch`          | 以 watch 模式執行 Vitest              |
 | `npm run analyze`             | 建置後分析 bundle 大小                |
 | `npm run analyze:performance` | 執行效能分析腳本                      |
@@ -145,6 +146,42 @@ VITE_USE_FIREBASE_EMULATOR=true
 專案包含 `.github/workflows/` 與 Firebase Hosting 相關設定。
 
 實際的建置、預覽與部署流程請以倉庫內對應 workflow 檔案與 Firebase 設定為準。
+
+## 品質閘門基線（TASK-AUD-008A）
+
+目前 repo 已存在且穩定的本地驗證品質閘門如下：
+
+- `npm run test:run`：Vitest 單次執行模式（提交前測試基線）。
+- `npm run build`：Vite production build 驗證（提交前建置基線）。
+
+每個 task 完成前，至少需在本機通過以上兩個指令。
+
+目前尚未導入以下 gate：
+
+- lint（尚無 lint script）
+- typecheck（尚無 typecheck script）
+- 完整 QA CI（需另行批准後導入）
+
+以下 scripts 不屬於一般 PR 品質閘門：
+
+- `npm run analyze`
+- `npm run analyze:performance`
+- `npm run deploy`
+- `npm run predeploy`
+
+### Build Warning Triage（目前狀態）
+
+- Header/Footer redundant prefetch warning：已修正。
+- Firebase/envUtils dynamic/static import warning：暫時記錄，本階段不重構。
+- chunk size warning：暫時記錄，本階段不做大規模 chunk split。
+- Vite CJS deprecation：暫時記錄。
+- React Router future flag warning：暫時記錄。
+
+### 後續範圍（非本階段）
+
+- 導入 ESLint（需另行批准）。
+- 評估 TypeScript 或 checkJs（需另行評估與批准）。
+- 新增 QA CI workflow（需另行批准）。
 
 ## 相關文件
 

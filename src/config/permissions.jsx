@@ -1,4 +1,15 @@
 // 權限配置文件
+/// <reference types="node" />
+// @ts-check
+
+/**
+ * @typedef {"super_admin" | "admin" | "editor" | "viewer"} UserRole
+ * @typedef {"view_dashboard" | "view_articles" | "create_articles" | "edit_articles" | "delete_articles" | "publish_articles" | "view_contact_forms" | "delete_contact_forms" | "export_contact_forms" | "view_users" | "create_users" | "edit_users" | "delete_users" | "manage_roles" | "view_settings" | "edit_settings" | "manage_system"} Permission
+ * @typedef {Record<string, UserRole>} UserRoleMap
+ * @typedef {Record<string, readonly Permission[]>} RolePermissionMap
+ */
+
+/** @type {{ readonly SUPER_ADMIN: "super_admin", readonly ADMIN: "admin", readonly EDITOR: "editor", readonly VIEWER: "viewer" }} */
 export const USER_ROLES = {
   SUPER_ADMIN: "super_admin",
   ADMIN: "admin",
@@ -6,6 +17,7 @@ export const USER_ROLES = {
   VIEWER: "viewer",
 };
 
+/** @type {{ readonly VIEW_DASHBOARD: "view_dashboard", readonly VIEW_ARTICLES: "view_articles", readonly CREATE_ARTICLES: "create_articles", readonly EDIT_ARTICLES: "edit_articles", readonly DELETE_ARTICLES: "delete_articles", readonly PUBLISH_ARTICLES: "publish_articles", readonly VIEW_CONTACT_FORMS: "view_contact_forms", readonly DELETE_CONTACT_FORMS: "delete_contact_forms", readonly EXPORT_CONTACT_FORMS: "export_contact_forms", readonly VIEW_USERS: "view_users", readonly CREATE_USERS: "create_users", readonly EDIT_USERS: "edit_users", readonly DELETE_USERS: "delete_users", readonly MANAGE_ROLES: "manage_roles", readonly VIEW_SETTINGS: "view_settings", readonly EDIT_SETTINGS: "edit_settings", readonly MANAGE_SYSTEM: "manage_system" }} */
 export const PERMISSIONS = {
   // 儀表板權限
   VIEW_DASHBOARD: "view_dashboard",
@@ -36,6 +48,7 @@ export const PERMISSIONS = {
 };
 
 // 角色權限對應表
+/** @type {RolePermissionMap} */
 export const ROLE_PERMISSIONS = {
   [USER_ROLES.SUPER_ADMIN]: [
     // 超級管理員擁有所有權限
@@ -84,6 +97,7 @@ const isProduction =
   (typeof window !== "undefined" && window.location.hostname !== "localhost");
 
 // 本地開發環境的用戶角色配置
+/** @type {UserRoleMap} */
 const DEVELOPMENT_USER_ROLES = {
   // 開發環境超級管理員
   "dev-admin@bright-edu.com": USER_ROLES.SUPER_ADMIN,
@@ -104,17 +118,20 @@ const DEVELOPMENT_USER_ROLES = {
 };
 
 // 正式環境的用戶角色配置
+/** @type {UserRoleMap} */
 const PRODUCTION_USER_ROLES = {
   // 正式環境超級管理員
   "web@bright-edu.com": USER_ROLES.SUPER_ADMIN,
 };
 
 // 根據環境選擇對應的用戶角色配置
+/** @type {UserRoleMap} */
 export const DEFAULT_USER_ROLES = isProduction
   ? PRODUCTION_USER_ROLES
   : DEVELOPMENT_USER_ROLES;
 
 // 獲取當前環境資訊
+/** @returns {{ isProduction: boolean, environment: string, userRoles: UserRoleMap, availableAccounts: string[] }} */
 export const getEnvironmentInfo = () => {
   return {
     isProduction,
@@ -127,6 +144,10 @@ export const getEnvironmentInfo = () => {
 };
 
 // 獲取用戶角色
+/**
+ * @param {string | null | undefined} email
+ * @returns {UserRole | null}
+ */
 export const getUserRole = (email) => {
   if (!email || !email.endsWith("@bright-edu.com")) {
     return null; // 非組織用戶無角色
@@ -142,17 +163,31 @@ export const getUserRole = (email) => {
 };
 
 // 獲取角色權限
+/**
+ * @param {string | null | undefined} role
+ * @returns {readonly Permission[]}
+ */
 export const getRolePermissions = (role) => {
-  return ROLE_PERMISSIONS[role] || [];
+  return ROLE_PERMISSIONS[/** @type {string} */ (role)] || [];
 };
 
 // 檢查用戶是否有特定權限
+/**
+ * @param {string | null | undefined} userRole
+ * @param {Permission} permission
+ * @returns {boolean}
+ */
 export const hasPermission = (userRole, permission) => {
   const permissions = getRolePermissions(userRole);
   return permissions.includes(permission);
 };
 
 // 檢查用戶是否有任一權限
+/**
+ * @param {string | null | undefined} userRole
+ * @param {readonly Permission[]} permissionList
+ * @returns {boolean}
+ */
 export const hasAnyPermission = (userRole, permissionList) => {
   return permissionList.some((permission) =>
     hasPermission(userRole, permission)
@@ -160,6 +195,7 @@ export const hasAnyPermission = (userRole, permissionList) => {
 };
 
 // 角色顯示名稱
+/** @type {Record<string, string>} */
 export const ROLE_DISPLAY_NAMES = {
   [USER_ROLES.SUPER_ADMIN]: "超級管理員",
   [USER_ROLES.ADMIN]: "管理員",
@@ -168,6 +204,7 @@ export const ROLE_DISPLAY_NAMES = {
 };
 
 // 權限顯示名稱
+/** @type {Record<string, string>} */
 export const PERMISSION_DISPLAY_NAMES = {
   [PERMISSIONS.VIEW_DASHBOARD]: "檢視儀表板",
   [PERMISSIONS.VIEW_ARTICLES]: "檢視文章",

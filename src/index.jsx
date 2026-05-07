@@ -139,8 +139,6 @@ root.render(
 setTimeout(() => {
   // 預載入關鍵路由組件
   import("./pages/Home/Home").catch(() => {});
-  import("./components/Header/Header").catch(() => {});
-  import("./components/Footer/Footer").catch(() => {});
 }, 100);
 
 logger.info("[Bootstrap] 優化版應用載入完成");

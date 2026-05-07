@@ -1,21 +1,23 @@
 import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
-const MsfApplication = lazy(() => import("../pages/Msu/Msf/MsfApplication.jsx"));
+const MsfApplication = lazy(
+  () => import("../pages/Msu/Msf/MsfApplication.jsx"),
+);
 const MsuMaster = lazy(() => import("../pages/Msu/Msf/MsMaster.jsx"));
 const AboutMsu = lazy(() => import("../pages/Msu/Msu_school/AboutMsu.jsx"));
-const MsRankingsAwards = lazy(() =>
-  import("../pages/Msu/Msu_school/RankingsAwards.jsx")
+const MsRankingsAwards = lazy(
+  () => import("../pages/Msu/Msu_school/RankingsAwards.jsx"),
 );
-const MsCareerResources = lazy(() =>
-  import("../pages/Msu/Msu_school/CareerResources.jsx")
+const MsCareerResources = lazy(
+  () => import("../pages/Msu/Msu_school/CareerResources.jsx"),
 );
 const Michigan = lazy(() => import("../pages/Msu/Msu_school/Michigan.jsx"));
-const Transportation = lazy(() =>
-  import("../pages/Msu/Msu_school/Michigan/Transportation.jsx")
+const Transportation = lazy(
+  () => import("../pages/Msu/Msu_school/Michigan/Transportation.jsx"),
 );
-const MicFoodAttractions = lazy(() =>
-  import("../pages/Msu/Msu_school/Michigan/FoodAttractions.jsx")
+const MicFoodAttractions = lazy(
+  () => import("../pages/Msu/Msu_school/Michigan/FoodAttractions.jsx"),
 );
 
 // MSU 中文路由配置
@@ -39,6 +41,10 @@ const msuChineseRoutes = [
   {
     path: "密西根州立大學/MSU商學院/東蘭辛市/景點與美食",
     element: <MicFoodAttractions />,
+  },
+  {
+    path: "密西根州立大學/MSU商學院/MSU學校介紹",
+    element: <Navigate to="/密西根州立大學/MSU商學院/學校介紹" replace />,
   },
   {
     path: "密西根州立大學",

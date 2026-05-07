@@ -31,11 +31,16 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.4",
     "@playwright/test": "^1.58.2",
     "@testing-library/jest-dom": "^6.9.1",
     "@types/node": "^25.5.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "gh-pages": "^6.3.0",
+    "globals": "^17.6.0",
     "html-webpack-link-type-plugin": "^1.1.1",
     "jsdom": "^29.0.1",
     "sass": "^1.60.0",
@@ -55,6 +60,7 @@
     "test": "vitest",
     "test:run": "vitest --run",
     "test:watch": "vitest --watch",
+    "lint": "eslint src --ext .js,.jsx",
     "predeploy": "npm run build:prod",
     "deploy": "gh-pages -d build"
   },

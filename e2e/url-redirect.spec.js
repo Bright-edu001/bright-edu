@@ -14,6 +14,22 @@ const uicRedirects = [
     from: "/uic-business-school/mba/application",
     expectedFragment: "申請資訊",
   },
+  {
+    from: "/uic-business-school/mba/areas/human-resource",
+    expectedFragment: "五大領域/Human-Resource-Management",
+  },
+  {
+    from: "/uic-business-school/mba/areas/analytics",
+    expectedFragment: "五大領域/Business-Analytics",
+  },
+  {
+    from: "/uic-business-school/ms/programs",
+    expectedFragment: "MS-Programs",
+  },
+  {
+    from: "/uic-business-school/ms",
+    expectedFragment: "MS-Programs",
+  },
 ];
 
 // REDIR-02：MSU 舊 URL 重導向
@@ -21,7 +37,7 @@ const msuRedirects = [
   { from: "/msu-business-school", expectedFragment: "密西根州立大學" },
   {
     from: "/msu-business-school/msu/about-msu",
-    expectedFragment: "學校介紹",
+    expectedFragment: "MSU商學院/學校介紹",
   },
   {
     from: "/msu-business-school/msf/application",
@@ -34,6 +50,19 @@ const msuRedirects = [
   {
     from: "/msu-business-school/msu/career-resources",
     expectedFragment: "職涯資源",
+  },
+];
+
+// REDIR-02B：通用英文 fallback URL 重導向
+const commonRedirects = [
+  { from: "/contact", expectedFragment: "聯絡我們" },
+  {
+    from: "/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human%20Resource%20Management",
+    expectedFragment: "五大領域/Human-Resource-Management",
+  },
+  {
+    from: "/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business%20Analytics",
+    expectedFragment: "五大領域/Business-Analytics",
   },
 ];
 
@@ -71,6 +100,28 @@ test.describe("URL Redirect — MSU 舊 URL", () => {
 
       const finalUrl = page.url();
       expect(urlContainsChinese(finalUrl, expectedFragment)).toBe(true);
+    });
+  }
+});
+
+test.describe("URL Redirect — 通用英文 fallback URL", () => {
+  for (const { from, expectedFragment } of commonRedirects) {
+    test(`REDIR-02B：${from} → 包含「${expectedFragment}」`, async ({
+      page,
+    }) => {
+      await page.goto(from);
+
+      await page.waitForURL(
+        (url) => decodeURIComponent(url.pathname).includes(expectedFragment),
+        {
+          timeout: 10000,
+        },
+      );
+
+      await page.locator("#root").waitFor({ state: "visible", timeout: 10000 });
+
+      const finalPath = decodeURIComponent(new URL(page.url()).pathname);
+      expect(finalPath).toContain(expectedFragment);
     });
   }
 });
