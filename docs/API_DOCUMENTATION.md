@@ -35,8 +35,8 @@ Bright Education 專案採用現代化的 API 架構，結合 Firebase 生態系
 
 **檔案位置：**
 
-- `src/services/blogService.js` (前端服務)
-- `src/admin/data/blogApi.js` (管理後台)
+- `src/services/blogService.jsx` (前端服務)
+- `src/admin/data/blogApi.jsx` (管理後台)
 
 #### 前端部落格服務
 
@@ -94,7 +94,7 @@ await updateArticle("article", "doc123", {
 
 ### 📝 聯絡表單 API
 
-**檔案位置：** `src/services/contactService.js`
+**檔案位置：** `src/services/contactService.jsx`
 
 #### ContactService 類別
 
@@ -135,7 +135,7 @@ const result = await contactService.saveToFirestore({
 // 同時儲存到兩個系統
 const dualResult = await contactService.saveToBoth(
   formData,
-  async (data) => await sendToGoogleSheets(data)
+  async (data) => await sendToGoogleSheets(data),
 );
 ```
 
@@ -179,7 +179,7 @@ const dualResult = await contactService.saveToBoth(
 
 ```javascript
 import { httpsCallable } from "firebase/functions";
-import { functions } from "../config/firebaseConfig";
+import { functions } from "../config/firebaseServices";
 
 const batchAddUsers = httpsCallable(functions, "batchAddUsers");
 
@@ -197,8 +197,8 @@ const result = await batchAddUsers({
 
 **檔案位置：**
 
-- `src/services/firestoreToSheetsSync.js`
-- `src/config/syncConfig.js`
+- `src/services/firestoreToSheetsSync.jsx`
+- `src/config/syncConfig.jsx`
 
 **基礎 URL：** `https://bright-edu-sync-156805168089.asia-east1.run.app`
 
@@ -247,46 +247,27 @@ try {
 const health = await checkSyncServiceHealth();
 ```
 
-### 🔗 通用 HTTP 請求 API
+### 🔗 HTTP 請求實作說明
 
-**檔案位置：** `src/utils/request.js`
+**檔案位置：** `src/services/contactService.jsx`、`src/config/syncConfig.jsx`
 
-#### 請求工具函數
+目前 repo 沒有獨立的通用 request helper 檔案。前端 API 呼叫由現行 service/helper 模組處理：
 
-| 功能                    | 方法     | 描述              | 參數                                    |
-| ----------------------- | -------- | ----------------- | --------------------------------------- |
-| `request(method, data)` | GET/POST | 通用 HTTP 請求    | `method: "GET"\|"POST"`, `data: Object` |
-| `get(data)`             | GET      | GET 請求便利函數  | `data: Object`                          |
-| `post(data)`            | POST     | POST 請求便利函數 | `data: Object`                          |
-
-**特色功能：**
-
-- 自動處理 CORS 問題
-- 多種請求格式支援（FormData、URLSearchParams、JSON）
-- 開發/生產環境適配
-- 自動重試機制
+- `ContactService`（`src/services/contactService.jsx`）負責聯絡表單資料處理與 Firestore 寫入。
+- `syncConfig`（`src/config/syncConfig.jsx`）提供 Google Sheets 同步與健康檢查請求封裝。
 
 **使用範例：**
 
 ```javascript
-import { get, post } from "../utils/request";
+import { syncGoogleSheets, checkSyncServiceHealth } from "../config/syncConfig";
 
-// GET 請求
-const response = await get({
-  name: "查詢參數",
-  type: "search",
-});
-
-// POST 請求
-const response = await post({
-  name: "表單資料",
-  email: "user@example.com",
-});
+const syncResult = await syncGoogleSheets();
+const health = await checkSyncServiceHealth();
 ```
 
 ## 🔐 Firebase 配置 API
 
-**檔案位置：** `src/config/firebaseConfig.js`
+**檔案位置：** `src/config/firebaseCore.jsx`、`src/config/firebaseServices.jsx`
 
 ### Firebase 服務
 
@@ -325,11 +306,11 @@ VITE_RECAPTCHA_SITE_KEY=your-recaptcha-key
 
 ### Context 提供者
 
-| Context         | 檔案               | 功能           | 狀態管理              |
-| --------------- | ------------------ | -------------- | --------------------- |
-| `AuthContext`   | `AuthContext.js`   | 使用者認證狀態 | 登入/登出、使用者資訊 |
-| `BlogContext`   | `BlogContext.js`   | 部落格資料狀態 | 文章列表、載入狀態    |
-| `SearchContext` | `SearchContext.js` | 搜尋功能狀態   | 搜尋關鍵字、結果      |
+| Context         | 檔案                | 功能           | 狀態管理              |
+| --------------- | ------------------- | -------------- | --------------------- |
+| `AuthContext`   | `AuthContext.jsx`   | 使用者認證狀態 | 登入/登出、使用者資訊 |
+| `BlogContext`   | `BlogContext.jsx`   | 部落格資料狀態 | 文章列表、載入狀態    |
+| `SearchContext` | `SearchContext.jsx` | 搜尋功能狀態   | 搜尋關鍵字、結果      |
 
 ### AuthContext API
 
@@ -437,7 +418,7 @@ await deleteArticle("enrollment", "doc-id");
 
 ```javascript
 import { httpsCallable } from "firebase/functions";
-import { functions } from "../config/firebaseConfig";
+import { functions } from "../config/firebaseServices";
 
 // 批次新增使用者
 const batchAddUsers = httpsCallable(functions, "batchAddUsers");
