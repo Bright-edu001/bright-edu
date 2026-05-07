@@ -151,14 +151,14 @@ VITE_USE_FIREBASE_EMULATOR=true
 
 目前 repo 已存在且穩定的本地驗證品質閘門如下：
 
+- `npm run lint`：ESLint 本地檢查（目前可通過，保留 1 個非阻塞 `react-hooks/exhaustive-deps` warning）。
 - `npm run test:run`：Vitest 單次執行模式（提交前測試基線）。
 - `npm run build`：Vite production build 驗證（提交前建置基線）。
 
-每個 task 完成前，至少需在本機通過以上兩個指令。
+每個 task 完成前，至少需在本機通過以上三個指令。
 
 目前尚未導入以下 gate：
 
-- lint（尚無 lint script）
 - typecheck（尚無 typecheck script）
 - 完整 QA CI（需另行批准後導入）
 
@@ -179,7 +179,6 @@ VITE_USE_FIREBASE_EMULATOR=true
 
 ### 後續範圍（非本階段）
 
-- 導入 ESLint（需另行批准）。
 - 評估 TypeScript 或 checkJs（需另行評估與批准）。
 - 新增 QA CI workflow（需另行批准）。
 

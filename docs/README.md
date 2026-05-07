@@ -66,7 +66,8 @@ Current baseline for local validation is documented in `README.md` under 「品�
 
 Scope summary:
 
-- Required before task completion: `npm run test:run` and `npm run build`.
-- Not yet introduced as gates: lint and typecheck.
+- Required before task completion: `npm run lint`, `npm run test:run`, and `npm run build`.
+- Lint status: currently passes with 1 non-blocking `react-hooks/exhaustive-deps` warning.
+- Not yet introduced as gates: typecheck.
 - Not part of regular PR quality gates: analyze and deploy scripts.
 - Build warning triage notes are recorded as current-state references, not as resolved-by-default quality gates.
