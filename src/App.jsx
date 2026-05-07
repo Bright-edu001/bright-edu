@@ -1,7 +1,5 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { App as AntdApp, ConfigProvider, Spin } from "antd";
-import { BlogProvider } from "./context/BlogContext";
-import { SearchProvider } from "./context/SearchContext";
 import {
   useFirebaseInit,
   useFirebaseBasicReady,
@@ -124,27 +122,23 @@ function App() {
       }}
     >
       <AntdApp>
-        <BlogProvider>
-          <SearchProvider>
-            <ErrorBoundary>
-              <ScrollToTop />
-              <div className="App">
-                <Header />
-                <main className="main-content">
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Outlet />
-                  </Suspense>
-                </main>
-                <Suspense fallback={null}>
-                  <Footer />
-                </Suspense>
-              </div>
-            </ErrorBoundary>
+        <ErrorBoundary>
+          <ScrollToTop />
+          <div className="App">
+            <Header />
+            <main className="main-content">
+              <Suspense fallback={<LoadingSpinner />}>
+                <Outlet />
+              </Suspense>
+            </main>
             <Suspense fallback={null}>
-              <FloatingButtons />
+              <Footer />
             </Suspense>
-          </SearchProvider>
-        </BlogProvider>
+          </div>
+        </ErrorBoundary>
+        <Suspense fallback={null}>
+          <FloatingButtons />
+        </Suspense>
       </AntdApp>
     </ConfigProvider>
   );
