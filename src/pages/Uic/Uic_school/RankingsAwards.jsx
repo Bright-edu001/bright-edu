@@ -43,7 +43,7 @@ const RankingsAwards = () => {
 
           <p className="aacsb-description">
             AACSB – Association to Advance Collegiate Schools of
-            Business(國際商學院促進協會)由美國商學院、社團和其他機構組成的非營利組織，致力於提高工商管理碩士和會計學等高等教育水準。是工商管理、會計學、金融專業等碩博士學位專案的機構。創立於1916年，迄今已100年歷史  
+            Business(國際商學院促進協會)由美國商學院、社團和其他機構組成的非營利組織，致力於提高工商管理碩士和會計學等高等教育水準。是工商管理、會計學、金融專業等碩博士學位專案的機構。創立於1916年，迄今已100年歷史
             AACSB為全球3大商管認證之首(AACSB、歐洲Equis、英國AMBA)
           </p>
 
@@ -79,7 +79,7 @@ const RankingsAwards = () => {
               <img
                 className="responsive-img"
                 src={getImageUrl(
-                  `/images/Uic/ranking/2023-INSIGHT-Into-Diversity-HEED-Award-Logo-1024x1024.webp`
+                  `/images/Uic/ranking/2023-INSIGHT-Into-Diversity-HEED-Award-Logo-1024x1024.webp`,
                 )}
                 alt="HEED Excellence Award"
                 loading="lazy"

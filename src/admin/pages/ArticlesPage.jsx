@@ -221,11 +221,12 @@ const ArticlesPage = () => {
           }}
           onError={(e) => {
             try {
-              // eslint-disable-next-line no-console
               console.warn("Thumbnail failed to load:", e?.target?.src);
               e.target.onerror = null;
               e.target.src = "/B-logo.webp";
-            } catch (err) {}
+            } catch (err) {
+              // Keep UI resilient if the image element is no longer available.
+            }
           }}
           onClick={() => window.open(thumbnail, "_blank")}
         />
@@ -287,7 +288,9 @@ const ArticlesPage = () => {
     if (typeof contentValue === "string") {
       try {
         contentValue = JSON.parse(contentValue);
-      } catch (e) {}
+      } catch (e) {
+        // Keep original string content when legacy payload is not JSON.
+      }
     }
     setEditingArticle({ ...article, content: contentValue });
     setIsModalVisible(true);
@@ -380,7 +383,6 @@ const ArticlesPage = () => {
   };
 
   // 處理檔案上傳
-  // eslint-disable-next-line no-unused-vars
   const handleFileUpload = async (file, field) => {
     const oldUrl = form.getFieldValue(field);
     // 建立 Storage 參考

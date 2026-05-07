@@ -27,6 +27,8 @@ export default [
       },
       globals: {
         ...globals.browser,
+        process: "readonly",
+        global: "readonly",
       },
     },
     plugins: {
@@ -52,6 +54,8 @@ export default [
     languageOptions: {
       globals: {
         ...(globals.vitest || {}),
+        process: "readonly",
+        global: "readonly",
         describe: "readonly",
         it: "readonly",
         test: "readonly",
