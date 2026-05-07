@@ -49,13 +49,6 @@ vi.mock("antd", () => ({
   },
 }));
 
-// 模擬 reactfire
-const mockUseUser = vi.fn();
-vi.mock("reactfire", () => ({
-  useUser: () => mockUseUser(),
-  AuthProvider: ({ children }) => children,
-}));
-
 // 輔助函數：使用 AuthProvider 包裝渲染 hook
 const renderWithProvider = (initialProps) => {
   const wrapper = ({ children }) => (
@@ -84,7 +77,6 @@ describe("AuthContext", () => {
     };
     mockUnsubscribe = vi.fn();
 
-    mockUseUser.mockReturnValue({ data: null, status: "success" });
     getAuth.mockReturnValue(mockAuth);
     onAuthStateChanged.mockImplementation((auth, callback) => {
       callback(null); // 初始狀態沒有用戶
@@ -435,11 +427,6 @@ describe("AuthContext", () => {
         email: "test@bright-edu.com",
       };
 
-      // 模擬 Firebase 認證狀態變化
-      mockUseUser.mockReturnValue({
-        data: mockFirebaseUser,
-        status: "success",
-      });
       onAuthStateChanged.mockImplementation((auth, callback) => {
         callback(mockFirebaseUser);
         return mockUnsubscribe;
@@ -449,6 +436,16 @@ describe("AuthContext", () => {
 
       expect(result.current.user).toEqual(mockFirebaseUser);
       expect(localStorage.getItem("isAuthenticated")).toBe("true");
+    });
+
+    it("unsubscribes from Firebase auth state when unmounted", () => {
+      window.location.hostname = "bright-edu.com";
+
+      const { unmount } = renderWithProvider();
+
+      unmount();
+
+      expect(mockUnsubscribe).toHaveBeenCalledTimes(1);
     });
 
     it("應該在開發環境中從 localStorage 恢復用戶狀態", () => {

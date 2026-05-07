@@ -10,7 +10,6 @@ import React, {
   useEffectEvent,
   startTransition,
 } from "react";
-import { FirebaseAppProvider } from "reactfire";
 import { app, initializeCoreServices } from "../config/firebaseCore";
 import { isLocalDevelopment } from "../config/envUtils";
 import logger from "../utils/logger";
@@ -106,7 +105,7 @@ export const FirebaseInitProvider = ({ children }) => {
 
   return (
     <FirebaseInitContext.Provider value={contextValue}>
-      <FirebaseAppProvider firebaseApp={app}>{children}</FirebaseAppProvider>
+      {children}
     </FirebaseInitContext.Provider>
   );
 };
