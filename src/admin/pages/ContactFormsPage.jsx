@@ -44,34 +44,14 @@ import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../../config/firebaseCore";
 import firestoreToSheetsSync from "../../services/firestoreToSheetsSync";
 import dayjs from "dayjs";
+import {
+  buildCsvContent,
+  getStatusColor,
+  getStatusText,
+} from "./ContactFormsPage.helpers";
 
 const { Option } = Select;
 const { TextArea } = Input;
-
-const escapeCsvValue = (value) => {
-  const stringValue = value == null ? "" : String(value);
-  const escapedValue = stringValue.replace(/"/g, '""');
-
-  if (/[",\r\n]/.test(stringValue)) {
-    return `"${escapedValue}"`;
-  }
-
-  return escapedValue;
-};
-
-const buildCsvContent = (rows) => {
-  if (!rows || rows.length === 0) {
-    return "";
-  }
-
-  const headers = Object.keys(rows[0]);
-  const headerLine = headers.join(",");
-  const dataLines = rows.map((row) =>
-    headers.map((header) => escapeCsvValue(row[header])).join(","),
-  );
-
-  return [headerLine, ...dataLines].join("\n");
-};
 
 function ContactFormsPage() {
   const [forms, setForms] = useState([]);
@@ -164,33 +144,6 @@ function ContactFormsPage() {
     };
   }, []);
 
-  // 狀態顏色對應
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "pending":
-        return "orange";
-      case "processing":
-        return "blue";
-      case "completed":
-        return "green";
-      default:
-        return "default";
-    }
-  };
-
-  // 狀態文字對應
-  const getStatusText = (status) => {
-    switch (status) {
-      case "pending":
-        return "待處理";
-      case "processing":
-        return "處理中";
-      case "completed":
-        return "已完成";
-      default:
-        return status;
-    }
-  };
 
   // 查看詳細資料
   const handleView = (record) => {
