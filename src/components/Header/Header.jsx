@@ -12,6 +12,26 @@ import { useWindowSize, calculateDrawerWidth } from "../../hooks/useWindowSize";
 import "./Header.scss";
 import getImageUrl from "../../utils/getImageUrl";
 
+const desktopSubmenuPopupClassName = "header-submenu-popup";
+
+const addSubmenuPopupClassName = (items) =>
+  items.map((item) => {
+    if (!item || typeof item !== "object") {
+      return item;
+    }
+
+    const nextItem = { ...item };
+
+    if (Array.isArray(item.children) && item.children.length > 0) {
+      nextItem.popupClassName = [item.popupClassName, desktopSubmenuPopupClassName]
+        .filter(Boolean)
+        .join(" ");
+      nextItem.children = addSubmenuPopupClassName(item.children);
+    }
+
+    return nextItem;
+  });
+
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const windowSize = useWindowSize();
@@ -21,6 +41,10 @@ const Header = () => {
   );
   const [animationDuration, setAnimationDuration] = useState("0.2s");
   const navigate = useNavigate();
+  const desktopMenuItems = useMemo(
+    () => addSubmenuPopupClassName(menuItems),
+    [],
+  );
 
   const onMenuMouseEnter = useEffectEvent((e) => {
     if (e.target.closest(".ant-menu-submenu")) {
@@ -126,7 +150,7 @@ const Header = () => {
             </div>
 
             <div className="header-nav">
-              <Menu mode="horizontal" theme="light" items={menuItems} />
+              <Menu mode="horizontal" theme="light" items={desktopMenuItems} />
             </div>
 
             <div className="hamburger-menu">
