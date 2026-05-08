@@ -151,7 +151,7 @@ VITE_USE_FIREBASE_EMULATOR=true
 
 目前 repo 已存在且穩定的本地驗證品質閘門如下：
 
-- `npm run lint`：ESLint 本地檢查（目前可通過，保留 1 個非阻塞 `react-hooks/exhaustive-deps` warning）。
+- `npm run lint`：ESLint 本地檢查目前可通過；執行時會出現 Node `MODULE_TYPELESS_PACKAGE_JSON` warning。
 - `npm run test:run`：Vitest 單次執行模式（提交前測試基線）。
 - `npm run build`：Vite production build 驗證（提交前建置基線）。
 
