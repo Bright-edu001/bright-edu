@@ -181,18 +181,9 @@
   }
 }
 
-/* Popup (portal) submenu title override: AntD may inject rules with higher specificity
-   such as :where(.css-dev-only-do-not-override-...) .ant-menu-submenu-popup ...
-   Add matching selectors and !important to ensure our 50px height and centering apply */
-:where(.css-dev-only-do-not-override-12gvrfx).ant-menu-submenu-popup
-  .ant-menu-vertical
-  > .ant-menu-item,
-:where(.css-dev-only-do-not-override-12gvrfx).ant-menu-submenu-popup
-  .ant-menu-vertical
-  > .ant-menu-submenu
-  > .ant-menu-submenu-title,
-.ant-menu-submenu-popup .ant-menu-vertical > .ant-menu-item,
-.ant-menu-submenu-popup
+/* Popup (portal) submenu title override: use the stable popup hook from Header.jsx */
+.header-submenu-popup.ant-menu-submenu-popup .ant-menu-vertical > .ant-menu-item,
+.header-submenu-popup.ant-menu-submenu-popup
   .ant-menu-vertical
   > .ant-menu-submenu
   > .ant-menu-submenu-title {

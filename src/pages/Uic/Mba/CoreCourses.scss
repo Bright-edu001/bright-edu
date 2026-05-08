@@ -2,6 +2,28 @@
 
 @use "./mba-common" as *;
 
+@mixin core-table-column-widths {
+  .ant-table-thead > tr > th:first-child {
+    width: 80px !important;
+    min-width: 70px !important;
+    max-width: 90px !important;
+  }
+
+  .ant-table-tbody > tr > td:first-child {
+    width: 80px !important;
+    min-width: 70px !important;
+    max-width: 90px !important;
+    word-break: break-word;
+  }
+
+  .ant-table-thead > tr > th:last-child,
+  .ant-table-tbody > tr > td:last-child {
+    width: auto !important;
+    min-width: 220px !important;
+    max-width: unset !important;
+  }
+}
+
 .mba-courses-page {
   .intro {
     font-size: $font-size-md;
@@ -68,23 +90,7 @@
     .ant-table-wrapper {
       .ant-table {
         border-color: #d13a3a !important;
-        .ant-table-thead > tr > th:first-child {
-          width: 80px !important;
-          min-width: 70px !important;
-          max-width: 90px !important;
-        }
-        .ant-table-tbody > tr > td:first-child {
-          width: 80px !important;
-          min-width: 70px !important;
-          max-width: 90px !important;
-          word-break: break-word;
-        }
-        .ant-table-thead > tr > th:last-child,
-        .ant-table-tbody > tr > td:last-child {
-          width: auto !important;
-          min-width: 220px !important;
-          max-width: unset !important;
-        }
+        @include core-table-column-widths;
       }
     }
     // Antd v5 Table 欄位分隔線黑色（補齊所有分隔線）
@@ -163,23 +169,7 @@
     // Antd Table 樣式調整
     .mba-courses-page .courses-content .ant-table-wrapper {
       .ant-table {
-        .ant-table-thead > tr > th:first-child {
-          width: 80px !important;
-          min-width: 70px !important;
-          max-width: 90px !important;
-        }
-        .ant-table-tbody > tr > td:first-child {
-          width: 80px !important;
-          min-width: 70px !important;
-          max-width: 90px !important;
-          word-break: break-word;
-        }
-        .ant-table-thead > tr > th:last-child,
-        .ant-table-tbody > tr > td:last-child {
-          width: auto !important;
-          min-width: 220px !important;
-          max-width: unset !important;
-        }
+        @include core-table-column-widths;
       }
     }
   }

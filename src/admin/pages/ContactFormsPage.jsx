@@ -21,11 +21,6 @@ import {
   EyeOutlined,
   EditOutlined,
   DeleteOutlined,
-  ReloadOutlined,
-  ExportOutlined,
-  SyncOutlined,
-  ClearOutlined,
-  ClockCircleOutlined,
   PlayCircleOutlined,
   PauseCircleOutlined,
 } from "@ant-design/icons";
@@ -44,34 +39,15 @@ import { onAuthStateChanged } from "firebase/auth";
 import { db, auth } from "../../config/firebaseCore";
 import firestoreToSheetsSync from "../../services/firestoreToSheetsSync";
 import dayjs from "dayjs";
+import {
+  buildCsvContent,
+  getStatusColor,
+  getStatusText,
+} from "./ContactFormsPage.helpers";
+import ContactFormsToolbar from "./ContactFormsToolbar";
 
 const { Option } = Select;
 const { TextArea } = Input;
-
-const escapeCsvValue = (value) => {
-  const stringValue = value == null ? "" : String(value);
-  const escapedValue = stringValue.replace(/"/g, '""');
-
-  if (/[",\r\n]/.test(stringValue)) {
-    return `"${escapedValue}"`;
-  }
-
-  return escapedValue;
-};
-
-const buildCsvContent = (rows) => {
-  if (!rows || rows.length === 0) {
-    return "";
-  }
-
-  const headers = Object.keys(rows[0]);
-  const headerLine = headers.join(",");
-  const dataLines = rows.map((row) =>
-    headers.map((header) => escapeCsvValue(row[header])).join(","),
-  );
-
-  return [headerLine, ...dataLines].join("\n");
-};
 
 function ContactFormsPage() {
   const [forms, setForms] = useState([]);
@@ -164,33 +140,6 @@ function ContactFormsPage() {
     };
   }, []);
 
-  // 狀態顏色對應
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "pending":
-        return "orange";
-      case "processing":
-        return "blue";
-      case "completed":
-        return "green";
-      default:
-        return "default";
-    }
-  };
-
-  // 狀態文字對應
-  const getStatusText = (status) => {
-    switch (status) {
-      case "pending":
-        return "待處理";
-      case "processing":
-        return "處理中";
-      case "completed":
-        return "已完成";
-      default:
-        return status;
-    }
-  };
 
   // 查看詳細資料
   const handleView = (record) => {
@@ -483,6 +432,14 @@ function ContactFormsPage() {
     autoSyncForm.resetFields();
   };
 
+  const handleStatusFilterChange = (value) => {
+    setFilters((prev) => ({ ...prev, status: value }));
+  };
+
+  const handleReload = () => {
+    window.location.reload();
+  };
+
   const columns = [
     {
       title: "姓名",
@@ -592,101 +549,21 @@ function ContactFormsPage() {
       <Card
         title="聯絡表單管理"
         extra={
-          <Space>
-            <Select
-              value={filters.status}
-              onChange={(value) =>
-                setFilters((prev) => ({ ...prev, status: value }))
-              }
-              style={{ width: 120 }}
-            >
-              <Option value="all">全部狀態</Option>
-              <Option value="pending">待處理</Option>
-              <Option value="processing">處理中</Option>
-              <Option value="completed">已完成</Option>
-            </Select>
-            <Button
-              icon={<SyncOutlined />}
-              onClick={handleSync}
-              loading={syncLoading}
-              type="primary"
-            >
-              同步到 Google Sheets
-            </Button>
-            <Tooltip
-              title={
-                autoSyncStatus?.enabled
-                  ? `自動同步已啟用，每 ${autoSyncStatus.intervalHours} 小時執行一次`
-                  : "設定自動同步功能"
-              }
-            >
-              <Badge
-                dot={autoSyncStatus?.enabled}
-                color={autoSyncStatus?.enabled ? "green" : "gray"}
-              >
-                <Button
-                  icon={
-                    autoSyncStatus?.enabled ? (
-                      <PauseCircleOutlined />
-                    ) : (
-                      <ClockCircleOutlined />
-                    )
-                  }
-                  onClick={handleOpenAutoSync}
-                  type={autoSyncStatus?.enabled ? "default" : "dashed"}
-                >
-                  自動同步
-                </Button>
-              </Badge>
-            </Tooltip>
-            <Popconfirm
-              title="批量刪除"
-              description={`確定要刪除選中的 ${selectedRowKeys.length} 筆資料嗎？此操作無法復原。`}
-              onConfirm={handleBatchDelete}
-              okText="確定刪除"
-              cancelText="取消"
-              okType="danger"
-              disabled={selectedRowKeys.length === 0}
-            >
-              <Button
-                icon={<DeleteOutlined />}
-                disabled={selectedRowKeys.length === 0}
-                loading={batchDeleteLoading}
-                danger
-              >
-                刪除選中項目 ({selectedRowKeys.length})
-              </Button>
-            </Popconfirm>
-            <Popconfirm
-              title="清除所有資料"
-              description={`確定要清除所有 ${forms.length} 筆聯絡表單資料嗎？此操作無法復原。`}
-              onConfirm={handleClearAll}
-              okText="確定清除"
-              cancelText="取消"
-              okType="danger"
-            >
-              <Button
-                icon={<ClearOutlined />}
-                disabled={forms.length === 0}
-                danger
-              >
-                清除所有資料
-              </Button>
-            </Popconfirm>
-            <Button
-              icon={<ExportOutlined />}
-              onClick={handleExport}
-              disabled={forms.length === 0}
-            >
-              匯出 CSV
-            </Button>
-            <Button
-              icon={<ReloadOutlined />}
-              onClick={() => window.location.reload()}
-            >
-              重新整理
-            </Button>
-          </Space>
+          <ContactFormsToolbar
+            statusFilter={filters.status}
+            onStatusFilterChange={handleStatusFilterChange}
+            syncLoading={syncLoading}
+            onSync={handleSync}
+            autoSyncStatus={autoSyncStatus}
+            onOpenAutoSync={handleOpenAutoSync}
+            selectedRowCount={selectedRowKeys.length}
+            batchDeleteLoading={batchDeleteLoading}
+            onBatchDelete={handleBatchDelete}
+            formsCount={forms.length}
+            onClearAll={handleClearAll}
+            onExport={handleExport}
+            onReload={handleReload}
+          />
         }
       >
         <Table
