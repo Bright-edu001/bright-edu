@@ -130,6 +130,14 @@ VITE_USE_FIREBASE_EMULATOR=true
 | `npm run predeploy`           | 部署前建置                            |
 | `npm run deploy`              | 使用 gh-pages 部署靜態版              |
 
+## 手動 E2E 驗證
+
+目前尚未提供 `npm run e2e` script。若要手動執行現有 Playwright redirect 驗證，可直接使用：
+
+```bash
+npx playwright test e2e/url-redirect.spec.js
+```
+
 ## 環境變數
 
 | 變數                         | 說明                                 |
