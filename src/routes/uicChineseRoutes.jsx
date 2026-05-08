@@ -41,7 +41,7 @@ const MbaPrograms = lazy(() => import("../pages/Uic/Mba/MbaPrograms.jsx"));
 const MSFinance = lazy(() => import("../pages/Uic/Ms/MSFinance.jsx"));
 const MsMarketing = lazy(() => import("../pages/Uic/Ms/MsMarketing.jsx"));
 const MsManagement = lazy(() => import("../pages/Uic/Ms/MsManagement.jsx"));
-const MsAnalttics = lazy(() => import("../pages/Uic/Ms/MsAnalytics.jsx"));
+const MsAnalytics = lazy(() => import("../pages/Uic/Ms/MsAnalytics.jsx"));
 const MsApplication = lazy(() => import("../pages/Uic/Ms/MsApplication.jsx"));
 const MsInformation = lazy(() => import("../pages/Uic/Ms/MsInformation.jsx"));
 const MsAccounting = lazy(() => import("../pages/Uic/Ms/MsAccounting.jsx"));
@@ -165,7 +165,7 @@ const uicChineseRoutes = [
   },
   {
     path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Business-Analytics-MSBA",
-    element: <MsAnalttics />,
+    element: <MsAnalytics />,
   },
   {
     path: "伊利諾大學芝加哥分校/MS-Programs/申請資訊",
