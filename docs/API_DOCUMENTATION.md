@@ -217,7 +217,7 @@ const result = await batchAddUsers({
 // 請求標頭
 {
   'Content-Type': 'application/json',
-  'x-api-key': 'bright-edu-sync-2024-secure-key'
+  'x-api-key': 'your-sync-api-key'
 }
 ```
 
