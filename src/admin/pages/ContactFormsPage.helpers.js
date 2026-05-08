@@ -39,11 +39,11 @@ export const getStatusColor = (status) => {
 export const getStatusText = (status) => {
   switch (status) {
     case "pending":
-      return "敺???";
+      return "待處理";
     case "processing":
-      return "??銝?";
+      return "處理中";
     case "completed":
-      return "撌脣???";
+      return "已完成";
     default:
       return status;
   }
