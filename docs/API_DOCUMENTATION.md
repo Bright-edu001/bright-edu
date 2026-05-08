@@ -200,6 +200,8 @@ const result = await batchAddUsers({
 - `src/services/firestoreToSheetsSync.jsx`
 - `src/config/syncConfig.jsx`
 
+> Note: Based on repo callers, the active contact form sync path currently appears to be `src/admin/pages/ContactFormsPage.jsx` -> `src/services/firestoreToSheetsSync.jsx` -> the hard-coded Google Apps Script endpoint in `src/services/firestoreToSheetsSync.jsx`. `src/config/syncConfig.jsx` exposes a separate Cloud Run-based sync configuration (`VITE_SYNC_SERVICE_URL`, `VITE_DEV_SYNC_SERVICE_URL`, `VITE_SYNC_API_KEY`) and should not be assumed to be the active contact form sync path without implementation changes.
+
 **基礎 URL：** `https://bright-edu-sync-156805168089.asia-east1.run.app`
 
 #### API 端點
