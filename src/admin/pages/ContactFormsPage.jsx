@@ -2,19 +2,9 @@ import React, { useState, useEffect, useEffectEvent } from "react";
 import {
   Table,
   Card,
-  Button,
-  Modal,
   Form,
   message,
-  Switch,
-  InputNumber,
-  Badge,
-  Descriptions,
 } from "antd";
-import {
-  PlayCircleOutlined,
-  PauseCircleOutlined,
-} from "@ant-design/icons";
 import {
   collection,
   query,
@@ -39,6 +29,7 @@ import ContactFormsToolbar from "./ContactFormsToolbar";
 import { createContactFormsColumns } from "./ContactFormsTableColumns";
 import ContactFormDetailModal from "./ContactFormDetailModal";
 import ContactFormEditModal from "./ContactFormEditModal";
+import ContactFormAutoSyncModal from "./ContactFormAutoSyncModal";
 
 function ContactFormsPage() {
   const [forms, setForms] = useState([]);
@@ -503,135 +494,13 @@ function ContactFormsPage() {
         }}
       />
 
-      {/* 自動同步設定 Modal */}
-      <Modal
-        title="自動同步設定"
+      <ContactFormAutoSyncModal
         open={isAutoSyncModalVisible}
-        onOk={() => autoSyncForm.submit()}
+        form={autoSyncForm}
+        autoSyncStatus={autoSyncStatus}
+        onSubmit={handleSaveAutoSync}
         onCancel={handleCancelAutoSync}
-        okText="保存設定"
-        cancelText="取消"
-        width={500}
-      >
-        <Form
-          form={autoSyncForm}
-          layout="vertical"
-          onFinish={handleSaveAutoSync}
-          initialValues={{
-            enabled: false,
-            intervalHours: 3,
-          }}
-        >
-          <Form.Item
-            name="enabled"
-            valuePropName="checked"
-            label="啟用自動同步"
-          >
-            <Switch
-              checkedChildren={<PlayCircleOutlined />}
-              unCheckedChildren={<PauseCircleOutlined />}
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="intervalHours"
-            label="同步間隔（小時）"
-            rules={[
-              { required: true, message: "請設定同步間隔" },
-              {
-                type: "number",
-                min: 1,
-                max: 24,
-                message: "請輸入 1-24 小時之間的數值",
-              },
-            ]}
-          >
-            <InputNumber
-              min={1}
-              max={24}
-              step={1}
-              style={{ width: "100%" }}
-              placeholder="每幾小時執行一次同步"
-            />
-          </Form.Item>
-
-          {autoSyncStatus && (
-            <div
-              style={{
-                marginTop: 16,
-                padding: 12,
-                backgroundColor: "#f5f5f5",
-                borderRadius: 6,
-              }}
-            >
-              <Descriptions title="目前狀態" size="small" column={1}>
-                <Descriptions.Item label="狀態">
-                  <Badge
-                    status={autoSyncStatus.enabled ? "processing" : "default"}
-                    text={autoSyncStatus.enabled ? "運行中" : "已停止"}
-                  />
-                </Descriptions.Item>
-                {autoSyncStatus.enabled && (
-                  <>
-                    <Descriptions.Item label="同步間隔">
-                      每 {autoSyncStatus.intervalHours} 小時
-                    </Descriptions.Item>
-                    {autoSyncStatus.lastSyncTime && (
-                      <Descriptions.Item label="上次同步">
-                        {new Date(autoSyncStatus.lastSyncTime).toLocaleString()}
-                      </Descriptions.Item>
-                    )}
-                    {autoSyncStatus.nextSyncTime && (
-                      <Descriptions.Item label="下次同步">
-                        {new Date(autoSyncStatus.nextSyncTime).toLocaleString()}
-                      </Descriptions.Item>
-                    )}
-                    {autoSyncStatus.retryCount > 0 && (
-                      <Descriptions.Item label="重試次數">
-                        <Badge
-                          count={autoSyncStatus.retryCount}
-                          color="orange"
-                          style={{ backgroundColor: "#ff7875" }}
-                        />
-                        / {autoSyncStatus.maxRetries}
-                      </Descriptions.Item>
-                    )}
-                  </>
-                )}
-              </Descriptions>
-            </div>
-          )}
-
-          <div
-            style={{
-              marginTop: 16,
-              padding: 12,
-              backgroundColor: "#e6f7ff",
-              borderRadius: 6,
-            }}
-          >
-            <h4 style={{ margin: "0 0 8px 0", color: "#1890ff" }}>
-              💡 功能說明
-            </h4>
-            <ul
-              style={{
-                margin: 0,
-                paddingLeft: 20,
-                fontSize: "14px",
-                color: "#666",
-              }}
-            >
-              <li>
-                自動同步會在設定的時間間隔內將 Firestore 資料同步到 Google
-                Sheets
-              </li>
-              <li>如果連續失敗 3 次，自動同步會暫停，需要重新啟用</li>
-              <li>建議設定 3-24 小時的間隔，避免過於頻繁的同步</li>
-              <li>即使啟用自動同步，您仍可以隨時手動執行同步</li>
-            </ul>
-          </div>
-        </Form>
-      </Modal>
+      />
     </div>
   );
 }
