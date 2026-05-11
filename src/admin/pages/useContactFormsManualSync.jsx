@@ -71,6 +71,16 @@ function useContactFormsManualSync({
       // 執行從 Firestore 到 Google Sheets 的同步
       const result = await syncService.triggerManualSync();
 
+      if (result?.success === false && !result?.results) {
+        console.log("⚠️ 同步過程中發生錯誤");
+        notify.error({
+          content: result.message || "同步過程中發生錯誤",
+          key: "sync",
+          duration: 4,
+        });
+        return;
+      }
+
       // 處理同步結果
       if (result.results.total === 0) {
         console.log("📝 Firestore 中沒有資料需要同步");
