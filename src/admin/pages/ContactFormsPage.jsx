@@ -2,7 +2,6 @@ import React, { useState, useEffect, useEffectEvent } from "react";
 import {
   Table,
   Card,
-  Tag,
   Button,
   Modal,
   Form,
@@ -40,6 +39,7 @@ import {
 } from "./ContactFormsPage.helpers";
 import ContactFormsToolbar from "./ContactFormsToolbar";
 import { createContactFormsColumns } from "./ContactFormsTableColumns";
+import ContactFormDetailModal from "./ContactFormDetailModal";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -489,74 +489,13 @@ function ContactFormsPage() {
         />
       </Card>
 
-      {/* 查看詳細資料 Modal */}
-      <Modal
-        title="聯絡表單詳細資料"
+      <ContactFormDetailModal
         open={isViewModalVisible}
-        onCancel={() => setIsViewModalVisible(false)}
-        footer={[
-          <Button key="close" onClick={() => setIsViewModalVisible(false)}>
-            關閉
-          </Button>,
-        ]}
-        width={600}
-      >
-        {selectedForm && (
-          <div>
-            <p>
-              <strong>姓名：</strong> {selectedForm.name}
-            </p>
-            <p>
-              <strong>信箱：</strong> {selectedForm.email}
-            </p>
-            <p>
-              <strong>LINE ID：</strong> {selectedForm.lineId || "未提供"}
-            </p>
-            <p>
-              <strong>訊息內容：</strong>
-            </p>
-            <p
-              style={{
-                background: "#f5f5f5",
-                padding: "10px",
-                borderRadius: "4px",
-                whiteSpace: "pre-wrap",
-              }}
-            >
-              {selectedForm.message}
-            </p>
-            <p>
-              <strong>狀態：</strong>
-              <Tag color={getStatusColor(selectedForm.status)}>
-                {getStatusText(selectedForm.status)}
-              </Tag>
-            </p>
-            <p>
-              <strong>建立時間：</strong>
-              {dayjs(selectedForm.createdAt).format("YYYY-MM-DD HH:mm:ss")}
-            </p>
-            <p>
-              <strong>來源：</strong> {selectedForm.source || "未知"}
-            </p>
-            {selectedForm.metadata && (
-              <div>
-                <p>
-                  <strong>來源網址：</strong> {selectedForm.metadata.url}
-                </p>
-                <p>
-                  <strong>推薦頁面：</strong>{" "}
-                  {selectedForm.metadata.referrer || "直接訪問"}
-                </p>
-              </div>
-            )}
-            {selectedForm.notes && (
-              <p>
-                <strong>備註：</strong> {selectedForm.notes}
-              </p>
-            )}
-          </div>
-        )}
-      </Modal>
+        contactForm={selectedForm}
+        onClose={() => setIsViewModalVisible(false)}
+        getStatusColor={getStatusColor}
+        getStatusText={getStatusText}
+      />
 
       {/* 編輯狀態 Modal */}
       <Modal
