@@ -2,28 +2,9 @@ import React, { useState, useEffect, useEffectEvent } from "react";
 import {
   Table,
   Card,
-  Tag,
-  Button,
-  Space,
-  Modal,
   Form,
-  Select,
   message,
-  Input,
-  Tooltip,
-  Popconfirm,
-  Switch,
-  InputNumber,
-  Badge,
-  Descriptions,
 } from "antd";
-import {
-  EyeOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  PlayCircleOutlined,
-  PauseCircleOutlined,
-} from "@ant-design/icons";
 import {
   collection,
   query,
@@ -45,9 +26,10 @@ import {
   getStatusText,
 } from "./ContactFormsPage.helpers";
 import ContactFormsToolbar from "./ContactFormsToolbar";
-
-const { Option } = Select;
-const { TextArea } = Input;
+import { createContactFormsColumns } from "./ContactFormsTableColumns";
+import ContactFormDetailModal from "./ContactFormDetailModal";
+import ContactFormEditModal from "./ContactFormEditModal";
+import ContactFormAutoSyncModal from "./ContactFormAutoSyncModal";
 
 function ContactFormsPage() {
   const [forms, setForms] = useState([]);
@@ -440,109 +422,13 @@ function ContactFormsPage() {
     window.location.reload();
   };
 
-  const columns = [
-    {
-      title: "姓名",
-      dataIndex: "name",
-      key: "name",
-      width: 100,
-      sorter: (a, b) => a.name.localeCompare(b.name, "zh-TW"),
-      showSorterTooltip: false,
-    },
-    {
-      title: "信箱",
-      dataIndex: "email",
-      key: "email",
-      width: 200,
-      sorter: (a, b) => a.email.localeCompare(b.email),
-      showSorterTooltip: false,
-    },
-    {
-      title: "LINE ID",
-      dataIndex: "lineId",
-      key: "lineId",
-      width: 120,
-      sorter: (a, b) => {
-        const aValue = a.lineId || "";
-        const bValue = b.lineId || "";
-        return aValue.localeCompare(bValue);
-      },
-      showSorterTooltip: false,
-      render: (text) => text || "-",
-    },
-    {
-      title: "訊息",
-      dataIndex: "message",
-      key: "message",
-      ellipsis: {
-        showTitle: false,
-      },
-      sorter: (a, b) => a.message.localeCompare(b.message, "zh-TW"),
-      showSorterTooltip: false,
-      render: (text) => (
-        <Tooltip placement="topLeft" title={text}>
-          {text}
-        </Tooltip>
-      ),
-    },
-    {
-      title: "狀態",
-      dataIndex: "status",
-      key: "status",
-      width: 100,
-      sorter: (a, b) => {
-        const statusOrder = { pending: 1, processing: 2, completed: 3 };
-        return statusOrder[a.status] - statusOrder[b.status];
-      },
-      showSorterTooltip: false,
-      render: (status) => (
-        <Tag color={getStatusColor(status)}>{getStatusText(status)}</Tag>
-      ),
-    },
-    {
-      title: "建立時間",
-      dataIndex: "createdAt",
-      key: "createdAt",
-      width: 150,
-      sorter: (a, b) => {
-        const aTime = dayjs(a.createdAt);
-        const bTime = dayjs(b.createdAt);
-        return aTime.isBefore(bTime) ? -1 : aTime.isAfter(bTime) ? 1 : 0;
-      },
-      defaultSortOrder: "descend", // 預設按建立時間降序排列（最新的在前）
-      showSorterTooltip: false,
-      render: (date) => dayjs(date).format("MM/DD HH:mm"),
-    },
-    {
-      title: "操作",
-      key: "actions",
-      width: 150,
-      render: (_, record) => (
-        <Space size="small">
-          <Button
-            type="text"
-            icon={<EyeOutlined />}
-            onClick={() => handleView(record)}
-            size="small"
-          />
-          <Button
-            type="text"
-            icon={<EditOutlined />}
-            onClick={() => handleEdit(record)}
-            size="small"
-          />
-          <Popconfirm
-            title="確定要刪除這筆資料嗎？"
-            onConfirm={() => handleDelete(record.id)}
-            okText="確定"
-            cancelText="取消"
-          >
-            <Button type="text" danger icon={<DeleteOutlined />} size="small" />
-          </Popconfirm>
-        </Space>
-      ),
-    },
-  ];
+  const columns = createContactFormsColumns({
+    onView: handleView,
+    onEdit: handleEdit,
+    onDelete: handleDelete,
+    getStatusColor,
+    getStatusText,
+  });
 
   return (
     <div className="contact-forms-page">
@@ -590,234 +476,31 @@ function ContactFormsPage() {
         />
       </Card>
 
-      {/* 查看詳細資料 Modal */}
-      <Modal
-        title="聯絡表單詳細資料"
+      <ContactFormDetailModal
         open={isViewModalVisible}
-        onCancel={() => setIsViewModalVisible(false)}
-        footer={[
-          <Button key="close" onClick={() => setIsViewModalVisible(false)}>
-            關閉
-          </Button>,
-        ]}
-        width={600}
-      >
-        {selectedForm && (
-          <div>
-            <p>
-              <strong>姓名：</strong> {selectedForm.name}
-            </p>
-            <p>
-              <strong>信箱：</strong> {selectedForm.email}
-            </p>
-            <p>
-              <strong>LINE ID：</strong> {selectedForm.lineId || "未提供"}
-            </p>
-            <p>
-              <strong>訊息內容：</strong>
-            </p>
-            <p
-              style={{
-                background: "#f5f5f5",
-                padding: "10px",
-                borderRadius: "4px",
-                whiteSpace: "pre-wrap",
-              }}
-            >
-              {selectedForm.message}
-            </p>
-            <p>
-              <strong>狀態：</strong>
-              <Tag color={getStatusColor(selectedForm.status)}>
-                {getStatusText(selectedForm.status)}
-              </Tag>
-            </p>
-            <p>
-              <strong>建立時間：</strong>
-              {dayjs(selectedForm.createdAt).format("YYYY-MM-DD HH:mm:ss")}
-            </p>
-            <p>
-              <strong>來源：</strong> {selectedForm.source || "未知"}
-            </p>
-            {selectedForm.metadata && (
-              <div>
-                <p>
-                  <strong>來源網址：</strong> {selectedForm.metadata.url}
-                </p>
-                <p>
-                  <strong>推薦頁面：</strong>{" "}
-                  {selectedForm.metadata.referrer || "直接訪問"}
-                </p>
-              </div>
-            )}
-            {selectedForm.notes && (
-              <p>
-                <strong>備註：</strong> {selectedForm.notes}
-              </p>
-            )}
-          </div>
-        )}
-      </Modal>
+        contactForm={selectedForm}
+        onClose={() => setIsViewModalVisible(false)}
+        getStatusColor={getStatusColor}
+        getStatusText={getStatusText}
+      />
 
-      {/* 編輯狀態 Modal */}
-      <Modal
-        title="更新處理狀態"
+      <ContactFormEditModal
         open={isEditModalVisible}
-        onOk={() => form.submit()}
+        form={form}
+        onSubmit={handleUpdateStatus}
         onCancel={() => {
           setIsEditModalVisible(false);
           form.resetFields();
         }}
-        okText="更新"
-        cancelText="取消"
-      >
-        <Form form={form} layout="vertical" onFinish={handleUpdateStatus}>
-          <Form.Item
-            name="status"
-            label="處理狀態"
-            rules={[{ required: true, message: "請選擇狀態" }]}
-          >
-            <Select>
-              <Option value="pending">待處理</Option>
-              <Option value="processing">處理中</Option>
-              <Option value="completed">已完成</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item name="notes" label="備註">
-            <TextArea rows={4} placeholder="可以記錄處理過程或其他備註..." />
-          </Form.Item>
-        </Form>
-      </Modal>
+      />
 
-      {/* 自動同步設定 Modal */}
-      <Modal
-        title="自動同步設定"
+      <ContactFormAutoSyncModal
         open={isAutoSyncModalVisible}
-        onOk={() => autoSyncForm.submit()}
+        form={autoSyncForm}
+        autoSyncStatus={autoSyncStatus}
+        onSubmit={handleSaveAutoSync}
         onCancel={handleCancelAutoSync}
-        okText="保存設定"
-        cancelText="取消"
-        width={500}
-      >
-        <Form
-          form={autoSyncForm}
-          layout="vertical"
-          onFinish={handleSaveAutoSync}
-          initialValues={{
-            enabled: false,
-            intervalHours: 3,
-          }}
-        >
-          <Form.Item
-            name="enabled"
-            valuePropName="checked"
-            label="啟用自動同步"
-          >
-            <Switch
-              checkedChildren={<PlayCircleOutlined />}
-              unCheckedChildren={<PauseCircleOutlined />}
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="intervalHours"
-            label="同步間隔（小時）"
-            rules={[
-              { required: true, message: "請設定同步間隔" },
-              {
-                type: "number",
-                min: 1,
-                max: 24,
-                message: "請輸入 1-24 小時之間的數值",
-              },
-            ]}
-          >
-            <InputNumber
-              min={1}
-              max={24}
-              step={1}
-              style={{ width: "100%" }}
-              placeholder="每幾小時執行一次同步"
-            />
-          </Form.Item>
-
-          {autoSyncStatus && (
-            <div
-              style={{
-                marginTop: 16,
-                padding: 12,
-                backgroundColor: "#f5f5f5",
-                borderRadius: 6,
-              }}
-            >
-              <Descriptions title="目前狀態" size="small" column={1}>
-                <Descriptions.Item label="狀態">
-                  <Badge
-                    status={autoSyncStatus.enabled ? "processing" : "default"}
-                    text={autoSyncStatus.enabled ? "運行中" : "已停止"}
-                  />
-                </Descriptions.Item>
-                {autoSyncStatus.enabled && (
-                  <>
-                    <Descriptions.Item label="同步間隔">
-                      每 {autoSyncStatus.intervalHours} 小時
-                    </Descriptions.Item>
-                    {autoSyncStatus.lastSyncTime && (
-                      <Descriptions.Item label="上次同步">
-                        {new Date(autoSyncStatus.lastSyncTime).toLocaleString()}
-                      </Descriptions.Item>
-                    )}
-                    {autoSyncStatus.nextSyncTime && (
-                      <Descriptions.Item label="下次同步">
-                        {new Date(autoSyncStatus.nextSyncTime).toLocaleString()}
-                      </Descriptions.Item>
-                    )}
-                    {autoSyncStatus.retryCount > 0 && (
-                      <Descriptions.Item label="重試次數">
-                        <Badge
-                          count={autoSyncStatus.retryCount}
-                          color="orange"
-                          style={{ backgroundColor: "#ff7875" }}
-                        />
-                        / {autoSyncStatus.maxRetries}
-                      </Descriptions.Item>
-                    )}
-                  </>
-                )}
-              </Descriptions>
-            </div>
-          )}
-
-          <div
-            style={{
-              marginTop: 16,
-              padding: 12,
-              backgroundColor: "#e6f7ff",
-              borderRadius: 6,
-            }}
-          >
-            <h4 style={{ margin: "0 0 8px 0", color: "#1890ff" }}>
-              💡 功能說明
-            </h4>
-            <ul
-              style={{
-                margin: 0,
-                paddingLeft: 20,
-                fontSize: "14px",
-                color: "#666",
-              }}
-            >
-              <li>
-                自動同步會在設定的時間間隔內將 Firestore 資料同步到 Google
-                Sheets
-              </li>
-              <li>如果連續失敗 3 次，自動同步會暫停，需要重新啟用</li>
-              <li>建議設定 3-24 小時的間隔，避免過於頻繁的同步</li>
-              <li>即使啟用自動同步，您仍可以隨時手動執行同步</li>
-            </ul>
-          </div>
-        </Form>
-      </Modal>
+      />
     </div>
   );
 }
