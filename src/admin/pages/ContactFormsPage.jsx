@@ -1,10 +1,5 @@
 import React, { useState, useEffect, useEffectEvent } from "react";
-import {
-  Table,
-  Card,
-  Form,
-  message,
-} from "antd";
+import { Table, Card, Form, message } from "antd";
 import {
   collection,
   query,
@@ -122,7 +117,6 @@ function ContactFormsPage() {
       clearInterval(statusInterval);
     };
   }, []);
-
 
   // 查看詳細資料
   const handleView = (record) => {

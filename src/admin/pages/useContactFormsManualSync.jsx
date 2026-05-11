@@ -80,7 +80,9 @@ function useContactFormsManualSync({
           duration: 4,
         });
       } else if (result.results.success > 0) {
-        console.log(`📤 成功同步 ${result.results.success} 筆資料到 Google Sheets`);
+        console.log(
+          `📤 成功同步 ${result.results.success} 筆資料到 Google Sheets`,
+        );
 
         if (result.results.failed > 0) {
           notify.warning({
