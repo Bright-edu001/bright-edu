@@ -51,7 +51,9 @@ vi.mock("antd", () => {
 
   return {
     Breadcrumb: () => <nav />,
-    Button: ({ children, onClick }) => <button onClick={onClick}>{children}</button>,
+    Button: ({ children, onClick }) => (
+      <button onClick={onClick}>{children}</button>
+    ),
     Layout,
     Menu: () => <nav />,
     theme: {
