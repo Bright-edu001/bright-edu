@@ -66,13 +66,14 @@ vi.mock("antd", () => {
 });
 
 describe("AdminLayout", () => {
-  it("renders a branded footer without placeholder author text", () => {
+  it("renders a branded footer without placeholder author text", async () => {
     render(
       <MemoryRouter>
         <AdminLayout />
       </MemoryRouter>
     );
 
+    await screen.findByText("Dashboard");
     expect(screen.getByText(/Bright Edu Admin/i)).toBeInTheDocument();
     expect(screen.queryByText(/Created by YourName/i)).not.toBeInTheDocument();
   });

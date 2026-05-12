@@ -82,7 +82,7 @@ describe("Blog route provider boundaries", () => {
     expect(blogSearchRoute.element.type).toBe(BlogSearchRouteElement);
   });
 
-  it("does not mount BlogProvider/SearchProvider at App root", () => {
+  it("does not mount BlogProvider/SearchProvider at App root", async () => {
     const router = createMemoryRouter(
       [
         {
@@ -98,6 +98,8 @@ describe("Blog route provider boundaries", () => {
 
     render(<RouterProvider router={router} />);
 
+    await screen.findByTestId("footer");
+    await screen.findByTestId("floating-buttons");
     expect(screen.getByTestId("route-content")).toBeInTheDocument();
     expect(screen.queryByTestId("search-provider")).not.toBeInTheDocument();
     expect(screen.queryByTestId("blog-provider")).not.toBeInTheDocument();
