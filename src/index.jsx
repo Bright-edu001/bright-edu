@@ -130,7 +130,13 @@ logger.info("[Bootstrap] 立即開始渲染，Firebase 在背景初始化");
 root.render(
   <FirebaseInitProvider>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      />
     </QueryClientProvider>
   </FirebaseInitProvider>,
 );
