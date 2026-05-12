@@ -41,6 +41,8 @@ const router = createBrowserRouter(
     future: {
       // 啟用 v7_startTransition，讓導航具有非同步特性，提升使用者體驗
       v7_startTransition: true,
+      // 啟用 v7_relativeSplatPath，修正 splat 路由的相對路徑解析
+      v7_relativeSplatPath: true,
     },
   }
 );

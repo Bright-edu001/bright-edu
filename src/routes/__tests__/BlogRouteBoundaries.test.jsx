@@ -93,10 +93,24 @@ describe("Blog route provider boundaries", () => {
           ],
         },
       ],
-      { initialEntries: ["/"] },
+      {
+        initialEntries: ["/"],
+        future: {
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        },
+      },
     );
 
-    render(<RouterProvider router={router} />);
+    render(
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      />,
+    );
 
     await screen.findByTestId("footer");
     await screen.findByTestId("floating-buttons");

@@ -68,9 +68,14 @@ vi.mock("antd", () => {
 describe("AdminLayout", () => {
   it("renders a branded footer without placeholder author text", async () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <AdminLayout />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     await screen.findByText("Dashboard");
