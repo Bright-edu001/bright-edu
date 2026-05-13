@@ -1,6 +1,4 @@
 import React from "react";
-import { Table } from "antd";
-import "antd/dist/reset.css";
 import "./CoreCourses.scss";
 import MbaAreasHero from "../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
@@ -43,22 +41,6 @@ const coreCoursesData = [
   },
 ];
 
-const columns = [
-  {
-    title: <span className="core-table-title">課程名稱</span>,
-    dataIndex: "title",
-    key: "title",
-    render: (text) => <span className="core-table-title-value">{text}</span>,
-    width: 260,
-  },
-  {
-    title: <span className="core-table-desc">課程說明</span>,
-    dataIndex: "desc",
-    key: "desc",
-    render: (text) => <span className="core-table-desc-value">{text}</span>,
-  },
-];
-
 function CoreCourses() {
   return (
     <div className="mba-courses-page">
@@ -68,13 +50,22 @@ function CoreCourses() {
         <p className="intro">
           核心課程中包括七門必修課程，課程內容涵蓋商業學科的基本知識。以下是各課程的簡要說明:
         </p>
-        <Table
-          columns={columns}
-          dataSource={coreCoursesData}
-          pagination={false}
-          bordered
-          style={{ background: "transparent" }}
-        />
+        <table className="core-table" style={{ background: "transparent" }}>
+          <thead>
+            <tr>
+              <th><span className="core-table-title">課程名稱</span></th>
+              <th><span className="core-table-desc">課程說明</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {coreCoursesData.map((row) => (
+              <tr key={row.key}>
+                <td><span className="core-table-title-value">{row.title}</span></td>
+                <td><span className="core-table-desc-value">{row.desc}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </SectionContainer>
       <SectionContainer className="courses-class">
         <div className="course">
