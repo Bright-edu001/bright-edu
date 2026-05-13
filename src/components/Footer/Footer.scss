@@ -1,15 +1,14 @@
 @use "../../styles/index" as *;
 
 .footer-wrapper {
-  // 頁腳容器
+  // ?�腳容器
   background: $color-gray-lighter;
   padding: $spacing-sm 0;
   transform: translateZ(0);
-  min-height: 400px; // 增加最小高
+  min-height: 400px; // 增�??�小�?
 }
 
-.footer-wrapper,
-.ant-layout-footer {
+.footer-wrapper {
   .container {
     width: 100%;
     padding: 0;
@@ -34,8 +33,7 @@
 
 
 @media screen and (min-width: 1025px) {
-  .footer-wrapper,
-  .ant-layout-footer.footer-wrapper {
+  .footer-wrapper {
     background: #f6f6f9;
     min-height: 217px;
     padding: 72px 0;
@@ -48,8 +46,7 @@
     }
   }
 
-  .footer-content,
-  .ant-layout-footer.footer-wrapper .ant-row.footer-content {
+  .footer-content {
     display: flex !important;
     flex-wrap: wrap;
     justify-content: center !important;
@@ -61,16 +58,14 @@
     text-align: left;
   }
 
-  .footer-section,
-  .ant-layout-footer.footer-wrapper .ant-row.footer-content .ant-col {
+  .footer-section {
     width: 135.619px;
     min-height: 0;
     margin: 0;
     flex: 0 0 auto;
   }
 
-  .footer-section.brand,
-  .ant-layout-footer.footer-wrapper .ant-row.footer-content .brand {
+  .footer-section.brand {
     width: 97.522px;
     min-height: 116px;
     align-items: flex-start;
@@ -96,9 +91,7 @@
   }
 
   .footer-section.footer-links-uic,
-  .footer-section.footer-links-msu,
-  .ant-layout-footer.footer-wrapper .ant-row.footer-content .footer-links-uic,
-  .ant-layout-footer.footer-wrapper .ant-row.footer-content .footer-links-msu {
+  .footer-section.footer-links-msu {
     width: 135.619px;
 
     .section-title {
@@ -139,8 +132,7 @@
     }
   }
 
-  .footer-section.articles,
-  .ant-layout-footer.footer-wrapper .ant-row.footer-content .articles {
+  .footer-section.articles {
     display: block;
     width: 135.619px;
     min-height: 0;
@@ -155,8 +147,7 @@
     }
   }
 
-  .footer-section.about,
-  .ant-layout-footer.footer-wrapper .ant-row.footer-content .about {
+  .footer-section.about {
     width: 135.619px;
     min-height: 0;
     align-items: flex-start;
@@ -228,8 +219,7 @@
     }
   }
 
-  .footer-bottom,
-  .ant-layout-footer.footer-wrapper .container > .footer-bottom {
+  .footer-bottom {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -252,8 +242,8 @@
 }
 
 .footer-content {
-  // 頁腳內容區塊 (Flex/Grid 佈局)
-  display: flex !important; // 覆寫 Ant Design Row 預設樣式
+  // ?�腳?�容?��?(Flex/Grid 佈�?)
+  display: flex !important; // 覆寫 Ant Design Row ?�設�??
   justify-content: center !important;
   align-items: flex-start !important;
   margin: 2rem 0 1rem;
@@ -263,16 +253,69 @@
   @media (max-width: 850px) {
     flex-direction: column !important;
     align-items: center !important;
+
+    .footer-section {
+      flex: none;
+      width: 100%;
+      text-align: center;
+    }
+
+    .footer-section.footer-links-uic,
+    .footer-section.footer-links-msu,
+    .footer-section.articles {
+      display: none;
+      height: 0;
+      min-height: 0;
+      padding: 0;
+      margin: 0;
+      border: none;
+      overflow: hidden;
+      visibility: hidden;
+    }
+
+    .footer-section.about {
+      order: 1;
+      align-items: center;
+      padding-bottom: 0;
+
+      .contact {
+        margin-bottom: 0.2rem;
+        text-align: center;
+
+        .contact-title,
+        .contact-address,
+        .contact-phone {
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: none;
+          justify-content: center;
+        }
+      }
+
+      .social-icons {
+        margin-top: 0.1rem;
+        align-self: center;
+        justify-content: center;
+        width: 100%;
+      }
+    }
+
+    .footer-section.brand {
+      order: 2;
+      margin: 0;
+      justify-content: center;
+    }
   }
 }
 
 .footer-section {
-  // 頁腳個別區塊
+  // ?�腳?�別?��?
   min-height: 120px;
   width: 180px;
   margin: 0 1rem;
 
-  // 品牌區塊
+  // ?��??��?
   &.brand {
     display: flex;
     justify-content: flex-start;
@@ -295,7 +338,7 @@
     }
   }
 
-  // 連結列表區塊 (UIC & MSU)
+  // ????�表?��?(UIC & MSU)
   &.footer-links-uic,
   &.footer-links-msu {
     display: flex;
@@ -350,7 +393,7 @@
     }
   }
 
-  // 關於與聯絡資訊區塊
+  // ?�於?�聯絡�?訊�?�?
   &.about {
     display: flex;
     flex-direction: column;
@@ -385,7 +428,7 @@
       }
     }
 
-    // 社群圖示
+    // 社群?�示
     .social-icons {
       display: flex;
       gap: 15px;
@@ -416,7 +459,7 @@
     }
   }
 
-  // 活動與文章區塊 (簡單連結)
+  // 活�??��?章�?�?(簡單???)
   &.articles {
     a {
       color: $color-nav;
@@ -428,7 +471,7 @@
 }
 
 .footer-bottom {
-  // 版權資訊
+  // ?��?資�?
   text-align: center;
   margin-top: $spacing-xl;
   padding-top: $spacing-md;
@@ -438,133 +481,5 @@
 
   p {
     margin: 0;
-  }
-}
-
-/* Footer critical layout - Migrated from index.html */
-.ant-layout-footer {
-  background: $color-gray-lighter;
-  padding: 1rem 0;
-  transform: translateZ(0);
-
-  .ant-row {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    margin: 2rem 0 1rem;
-    text-align: left;
-    min-height: 140px;
-
-    @media (max-width: 850px) {
-      flex-direction: column;
-      align-items: center;
-      min-height: 290px;
-    }
-
-    .ant-col {
-      min-height: 120px;
-    }
-
-    .footer-links-uic,
-    .footer-links-msu {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      width: 150px;
-    }
-
-    .articles {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      margin-right: 0;
-      width: 150px;
-      min-height: 24px;
-    }
-
-    .about {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .brand {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      .footer-brand img {
-        width: 120px;
-        height: 120px;
-        max-width: 120px;
-        min-width: 120px;
-        min-height: 120px;
-        object-fit: contain;
-      }
-    }
-  }
-
-  .container > div:last-child {
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @media (max-width: 850px) {
-    .ant-row {
-      .ant-col {
-        flex: none;
-        width: 100%;
-        text-align: center;
-      }
-
-      .footer-links-uic,
-      .footer-links-msu,
-      .articles {
-        display: none;
-        height: 0;
-        min-height: 0;
-        padding: 0;
-        margin: 0;
-        border: none;
-        overflow: hidden;
-        visibility: hidden;
-      }
-
-      .about {
-        order: 1;
-        align-items: center;
-        padding-bottom: 0;
-
-        .contact {
-          margin-bottom: 0.2rem;
-          text-align: center;
-
-          .contact-title,
-          .contact-address,
-          .contact-phone {
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: none;
-            justify-content: center;
-          }
-        }
-
-        .social-icons {
-          margin-top: 0.1rem;
-          align-self: center;
-          justify-content: center;
-          width: 100%;
-        }
-      }
-
-      .brand {
-        order: 2;
-        margin: 0;
-        justify-content: center;
-      }
-    }
   }
 }
