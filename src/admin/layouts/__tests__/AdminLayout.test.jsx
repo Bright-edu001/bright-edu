@@ -104,7 +104,7 @@ describe("AdminLayout", () => {
       </MemoryRouter>,
     );
 
-    await screen.findByText("Dashboard");
+    // Sidebar links are rendered synchronously and always use absolute paths
     expect(screen.getByRole("link", { name: "儀表板" })).toHaveAttribute(
       "href",
       "/admin",
