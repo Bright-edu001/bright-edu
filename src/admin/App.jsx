@@ -1,25 +1,41 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import AdminLayout from "./layouts/AdminLayout";
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "../context/AuthContext";
 import "./App.css";
 
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const AdminLayout = lazy(() => import("./layouts/AdminLayout"));
+
+const adminLoadingFallback = (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "100vh",
+    }}
+  >
+    <span>載入中...</span>
+  </div>
+);
+
 function App() {
   return (
     <AuthProvider>
-      <Routes>
-        <Route path="login" element={<LoginPage />} />
-        <Route
-          path="*"
-          element={
-            <PrivateRoute>
-              <AdminLayout />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
+      <Suspense fallback={adminLoadingFallback}>
+        <Routes>
+          <Route path="login" element={<LoginPage />} />
+          <Route
+            path="*"
+            element={
+              <PrivateRoute>
+                <AdminLayout />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Suspense>
     </AuthProvider>
   );
 }

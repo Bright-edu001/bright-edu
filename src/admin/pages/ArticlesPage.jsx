@@ -25,14 +25,6 @@ import {
   deleteArticle,
   updateArticlesOrder,
 } from "../data/blogApi";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-} from "firebase/storage";
-import { app } from "../../config/firebaseCore";
 import logger from "../../utils/logger";
 const NewsEditor = lazy(() => import("../components/NewsEditor"));
 const EnrollmentEditor = lazy(() => import("../components/EnrollmentEditor"));
@@ -43,9 +35,6 @@ const NewsContentViewer = lazy(() => import("../components/NewsContentViewer"));
 
 // 解構 Ant Design 組件
 const { Title } = Typography;
-
-// 初始化 Firebase Storage
-const storage = getStorage(app);
 
 // 文章管理頁面組件
 const ArticlesPage = () => {
@@ -382,48 +371,6 @@ const ArticlesPage = () => {
   const handleViewCancel = () => {
     setIsViewModalVisible(false);
     setViewingArticle(null);
-  };
-
-  // 處理檔案上傳
-  const handleFileUpload = async (file, field) => {
-    const oldUrl = form.getFieldValue(field);
-    // 建立 Storage 參考
-    const storageRef = ref(storage, `blog/${Date.now()}_${file.name}`);
-
-    // 設定 Cache-Control 標頭，讓圖片可以被瀏覽器快取一年
-    const metadata = {
-      cacheControl: "public, max-age=31536000",
-    };
-
-    // 上傳檔案並附帶 metadata
-    await uploadBytes(storageRef, file, metadata);
-    // 取得下載 URL
-    const url = await getDownloadURL(storageRef);
-    // 更新表單值
-    form.setFieldsValue({ [field]: url });
-    message.success(`${field === "thumbnail" ? "縮圖" : "大圖"}上傳成功`);
-
-    // 刪除舊檔案
-    if (oldUrl) {
-      try {
-        const matches = oldUrl.match(/\/o\/([^?]+)\?/);
-        let filePath = null;
-        if (matches && matches[1]) {
-          filePath = decodeURIComponent(matches[1]);
-        } else {
-          const urlObj = new URL(oldUrl);
-          const pathname = urlObj.pathname;
-          const parts = pathname.split("/o/");
-          if (parts.length === 2) filePath = decodeURIComponent(parts[1]);
-        }
-        if (filePath) {
-          const oldRef = ref(storage, filePath);
-          await deleteObject(oldRef);
-        }
-      } catch (err) {
-        logger.warn("刪除舊檔案失敗", err);
-      }
-    }
   };
 
   return (

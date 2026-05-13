@@ -44,7 +44,7 @@ const router = createBrowserRouter(
       // 啟用 v7_relativeSplatPath，修正 splat 路由的相對路徑解析
       v7_relativeSplatPath: true,
     },
-  }
+  },
 );
 
 export default router;

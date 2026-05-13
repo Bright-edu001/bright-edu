@@ -51,9 +51,17 @@ vi.mock("antd", () => {
 
   return {
     Breadcrumb: () => <nav />,
-    Button: ({ children, onClick }) => <button onClick={onClick}>{children}</button>,
+    Button: ({ children, onClick }) => (
+      <button onClick={onClick}>{children}</button>
+    ),
     Layout,
-    Menu: () => <nav />,
+    Menu: ({ items = [] }) => (
+      <nav>
+        {items.map((item) => (
+          <div key={item.key}>{item.label}</div>
+        ))}
+      </nav>
+    ),
     theme: {
       useToken: () => ({
         token: {
@@ -81,5 +89,37 @@ describe("AdminLayout", () => {
     await screen.findByText("Dashboard");
     expect(screen.getByText(/Bright Edu Admin/i)).toBeInTheDocument();
     expect(screen.queryByText(/Created by YourName/i)).not.toBeInTheDocument();
+  });
+
+  it("uses stable absolute admin sidebar links", async () => {
+    render(
+      <MemoryRouter
+        initialEntries={["/admin/articles"]}
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
+        <AdminLayout />
+      </MemoryRouter>,
+    );
+
+    // Sidebar links are rendered synchronously and always use absolute paths
+    expect(screen.getByRole("link", { name: "儀表板" })).toHaveAttribute(
+      "href",
+      "/admin",
+    );
+    expect(screen.getByRole("link", { name: "文章管理" })).toHaveAttribute(
+      "href",
+      "/admin/articles",
+    );
+    expect(screen.getByRole("link", { name: "聯絡表單" })).toHaveAttribute(
+      "href",
+      "/admin/contact-forms",
+    );
+    expect(screen.getByRole("link", { name: "用戶管理" })).toHaveAttribute(
+      "href",
+      "/admin/users",
+    );
   });
 });
