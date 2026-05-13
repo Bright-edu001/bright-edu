@@ -8,6 +8,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { app } from "../config/firebaseCore";
+import { isLocalDevelopment } from "../config/envUtils";
 import { message } from "antd";
 import {
   getUserRole,
@@ -36,9 +37,8 @@ const AuthContextLogicWrapper = ({ children }) => {
   const auth = getAuth(app);
 
   // 檢查環境
-  const isProduction =
-    process.env.NODE_ENV === "production" ||
-    window.location.hostname !== "localhost";
+  const isLocalDev = isLocalDevelopment();
+  const isProduction = process.env.NODE_ENV === "production" || !isLocalDev;
 
   // 使用 Firebase Auth 原生 listener 監聽用戶狀態
   const [firebaseUser, setFirebaseUser] = useState(null);
@@ -108,6 +108,9 @@ const AuthContextLogicWrapper = ({ children }) => {
         message.success("登入成功！");
         return user;
       } else {
+        if (!isLocalDev) {
+          throw new Error("Development fallback login is only available on local hosts.");
+        }
         // 開發環境：使用原來的帳號密碼驗證
         const EXPECTED_USERNAME = "admin";
         const EXPECTED_PASSWORD = "0000";

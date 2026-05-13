@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { Spin } from "antd";
 import { useAuth } from "../../context/AuthContext";
+import { isLocalDevelopment } from "../../config/envUtils";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading, user } = useAuth();
@@ -28,8 +29,7 @@ const ProtectedRoute = ({ children }) => {
 
   // 生產環境時，檢查是否為允許的email域名
   const isProduction =
-    process.env.NODE_ENV === "production" ||
-    window.location.hostname !== "localhost";
+    process.env.NODE_ENV === "production" || !isLocalDevelopment();
 
   if (isProduction && user && !user.email?.endsWith("@bright-edu.com")) {
     // 如果不是允許的email域名，登出並跳轉到登入頁面
