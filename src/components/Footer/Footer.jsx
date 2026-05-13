@@ -1,17 +1,13 @@
 import React from "react";
-import { Layout, Row, Col } from "antd";
 import getImageUrl from "../../utils/getImageUrl";
 import "./Footer.scss";
 
-const { Footer: AntFooter } = Layout;
-
 function Footer() {
   return (
-    <>
-      <AntFooter className="footer-wrapper" role="contentinfo">
-        <div className="container">
-          <Row className="footer-content">
-            <Col className="footer-section brand">
+    <footer className="footer-wrapper" role="contentinfo">
+      <div className="container">
+        <div className="footer-content">
+          <div className="footer-section brand">
               <div className="footer-brand">
                 <a
                   href="https://www.icef.com/agency/001bG00000EAMX3QAP"
@@ -28,9 +24,9 @@ function Footer() {
                   />
                 </a>
               </div>
-            </Col>
+          </div>
 
-            <Col className="footer-section footer-links-uic">
+            <div className="footer-section footer-links-uic">
               <p className="section-title">UIC商學院碩士</p>
               <ul>
                 <li>
@@ -58,8 +54,8 @@ function Footer() {
                   </a>
                 </li>
               </ul>
-            </Col>
-            <Col className="footer-section footer-links-msu">
+            </div>
+            <div className="footer-section footer-links-msu">
               <p className="section-title">MSU金融碩士</p>
               <ul>
                 <li>
@@ -87,14 +83,14 @@ function Footer() {
                   </a>
                 </li>
               </ul>
-            </Col>
+            </div>
 
-            <Col className="footer-section articles">
+            <div className="footer-section articles">
               <a href="/blog" title="瀏覽所有活動與文章">
                 活動與文章
               </a>
-            </Col>
-            <Col className="footer-section about">
+            </div>
+            <div className="footer-section about">
               <div
                 className="contact"
                 itemScope
@@ -153,8 +149,8 @@ function Footer() {
                   />
                 </a>
               </div>
-            </Col>
-          </Row>
+            </div>
+          </div>
           <div className="footer-bottom">
             <p>
               &copy; BRIGHT EDUCATION CORPORATION © {new Date().getFullYear()}{" "}
@@ -162,8 +158,7 @@ function Footer() {
             </p>
           </div>
         </div>
-      </AntFooter>
-    </>
+    </footer>
   );
 }
 
