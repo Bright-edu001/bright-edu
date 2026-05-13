@@ -43,28 +43,28 @@ const AdminLayout = () => {
   const getFilteredMenuItems = () => {
     const allItems = [
       getItem(
-        <Link to=".">儀表板</Link>,
+        <Link to="/admin">儀表板</Link>,
         "dashboard",
         <PieChartOutlined />,
         null,
         PERMISSIONS.VIEW_DASHBOARD,
       ),
       getItem(
-        <Link to="articles">文章管理</Link>,
+        <Link to="/admin/articles">文章管理</Link>,
         "articles",
         <DesktopOutlined />,
         null,
         PERMISSIONS.VIEW_ARTICLES,
       ),
       getItem(
-        <Link to="contact-forms">聯絡表單</Link>,
+        <Link to="/admin/contact-forms">聯絡表單</Link>,
         "contact-forms",
         <FormOutlined />,
         null,
         PERMISSIONS.VIEW_CONTACT_FORMS,
       ),
       getItem(
-        <Link to="users">用戶管理</Link>,
+        <Link to="/admin/users">用戶管理</Link>,
         "users",
         <TeamOutlined />,
         null,
