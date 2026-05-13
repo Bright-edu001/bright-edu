@@ -53,15 +53,23 @@ function CoreCourses() {
         <table className="core-table" style={{ background: "transparent" }}>
           <thead>
             <tr>
-              <th><span className="core-table-title">課程名稱</span></th>
-              <th><span className="core-table-desc">課程說明</span></th>
+              <th>
+                <span className="core-table-title">課程名稱</span>
+              </th>
+              <th>
+                <span className="core-table-desc">課程說明</span>
+              </th>
             </tr>
           </thead>
           <tbody>
             {coreCoursesData.map((row) => (
               <tr key={row.key}>
-                <td><span className="core-table-title-value">{row.title}</span></td>
-                <td><span className="core-table-desc-value">{row.desc}</span></td>
+                <td>
+                  <span className="core-table-title-value">{row.title}</span>
+                </td>
+                <td>
+                  <span className="core-table-desc-value">{row.desc}</span>
+                </td>
               </tr>
             ))}
           </tbody>
