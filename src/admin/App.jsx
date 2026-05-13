@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from "react";
+import { ConfigProvider, App as AntdApp } from "antd";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "../context/AuthContext";
@@ -22,21 +23,25 @@ const adminLoadingFallback = (
 
 function App() {
   return (
-    <AuthProvider>
-      <Suspense fallback={adminLoadingFallback}>
-        <Routes>
-          <Route path="login" element={<LoginPage />} />
-          <Route
-            path="*"
-            element={
-              <PrivateRoute>
-                <AdminLayout />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </Suspense>
-    </AuthProvider>
+    <ConfigProvider>
+      <AntdApp>
+        <AuthProvider>
+          <Suspense fallback={adminLoadingFallback}>
+            <Routes>
+              <Route path="login" element={<LoginPage />} />
+              <Route
+                path="*"
+                element={
+                  <PrivateRoute>
+                    <AdminLayout />
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
+          </Suspense>
+        </AuthProvider>
+      </AntdApp>
+    </ConfigProvider>
   );
 }
 
