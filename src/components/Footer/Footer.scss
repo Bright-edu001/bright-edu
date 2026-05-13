@@ -1,11 +1,10 @@
 @use "../../styles/index" as *;
 
 .footer-wrapper {
-  // ?è…³å®¹å™¨
   background: $color-gray-lighter;
   padding: $spacing-sm 0;
   transform: translateZ(0);
-  min-height: 400px; // å¢å??€å°é?
+  min-height: 400px; // å¢ï¿½??ï¿½å°ï¿½?
 }
 
 .footer-wrapper {
@@ -30,7 +29,6 @@
     }
   }
 }
-
 
 @media screen and (min-width: 1025px) {
   .footer-wrapper {
@@ -242,8 +240,7 @@
 }
 
 .footer-content {
-  // ?è…³?§å®¹?€å¡?(Flex/Grid ä½ˆå?)
-  display: flex !important; // è¦†å¯« Ant Design Row ?è¨­æ¨??
+  display: flex !important;
   justify-content: center !important;
   align-items: flex-start !important;
   margin: 2rem 0 1rem;
@@ -310,12 +307,11 @@
 }
 
 .footer-section {
-  // ?è…³?‹åˆ¥?€å¡?
   min-height: 120px;
   width: 180px;
   margin: 0 1rem;
 
-  // ?ç??€å¡?
+  // ?ï¿½ï¿½??ï¿½ï¿½?
   &.brand {
     display: flex;
     justify-content: flex-start;
@@ -338,7 +334,6 @@
     }
   }
 
-  // ????—è¡¨?€å¡?(UIC & MSU)
   &.footer-links-uic,
   &.footer-links-msu {
     display: flex;
@@ -393,7 +388,6 @@
     }
   }
 
-  // ?œæ–¼?‡è¯çµ¡è?è¨Šå?å¡?
   &.about {
     display: flex;
     flex-direction: column;
@@ -428,7 +422,6 @@
       }
     }
 
-    // ç¤¾ç¾¤?–ç¤º
     .social-icons {
       display: flex;
       gap: 15px;
@@ -459,7 +452,6 @@
     }
   }
 
-  // æ´»å??‡æ?ç« å?å¡?(ç°¡å–®???)
   &.articles {
     a {
       color: $color-nav;
@@ -471,7 +463,6 @@
 }
 
 .footer-bottom {
-  // ?ˆæ?è³‡è?
   text-align: center;
   margin-top: $spacing-xl;
   padding-top: $spacing-md;
