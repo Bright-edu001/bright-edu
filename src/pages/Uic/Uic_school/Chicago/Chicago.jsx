@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Table } from "antd";
-import "antd/dist/reset.css";
 import "./Chicago.scss";
 import MbaAreasHero from "../../../../components/MbaAreasHero/MbaAreasHero";
 import SectionContainer from "../../../../components/SectionContainer/SectionContainer";
@@ -9,29 +7,6 @@ import getImageUrl from "../../../../utils/getImageUrl";
 const Chicago = () => {
   const [historyLoaded, setHistoryLoaded] = useState(false);
   const [transportLoaded, setTransportLoaded] = useState(false);
-
-  const ethnicityColumns = [
-    {
-      title: <span className="ethnicity-table-title">種族類別 (中文)</span>,
-      dataIndex: "chinese",
-      key: "chinese",
-      render: (text) => <span className="ethnicity-table-text">{text}</span>,
-    },
-    {
-      title: <span className="ethnicity-table-title">種族類別 (英文原文)</span>,
-      dataIndex: "english",
-      key: "english",
-      render: (text) => <span className="ethnicity-table-text">{text}</span>,
-    },
-    {
-      title: <span className="ethnicity-table-title">比例 (%)</span>,
-      dataIndex: "percentage",
-      key: "percentage",
-      render: (text) => (
-        <span className="ethnicity-table-percentage">{text}</span>
-      ),
-    },
-  ];
 
   const ethnicityData = [
     {
@@ -341,13 +316,24 @@ const Chicago = () => {
                     芝加哥是一座真正的多元文化城市。根據美國人口普查局 2023
                     年社區調查（ACS）估計，芝加哥市的人口結構呈現高度多樣性：
                   </p>
-                  <Table
-                    columns={ethnicityColumns}
-                    dataSource={ethnicityData}
-                    pagination={false}
-                    bordered
-                    style={{ background: "transparent", marginBottom: "20px" }}
-                  />
+                  <table className="ethnicity-table" style={{ background: "transparent", marginBottom: "20px" }}>
+                    <thead>
+                      <tr>
+                        <th><span className="ethnicity-table-title">種族類別 (中文)</span></th>
+                        <th><span className="ethnicity-table-title">種族類別 (英文原文)</span></th>
+                        <th><span className="ethnicity-table-title">比例 (%)</span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {ethnicityData.map((row) => (
+                        <tr key={row.key}>
+                          <td><span className="ethnicity-table-text">{row.chinese}</span></td>
+                          <td><span className="ethnicity-table-text">{row.english}</span></td>
+                          <td><span className="ethnicity-table-percentage">{row.percentage}</span></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                   <p>
                     註解：此欄位的官方定義為 “Race alone or in combination with
                     one or more other

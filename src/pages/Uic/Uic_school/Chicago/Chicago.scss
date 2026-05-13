@@ -134,6 +134,24 @@
   }
 }
 
+.ethnicity-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid $color-black;
+
+  th,
+  td {
+    border: 1px solid $color-black;
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  thead tr {
+    background: transparent;
+  }
+}
+
 .ethnicity-table-text {
   font-size: 18px;
   font-weight: 700;
