@@ -1,5 +1,4 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { App as AntdApp, ConfigProvider, Spin } from "antd";
 import {
   useFirebaseInit,
   useFirebaseBasicReady,
@@ -21,41 +20,17 @@ const FloatingButtons = lazy(
 
 // 載入指示器組件，顯示「載入中...」
 const LoadingSpinner = () => (
-  <div className="loading-spinner">
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "12px",
-        minHeight: "200px",
-      }}
-    >
-      <Spin size="large" />
-      <span style={{ fontSize: "18px", color: "#666" }}>載入中...</span>
-    </div>
+  <div className="app-loading" role="status" aria-label="載入中">
+    <span className="app-loading__spinner" aria-hidden="true" />
+    <span className="app-loading__text">載入中...</span>
   </div>
 );
 
 // 最小化骨架屏組件
 const MinimalSkeleton = () => (
-  <div className="minimal-skeleton">
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100vh",
-        background: "#f5f5f5",
-      }}
-    >
-      <div style={{ textAlign: "center" }}>
-        <Spin size="large" />
-        <div style={{ marginTop: "16px", fontSize: "16px", color: "#666" }}>
-          載入中...
-        </div>
-      </div>
-    </div>
+  <div className="app-minimal-skeleton" role="status" aria-label="載入中">
+    <span className="app-loading__spinner" aria-hidden="true" />
+    <span className="app-loading__text">載入中...</span>
   </div>
 );
 
@@ -113,34 +88,25 @@ function App() {
   }
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          // 你可以在這裡自訂主題色彩
-          // colorPrimary: '#1890ff',
-        },
-      }}
-    >
-      <AntdApp>
-        <ErrorBoundary>
-          <ScrollToTop />
-          <div className="App">
-            <Header />
-            <main className="main-content">
-              <Suspense fallback={<LoadingSpinner />}>
-                <Outlet />
-              </Suspense>
-            </main>
-            <Suspense fallback={null}>
-              <Footer />
+    <>
+      <ErrorBoundary>
+        <ScrollToTop />
+        <div className="App">
+          <Header />
+          <main className="main-content">
+            <Suspense fallback={<LoadingSpinner />}>
+              <Outlet />
             </Suspense>
-          </div>
-        </ErrorBoundary>
-        <Suspense fallback={null}>
-          <FloatingButtons />
-        </Suspense>
-      </AntdApp>
-    </ConfigProvider>
+          </main>
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
+        </div>
+      </ErrorBoundary>
+      <Suspense fallback={null}>
+        <FloatingButtons />
+      </Suspense>
+    </>
   );
 }
 
