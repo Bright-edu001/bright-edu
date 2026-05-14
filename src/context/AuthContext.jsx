@@ -38,7 +38,15 @@ const AuthContextLogicWrapper = ({ children }) => {
 
   // 檢查環境
   const isLocalDev = isLocalDevelopment();
-  const isProduction = process.env.NODE_ENV === "production" || !isLocalDev;
+  // fallback (admin/0000) 僅允許在實際本機 hostname 的非 production 模式。
+  // 不得依賴 NODE_ENV 判斷，以防 remote preview/dev deployment 也帶有 NODE_ENV=development。
+  const isActualLocalHost =
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1");
+  const fallbackAuthEnabled =
+    isActualLocalHost && process.env.NODE_ENV !== "production";
+  const isProduction = !fallbackAuthEnabled;
 
   // 使用 Firebase Auth 原生 listener 監聽用戶狀態
   const [firebaseUser, setFirebaseUser] = useState(null);

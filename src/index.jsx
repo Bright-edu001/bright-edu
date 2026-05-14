@@ -31,10 +31,13 @@ const queryClient = new QueryClient({
 const initializeSentryOptimized = () => {
   if (process.env.NODE_ENV !== "production") return;
 
-  // 實際初始化邏輯：BrowserTracing 直接從 @sentry/react 取得，不需另外 import @sentry/tracing
+  // 實際初始化邏輯：BrowserTracing 從 @sentry/tracing 取得（v7 不從 @sentry/react re-export）
   const doInit = async () => {
     try {
-      const { default: Sentry, BrowserTracing } = await import("@sentry/react");
+      const [{ default: Sentry }, { BrowserTracing }] = await Promise.all([
+        import("@sentry/react"),
+        import("@sentry/tracing"),
+      ]);
 
       Sentry.init({
         dsn: import.meta.env.VITE_SENTRY_DSN,
