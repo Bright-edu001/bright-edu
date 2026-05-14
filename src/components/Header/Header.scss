@@ -233,7 +233,9 @@
 }
 
 /* Popup (portal) submenu title override: use the stable popup hook from Header.jsx */
-.header-submenu-popup.ant-menu-submenu-popup .ant-menu-vertical > .ant-menu-item,
+.header-submenu-popup.ant-menu-submenu-popup
+  .ant-menu-vertical
+  > .ant-menu-item,
 .header-submenu-popup.ant-menu-submenu-popup
   .ant-menu-vertical
   > .ant-menu-submenu
@@ -293,12 +295,9 @@
     cursor: pointer;
     color: #666;
     border-radius: 4px;
+    outline: none;
     &:hover {
       color: #333;
-    }
-    &:focus-visible {
-      outline: 2px solid $color-uic;
-      outline-offset: 2px;
     }
   }
 }
@@ -340,7 +339,7 @@
       background: transparent;
     }
     &:focus-visible {
-      outline: 2px solid $color-uic;
+      outline: 2px solid;
       outline-offset: -2px;
     }
     &--expanded {
@@ -370,6 +369,7 @@
     font-weight: 700;
     color: $color-nav;
     text-decoration: none;
+    text-align: left;
     -webkit-tap-highlight-color: transparent;
     &:hover,
     &:focus-visible {

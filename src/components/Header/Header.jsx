@@ -24,7 +24,10 @@ const addSubmenuPopupClassName = (items) =>
     const nextItem = { ...item };
 
     if (Array.isArray(item.children) && item.children.length > 0) {
-      nextItem.popupClassName = [item.popupClassName, desktopSubmenuPopupClassName]
+      nextItem.popupClassName = [
+        item.popupClassName,
+        desktopSubmenuPopupClassName,
+      ]
         .filter(Boolean)
         .join(" ");
       nextItem.children = addSubmenuPopupClassName(item.children);
