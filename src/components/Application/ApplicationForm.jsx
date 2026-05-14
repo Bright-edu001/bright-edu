@@ -4,7 +4,7 @@ import useFormSubmit from "../../hooks/useFormSubmit";
 
 function ApplicationForm({ showCondition = true, variant = "uic" }) {
   // variant: 'uic' (default/red) or 'msf' (green)
-  const { form, handleChange, handleSubmit, submitting } = useFormSubmit();
+  const { form, handleChange, handleSubmit, submitting, notification, clearNotification } = useFormSubmit();
 
   const formClass = `application-form ${variant === "msf" ? "application-form--msf" : ""}`;
 
@@ -47,6 +47,24 @@ function ApplicationForm({ showCondition = true, variant = "uic" }) {
   return (
     <form className={formClass} onSubmit={handleSubmit}>
       <h2 className="application-form__title">CONTACT US</h2>
+
+      {notification && (
+        <div
+          className={`application-form__notification application-form__notification--${notification.type}`}
+          role={notification.type === "error" ? "alert" : "status"}
+          aria-live="polite"
+        >
+          <span>{notification.content}</span>
+          <button
+            type="button"
+            className="application-form__notification-close"
+            onClick={clearNotification}
+            aria-label="關閉訊息"
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       {fields.map((field) =>
         field.type === "textarea" ? (

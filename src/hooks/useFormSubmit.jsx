@@ -1,15 +1,14 @@
 import { useState, useCallback } from "react";
-import { App } from "antd";
 import { contactService } from "../services/contactService";
 import logger from "../utils/logger";
 
 const DEFAULT_FORM = { name: "", lineId: "", email: "", message: "" };
 
 function useFormSubmit(initialState = DEFAULT_FORM) {
-  const { message } = App.useApp();
   const [form, setForm] = useState(initialState);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState(null);
+  const [notification, setNotification] = useState(null);
   // 請求去重機制
   const [submitPromise, setSubmitPromise] = useState(null);
 
@@ -29,6 +28,8 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
     setForm(DEFAULT_FORM);
     setResult(null);
   }, []);
+
+  const clearNotification = useCallback(() => setNotification(null), []);
 
   const validateForm = useCallback((formData) => {
     const errors = {};
@@ -98,7 +99,7 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
           const validationErrors = validateForm(form);
           if (Object.keys(validationErrors).length > 0) {
             const errorMessages = Object.values(validationErrors);
-            message.error(errorMessages[0]);
+            setNotification({ type: "error", content: errorMessages[0] });
             logger.warn("[FORM_SUBMIT] 表單驗證失敗", validationErrors);
             return { success: false, errors: validationErrors };
           }
@@ -138,9 +139,9 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
 
           // 顯示成功訊息
           if (results.firestore.success) {
-            message.success({
+            setNotification({
+              type: "success",
               content: "表單已成功提交！我們會盡快與您聯繫。",
-              duration: 6,
             });
 
             // 重置表單但保留結果
@@ -165,9 +166,9 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
             totalTime: `${totalTime.toFixed(2)}ms`,
           });
 
-          message.error({
+          setNotification({
+            type: "error",
             content: error.message || "送出失敗，請稍後再試",
-            duration: 4,
           });
 
           return { success: false, error: error.message };
@@ -183,17 +184,13 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
         setSubmitting(false);
       }
     },
-    [form, submitPromise, message, validateForm]
+    [form, submitPromise, validateForm]
   );
 
   const testConnection = useCallback(async () => {
     try {
       logger.log("開始 Firestore 連接測試");
-      message.loading({
-        content: "測試 Firestore 連接中...",
-        key: "test",
-        duration: 0,
-      });
+      setNotification({ type: "loading", content: "測試 Firestore 連接中..." });
 
       const testData = {
         name: "連接測試",
@@ -207,27 +204,21 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
       const result = await contactService.submitContactForm(testData);
 
       if (result.success) {
-        message.success({
-          content: "Firestore 連接測試成功！",
-          key: "test",
-          duration: 4,
-        });
+        setNotification({ type: "success", content: "Firestore 連接測試成功！" });
       } else {
-        message.error({
+        setNotification({
+          type: "error",
           content: `Firestore 連接測試失敗: ${result.error}`,
-          key: "test",
-          duration: 4,
         });
       }
     } catch (error) {
       logger.error("Firestore 連接測試失敗:", error);
-      message.error({
+      setNotification({
+        type: "error",
         content: `連接測試失敗: ${error.message}`,
-        key: "test",
-        duration: 4,
       });
     }
-  }, [message]);
+  }, []);
 
   return {
     form,
@@ -237,6 +228,8 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
     resetForm,
     submitting,
     result,
+    notification,
+    clearNotification,
     handleSubmit,
     testConnection,
     validateForm,
