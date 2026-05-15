@@ -1,78 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import { menuItems } from "../../config/menuConfig";
-import { getMenuItemText, getMenuItemTo } from "./headerMenuHelpers";
 import DesktopNav from "./DesktopNav";
+import MobileNavPanel from "./MobileNavPanel";
 import "./Header.scss";
 import getImageUrl from "../../utils/getImageUrl";
-
-// ---- Native mobile menu components ----
-
-function MobileMenuItem({ item, expandedKeys, onToggle, onClose }) {
-  const hasChildren = Array.isArray(item.children) && item.children.length > 0;
-
-  if (hasChildren) {
-    const text = getMenuItemText(item.label);
-    const isExpanded = expandedKeys.has(item.key);
-    const submenuId = `mobile-submenu-${item.key}`;
-
-    return (
-      <li className="mobile-menu__item" role="none">
-        <button
-          className={`mobile-menu__trigger${isExpanded ? " mobile-menu__trigger--expanded" : ""}`}
-          aria-expanded={isExpanded}
-          aria-controls={submenuId}
-          onClick={() => onToggle(item.key)}
-          role="menuitem"
-          type="button"
-        >
-          <span>{text}</span>
-          <span className="mobile-menu__chevron" aria-hidden="true" />
-        </button>
-        {isExpanded && (
-          <ul id={submenuId} className="mobile-menu__submenu" role="menu">
-            {item.children.map((child) => (
-              <MobileMenuItem
-                key={child.key}
-                item={child}
-                expandedKeys={expandedKeys}
-                onToggle={onToggle}
-                onClose={onClose}
-              />
-            ))}
-          </ul>
-        )}
-      </li>
-    );
-  }
-
-  // Leaf item
-  const to = getMenuItemTo(item.label);
-  const text = getMenuItemText(item.label);
-
-  if (to) {
-    return (
-      <li className="mobile-menu__item" role="none">
-        <Link
-          className="mobile-menu__link"
-          to={to}
-          onClick={onClose}
-          role="menuitem"
-        >
-          {text}
-        </Link>
-      </li>
-    );
-  }
-
-  return (
-    <li className="mobile-menu__item" role="none">
-      <span className="mobile-menu__link" role="menuitem">
-        {text}
-      </span>
-    </li>
-  );
-}
 
 // ---- Header component ----
 
@@ -168,48 +100,14 @@ const Header = () => {
         </div>
       </header>
 
-      {mobileMenu && (
-        <div className="mobile-drawer" role="presentation">
-          <button
-            className="mobile-drawer__backdrop"
-            aria-label="關閉選單"
-            onClick={closeMobileMenu}
-            tabIndex={-1}
-            type="button"
-          />
-          <aside
-            className="mobile-drawer__panel"
-            role="dialog"
-            aria-modal="true"
-            aria-label="手機導覽選單"
-          >
-            <div className="mobile-drawer__header">
-              <button
-                ref={closeButtonRef}
-                className="mobile-drawer__close"
-                aria-label="關閉選單"
-                onClick={closeMobileMenu}
-                type="button"
-              >
-                ✕
-              </button>
-            </div>
-            <nav aria-label="手機導覽">
-              <ul className="mobile-menu" role="menubar">
-                {menuItems.map((item) => (
-                  <MobileMenuItem
-                    key={item.key}
-                    item={item}
-                    expandedKeys={mobileExpandedKeys}
-                    onToggle={toggleMobileExpand}
-                    onClose={closeMobileMenu}
-                  />
-                ))}
-              </ul>
-            </nav>
-          </aside>
-        </div>
-      )}
+      <MobileNavPanel
+        open={mobileMenu}
+        items={menuItems}
+        expandedKeys={mobileExpandedKeys}
+        onToggle={toggleMobileExpand}
+        onClose={closeMobileMenu}
+        closeButtonRef={closeButtonRef}
+      />
     </>
   );
 };
