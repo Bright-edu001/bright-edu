@@ -238,21 +238,60 @@
     background: $color-gray-ultralight;
 
     .mobile-menu__trigger,
-    .mobile-menu__link {
+    .mobile-menu__link,
+    .mobile-menu__parent-row .mobile-menu__link {
       padding-left: 32px;
     }
 
     .mobile-menu__submenu {
       .mobile-menu__trigger,
-      .mobile-menu__link {
+      .mobile-menu__link,
+      .mobile-menu__parent-row .mobile-menu__link {
         padding-left: 48px;
       }
 
       .mobile-menu__submenu {
         .mobile-menu__trigger,
-        .mobile-menu__link {
+        .mobile-menu__link,
+        .mobile-menu__parent-row .mobile-menu__link {
           padding-left: 64px;
         }
+      }
+    }
+  }
+
+  // Row containing parent link + expand toggle button side-by-side
+  &__parent-row {
+    display: flex;
+    align-items: stretch;
+
+    .mobile-menu__link {
+      flex: 1;
+    }
+  }
+
+  // Expand/collapse toggle button for parent items with a route
+  &__expand-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    color: $color-nav;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    &:hover,
+    &:focus-visible {
+      color: $color-uic;
+    }
+    &:focus-visible {
+      outline: 2px solid;
+      outline-offset: -2px;
+    }
+    &[aria-expanded="true"] {
+      .mobile-menu__chevron {
+        transform: rotate(45deg);
       }
     }
   }
@@ -411,6 +450,39 @@
     padding: 8px 0;
     list-style: none;
     margin: 0;
+  }
+
+  // Small toggle button (chevron only) for items with both a parent link and children
+  &__toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    color: $color-nav;
+    flex-shrink: 0;
+    align-self: stretch;
+    &:hover {
+      color: $color-uic;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-nav;
+      outline-offset: -2px;
+    }
+  }
+
+  // Dropdown item that has both a parent link and submenu: flex layout
+  &__dropdown-item {
+    &.desktop-menu__item--has-submenu {
+      display: flex;
+      align-items: stretch;
+    }
+  }
+
+  // Parent link inside a dropdown item with children: takes remaining flex space
+  &__dropdown-link--parent {
+    flex: 1;
   }
 }
 

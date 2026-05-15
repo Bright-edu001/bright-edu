@@ -168,3 +168,86 @@ test.describe("Mobile drawer navigation", () => {
     await expect(page.locator(".application-form")).toBeVisible({ timeout: 8000 });
   });
 });
+
+test.describe("Parent route navigation (regression)", () => {
+  test("NAV-08: desktop parent dropdown link navigates to parent route", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile-chrome", "Desktop-only flow");
+    await page.setViewportSize(DESKTOP_VIEWPORT);
+    await page.goto("/");
+    await waitForPageReady(page);
+
+    // Hover top-level "UIC商學院碩士" to open first-level dropdown
+    const desktopNav = page.locator(".header-nav");
+    await desktopNav.getByText("UIC商學院碩士", { exact: true }).first().hover();
+
+    // The "UIC 伊利諾大學芝加哥分校" link should now be visible as a proper anchor
+    const parentLink = page
+      .locator(`a[href="${UIC_ABOUT_PATH}"]`)
+      .first();
+    await expect(parentLink).toBeVisible({ timeout: 5000 });
+
+    await parentLink.click();
+    await page.waitForURL(
+      (url) => decodeURIComponent(url.pathname).includes(UIC_ABOUT_PATH),
+      { timeout: 8000 },
+    );
+    expect(urlContainsChinese(page.url(), "伊利諾大學芝加哥分校")).toBe(true);
+  });
+
+  test("NAV-09: mobile parent link with children is reachable", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name !== "mobile-chrome", "Mobile-only flow");
+
+    await page.goto("/");
+    await waitForPageReady(page);
+
+    // Open mobile drawer
+    await page.locator(".mobile-nav-toggle").click();
+    const mobileMenu = page.locator(".mobile-drawer");
+    await expect(mobileMenu).toBeVisible({ timeout: 5000 });
+
+    // Expand the "UIC商學院碩士" trigger
+    await mobileMenu.getByText("UIC商學院碩士", { exact: true }).click();
+
+    // The "UIC 伊利諾大學芝加哥分校" parent should render as an anchor link
+    const parentLink = mobileMenu
+      .locator(`a[href="${UIC_ABOUT_PATH}"]`)
+      .first();
+    await expect(parentLink).toBeVisible({ timeout: 5000 });
+
+    await parentLink.click();
+    await page.waitForURL(
+      (url) => decodeURIComponent(url.pathname).includes(UIC_ABOUT_PATH),
+      { timeout: 8000 },
+    );
+    expect(urlContainsChinese(page.url(), "伊利諾大學芝加哥分校")).toBe(true);
+  });
+
+  test("NAV-10: desktop keyboard can open submenu via Enter on trigger", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name === "mobile-chrome", "Desktop-only flow");
+    await page.setViewportSize(DESKTOP_VIEWPORT);
+    await page.goto("/");
+    await waitForPageReady(page);
+
+    // Tab to the "UIC商學院碩士" trigger button and press Enter to open
+    const trigger = page
+      .locator(".desktop-menu__trigger")
+      .filter({ hasText: "UIC商學院碩士" })
+      .first();
+    await trigger.focus();
+    await trigger.press("Enter");
+
+    // Dropdown should now be open and contain submenu links
+    const dropdown = page.locator(".desktop-menu__dropdown").first();
+    await expect(dropdown).toBeVisible({ timeout: 5000 });
+
+    // Press Escape to close the submenu
+    await trigger.press("Escape");
+    await expect(dropdown).not.toBeVisible({ timeout: 3000 });
+  });
+});
