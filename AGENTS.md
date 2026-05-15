@@ -29,13 +29,17 @@ Do not assume Notion, GitHub PRs, deployment status, or production status were u
 
 The normal working branch is:
 
-````bash
+```text
 feature/test-preview
+```
 
 Before modifying files, inspect the current branch and working tree:
 
+```bash
 git status --short --branch
-Git Rules
+```
+
+## Git Rules
 
 General rules:
 
@@ -52,7 +56,8 @@ Recommended final checks before reporting:
 
 git status --short --branch
 git diff --name-only
-Common Validation Commands
+
+## Common Validation Commands
 
 For most implementation tasks, run:
 
@@ -77,7 +82,7 @@ npm run emulator:start:with-sync
 
 Use emulator commands only when the task explicitly requires emulator behavior.
 
-Known Validation Notes
+## Known Validation Notes
 
 Known or recurring warnings may appear depending on environment and task history:
 
@@ -91,7 +96,7 @@ Do not treat known warnings as new failures unless the current task changes the 
 
 If snapshot or line-ending noise appears accidentally, restore it unless the task explicitly targets that file.
 
-Project Structure Notes
+## Project Structure Notes
 
 Important paths:
 
@@ -120,7 +125,7 @@ src/pages/Ou/
 
 This is an intentional reserved empty folder. Preserve it. Do not remove it as cleanup.
 
-Dependency Rules
+## Dependency Rules
 
 Do not modify dependency files unless the task explicitly requires it.
 
@@ -136,7 +141,7 @@ Keep dependency changes minimal.
 Preserve existing package manager behavior.
 Report peer dependency or install conflicts exactly.
 Do not introduce new libraries for small UI changes, local refactors, selector fixes, or simple styling work without explicit approval.
-Firebase and Environment Rules
+## Firebase and Environment Rules
 
 Do not change Firebase project IDs, deployment targets, secrets, workflow files, or environment variable names unless explicitly required.
 
@@ -157,7 +162,7 @@ Browser code should use Vite-compatible env access.
 Do not introduce unguarded process.env usage in browser code.
 Preserve emulator, local, preview, and production boundaries.
 Do not weaken auth or admin fallback guards.
-Public vs Admin Ant Design Boundary
+## Public vs Admin Ant Design Boundary
 
 Current intended boundary:
 
@@ -175,7 +180,7 @@ Interpret results carefully:
 
 src/components/Header/** may still intentionally contain AntD while Header migration is incomplete.
 src/admin/** is a separate admin boundary and may contain AntD.
-Header Rules
+## Header Rules
 
 Header work is higher risk because it affects desktop navigation, mobile navigation, routing, accessibility, and E2E tests.
 
@@ -183,7 +188,7 @@ Typical Header-related files:
 
 src/components/Header/Header.jsx
 src/components/Header/Header.scss
-src/components/Header/headerMenuHelpers.js
+src/components/Header/headerMenuHelpers.jsx
 src/config/menuConfig.jsx
 e2e/navigation.spec.js
 
@@ -203,7 +208,7 @@ E2E guidance:
 Prefer project-owned selectors such as header, .header-nav, .mobile-nav-toggle, .mobile-drawer.
 Do not couple new tests to AntD internal DOM selectors.
 Use visible labels and hrefs where stable.
-Admin Contact Forms Notes
+## Admin Contact Forms Notes
 
 The Contact Forms admin page has already been split into smaller units.
 
@@ -226,7 +231,7 @@ Do not mix behavior fixes with structure-only refactors unless requested.
 Preserve AntD message text, key, and duration values unless explicitly changing UX.
 Do not change Google Sheets sync endpoints or service contracts unless explicitly required.
 Preserve existing manual sync guard behavior unless the task targets it.
-Testing Rules
+## Testing Rules
 
 General:
 
@@ -255,7 +260,8 @@ npm run build
 Diff whitespace check:
 
 git diff --check
-Styling Rules
+
+## Styling Rules
 
 The project uses SCSS.
 
@@ -267,7 +273,7 @@ Do not add new public AntD selector coupling.
 Keep responsive behavior explicit.
 Avoid changing visual design outside task scope.
 Preserve accessible focus indicators unless replacing them with an equivalent accessible treatment.
-Accessibility Rules
+## Accessibility Rules
 
 For interactive UI:
 
@@ -277,7 +283,7 @@ Preserve Escape close behavior where already implemented.
 Use aria-label, aria-expanded, aria-controls, role, and aria-modal where appropriate.
 Loading UI should expose status semantics where practical.
 Notifications should use role="alert" or role="status" where appropriate.
-Code Style Rules
+## Code Style Rules
 
 General:
 
@@ -294,7 +300,7 @@ Preserve hook dependency correctness.
 Avoid changing route boundaries unless task scope includes routing.
 Use small presentational components for JSX extraction.
 Keep side effects explicit and testable.
-Performance Rules
+## Performance Rules
 
 When doing performance work:
 
@@ -302,7 +308,7 @@ Prefer route-level or component-level lazy loading over broad architectural rewr
 Validate with npm run build.
 Report build output observations, but do not chase all chunk warnings unless the task is specifically about chunk splitting.
 Do not remove dependencies only because they appear large; first confirm actual usage and task scope.
-Documentation Rules
+## Documentation Rules
 
 Docs-only tasks should not modify runtime code.
 
@@ -313,7 +319,7 @@ Do not invent workflow policy.
 Do not add stale references to removed docs.
 Do not claim a command exists unless it is present in package.json.
 If uncertain, add a short TODO rather than guessing.
-Forbidden by Default
+## Forbidden by Default
 
 Unless explicitly allowed by the current task, do not modify:
 
@@ -338,7 +344,7 @@ Perform broad formatting-only changes
 Remove intentional empty directories
 Change unrelated snapshots
 Modify unrelated generated files
-Completion Report Format
+## Completion Report Format
 
 At the end of a coding task, report:
 
@@ -362,7 +368,7 @@ No package change.
 
 Do not claim a validation command passed unless it was actually run and passed.
 
-Suggested Commit Message Style
+## Suggested Commit Message Style
 
 Use concise conventional-style messages where practical:
 
@@ -371,7 +377,8 @@ fix: resolve auth fallback guard
 test: decouple header navigation e2e selectors
 perf: lazy-load admin route shells
 docs: clarify local env setup
-When to Stop and Report
+
+## When to Stop and Report
 
 Stop and report instead of guessing when:
 
@@ -382,14 +389,3 @@ The working tree has unrelated dirty changes that may conflict.
 Validation fails for reasons outside the task scope.
 Required secrets, Firebase access, or external services are unavailable.
 The change would require push, deploy, PR, or production action without explicit approval.
-
-```text
-請在 repo 根目錄新增或更新 AGENTS.md，內容使用我提供的版本。
-
-限制：
-- 只允許修改 AGENTS.md。
-- 不要修改 src、package.json、package-lock.json、Firebase config、GitHub workflow、測試、README 或其他文件。
-- 不要 push、deploy、建立 PR 或寫 Notion。
-- 完成後執行 git diff --check。
-- 回報 git status、變更摘要、以及是否只有 AGENTS.md 被修改。
-````
