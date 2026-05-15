@@ -1,8 +1,13 @@
 import { useState, useCallback } from "react";
 import { contactService } from "../services/contactService";
 import logger from "../utils/logger";
+import {
+  DEFAULT_CONTACT_FORM,
+  VALIDATION_RULES,
+  VALIDATION_MESSAGES,
+} from "../components/Application/applicationFormConstants";
 
-const DEFAULT_FORM = { name: "", lineId: "", email: "", message: "" };
+const DEFAULT_FORM = DEFAULT_CONTACT_FORM;
 
 function useFormSubmit(initialState = DEFAULT_FORM) {
   const [form, setForm] = useState(initialState);
@@ -36,36 +41,36 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
 
     // 姓名驗證
     if (!formData.name?.trim()) {
-      errors.name = "請輸入姓名";
-    } else if (formData.name.trim().length < 2) {
-      errors.name = "姓名至少需要2個字元";
-    } else if (formData.name.trim().length > 50) {
-      errors.name = "姓名不能超過50個字元";
+      errors.name = VALIDATION_MESSAGES.NAME.REQUIRED;
+    } else if (formData.name.trim().length < VALIDATION_RULES.NAME.MIN) {
+      errors.name = VALIDATION_MESSAGES.NAME.TOO_SHORT;
+    } else if (formData.name.trim().length > VALIDATION_RULES.NAME.MAX) {
+      errors.name = VALIDATION_MESSAGES.NAME.TOO_LONG;
     }
 
     // Email 驗證
     if (!formData.email?.trim()) {
-      errors.email = "請輸入電子郵件";
+      errors.email = VALIDATION_MESSAGES.EMAIL.REQUIRED;
     } else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(formData.email.trim())) {
-        errors.email = "請輸入有效的電子郵件格式";
+        errors.email = VALIDATION_MESSAGES.EMAIL.INVALID;
       }
     }
 
     // 訊息驗證
     if (!formData.message?.trim()) {
-      errors.message = "請輸入訊息內容";
-    } else if (formData.message.trim().length < 10) {
-      errors.message = "訊息內容至少需要10個字元";
-    } else if (formData.message.trim().length > 1000) {
-      errors.message = "訊息內容不能超過1000個字元";
+      errors.message = VALIDATION_MESSAGES.MESSAGE.REQUIRED;
+    } else if (formData.message.trim().length < VALIDATION_RULES.MESSAGE.MIN) {
+      errors.message = VALIDATION_MESSAGES.MESSAGE.TOO_SHORT;
+    } else if (formData.message.trim().length > VALIDATION_RULES.MESSAGE.MAX) {
+      errors.message = VALIDATION_MESSAGES.MESSAGE.TOO_LONG;
     }
 
     // LINE ID 驗證（可選）
     if (formData.lineId && formData.lineId.trim().length > 0) {
-      if (formData.lineId.trim().length > 50) {
-        errors.lineId = "LINE ID 不能超過50個字元";
+      if (formData.lineId.trim().length > VALIDATION_RULES.LINE_ID.MAX) {
+        errors.lineId = VALIDATION_MESSAGES.LINE_ID.TOO_LONG;
       }
     }
 
