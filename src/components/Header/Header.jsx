@@ -1,40 +1,79 @@
-import React, {
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-  useRef,
-  useEffectEvent,
-} from "react";
-import { Menu, ConfigProvider } from "antd";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import { menuItems } from "../../config/menuConfig";
 import { getMenuItemText, getMenuItemTo } from "./headerMenuHelpers";
 import "./Header.scss";
 import getImageUrl from "../../utils/getImageUrl";
 
-const desktopSubmenuPopupClassName = "header-submenu-popup";
+// ---- Native desktop menu components ----
 
-const addSubmenuPopupClassName = (items) =>
-  items.map((item) => {
-    if (!item || typeof item !== "object") {
-      return item;
-    }
+function DesktopNavItem({ item, depth = 0 }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const hasChildren = Array.isArray(item.children) && item.children.length > 0;
+  const isTopLevel = depth === 0;
 
-    const nextItem = { ...item };
+  if (!hasChildren) {
+    const to = getMenuItemTo(item.label);
+    const text = getMenuItemText(item.label);
+    if (!to) return null;
+    return (
+      <li
+        className={
+          isTopLevel ? "desktop-menu__item" : "desktop-menu__dropdown-item"
+        }
+        role="none"
+      >
+        <Link
+          className={
+            isTopLevel ? "desktop-menu__link" : "desktop-menu__dropdown-link"
+          }
+          to={to}
+          role="menuitem"
+        >
+          {text}
+        </Link>
+      </li>
+    );
+  }
 
-    if (Array.isArray(item.children) && item.children.length > 0) {
-      nextItem.popupClassName = [
-        item.popupClassName,
-        desktopSubmenuPopupClassName,
-      ]
-        .filter(Boolean)
-        .join(" ");
-      nextItem.children = addSubmenuPopupClassName(item.children);
-    }
+  const text = getMenuItemText(item.label);
 
-    return nextItem;
-  });
+  return (
+    <li
+      className={`${isTopLevel ? "desktop-menu__item" : "desktop-menu__dropdown-item"} desktop-menu__item--has-submenu${isOpen ? " desktop-menu__item--open" : ""}`}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+      role="none"
+    >
+      <button
+        className={
+          isTopLevel ? "desktop-menu__trigger" : "desktop-menu__subtrigger"
+        }
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        type="button"
+        role="menuitem"
+      >
+        <span>{text}</span>
+        {!isTopLevel && (
+          <span className="desktop-menu__chevron" aria-hidden="true" />
+        )}
+      </button>
+      {isOpen && (
+        <ul
+          className={
+            isTopLevel ? "desktop-menu__dropdown" : "desktop-menu__subdropdown"
+          }
+          role="menu"
+        >
+          {item.children.map((child) => (
+            <DesktopNavItem key={child.key} item={child} depth={depth + 1} />
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+}
 
 // ---- Native mobile menu components ----
 
@@ -109,40 +148,7 @@ function MobileMenuItem({ item, expandedKeys, onToggle, onClose }) {
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [mobileExpandedKeys, setMobileExpandedKeys] = useState(new Set());
-  const [animationDuration, setAnimationDuration] = useState("0.2s");
   const closeButtonRef = useRef(null);
-  const desktopMenuItems = useMemo(
-    () => addSubmenuPopupClassName(menuItems),
-    [],
-  );
-
-  const onMenuMouseEnter = useEffectEvent((e) => {
-    if (e.target.closest(".ant-menu-submenu")) {
-      setAnimationDuration("0.2s");
-    }
-  });
-
-  const onMenuMouseLeave = useEffectEvent((e) => {
-    if (e.target.closest(".ant-menu-submenu")) {
-      setAnimationDuration("0.7s");
-    }
-  });
-
-  // 監聽滑鼠事件來控制動畫時間
-  useEffect(() => {
-    const headerNav = document.querySelector(".header-nav");
-    if (headerNav) {
-      headerNav.addEventListener("mouseenter", onMenuMouseEnter, true);
-      headerNav.addEventListener("mouseleave", onMenuMouseLeave, true);
-    }
-
-    return () => {
-      if (headerNav) {
-        headerNav.removeEventListener("mouseenter", onMenuMouseEnter, true);
-        headerNav.removeEventListener("mouseleave", onMenuMouseLeave, true);
-      }
-    };
-  }, []);
 
   const closeMobileMenu = useCallback(() => {
     setMobileMenu(false);
@@ -195,13 +201,7 @@ const Header = () => {
   }, [mobileMenu]);
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          motionDurationMid: animationDuration, // 動態控制展開(0.2s)和關閉(0.5s)時間
-        },
-      }}
-    >
+    <>
       <header className="header" role="banner">
         <div className="header-center-wrapper">
           <div className="container">
@@ -218,9 +218,13 @@ const Header = () => {
               </Link>
             </div>
 
-            <div className="header-nav">
-              <Menu mode="horizontal" theme="light" items={desktopMenuItems} />
-            </div>
+            <nav className="header-nav" aria-label="主要導覽">
+              <ul className="desktop-menu" role="menubar">
+                {menuItems.map((item) => (
+                  <DesktopNavItem key={item.key} item={item} depth={0} />
+                ))}
+              </ul>
+            </nav>
 
             <div className="hamburger-menu">
               <div
@@ -281,7 +285,7 @@ const Header = () => {
           </aside>
         </div>
       )}
-    </ConfigProvider>
+    </>
   );
 };
 

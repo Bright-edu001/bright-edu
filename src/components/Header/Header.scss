@@ -65,87 +65,16 @@
     }
   }
 
-  /* 主要導航樣式 (Ant Design Menu Wrapper) */
+  /* 主要導航樣式 */
   .header-nav {
     flex-grow: 1;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     min-width: 0;
-    .ant-menu-horizontal {
-      width: 100%;
-      justify-content: flex-end;
-      align-items: center;
-      flex-wrap: wrap;
-      min-width: 0;
-    }
     @media (max-width: 1024px) {
       display: none;
     }
-  }
-
-  // Ant Design Overrides for Header
-  .ant-menu {
-    background-color: transparent;
-    border-bottom: none;
-  }
-
-  .ant-menu-horizontal {
-    border-bottom: none;
-    line-height: 60px;
-    height: 60px;
-    @media (max-width: 600px) {
-      line-height: 40px;
-      height: 40px;
-      font-size: 15px;
-    }
-  }
-
-  .ant-menu-overflow-item {
-    min-width: 60px; // 為 "..." 溢出項目預留最小寬度
-    text-align: center;
-  }
-
-  .ant-menu-item,
-  .ant-menu-submenu-title {
-    color: rgba(28, 24, 74, 1);
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    display: flex !important;
-    height: 50px !important;
-    align-items: center !important;
-    min-width: 80px;
-    justify-content: center;
-    white-space: pre-line;
-    @media (max-width: 600px) {
-      font-size: 15px !important;
-      height: 36px !important;
-      min-width: 60px;
-      padding: 0 6px !important;
-    }
-    &:hover {
-      color: $color-uic;
-    }
-  }
-
-  .ant-menu-submenu {
-    &:hover {
-      border-bottom: none !important;
-    }
-  }
-
-  .ant-menu-item-selected {
-    color: $color-uic !important;
-    border-bottom: none !important;
-  }
-
-  .ant-menu-submenu-title {
-    &:hover {
-      color: $color-uic !important;
-    }
-  }
-
-  .ant-menu-submenu-arrow {
-    color: rgba(28, 24, 74, 1);
   }
 
   @media (min-width: 1024px) {
@@ -167,82 +96,7 @@
       max-height: 55px;
       min-height: 55px;
     }
-
-    .header-nav .ant-menu-horizontal {
-      gap: 36px;
-      flex-wrap: nowrap;
-      align-items: center;
-    }
-
-    .ant-menu-horizontal {
-      height: 55px;
-      line-height: 55px;
-    }
-
-    .ant-menu-overflow-item {
-      min-width: unset;
-    }
-
-    .ant-menu-item,
-    .ant-menu-submenu-title {
-      font-size: 20px !important;
-      line-height: 30px !important;
-      color: rgba(28, 24, 74, 1) !important;
-      height: 55px !important;
-      min-width: unset;
-      padding: 0 !important;
-      letter-spacing: 0;
-    }
-
-    .ant-menu-submenu-arrow {
-      color: rgba(28, 24, 74, 1);
-    }
   }
-}
-
-.ant-menu-light .ant-menu-item-selected {
-  background-color: transparent !important;
-}
-
-.ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title {
-  color: $color-nav !important;
-}
-
-.ant-menu-light.ant-menu-horizontal > .ant-menu-item:hover::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-item-active::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu:hover::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-active::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-selected::after {
-  border-bottom: none !important;
-}
-
-.ant-menu-light.ant-menu-horizontal > .ant-menu-item::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu::after {
-  display: none !important;
-}
-
-// Submenu styles - Placed outside .header to apply globally to the popups
-.ant-menu-submenu-popup {
-  .ant-menu-item,
-  .ant-menu-submenu-title {
-    font-size: 16px !important;
-    color: $color-nav !important;
-    font-weight: 700 !important;
-  }
-}
-
-/* Popup (portal) submenu title override: use the stable popup hook from Header.jsx */
-.header-submenu-popup.ant-menu-submenu-popup
-  .ant-menu-vertical
-  > .ant-menu-item,
-.header-submenu-popup.ant-menu-submenu-popup
-  .ant-menu-vertical
-  > .ant-menu-submenu
-  > .ant-menu-submenu-title {
-  height: 50px !important;
-  display: flex !important;
-  align-items: center !important;
 }
 
 // Mobile Drawer - Native panel overlay
@@ -413,11 +267,154 @@
   height: 100%;
 }
 
-.nav-link-color {
-  color: $color-nav !important;
+// Desktop Menu - Native horizontal nav
+.desktop-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 55px;
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 55px;
+  }
+
+  &__link {
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-nav;
+    text-decoration: none;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    &:hover {
+      color: $color-uic;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-nav;
+      outline-offset: 2px;
+    }
+  }
+
+  &__trigger {
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-nav;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    &:hover {
+      color: $color-uic;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-nav;
+      outline-offset: 2px;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 200;
+    background: #fff;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    padding: 8px 0;
+    list-style: none;
+    margin: 0;
+  }
+
+  &__dropdown-item {
+    position: relative;
+  }
+
+  &__dropdown-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-nav;
+    text-decoration: none;
+    white-space: nowrap;
+    &:hover {
+      color: $color-uic;
+      background: $color-gray-ultralight;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-nav;
+      outline-offset: -2px;
+    }
+  }
+
+  &__subtrigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-nav;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    white-space: nowrap;
+    gap: 8px;
+    &:hover {
+      color: $color-uic;
+      background: $color-gray-ultralight;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-nav;
+      outline-offset: -2px;
+    }
+  }
+
+  &__chevron {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+
+  &__subdropdown {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 201;
+    background: #fff;
+    min-width: 220px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    padding: 8px 0;
+    list-style: none;
+    margin: 0;
+  }
 }
 
-.ant-menu-item-selected .nav-link-hover {
+.nav-link-color {
   color: $color-nav !important;
 }
 
