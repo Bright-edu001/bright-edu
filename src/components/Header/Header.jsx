@@ -2,78 +2,9 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import { menuItems } from "../../config/menuConfig";
 import { getMenuItemText, getMenuItemTo } from "./headerMenuHelpers";
+import DesktopNav from "./DesktopNav";
 import "./Header.scss";
 import getImageUrl from "../../utils/getImageUrl";
-
-// ---- Native desktop menu components ----
-
-function DesktopNavItem({ item, depth = 0 }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const hasChildren = Array.isArray(item.children) && item.children.length > 0;
-  const isTopLevel = depth === 0;
-
-  if (!hasChildren) {
-    const to = getMenuItemTo(item.label);
-    const text = getMenuItemText(item.label);
-    if (!to) return null;
-    return (
-      <li
-        className={
-          isTopLevel ? "desktop-menu__item" : "desktop-menu__dropdown-item"
-        }
-        role="none"
-      >
-        <Link
-          className={
-            isTopLevel ? "desktop-menu__link" : "desktop-menu__dropdown-link"
-          }
-          to={to}
-          role="menuitem"
-        >
-          {text}
-        </Link>
-      </li>
-    );
-  }
-
-  const text = getMenuItemText(item.label);
-
-  return (
-    <li
-      className={`${isTopLevel ? "desktop-menu__item" : "desktop-menu__dropdown-item"} desktop-menu__item--has-submenu${isOpen ? " desktop-menu__item--open" : ""}`}
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-      role="none"
-    >
-      <button
-        className={
-          isTopLevel ? "desktop-menu__trigger" : "desktop-menu__subtrigger"
-        }
-        aria-haspopup="true"
-        aria-expanded={isOpen}
-        type="button"
-        role="menuitem"
-      >
-        <span>{text}</span>
-        {!isTopLevel && (
-          <span className="desktop-menu__chevron" aria-hidden="true" />
-        )}
-      </button>
-      {isOpen && (
-        <ul
-          className={
-            isTopLevel ? "desktop-menu__dropdown" : "desktop-menu__subdropdown"
-          }
-          role="menu"
-        >
-          {item.children.map((child) => (
-            <DesktopNavItem key={child.key} item={child} depth={depth + 1} />
-          ))}
-        </ul>
-      )}
-    </li>
-  );
-}
 
 // ---- Native mobile menu components ----
 
@@ -218,13 +149,7 @@ const Header = () => {
               </Link>
             </div>
 
-            <nav className="header-nav" aria-label="主要導覽">
-              <ul className="desktop-menu" role="menubar">
-                {menuItems.map((item) => (
-                  <DesktopNavItem key={item.key} item={item} depth={0} />
-                ))}
-              </ul>
-            </nav>
+            <DesktopNav items={menuItems} />
 
             <div className="hamburger-menu">
               <div
