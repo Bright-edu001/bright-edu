@@ -4,8 +4,8 @@ import { getMenuItemText, getMenuItemTo } from "./headerMenuHelpers";
 
 function MobileMenuItem({ item, expandedKeys, onToggle, onClose }) {
   const hasChildren = Array.isArray(item.children) && item.children.length > 0;
-  const to = getMenuItemTo(item.label);
-  const text = getMenuItemText(item.label);
+  const to = getMenuItemTo(item);
+  const text = getMenuItemText(item);
 
   if (hasChildren) {
     const isExpanded = expandedKeys.has(item.key);

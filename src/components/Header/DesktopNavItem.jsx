@@ -22,8 +22,8 @@ function DesktopNavItem({ item, depth = 0 }) {
   );
 
   if (!hasChildren) {
-    const to = getMenuItemTo(item.label);
-    const text = getMenuItemText(item.label);
+    const to = getMenuItemTo(item);
+    const text = getMenuItemText(item);
     if (!to) return null;
     return (
       <li
@@ -45,8 +45,8 @@ function DesktopNavItem({ item, depth = 0 }) {
     );
   }
 
-  const text = getMenuItemText(item.label);
-  const to = getMenuItemTo(item.label);
+  const text = getMenuItemText(item);
+  const to = getMenuItemTo(item);
 
   const liClassName = `${isTopLevel ? "desktop-menu__item" : "desktop-menu__dropdown-item"} desktop-menu__item--has-submenu${isOpen ? " desktop-menu__item--open" : ""}`;
   const submenuClassName = isTopLevel

@@ -38,6 +38,12 @@ describe("getMenuItemText", () => {
     expect(getMenuItemText(label)).toBe("活動與文章");
   });
 
+  it("extracts text from a plain menu item object", () => {
+    expect(getMenuItemText({ key: "blog", label: "活動與文章", to: "/blog" })).toBe(
+      "活動與文章",
+    );
+  });
+
   it("returns empty string for null", () => {
     expect(getMenuItemText(null)).toBe("");
   });
@@ -54,6 +60,12 @@ describe("getMenuItemTo", () => {
   it("extracts to from a Link-like element", () => {
     const label = <MockLink to="/blog">活動與文章</MockLink>;
     expect(getMenuItemTo(label)).toBe("/blog");
+  });
+
+  it("extracts to from a plain menu item object", () => {
+    expect(getMenuItemTo({ key: "blog", label: "活動與文章", to: "/blog" })).toBe(
+      "/blog",
+    );
   });
 
   it("returns null for a plain string label", () => {

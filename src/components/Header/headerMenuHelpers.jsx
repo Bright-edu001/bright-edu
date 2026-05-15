@@ -11,6 +11,14 @@ import React from "react";
  * @returns {string}
  */
 export function getMenuItemText(label) {
+  if (
+    label &&
+    typeof label === "object" &&
+    !React.isValidElement(label) &&
+    "label" in label
+  ) {
+    return getMenuItemText(label.label);
+  }
   if (typeof label === "string") return label;
   if (React.isValidElement(label)) {
     return extractText(label.props.children);
@@ -36,6 +44,22 @@ function extractText(node) {
  */
 export function getMenuItemTo(label) {
   if (
+    label &&
+    typeof label === "object" &&
+    !React.isValidElement(label) &&
+    typeof label.to === "string"
+  ) {
+    return label.to;
+  }
+  if (
+    label &&
+    typeof label === "object" &&
+    !React.isValidElement(label) &&
+    "label" in label
+  ) {
+    return getMenuItemTo(label.label);
+  }
+  if (
     React.isValidElement(label) &&
     label.props != null &&
     "to" in label.props
@@ -57,8 +81,8 @@ export function getMenuItemTo(label) {
 function normalizeItem(item, depth, parentKey) {
   const { key, label, children } = item;
   const isLeaf = !Array.isArray(children) || children.length === 0;
-  const text = getMenuItemText(label);
-  const to = getMenuItemTo(label);
+  const text = getMenuItemText(item);
+  const to = getMenuItemTo(item);
 
   const normalized = {
     key,
