@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { COMMON_ROUTE_PATHS, UIC_MBA_LINKS } from "../routes/publicRoutePaths";
 
 export const menuItems = [
   {
     key: "home",
     label: (
-      <Link to="/" className="nav-link-hover">
+      <Link to={COMMON_ROUTE_PATHS.home} className="nav-link-hover">
         首頁
       </Link>
     ),
@@ -129,7 +130,7 @@ export const menuItems = [
         key: "mba",
         label: (
           <Link
-            to="/伊利諾大學芝加哥分校/MBA-Programs"
+            to={UIC_MBA_LINKS.programs}
             className="nav-link-color"
           >
             MBA Programs
@@ -140,7 +141,7 @@ export const menuItems = [
             key: "areas",
             label: (
               <Link
-                to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域"
+                to={UIC_MBA_LINKS.areas}
                 className="nav-link-color"
               >
                 五大領域
@@ -150,7 +151,7 @@ export const menuItems = [
               {
                 key: "management",
                 label: (
-                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Management">
+                  <Link to={UIC_MBA_LINKS.management}>
                     Management
                   </Link>
                 ),
@@ -158,7 +159,7 @@ export const menuItems = [
               {
                 key: "finance",
                 label: (
-                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Finance">
+                  <Link to={UIC_MBA_LINKS.finance}>
                     Finance
                   </Link>
                 ),
@@ -166,7 +167,7 @@ export const menuItems = [
               {
                 key: "analytics",
                 label: (
-                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business-Analytics">
+                  <Link to={UIC_MBA_LINKS.analytics}>
                     Business Analytics
                   </Link>
                 ),
@@ -174,7 +175,7 @@ export const menuItems = [
               {
                 key: "marketing",
                 label: (
-                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Marketing">
+                  <Link to={UIC_MBA_LINKS.marketing}>
                     Marketing
                   </Link>
                 ),
@@ -182,7 +183,7 @@ export const menuItems = [
               {
                 key: "hr",
                 label: (
-                  <Link to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human-Resource-Management">
+                  <Link to={UIC_MBA_LINKS.humanResource}>
                     Human Resource Management
                   </Link>
                 ),
@@ -192,7 +193,7 @@ export const menuItems = [
           {
             key: "advantages",
             label: (
-              <Link to="/伊利諾大學芝加哥分校/MBA-Programs/課程優勢">
+              <Link to={UIC_MBA_LINKS.advantages}>
                 課程優勢
               </Link>
             ),
@@ -200,7 +201,7 @@ export const menuItems = [
           {
             key: "core-courses",
             label: (
-              <Link to="/伊利諾大學芝加哥分校/MBA-Programs/核心課程">
+              <Link to={UIC_MBA_LINKS.coreCourses}>
                 核心課程
               </Link>
             ),
@@ -208,7 +209,7 @@ export const menuItems = [
           {
             key: "dual-degree",
             label: (
-              <Link to="/伊利諾大學芝加哥分校/MBA-Programs/雙碩士銜接課程">
+              <Link to={UIC_MBA_LINKS.dualDegree}>
                 雙碩士銜接課程
               </Link>
             ),
@@ -216,7 +217,7 @@ export const menuItems = [
           {
             key: "application",
             label: (
-              <Link to="/伊利諾大學芝加哥分校/MBA-Programs/申請資訊">
+              <Link to={UIC_MBA_LINKS.application}>
                 申請資訊
               </Link>
             ),
@@ -374,7 +375,7 @@ export const menuItems = [
   {
     key: "blog",
     label: (
-      <Link to="/blog" className="nav-link-hover">
+      <Link to={COMMON_ROUTE_PATHS.blogLink} className="nav-link-hover">
         活動與文章
       </Link>
     ),
@@ -382,7 +383,7 @@ export const menuItems = [
   {
     key: "contact",
     label: (
-      <Link to="/聯絡我們" className="nav-link-hover">
+      <Link to={COMMON_ROUTE_PATHS.contactLink} className="nav-link-hover">
         聯絡我們
       </Link>
     ),

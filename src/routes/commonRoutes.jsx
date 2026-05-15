@@ -5,6 +5,7 @@ import {
   BlogRouteElement,
   BlogSearchRouteElement,
 } from "./BlogRouteBoundaries";
+import { COMMON_ROUTE_PATHS } from "./publicRoutePaths";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 const Contact = lazy(() => import("../pages/Home/Contact.jsx"));
@@ -14,15 +15,18 @@ const BlogSearch = lazy(() => import("../pages/Blog/BlogSearch"));
 
 const commonRoutes = [
   { index: true, element: <Home /> },
-  { path: "contact", element: <Navigate to="/聯絡我們" replace /> },
-  { path: "聯絡我們", element: <Contact /> },
-  { path: "blog", element: <BlogRouteElement Component={Blog} /> },
   {
-    path: "blog/:slug",
+    path: COMMON_ROUTE_PATHS.contactRedirect,
+    element: <Navigate to={COMMON_ROUTE_PATHS.contactLink} replace />,
+  },
+  { path: COMMON_ROUTE_PATHS.contact, element: <Contact /> },
+  { path: COMMON_ROUTE_PATHS.blog, element: <BlogRouteElement Component={Blog} /> },
+  {
+    path: COMMON_ROUTE_PATHS.blogDetail,
     element: <BlogDetailRouteElement Component={BlogDetail} />,
   },
   {
-    path: "blog/search/:keyword",
+    path: COMMON_ROUTE_PATHS.blogSearch,
     element: <BlogSearchRouteElement Component={BlogSearch} />,
   },
 ];

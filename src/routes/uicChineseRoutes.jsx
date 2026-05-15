@@ -1,5 +1,6 @@
 import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
+import { UIC_MBA_ROUTE_PATHS } from "./publicRoutePaths";
 
 const AboutUic = lazy(() => import("../pages/Uic/Uic_school/AboutUic"));
 const CareerResources = lazy(
@@ -57,13 +58,13 @@ const uicChineseRoutes = [
     path: "伊利諾大學芝加哥分校/UIC商學院碩士/職涯資源",
     element: <CareerResources />,
   },
-  { path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域", element: <Areas /> },
+  { path: UIC_MBA_ROUTE_PATHS.areas, element: <Areas /> },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/課程優勢",
+    path: UIC_MBA_ROUTE_PATHS.advantages,
     element: <Advantages />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/核心課程",
+    path: UIC_MBA_ROUTE_PATHS.coreCourses,
     element: <CoreCourses />,
   },
   {
@@ -88,39 +89,39 @@ const uicChineseRoutes = [
     element: <RankingPage />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Management",
+    path: UIC_MBA_ROUTE_PATHS.management,
     element: <Management />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Finance",
+    path: UIC_MBA_ROUTE_PATHS.finance,
     element: <Finance />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business-Analytics",
+    path: UIC_MBA_ROUTE_PATHS.analytics,
     element: <Analytics />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business Analytics",
+    path: UIC_MBA_ROUTE_PATHS.analyticsLegacy,
     element: (
       <Navigate
-        to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business-Analytics"
+        to={`/${UIC_MBA_ROUTE_PATHS.analytics}`}
         replace
       />
     ),
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Marketing",
+    path: UIC_MBA_ROUTE_PATHS.marketing,
     element: <Marketing />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human-Resource-Management",
+    path: UIC_MBA_ROUTE_PATHS.humanResource,
     element: <HRManagement />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human Resource Management",
+    path: UIC_MBA_ROUTE_PATHS.humanResourceLegacy,
     element: (
       <Navigate
-        to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human-Resource-Management"
+        to={`/${UIC_MBA_ROUTE_PATHS.humanResource}`}
         replace
       />
     ),
@@ -143,14 +144,14 @@ const uicChineseRoutes = [
     element: <Economy />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/雙碩士銜接課程",
+    path: UIC_MBA_ROUTE_PATHS.dualDegree,
     element: <DualDegree />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/申請資訊",
+    path: UIC_MBA_ROUTE_PATHS.application,
     element: <Application />,
   },
-  { path: "伊利諾大學芝加哥分校/MBA-Programs", element: <MbaPrograms /> },
+  { path: UIC_MBA_ROUTE_PATHS.programs, element: <MbaPrograms /> },
   {
     path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Finance-MSF",
     element: <MSFinance />,
