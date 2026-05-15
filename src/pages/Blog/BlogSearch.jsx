@@ -6,39 +6,32 @@ import MbaAreasHero from "../../components/MbaAreasHero/MbaAreasHero";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AppSkeleton from "../../components/AppSkeleton/AppSkeleton";
 import ProgressiveImage from "../../components/ProgressiveImage/ProgressiveImage";
+import BlogGridSection from "./BlogGridSection";
 
 import "./BlogDetail.scss";
 import "./BlogSearch.scss"; // 新增：引入樣式
 import "../../pages/Home/Blog.scss";
 
 // 直接複製 Blog.js 的 BlogSection 結構
-function BlogSection({ items }) {
-  return (
-    <section className="blog-section">
-      <div className="blog-grid">
-        {items.map((item) => (
-          <Link
-            to={`/blog/${item.slug || item.id}`}
-            className="blog-card"
-            key={`${item._collectionType || "item"}-${item.id}`}
-          >
-            <ProgressiveImage
-              src={item.image || item.thumbnail}
-              placeholderSrc={item.thumbnail}
-              alt={item.title}
-              className="blog-card-img"
-              style={{ width: "100%", height: "253px", objectFit: "cover" }}
-            />
-            <div className="blog-card-content">
-              <h3 className="blog-card-title">{item.title}</h3>
-              <p className="blog-card-excerpt">{item.excerpt}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
-  );
-}
+const renderSearchResultCard = (item) => (
+  <Link
+    to={`/blog/${item.slug || item.id}`}
+    className="blog-card"
+    key={`${item._collectionType || "item"}-${item.id}`}
+  >
+    <ProgressiveImage
+      src={item.image || item.thumbnail}
+      placeholderSrc={item.thumbnail}
+      alt={item.title}
+      className="blog-card-img"
+      style={{ width: "100%", height: "253px", objectFit: "cover" }}
+    />
+    <div className="blog-card-content">
+      <h3 className="blog-card-title">{item.title}</h3>
+      <p className="blog-card-excerpt">{item.excerpt}</p>
+    </div>
+  </Link>
+);
 
 function BlogSearch() {
   const { keyword } = useParams();
@@ -82,7 +75,10 @@ function BlogSearch() {
         <div className="blog-detail-main">
           <h1 className="blog-detail-title">搜尋關鍵字: {keyword}</h1>
           {searchResults.length > 0 ? (
-            <BlogSection items={searchResults} />
+            <BlogGridSection
+              items={searchResults}
+              renderItem={renderSearchResultCard}
+            />
           ) : (
             <div>查無相關文章</div>
           )}

@@ -2,22 +2,9 @@ import React from "react";
 import "./Blog.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useBlogData } from "../../hooks/useBlogData";
-import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AppSkeleton from "../../components/AppSkeleton/AppSkeleton";
-
-function BlogSection({ title, items, imageType }) {
-  return (
-    <section className="blog-section">
-      <h2 className="blog-section-title">{title}</h2>
-      <div className="blog-grid">
-        {items.map((item) => (
-          <ArticleCard key={item.id} item={item} imageType={imageType} />
-        ))}
-      </div>
-    </section>
-  );
-}
+import BlogGridSection from "../Blog/BlogGridSection";
 
 function Blog() {
   const location = useLocation();
@@ -55,7 +42,7 @@ function Blog() {
               <AppSkeleton />
             ) : (
               sections.map((section) => (
-                <BlogSection
+                <BlogGridSection
                   key={section.title}
                   title={section.title}
                   items={section.items}
