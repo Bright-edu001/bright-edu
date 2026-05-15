@@ -35,6 +35,7 @@ vi.mock("../../hooks/useBlogData", () => ({
     error: null,
   }),
 }));
+
 const wrapper = ({ children }) => (
   <MemoryRouter
     initialEntries={["/blog/1"]}
@@ -62,9 +63,21 @@ describe("BlogDetail", () => {
   });
 
   test("renders stably across rerenders", () => {
-    const { asFragment, rerender } = render(<BlogDetail />, { wrapper });
-    // 使用 snapshot 驗證重渲染前後輸出一致，避免直接存取 DOM 節點
+    const { container, rerender } = render(<BlogDetail />, { wrapper });
+    const before = container.innerHTML;
     rerender(<BlogDetail />);
-    expect(asFragment()).toMatchSnapshot();
+    expect(container.innerHTML).toBe(before);
+    expect(screen.getByRole("heading", { name: "Sample" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Sample" })).toHaveAttribute(
+      "src",
+      "img.jpg",
+    );
+    expect(container.querySelector('a[href="/blog"]')).toHaveAttribute(
+      "href",
+      "/blog",
+    );
+    expect(container.innerHTML).toContain(
+      '&lt;script&gt;alert("xss")&lt;/script&gt;',
+    );
   });
 });
