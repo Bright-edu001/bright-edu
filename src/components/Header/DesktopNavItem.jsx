@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { getMenuItemText, getMenuItemTo } from "./headerMenuHelpers";
 
-function DesktopNavItem({ item, depth = 0 }) {
+function DesktopNavItem({ item, depth = 0, onNavigate }) {
   const [isOpen, setIsOpen] = useState(false);
   const hasChildren = Array.isArray(item.children) && item.children.length > 0;
   const isTopLevel = depth === 0;
@@ -10,6 +10,10 @@ function DesktopNavItem({ item, depth = 0 }) {
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
   const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
+  const handleNavigate = useCallback(() => {
+    setIsOpen(false);
+    onNavigate?.();
+  }, [onNavigate]);
 
   const handleKeyDown = useCallback(
     (e) => {
@@ -37,6 +41,7 @@ function DesktopNavItem({ item, depth = 0 }) {
             isTopLevel ? "desktop-menu__link" : "desktop-menu__dropdown-link"
           }
           to={to}
+          onClick={handleNavigate}
           role="menuitem"
         >
           {text}
@@ -71,6 +76,7 @@ function DesktopNavItem({ item, depth = 0 }) {
                 : "desktop-menu__dropdown-link desktop-menu__dropdown-link--parent"
             }
             to={to}
+            onClick={handleNavigate}
             role="menuitem"
           >
             {text}
@@ -107,7 +113,12 @@ function DesktopNavItem({ item, depth = 0 }) {
       {isOpen && (
         <ul className={submenuClassName} role="menu">
           {item.children.map((child) => (
-            <DesktopNavItem key={child.key} item={child} depth={depth + 1} />
+            <DesktopNavItem
+              key={child.key}
+              item={child}
+              depth={depth + 1}
+              onNavigate={handleNavigate}
+            />
           ))}
         </ul>
       )}
