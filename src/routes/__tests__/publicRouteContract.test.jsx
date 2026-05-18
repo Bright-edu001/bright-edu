@@ -5,7 +5,13 @@ import {
   normalizeHeaderMenuItems,
 } from "../../components/Header/headerMenuHelpers";
 import { buildChineseUrl } from "../../config/urlMapping";
+import { LEGACY_REDIRECT_MAP } from "../../config/legacyRedirectMap";
 import { COMMON_ROUTE_PATHS, UIC_MBA_ROUTE_PATHS } from "../publicRoutePaths";
+import {
+  UIC_SECTION_CONFIG,
+  MSU_SECTION_CONFIG,
+  BLOG_LINK_CONFIG,
+} from "../../components/Footer/footerConfig";
 import commonRoutes from "../commonRoutes";
 import msuChineseRoutes from "../msuChineseRoutes";
 import msuRoutes from "../msuRoutes";
@@ -108,21 +114,15 @@ const getHeaderMenuTargets = () =>
 
 // ─── Footer internal links ────────────────────────────────────────────────────
 
-// Footer.jsx (feature/test-preview) hardcodes these internal links as <a href>.
-// After P0-3 is merged (footerConfig.js), replace this list by importing
-// footerConfig and deriving links from UIC_SECTION_CONFIG, MSU_SECTION_CONFIG,
-// and BLOG_LINK_CONFIG.
+// Derive footer links from footerConfig (added in P0-3). This ensures the test
+// always reflects the actual links rendered by the Footer components.
 const FOOTER_INTERNAL_LINKS = [
-  "/uic-business-school/uic/about-uic",
-  "/uic-business-school/uic/rankings-awards",
-  "/uic-business-school/mba/application",
-  "/msu-business-school/msu/about-msu",
-  "/msu-business-school/msu/rankings-awards",
-  "/msu-business-school/msf/application",
-  COMMON_ROUTE_PATHS.blogLink,
+  ...UIC_SECTION_CONFIG.links.map((l) => l.to),
+  ...MSU_SECTION_CONFIG.links.map((l) => l.to),
+  BLOG_LINK_CONFIG.to,
 ];
 
-// ─── Legacy UrlRedirect data ──────────────────────────────────────────────────
+// ─── Legacy exact redirect map data ──────────────────────────────────────────
 
 // UrlRedirect routes have no explicit Navigate target; they compute their
 // destination at runtime via buildChineseUrl(location.pathname).
@@ -137,6 +137,10 @@ const getLegacyRedirectTargets = () =>
     normalizePath(buildChineseUrl(p.slice(1))),
   );
 
+// Exact targets from the legacyRedirectMap (P0-2). These are the canonical
+// Chinese paths that UrlRedirect resolves via getExactRedirectTarget().
+const getLegacyExactMapTargets = () => Object.values(LEGACY_REDIRECT_MAP);
+
 // ─── Key canonical public routes ─────────────────────────────────────────────
 
 // Spot-check the most important entry-point routes exist in the route config.
@@ -149,7 +153,7 @@ const KEY_PUBLIC_ROUTES = [
   `/${UIC_MBA_ROUTE_PATHS.programs}`,
   `/${UIC_MBA_ROUTE_PATHS.application}`,
   "/伊利諾大學芝加哥分校/UIC商學院碩士/學校介紹",
-  // MSU (hardcoded; MSU_ROUTE_PATHS added in P0-3)
+  // MSU (using MSU_SCHOOL_ROUTE_PATHS / MSU_MSF_ROUTE_PATHS from P0-1)
   "/密西根州立大學/MSU商學院/學校介紹",
   "/密西根州立大學/金融碩士課程/申請資訊",
 ];
@@ -199,25 +203,34 @@ describe("Footer internal link contract", () => {
   });
 
   it("Footer covers blog, UIC, and MSU navigation links", () => {
-    expect(FOOTER_INTERNAL_LINKS).toContain(COMMON_ROUTE_PATHS.blogLink);
+    expect(FOOTER_INTERNAL_LINKS).toContain(BLOG_LINK_CONFIG.to);
     expect(
-      FOOTER_INTERNAL_LINKS.some(
-        (l) =>
-          l.startsWith("/uic-business-school/") ||
-          l.startsWith("/伊利諾大學芝加哥分校/"),
+      FOOTER_INTERNAL_LINKS.some((l) =>
+        l.startsWith("/伊利諾大學芝加哥分校/"),
       ),
     ).toBe(true);
     expect(
-      FOOTER_INTERNAL_LINKS.some(
-        (l) =>
-          l.startsWith("/msu-business-school/") ||
-          l.startsWith("/密西根州立大學/"),
+      FOOTER_INTERNAL_LINKS.some((l) =>
+        l.startsWith("/密西根州立大學/"),
       ),
     ).toBe(true);
   });
 });
 
 describe("Legacy redirect target contract", () => {
+  it("every exact legacyRedirectMap target is a registered Chinese public route", () => {
+    const publicRouteMatchers = getPublicRouteMatchers();
+    const exactTargets = getLegacyExactMapTargets();
+
+    expect(exactTargets.length).toBeGreaterThan(0);
+
+    const unresolved = exactTargets.filter(
+      (target) => !isRegisteredPublicRoute(target, publicRouteMatchers),
+    );
+
+    expect(unresolved).toEqual([]);
+  });
+
   it("every UrlRedirect route resolves to a registered Chinese public route", () => {
     const publicRouteMatchers = getPublicRouteMatchers();
     const redirectTargets = getLegacyRedirectTargets();
