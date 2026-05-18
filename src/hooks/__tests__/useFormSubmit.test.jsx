@@ -2,16 +2,6 @@
 import { renderHook, act } from "@testing-library/react";
 import useFormSubmit from "../useFormSubmit";
 import { contactService } from "../../services/contactService";
-import { App } from "antd";
-
-// Mock Ant Design 的 App.useApp，避免實際呼叫 UI
-vi.mock("antd", () => ({
-  App: {
-    useApp: vi.fn(),
-  },
-  // Mock Button component used in hook's error message
-  Button: () => null,
-}));
 
 // Mock Firebase modules to prevent actual Firebase calls
 vi.mock("../../config/firebaseCore", () => ({
@@ -33,21 +23,12 @@ vi.mock("../../services/contactService", () => ({
 
 // 測試 useFormSubmit hook 的行為
 describe("useFormSubmit", () => {
-  // message mock 物件，模擬 antd 的訊息提示
-  const message = {
-    error: vi.fn(),
-    success: vi.fn(),
-    warning: vi.fn(),
-    loading: vi.fn(),
-  };
-
-  // 每次測試前重置 mock 狀態，並讓 useApp 回傳 message mock
+  // 每次測試前重置 mock 狀態
   beforeEach(() => {
     vi.clearAllMocks();
-    App.useApp.mockReturnValue({ message });
   });
 
-  // 測試：表單驗證失敗時，顯示錯誤訊息且不送出
+  // 測試：表單驗證失敗時，顯示錯誤通知且不送出
   it("shows error message and does not submit when form is invalid", async () => {
     const { result } = renderHook(() => useFormSubmit());
 
@@ -55,7 +36,7 @@ describe("useFormSubmit", () => {
       await result.current.handleSubmit({ preventDefault: vi.fn() });
     });
 
-    expect(message.error).toHaveBeenCalled();
+    expect(result.current.notification?.type).toBe("error");
     expect(contactService.saveToBoth).not.toHaveBeenCalled();
   });
 
@@ -84,7 +65,7 @@ describe("useFormSubmit", () => {
       await result.current.handleSubmit({ preventDefault: vi.fn() });
     });
 
-    // 表單應該被重置，result.success 應為 true，並顯示成功訊息
+    // 表單應該被重置，result.success 應為 true，並顯示成功通知
     expect(result.current.form).toEqual({
       name: "",
       lineId: "",
@@ -94,7 +75,7 @@ describe("useFormSubmit", () => {
     expect(result.current.result).toEqual(
       expect.objectContaining({ success: true }),
     );
-    expect(message.success).toHaveBeenCalled();
+    expect(result.current.notification?.type).toBe("success");
   });
 
   // 測試：Firestore 儲存失敗的情況
@@ -129,7 +110,7 @@ describe("useFormSubmit", () => {
     expect(result.current.result).toEqual(
       expect.objectContaining({ success: false }),
     );
-    expect(message.error).toHaveBeenCalled();
+    expect(result.current.notification?.type).toBe("error");
   });
 
   // 測試：完全儲存失敗的情況
@@ -157,6 +138,6 @@ describe("useFormSubmit", () => {
     expect(result.current.result).toEqual(
       expect.objectContaining({ success: false }),
     );
-    expect(message.error).toHaveBeenCalled();
+    expect(result.current.notification?.type).toBe("error");
   });
 });

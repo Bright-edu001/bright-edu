@@ -3,6 +3,7 @@ import "./AboutUic.scss";
 import GallerySection from "../../../components/GallerySection/GallerySection";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import ActionButton from "../../../components/ActionButton/ActionButton";
+import SchoolStatsCard from "../../../components/SchoolStatsCard/SchoolStatsCard";
 import getImageUrl from "../../../utils/getImageUrl";
 
 function AboutUic() {
@@ -61,9 +62,7 @@ function AboutUic() {
 
       <section className="stats" aria-label="學校數據">
         <div className="container">
-          <div className="stats-card-school">
-            <h3>UIC 美國商學院</h3>
-            <ul className="left-aligned">
+          <SchoolStatsCard title="UIC 美國商學院">
               <li>
                 <span className="label">所在省州</span>
                 <span className="value">伊利諾州</span>
@@ -106,8 +105,7 @@ function AboutUic() {
                   (小班教學，學習體驗更佳)
                 </span>
               </li>
-            </ul>
-          </div>
+            </SchoolStatsCard>
           <div className="stats-card-ranking">
             <div className="card-header">
               <div className="header-content">

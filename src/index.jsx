@@ -31,8 +31,8 @@ const queryClient = new QueryClient({
 const initializeSentryOptimized = () => {
   if (process.env.NODE_ENV !== "production") return;
 
-  // 延遲載入 Sentry，避免阻塞初始渲染
-  setTimeout(async () => {
+  // 實際初始化邏輯：BrowserTracing 從 @sentry/tracing 取得（v7 不從 @sentry/react re-export）
+  const doInit = async () => {
     try {
       const [{ default: Sentry }, { BrowserTracing }] = await Promise.all([
         import("@sentry/react"),
@@ -63,7 +63,14 @@ const initializeSentryOptimized = () => {
     } catch (error) {
       logger.warn("[Sentry] 初始化失敗:", error);
     }
-  }, 2000); // 2秒後初始化
+  };
+
+  // 瀏覽器空閒時才載入 Sentry，避免阻塞初始渲染；不支援 requestIdleCallback 的環境退回 setTimeout
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(doInit, { timeout: 5000 });
+  } else {
+    setTimeout(doInit, 2000);
+  }
 };
 
 // ===== 優化版 Service Worker 清理（非阻塞）=====

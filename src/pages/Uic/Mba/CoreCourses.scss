@@ -2,22 +2,17 @@
 
 @use "./mba-common" as *;
 
-@mixin core-table-column-widths {
-  .ant-table-thead > tr > th:first-child {
-    width: 80px !important;
-    min-width: 70px !important;
-    max-width: 90px !important;
-  }
-
-  .ant-table-tbody > tr > td:first-child {
+@mixin core-table-column-widths-mobile {
+  th:first-child,
+  td:first-child {
     width: 80px !important;
     min-width: 70px !important;
     max-width: 90px !important;
     word-break: break-word;
   }
 
-  .ant-table-thead > tr > th:last-child,
-  .ant-table-tbody > tr > td:last-child {
+  th:last-child,
+  td:last-child {
     width: auto !important;
     min-width: 220px !important;
     max-width: unset !important;
@@ -37,7 +32,7 @@
     text-align: left;
   }
   .courses-content {
-    margin-top: $spacing-sm;
+    margin-top: $spacing-xl;
     display: flex;
     flex-direction: column;
     gap: 3.5rem;
@@ -86,71 +81,29 @@
     color: #211700;
     font-size: 18px;
   }
-  .courses-content {
-    .ant-table-wrapper {
-      .ant-table {
-        border-color: #d13a3a !important;
-        @include core-table-column-widths;
-      }
+  .core-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000000;
+
+    th,
+    td {
+      border: 1px solid #000000;
+      padding: 16px;
+      text-align: left;
     }
-    // Antd v5 Table 欄位分隔線黑色（補齊所有分隔線）
-    :where(.css-dev-only-do-not-override-1rfzxih).ant-table-wrapper
-      .ant-table.ant-table-bordered
-      > .ant-table-container
-      table
-      > thead
-      > tr
-      > th,
-    :where(.css-dev-only-do-not-override-1rfzxih).ant-table-wrapper
-      .ant-table.ant-table-bordered
-      > .ant-table-container
-      table
-      > thead
-      > tr
-      > td,
-    :where(.css-dev-only-do-not-override-1rfzxih).ant-table-wrapper
-      .ant-table.ant-table-bordered
-      > .ant-table-container
-      table
-      > tbody
-      > tr
-      > th,
-    :where(.css-dev-only-do-not-override-1rfzxih).ant-table-wrapper
-      .ant-table.ant-table-bordered
-      > .ant-table-container
-      table
-      > tbody
-      > tr
-      > td,
-    :where(.css-dev-only-do-not-override-1rfzxih).ant-table-wrapper
-      .ant-table.ant-table-bordered
-      > .ant-table-container
-      table
-      > tfoot
-      > tr
-      > th,
-    :where(.css-dev-only-do-not-override-1rfzxih).ant-table-wrapper
-      .ant-table.ant-table-bordered
-      > .ant-table-container
-      table
-      > tfoot
-      > tr
-      > td,
-    :where(.css-dev-only-do-not-override-1rfzxih).ant-table-wrapper
-      .ant-table.ant-table-bordered
-      > .ant-table-container
-      table
-      > colgroup
-      > col {
-      border-color: #000000 !important;
+
+    th:first-child,
+    td:first-child {
+      width: 260px;
+      min-width: 180px;
+      word-break: break-word;
     }
-    // Antd v5 Table 補齊左邊與最上方邊線為黑色
-    :where(.css-dev-only-do-not-override-1rfzxih).ant-table-wrapper
-      .ant-table.ant-table-bordered
-      > .ant-table-container
-      table {
-      border-left: 1px solid #000000 !important;
-      border-top: 1px solid #000000 !important;
+
+    th:last-child,
+    td:last-child {
+      width: auto;
+      min-width: 220px;
     }
   }
 
@@ -160,17 +113,14 @@
     }
   }
   @media (max-width: 500px) {
-    .mba-courses-page .courses-content {
+    .courses-content {
       margin-top: $spacing-sm;
     }
-    .mba-courses-page .intro {
+    .intro {
       margin: $spacing-xs 0;
     }
-    // Antd Table 樣式調整
-    .mba-courses-page .courses-content .ant-table-wrapper {
-      .ant-table {
-        @include core-table-column-widths;
-      }
+    .core-table {
+      @include core-table-column-widths-mobile;
     }
   }
 }

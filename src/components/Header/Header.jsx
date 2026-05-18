@@ -1,138 +1,70 @@
-import React, {
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-  useEffectEvent,
-} from "react";
-import { Menu, Drawer, ConfigProvider } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { Link } from "react-router-dom";
 import { menuItems } from "../../config/menuConfig";
-import { useWindowSize, calculateDrawerWidth } from "../../hooks/useWindowSize";
+import DesktopNav from "./DesktopNav";
+import MobileNavPanel from "./MobileNavPanel";
 import "./Header.scss";
 import getImageUrl from "../../utils/getImageUrl";
 
-const desktopSubmenuPopupClassName = "header-submenu-popup";
-
-const addSubmenuPopupClassName = (items) =>
-  items.map((item) => {
-    if (!item || typeof item !== "object") {
-      return item;
-    }
-
-    const nextItem = { ...item };
-
-    if (Array.isArray(item.children) && item.children.length > 0) {
-      nextItem.popupClassName = [item.popupClassName, desktopSubmenuPopupClassName]
-        .filter(Boolean)
-        .join(" ");
-      nextItem.children = addSubmenuPopupClassName(item.children);
-    }
-
-    return nextItem;
-  });
+// ---- Header component ----
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
-  const windowSize = useWindowSize();
-  const drawerWidth = useMemo(
-    () => calculateDrawerWidth(windowSize.width),
-    [windowSize.width],
-  );
-  const [animationDuration, setAnimationDuration] = useState("0.2s");
-  const navigate = useNavigate();
-  const desktopMenuItems = useMemo(
-    () => addSubmenuPopupClassName(menuItems),
-    [],
-  );
+  const [mobileExpandedKeys, setMobileExpandedKeys] = useState(new Set());
+  const closeButtonRef = useRef(null);
 
-  const onMenuMouseEnter = useEffectEvent((e) => {
-    if (e.target.closest(".ant-menu-submenu")) {
-      setAnimationDuration("0.2s");
-    }
-  });
-
-  const onMenuMouseLeave = useEffectEvent((e) => {
-    if (e.target.closest(".ant-menu-submenu")) {
-      setAnimationDuration("0.7s");
-    }
-  });
-
-  // 監聽滑鼠事件來控制動畫時間
-  useEffect(() => {
-    // 添加事件監聽器到 header-nav
-    const headerNav = document.querySelector(".header-nav");
-    if (headerNav) {
-      headerNav.addEventListener("mouseenter", onMenuMouseEnter, true);
-      headerNav.addEventListener("mouseleave", onMenuMouseLeave, true);
-    }
-
-    return () => {
-      if (headerNav) {
-        headerNav.removeEventListener("mouseenter", onMenuMouseEnter, true);
-        headerNav.removeEventListener("mouseleave", onMenuMouseLeave, true);
-      }
-    };
+  const closeMobileMenu = useCallback(() => {
+    setMobileMenu(false);
+    setMobileExpandedKeys(new Set());
   }, []);
 
   const toggleMobileMenu = useCallback(() => {
     setMobileMenu((prev) => !prev);
   }, []);
 
-  const handleMenuClick = useCallback(
-    ({ key }) => {
-      // 同原本邏輯：透過 key 找到 path，navigate 並關閉 drawer
-      const findItem = (items, key) => {
-        for (const item of items) {
-          if (item.key === key) return item;
-          if (item.children) {
-            const found = findItem(item.children, key);
-            if (found) return found;
-          }
-        }
-        return null;
-      };
-      const clicked = findItem(menuItems, key);
-      if (clicked?.path) {
-        navigate(clicked.path);
-        setMobileMenu(false);
+  const toggleMobileExpand = useCallback((key) => {
+    setMobileExpandedKeys((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
       }
-    },
-    [navigate],
-  ); // 依賴 navigate 函式
-
-  // 創建關閉移動選單的 callback 函式
-  const closeMobileMenu = useCallback(() => {
-    setMobileMenu(false);
+      return next;
+    });
   }, []);
 
-  // --- 新增：在 Drawer 裡的 Menu，所有 <Link> 點擊都自動關閉 drawer ---
-  const mobileMenuItems = useMemo(() => {
-    const wrapClose = (items) =>
-      items.map((item) => {
-        const newItem = { ...item };
-        // 如果 label 是 React Element 而且 type === Link，就 clone 注入 onClick
-        if (React.isValidElement(item.label) && item.label.type === Link) {
-          newItem.label = React.cloneElement(item.label, {
-            onClick: closeMobileMenu,
-          });
-        }
-        if (item.children) {
-          newItem.children = wrapClose(item.children);
-        }
-        return newItem;
-      });
-    return wrapClose(menuItems);
-  }, [closeMobileMenu]);
+  // Body scroll lock while mobile panel is open
+  useEffect(() => {
+    if (mobileMenu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenu]);
+
+  // Escape key closes mobile panel
+  useEffect(() => {
+    if (!mobileMenu) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeMobileMenu();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenu, closeMobileMenu]);
+
+  // Focus close button when mobile panel opens (minimal focus management)
+  useEffect(() => {
+    if (mobileMenu && closeButtonRef.current) {
+      closeButtonRef.current.focus();
+    }
+  }, [mobileMenu]);
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          motionDurationMid: animationDuration, // 動態控制展開(0.2s)和關閉(0.5s)時間
-        },
-      }}
-    >
+    <>
       <header className="header" role="banner">
         <div className="header-center-wrapper">
           <div className="container">
@@ -149,9 +81,7 @@ const Header = () => {
               </Link>
             </div>
 
-            <div className="header-nav">
-              <Menu mode="horizontal" theme="light" items={desktopMenuItems} />
-            </div>
+            <DesktopNav items={menuItems} />
 
             <div className="hamburger-menu">
               <div
@@ -166,25 +96,19 @@ const Header = () => {
                 <span></span>
               </div>
             </div>
-
-            <Drawer
-              placement="right"
-              onClose={toggleMobileMenu}
-              open={mobileMenu}
-              className="mobile-drawer"
-              width={drawerWidth}
-            >
-              <Menu
-                mode="inline"
-                theme="light"
-                items={mobileMenuItems}
-                onClick={handleMenuClick}
-              />
-            </Drawer>
           </div>
         </div>
       </header>
-    </ConfigProvider>
+
+      <MobileNavPanel
+        open={mobileMenu}
+        items={menuItems}
+        expandedKeys={mobileExpandedKeys}
+        onToggle={toggleMobileExpand}
+        onClose={closeMobileMenu}
+        closeButtonRef={closeButtonRef}
+      />
+    </>
   );
 };
 

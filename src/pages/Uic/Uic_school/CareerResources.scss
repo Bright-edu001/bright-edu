@@ -1,31 +1,30 @@
 @use "../../../styles/index" as *;
 
-// 全域橫向捲軸隱藏
+// 全域橫向捲軸隱藏（需要保持全域，避免 MbaAreasHero 橫向溢位）
 body,
 html {
   overflow-x: hidden;
 }
-.intro-title {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-bold;
-  color: $color-nav;
-  margin-bottom: $spacing-sm;
-}
-.career-list-item {
-  font-weight: $font-weight-bold;
-  font-size: $font-size-md;
-  line-height: 40px;
-}
-.career-resources-intro-list {
-  font-size: $font-size-md;
-  margin-top: $spacing-xs;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xs;
-}
 .career-resources {
   overflow-x: hidden;
+
+  // Scoped here to prevent bleed into other pages
+  .intro-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-nav;
+    margin-bottom: $spacing-sm;
+  }
+
+  .career-resources-intro-list {
+    font-size: $font-size-md;
+    margin-top: $spacing-xs;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
   h3 {
     font-size: $font-size-xl;
     margin-bottom: $spacing-sm;

@@ -97,6 +97,18 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: $spacing-sm;
+
+          h3 {
+            min-width: 0;
+          }
+
+          .ranking-btn {
+            flex: 0 0 auto;
+            justify-content: center;
+            max-width: none;
+            white-space: nowrap;
+          }
         }
       }
 

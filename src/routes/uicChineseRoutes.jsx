@@ -1,5 +1,12 @@
 import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
+import {
+  UIC_MBA_ROUTE_PATHS,
+  UIC_SCHOOL_ROUTE_PATHS,
+  UIC_SCHOOL_LINKS,
+  UIC_MS_ROUTE_PATHS,
+  UIC_MS_LINKS,
+} from "./publicRoutePaths";
 
 const AboutUic = lazy(() => import("../pages/Uic/Uic_school/AboutUic"));
 const CareerResources = lazy(
@@ -50,150 +57,131 @@ const MsPrograms = lazy(() => import("../pages/Uic/Ms/MsPrograms.jsx"));
 // 中文路由配置
 const uicChineseRoutes = [
   {
-    path: "伊利諾大學芝加哥分校/UIC商學院碩士/學校介紹",
+    path: UIC_SCHOOL_ROUTE_PATHS.aboutUic,
     element: <AboutUic />,
   },
   {
-    path: "伊利諾大學芝加哥分校/UIC商學院碩士/職涯資源",
+    path: UIC_SCHOOL_ROUTE_PATHS.careerResources,
     element: <CareerResources />,
   },
-  { path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域", element: <Areas /> },
+  { path: UIC_MBA_ROUTE_PATHS.areas, element: <Areas /> },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/課程優勢",
+    path: UIC_MBA_ROUTE_PATHS.advantages,
     element: <Advantages />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/核心課程",
+    path: UIC_MBA_ROUTE_PATHS.coreCourses,
     element: <CoreCourses />,
   },
   {
-    path: "伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/景點與美食",
+    path: UIC_SCHOOL_ROUTE_PATHS.chicagoFoodAttractions,
     element: <FoodAttractions />,
   },
-  { path: "伊利諾大學芝加哥分校/UIC商學院碩士/常見問題", element: <FAQ /> },
+  { path: UIC_SCHOOL_ROUTE_PATHS.faq, element: <FAQ /> },
   {
-    path: "伊利諾大學芝加哥分校/UIC商學院碩士/排名與獎項",
+    path: UIC_SCHOOL_ROUTE_PATHS.rankingsAwards,
     element: <RankingsAwards />,
   },
   {
-    path: "伊利諾大學芝加哥分校/UIC商學院碩士/學校資訊/排名/AACSB認證",
+    path: UIC_SCHOOL_ROUTE_PATHS.rankingAacsb,
     element: <AacsbPage />,
   },
   {
-    path: "伊利諾大學芝加哥分校/UIC商學院碩士/學校資訊/排名/HEED獎項",
+    path: UIC_SCHOOL_ROUTE_PATHS.rankingHeed,
     element: <HeedPage />,
   },
   {
-    path: "伊利諾大學芝加哥分校/UIC商學院碩士/學校資訊/排名/排名",
+    path: UIC_SCHOOL_ROUTE_PATHS.rankingPage,
     element: <RankingPage />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Management",
+    path: UIC_MBA_ROUTE_PATHS.management,
     element: <Management />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Finance",
+    path: UIC_MBA_ROUTE_PATHS.finance,
     element: <Finance />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business-Analytics",
+    path: UIC_MBA_ROUTE_PATHS.analytics,
     element: <Analytics />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business Analytics",
-    element: (
-      <Navigate
-        to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Business-Analytics"
-        replace
-      />
-    ),
+    path: UIC_MBA_ROUTE_PATHS.analyticsLegacy,
+    element: <Navigate to={`/${UIC_MBA_ROUTE_PATHS.analytics}`} replace />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Marketing",
+    path: UIC_MBA_ROUTE_PATHS.marketing,
     element: <Marketing />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human-Resource-Management",
+    path: UIC_MBA_ROUTE_PATHS.humanResource,
     element: <HRManagement />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human Resource Management",
-    element: (
-      <Navigate
-        to="/伊利諾大學芝加哥分校/MBA-Programs/五大領域/Human-Resource-Management"
-        replace
-      />
-    ),
+    path: UIC_MBA_ROUTE_PATHS.humanResourceLegacy,
+    element: <Navigate to={`/${UIC_MBA_ROUTE_PATHS.humanResource}`} replace />,
   },
   {
-    path: "伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市",
-    element: (
-      <Navigate
-        to="/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/Chicago-city"
-        replace
-      />
-    ),
+    path: UIC_SCHOOL_ROUTE_PATHS.chicago,
+    element: <Navigate to={UIC_SCHOOL_LINKS.chicagoCity} replace />,
   },
   {
-    path: "伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/Chicago-city",
+    path: UIC_SCHOOL_ROUTE_PATHS.chicagoCity,
     element: <ChicagoCity />,
   },
   {
-    path: "伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/芝加哥經濟",
+    path: UIC_SCHOOL_ROUTE_PATHS.chicagoEconomy,
     element: <Economy />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/雙碩士銜接課程",
+    path: UIC_MBA_ROUTE_PATHS.dualDegree,
     element: <DualDegree />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MBA-Programs/申請資訊",
+    path: UIC_MBA_ROUTE_PATHS.application,
     element: <Application />,
   },
-  { path: "伊利諾大學芝加哥分校/MBA-Programs", element: <MbaPrograms /> },
+  { path: UIC_MBA_ROUTE_PATHS.programs, element: <MbaPrograms /> },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Finance-MSF",
+    path: UIC_MS_ROUTE_PATHS.msFinance,
     element: <MSFinance />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Marketing-MSM",
+    path: UIC_MS_ROUTE_PATHS.msMarketing,
     element: <MsMarketing />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Supply-Chain-and-Operation-Management-MSSCOM",
+    path: UIC_MS_ROUTE_PATHS.msSupplyChain,
     element: <MsManagement />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Business-Analytics-MSBA",
+    path: UIC_MS_ROUTE_PATHS.msAnalytics,
     element: <MsAnalytics />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/申請資訊",
+    path: UIC_MS_ROUTE_PATHS.msApplication,
     element: <MsApplication />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Management-Information-Systems-MSMIS",
+    path: UIC_MS_ROUTE_PATHS.msMIS,
     element: <MsInformation />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/MS-in-Accounting-MSA",
+    path: UIC_MS_ROUTE_PATHS.msAccounting,
     element: <MsAccounting />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs/課程介紹",
+    path: UIC_MS_ROUTE_PATHS.programs,
     element: <MsPrograms />,
   },
   {
-    path: "伊利諾大學芝加哥分校/MS-Programs",
-    element: (
-      <Navigate to="/伊利諾大學芝加哥分校/MS-Programs/課程介紹" replace />
-    ),
+    path: UIC_MS_ROUTE_PATHS.root,
+    element: <Navigate to={UIC_MS_LINKS.programs} replace />,
   },
   {
-    path: "伊利諾大學芝加哥分校",
-    element: (
-      <Navigate to="/伊利諾大學芝加哥分校/UIC商學院碩士/學校介紹" replace />
-    ),
+    path: UIC_SCHOOL_ROUTE_PATHS.root,
+    element: <Navigate to={UIC_SCHOOL_LINKS.aboutUic} replace />,
   },
 ];
 

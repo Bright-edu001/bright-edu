@@ -2,7 +2,7 @@
 
 /* 頁首基本樣式 */
 .header {
-  background: $color-gray-ultralight;
+  background: rgba(246, 246, 249, 0.85);
   height: 120px;
   opacity: 100%;
   box-shadow: $shadow-sm;
@@ -65,164 +65,234 @@
     }
   }
 
-  /* 主要導航樣式 (Ant Design Menu Wrapper) */
+  /* 主要導航樣式 */
   .header-nav {
     flex-grow: 1;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     min-width: 0;
-    .ant-menu-horizontal {
-      width: 100%;
-      justify-content: flex-end;
-      align-items: center;
-      flex-wrap: wrap;
-      min-width: 0;
-    }
     @media (max-width: 1024px) {
       display: none;
     }
   }
 
-  // Ant Design Overrides for Header
-  .ant-menu {
-    background-color: transparent;
-    border-bottom: none;
-  }
+  @media (min-width: 1024px) {
+    min-height: 109px;
+    height: auto;
+    padding: 27px 77px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 
-  .ant-menu-horizontal {
-    border-bottom: none;
-    line-height: 60px;
-    height: 60px;
-    @media (max-width: 600px) {
-      line-height: 40px;
-      height: 40px;
-      font-size: 15px;
+    .container {
+      padding: 0;
+    }
+
+    .logo a .logo-img {
+      width: auto;
+      max-width: 260px;
+      min-width: 180px;
+      height: 55px;
+      max-height: 55px;
+      min-height: 55px;
     }
   }
+}
 
-  .ant-menu-overflow-item {
-    min-width: 60px; // 為 "..." 溢出項目預留最小寬度
-    text-align: center;
+// Mobile Drawer - Native panel overlay
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
-  .ant-menu-item,
-  .ant-menu-submenu-title {
-    color: $color-nav;
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    display: flex !important;
-    height: 50px !important;
-    align-items: center !important;
-    min-width: 80px;
-    justify-content: center;
-    white-space: pre-line;
-    @media (max-width: 600px) {
-      font-size: 15px !important;
-      height: 36px !important;
-      min-width: 60px;
-      padding: 0 6px !important;
-    }
+  &__panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    background: #fff;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    animation: mobile-panel-slide-in 0.2s ease;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    line-height: 1;
+    padding: 4px 8px;
+    cursor: pointer;
+    color: #666;
+    border-radius: 4px;
+    outline: none;
     &:hover {
+      color: #333;
+    }
+  }
+}
+
+@keyframes mobile-panel-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+// Mobile Menu - Native recursive list
+.mobile-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 16px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-nav;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    &:active {
+      background: transparent;
+    }
+    &:focus-visible {
+      outline: 2px solid;
+      outline-offset: -2px;
+    }
+    &--expanded {
+      .mobile-menu__chevron {
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &__chevron {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  &__link {
+    display: block;
+    padding: 14px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-nav;
+    text-decoration: none;
+    text-align: left;
+    -webkit-tap-highlight-color: transparent;
+    &:hover,
+    &:focus-visible {
       color: $color-uic;
     }
   }
 
-  .ant-menu-submenu {
-    &:hover {
-      border-bottom: none !important;
-    }
-  }
-
-  .ant-menu-item-selected {
-    color: $color-uic !important;
-    border-bottom: none !important;
-  }
-
-  .ant-menu-submenu-title {
-    &:hover {
-      color: $color-uic !important;
-    }
-  }
-
-  .ant-menu-submenu-arrow {
-    color: $color-nav;
-  }
-}
-
-.ant-menu-light .ant-menu-item-selected {
-  background-color: transparent !important;
-}
-
-.ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title {
-  color: $color-nav !important;
-}
-
-.ant-menu-light.ant-menu-horizontal > .ant-menu-item:hover::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-item-active::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu:hover::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-active::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-selected::after {
-  border-bottom: none !important;
-}
-
-.ant-menu-light.ant-menu-horizontal > .ant-menu-item::after,
-.ant-menu-light.ant-menu-horizontal > .ant-menu-submenu::after {
-  display: none !important;
-}
-
-// Submenu styles - Placed outside .header to apply globally to the popups
-.ant-menu-submenu-popup {
-  .ant-menu-item,
-  .ant-menu-submenu-title {
-    font-size: 16px !important;
-    color: $color-nav !important;
-    font-weight: 700 !important;
-  }
-}
-
-/* Popup (portal) submenu title override: use the stable popup hook from Header.jsx */
-.header-submenu-popup.ant-menu-submenu-popup .ant-menu-vertical > .ant-menu-item,
-.header-submenu-popup.ant-menu-submenu-popup
-  .ant-menu-vertical
-  > .ant-menu-submenu
-  > .ant-menu-submenu-title {
-  height: 50px !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-// Mobile Drawer Styles - Placed outside .header to apply globally to the portal
-.mobile-drawer {
-  .ant-drawer-body {
+  &__submenu {
+    list-style: none;
+    margin: 0;
     padding: 0;
-  }
+    background: $color-gray-ultralight;
 
-  .ant-menu-item,
-  .ant-menu-submenu-title {
-    font-size: 16px !important;
-    color: $color-nav !important;
-    font-weight: 700 !important;
-    -webkit-tap-highlight-color: transparent; // Remove tap highlight on mobile
+    .mobile-menu__trigger,
+    .mobile-menu__link,
+    .mobile-menu__parent-row .mobile-menu__link {
+      padding-left: 32px;
+    }
 
-    &:active {
-      background-color: transparent !important;
+    .mobile-menu__submenu {
+      .mobile-menu__trigger,
+      .mobile-menu__link,
+      .mobile-menu__parent-row .mobile-menu__link {
+        padding-left: 48px;
+      }
+
+      .mobile-menu__submenu {
+        .mobile-menu__trigger,
+        .mobile-menu__link,
+        .mobile-menu__parent-row .mobile-menu__link {
+          padding-left: 64px;
+        }
+      }
     }
   }
 
-  .ant-menu-item-selected,
-  .ant-menu-item-active:not(.ant-menu-item-selected),
-  .ant-menu-submenu-title:active {
-    background-color: transparent !important;
+  // Row containing parent link + expand toggle button side-by-side
+  &__parent-row {
+    display: flex;
+    align-items: stretch;
+
+    .mobile-menu__link {
+      flex: 1;
+    }
   }
 
-  .ant-menu-vertical {
-    border-right: none;
-  }
-
-  @media (max-width: 500px) {
-    .ant-drawer-content-wrapper {
-      width: 100% !important;
+  // Expand/collapse toggle button for parent items with a route
+  &__expand-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    color: $color-nav;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    &:hover,
+    &:focus-visible {
+      color: $color-uic;
+    }
+    &:focus-visible {
+      outline: 2px solid;
+      outline-offset: -2px;
+    }
+    &[aria-expanded="true"] {
+      .mobile-menu__chevron {
+        transform: rotate(45deg);
+      }
     }
   }
 }
@@ -236,15 +306,187 @@
   height: 100%;
 }
 
-.ant-menu-sub.ant-menu-inline {
-  background: $color-gray-ultralight !important;
+// Desktop Menu - Native horizontal nav
+.desktop-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 55px;
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 55px;
+  }
+
+  &__link {
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-nav;
+    text-decoration: none;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    &:hover {
+      color: $color-uic;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-nav;
+      outline-offset: 2px;
+    }
+  }
+
+  &__trigger {
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-nav;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    &:hover {
+      color: $color-uic;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-nav;
+      outline-offset: 2px;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 200;
+    background: #fff;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    padding: 8px 0;
+    list-style: none;
+    margin: 0;
+  }
+
+  &__dropdown-item {
+    position: relative;
+  }
+
+  &__dropdown-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-nav;
+    text-decoration: none;
+    white-space: nowrap;
+    &:hover {
+      color: $color-uic;
+      background: $color-gray-ultralight;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-nav;
+      outline-offset: -2px;
+    }
+  }
+
+  &__subtrigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-nav;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    white-space: nowrap;
+    gap: 8px;
+    &:hover {
+      color: $color-uic;
+      background: $color-gray-ultralight;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-nav;
+      outline-offset: -2px;
+    }
+  }
+
+  &__chevron {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+
+  &__subdropdown {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 201;
+    background: #fff;
+    min-width: 220px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    padding: 8px 0;
+    list-style: none;
+    margin: 0;
+  }
+
+  // Small toggle button (chevron only) for items with both a parent link and children
+  &__toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    color: $color-nav;
+    flex-shrink: 0;
+    align-self: stretch;
+    &:hover {
+      color: $color-uic;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-nav;
+      outline-offset: -2px;
+    }
+  }
+
+  // Dropdown item that has both a parent link and submenu: flex layout
+  &__dropdown-item {
+    &.desktop-menu__item--has-submenu {
+      display: flex;
+      align-items: stretch;
+    }
+  }
+
+  // Parent link inside a dropdown item with children: takes remaining flex space
+  &__dropdown-link--parent {
+    flex: 1;
+  }
 }
 
 .nav-link-color {
-  color: $color-nav !important;
-}
-
-.ant-menu-item-selected .nav-link-hover {
   color: $color-nav !important;
 }
 

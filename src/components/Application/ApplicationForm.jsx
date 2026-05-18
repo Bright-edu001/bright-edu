@@ -1,52 +1,37 @@
 import React from "react";
 import "./ApplicationForm.scss";
 import useFormSubmit from "../../hooks/useFormSubmit";
+import { CONTACT_FORM_FIELDS } from "./applicationFormConstants";
 
 function ApplicationForm({ showCondition = true, variant = "uic" }) {
   // variant: 'uic' (default/red) or 'msf' (green)
-  const { form, handleChange, handleSubmit, submitting } = useFormSubmit();
+  const { form, handleChange, handleSubmit, submitting, notification, clearNotification } = useFormSubmit();
 
   const formClass = `application-form ${variant === "msf" ? "application-form--msf" : ""}`;
 
-  // 欄位描述陣列，順序與屬性完全對應原本欄位
-  const fields = [
-    {
-      type: "text",
-      name: "name",
-      placeholder: "姓名（必填）",
-      className: "application-form__input",
-      required: true,
-      ariaLabel: "姓名（必填）",
-    },
-    {
-      type: "text",
-      name: "lineId",
-      placeholder: "LINE ID（選填）",
-      className: "application-form__input",
-      required: false,
-      ariaLabel: "LINE ID（選填）",
-    },
-    {
-      type: "email",
-      name: "email",
-      placeholder: "Email（必填）",
-      className: "application-form__input",
-      required: true,
-      ariaLabel: "Email（必填）",
-    },
-    {
-      type: "textarea",
-      name: "message",
-      placeholder: "請輸入您的問題或需求，我們將盡快與您聯絡。",
-      className: "application-form__textarea",
-      required: true,
-      ariaLabel: "聯絡內容（必填）",
-    },
-  ];
+  const fields = CONTACT_FORM_FIELDS;
 
   return (
     <form className={formClass} onSubmit={handleSubmit}>
       <h2 className="application-form__title">CONTACT US</h2>
+
+      {notification && (
+        <div
+          className={`application-form__notification application-form__notification--${notification.type}`}
+          role={notification.type === "error" ? "alert" : "status"}
+          aria-live="polite"
+        >
+          <span>{notification.content}</span>
+          <button
+            type="button"
+            className="application-form__notification-close"
+            onClick={clearNotification}
+            aria-label="關閉訊息"
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       {fields.map((field) =>
         field.type === "textarea" ? (

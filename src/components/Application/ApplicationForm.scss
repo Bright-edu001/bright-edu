@@ -125,6 +125,61 @@
     }
   }
 
+  // 提交結果 inline 通知（取代 AntD message）
+  &__notification {
+    width: 900px;
+    max-width: 900px;
+    min-width: 260px;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 16px;
+
+    &--success {
+      background: #f6ffed;
+      border: 1px solid #b7eb8f;
+      color: #389e0d;
+    }
+
+    &--error {
+      background: #fff2f0;
+      border: 1px solid #ffccc7;
+      color: #cf1322;
+    }
+
+    &--loading {
+      background: #e6f4ff;
+      border: 1px solid #91caff;
+      color: #0958d9;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      width: 100%;
+      max-width: 100%;
+      min-width: unset;
+    }
+  }
+
+  &__notification-close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    color: inherit;
+    opacity: 0.5;
+    padding: 0 2px;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
   // MSF 變體樣式 (覆寫顏色)
   &--msf {
     .application-form__title {

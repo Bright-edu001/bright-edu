@@ -1,15 +1,19 @@
 import { useState, useCallback } from "react";
-import { App } from "antd";
 import { contactService } from "../services/contactService";
 import logger from "../utils/logger";
+import {
+  DEFAULT_CONTACT_FORM,
+  VALIDATION_RULES,
+  VALIDATION_MESSAGES,
+} from "../components/Application/applicationFormConstants";
 
-const DEFAULT_FORM = { name: "", lineId: "", email: "", message: "" };
+const DEFAULT_FORM = DEFAULT_CONTACT_FORM;
 
 function useFormSubmit(initialState = DEFAULT_FORM) {
-  const { message } = App.useApp();
   const [form, setForm] = useState(initialState);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState(null);
+  const [notification, setNotification] = useState(null);
   // 請求去重機制
   const [submitPromise, setSubmitPromise] = useState(null);
 
@@ -30,41 +34,43 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
     setResult(null);
   }, []);
 
+  const clearNotification = useCallback(() => setNotification(null), []);
+
   const validateForm = useCallback((formData) => {
     const errors = {};
 
     // 姓名驗證
     if (!formData.name?.trim()) {
-      errors.name = "請輸入姓名";
-    } else if (formData.name.trim().length < 2) {
-      errors.name = "姓名至少需要2個字元";
-    } else if (formData.name.trim().length > 50) {
-      errors.name = "姓名不能超過50個字元";
+      errors.name = VALIDATION_MESSAGES.NAME.REQUIRED;
+    } else if (formData.name.trim().length < VALIDATION_RULES.NAME.MIN) {
+      errors.name = VALIDATION_MESSAGES.NAME.TOO_SHORT;
+    } else if (formData.name.trim().length > VALIDATION_RULES.NAME.MAX) {
+      errors.name = VALIDATION_MESSAGES.NAME.TOO_LONG;
     }
 
     // Email 驗證
     if (!formData.email?.trim()) {
-      errors.email = "請輸入電子郵件";
+      errors.email = VALIDATION_MESSAGES.EMAIL.REQUIRED;
     } else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(formData.email.trim())) {
-        errors.email = "請輸入有效的電子郵件格式";
+        errors.email = VALIDATION_MESSAGES.EMAIL.INVALID;
       }
     }
 
     // 訊息驗證
     if (!formData.message?.trim()) {
-      errors.message = "請輸入訊息內容";
-    } else if (formData.message.trim().length < 10) {
-      errors.message = "訊息內容至少需要10個字元";
-    } else if (formData.message.trim().length > 1000) {
-      errors.message = "訊息內容不能超過1000個字元";
+      errors.message = VALIDATION_MESSAGES.MESSAGE.REQUIRED;
+    } else if (formData.message.trim().length < VALIDATION_RULES.MESSAGE.MIN) {
+      errors.message = VALIDATION_MESSAGES.MESSAGE.TOO_SHORT;
+    } else if (formData.message.trim().length > VALIDATION_RULES.MESSAGE.MAX) {
+      errors.message = VALIDATION_MESSAGES.MESSAGE.TOO_LONG;
     }
 
     // LINE ID 驗證（可選）
     if (formData.lineId && formData.lineId.trim().length > 0) {
-      if (formData.lineId.trim().length > 50) {
-        errors.lineId = "LINE ID 不能超過50個字元";
+      if (formData.lineId.trim().length > VALIDATION_RULES.LINE_ID.MAX) {
+        errors.lineId = VALIDATION_MESSAGES.LINE_ID.TOO_LONG;
       }
     }
 
@@ -98,7 +104,7 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
           const validationErrors = validateForm(form);
           if (Object.keys(validationErrors).length > 0) {
             const errorMessages = Object.values(validationErrors);
-            message.error(errorMessages[0]);
+            setNotification({ type: "error", content: errorMessages[0] });
             logger.warn("[FORM_SUBMIT] 表單驗證失敗", validationErrors);
             return { success: false, errors: validationErrors };
           }
@@ -138,9 +144,9 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
 
           // 顯示成功訊息
           if (results.firestore.success) {
-            message.success({
+            setNotification({
+              type: "success",
               content: "表單已成功提交！我們會盡快與您聯繫。",
-              duration: 6,
             });
 
             // 重置表單但保留結果
@@ -165,9 +171,9 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
             totalTime: `${totalTime.toFixed(2)}ms`,
           });
 
-          message.error({
+          setNotification({
+            type: "error",
             content: error.message || "送出失敗，請稍後再試",
-            duration: 4,
           });
 
           return { success: false, error: error.message };
@@ -183,17 +189,13 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
         setSubmitting(false);
       }
     },
-    [form, submitPromise, message, validateForm]
+    [form, submitPromise, validateForm]
   );
 
   const testConnection = useCallback(async () => {
     try {
       logger.log("開始 Firestore 連接測試");
-      message.loading({
-        content: "測試 Firestore 連接中...",
-        key: "test",
-        duration: 0,
-      });
+      setNotification({ type: "loading", content: "測試 Firestore 連接中..." });
 
       const testData = {
         name: "連接測試",
@@ -207,27 +209,21 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
       const result = await contactService.submitContactForm(testData);
 
       if (result.success) {
-        message.success({
-          content: "Firestore 連接測試成功！",
-          key: "test",
-          duration: 4,
-        });
+        setNotification({ type: "success", content: "Firestore 連接測試成功！" });
       } else {
-        message.error({
+        setNotification({
+          type: "error",
           content: `Firestore 連接測試失敗: ${result.error}`,
-          key: "test",
-          duration: 4,
         });
       }
     } catch (error) {
       logger.error("Firestore 連接測試失敗:", error);
-      message.error({
+      setNotification({
+        type: "error",
         content: `連接測試失敗: ${error.message}`,
-        key: "test",
-        duration: 4,
       });
     }
-  }, [message]);
+  }, []);
 
   return {
     form,
@@ -237,6 +233,8 @@ function useFormSubmit(initialState = DEFAULT_FORM) {
     resetForm,
     submitting,
     result,
+    notification,
+    clearNotification,
     handleSubmit,
     testConnection,
     validateForm,
