@@ -48,6 +48,27 @@ const msuChineseRoutes = [
     element: <MicFoodAttractions />,
   },
   {
+    // urlMapping maps "east-lansing-food-attractions" → "東蘭辛景點與美食";
+    // redirect to the canonical path that uses "景點與美食".
+    // Protects unknown legacy buildChineseUrl fallback — does NOT replace exact legacyRedirectMap.
+    path: "密西根州立大學/MSU商學院/東蘭辛市/東蘭辛景點與美食",
+    element: (
+      <Navigate
+        to="/密西根州立大學/MSU商學院/東蘭辛市/景點與美食"
+        replace
+      />
+    ),
+  },
+  {
+    // urlMapping maps "master" → "金融碩士";
+    // redirect to the canonical path that uses "MSF金融碩士".
+    // Protects unknown legacy buildChineseUrl fallback — does NOT replace exact legacyRedirectMap.
+    path: "密西根州立大學/金融碩士課程/金融碩士",
+    element: (
+      <Navigate to="/密西根州立大學/金融碩士課程/MSF金融碩士" replace />
+    ),
+  },
+  {
     // legacy redirect — path kept hard-coded intentionally
     path: "密西根州立大學/MSU商學院/MSU學校介紹",
     element: <Navigate to={MSU_SCHOOL_LINKS.aboutMsu} replace />,
