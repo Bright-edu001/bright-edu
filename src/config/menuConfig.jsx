@@ -186,6 +186,7 @@ export const menuItems = [
       {
         key: "msu-main",
         label: "MSU密西根州立大學",
+        to: "/密西根州立大學/MSU商學院/學校介紹",
         children: [
           {
             key: "about-msu",
@@ -224,6 +225,7 @@ export const menuItems = [
       {
         key: "msf",
         label: "MSF Programs",
+        to: "/密西根州立大學/金融碩士課程/MSF金融碩士",
         children: [
           {
             key: "msf-master",

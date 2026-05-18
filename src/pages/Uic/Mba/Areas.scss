@@ -29,6 +29,10 @@
   }
 }
 
+.mba-areas-page > section {
+  margin-top: $spacing-xl;
+}
+
 .mba-areas-title {
   @include body-large;
   color: $color-nav;
