@@ -12,7 +12,7 @@
   }
 
   .intro {
-    padding: $spacing-sm 0 0;
+    margin-top: $spacing-xl;
     .intro-title {
       font-size: 24px;
       font-weight: 700;
@@ -20,6 +20,10 @@
       margin-bottom: $spacing-xs;
       text-align: left;
     }
+  }
+
+  .learn {
+    margin-top: $spacing-xl;
   }
 
   .learn .container {
