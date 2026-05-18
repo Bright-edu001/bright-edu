@@ -1,4 +1,11 @@
-import { COMMON_ROUTE_PATHS, UIC_MBA_LINKS } from "../routes/publicRoutePaths";
+import {
+  COMMON_ROUTE_PATHS,
+  UIC_MBA_LINKS,
+  UIC_SCHOOL_LINKS,
+  UIC_MS_LINKS,
+  MSU_SCHOOL_LINKS,
+  MSU_MSF_LINKS,
+} from "../routes/publicRoutePaths";
 
 export const menuItems = [
   {
@@ -13,66 +20,66 @@ export const menuItems = [
       {
         key: "uic-sub",
         label: "UIC 伊利諾大學芝加哥分校",
-        to: "/伊利諾大學芝加哥分校/UIC商學院碩士/學校介紹",
+        to: UIC_SCHOOL_LINKS.aboutUic,
         children: [
           {
             key: "about-uic",
             label: "學校介紹",
-            to: "/伊利諾大學芝加哥分校/UIC商學院碩士/學校介紹",
+            to: UIC_SCHOOL_LINKS.aboutUic,
           },
           {
             key: "rankings",
             label: "排名與獎項",
-            to: "/伊利諾大學芝加哥分校/UIC商學院碩士/排名與獎項",
+            to: UIC_SCHOOL_LINKS.rankingsAwards,
             children: [
               {
                 key: "aacsb",
                 label: "AACSB",
-                to: "/伊利諾大學芝加哥分校/UIC商學院碩士/學校資訊/排名/AACSB認證",
+                to: UIC_SCHOOL_LINKS.rankingAacsb,
               },
               {
                 key: "heed",
                 label: "Heed",
-                to: "/伊利諾大學芝加哥分校/UIC商學院碩士/學校資訊/排名/HEED獎項",
+                to: UIC_SCHOOL_LINKS.rankingHeed,
               },
               {
                 key: "ranking",
                 label: "Ranking",
-                to: "/伊利諾大學芝加哥分校/UIC商學院碩士/學校資訊/排名/排名",
+                to: UIC_SCHOOL_LINKS.rankingPage,
               },
             ],
           },
           {
             key: "career-resources",
             label: "職涯資源",
-            to: "/伊利諾大學芝加哥分校/UIC商學院碩士/職涯資源",
+            to: UIC_SCHOOL_LINKS.careerResources,
           },
           {
             key: "chicago",
             label: "芝加哥城市",
-            to: "/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市",
+            to: UIC_SCHOOL_LINKS.chicago,
             children: [
               {
                 key: "chicago-city",
                 label: "Chicago-city",
-                to: "/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/chicago-city",
+                to: UIC_SCHOOL_LINKS.chicagoCity,
               },
               {
                 key: "food-attractions",
                 label: "景點與美食",
-                to: "/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/景點與美食",
+                to: UIC_SCHOOL_LINKS.chicagoFoodAttractions,
               },
               {
                 key: "economy",
                 label: "芝加哥經濟",
-                to: "/伊利諾大學芝加哥分校/UIC商學院碩士/芝加哥城市/芝加哥經濟",
+                to: UIC_SCHOOL_LINKS.chicagoEconomy,
               },
             ],
           },
           {
             key: "faq",
             label: "常見問題",
-            to: "/伊利諾大學芝加哥分校/UIC商學院碩士/常見問題",
+            to: UIC_SCHOOL_LINKS.faq,
           },
         ],
       },
@@ -138,42 +145,42 @@ export const menuItems = [
       {
         key: "ms",
         label: "MS Programs",
-        to: "/伊利諾大學芝加哥分校/MS-Programs/課程介紹",
+        to: UIC_MS_LINKS.programs,
         children: [
           {
             key: "ms-finance",
             label: "MS in Finance",
-            to: "/伊利諾大學芝加哥分校/MS-Programs/MS-in-Finance-MSF",
+            to: UIC_MS_LINKS.msFinance,
           },
           {
             key: "ms-marketing",
             label: "MS in Marketing",
-            to: "/伊利諾大學芝加哥分校/MS-Programs/MS-in-Marketing-MSM",
+            to: UIC_MS_LINKS.msMarketing,
           },
           {
             key: "ms-supply-chain",
             label: "MS in Supply Chain and Operation Management",
-            to: "/伊利諾大學芝加哥分校/MS-Programs/MS-in-Supply-Chain-and-Operation-Management-MSSCOM",
+            to: UIC_MS_LINKS.msSupplyChain,
           },
           {
             key: "ms-analytics",
             label: "MS in Business Analytics",
-            to: "/伊利諾大學芝加哥分校/MS-Programs/MS-in-Business-Analytics-MSBA",
+            to: UIC_MS_LINKS.msAnalytics,
           },
           {
             key: "ms-mis",
             label: "MS in Management Information Systems",
-            to: "/伊利諾大學芝加哥分校/MS-Programs/MS-in-Management-Information-Systems-MSMIS",
+            to: UIC_MS_LINKS.msMIS,
           },
           {
             key: "ms-accounting",
             label: "MS in Accounting",
-            to: "/伊利諾大學芝加哥分校/MS-Programs/MS-in-Accounting-MSA",
+            to: UIC_MS_LINKS.msAccounting,
           },
           {
             key: "ms-application",
             label: "申請資訊",
-            to: "/伊利諾大學芝加哥分校/MS-Programs/申請資訊",
+            to: UIC_MS_LINKS.msApplication,
           },
         ],
       },
@@ -186,37 +193,37 @@ export const menuItems = [
       {
         key: "msu-main",
         label: "MSU密西根州立大學",
-        to: "/密西根州立大學/MSU商學院/學校介紹",
+        to: MSU_SCHOOL_LINKS.aboutMsu,
         children: [
           {
             key: "about-msu",
             label: "學校介紹",
-            to: "/密西根州立大學/MSU商學院/學校介紹",
+            to: MSU_SCHOOL_LINKS.aboutMsu,
           },
           {
             key: "msu-rankings",
             label: "排名與獎項",
-            to: "/密西根州立大學/MSU商學院/排名與獎項",
+            to: MSU_SCHOOL_LINKS.rankingsAwards,
           },
           {
             key: "msu-career-resources",
             label: "職涯資源",
-            to: "/密西根州立大學/MSU商學院/職涯資源",
+            to: MSU_SCHOOL_LINKS.careerResources,
           },
           {
             key: "east-lansing",
             label: "密西根州-東蘭辛市(大學城)",
-            to: "/密西根州立大學/MSU商學院/東蘭辛市",
+            to: MSU_SCHOOL_LINKS.michigan,
             children: [
               {
                 key: "east-lansing-food",
                 label: "景點與美食",
-                to: "/密西根州立大學/MSU商學院/東蘭辛市/景點與美食",
+                to: MSU_SCHOOL_LINKS.michiganFoodAttractions,
               },
               {
                 key: "transportation",
                 label: "交通",
-                to: "/密西根州立大學/MSU商學院/東蘭辛市/交通",
+                to: MSU_SCHOOL_LINKS.michiganTransportation,
               },
             ],
           },
@@ -225,17 +232,17 @@ export const menuItems = [
       {
         key: "msf",
         label: "MSF Programs",
-        to: "/密西根州立大學/金融碩士課程/MSF金融碩士",
+        to: MSU_MSF_LINKS.msfMaster,
         children: [
           {
             key: "msf-master",
             label: "MSF 金融碩士",
-            to: "/密西根州立大學/金融碩士課程/MSF金融碩士",
+            to: MSU_MSF_LINKS.msfMaster,
           },
           {
             key: "msf-application",
             label: "申請資訊",
-            to: "/密西根州立大學/金融碩士課程/申請資訊",
+            to: MSU_MSF_LINKS.msfApplication,
           },
         ],
       },
