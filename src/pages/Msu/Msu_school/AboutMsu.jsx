@@ -2,6 +2,7 @@ import React from "react";
 import "./AboutMsu.scss";
 import ImageTextSection from "../../../components/ImageTextSection/ImageTextSection";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import SchoolStatsCard from "../../../components/SchoolStatsCard/SchoolStatsCard";
 import getImageUrl from "../../../utils/getImageUrl";
 
 function AboutMsu() {
@@ -26,9 +27,7 @@ function AboutMsu() {
         </section>
         <section className="stats" aria-label="學校數據">
           <div className="container">
-            <div className="stats-card-school">
-              <h3>基本資料 Facts at a Glance</h3>
-              <ul className="left-aligned">
+            <SchoolStatsCard title="基本資料 Facts at a Glance">
                 <li>
                   <span className="label">學院數量</span>
                   <span className="value">17個學院</span>
@@ -67,8 +66,7 @@ function AboutMsu() {
                     來自美國所有50個州及133個國家和地區
                   </span>
                 </li>
-              </ul>
-            </div>
+              </SchoolStatsCard>
           </div>
         </section>
         <section className="details" aria-label="學校詳細資料">
